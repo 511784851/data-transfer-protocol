@@ -1,0 +1,132 @@
+syntax = "proto3";
+package common;
+option java_package = "com.oleaster.blemobi.probuf";
+option java_outer_classname = "LoginProtos";
+
+
+message PLogin {
+	int32 type = 1;	    	//固定为1
+	/*保留2~5用于扩展*/
+	string uuid = 6;      	//用户ID
+	string token = 7;		//统一访问令牌
+	string name = 8;		//用户昵称
+	string portrait = 9;	//用户头像URL
+	
+	//其它需要下发的信息...
+}
+
+/*
+ *@note 微信首次登录
+ *@path /app/wechat_login
+ *@param code 授权临时票据(authorization code)
+ *@param ostp 操作系统类型 0未知、1Android、2IOS
+ *@param osv 操作系统版本
+ *@param model 设备型号
+ *@param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 渠道或应用平台
+ *@return 登录成功返回PLogin，失败返回PResult
+ */
+
+/*
+ *@note 微博首次登录
+ *@path /app/weibo_login
+ *@param wbuid 用户微博uid
+ *@param wbname 用户微博昵称
+ *@param headurl 用户微博头像地址
+ *@param weihao 用户微号
+ *@param ostp 操作系统类型 0未知、1Android、2IOS
+ *@param osv 操作系统版本
+ *@param model 设备型号
+ *@param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 渠道或应用平台
+ *@return 登录成功返回PLogin，失败返回PResult
+ */
+
+ /*
+ *@note facebook首次登录
+ *@path /app/facebook_login
+ *@param code 授权临时票据(authorization code)
+ *@param ostp 操作系统类型 0未知、1Android、2IOS
+ *@param osv 操作系统版本
+ *@param model 设备型号
+ *@param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 渠道或应用平台
+ *@return 登录成功返回PLogin，失败返回PResult
+ */
+ 
+ /*
+ *@note google首次登录
+ *@path /app/google_login
+ *@param code 授权临时票据(authorization code)
+ *@param token 登陆验证数据(id token)
+ *@param ostp 操作系统类型 0未知、1Android、2IOS
+ *@param osv 操作系统版本
+ *@param model 设备型号
+ *@param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 渠道或应用平台
+ *@return 登录成功返回PLogin，失败返回PResult
+ */
+  
+/*
+ *@note 手机号登录
+ *@path /app/login
+ *@param username 用户名
+ *@param password 密码
+ *@param ostp 操作系统类型 0未知、1Android、2IOS
+ *@param osv 操作系统版本
+ *@param model 设备型号
+ *@param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 渠道或应用平台
+ *@return 登录成功返回PLogin，失败返回PResult
+ */
+
+/*
+ *@note 手机号注册
+ *@path /app/register
+ *@param username 用户名
+ *@param password 密码
+ *@param mobile 手机号
+ *@param verifycode 发送给手机的验证码
+ *@param ostp 操作系统类型 0未知、1Android、2IOS
+ *@param osv 操作系统版本
+ *@param model 设备型号
+ *@param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 渠道或应用平台
+ *@return 注册成功返回PLogin，失败返回PResult
+ */
+
+
+/*
+ *@note 生成短信验证码
+ *@path /msgcode
+ *@param mobile 手机号
+ *@return 返回PResult
+ */
+
+ /*
+ *@note 令牌校验，打开App时若令牌信息存在，直接校验
+ *@path /app/token_check
+ *@param token 统一访问令牌
+ *@param uuid 用户ID
+ *@return 令牌有效或成功续期返回PLogin，失败返回PResult
+ */
+ 
+
+/*
+ *@note 修改密码
+ *@path /app/change_pwd
+ *@cookie userId & token
+ *param newpwd 新密码
+ *param oldpwd 旧密码
+ *@return 返回PResult
+ */
+
+/*
+ *@note 忘记密码
+ *@URL /app/reset_pwd
+ *param mobile 手机号码
+ *param msgcode 验证码
+ *param newpwd 新密码
+ *@return 返回PResult
+ */
+
