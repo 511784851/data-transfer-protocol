@@ -17,7 +17,7 @@ message PLogin {
 
 /*
  *@note 微信首次登录
- *@path /app/wechat_login
+ *@path /app/wechat
  *@param code 授权临时票据(authorization code)
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -29,10 +29,10 @@ message PLogin {
 
 /*
  *@note 微博首次登录
- *@path /app/weibo_login
+ *@path /app/weibo
  *@param wbuid 用户微博uid
  *@param wbname 用户微博昵称
- *@param headurl 用户微博头像地址
+ *@param headimgurl 用户微博头像地址
  *@param weihao 用户微号
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -44,7 +44,7 @@ message PLogin {
 
  /*
  *@note facebook首次登录
- *@path /app/facebook_login
+ *@path /app/facebook
  *@param code 授权临时票据(authorization code)
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -56,7 +56,7 @@ message PLogin {
  
  /*
  *@note google首次登录
- *@path /app/google_login
+ *@path /app/google
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
  *@param ostp 操作系统类型 0未知、1Android、2IOS
@@ -70,7 +70,7 @@ message PLogin {
 /*
  *@note 手机号登录
  *@path /app/login
- *@param username 用户名
+ *@param cellphone 手机号
  *@param password 密码
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -83,9 +83,9 @@ message PLogin {
 /*
  *@note 手机号注册
  *@path /app/register
- *@param username 用户名
+ *@param cellphone 手机号
  *@param password 密码
- *@param mobile 手机号
+ *@param nickname 昵称
  *@param verifycode 发送给手机的验证码
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -99,13 +99,13 @@ message PLogin {
 /*
  *@note 生成短信验证码
  *@path /msgcode
- *@param mobile 手机号
+ *@param cellphone 手机号
  *@return 返回PResult
  */
 
  /*
  *@note 令牌校验，打开App时若令牌信息存在，直接校验
- *@path /app/token_check
+ *@path /app/checktoken
  *@param token 统一访问令牌
  *@param uuid 用户ID
  *@return 令牌有效或成功续期返回PLogin，失败返回PResult
