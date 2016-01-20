@@ -45,7 +45,7 @@ message PLogin {
  /*
  *@note facebook首次登录
  *@path /app/facebook
- *@param code 授权临时票据(authorization code)
+ *@param token Facebook User access token
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
  *@param model 设备型号
