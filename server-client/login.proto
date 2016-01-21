@@ -95,6 +95,37 @@ message PLogin {
  *@return 注册成功返回PLogin，失败返回PResult
  */
 
+/*
+ *@note 取用户信息
+ *@path /app/user/get
+ *@param uuid 用户ID
+ *@param token 访问令牌
+ *@return 成功返回PUser，失败返回PResult
+ */
+ 
+message PUser {
+	int32 type = 1;	    	//固定为2
+	/*保留2~5用于扩展*/
+	
+	string nickname = 6;
+	string realname = 7;
+	string portrait = 8;
+	int32 gender = 9;		//性别 0女，1男
+	string birthday = 10;
+	string email = 11;
+}
+
+/*
+ *@note 更新用户信息
+ *@path /app/user/set
+ *@param uuid 用户ID
+ *@param nickname 昵称
+ *@param realname 真实姓名
+ *@param gender 性别
+ *@param birthday 访问令牌
+ *@param email 访问令牌
+ *@return 返回PResult
+ */
 
 /*
  *@note 生成短信验证码
