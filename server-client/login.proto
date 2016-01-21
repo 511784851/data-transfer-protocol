@@ -113,6 +113,7 @@ message PUser {
 	int32 gender = 9;		//性别 0女，1男
 	string birthday = 10;
 	string email = 11;
+	string cellphone = 12;
 }
 
 /*
@@ -122,8 +123,9 @@ message PUser {
  *@param nickname 昵称
  *@param realname 真实姓名
  *@param gender 性别
- *@param birthday 访问令牌
- *@param email 访问令牌
+ *@param birthday 生日
+ *@param email 电子邮件
+ *@param cellphone 手机号码
  *@return 返回PResult
  */
 
