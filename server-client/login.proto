@@ -163,3 +163,10 @@ message PUser {
  *@return 返回PResult
  */
 
+/*
+ *@note 用户登出
+ *@URL /app/user/logout
+ *@param uuid 用户ID
+ *@param token 访问令牌
+ *@return 返回PResult
+ */
