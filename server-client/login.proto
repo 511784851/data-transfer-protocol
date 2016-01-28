@@ -33,6 +33,7 @@ message PLogin {
  *@param wbuid 用户微博uid
  *@param wbname 用户微博昵称
  *@param headimgurl 用户微博头像地址
+ *@param gender 性别
  *@param weihao 用户微号
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
