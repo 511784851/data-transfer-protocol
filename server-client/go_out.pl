@@ -1,3 +1,4 @@
+#! /usr/bin/perl
 
 use Cwd;
 $pwd = cwd();

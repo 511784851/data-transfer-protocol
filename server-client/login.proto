@@ -11,9 +11,21 @@ message PLogin {
 	string token = 7;		//统一访问令牌
 	string name = 8;		//用户昵称
 	string portrait = 9;	//用户头像URL
+	repeated int32 loginTypes = 10; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 	
 	//其它需要下发的信息...
 }
+
+message PLoginType {
+	int32 type = 1; //固定为4
+	repeated int32 types = 2; //可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+}
+
+/*
+ *@note 设备激活
+ *@path /device/active
+ *@return 返回PLoginType
+*/
 
 /*
  *@note 微信首次登录
