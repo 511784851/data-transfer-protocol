@@ -14,7 +14,7 @@ print("------开始安装Go第三方依赖库\n");
 
     "github.com/gorilla/websocket",
     "github.com/pborman/uuid",
-    "github.com/garyburd/redigo/redis"
+    "github.com/garyburd/redigo/redis",
     "github.com/golang/groupcache"
 
 );

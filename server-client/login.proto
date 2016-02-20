@@ -33,6 +33,7 @@ message PLogin {
  *@param wbuid 用户微博uid
  *@param wbname 用户微博昵称
  *@param headimgurl 用户微博头像地址
+ *@param gender 性别
  *@param weihao 用户微号
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -96,13 +97,28 @@ message PLogin {
  */
 
 /*
+ *@note 令牌校验，打开App时若令牌信息存在，直接校验
+ *@path /app/checktoken
+ *@cookie token&uuid
+ *@return 令牌有效或成功续期返回PLogin，失败返回PResult
+ */
+ 
+/*
+ *@note 登出
+ *@path /app/logout
+ *@cookie token&uuid
+ *@return 返回PResult
+ */
+ 
+ 
+/*
  *@note 取用户信息
  *@path /app/user/get
- *@param uuid 用户ID
- *@param token 访问令牌
+ *@cookie token&uuid
  *@return 成功返回PUser，失败返回PResult
  */
  
+
 message PUser {
 	int32 type = 1;	    	//固定为2
 	/*保留2~5用于扩展*/
@@ -113,19 +129,17 @@ message PUser {
 	int32 gender = 9;		//性别 0女，1男
 	string birthday = 10;
 	string email = 11;
-	string cellphone = 12;
 }
 
 /*
  *@note 更新用户信息
  *@path /app/user/set
- *@param uuid 用户ID
+ *@cookie token&uuid
  *@param nickname 昵称
  *@param realname 真实姓名
  *@param gender 性别
  *@param birthday 生日
  *@param email 电子邮件
- *@param cellphone 手机号码
  *@return 返回PResult
  */
 
@@ -135,15 +149,6 @@ message PUser {
  *@param cellphone 手机号
  *@return 返回PResult
  */
-
- /*
- *@note 令牌校验，打开App时若令牌信息存在，直接校验
- *@path /app/checktoken
- *@param token 统一访问令牌
- *@param uuid 用户ID
- *@return 令牌有效或成功续期返回PLogin，失败返回PResult
- */
- 
 
 /*
  *@note 修改密码
@@ -162,4 +167,63 @@ message PUser {
  *param newpwd 新密码
  *@return 返回PResult
  */
+ 
+message PAccount{
+	int32 type = 1;	    		//固定为3
+	string cellphone = 2;		//手机号
+	string wechat = 3;			//微信用户ID信息
+	string weibo = 4;			//微博用户ID信息
+	string google = 5;			//google用户ID信息
+	string facebook = 6;		//facebook用户ID信息
+} 
+ 
+/*
+ *@note 取帐号信息，包括绑定的手机号、微信、微博、google、facebook
+ *@URL /app/account/get
+ *@cookie token&uuid
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+/*
+ *@note 绑定手机号登录方式
+ *@URL /app/cellphone/set
+ *@cookie token&uuid
+ *@param cellphone 手机号
+ *@return 成功返回PAccount，失败返回PResult
+ */
 
+/*
+ *@note 绑定微信登录方式
+ *@URL /app/wechat/set
+ *@cookie token&uuid
+ *@param code 授权临时票据(authorization code)
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+ /*
+ *@note 绑定微博登录方式
+ *@URL /app/weibo/set
+ *@cookie token&uuid
+ *@param wbuid 用户微博uid
+ *@param wbname 用户微博昵称
+ *@param headimgurl 用户微博头像地址
+ *@param weihao 用户微号
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+ /*
+ *@note 绑定google登录方式
+ *@URL /app/google/set
+ *@cookie token&uuid
+ *@param code 授权临时票据(authorization code)
+ *@param token 登陆验证数据(id token)
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+ /*
+ *@note 绑定facebook登录方式
+ *@URL /app/facebook/set
+ *@cookie token&uuid
+ *@param token Facebook User access token
+ *@return 成功返回PAccount，失败返回PResult
+ */
