@@ -1,0 +1,21 @@
+syntax = "proto3";
+package common;
+option java_package = "com.oleaster.blemobi.probuf";
+option java_outer_classname = "MainProtos";
+
+// OSS STS凭证传输结构
+message PSts {
+	int32 type = 1;			//固定为11
+	
+	string accessKeyId = 2;
+	string accessKeySecret = 3;
+	string securityToken = 4;
+	string expiration = 5;
+}
+
+/*
+ *@note 申请STS凭证
+ *@path /app/getsts
+ *@cookie token&uuid
+ *@return 成功返回PSts，失败返回PResult
+ */
