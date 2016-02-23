@@ -9,7 +9,8 @@ message PSts {
 	
 	string accessKeyId = 2;
 	string accessKeySecret = 3;
-	string expiration = 4;
+	string securityToken = 4;
+	string expiration = 5;
 }
 
 /*
