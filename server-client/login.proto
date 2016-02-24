@@ -11,9 +11,21 @@ message PLogin {
 	string token = 7;		//统一访问令牌
 	string name = 8;		//用户昵称
 	string portrait = 9;	//用户头像URL
+	repeated int32 loginTypes = 10; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 	
 	//其它需要下发的信息...
 }
+
+message PLoginType {
+	int32 type = 1; //固定为4
+	repeated int32 types = 2; //可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+}
+
+/*
+ *@note 设备激活
+ *@path /device/active
+ *@return 返回PLoginType
+*/
 
 /*
  *@note 微信首次登录
@@ -80,6 +92,14 @@ message PLogin {
  *@param channel 渠道或应用平台
  *@return 登录成功返回PLogin，失败返回PResult
  */
+ 
+ /*
+  *@note 手机验证码确认
+  *@path /app/check_code
+  *@param cellphone 手机号码
+  *@param code 验证码
+  *@return PResult
+ */
 
 /*
  *@note 手机号注册
@@ -87,7 +107,7 @@ message PLogin {
  *@param cellphone 手机号
  *@param password 密码
  *@param nickname 昵称
- *@param verifycode 发送给手机的验证码
+ *@param verifycode 发送给手机的验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但注册的时候要带上）
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
  *@param model 设备型号
@@ -163,7 +183,7 @@ message PUser {
  *@note 忘记密码
  *@URL /app/reset_pwd
  *param mobile 手机号码
- *param msgcode 验证码
+ *param msgcode 验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但修改密码的时候要带上）
  *param newpwd 新密码
  *@return 返回PResult
  */
