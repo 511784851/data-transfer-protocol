@@ -26,14 +26,16 @@ message PSts {
 	
 	bool exists = 2;		//要上传的文件是否存在
 	string url = 3;   		//经服务端签好名的文件上传URL, exists为false时有意义
-	string objectKey = 4;	//要上传的文件如果存在，则通过此字段返回文件名
+	repeated string headers = 4; //必要增加的Http Header信息
+	string objectKey = 5;	//要上传的文件如果存在，则通过此字段返回文件名
  }
  
  /*
  *@note 获取签名上传文件的URL
  *@path /oss/uploadurl/get
  *@cookie token&uuid
- *@digest 要上传的文件的md5值
+ *@digest 要上传的文件的md5 hexstring
  *@length 文件大小，字节
+ *@extension 扩展名 包括jpg,png,gif,bmp,apk
  *@return 成功返回PUpload，失败返回PResult
  */
