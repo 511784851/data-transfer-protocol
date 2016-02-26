@@ -29,7 +29,7 @@ message PRUsername {
 /*
  *@note 请求推荐的用户名
  *@path /login/rcmd_uname
- *@param uname 用户填写的用户名
+ *@param uname 用户填写的用户名(如果这个用户还没有被注册，那么原封不动返回这个用户名)
  *@return 成功返回PRUsername，失败返回PRsult
 */
 
@@ -179,6 +179,7 @@ message PUser {
  *@note 生成短信验证码
  *@path /msgcode
  *@param cellphone 手机号
+ *@param cty 验证码的类型，用于判断手机号码是否被注册 1 新用户注册，2 密码重置
  *@return 返回PResult
  */
 
