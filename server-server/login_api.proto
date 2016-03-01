@@ -9,6 +9,7 @@ message PGetToken {
  *@note 获取用户token
  *@path /login/token
  *@method GET
+ *@param from 发起调用的服务名
  *@param uuid 用户的uuid
  *@return 返回PGetToken
  */
@@ -21,6 +22,7 @@ message PGetSMSCode {
  *@note 获取短信验证码
  *@path /login/msgcode
  *@method GET
+ *@param from 发起调用的服务名
  *@param cellphone 手机号
  *@return 返回PGetSMSCode
  */
@@ -35,6 +37,7 @@ message PPostSMSCode {
  *@note 生成短信验证码
  *@path /login/msgcode
  *@method POST
+ *@param from 发起调用的服务名
  *@param cellphone 手机号
  *@return 返回PPostSMSCode
  */
@@ -44,6 +47,7 @@ message PPostSMSCode {
  *@note 修改密码
  *@path /login/password
  *@method POST
+ *@param from 发起调用的服务名
  *@param uuid 用户uuid
  *@param token 用户token
  *@param newpwd 新密码
