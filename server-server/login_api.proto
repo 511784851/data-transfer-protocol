@@ -1,0 +1,61 @@
+syntax = "proto3";
+package service;
+
+message PGetToken {
+	int32 type = 1;		// 固定为0
+	string token = 2; 	// 成功则返回实际token，失败返回空串
+}
+
+/*
+ *@note 获取用户token
+ *@path /login/token
+ *@method GET
+ *@param from 发起调用的服务名
+ *@param uuid 用户的uuid
+ *@return 返回PGetToken
+ */
+
+message PGetSMSCode {
+	int32 type = 1;		// 固定为0
+	string code = 2;		// 成功则返回实际token，失败返回空串
+}
+
+/*
+ *@note 获取短信验证码
+ *@path /login/msgcode
+ *@method GET
+ *@param from 发起调用的服务名
+ *@param cellphone 手机号
+ *@return 返回PGetSMSCode
+ */
+
+
+message PPostSMSCode {
+	int32 type = 1;		// 固定为0
+	bool result = 2;		// 成功则返回true，失败返回false
+	int32 remain = 3;	// 如果返回失败，则返回还有多少秒cd时间
+}
+
+/*
+ *@note 生成短信验证码
+ *@path /login/msgcode
+ *@method POST
+ *@param from 发起调用的服务名
+ *@param cellphone 手机号
+ *@return 返回PPostSMSCode
+ */
+
+
+/*
+ *@note 修改密码
+ *@path /login/password
+ *@method POST
+ *@param from 发起调用的服务名
+ *@param uuid 用户uuid
+ *@param token 用户token
+ *@param newpwd 新密码
+ *@param oldpwd 旧密码
+ *@return 返回PResult
+ */
+
+
