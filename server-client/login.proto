@@ -23,13 +23,13 @@ message PLoginType {
 
 /*
  *@note 设备激活
- *@path /device/active
+ *@path /login/active
  *@return 返回PLoginType
 */
 
 /*
  *@note 微信首次登录
- *@path /app/wechat
+ *@path /login/wechat
  *@param code 授权临时票据(authorization code)
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -41,7 +41,7 @@ message PLoginType {
 
 /*
  *@note 微博首次登录
- *@path /app/weibo
+ *@path /login/weibo
  *@param wbuid 用户微博uid
  *@param wbname 用户微博昵称
  *@param headimgurl 用户微博头像地址
@@ -57,7 +57,7 @@ message PLoginType {
 
  /*
  *@note facebook首次登录
- *@path /app/facebook
+ *@path /login/facebook
  *@param token Facebook User access token
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -69,7 +69,7 @@ message PLoginType {
  
  /*
  *@note google首次登录
- *@path /app/google
+ *@path /login/google
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
  *@param ostp 操作系统类型 0未知、1Android、2IOS
@@ -82,7 +82,7 @@ message PLoginType {
   
 /*
  *@note 手机号登录
- *@path /app/login
+ *@path /login/login
  *@param cellphone 手机号
  *@param password 密码
  *@param ostp 操作系统类型 0未知、1Android、2IOS
@@ -95,7 +95,7 @@ message PLoginType {
  
  /*
   *@note 手机验证码确认
-  *@path /app/check_code
+  *@path /login/checkcode
   *@param cellphone 手机号码
   *@param code 验证码
   *@return PResult
@@ -103,7 +103,7 @@ message PLoginType {
 
 /*
  *@note 手机号注册
- *@path /app/register
+ *@path /login/register
  *@param cellphone 手机号
  *@param password 密码
  *@param nickname 昵称
@@ -118,14 +118,14 @@ message PLoginType {
 
 /*
  *@note 令牌校验，打开App时若令牌信息存在，直接校验
- *@path /app/checktoken
+ *@path /login/checktoken
  *@cookie token&uuid
  *@return 令牌有效或成功续期返回PLogin，失败返回PResult
  */
  
 /*
  *@note 登出
- *@path /app/logout
+ *@path /login/logout
  *@cookie token&uuid
  *@return 返回PResult
  */
@@ -133,7 +133,7 @@ message PLoginType {
  
 /*
  *@note 取用户信息
- *@path /app/user/get
+ *@path /account/user/get
  *@cookie token&uuid
  *@return 成功返回PUser，失败返回PResult
  */
@@ -153,7 +153,7 @@ message PUser {
 
 /*
  *@note 更新用户信息
- *@path /app/user/set
+ *@path /account/user/set
  *@cookie token&uuid
  *@param nickname 昵称
  *@param realname 真实姓名
@@ -165,14 +165,14 @@ message PUser {
 
 /*
  *@note 生成短信验证码
- *@path /msgcode
+ *@path /login/msgcode
  *@param cellphone 手机号
  *@return 返回PResult
  */
 
 /*
  *@note 修改密码
- *@path /app/change_pwd
+ *@path /login/changepwd
  *@cookie userId & token
  *param newpwd 新密码
  *param oldpwd 旧密码
@@ -181,7 +181,7 @@ message PUser {
 
 /*
  *@note 忘记密码
- *@URL /app/reset_pwd
+ *@URL /login/resetpwd
  *param mobile 手机号码
  *param msgcode 验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但修改密码的时候要带上）
  *param newpwd 新密码
