@@ -129,39 +129,6 @@ message PLoginType {
  *@cookie token&uuid
  *@return 返回PResult
  */
- 
- 
-/*
- *@note 取用户信息
- *@path /account/user/get
- *@cookie token&uuid
- *@return 成功返回PUser，失败返回PResult
- */
- 
-
-message PUser {
-	int32 type = 1;	    	//固定为2
-	/*保留2~5用于扩展*/
-	
-	string nickname = 6;
-	string realname = 7;
-	string portrait = 8;
-	int32 gender = 9;		//性别 0女，1男
-	string birthday = 10;
-	string email = 11;
-}
-
-/*
- *@note 更新用户信息
- *@path /account/user/set
- *@cookie token&uuid
- *@param nickname 昵称
- *@param realname 真实姓名
- *@param gender 性别
- *@param birthday 生日
- *@param email 电子邮件
- *@return 返回PResult
- */
 
 /*
  *@note 生成短信验证码
