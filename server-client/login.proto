@@ -5,26 +5,67 @@ option java_outer_classname = "LoginProtos";
 
 
 message PLogin {
-	int32 type = 1;	    	//固定为1
+	int32 type = 1;	    			//固定为1
 	/*保留2~5用于扩展*/
-	string uuid = 6;      	//用户ID
-	string token = 7;		//统一访问令牌
-	string nickname = 8;		//用户昵称
-	string imgURL = 9;	//用户头像URL
+	string uuid = 6;      			//用户ID
+	string token = 7;				//统一访问令牌
+	string nickname = 8;			//用户昵称
+	string imgURL = 9;				//用户头像URL
 	repeated int32 loginTypes = 10; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 	
 	//其它需要下发的信息...
 }
 
+message PAccount{
+	int32 type = 1;	    		//固定为3
+	string cellphone = 2;		//手机号
+	string wechat = 3;			//微信用户ID信息
+	string weibo = 4;			//微博用户ID信息
+	string google = 5;			//google用户ID信息
+	string facebook = 6;		//facebook用户ID信息
+} 
+
 message PLoginType {
-	int32 type = 1; //固定为4
-	repeated int32 types = 2; //可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+	int32 type = 1; 			//固定为4
+	repeated int32 types = 2; 	//可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 }
 
 message PRUsername {
-	int32 type = 1; //固定为5
-	repeated string names = 2; //推荐的用户名
+	int32 type = 1; 			//固定为5
+	repeated string names = 2; 	//推荐的用户名
 }
+
+message PWeiXinAccount{
+	int32 type = 1;	    		//固定为6
+	string code = 2;			//授权临时票据
+}
+
+message PWeiBoAccount{
+	int32 type = 1;	    		//固定为7
+	string wbuid = 2;			//用户微博uid
+	string wbname = 3;			//用户微博昵称
+	string headimgurl = 4;		//用户微博头像地址
+	string gender = 5;			//性别
+	string weihao = 6;			//用户微号
+}
+
+message PFacebookAccount{
+	int32 type = 1;				//固定为8
+	string token = 2; 			//Facebook User access token	
+}
+
+message PGoogleAccount{
+	int32 type = 1;				//固定为9
+	string code = 2; 			//授权临时票据
+	string token = 3;			//登陆验证数据
+}
+
+message PCellphoneAccount {
+	int32 type = 1;				//固定为10
+	string cellphone = 2; 		//手机号码
+	string smscode = 3;			//短信验证码	
+}
+
 
 /*
  *@note 请求推荐的用户名
@@ -169,63 +210,24 @@ message PRUsername {
  *param newpwd 新密码
  *@return 返回PResult
  */
- 
-message PAccount{
-	int32 type = 1;	    		//固定为3
-	string cellphone = 2;		//手机号
-	string wechat = 3;			//微信用户ID信息
-	string weibo = 4;			//微博用户ID信息
-	string google = 5;			//google用户ID信息
-	string facebook = 6;		//facebook用户ID信息
-} 
- 
+
 /*
- *@note 取帐号信息，包括绑定的手机号、微信、微博、google、facebook
- *@URL /app/account/get
- *@cookie token&uuid
- *@return 成功返回PAccount，失败返回PResult
- */
- 
-/*
- *@note 绑定手机号登录方式
- *@URL /app/cellphone/set
- *@cookie token&uuid
- *@param cellphone 手机号
- *@return 成功返回PAccount，失败返回PResult
+ *@note 第三方账号登陆
+ *@URL /login/partner
+ *@Method POST 		使用post方式上传数据，数据类型见：
+ *@					PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount
+ *@param ostp 		操作系统类型 0未知、1Android、2IOS
+ *@param osv 		操作系统版本
+ *@param model 		设备型号
+ *@param imei 		手机取IMEI，无IMEI用WIFI的MAC地址
+ *@param channel 	渠道或应用平台
+ *@return 			登录成功返回PLogin，失败返回PResult
  */
 
 /*
- *@note 绑定微信登录方式
- *@URL /app/wechat/set
- *@cookie token&uuid
- *@param code 授权临时票据(authorization code)
- *@return 成功返回PAccount，失败返回PResult
- */
- 
- /*
- *@note 绑定微博登录方式
- *@URL /app/weibo/set
- *@cookie token&uuid
- *@param wbuid 用户微博uid
- *@param wbname 用户微博昵称
- *@param headimgurl 用户微博头像地址
- *@param weihao 用户微号
- *@return 成功返回PAccount，失败返回PResult
- */
- 
- /*
- *@note 绑定google登录方式
- *@URL /app/google/set
- *@cookie token&uuid
- *@param code 授权临时票据(authorization code)
- *@param token 登陆验证数据(id token)
- *@return 成功返回PAccount，失败返回PResult
- */
- 
- /*
- *@note 绑定facebook登录方式
- *@URL /app/facebook/set
- *@cookie token&uuid
- *@param token Facebook User access token
- *@return 成功返回PAccount，失败返回PResult
+ *@note 账号绑定
+ *@URL /login/binding
+ *@Method POST 		使用post方式上传数据，数据类型见：
+ *@					PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
+ *@return 返回PResult
  */
