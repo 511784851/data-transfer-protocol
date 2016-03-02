@@ -1,5 +1,26 @@
 syntax = "proto3";
-package service;
+package service; 
+
+message PUser {
+	int32 type = 1;	    	//固定为2
+	/*保留2~5用于扩展*/
+	
+	string uuid =  6           	// 服务端标志用户的唯一id
+	string password = 7 		// 自有手机号码注册时输入的密码
+	string username = 8 		// 用户名，唯一
+	string nickname = 9 		// 昵称
+	string headImgURL = 10 		// 头像地址
+	string realName = 11  		// 真实姓名
+	int32 gender = 12    		// 性别，0女，1男
+	string email = 13 			// 邮箱地址
+	string birthday = 14 		// 生日，格式19850101
+	string cellphone = 15 		// 手机号
+	int32 timeZone = 16    		// 时区
+	string locale = 17  		// 语言
+	int32 membershipLevel = 18  // 会员级别
+	int64 lastUpdateTime = 19  	// 最后更新时间TUser结构，用户/系统修改
+	int64 lastLoginTime = 20  	// 用户最后登陆时间
+}
 
 /*
  *@note 取用户信息
@@ -8,19 +29,6 @@ package service;
  *@param GET
  *@return 成功返回PUser，失败返回PResult
  */
- 
-
-message PUser {
-	int32 type = 1;	    	//固定为2
-	/*保留2~5用于扩展*/
-	
-	string nickname = 6;
-	string realname = 7;
-	string portrait = 8;
-	int32 gender = 9;		//性别 0女，1男
-	string birthday = 10;
-	string email = 11;
-}
 
 /*
  *@note 更新用户信息
@@ -28,6 +36,7 @@ message PUser {
  *@cookie token&uuid
  *@method POST
  *@param nickname 昵称
+ *@param username 用户名
  *@param realname 真实姓名
  *@param gender 性别
  *@param birthday 生日
