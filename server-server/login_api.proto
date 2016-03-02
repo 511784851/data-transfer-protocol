@@ -2,7 +2,8 @@ syntax = "proto3";
 package service;
 
 message PGetToken {
-	string token = 1; 	// 成功则返回实际token，失败返回空串
+	int32 type = 1;		// 固定为0
+	string token = 2; 	// 成功则返回实际token，失败返回空串
 }
 
 /*
@@ -15,7 +16,8 @@ message PGetToken {
  */
 
 message PGetSMSCode {
-	string code = 1;		// 成功则返回实际token，失败返回空串
+	int32 type = 1;		// 固定为0
+	string code = 2;		// 成功则返回实际token，失败返回空串
 }
 
 /*
@@ -29,8 +31,9 @@ message PGetSMSCode {
 
 
 message PPostSMSCode {
-	bool result = 1;		// 成功则返回true，失败返回false
-	int32 remain = 2;		// 如果返回失败，则返回还有多少秒cd时间
+	int32 type = 1;		// 固定为0
+	bool result = 2;		// 成功则返回true，失败返回false
+	int32 remain = 3;	// 如果返回失败，则返回还有多少秒cd时间
 }
 
 /*
