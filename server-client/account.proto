@@ -12,7 +12,7 @@ message PUser {
 	string username = 8; 	// 用户名，唯一
 	string nickname = 9; 	// 昵称
 	string headImgURL = 10; // 头像地址
-	string realName = 11; 	// 真实姓名
+	string realname = 11; 	// 真实姓名
 	int32 gender = 12;    	// 性别，0就是女，其余的是男；人妖暂时不考虑
 	string email = 13; 		// 邮箱地址
 	string birthday = 14; 	// 生日，格式19850101
