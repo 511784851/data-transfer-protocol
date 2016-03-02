@@ -2,7 +2,7 @@ syntax = "proto3";
 package service;
 
 message PGetToken {
-	int32 type = 1;		// 固定为0
+	int32 type = 1;		// 固定为1
 	string token = 2; 	// 成功则返回实际token，失败返回空串
 }
 
@@ -16,7 +16,7 @@ message PGetToken {
  */
 
 message PGetSMSCode {
-	int32 type = 1;		// 固定为0
+	int32 type = 1;		// 固定为2
 	string code = 2;		// 成功则返回实际token，失败返回空串
 }
 
@@ -31,7 +31,7 @@ message PGetSMSCode {
 
 
 message PPostSMSCode {
-	int32 type = 1;		// 固定为0
+	int32 type = 1;		// 固定为3
 	bool result = 2;		// 成功则返回true，失败返回false
 	int32 remain = 3;	// 如果返回失败，则返回还有多少秒cd时间
 }
