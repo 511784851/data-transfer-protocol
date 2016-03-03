@@ -25,6 +25,15 @@ message PUser {
 	int64 lastLoginTime = 20;  		// 用户最后登陆时间
 }
 
+message PAccount {
+	int32 type = 1;				//固定为3
+	bool cellphone = 2;			//手机
+	bool wechat = 3;			//微信
+	bool weibo = 4;				//微博
+	bool facebook = 5;			//脸书
+	bool google = 6;			//谷歌
+}
+
 /*
  *@note 取用户信息
  *@path /account/user/profile
@@ -51,7 +60,7 @@ message PUser {
  *@note 获取用户的账号绑定信息
  *@URL /account/binding/status
  *@cookie token&uuid
- *@return 成功返回PBindAccount，失败返回PResult
+ *@return 成功返回PAccount，失败返回PResult
  */
 
 /*

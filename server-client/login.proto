@@ -16,15 +16,6 @@ message PLogin {
 	//其它需要下发的信息...
 }
 
-message PAccount{
-	int32 type = 1;	    		//固定为3
-	string cellphone = 2;		//手机号
-	string wechat = 3;			//微信用户ID信息
-	string weibo = 4;			//微博用户ID信息
-	string google = 5;			//google用户ID信息
-	string facebook = 6;		//facebook用户ID信息
-} 
-
 message PLoginType {
 	int32 type = 1; 			//固定为4
 	repeated int32 types = 2; 	//可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
