@@ -211,24 +211,5 @@ message PCellphoneAccount {
  *@return 返回PResult
  */
 
-/*
- *@note 第三方账号登陆
- *@URL /login/partner
- *@Method POST 		使用post方式上传数据，数据类型见：
- *@					PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount
- *@param ostp 		操作系统类型 0未知、1Android、2IOS
- *@param osv 		操作系统版本
- *@param model 		设备型号
- *@param imei 		手机取IMEI，无IMEI用WIFI的MAC地址
- *@param channel 	渠道或应用平台
- *@return 			登录成功返回PLogin，失败返回PResult
- */
 
-/*
- *@note 账号绑定
- *@URL /login/binding
- *@Method POST 		使用post方式上传数据，数据类型见：
- *@					PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
- *@return 返回PResult
- */
 
