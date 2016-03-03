@@ -3,6 +3,13 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "AccountProtos";
 
+message PBinding {
+	int32 type = 1; //固定为1
+	int32 bindType = 2;// 绑定的类型（0 手机,1 微信,2 微博,3 facebook,4 google）
+	string code = 3; //如果是手机那么就是手机号码（具体的看下面协议定义）
+	string token = 4; //没有的话可以为空
+}
+
 message PUser {
 	int32 type = 1;	    	//固定为2
 	/*保留2~5用于扩展*/
@@ -45,4 +52,47 @@ message PUser {
  *@param email 电子邮件
  *@return 返回PResult
  */
+
+
+
+/*
+ *@note 绑定手机号登录方式
+ *@URL /account/binding
+ *@cookie token&uuid
+ *@param data protobuf的结构数据（手机号码）
+ *@return 成功返回PAccount，失败返回PResult
+ */
+
+/*
+ *@note 绑定微信登录方式
+ *@URL /account/binding
+ *@cookie token&uuid
+ *@param data protobuf的结构数据（code 授权临时票据(authorization code)）
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+ /*
+ *@note 绑定微博登录方式
+ *@URL /account/binding
+ *@cookie token&uuid
+ *@param data protobuf的结构数据（wbuid 用户微博uid）
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+ /*
+ *@note 绑定google登录方式
+ *@URL /account/binding/google
+ *@cookie token&uuid
+ *@param data protobuf的结构数据（code 授权临时票据(authorization code); token 登陆验证数据(id token)）
+ *@return 成功返回PAccount，失败返回PResult
+ */
+ 
+ /*
+ *@note 绑定facebook登录方式
+ *@URL /account/binding/facebook
+ *@cookie token&uuid
+ *@param data protobuf的结构数据（token Facebook User access token）
+ *@return 成功返回PAccount，失败返回PResult
+ */
+
  
