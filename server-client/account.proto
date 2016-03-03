@@ -47,7 +47,12 @@ message PUser {
  *@return 返回PResult
  */
 
-
+/*
+ *@note 获取用户的账号绑定信息
+ *@URL /account/binding/status
+ *@cookie token&uuid
+ *@return 成功返回PBindAccount，失败返回PResult
+ */
 
 /*
  *@note 绑定手机号登录方式
@@ -55,7 +60,7 @@ message PUser {
  *@cookie token&uuid
  *@param cellphone 手机号码
  *@param smscode 验证码
- *@return 成功返回PAccount，失败返回PResult
+ *@return 返回PResult
  */
 
 /*
@@ -63,7 +68,7 @@ message PUser {
  *@URL /account/binding/wechat
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
- *@return 成功返回PAccount，失败返回PResult
+ *@return 返回PResult
  */
  
  /*
@@ -75,7 +80,7 @@ message PUser {
  *@param wheadimgurl 用户微博头像地址
  *@param wgender 性别
  *@param wweihao 用户微号
- *@return 成功返回PAccount，失败返回PResult
+ *@return 返回PResult
  */
  
  /*
@@ -84,7 +89,7 @@ message PUser {
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
- *@return 成功返回PAccount，失败返回PResult
+ *@return 返回PResult
  */
  
  /*
@@ -92,7 +97,7 @@ message PUser {
  *@URL /account/binding/facebook
  *@cookie token&uuid
  *@param token Facebook User access token
- *@return 成功返回PAccount，失败返回PResult
+ *@return 返回PResult
  */
 
  
