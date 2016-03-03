@@ -7,12 +7,8 @@ message PGetToken {
 }
 
 message PBindAccount {
-	int32 type = 1;				//固定为4
-	bool cellphone = 2;			//手机
-	bool wechat = 3;			//微信
-	bool weibo = 4;				//微博
-	bool facebook = 5;			//脸书
-	bool google = 6;			//谷歌
+	int32 type = 1;					//固定为4
+	repeated bool bindTypes = 2; 	//绑定登录类型(0手机,1 微信,2 微博,3 facebook,4 google)
 }
 
 message PCellphoneAccount {
