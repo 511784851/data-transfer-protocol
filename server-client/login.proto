@@ -35,38 +35,6 @@ message PRUsername {
 	repeated string names = 2; 	//推荐的用户名
 }
 
-message PWeiXinAccount{
-	int32 type = 1;	    		//固定为6
-	string code = 2;			//授权临时票据
-}
-
-message PWeiBoAccount{
-	int32 type = 1;	    		//固定为7
-	string wbuid = 2;			//用户微博uid
-	string wbname = 3;			//用户微博昵称
-	string headimgurl = 4;		//用户微博头像地址
-	string gender = 5;			//性别
-	string weihao = 6;			//用户微号
-}
-
-message PFacebookAccount{
-	int32 type = 1;				//固定为8
-	string token = 2; 			//Facebook User access token	
-}
-
-message PGoogleAccount{
-	int32 type = 1;				//固定为9
-	string code = 2; 			//授权临时票据
-	string token = 3;			//登陆验证数据
-}
-
-message PCellphoneAccount {
-	int32 type = 1;				//固定为10
-	string cellphone = 2; 		//手机号码
-	string smscode = 3;			//短信验证码	
-}
-
-
 /*
  *@note 请求推荐的用户名
  *@path /login/username
