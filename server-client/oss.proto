@@ -1,7 +1,7 @@
 syntax = "proto3";
 package common;
 option java_package = "com.blemobi.demo.probuf";
-option java_outer_classname = "MainProtos";
+option java_outer_classname = "OssProtos";
 
 // OSS STS凭证传输结构
 message PSts {
