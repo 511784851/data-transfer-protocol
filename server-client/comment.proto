@@ -5,11 +5,18 @@ option java_outer_classname = "CommentProtos";
 
 // 单条评论结构
 message PComment {
-	int32 upvotes = 1;		//赞数
-	int32 downvotes = 2;	//踩数
-	string text = 3;		//评论文本内容
-	string voiceurl = 4; 	//声音地址
-	bool isvalid = 5;		//声音是否有效
+	string id = 1;			//评论ID
+	string uuid = 2;		//评论者ID
+	string nickname = 3;	//评论者昵称
+	string headImgUrl = 4;  //评论者头像
+	string atUuid = 5;		//@用户ID
+	string atNickname = 6;	//@用户昵称
+	/*保留6~10用于扩展*/
+	int32 upvotes = 11;		//赞数
+	int32 downvotes = 12;	//踩数
+	string text = 13;		//评论文本内容
+	string voiceUrl = 14; 	//声音地址
+	bool voiceIsValid = 15;		//声音是否有效
 }
 
 message PCommentList {
@@ -33,7 +40,7 @@ message PCommentList {
  *@return 返回PResult
  */
  
- /*
+/*
  *@note 赞(踩)
  *@path /comment/vote
  *@method GET
@@ -44,7 +51,7 @@ message PCommentList {
  *@return 返回PResult
  */
  
-  /*
+/*
  *@note 取评论列表
  *@path /comment/commentlist
  *@method GET
@@ -54,4 +61,27 @@ message PCommentList {
  *@param pagesize 每页多少记录
  *@return 成功返回PCommentList，失败返回PResult
  */
+ 
+message PVoteUser {
+	string uuid = 1;		//赞或踩的用户信息
+	string nickname = 2;
+	string headImgUrl = 3;
+}
+
+message PVoteUserList {
+	int32 type = 1;			//固定为14
+	repeated PVoteUser user = 2;
+}
+
+/*
+ *@note 取帖子赞列表
+ *@path /comment/upvotelist
+ *@method GET
+ *@cookie token&uuid
+ *@param postid 帖子ID
+ *@param pageindex 第几页
+ *@param pagesize 每页多少记录
+ *@return 成功返回PVoteUserList，失败返回PResult
+ */
+ 
  
