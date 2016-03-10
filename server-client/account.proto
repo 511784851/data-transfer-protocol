@@ -1,0 +1,112 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "AccountProtos";
+
+
+message PUser {
+	int32 type = 1;	    	//固定为2
+	/*保留2~5用于扩展*/
+	
+	string uuid = 6; 		// 服务端标志用户的唯一id
+	string password = 7; 	// 自有手机号码注册时输入的密码
+	string username = 8; 	// 用户名，唯一
+	string nickname = 9; 	// 昵称
+	string headImgURL = 10; // 头像地址
+	string realname = 11; 	// 真实姓名
+	int32 gender = 12;    	// 性别，0就是女，其余的是男；人妖暂时不考虑
+	string email = 13; 		// 邮箱地址
+	string birthday = 14; 	// 生日，格式19850101
+	string cellphone = 15; 	// 手机号
+	int32 timeZone = 16;    // 时区
+	string locale = 17; 	// 语言
+	int32 membershipLevel = 18;    	// 会员级别
+	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
+	int64 lastLoginTime = 20;  		// 用户最后登陆时间
+}
+
+message PAccount {
+	int32 type = 1;				//固定为3
+	bool cellphone = 2;			//手机
+	bool wechat = 3;			//微信
+	bool weibo = 4;				//微博
+	bool facebook = 5;			//脸书
+	bool google = 6;			//谷歌
+}
+
+/*
+ *@note 取用户信息
+ *@path /account/user/profile
+ *@cookie token&uuid
+ *@param GET
+ *@return 成功返回PUser，失败返回PResult
+ */
+
+/*
+ *@note 更新用户信息（不包含添加用户信息）
+ *@path /account/user/profile
+ *@cookie token&uuid
+ *@method POST
+ *@param nickname 昵称
+ *@param realname 真实姓名
+ *@param headimgurl 头像地址
+ *@param gender 性别
+ *@param birthday 生日
+ *@param email 电子邮件
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取用户的账号绑定信息
+ *@URL /account/binding/status
+ *@cookie token&uuid
+ *@return 成功返回PAccount，失败返回PResult
+ */
+
+/*
+ *@note 绑定手机号登录方式
+ *@URL /account/binding/phone
+ *@cookie token&uuid
+ *@param cellphone 手机号码
+ *@param smscode 验证码
+ *@return 返回PResult
+ */
+
+/*
+ *@note 绑定微信登录方式
+ *@URL /account/binding/wechat
+ *@cookie token&uuid
+ *@param code 授权临时票据(authorization code)
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 绑定微博登录方式
+ *@URL /account/binding/weibo
+ *@cookie token&uuid
+ *@param wbuid 用户微博uid
+ *@param wname 用户微博昵称
+ *@param wheadimgurl 用户微博头像地址
+ *@param wgender 性别
+ *@param wweihao 用户微号
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 绑定google登录方式
+ *@URL /account/binding/google
+ *@cookie token&uuid
+ *@param code 授权临时票据(authorization code)
+ *@param token 登陆验证数据(id token)
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 绑定facebook登录方式
+ *@URL /account/binding/facebook
+ *@cookie token&uuid
+ *@param token Facebook User access token
+ *@return 返回PResult
+ */
+
+ 

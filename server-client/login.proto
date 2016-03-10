@@ -1,29 +1,41 @@
 syntax = "proto3";
 package common;
-option java_package = "com.oleaster.blemobi.probuf";
+option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "LoginProtos";
 
 
 message PLogin {
-	int32 type = 1;	    	//固定为1
+	int32 type = 1;	    			//固定为1
 	/*保留2~5用于扩展*/
-	string uuid = 6;      	//用户ID
-	string token = 7;		//统一访问令牌
-	string name = 8;		//用户昵称
-	string portrait = 9;	//用户头像URL
+	string uuid = 6;      			//用户ID
+	string token = 7;				//统一访问令牌
+	string nickname = 8;			//用户昵称
+	string imgURL = 9;				//用户头像URL
 	repeated int32 loginTypes = 10; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 	
 	//其它需要下发的信息...
 }
 
 message PLoginType {
-	int32 type = 1; //固定为4
-	repeated int32 types = 2; //可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+	int32 type = 1; 			//固定为4
+	repeated int32 types = 2; 	//可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+}
+
+message PRUsername {
+	int32 type = 1; 			//固定为5
+	repeated string names = 2; 	//推荐的用户名
 }
 
 /*
- *@note 设备激活
- *@path /login/active
+ *@note 请求推荐的用户名
+ *@path /login/username
+ *@param uname 用户填写的用户名(如果这个用户还没有被注册，那么原封不动返回这个用户名)
+ *@return 成功返回PRUsername，失败返回PRsult
+*/
+
+/*
+ *@note app启动时从服务端获取可用第三方登陆方式
+ *@path /login/logintype
  *@return 返回PLoginType
 */
 
@@ -93,21 +105,36 @@ message PLoginType {
  *@return 登录成功返回PLogin，失败返回PResult
  */
  
+
+/*
+ *@note 生成短信验证码
+ *@path /login/smscode
+ *@param cellphone 手机号
+ *@param cty 验证码的类型，用于判断手机号码是否被注册 1 新用户注册，2 密码重置
+ *@return 返回PResult
+ */
+
  /*
   *@note 手机验证码确认
-  *@path /login/checkcode
+  *@path /login/checksmscode
   *@param cellphone 手机号码
   *@param code 验证码
   *@return PResult
  */
 
 /*
+ *@note 令牌校验，打开App时若令牌信息存在，直接校验
+ *@path /login/checktoken
+ *@cookie token&uuid
+ *@return 令牌有效或成功续期返回PLogin，失败返回PResult
+ */
+
+/*
  *@note 手机号注册
  *@path /login/register
  *@param cellphone 手机号
- *@param password 密码
- *@param username 用户名
- *@param nickname 昵称
+ *@param password 密码，不能为空
+ *@param username 用户名称，不能为空
  *@param verifycode 发送给手机的验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但注册的时候要带上）
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
@@ -118,25 +145,12 @@ message PLoginType {
  */
 
 /*
- *@note 令牌校验，打开App时若令牌信息存在，直接校验
- *@path /login/checktoken
- *@cookie token&uuid
- *@return 令牌有效或成功续期返回PLogin，失败返回PResult
- */
- 
-/*
  *@note 登出
  *@path /login/logout
  *@cookie token&uuid
  *@return 返回PResult
  */
 
-/*
- *@note 生成短信验证码
- *@path /login/msgcode
- *@param cellphone 手机号
- *@return 返回PResult
- */
 
 /*
  *@note 修改密码
@@ -154,64 +168,4 @@ message PLoginType {
  *param msgcode 验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但修改密码的时候要带上）
  *param newpwd 新密码
  *@return 返回PResult
- */
- 
-message PAccount{
-	int32 type = 1;	    		//固定为3
-	string cellphone = 2;		//手机号
-	string wechat = 3;			//微信用户ID信息
-	string weibo = 4;			//微博用户ID信息
-	string google = 5;			//google用户ID信息
-	string facebook = 6;		//facebook用户ID信息
-} 
- 
-/*
- *@note 取帐号信息，包括绑定的手机号、微信、微博、google、facebook
- *@URL /app/account/get
- *@cookie token&uuid
- *@return 成功返回PAccount，失败返回PResult
- */
- 
-/*
- *@note 绑定手机号登录方式
- *@URL /app/cellphone/set
- *@cookie token&uuid
- *@param cellphone 手机号
- *@return 成功返回PAccount，失败返回PResult
- */
-
-/*
- *@note 绑定微信登录方式
- *@URL /app/wechat/set
- *@cookie token&uuid
- *@param code 授权临时票据(authorization code)
- *@return 成功返回PAccount，失败返回PResult
- */
- 
- /*
- *@note 绑定微博登录方式
- *@URL /app/weibo/set
- *@cookie token&uuid
- *@param wbuid 用户微博uid
- *@param wbname 用户微博昵称
- *@param headimgurl 用户微博头像地址
- *@param weihao 用户微号
- *@return 成功返回PAccount，失败返回PResult
- */
- 
- /*
- *@note 绑定google登录方式
- *@URL /app/google/set
- *@cookie token&uuid
- *@param code 授权临时票据(authorization code)
- *@param token 登陆验证数据(id token)
- *@return 成功返回PAccount，失败返回PResult
- */
- 
- /*
- *@note 绑定facebook登录方式
- *@URL /app/facebook/set
- *@cookie token&uuid
- *@param token Facebook User access token
- *@return 成功返回PAccount，失败返回PResult
  */

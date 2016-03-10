@@ -1,0 +1,49 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "NewsProtos";
+
+message PNews {
+	int32 type = 1; //固定为11
+	int32 pageindex = 2; //从第几页开始
+	int32 pagesize = 3; //每一页的个数
+	repeated PArticle articles = 4; //博文列表
+}
+
+message PArticle {
+	int32 type = 1; //固定为12
+	int32 id = 2; //博文的ID
+	string uuid = 3; //博文的作者
+	string userName = 4; //作者名称
+	string userHead = 5; //作者头像
+	string content = 6; //文章正文(如果正文是保存的OSS上，那么这里是一个url)
+	string imageUrl = 7; //图片的地址（多个以‘,’分隔）
+	string videourl = 8; //视频的地址
+	string audioUrl = 9; //音频的地址
+	bool onOSS = 10; //正文是否在oss上
+}
+
+/**
+ *@note 发布微博
+ *@path /news/publish
+ *@cookie token&uuid
+ *@method POST
+ *@param content 微博正文(如果正文是保存的OSS上，那么这里是一个url)
+ *@param onoss 正文是否在oss上（0没有，1在oss上）
+ *@param imageurl 上传成功后的图片路径（如果有多个用‘,’分隔，图片、视频、音频只能三选一）
+ *@param videourl 上传成功后的视频路径（只能有一个）
+ *@param audiourl 上传成功后的音频路径（只能有一个）
+ *@return PResult
+ */
+ 
+ 
+ /**
+  *@note 微博刷新
+  *@path /news/list
+  *@cookie token&uuid
+  *@method GET
+  *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+  *@param pageindex 从第几页开始
+  *@param pagesize 每一页的个数
+  *@param PNews
+  */

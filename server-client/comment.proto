@@ -1,0 +1,87 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "CommentProtos";
+
+// 单条评论结构
+message PComment {
+	string id = 1;			//评论ID
+	string uuid = 2;		//评论者ID
+	string nickname = 3;	//评论者昵称
+	string headImgUrl = 4;  //评论者头像
+	string atUuid = 5;		//@用户ID
+	string atNickname = 6;	//@用户昵称
+	/*保留6~10用于扩展*/
+	int32 upvotes = 11;		//赞数
+	int32 downvotes = 12;	//踩数
+	string text = 13;		//评论文本内容
+	string voiceUrl = 14; 	//声音地址
+	bool voiceIsValid = 15;		//声音是否有效
+}
+
+message PCommentList {
+	int32 type = 1;			//固定为13
+	/*保留2~5用于扩展*/
+	int32 upvotes = 6;		//赞数
+	int32 downvotes = 7;	//踩数
+	repeated PComment comment = 8;		//评论列表
+}
+
+/*
+ *@note 发布评论
+ *@path /comment/publish
+ *@method POST
+ *@cookie token&uuid
+ *@param postid 帖子ID
+ *@param text 文本内容
+ *@param voiceurl 语音地址
+ *@param validtime 语音有效时间, 单位分钟, 0表示永久有效, >0表示在一段时间内有效, 如1440表示在1天内有效
+ *@param at @了谁，用户uuid
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 赞(踩)
+ *@path /comment/vote
+ *@method GET
+ *@cookie token&uuid
+ *@param actiontp 动作类型 0赞 1踩
+ *@param objecttp 目标类型 0帖子 1评论
+ *@param id 帖子ID(post ID)或评论ID(comment ID)
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 取评论列表
+ *@path /comment/commentlist
+ *@method GET
+ *@cookie token&uuid
+ *@param postid 帖子ID
+ *@param pageindex 第几页
+ *@param pagesize 每页多少记录
+ *@return 成功返回PCommentList，失败返回PResult
+ */
+ 
+message PVoteUser {
+	string uuid = 1;		//赞或踩的用户信息
+	string nickname = 2;
+	string headImgUrl = 3;
+}
+
+message PVoteUserList {
+	int32 type = 1;			//固定为14
+	repeated PVoteUser user = 2;
+}
+
+/*
+ *@note 取帖子赞列表
+ *@path /comment/upvotelist
+ *@method GET
+ *@cookie token&uuid
+ *@param postid 帖子ID
+ *@param pageindex 第几页
+ *@param pagesize 每页多少记录
+ *@return 成功返回PVoteUserList，失败返回PResult
+ */
+ 
+ 
