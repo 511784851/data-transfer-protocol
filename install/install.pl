@@ -18,6 +18,8 @@ print("------开始安装Go第三方依赖库\n");
     "github.com/golang/groupcache",
     "github.com/hashicorp/consul/api",
     "github.com/rafaeljusto/redigomock"
+	"github.com/MieYua/Aliyun-OSS-Go-SDK/oss"
+	"github.com/denverdino/aliyungo/oss"
 );
 
 $i = 0;
