@@ -23,11 +23,6 @@ message PArticle {
 	bool onOSS = 10; //正文是否在oss上
 }
 
-message PRelation {
-	int32 type = 1;
-	string uoid = 2; //关注或取消关注对象的id
-	int32 relation = 3; //值等1时表示加关注，为0时表示取消关注
-}
 
 
 /**
@@ -58,7 +53,7 @@ message PRelation {
   *@path /news/relation
   *@cookie token&uuid
   *@method GET
-  *@param uoid 关注/本关注对象的id
+  *@param uuid 关注/本关注对象的id
   *@param do 为1时表示添加关注，为0时表示取消关注
   *@return PResult
   */
