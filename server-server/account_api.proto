@@ -6,20 +6,24 @@ message PUser {
 	/*保留2~5用于扩展*/
 	
 	string uuid =  6;           	// 服务端标志用户的唯一id
-	string password = 7;		// 自有手机号码注册时输入的密码
-	string username = 8; 		// 用户名，唯一
-	string nickname = 9; 		// 昵称
-	string headImgURL = 10;		// 头像地址
-	string realName = 11;  		// 真实姓名
-	int32 gender = 12;    		// 性别，0女，1男
-	string email = 13; 			// 邮箱地址
-	string birthday = 14; 		// 生日，格式19850101
-	string cellphone = 15; 		// 手机号
+	string password = 7;			// 自有手机号码注册时输入的密码
+	string username = 8; 			// 用户名，唯一
+	string nickname = 9; 			// 昵称
+	string headImgURL = 10;			// 头像地址
+	string realName = 11;  			// 真实姓名
+	int32 gender = 12;    			// 性别，0女，1男
+	string email = 13; 				// 邮箱地址
+	string birthday = 14; 			// 生日，格式19850101
+	string cellphone = 15; 			// 手机号
 	int32 timeZone = 16;    		// 时区
-	string locale = 17; 		// 语言
-	int32 membershipLevel = 18;  // 会员级别
+	string locale = 17; 			// 语言
+	int32 membershipLevel = 18;  	// 会员级别
 	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
-	int64 lastLoginTime = 20;  	// 用户最后登陆时间
+	int64 lastLoginTime = 20;  		// 用户最后登陆时间
+	string userResume = 21; 		// 个人简介
+	string link1 = 22;       		// 链接1  
+	string link2 = 23;          	// 链接2  
+	string link3 = 24;          	// 链接3
 }
 
 /*
@@ -41,6 +45,10 @@ message PUser {
  *@param gender 性别
  *@param birthday 生日
  *@param email 电子邮件
+ *@param userResume 个人简介
+ *@param link1 链接1
+ *@param link2 链接2
+ *@param link3 链接3
  *@return 返回PResult
  */
 
