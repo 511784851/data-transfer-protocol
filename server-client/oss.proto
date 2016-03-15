@@ -5,12 +5,10 @@ option java_outer_classname = "OssProtos";
 
 // OSS STS凭证传输结构
 message PSts {
-	int32 type = 1;			//固定为11
-	
-	string accessKeyId = 2;
-	string accessKeySecret = 3;
-	string securityToken = 4;
-	string expiration = 5;
+	string accessKeyId = 1;
+	string accessKeySecret = 2;
+	string securityToken = 3;
+	string expiration = 4;
 }
 
 /*
@@ -23,16 +21,14 @@ message PSts {
  
  
 message PUpload {
-	int32 type = 1;			//固定为12
-	/*保留2~5用于扩展*/
-	bool exists = 6;		//要上传的文件是否存在
-	string url = 7;   		//经服务端签好名的文件上传URL, exists为false时有意义
-	repeated string headers = 8; //必要增加的Http Header信息
-	string objectKey = 9;	//要上传的文件如果存在，则通过此字段返回文件名
+	bool exists = 1;		//要上传的文件是否存在
+	string url = 2;   		//经服务端签好名的文件上传URL, exists为false时有意义
+	repeated string headers = 3; //必要增加的Http Header信息
+	string objectKey = 4;	//文件名。（要上传的文件如果存在，则通过此字段返回文件名）
 }
  
  /*
- *@note 获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为永久的，
+ *@note 获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
  *      否则请在各自的模块里面单独实现此协议，参看comment模块
  *@path /oss/uploadfileurl
  *@method GET

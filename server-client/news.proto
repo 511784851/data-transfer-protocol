@@ -4,14 +4,12 @@ option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "NewsProtos";
 
 message PNews {
-	int32 type = 1; //固定为11
-	int32 pageindex = 2; //从第几页开始
-	int32 pagesize = 3; //每一页的个数
-	repeated PArticle articles = 4; //博文列表
+	int32 pageindex = 1; //从第几页开始
+	int32 pagesize = 2; //每一页的个数
+	repeated PArticle articles = 3; //博文列表
 }
 
 message PArticle {
-	int32 type = 1; //固定为12
 	int32 id = 2; //博文的ID
 	string uuid = 3; //博文的作者
 	string userName = 4; //作者名称

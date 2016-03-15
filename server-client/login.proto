@@ -5,8 +5,7 @@ option java_outer_classname = "LoginProtos";
 
 
 message PLogin {
-	int32 type = 1;	    			//固定为1
-	/*保留2~5用于扩展*/
+	/*保留1~5用于扩展*/
 	string uuid = 6;      			//用户ID
 	string token = 7;				//统一访问令牌
 	string nickname = 8;			//用户昵称
@@ -17,12 +16,10 @@ message PLogin {
 }
 
 message PLoginType {
-	int32 type = 1; 			//固定为4
 	repeated int32 types = 2; 	//可用的第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 }
 
 message PRUsername {
-	int32 type = 1; 			//固定为5
 	repeated string names = 2; 	//推荐的用户名
 }
 

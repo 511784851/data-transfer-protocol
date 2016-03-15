@@ -5,16 +5,16 @@ option java_outer_classname = "ResultProtos";
 
 // 通用操作结果返回
 message PResult {
-	int32 type = 1;			//固定为0
-	int32 errorCode = 2;	//错误码：0为正确，其他均为出错
-	string errorMsg = 3;	//错误描述信息
-	string extraInfo = 4;	//额外信息
+	int32 errorCode = 1;	//错误码：0为正确，其他均为出错
+	string errorMsg = 2;	//错误描述信息
+	string extraInfo = 3;	//额外信息
 }
 
 /*
- *@note 用于反序列化时，第一次的探索，以进一步判断序列化的数据是什么类型
- *@type 可能出现的结构类型定义
+ *@note 通信消息结构
  */
-message PType {
-	int32 type = 1;
+message PMessage {
+	int32 magic = 1;		//固定为9833
+	string type = 2;		//data消息结构名称，如"PResult"
+	bytes data = 3;			//具体的message数据，请根据type解析
 }

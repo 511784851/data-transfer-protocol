@@ -5,8 +5,7 @@ option java_outer_classname = "AccountProtos";
 
 
 message PUser {
-	int32 type = 1;	    	//固定为2
-	/*保留2~5用于扩展*/
+	/*保留1~5用于扩展*/
 	
 	string uuid = 6; 				// 服务端标志用户的唯一id
 	string password = 7; 			// 自有手机号码注册时输入的密码
@@ -30,7 +29,6 @@ message PUser {
 }
 
 message PAccount {
-	int32 type = 1;				//固定为3
 	bool cellphone = 2;			//手机
 	bool wechat = 3;			//微信
 	bool weibo = 4;				//微博
