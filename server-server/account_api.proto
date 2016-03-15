@@ -1,37 +1,12 @@
 syntax = "proto3";
 package service; 
 
-message PUser {
-	int32 type = 1;	    	//固定为2
-	/*保留2~5用于扩展*/
-	
-	string uuid =  6;           	// 服务端标志用户的唯一id
-	string password = 7;			// 自有手机号码注册时输入的密码
-	string username = 8; 			// 用户名，唯一
-	string nickname = 9; 			// 昵称
-	string headImgURL = 10;			// 头像地址
-	string realName = 11;  			// 真实姓名
-	int32 gender = 12;    			// 性别，0女，1男
-	string email = 13; 				// 邮箱地址
-	string birthday = 14; 			// 生日，格式19850101
-	string cellphone = 15; 			// 手机号
-	int32 timeZone = 16;    		// 时区
-	string locale = 17; 			// 语言
-	int32 membershipLevel = 18;  	// 会员级别
-	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
-	int64 lastLoginTime = 20;  		// 用户最后登陆时间
-	string userResume = 21; 		// 个人简介
-	string link1 = 22;       		// 链接1  
-	string link2 = 23;          	// 链接2  
-	string link3 = 24;          	// 链接3
-}
-
 /*
  *@note 取用户信息
  *@path /account/user/profile
  *@cookie token&uuid
  *@param GET
- *@return 成功返回PUser，失败返回PResult
+ *@return 成功返回PUser，失败返回PResult;PUser定义见account.proto
  */
 
 /*
