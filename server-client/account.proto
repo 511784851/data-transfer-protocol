@@ -57,7 +57,7 @@ message PAccount {
  *@param gender 性别
  *@param birthday 生日
  *@param email 电子邮件
- *@param userResume 个人简介
+ *@param userresume 个人简介
  *@param link1 链接1
  *@param link2 链接2
  *@param link3 链接3
