@@ -21,6 +21,7 @@ message PArticle {
 	string videourl = 8; //视频的地址
 	string audioUrl = 9; //音频的地址
 	bool onOSS = 10; //正文是否在oss上
+	string pubishTime = 11; //发布时间
 }
 
 
