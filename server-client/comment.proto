@@ -3,7 +3,7 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "CommentProtos";
 
-// 单条评论结构
+// 单条评论结构详细信息
 message PComment {
 	string id = 1;			//评论ID
 	string uuid = 2;		//评论者ID
@@ -16,15 +16,19 @@ message PComment {
 	int32 downvotes = 12;	//踩数
 	string text = 13;		//评论文本内容
 	string voiceUrl = 14; 	//声音地址
-	bool voiceIsValid = 15;		//声音是否有效
+	bool voiceIsValid = 15;	//声音是否有效
+}
+
+// 某个用户等级的评论列表
+message PCommentLevel {
+	int32 level = 1;		//等级
+	int32 count = 2;		//评论数
+	int32 interactions = 3; //交互数（@次数）
+	repeated PComment comments = 4;
 }
 
 message PCommentList {
-	int32 type = 1;			//固定为13
-	/*保留2~5用于扩展*/
-	int32 upvotes = 6;		//赞数
-	int32 downvotes = 7;	//踩数
-	repeated PComment comment = 8;		//评论列表
+	repeated PCommentLevel comments = 1;
 }
 
 /*
@@ -41,25 +45,44 @@ message PCommentList {
  */
  
 /*
- *@note 赞(踩)
+ *@note 赞(踩)帖子
  *@path /comment/vote
  *@method GET
  *@cookie token&uuid
  *@param actiontp 动作类型 0赞 1踩
- *@param objecttp 目标类型 0帖子 1评论
- *@param id 帖子ID(post ID)或评论ID(comment ID)
+ *@param id 帖子ID(post ID)
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 赞(踩)评论
+ *@path /comment/vote
+ *@method GET
+ *@cookie token&uuid
+ *@param actiontp 动作类型 0赞 1踩
+ *@param id 评论ID(comment ID)
  *@return 返回PResult
  */
  
 /*
- *@note 取评论列表
+ *@note 取评论列表（按等级，每个等级取2条）
  *@path /comment/commentlist
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
- *@param pageindex 第几页
- *@param pagesize 每页多少记录
  *@return 成功返回PCommentList，失败返回PResult
+ */
+ 
+/*
+ *@note 加载更多评论
+ *@path /comment/commentmore
+ *@method GET
+ *@cookie token&uuid
+ *@param postid 帖子ID
+ *@param level 用户等级
+ *@param offset 从第几条开始加载
+ *@param count 每次加载多少条
+ *@return 成功返回PCommentLevel，失败返回PResult
  */
  
 message PVoteUser {
@@ -69,9 +92,20 @@ message PVoteUser {
 }
 
 message PVoteUserList {
-	int32 type = 1;			//固定为14
-	repeated PVoteUser user = 2;
+	repeated PVoteUser user = 1;
 }
+
+message PInt32Array {
+	repeated int32 array = 1;
+}
+
+/*
+ *@note 取N个帖子的评论数，提供给news模块调用
+ *@path /comment/post/count
+ *@method GET
+ *@param postids 帖子ID，用|分隔
+ *@return 成功返回PInt32Array，失败返回PResult
+ */
 
 /*
  *@note 取帖子赞列表
