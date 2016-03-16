@@ -47,7 +47,7 @@ message PCommentList {
  
 /*
  *@note 赞(踩)帖子
- *@path /comment/vote
+ *@path /comment/votepost
  *@method GET
  *@cookie token&uuid
  *@param actiontp 动作类型 0赞 1踩
@@ -57,7 +57,7 @@ message PCommentList {
  
  /*
  *@note 赞(踩)评论
- *@path /comment/vote
+ *@path /comment/votecomment
  *@method GET
  *@cookie token&uuid
  *@param actiontp 动作类型 0赞 1踩
