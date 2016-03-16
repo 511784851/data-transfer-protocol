@@ -3,6 +3,9 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "AccountProtos";
 
+message PUserList {
+	repeated PUser list = 1; //PUser列表，最多100个
+}
 
 message PUser {
 	/*保留1~5用于扩展*/
