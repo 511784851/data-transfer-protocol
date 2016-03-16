@@ -4,8 +4,6 @@ option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "NewsProtos";
 
 message PNews {
-	int32 pageindex = 1; //从第几页开始
-	int32 pagesize = 2; //每一页的个数
 	repeated PArticle articles = 3; //博文列表
 }
 
@@ -15,11 +13,12 @@ message PArticle {
 	string userName = 4; //作者名称
 	string userHead = 5; //作者头像
 	string content = 6; //文章正文(如果正文是保存的OSS上，那么这里是一个url)
-	string imageUrl = 7; //图片的地址（多个以‘,’分隔）
-	string videourl = 8; //视频的地址
-	string audioUrl = 9; //音频的地址
-	bool onOSS = 10; //正文是否在oss上
-	string pubishTime = 11; //发布时间
+	string srcType = 7; //资源的类型（imageUrl表示上传的是图片，videoUrl表示上传的是视频，audioUrl表示上传的是音频）
+	string imageUrl = 8; //图片的地址（多个以‘,’分隔）
+	string videoUrl = 9; //视频的地址
+	string audioUrl = 10; //音频的地址
+	bool onOSS = 11; //正文是否在oss上
+	string pubishTime = 12; //发布时间
 }
 
 
@@ -31,11 +30,24 @@ message PArticle {
  *@method POST
  *@param content 微博正文(如果正文是保存的OSS上，那么这里是一个url)
  *@param onoss 正文是否在oss上（0没有，1在oss上）
+ *@param srctp 资源的类型（img表示上传的是图片，vdo表示上传的是视频，ado表示上传的是音频）
  *@param imageurl 上传成功后的图片路径（如果有多个用‘,’分隔，图片、视频、音频只能三选一）
  *@param videourl 上传成功后的视频路径（只能有一个）
  *@param audiourl 上传成功后的音频路径（只能有一个）
  *@return PResult
  */
+ 
+ 
+ /**
+  *@note 获取资源文件在oss上的状态（包括大于30个字的文字）
+  *@path /news/src/status
+  *@cookie token&uuid
+  *@method GET
+  *@param digest 要上传的文件的md5 hexstring
+  *@param length 文件大小，字节
+  *@param extension 扩展名 如jpg,png,gif,bmp,mp3,apk等(如果是纯的文本流可以不填写扩展名)
+  *@return 成功返回PUpload，失败返回PResult
+  */
  
  
  /**
