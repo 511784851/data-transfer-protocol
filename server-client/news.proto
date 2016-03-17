@@ -3,22 +3,63 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "NewsProtos";
 
+//微博列表
 message PNews {
-	repeated PArticle articles = 3; //博文列表
+	repeated PArticle articles = 1; //博文列表
 }
 
+//微博信息
 message PArticle {
-	int32 id = 2; //博文的ID
-	string uuid = 3; //博文的作者
-	string userName = 4; //作者名称
-	string userHead = 5; //作者头像
-	string content = 6; //文章正文(如果正文是保存的OSS上，那么这里是一个url)
-	string srcType = 7; //资源的类型（imageUrl表示上传的是图片，videoUrl表示上传的是视频，audioUrl表示上传的是音频）
-	string imageUrl = 8; //图片的地址（多个以‘,’分隔）
-	string videoUrl = 9; //视频的地址
-	string audioUrl = 10; //音频的地址
-	bool onOSS = 11; //正文是否在oss上
-	string pubishTime = 12; //发布时间
+	int32 id = 1; 				//博文的ID
+	string uuid = 2; 			//博文的作者
+	string userName = 3; 		//作者名称
+	string userHead = 4; 		//作者头像
+	string content = 5; 		//文章正文(如果正文是保存的OSS上，那么这里是一个url)
+	string srcType = 6; 		//资源的类型（image表示上传的是图片，video表示上传的是视频，audio表示上传的是音频）
+	repeated PImage images = 7; //图片（最多九张）
+	PVideo video = 8; 			//视频
+	PAudio audio = 9; 			//音频
+	bool onOSS = 10; 			//正文是否在oss上
+	int64 pubishTime = 11; 	//发布时间
+	string position = 12; 		//位置
+	string tag = 13; 			//标签（多个可以用‘,’分隔）
+}
+
+//图片
+message PImage {
+	string url = 1;
+	repeated PImageAD aDList = 2; //图片的热点广告 
+}
+
+//视频
+message PVideo {
+	string url = 1; //视频在OSS上的路径
+	string img = 2; //视频的缩略图
+	repeated PVideoTag tags = 3; //视频的标签
+	int64 expires = 4; //视频的有效期
+}
+
+//音频
+message PAudio {
+	string url = 1; //音频在OSS上的路径
+	int64 expires = 2; //音频的有效期
+}
+
+//图片的热点广告
+message PImageAD {
+	float x = 1;
+	float y = 2;
+	string title = 3; //广告名称
+	float price = 4; //价格
+	int32 category = 5; //分类
+	string url = 6; //广告链接
+}
+
+//视频的标签
+message PVideoTag {
+	float x = 1;
+	float y = 2;
+	string text = 3; //标签内容
 }
 
 
@@ -28,12 +69,7 @@ message PArticle {
  *@path /news/publish
  *@cookie token&uuid
  *@method POST
- *@param content 微博正文(如果正文是保存的OSS上，那么这里是一个url)
- *@param onoss 正文是否在oss上（0没有，1在oss上）
- *@param srctp 资源的类型（img表示上传的是图片，vdo表示上传的是视频，ado表示上传的是音频）
- *@param imageurl 上传成功后的图片路径（如果有多个用‘,’分隔，图片、视频、音频只能三选一）
- *@param videourl 上传成功后的视频路径（只能有一个）
- *@param audiourl 上传成功后的音频路径（只能有一个）
+ *@param article PArticle数据流
  *@return PResult
  */
  
