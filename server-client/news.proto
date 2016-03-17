@@ -42,7 +42,8 @@ message PVideo {
 //音频
 message PAudio {
 	string url = 1; //音频在OSS上的路径
-	int64 expires = 2; //音频的有效期
+	int32 length = 2; //音频长度
+	int64 expires = 3; //音频的有效期
 }
 
 //图片的热点广告
@@ -92,7 +93,7 @@ message PVideoTag {
   *@cookie token&uuid
   *@method GET
   *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
-  *@param PNews
+  *@return PNews
   */
 
  /**
