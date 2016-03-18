@@ -133,6 +133,6 @@ message PAccount {
  *@path /account/user/headimage
  *@method post
  *@cookie token&uuid
- *@image 要上传的头像objectkey，PUpload返回的参数
+ *@param image 要上传的头像objectkey，PUpload返回的参数
  *@return 返回PResult
  */
