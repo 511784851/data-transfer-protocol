@@ -54,7 +54,6 @@ message PAccount {
  *@method POST
  *@param nickname 昵称
  *@param realname 真实姓名
- *@param headimgurl 头像地址
  *@param gender 性别
  *@param birthday 生日
  *@param email 电子邮件
@@ -127,4 +126,13 @@ message PAccount {
  *@length 文件大小，字节
  *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
  *@return 成功返回PUpload，失败返回PResult
+ */
+
+ /*
+ *@note 修改用户头像
+ *@path /account/user/headimage
+ *@method post
+ *@cookie token&uuid
+ *@image 要上传的头像objectkey，PUpload返回的参数
+ *@return 返回PResult
  */
