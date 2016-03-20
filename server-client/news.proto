@@ -71,6 +71,7 @@ message PVideoTag {
  *@cookie token&uuid
  *@method POST
  *@param article PArticle数据流
+	images.url/video.url/audio.url 这些个url传的是pupload的objectKey
  *@return PResult
  */
  
@@ -84,6 +85,15 @@ message PVideoTag {
   *@param length 文件大小，字节
   *@param extension 扩展名 如jpg,png,gif,bmp,mp3,apk等(如果是纯的文本流可以不填写扩展名)
   *@return 成功返回PUpload，失败返回PResult
+  */
+  
+ /**
+  *@note 获取多个资源文件在oss上的状态（如多个图片）
+  *@path /news/src/status/multi
+  *@cookie token&uuid
+  *@method GET
+  *@body PFileInfoArray
+  *@return 成功返回PUploadArray，失败返回PResult
   */
  
  
