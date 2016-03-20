@@ -19,7 +19,7 @@ message PSts {
  *@return 成功返回PSts，失败返回PResult
  */
  
- 
+// 用于构造上传文件HTTP请求的信息
 message PUpload {
 	bool exists = 1;		//要上传的文件是否存在
 	string url = 2;   		//经服务端签好名的文件上传URL, exists为false时有意义
@@ -27,7 +27,7 @@ message PUpload {
 	string objectKey = 4;	//文件名。（要上传的文件如果存在，则通过此字段返回文件名）
 }
  
- /*
+/*
  *@note 获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
  *      否则请在各自的模块里面单独实现此协议，参看comment模块
  *@path /oss/uploadfileurl
@@ -37,4 +37,29 @@ message PUpload {
  *@length 文件大小，字节
  *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
  *@return 成功返回PUpload，失败返回PResult
+ */
+
+// 多个文件的上传信息
+message PUploadArray {
+	repeated PUpload uploads = 1;
+}
+
+message PFileInfo {
+	string digest = 1;	//要上传的文件的md5 hexstring
+	int32 length = 2;	//文件大小，字节
+	string extension =3;//扩展名
+}
+
+message PFileInfoArray {
+	repeated PFileInfo fileInfos = 1;
+}
+
+/*
+ *@note 批量获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
+ *      否则请在各自的模块里面单独实现此协议，参看comment模块
+ *@path /oss/uploadfileurls
+ *@method POST
+ *@cookie token&uuid
+ *@body   PFileInfoArray
+ *@return 成功返回PUploadArray，失败返回PResult
  */
