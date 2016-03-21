@@ -20,15 +20,17 @@ message PArticle {
 	PVideo video = 8; 			//视频
 	PAudio audio = 9; 			//音频
 	bool onOSS = 10; 			//正文是否在oss上
-	int64 pubishTime = 11; 	//发布时间
+	int64 pubishTime = 11; 		//发布时间
 	string position = 12; 		//位置
 	string tag = 13; 			//标签（多个可以用‘,’分隔）
+	bool self = 14; 			//这篇文章是查看人自己的写的
 }
 
 //图片
 message PImage {
 	string url = 1;
 	repeated PImageAD aDList = 2; //图片的热点广告 
+	string thumbnail = 3; //缩略图的url
 }
 
 //视频
@@ -36,14 +38,14 @@ message PVideo {
 	string url = 1; //视频在OSS上的路径
 	string img = 2; //视频的缩略图
 	repeated PVideoTag tags = 3; //视频的标签
-	int64 expires = 4; //视频的有效期
+	int64 expires = 4; //视频的有效期（多少秒之后过期）
 }
 
 //音频
 message PAudio {
 	string url = 1; //音频在OSS上的路径
 	int32 length = 2; //音频长度
-	int64 expires = 3; //音频的有效期
+	int64 expires = 3; //音频的有效期（多少秒之后过期）
 }
 
 //图片的热点广告
@@ -70,7 +72,7 @@ message PVideoTag {
  *@path /news/publish
  *@cookie token&uuid
  *@method POST
- *@param article PArticle数据流
+ *@body PArticle数据流
 	images.url/video.url/audio.url 这些个url传的是pupload的objectKey
  *@return PResult
  */
@@ -87,11 +89,12 @@ message PVideoTag {
   *@return 成功返回PUpload，失败返回PResult
   */
   
+  
  /**
   *@note 获取多个资源文件在oss上的状态（如多个图片）
   *@path /news/src/status/multi
   *@cookie token&uuid
-  *@method GET
+  *@method POST
   *@body PFileInfoArray
   *@return 成功返回PUploadArray，失败返回PResult
   */
@@ -113,5 +116,24 @@ message PVideoTag {
   *@method GET
   *@param uuid 关注/本关注对象的id
   *@param do 为1时表示添加关注，为0时表示取消关注
+  *@return PResult
+  */
+  
+/**
+ *@note 个人微博主页
+ *@path /news/home
+ *@method GET
+ *@cookie token&uuid
+ *@param id uuid
+ *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@return PNews
+ */
+ 
+ /**
+  *@note 删除微博
+  *@path /news/delete
+  *@cookie token&uuid
+  *@method GET
+  *@param id 微博的id
   *@return PResult
   */
