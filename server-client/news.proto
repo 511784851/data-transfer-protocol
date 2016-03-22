@@ -28,9 +28,9 @@ message PArticle {
 
 //图片
 message PImage {
-	string url = 1;
-	repeated PImageAD aDList = 2; //图片的热点广告 
-	string thumbnail = 3; //缩略图的url
+	string url = 1; 				//原图url
+	repeated PImageAD aDList = 2; 	//图片的热点广告 
+	string thumbnail = 3; 			//缩略图的url
 }
 
 //视频
