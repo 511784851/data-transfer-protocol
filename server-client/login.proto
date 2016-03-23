@@ -10,7 +10,8 @@ message PLogin {
 	string token = 7;				//统一访问令牌
 	string nickname = 8;			//用户昵称
 	string imgURL = 9;				//用户头像URL
-	repeated int32 loginTypes = 10; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+	int64 chatid = 10;				//用户聊天系统分配的聊天id
+	repeated int32 loginTypes = 11; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 	
 	//其它需要下发的信息...
 }
