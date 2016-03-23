@@ -64,7 +64,7 @@ message PCommentList {
  *@cookie token&uuid
  *@param actiontp 动作类型 0赞 1踩
  *@param id 评论ID(comment ID)
- *@return 返回PResult
+ *@return 成功返回PComment，失败返回PResult
  */
  
 /*
