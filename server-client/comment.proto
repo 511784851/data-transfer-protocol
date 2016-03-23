@@ -73,6 +73,7 @@ message PCommentList {
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
+ *@param postuuid 帖子创建者ID
  *@return 成功返回PCommentList，失败返回PResult
  */
  
@@ -82,6 +83,7 @@ message PCommentList {
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
+ *@param postuuid 帖子创建者ID
  *@param level 用户等级
  *@param offset 从第几条开始加载
  *@param count 每次加载多少条
@@ -107,6 +109,7 @@ message PInt32Array {
  *@path /comment/post/count
  *@method GET
  *@param postids 帖子ID，用|分隔
+ *@param postuuids 帖子创建者ID, 用|分隔
  *@return 成功返回PInt32Array，失败返回PResult
  */
 
@@ -116,6 +119,7 @@ message PInt32Array {
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
+ *@param postuuid 帖子创建者ID
  *@param pageindex 第几页
  *@param pagesize 每页多少记录
  *@return 成功返回PVoteUserList，失败返回PResult
