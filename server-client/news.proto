@@ -67,6 +67,22 @@ message PVideoTag {
 
 
 
+
+message RecommendUserList {
+  repeated RecommendUser list = 1; //PUser列表，最多100个
+}
+
+message RecommendUser {
+  /*保留1~5用于扩展*/ 
+  string uuid = 6;        // 服务端标志用户的唯一id
+  string username = 7;      // 用户名，唯一
+  string nickname = 8;      // 昵称
+  string headImgURL = 9;     // 头像地址
+  int32 gender = 10;          // 性别，0就是女，其余的是男；人妖暂时不考虑
+  int32 membershipLevel = 11;    // 会员级别
+}
+
+
 /**
  *@note 发布微博
  *@path /news/publish
@@ -176,5 +192,16 @@ message PVideoTag {
   *@method GET
   *@param puuid 微博发布者uuid
   *@param id 微博的id
+  *@return PResult
+  */
+
+
+
+
+   /**
+  *@note 获取推荐用户
+  *@path /news/recommenduser
+  *@cookie token&uuid
+  *@method GET
   *@return PResult
   */
