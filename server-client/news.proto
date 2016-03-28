@@ -137,3 +137,44 @@ message PVideoTag {
   *@param id 微博的id
   *@return PResult
   */
+
+
+ /**
+  *@note 收藏微博
+  *@path /news/collect
+  *@cookie token&uuid
+  *@method GET
+  *@param puuid 微博发布者uuid
+  *@param id 微博的id
+  *@return PResult
+  */
+
+   /**
+  *@note 取消收藏微博
+  *@path /news/uncollect
+  *@cookie token&uuid
+  *@method GET
+  *@param puuid 微博发布者uuid
+  *@param id 微博的id
+  *@return PResult
+  */
+
+   /**
+  *@note 移除微博
+  *@path /news/remove
+  *@cookie token&uuid
+  *@method GET
+  *@param puuid 微博发布者uuid
+  *@param id 微博的id
+  *@return PResult
+  */
+
+   /**
+  *@note 举报微博
+  *@path /news/report
+  *@cookie token&uuid
+  *@method GET
+  *@param puuid 微博发布者uuid
+  *@param id 微博的id
+  *@return PResult
+  */
