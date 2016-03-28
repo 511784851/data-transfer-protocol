@@ -44,7 +44,7 @@ message PCommentList {
  *@param voicefile 语音对象文件名称
  *@param validtime 语音有效时间, 单位分钟, 0表示永久有效, >0表示在一段时间内有效, 如1440表示在1天内有效
  *@param at @了谁，用户uuid
- *@return 返回PResult
+ *@return 成功返回PComment，失败返回PResult
  */
  
 /*
