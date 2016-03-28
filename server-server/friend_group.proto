@@ -1,10 +1,10 @@
 syntax = "proto3";
 package common;
 
-option java_package = "com.blemobi.chat.protobuf";
+option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "FriendGroupProtos";
 
-import "account.proto";
+import "server-client/account.proto";
 
 message PGroup {
 	string title = 1;           // 群名称
