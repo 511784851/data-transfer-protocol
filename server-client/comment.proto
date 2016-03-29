@@ -13,7 +13,8 @@ message PComment {
 	string headImgUrl = 4;  //评论者头像
 	string atUuid = 5;		//@用户ID
 	string atNickname = 6;	//@用户昵称
-	/*保留7~10用于扩展*/
+	/*保留7~9用于扩展*/
+	int32  children = 10;		//下一级子评论数
 	int32 upvotes = 11;		//赞数
 	int32 downvotes = 12;	//踩数
 	int64 createTime = 13;	//评论创建时间
