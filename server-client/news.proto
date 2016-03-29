@@ -162,7 +162,7 @@ message RecommendUser {
   *@method GET
   *@param puuid 微博发布者uuid
   *@param id 微博的id
-  *@return PNews
+  *@return PResult
   */
 
    /**
@@ -171,7 +171,7 @@ message RecommendUser {
   *@cookie token&uuid
   *@method GET
   *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
-  *@return PResult
+  *@return PNews
   */
 
    /**
