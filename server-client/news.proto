@@ -212,5 +212,5 @@ message RecommendUser {
   *@path /news/recommenduser
   *@cookie token&uuid
   *@method GET
-  *@return PResult
+  *@return RecommendUserList
   */
