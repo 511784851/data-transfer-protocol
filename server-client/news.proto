@@ -162,7 +162,7 @@ message RecommendUser {
   *@method GET
   *@param puuid 微博发布者uuid
   *@param id 微博的id
-  *@return PResult
+  *@return PNews
   */
 
    /**
