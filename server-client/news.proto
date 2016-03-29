@@ -24,6 +24,7 @@ message PArticle {
 	string position = 12; 		//位置
 	string tag = 13; 			//标签（多个可以用‘,’分隔）
 	bool self = 14; 			//这篇文章是查看人自己的写的
+  bool collected = 15;  //是否收藏此文章
 }
 
 //图片
@@ -31,6 +32,7 @@ message PImage {
 	string url = 1; 				//原图url
 	repeated PImageAD aDList = 2; 	//图片的热点广告 
 	string thumbnail = 3; 			//缩略图的url
+  string des = 4;       //图片描述
 }
 
 //视频
