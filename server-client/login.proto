@@ -94,7 +94,7 @@ message PRUsername {
  *@note 手机号登录
  *@path /login/login
  *@param cellphone 手机号
- *@param password 密码
+ *@param password 密码(原始密码+3721再MD5加密)
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
  *@param model 设备型号
@@ -133,6 +133,7 @@ message PRUsername {
  *@param cellphone 手机号
  *@param password 密码，不能为空
  *@param username 用户名称，不能为空
+ *@param nickname 用户昵称
  *@param verifycode 发送给手机的验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但注册的时候要带上）
  *@param ostp 操作系统类型 0未知、1Android、2IOS
  *@param osv 操作系统版本
