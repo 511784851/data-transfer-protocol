@@ -47,15 +47,18 @@ message PCommentList {
  *@param at @了谁，用户uuid
  *@return 成功返回PComment，失败返回PResult
  */
- 
+
 /*
- *@note 赞(踩)帖子
- *@path /comment/votepost
- *@method GET
+ *@note 评论评论
+ *@path /comment/comment
+ *@method POST
  *@cookie token&uuid
- *@param actiontp 动作类型 0赞 1踩
- *@param id 帖子ID(post ID)
- *@return 返回PResult
+ *@param id 要评论的ID
+ *@param text 文本内容
+ *@param voicefile 语音对象文件名称
+ *@param validtime 语音有效时间, 单位分钟, 0表示永久有效, >0表示在一段时间内有效, 如1440表示在1天内有效
+ *@param at @了谁，用户uuid
+ *@return 成功返回PComment，失败返回PResult
  */
  
  /*
@@ -91,6 +94,17 @@ message PCommentList {
  *@return 成功返回PCommentLevel，失败返回PResult
  */
  
+/*
+ *@note 分页加载评论的评论
+ *@path /comment/commentchild
+ *@method GET
+ *@cookie token&uuid
+ *@param id 评论ID
+ *@param offset 从第几条开始加载
+ *@param count 每次加载多少条
+ *@return 成功返回PCommentLevel，失败返回PResult
+ */
+
 message PVoteUser {
 	string uuid = 1;		//赞或踩的用户信息
 	string nickname = 2;
@@ -114,18 +128,6 @@ message PInt32Array {
  *@return 成功返回PInt32Array，失败返回PResult
  */
 
-/*
- *@note 取帖子赞列表
- *@path /comment/upvotelist
- *@method GET
- *@cookie token&uuid
- *@param postid 帖子ID
- *@param postuuid 帖子创建者ID
- *@param pageindex 第几页
- *@param pagesize 每页多少记录
- *@return 成功返回PVoteUserList，失败返回PResult
- */
- 
 /*
  *@note 获取文件上传URL
  *@path /comment/uploadfileurl
