@@ -26,6 +26,7 @@ message PArticle {
 	bool self = 14; 			//这篇文章是查看人自己的写的
 	bool collected = 15;  //是否收藏此文章
 	int64 commentCnt = 16; //评论数
+  int64 collectCnt = 17; //收藏数
 }
 
 //图片
