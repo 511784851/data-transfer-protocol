@@ -14,11 +14,12 @@ message PWkToken {
 	int64 timestamp = 6;	   // 时间戳
 	string signature = 7;      // 签名串，用于登录阿里悟空的凭证，每个signature的有效期为5分钟
 }
-
+  
 /*
  *@note 获取用户登录阿里悟空的凭证信息
  *@path /chat/user/token
  *@method GET
  *@cookie token&uuid
+ *@param devType 设备类型（"ios"或"android"）
  *@return 成功返回PWkToken，失败返回PResult
  */
