@@ -1,7 +1,12 @@
 #! /usr/bin/perl
-
+use File::Path;
 use Cwd;
 $pwd = cwd();
+
+$output = "../go-commons";
+if (@ARGV > 0) {
+	$output = $ARGV[0];
+}
 
 #################server_client protos#######################
 $server_client_protos = "server-client/result.proto ".
@@ -11,18 +16,19 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/news.proto ".
 						"server-client/comment.proto ";
 
-$cmd = "protoc -Iserver-client --go_out=../go-commons/ ".$server_client_protos;
+$cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
 
 
 #################server_server protos#######################
 $server_server_protos = "server-server/login_api.proto ".
                         "server-server/account_api.proto ";
-
-$cmd = "protoc -Iserver-server --go_out=../go-commons/service/ ".$server_server_protos;
+-d ($output = $output."/service") || mkdir($output);
+$cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
 system($cmd);
 
+if (@ARGV == 0) {
+	system(pause);
+}
 
-
-system(pause);
 
