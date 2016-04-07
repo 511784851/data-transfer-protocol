@@ -73,7 +73,7 @@ message PVideoTag {
 
 
 message RecommendUserList {
-  repeated RecommendUser list = 1; //PUser列表，最多100个
+  repeated RecommendUser list = 1; //RecommendUser列表，最多100个
 }
 
 message RecommendUser {
@@ -84,6 +84,11 @@ message RecommendUser {
   string headImgURL = 9;     // 头像地址
   int32 gender = 10;          // 性别，0就是女，其余的是男；人妖暂时不考虑
   int32 membershipLevel = 11;    // 会员级别
+}
+
+message FollowOrFansList {
+  repeated RecommendUser list = 1; //关注、粉丝 列表，最多100个
+  int32 index = 2; //下次请求的起点
 }
 
 
@@ -138,6 +143,26 @@ message RecommendUser {
   *@param do 为1时表示添加关注，为0时表示取消关注
   *@return PResult
   */
+
+ /**
+  *@note 获取关注列表
+  *@path /news/relation/followers
+  *@cookie token&uuid
+  *@method GET
+  *param count   单次返回的记录条数，默认为20，最大不超过50。
+  *param cursor  下次查询的起点，默认为0。
+  *@return FollowOrFansList
+  */
+
+ /**
+  *@note 获取粉丝列表
+  *@path /news/relation/fans
+  *@cookie token&uuid
+  *@method GET
+  *param count   单次返回的记录条数，默认为20，最大不超过50。
+  *param cursor  下次查询的起点，默认为0。
+  *@return FollowOrFansList
+  */  
   
 /**
  *@note 个人微博主页
@@ -209,12 +234,19 @@ message RecommendUser {
   */
 
 
-
-
    /**
   *@note 获取推荐用户
   *@path /news/recommenduser
   *@cookie token&uuid
   *@method GET
   *@return RecommendUserList
+  */
+
+  /**
+  *@note 移除推荐用户,下次不再推荐
+  *@path /news/recommenduser/unlike
+  *@cookie token&uuid
+  *@method GET
+  *@param  puuid 移除推荐用户的uuid
+  *@return PResult
   */
