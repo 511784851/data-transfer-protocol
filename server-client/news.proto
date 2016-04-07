@@ -84,6 +84,7 @@ message RecommendUser {
   string headImgURL = 9;     // 头像地址
   int32 gender = 10;          // 性别，0就是女，其余的是男；人妖暂时不考虑
   int32 membershipLevel = 11;    // 会员级别
+  int32 followship = 12;      //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
 }
 
 message FollowOrFansList {
