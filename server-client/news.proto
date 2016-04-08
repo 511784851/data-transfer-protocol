@@ -85,6 +85,7 @@ message RecommendUser {
   int32 gender = 10;          // 性别，0就是女，其余的是男；人妖暂时不考虑
   int32 membershipLevel = 11;    // 会员级别
   int32 followship = 12;      //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  bool friend = 13;       //是否是好友，是：true
 }
 
 message FollowOrFansList {
@@ -92,6 +93,17 @@ message FollowOrFansList {
   int32 index = 2; //下次请求的起点
 }
 
+//个人统计信息
+message PersonStatistic {
+  int32 friendCnt = 1; //朋友个数
+  int32 followCnt = 2; //follow人数
+  int32 fansCnt = 3; //fans个数
+
+  int32 textCnt = 4; //发表的文字帖个数
+  int32 imageCnt = 5;
+  int32 audioCnt = 6;
+  int32 videoCnt = 7;
+}
 
 /**
  *@note 发布微博
@@ -145,6 +157,16 @@ message FollowOrFansList {
   *@return PResult
   */
 
+  /**
+  *@note 关注系统的收索
+  *@path /news/relation/search
+  *@cookie token&uuid
+  *@method GET
+  *@param key 0：搜索粉丝 1：搜索关注者 2：搜索全部 3：搜索相互关注
+  *@param word 收索关键字
+  *@return RecommendUserList
+  */
+
  /**
   *@note 获取关注列表
   *@path /news/relation/followers
@@ -171,9 +193,19 @@ message FollowOrFansList {
  *@method GET
  *@cookie token&uuid
  *@param id uuid
+ *@param arctype 要查看的文章类型
  *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
  *@return PNews
  */
+
+/**
+ *@note 微博类型统计信息
+ *@path /news/statistic
+ *@method GET
+ *@cookie token&uuid
+ *@param ouuid
+ *@return NewsStatistic
+ */ 
  
  /**
   *@note 删除微博
@@ -234,7 +266,7 @@ message FollowOrFansList {
   *@return PResult
   */
 
-
+//无*****************************
    /**
   *@note 获取推荐用户
   *@path /news/recommenduser
@@ -251,3 +283,23 @@ message FollowOrFansList {
   *@param  puuid 移除推荐用户的uuid
   *@return PResult
   */
+//无******************************
+
+  /**
+  *@note 查看其他用户首页
+  *@path /news/user/home
+  *@cookie token&uuid
+  *@method GET
+  *@param  targetuuid 查看的目标用户
+  *@return RecommendUser
+  */
+
+  /**
+  *@note 查看用户个人的统计信息
+  *@path /news/user/statistic
+  *@cookie token&uuid
+  *@method GET
+  *@param  targetuuid 查看的目标用户
+  *@return PersonStatistic
+  */
+
