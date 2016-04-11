@@ -1,0 +1,50 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "LevelProtos";
+
+enum PLevelType {
+	User = 0;		//普通用户开放给所有用户
+	Vip = 1;		//VIP为在平台内受欢迎的普通用户，并且有意向利用平台获得收益者
+	VipPlus = 2;	//VIP+为名人明星，职业队员，游戏公司重要任务，俱乐部以及协会
+	Vo = 3;			//VO仅为电子竞技俱乐部或者公司级别
+}
+
+message PLevelInfo {
+	PLevelType levelType = 1;
+	
+//Regular User
+	bool officialNewsTextComment = 2;  	//是否可以在官方新闻帖子下面文字评论
+	bool officialNewsAudioComment = 3; 	//是否可以在官方新闻帖子下面语音评论
+	bool postUpDownVote = 4;           	//普通用户可对任意帖子进行投票，可投上，可投下，类似于reddit
+	bool postText = 5;                 	//是否可以发布文字
+	bool postImage = 6;                	//是否可以发布图片
+	bool postExternalLink = 7;         	//是否可以发布外部链接
+	bool locationPunchCard = 8;        	//是否可以位置打卡
+	bool collectPost = 9;              	//是否可以收藏帖子
+	bool higherUserInteraction = 10;    //是否可以主动发起与上级用户的互动
+	bool higherUserVote = 11;           //是否可以对上级用户帖子进行投票
+	bool higherUserComment = 12;        //是否可以对上级用户帖子进行评论
+	bool postVideo = 13;                //是否可以发布视频贴
+	bool postAudio = 14;                //是否可以发布语音贴
+
+//VIP
+	bool receiveDonation = 101;         //是否可以接受礼物，VIP+也拥有
+	bool personalIcon = 102;            //是否可以拥有个人图标
+	bool artificialAssistant = 103;     //是否可以可创建智能机器人，并推送可售买的个人内容
+	bool identicalRankingVisible = 104; //是否可以拥有仅为同级别可见的排行榜
+	bool addTopContent = 105;           //是否可以在视频图片上添加文字，链接等顶层内容
+
+//VIP+
+	bool postAd = 201;               	//是否可以发布广告，与平台分层，VO也拥有
+	bool createTopic = 202;          	//是否可以创建话题，VO也拥有
+	bool createCommunityTopic = 203; 	//是否可以创建社区话题，VO也拥有
+	bool createForumTopic = 204;     	//是否可以创建论坛话题，VO也拥有
+	bool realName = 205;             	//是否必须实名制，VO也拥有
+	bool ownVideoChannel = 206;      	//是否可以有独立的视频频道（直播，录播），VO也拥有
+	bool ownFanManagement = 207;     	//是否可以有粉丝管理系统，VO也拥有
+	bool lowerUsersPostMsg = 208;    	//是否可以向下级用户发送消息
+
+//VO
+	bool ownContentAdminPanel = 301; 	//是否可以有独立的内容管理界面
+}
