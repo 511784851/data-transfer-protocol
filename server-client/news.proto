@@ -86,6 +86,7 @@ message RecommendUser {
   int32 membershipLevel = 11;    // 会员级别
   int32 followship = 12;      //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
   bool friend = 13;       //是否是好友，是：true
+  int64 chatId = 14;      //聊天id
 }
 
 message FollowOrFansList {
@@ -164,6 +165,8 @@ message PersonStatistic {
   *@method GET
   *@param key 0：搜索粉丝 1：搜索关注者 2：搜索全部 3：搜索相互关注
   *@param word 收索关键字
+  *@param cursor 下次查询的起点，默认为0
+  *param count   单次返回的记录条数，默认为20，最大不超过50。 
   *@return RecommendUserList
   */
 
