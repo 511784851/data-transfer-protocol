@@ -6,15 +6,26 @@ option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "ConversationProtos";
 
 message PConversation {
-	string id = 1; // 会话ID
+	string conversationId = 1;     // 会话ID
+	int64 openId = 2;              // 会话创建者	
+	int32 type = 3;                // 会话类型
+	string icon = 4;               // 会话图标url地址
+	string title = 5;	           // 会话名称
+	int64 tag = 6;	               // 会话tag
+	int32 memberLimit = 7;         // 群成员数
+    int32 superGroup = 8;	       // 0非大群，1大群  
+    string parentId = 9;           // 父会话id，默认0
+    int32 nodeType = 10;           // 是否 父会话，0-否，默认；1-是父会话
+    repeated int64 members = 11;   // 会话的成员列表openId
 }
 
 /*
  *@note 创建会话（单聊）
  *@path /chat/conversation/create/single
  *@method GET
- *@cookie token&uuid
- *@param friend_uuid 好友uuid
+ *@param token&uuid&chatId 登录用户信息
+ *@param friend_uuid   好友uuid
+ *@param friend_chatId 好友chatId
  *@return 成功返回PConversation，失败返回PResult
  */
  
@@ -22,7 +33,7 @@ message PConversation {
  *@note 创建会话（群聊）
  *@path /chat/conversation/create/group
  *@method GET
- *@cookie token&uuid
+ *@param token&uuid&chatId 登录用户信息
  *@param group_id 群ID
  *@return 成功返回PConversation，失败返回PResult
  */

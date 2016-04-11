@@ -4,39 +4,19 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "FriendGroupProtos";
 
-import "server-client/account.proto";
-
 message PGroup {
 	string title = 1;           // 群名称
 	string icon = 2;            // 群头像url  
 	int32 superGroup = 3;       // 0非大群，1大群
 	int32 memberLimit =4;       // 最大人数
-	repeated PUser users = 5;   // 成员列表
+    repeated int64 members = 5; // 群成员列表openId
 }
 
 /*
  *@note 获取群信息（可验证是否有权限获取该群的信息）
  *@path /account/get/group
  *@method GET
- *@param token&uuid
+ *@param token&uuid 登录用户信息
  *@param group_id 群ID
  *@return 成功返回PGroup，失败返回PResult
- */
- 
-/*
- *@note 获取好友信息（可验证是否为好友）
- *@path /account/get/friend
- *@method GET
- *@param token&uuid
- *@param friend_uuid 好友uuid
- *@return 成功返回好友PUser，失败返回PResult
- */
- 
- /*
- *@note 获取其他用户信息（可验证是否有权限获取该用户的信息）
- *@path /account/get/user
- *@method GET
- *@param token&uuid
- *@param other_uuid 其他用户uuid
- *@return 成功返回PUser，失败返回PResult
  */

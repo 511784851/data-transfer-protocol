@@ -19,7 +19,7 @@ message PWkToken {
  *@note 获取用户登录阿里悟空的凭证信息
  *@path /chat/user/token
  *@method GET
- *@cookie token&uuid
- *@param devType 设备类型（"ios"或"android"）
+ *@param token&uuid&chatId 登录用户信息
+ *@param devType 设备类型（固定为"ios"或"android"）
  *@return 成功返回PWkToken，失败返回PResult
  */
