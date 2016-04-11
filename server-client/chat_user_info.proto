@@ -1,0 +1,54 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.chat.protocol";
+option java_outer_classname = "ChatUserProtos";
+
+
+message PChatUser {
+	int32 type = 1;	    			//固定为1
+	/*保留2~5用于扩展*/
+	
+	int64	openid = 2;	//用户id,等价于现有的其他文档中uuid字段，作为用户的唯一标志信息。
+	string	nick = 3;	//用户昵称，10个中文字符以内，20个英文字符以内
+	string	nickPinyin = 4;	//昵称的拼音，系统根据nick自动生成
+	string	stateCode = 5;	//手机区号
+	bool	isActive = 6;	//标示用户是否激活,用户不可修改。登陆以后就会设置为true
+	int64	ver = 7;	//版本号
+	string	avatar = 8;	//用户头像，可以是用于传递的地址，也可以是特定的媒体ID。
+	string	mobile = 9;	//用户手机号，可带区号，不带区号默认区号86(中国国家码)。
+	string	city = 10;	//所在城市，30中文字符以内。
+	string	remark = 11;	//用户的留言/备注 ，200个字符以内。
+	int32	gender = 12;	//用户性别，0 默认未知,1是男,2是女
+	int64	birthday = 13;	//用户生日，传时间戳。
+	string	extension = 14;	//用户自定义字段，可自己控制其内容，4096个英文字符。
+}
+
+/*
+ *@note 同步用户信息到悟空（不包含添加用户信息）
+ *@path /chat/user/synUserInfo
+ *@method GET
+ *@param uuid  用户uuid。
+ *@return 返回PResult
+ */
+
+
+
+/*
+ *@note 更新用户信息（不包含添加用户信息）
+ *@path /chat/user/updateUserInfo
+ *@method POST
+ *@param openid  用户id,等价于现有的其他文档中uuid字段，作为用户的唯一标志信息。
+ *@param nick  用户昵称，10个中文字符以内，20个英文字符以内
+ *@param nickPinyin  昵称的拼音，系统根据nick自动生成
+ *@param stateCode  手机区号
+ *@param isActive  标示用户是否激活,用户不可修改。登陆以后就会设置为true
+ *@param ver  版本号
+ *@param avatar  用户头像，可以是用于传递的地址，也可以是特定的媒体ID。
+ *@param mobile  用户手机号，可带区号，不带区号默认区号86(中国国家码)。
+ *@param city  所在城市，30中文字符以内。
+ *@param remark  用户的留言/备注 ，200个字符以内。
+ *@param gender  用户性别，0 默认未知,1是男,2是女
+ *@param birthday  用户生日，传时间戳。
+ *@param extension  用户自定义字段，可自己控制其内容，4096个英文字符。 
+ *@return 返回PResult
+ */

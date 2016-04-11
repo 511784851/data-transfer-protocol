@@ -1,0 +1,162 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "MsgResultProtos";
+
+// 通用操作结果返回(单个消息)
+message PQuerySingleMessage {
+	int32 errorCode = 1;	//错误码：0为正确，其他均为出错
+	string errorMsg = 2;	//错误描述信息
+	string contentType = 3;	//消息类型：TextMsg/PictureMsg/AudioMsg/AudioImageMsg/FileMsg
+	bytes data = 4;		//对应该msg内容,对应是PTextMsg/PImageMsg/PAudioMsg/PAudioImageMsg/PFileMsg的数据的protobuff内容
+}
+
+
+// 通用操作结果返回(多个消息，历史消息查询)
+message PQueryMoreMessage {
+	int32 errorCode = 1;	//错误码：0为正确，其他均为出错
+	string errorMsg = 2;	//错误描述信息
+	repeated PMessageData data = 3;
+}
+
+// 多个消息中的消息存储结构，包括消息的创建时间。
+message PMessageData {
+	string openId = 1; //消息的openId
+	string messageId = 2; //消息的openId
+	string createdAt = 3; //消息的openId
+	string conversationId = 4; //消息的openId
+	string contentType = 5;	//消息类型：TextMsg/PictureMsg/AudioMsg/AudioImageMsg/FileMsg
+	bytes data = 6;		//对应该msg内容,对应是PTextMsg/PImageMsg/PAudioMsg/PAudioImageMsg/PFileMsg的数据的protobuff内容
+}
+
+
+// 文本消息的内容
+message PTextMsg {
+	string text = 1;//	文字消息内容
+}
+
+
+// 图片消息的内容
+message PImageMsg {
+	string mediaId = 1;	//mediaId(图片id,String类型，必须字段。取值从/v1/media/upload 接口获得)
+	int32 mediaSize = 2;	//(图片大小,int类型，必须字段。取值从/v1/media/upload 接口返回)
+	string mediaUrl = 3; //media文件的url
+}
+
+// 音频消息的内容
+message PAudioMsg {
+	string mediaId = 1;	//mediaId(图片id,String类型，必须字段。取值从/v1/media/upload 接口获得)
+	int32 duration = 2;	//(语音时长,int类型，可选字段)
+	int32 audioVolumns = 3;	//(声音波形,int类型数组，可选字段)
+	string mediaUrl = 4; //media文件的url
+}
+
+
+// 音频视频消息的内容
+message PAudioImageMsg {
+	string mediaId = 1;	//mediaId(图片id,String类型，必须字段。取值从/v1/media/upload 接口获得)
+	int32 mediaSize = 2;	//(图片大小,int类型，必须字段。取值从/v1/media/upload 接口返回)
+	
+	int32 duration = 3;	//(语音时长,int类型，可选字段)
+	int32 audioVolumns = 4;	//(声音波形,int类型数组，可选字段)
+	string mediaUrl = 5; //media文件的url
+}
+
+// 文件消息的内容
+message PFileMsg {
+	string fileName = 1;	//fileName(文件名,String类型，必须字段)
+	string fileType = 2;	//(文件id,String类型，必须字段)
+	string mediaId = 3;		//mediaId(图片id,String类型，必须字段。取值从/v1/media/upload 接口获得)
+	int32 fileSize = 4;		//(图片大小,int类型，必须字段。取值从/v1/media/upload 接口返回)
+	string mediaUrl = 5; //media文件的url
+}
+
+/*
+ *@note 用户发文本信息
+ *@path /chat/message/sendTextMsg
+ *@method GET
+ *@param uuid  发送消息的用户uuid
+ *@param conversationId  会话id
+ *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
+ *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
+ *@param content  为TextMsg(文字消息)是的文本内容。
+ *@return 返回PResult  成功与否，看errorCode和errorMsg
+ */
+
+
+/*
+ *@note 用户发图片信息
+ *@path /chat/message/sendImageMsg
+ *@method POST
+ *@param uuid  发送消息的用户uuid
+ *@param conversationId  会话id
+ *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
+ *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
+ *@param uploadFile  为文件上传的的form表单里的文件对象。
+ *@return 返回PResult  成功与否，看errorCode和errorMsg
+ */
+
+
+/*
+ *@note 用户发音频信息
+ *@path /chat/message/sendAudioMsg
+ *@method POST
+ *@param uuid  发送消息的用户uuid
+ *@param conversationId  会话id
+ *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
+ *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
+ *@param uploadFile  为文件上传的的form表单里的文件对象。
+ *@return 返回PResult  成功与否，看errorCode和errorMsg
+ */
+
+
+
+/*
+ *@note 用户发视频音频信息
+ *@path /chat/message/sendAudioImageMsg
+ *@method POST
+ *@param uuid  发送消息的用户uuid
+ *@param conversationId  会话id
+ *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
+ *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
+ *@param uploadFile  为文件上传的的form表单里的文件对象。
+ *@return 返回PResult  成功与否，看errorCode和errorMsg
+ */
+
+
+
+/*
+ *@note 用户发文件信息
+ *@path /chat/message/sendFileMsg
+ *@method POST
+ *@param uuid  发送消息的用户uuid
+ *@param conversationId  会话id
+ *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
+ *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
+ *@param uploadFile  为文件上传的的form表单里的文件对象。
+ *@return 返回PResult  成功与否，看errorCode和errorMsg
+ */
+
+
+/*
+ *@note 用户查询信息
+ *@path /chat/message/queryMsg
+ *@method POST
+ *@param uuid  发送消息的用户uuid
+ *@param messageId  消息id
+ *@return 返回PQuerySingleMessage。
+ */
+
+
+/*
+ *@note 用户查询信息
+ *@path /chat/message/queryMoreMsg
+ *@method POST
+ *@param uuid  发送消息的用户uuid
+ *@param conversationId  会话id
+ *@param cursor  会话id
+ *@param conversationId  起始时间戳,单位毫秒,第一次取值为0 ，之后取最后一条消息的createAt 时间值id
+ *@param forward  true拉取cursor这个时间点之后的数据, false拉取这个时间点之前的数据
+ *@param count  最大消息数量，即当前页最多的纪录数
+ *@return 返回PQueryMoreMessage。
+ */
