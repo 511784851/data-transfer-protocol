@@ -9,7 +9,7 @@ message PServiceStatus {
 }
 
 //发布文字信息的来源（用于监管系统的验证文字信息是否合法中的参数）
-enum FromType {
+enum PFromType {
 	news = 0;
 	comment = 1;
 }
