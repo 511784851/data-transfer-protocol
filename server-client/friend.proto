@@ -1,0 +1,97 @@
+syntax = "proto3";
+package common;
+
+/*
+ *@note 获取推荐好友列表
+ *@path /friend/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param count 加载多少条
+ *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 申请好友
+ *@path /friend/add
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 申请的好友ID
+ *@return PResult
+ */
+
+/*
+ *@note 分页获取未处理的好友申请列表
+ *@path /friend/listfollowers
+ *@method GET
+ *@cookie token&uuid
+ *@param start 从第几条开始加载
+ *@param count 每次加载多少条
+ *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 分页获取已申请但未接受的好友列表
+ *@path /friend/listfollowings
+ *@method GET
+ *@cookie token&uuid
+ *@param start 从第几条开始加载
+ *@param count 每次加载多少条
+ *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 接受好友申请
+ *@path /friend/accept
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 申请人的ID
+ *@return PResult
+ */
+
+/*
+ *@note 拒绝好友申请
+ *@path /friend/refuse
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 申请人的ID
+ *@return PResult
+ */
+
+/*
+ *@note 取消好友申请或删除好友
+ *@path /friend/cancel
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 申请好友的ID
+ *@return PResult
+ */
+
+/*
+ *@note 分页获取好友列表
+ *@path /friend/listfriends
+ *@method GET
+ *@cookie token&uuid
+ *@param start 从第几条开始加载
+ *@param count 每次加载多少条
+ *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 拉黑好友
+ *@path /friend/block
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 要拉黑的好友ID
+ *@return PResult
+ */
+
+/*
+ *@note 分页获取共同好友
+ *@path /friend/common
+ *@method GET
+ *@cookie token&uuid
+ *@param uuid 对方ID
+ *@param start 从第几条开始加载
+ *@param count 每次加载多少条
+ *@return 成功PUserList, 失败PResult
+ */
