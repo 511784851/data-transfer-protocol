@@ -1,0 +1,15 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "AccountProtos";
+
+//列出所有服务的状态（开启的还是关闭的）
+message PServiceStatus {
+	map<string,bool> status = 1; 
+}
+
+//发布文字信息的来源（用于监管系统的验证文字信息是否合法中的参数）
+enum FromType {
+	news = 0;
+	comment = 1;
+}
