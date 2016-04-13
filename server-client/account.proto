@@ -86,6 +86,16 @@ message PLevelInfo {
 	bool ownContentAdminPanel = 301; 	//是否可以有独立的内容管理界面
 }
 
+message PUuidLevelInfo {
+	string uuid = 1;	 		//用户ID
+	PLevelInfo levelInfo = 2; 	//PLevelInfo信息
+}
+
+message PLevelInfos {
+	repeated PUuidLevelInfo list = 1; 	//返回成功的PUuidLevelInfo信息列表
+	repeated string failUuid = 2;			//返回失败的uuid列表
+}
+
 /*
  *@note 取用户信息
  *@path /account/user/profile
@@ -192,3 +202,13 @@ message PLevelInfo {
  *@param uuid 用户ID
  *@return 成功返回PLevelInfo，失败返回PbResult
  */
+ 
+ /*
+ *@note 获取等级权限信息
+ *@path /account/user/levels
+ *@method POST
+ *@cookie token&uuid
+ *@param uuids 用户ID列表，如：uuids|uuids|uuids|......
+ *@return 成功返回PLevelInfos，失败返回PbResult
+ */
+ 
