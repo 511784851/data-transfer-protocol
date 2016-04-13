@@ -14,7 +14,9 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/login.proto ".
 						"server-client/oss.proto ".
 						"server-client/news.proto ".
-						"server-client/comment.proto ";
+						"server-client/comment.proto ".
+						"server-client/friend.proto ".
+						"server-client/platform.proto";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
