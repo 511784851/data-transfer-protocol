@@ -1,7 +1,7 @@
 syntax = "proto3";
 package common;
 option java_package = "com.blemobi.demo.probuf";
-option java_outer_classname = "AccountProtos";
+option java_outer_classname = "PlatformProtos";
 
 //列出所有服务的状态（开启的还是关闭的）
 message PServiceStatus {
