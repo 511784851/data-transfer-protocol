@@ -120,6 +120,17 @@ message PLevelInfos {
  *@param link3 链接3
  *@return 返回PResult
  */
+ 
+ /**
+  *@note 分页地获取用户的列表
+  *@path /account/user/users
+  *@cookie token&uuid
+  *@method GET
+  *@param from 服务名称（内部调用要传这个参数）
+  *@param pageindex 要查看第几页
+  *@param pagesize 一页要显示几条数据
+  *@return 成功返回PUserList，失败返回PResult
+  */
 
 /*
  *@note 获取用户的账号绑定信息
