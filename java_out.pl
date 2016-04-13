@@ -15,7 +15,10 @@ if (@ARGV > 0) {
 $server_client_protos = "server-client/result.proto ".
                         "server-client/account.proto ".
 						"server-client/login.proto ".
-						"server-client/conversation.proto";
+						"server-client/conversation.proto ".
+						"server-client/chat_user_info.proto ".
+						"server-client/chat_message.proto ".
+						"server-client/wk_token.proto ";
 $cmd = "protoc --java_out=".$output." ".$server_client_protos;
 system($cmd);
 
