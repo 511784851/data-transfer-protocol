@@ -106,6 +106,33 @@ message PersonStatistic {
   int32 videoCnt = 7;
 }
 
+message UserShowProfile {
+  /*保留1~5用于扩展*/ 
+
+  string uuid = 6;        // 服务端标志用户的唯一id
+  string username = 8;      // 用户名，唯一
+  string nickname = 9;      // 昵称
+  string headImgURL = 10;     // 头像地址
+  string realname = 11;       // 真实姓名
+  int32 gender = 12;          // 性别，0就是女，其余的是男；人妖暂时不考虑
+  string email = 13;        // 邮箱地址
+  string birthday = 14;       // 生日，格式19850101
+  string cellphone = 15;      // 手机号
+  int32 timeZone = 16;        // 时区
+  string locale = 17;       // 语言
+  int32 membershipLevel = 18;    // 会员级别
+  int64 lastUpdateTime = 19;    // 最后更新时间TUser结构，用户/系统修改
+  int64 lastLoginTime = 20;     // 用户最后登陆时间
+  string userResume = 21;     // 个人简介
+  string link1 = 22;          // 链接1  
+  string link2 = 23;            // 链接2  
+  string link3 = 24;            // 链接3
+  int64 chatId = 25;        // 聊天系统分配的id
+
+  int32 followship = 26;      //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  bool friend = 27;       //是否是好友，是：true
+}
+
 /**
  *@note 发布微博
  *@path /news/publish
@@ -198,6 +225,7 @@ message PersonStatistic {
  *@param id uuid
  *@param arctype 要查看的文章类型 值：all, text, image, audio, video
  *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *param count   单次返回的记录条数，默认为20，最大不超过50。
  *@return PNews
  */
 
