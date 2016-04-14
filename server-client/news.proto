@@ -196,8 +196,9 @@ message PersonStatistic {
  *@method GET
  *@cookie token&uuid
  *@param id uuid
- *@param arctype 要查看的文章类型
- *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@param arctype 要查看的文章类型 值：all, text, image, audio, video
+ *@param count   单次返回的记录条数，默认为20，最大不超过50。
+ *@param cursor  下次查询的起点，默认为0。
  *@return PNews
  */
 
