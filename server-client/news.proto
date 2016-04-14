@@ -322,7 +322,7 @@ message UserShowProfile {
   *@cookie token&uuid
   *@method GET
   *@param  targetuuid 查看的目标用户
-  *@return RecommendUser
+  *@return UserShowProfile
   */
 
   /**
