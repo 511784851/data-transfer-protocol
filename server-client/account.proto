@@ -275,3 +275,12 @@ message PLevelItems {
  *@return 成功返回PLevelInfos，失败返回PbResult
  */
  
+ /*
+ *@note 批量获取某几项的等级权限
+ *@path /account/user/levels
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 用户ID
+ *@param levelNames	等级名称列表
+ *@return 成功返回PLevelItems，失败返回PbResult
+ */
