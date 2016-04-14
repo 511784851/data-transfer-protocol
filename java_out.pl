@@ -19,7 +19,7 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/chat_user_info.proto ".
 						"server-client/chat_message.proto ".
 						"server-client/wk_token.proto ";
-$cmd = "protoc --java_out=".$output." ".$server_client_protos;
+$cmd = "protoc -Iserver-client --java_out=".$output." ".$server_client_protos;
 system($cmd);
 
 
