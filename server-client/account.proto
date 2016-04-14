@@ -47,6 +47,7 @@ enum PLevelType {
 	Vo = 3;			//VO仅为电子竞技俱乐部或者公司级别
 }
 
+//会员等级信息
 message PLevelInfo {
 	PLevelType levelType = 1;
 	
@@ -86,6 +87,18 @@ message PLevelInfo {
 	bool ownContentAdminPanel = 301; 	//是否可以有独立的内容管理界面
 }
 
+//带uuid的会员等级信息
+message PUuidLevelInfo {
+	string uuid = 1;	 		//用户ID
+	PLevelInfo levelInfo = 2; 	//PLevelInfo信息
+}
+
+//批量会员等级信息
+message PLevelInfos {
+	repeated PUuidLevelInfo list = 1; 	//返回成功的PUuidLevelInfo信息列表
+	repeated string failUuid = 2;		//返回失败的uuid列表
+}
+
 /*
  *@note 取用户信息
  *@path /account/user/profile
@@ -110,6 +123,17 @@ message PLevelInfo {
  *@param link3 链接3
  *@return 返回PResult
  */
+ 
+ /**
+  *@note 分页地获取用户的列表
+  *@path /account/user/users
+  *@cookie token&uuid
+  *@method GET
+  *@param from 服务名称（内部调用要传这个参数）
+  *@param pageindex 要查看第几页
+  *@param pagesize 一页要显示几条数据
+  *@return 成功返回PUserList，失败返回PResult
+  */
 
 /*
  *@note 获取用户的账号绑定信息
@@ -192,3 +216,13 @@ message PLevelInfo {
  *@param uuid 用户ID
  *@return 成功返回PLevelInfo，失败返回PbResult
  */
+ 
+ /*
+ *@note 批量获取等级权限信息
+ *@path /account/users/level
+ *@method POST
+ *@cookie token&uuid
+ *@param uuids 用户ID列表，如：uuids|uuids|uuids|......
+ *@return 成功返回PLevelInfos，失败返回PbResult
+ */
+ 

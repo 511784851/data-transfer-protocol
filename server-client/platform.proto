@@ -1,7 +1,7 @@
 syntax = "proto3";
 package common;
 option java_package = "com.blemobi.demo.probuf";
-option java_outer_classname = "AccountProtos";
+option java_outer_classname = "PlatformProtos";
 
 //列出所有服务的状态（开启的还是关闭的）
 message PServiceStatus {
@@ -12,4 +12,17 @@ message PServiceStatus {
 enum PFromType {
 	news = 0;
 	comment = 1;
+}
+
+message PReportList {
+	repeated PReport list = 1;
+}
+
+//被举报人的信息
+message PReport {
+	string uuid = 1; //举报人
+	string tuid = 2; //被举报人
+	int64 postid = 3; //被举报的帖子
+	int64 time = 4; //举报时间
+	bool isProcess = 5; //是否已经处理
 }
