@@ -30,6 +30,7 @@ message PUser {
 	string link2 = 23;          	// 链接2  
 	string link3 = 24;          	// 链接3
 	int64 chatId = 25;				// 聊天系统分配的id
+	PLevelInfo levelInfo = 26;		// 会员等级信息
 }
 
 message PAccount {
