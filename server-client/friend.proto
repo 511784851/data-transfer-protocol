@@ -8,7 +8,7 @@ option java_outer_classname = "FriendProtos";
  *@path /friend/recommend
  *@method GET
  *@cookie token&uuid
- *@param count 加载多少条
+ *@param count 加载多少条 query参数
  *@return 成功PUserList, 失败PResult
  */
 
@@ -26,8 +26,8 @@ option java_outer_classname = "FriendProtos";
  *@path /friend/listfollowers
  *@method GET
  *@cookie token&uuid
- *@param start 从第几条开始加载
- *@param count 每次加载多少条
+ *@param start 从第几条开始加载 query参数
+ *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
  */
 
@@ -36,8 +36,8 @@ option java_outer_classname = "FriendProtos";
  *@path /friend/listfollowings
  *@method GET
  *@cookie token&uuid
- *@param start 从第几条开始加载
- *@param count 每次加载多少条
+ *@param start 从第几条开始加载 query参数
+ *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
  */
 
@@ -73,8 +73,8 @@ option java_outer_classname = "FriendProtos";
  *@path /friend/listfriends
  *@method GET
  *@cookie token&uuid
- *@param start 从第几条开始加载
- *@param count 每次加载多少条
+ *@param start 从第几条开始加载 query参数
+ *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
  */
 
@@ -92,8 +92,8 @@ option java_outer_classname = "FriendProtos";
  *@path /friend/common
  *@method GET
  *@cookie token&uuid
- *@param uuid 对方ID
- *@param start 从第几条开始加载
- *@param count 每次加载多少条
+ *@param uuid 对方ID query参数
+ *@param start 从第几条开始加载 query参数
+ *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
  */
