@@ -14,15 +14,21 @@ enum PFromType {
 	comment = 1;
 }
 
+//被举报人列表
 message PReportList {
 	repeated PReport list = 1;
 }
 
 //被举报人的信息
 message PReport {
+	repeated PReporter informers = 1; 	//举报人
+	string tuid = 2; 					//被举报人
+	int64 postid = 3; 					//被举报的帖子
+	bool isProcess = 5; 				//是否已经处理
+}
+
+//举报人
+message PReporter {
 	string uuid = 1; //举报人
-	string tuid = 2; //被举报人
-	int64 postid = 3; //被举报的帖子
-	int64 time = 4; //举报时间
-	bool isProcess = 5; //是否已经处理
+	int64 time = 2; //举报时间
 }
