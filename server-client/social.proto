@@ -101,3 +101,11 @@ message PFriendCount {
  *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
  */
+
+/*
+ *@note 获取好友数量
+ *@path /social/friendcount
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功PFriendCount, 失败PResult
+ */
