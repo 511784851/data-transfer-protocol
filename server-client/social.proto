@@ -1,11 +1,11 @@
 syntax = "proto3";
 package common;
 option java_package = "com.blemobi.demo.probuf";
-option java_outer_classname = "FriendProtos";
+option java_outer_classname = "SocialProtos";
 
 /*
  *@note 获取推荐好友列表
- *@path /friend/recommend
+ *@path /social/recommend
  *@method GET
  *@cookie token&uuid
  *@param count 加载多少条 query参数
@@ -14,7 +14,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 申请好友
- *@path /friend/add
+ *@path /social/add
  *@method POST
  *@cookie token&uuid
  *@param uuid 申请的好友ID form参数
@@ -23,7 +23,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 分页获取未处理的好友申请列表
- *@path /friend/listfollowers
+ *@path /social/listfollowers
  *@method GET
  *@cookie token&uuid
  *@param start 从第几条开始加载 query参数
@@ -33,7 +33,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 分页获取已申请但未接受的好友列表
- *@path /friend/listfollowings
+ *@path /social/listfollowings
  *@method GET
  *@cookie token&uuid
  *@param start 从第几条开始加载 query参数
@@ -43,7 +43,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 接受好友申请
- *@path /friend/accept
+ *@path /social/accept
  *@method POST
  *@cookie token&uuid
  *@param uuid 申请人的ID form参数
@@ -52,7 +52,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 拒绝好友申请
- *@path /friend/refuse
+ *@path /social/refuse
  *@method POST
  *@cookie token&uuid
  *@param uuid 申请人的ID form参数
@@ -61,7 +61,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 取消好友申请或删除好友
- *@path /friend/cancel
+ *@path /social/cancel
  *@method POST
  *@cookie token&uuid
  *@param uuid 申请好友的ID form参数
@@ -70,7 +70,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 分页获取好友列表
- *@path /friend/listfriends
+ *@path /social/listfriends
  *@method GET
  *@cookie token&uuid
  *@param start 从第几条开始加载 query参数
@@ -80,7 +80,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 拉黑好友
- *@path /friend/block
+ *@path /social/block
  *@method POST
  *@cookie token&uuid
  *@param uuid 要拉黑的好友ID form参数
@@ -89,7 +89,7 @@ option java_outer_classname = "FriendProtos";
 
 /*
  *@note 分页获取共同好友
- *@path /friend/common
+ *@path /social/common
  *@method GET
  *@cookie token&uuid
  *@param uuid 对方ID query参数
