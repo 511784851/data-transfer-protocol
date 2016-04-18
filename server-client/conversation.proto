@@ -7,7 +7,7 @@ option java_outer_classname = "ConversationProtos";
 
 message PConversation {
 	string conversationId = 1;     // 会话ID
-	int64 openId = 2;              // 会话创建者	
+	int64 openId = 2;              // 会话创建者
 	int32 type = 3;                // 会话类型
 	string icon = 4;               // 会话图标url地址
 	string title = 5;	           // 会话名称
@@ -23,9 +23,9 @@ message PConversation {
  *@note 创建会话（单聊）
  *@path /chat/conversation/create/single
  *@method GET
- *@param token&uuid&chatId 登录用户信息
- *@param friend_uuid   好友uuid
- *@param friend_chatId 好友chatId
+ *@param token&uuid&chatId 登录用户信息（必须）
+ *@param friend_uuid   好友uuid（非必须）
+ *@param friend_chatId 好友chatId（必须）
  *@return 成功返回PConversation，失败返回PResult
  */
  
@@ -33,8 +33,10 @@ message PConversation {
  *@note 创建会话（群聊）
  *@path /chat/conversation/create/group
  *@method GET
- *@param token&uuid&chatId 登录用户信息
- *@param group_id 群ID
+ *@param token&uuid&chatId 登录用户信息（必须）
+ *@param title 群聊名称（非必须）
+ *@param icon  群聊头像url（非必须）
+ *@param memberChatId 群组成员chatId数组（必须）     格式：memberChatId=1&memberChatId=2&memberChatId=3
  *@return 成功返回PConversation，失败返回PResult
  */
  
