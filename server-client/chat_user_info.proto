@@ -13,4 +13,3 @@ option java_outer_classname = "ChatUserProtos";
  *@param chatId  用户chatId。
  *@return 返回PResult
  */
-
