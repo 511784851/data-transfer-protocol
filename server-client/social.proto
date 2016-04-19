@@ -3,6 +3,10 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "SocialProtos";
 
+message PFriendCount {
+	int64 count = 1; // 好友数量
+}
+
 /*
  *@note 获取推荐好友列表
  *@path /social/recommend
@@ -96,4 +100,12 @@ option java_outer_classname = "SocialProtos";
  *@param start 从第几条开始加载 query参数
  *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 获取好友数量
+ *@path /social/friendcount
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功PFriendCount, 失败PResult
  */

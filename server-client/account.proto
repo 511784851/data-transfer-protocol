@@ -22,7 +22,7 @@ message PUser {
 	string cellphone = 15; 			// 手机号
 	int32 timeZone = 16;    		// 时区
 	string locale = 17; 			// 语言
-	int32 membershipLevel = 18;    // 会员级别
+	int32 membershipLevel = 18;    	// 会员级别
 	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
 	int64 lastLoginTime = 20;  		// 用户最后登陆时间
 	string userResume = 21; 		// 个人简介
@@ -31,6 +31,8 @@ message PUser {
 	string link3 = 24;          	// 链接3
 	int64 chatId = 25;				// 聊天系统分配的id
 	PLevelInfo levelInfo = 26;		// 会员等级信息
+	bool disable = 27; 				//帐户是否被禁用
+	bool isAI = 28; 				//该帐户是否是机器人
 }
 
 message PAccount {
