@@ -35,6 +35,10 @@ message PUser {
 	bool isAI = 28; 				//该帐户是否是机器人
 }
 
+message PPhoneMap {
+	map<string,string> list = 1; //手机号：uuid
+}
+
 message PAccount {
 	bool cellphone = 2;			//手机
 	bool wechat = 3;			//微信
@@ -175,6 +179,15 @@ message PLevelItems {
  *@param link3 链接3
  *@return 返回PResult
  */
+ 
+ /**
+  *@note 检测手机号码是否已经注册
+  *path /account/user/chphone
+  *cookie token&uuid
+  *method POST
+  *param phones 加了区号的手机号码数组
+  *return PPhoneMap 手机号：uuid
+  */
  
  /**
   *@note 分页地获取用户的列表
