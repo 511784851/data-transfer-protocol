@@ -57,36 +57,36 @@ enum ELevelType {
 
 enum ERightId {
 //微博展示
-	weibo_show_left_catalog = 0;  //侧边目录
-	weibo_show_top_dropdown = 1;  //顶部下拉
-	weibo_show_icon = 2; 		  //头像
-	weibo_show_comment = 3;       //评论
-	weibo_show_collect = 4;		 //收藏
-	weibo_show_more = 5;     	 //更多
-	weibo_show_view_details = 6; //查看详情
+	weibo_show_left_catalog = 0;  	//侧边目录
+	weibo_show_top_dropdown = 1;  	//顶部下拉
+	weibo_show_icon = 2; 		  	//头像
+	weibo_show_comment = 3;       	//评论
+	weibo_show_collect = 4;		 	//收藏
+	weibo_show_more = 5;     	 	//更多
+	weibo_show_view_details = 6; 	//查看详情
 //微博评论
-	weibo_comment_text = 7; //文字评论
-	weibo_comment_andio = 8;//语音评论
+	weibo_comment_text = 7; 	//文字评论
+	weibo_comment_andio = 8;	//语音评论
 //微博发布
-	weibo_post_text = 9;//文字贴
-	weibo_post_image = 10;//图片贴
-	weibo_post_video = 11;//视频贴
-	weibo_post_audio = 12;//语音贴
+	weibo_post_text = 9;		//文字贴
+	weibo_post_image = 10;		//图片贴
+	weibo_post_video = 11;		//视频贴
+	weibo_post_audio = 12;		//语音贴
 //个人档案
-	personal_record_external_links = 13;//外部链接
-	personal_record_icon = 14;//个人图标
-	personal_record_community = 15;//社区 
-	personal_record_video_classify_page = 16;//视频贴分类页
-	personal_record_audio_classify_page = 17;//语音贴分类页
+	personal_record_external_links = 13;		//外部链接
+	personal_record_icon = 14;					//个人图标
+	personal_record_community = 15;				//社区 
+	personal_record_video_classify_page = 16;	//视频贴分类页
+	personal_record_audio_classify_page = 17;	//语音贴分类页
 //好友系统
-	friend_system_recommend = 18;//推荐
-	friend_system_search = 19;//搜索
+	friend_system_recommend = 18;		//推荐
+	friend_system_search = 19;			//搜索
 	friend_system_friend_apply_for = 20;//好友申请
-	friend_system_address_book = 21;//通迅录
-	friend_system_friend = 22;//好友
-	friend_system_my_apply_for = 23;//我的申请
+	friend_system_address_book = 21;	//通迅录
+	friend_system_friend = 22;			//好友
+	friend_system_my_apply_for = 23;	//我的申请
 //其它
-	real_name = 24;             	//是否必须实名制，VO也拥有
+	real_name = 24;             		//是否必须实名制，VO也拥有
 }
 
 //会员等级信息
