@@ -10,6 +10,7 @@ option java_outer_classname = "ChatUserProtos";
  *@method GET
  *@param uuid  用户uuid。
  *@param token  用户token。
+ *@param chatId  用户chatId。
  *@return 返回PResult
  */
 
