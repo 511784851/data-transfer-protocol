@@ -3,8 +3,23 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "SocialProtos";
 
+import "account.proto";
+
 message PFriendCount {
 	int64 count = 1; // 好友数量
+}
+
+// 搜索用户信息
+message PSearchUser {
+	bool isFriend = 1; // 是否已经是好友
+	bool isFollowing = 2; // 是否已经申请好友
+	/*保留3~6用于扩展*/
+	PUser user = 7; // 用户信息
+}
+
+// 搜索用户返回列表
+message PSearchUserList {
+	repeated PSearchUser searchUsers = 1;
 }
 
 /*
