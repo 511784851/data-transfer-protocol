@@ -35,6 +35,10 @@ message PUser {
 	bool isAI = 28; 				//该帐户是否是机器人
 }
 
+message PPhoneMap {
+	map<string,string> list = 1; //手机号：uuid
+}
+
 message PAccount {
 	bool cellphone = 2;			//手机
 	bool wechat = 3;			//微信
@@ -46,109 +50,61 @@ message PAccount {
 enum ELevelType {
 	User = 0;		//普通用户开放给所有用户
 	Vip = 1;		//VIP为在平台内受欢迎的普通用户，并且有意向利用平台获得收益者
-	VipPlus = 2;	//VIP+为名人明星，职业队员，游戏公司重要任务，俱乐部以及协会
+	Vipp = 2;		//VIP+为名人明星，职业队员，游戏公司重要任务，俱乐部以及协会
 	Vo = 3;			//VO仅为电子竞技俱乐部或者公司级别
+	Tourist = 4;	//游客
 }
 
-enum ELevelName {
-	NullLevel = 0;					//暂不使用
-//Regular User
-	OfficialNewsTextComment = 1;
-	OfficialNewsAudioComment = 2; 	//是否可以在官方新闻帖子下面语音评论
-	PostUpDownVote = 3;           	//普通用户可对任意帖子进行投票，可投上，可投下，类似于reddit
-	PostText = 4;                 	//是否可以发布文字
-	PostImage = 5;                	//是否可以发布图片
-	PostExternalLink = 6;         	//是否可以发布外部链接
-	LocationPunchCard = 7;        	//是否可以位置打卡
-	CollectPost = 8;              	//是否可以收藏帖子
-	HigherUserInteraction = 9;    	//是否可以主动发起与上级用户的互动
-	HigherUserVote = 10;           	//是否可以对上级用户帖子进行投票
-	HigherUserComment = 11;        	//是否可以对上级用户帖子进行评论
-	PostVideo = 12;                	//是否可以发布视频贴
-	PostAudio = 13;               	//是否可以发布语音贴
-
-//VIP
-	ReceiveDonation = 101;         	//是否可以接受礼物，VIP+也拥有
-	PersonalIcon = 102;            	//是否可以拥有个人图标
-	ArtificialAssistant = 103;     	//是否可以可创建智能机器人，并推送可售买的个人内容
-	IdenticalRankingVisible = 104; 	//是否可以拥有仅为同级别可见的排行榜
-	AddTopContent = 105;           	//是否可以在视频图片上添加文字，链接等顶层内容
-
-//VIP+
-	PostAd = 201;               	//是否可以发布广告，与平台分层，VO也拥有
-	CreateTopic = 202;          	//是否可以创建话题，VO也拥有
-	CreateCommunityTopic = 203; 	//是否可以创建社区话题，VO也拥有
-	CreateForumTopic = 204;     	//是否可以创建论坛话题，VO也拥有
-	RealName = 205;             	//是否必须实名制，VO也拥有
-	OwnVideoChannel = 206;      	//是否可以有独立的视频频道（直播，录播），VO也拥有
-	OwnFanManagement = 207;     	//是否可以有粉丝管理系统，VO也拥有
-	LowerUsersPostMsg = 208;    	//是否可以向下级用户发送消息
-
-//VO
-	OwnContentAdminPanel = 301; 	//是否可以有独立的内容管理界面
+enum ERightId {
+//微博展示
+	weibo_show_left_catalog = 0;  	//侧边目录
+	weibo_show_top_dropdown = 1;  	//顶部下拉
+	weibo_show_icon = 2; 		  	//头像
+	weibo_show_comment = 3;       	//评论
+	weibo_show_collect = 4;		 	//收藏
+	weibo_show_more = 5;     	 	//更多
+	weibo_show_view_details = 6; 	//查看详情
+//微博评论
+	weibo_comment_text = 7; 	//文字评论
+	weibo_comment_andio = 8;	//语音评论
+//微博发布
+	weibo_post_text = 9;		//文字贴
+	weibo_post_image = 10;		//图片贴
+	weibo_post_video = 11;		//视频贴
+	weibo_post_audio = 12;		//语音贴
+//个人档案
+	personal_record_external_links = 13;		//外部链接
+	personal_record_icon = 14;					//个人图标
+	personal_record_community = 15;				//社区 
+	personal_record_video_classify_page = 16;	//视频贴分类页
+	personal_record_audio_classify_page = 17;	//语音贴分类页
+//好友系统
+	friend_system_recommend = 18;		//推荐
+	friend_system_search = 19;			//搜索
+	friend_system_friend_apply_for = 20;//好友申请
+	friend_system_address_book = 21;	//通迅录
+	friend_system_friend = 22;			//好友
+	friend_system_my_apply_for = 23;	//我的申请
+//其它
+	real_name = 24;             		//是否必须实名制，VO也拥有
 }
 
 //会员等级信息
 message PLevelInfo {
 	int32 levelType = 1;
-	
-//Regular User
-	bool officialNewsTextComment = 2;  	//是否可以在官方新闻帖子下面文字评论
-	bool officialNewsAudioComment = 3; 	//是否可以在官方新闻帖子下面语音评论
-	bool postUpDownVote = 4;           	//普通用户可对任意帖子进行投票，可投上，可投下，类似于reddit
-	bool postText = 5;                 	//是否可以发布文字
-	bool postImage = 6;                	//是否可以发布图片
-	bool postExternalLink = 7;         	//是否可以发布外部链接
-	bool locationPunchCard = 8;        	//是否可以位置打卡
-	bool collectPost = 9;              	//是否可以收藏帖子
-	bool higherUserInteraction = 10;    //是否可以主动发起与上级用户的互动
-	bool higherUserVote = 11;           //是否可以对上级用户帖子进行投票
-	bool higherUserComment = 12;        //是否可以对上级用户帖子进行评论
-	bool postVideo = 13;                //是否可以发布视频贴
-	bool postAudio = 14;                //是否可以发布语音贴
-
-//VIP
-	bool receiveDonation = 101;         //是否可以接受礼物(VIP+也拥有)
-	bool personalIcon = 102;            //是否可以拥有个人图标
-	bool artificialAssistant = 103;     //是否可以可创建智能机器人，并推送可售买的个人内容
-	bool identicalRankingVisible = 104; //是否可以拥有仅为同级别可见的排行榜
-	bool addTopContent = 105;           //是否可以在视频图片上添加文字，链接等顶层内容
-
-//VIP+
-	bool postAd = 201;               	//是否可以发布广告，与平台分层(VO也拥有)
-	bool createTopic = 202;          	//是否可以创建话题(VO也拥有)
-	bool createCommunityTopic = 203; 	//是否可以创建社区话题(VO也拥有)
-	bool createForumTopic = 204;     	//是否可以创建论坛话题(VO也拥有)
-	bool realName = 205;             	//是否必须实名制(VO也拥有)
-	bool ownVideoChannel = 206;      	//是否可以有独立的视频频道(直播，录播)(VO也拥有)
-	bool ownFanManagement = 207;     	//是否可以有粉丝管理系统(VO也拥有)
-	bool lowerUsersPostMsg = 208;    	//是否可以向下级用户发送消息
-
-//VO
-	bool ownContentAdminPanel = 301; 	//是否可以有独立的内容管理界面
+	map<int32, bool> mapRight = 2;//会员等级项
 }
 
-//带uuid的会员等级信息
-message PUuidLevelInfo {
-	string uuid = 1;	 		//用户ID
-	PLevelInfo levelInfo = 2; 	//PLevelInfo信息
+//会员等级扩展
+message PLevelInfoEx {
+	string uuid = 1;	//用户ID
+	PLevelInfo levelInfo = 2;
 }
 
 //批量会员等级信息
 message PLevelInfos {
-	repeated PUuidLevelInfo list = 1; 	//成功的PUuidLevelInfo信息列表
+	repeated PLevelInfoEx list = 1; 	//成功的PUuidLevelInfo信息列表
 	repeated string failUuid = 2;		//失败的uuid列表
-}
-
-//会员等级项
-message PLevelItem {
-	ELevelName levelName = 1;	//等级名称
-	bool offOn = 2;				//开关
-}
-
-//会员等级项列表
-message PLevelItems {
-	repeated PLevelItem list = 1;
 }
 
 /*
@@ -175,6 +131,15 @@ message PLevelItems {
  *@param link3 链接3
  *@return 返回PResult
  */
+ 
+ /**
+  *@note 检测手机号码是否已经注册
+  *path /account/user/chphone
+  *cookie token&uuid
+  *method POST
+  *param phones 加了区号的手机号码数组
+  *return PPhoneMap 手机号：uuid
+  */
  
  /**
   *@note 分页地获取用户的列表
