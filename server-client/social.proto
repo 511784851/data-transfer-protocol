@@ -79,7 +79,7 @@ message PSearchUserList {
  */
 
 /*
- *@note 取消好友申请或删除好友
+ *@note 取消好友申请
  *@path /social/cancel
  *@method POST
  *@cookie token&uuid
@@ -95,6 +95,15 @@ message PSearchUserList {
  *@param start 从第几条开始加载 query参数
  *@param count 每次加载多少条 query参数
  *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 删除好友
+ *@path /social/deletefriend
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 要删除的好友ID
+ *@return PResult
  */
 
 /*
