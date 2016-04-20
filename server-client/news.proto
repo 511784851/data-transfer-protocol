@@ -192,9 +192,10 @@ message UserShowProfile {
   *@cookie token&uuid
   *@method GET
   *@param key 0：搜索粉丝 1：搜索关注者 2：搜索全部 3：搜索相互关注
+  *@param  uuid   被查找的用户uuid
   *@param word 收索关键字
   *@param cursor 下次查询的起点，默认为0
-  *param count   单次返回的记录条数，默认为20，最大不超过50。 
+  *@param count   单次返回的记录条数，默认为20，最大不超过50。 
   *@return RecommendUserList
   */
 
@@ -203,8 +204,9 @@ message UserShowProfile {
   *@path /news/relation/followers
   *@cookie token&uuid
   *@method GET
-  *param count   单次返回的记录条数，默认为20，最大不超过50。
-  *param cursor  下次查询的起点，默认为0。
+  *@param  uuid   被查找的用户uuid
+  *@param count   单次返回的记录条数，默认为20，最大不超过50。
+  *@param cursor  下次查询的起点，默认为0。
   *@return FollowOrFansList
   */
 
@@ -213,6 +215,7 @@ message UserShowProfile {
   *@path /news/relation/fans
   *@cookie token&uuid
   *@method GET
+  *@param  uuid   被查找的用户uuid
   *param count   单次返回的记录条数，默认为20，最大不超过50。
   *param cursor  下次查询的起点，默认为0。
   *@return FollowOrFansList
