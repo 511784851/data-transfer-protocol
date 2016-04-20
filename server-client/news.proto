@@ -196,7 +196,7 @@ message UserShowProfile {
   *@param word 收索关键字
   *@param cursor 下次查询的起点，默认为0
   *@param count   单次返回的记录条数，默认为20，最大不超过50。 
-  *@return RecommendUserList
+  *@return FollowOrFansList
   */
 
  /**
