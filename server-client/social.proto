@@ -124,3 +124,21 @@ message PSearchUserList {
  *@cookie token&uuid
  *@return 成功PFriendCount, 失败PResult
  */
+
+/*
+ *@note 通过关键词搜索用户
+ *@path /social/searchuser
+ *@method GET
+ *@cookie token&uuid
+ *@param key 搜索关键词 query参数
+ *@return 成功PsearchUserList, 失败PResult
+ */
+
+/*
+ *@note 通过关键词搜索好友
+ *@path /social/searchfriend
+ *@method GET
+ *@cookie token&uuid
+ *@param key 搜索关键词 query参数
+ *@return 成功PsearchUserList, 失败PResult
+ */
