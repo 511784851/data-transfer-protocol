@@ -149,5 +149,5 @@ message PSearchUserList {
  *@method GET
  *@cookie token&uuid
  *@param key 搜索关键词 query参数
- *@return 成功PsearchUserList, 失败PResult
+ *@return 成功PUserList, 失败PResult
  */
