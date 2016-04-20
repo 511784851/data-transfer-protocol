@@ -330,8 +330,6 @@ message UserShowProfile {
   */
 
   /**
-
-  /**
  *@note 微博类型统计信息
  *@path /news/statistic
  *@method GET
@@ -340,4 +338,5 @@ message UserShowProfile {
  *@return NewsStatistic
  */
  
+//无********************************************************
 
