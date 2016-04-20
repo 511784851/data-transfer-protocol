@@ -231,15 +231,6 @@ message UserShowProfile {
  *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
  *param count   单次返回的记录条数，默认为20，最大不超过50。
  *@return PNews
- */
-
-/**
- *@note 微博类型统计信息
- *@path /news/statistic
- *@method GET
- *@cookie token&uuid
- *@param ouuid
- *@return NewsStatistic
  */ 
  
  /**
@@ -301,25 +292,6 @@ message UserShowProfile {
   *@return PResult
   */
 
-//无*****************************
-   /**
-  *@note 获取推荐用户
-  *@path /news/recommenduser
-  *@cookie token&uuid
-  *@method GET
-  *@return RecommendUserList
-  */
-
-  /**
-  *@note 移除推荐用户,下次不再推荐
-  *@path /news/recommenduser/unlike
-  *@cookie token&uuid
-  *@method GET
-  *@param  puuid 移除推荐用户的uuid
-  *@return PResult
-  */
-//无******************************
-
   /**
   *@note 查看其他用户首页
   *@path /news/user/home
@@ -337,4 +309,35 @@ message UserShowProfile {
   *@param  targetuuid 查看的目标用户
   *@return PersonStatistic
   */
+
+
+  //无*************这里的接口不推荐正式使用****************
+   /**
+  *@note 获取推荐用户
+  *@path /news/recommenduser
+  *@cookie token&uuid
+  *@method GET
+  *@return RecommendUserList
+  */
+
+  /**
+  *@note 移除推荐用户,下次不再推荐
+  *@path /news/recommenduser/unlike
+  *@cookie token&uuid
+  *@method GET
+  *@param  puuid 移除推荐用户的uuid
+  *@return PResult
+  */
+
+  /**
+
+  /**
+ *@note 微博类型统计信息
+ *@path /news/statistic
+ *@method GET
+ *@cookie token&uuid
+ *@param ouuid
+ *@return NewsStatistic
+ */
+ 
 
