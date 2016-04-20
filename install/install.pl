@@ -17,9 +17,10 @@ print("------开始安装Go第三方依赖库\n");
     "github.com/garyburd/redigo/redis",
     "github.com/golang/groupcache",
     "github.com/hashicorp/consul/api",
-    "github.com/rafaeljusto/redigomock"
-	"github.com/MieYua/Aliyun-OSS-Go-SDK/oss"
-	"github.com/denverdino/aliyungo/oss"
+    "github.com/rafaeljusto/redigomock",
+	"github.com/MieYua/Aliyun-OSS-Go-SDK/oss",
+	"github.com/denverdino/aliyungo/oss",
+	"github.com/bitly/go-hostpool"
 );
 
 $i = 0;
