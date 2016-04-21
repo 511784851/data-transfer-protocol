@@ -89,10 +89,15 @@ enum ERightId {
 	real_name = 24;             		//是否必须实名制，VO也拥有
 }
 
+message PLevelRight {
+	int32 rightId = 1;
+	bool offOn = 2;
+}
+
 //会员等级信息
 message PLevelInfo {
 	int32 levelType = 1;
-	map<int32, bool> mapRight = 2;//会员等级项
+	repeated PLevelRight rightList = 2;//会员等级列表
 }
 
 //会员等级扩展
