@@ -60,3 +60,12 @@ message PGoogleAccount{
  *@					PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
  *@return 返回PResult
  */
+
+/*
+ *@note 用户登出接口
+ *@path /login/inside/logout
+ *@method GET
+ *@param from 发起调用的服务名
+ *@param uuid 用户的uuid
+ *@return 返回PbResult
+ */
