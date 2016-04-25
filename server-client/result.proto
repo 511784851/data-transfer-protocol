@@ -27,9 +27,10 @@ message PManyUUID {
 }
 
 /*
- *@note 批量传输presult
+ *@note 批量传输errorCode
  */
-message PManyResult {
-	repeated PResult ManyResult = 1;		//一串PResult
+message PManyErrorCode {
+	repeated int32 ManyErrorCode = 1;		//一串ErrorCode
 }
+
 
