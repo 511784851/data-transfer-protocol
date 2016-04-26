@@ -66,7 +66,7 @@ enum ERightId {
 	weibo_show_view_details = 6; 	//查看详情
 //微博评论
 	weibo_comment_text = 7; 	//文字评论
-	weibo_comment_andio = 8;	//语音评论
+	weibo_comment_audio = 8;	//语音评论
 //微博发布
 	weibo_post_text = 9;		//文字贴
 	weibo_post_image = 10;		//图片贴
@@ -92,7 +92,7 @@ enum ERightId {
 //会员等级信息
 message PLevelInfo {
 	int32 levelType = 1;
-	map<int32, bool> mapRight = 2;//会员等级项
+	map<string,bool> mapRight = 2;//会员等级权限列表
 }
 
 //会员等级扩展
