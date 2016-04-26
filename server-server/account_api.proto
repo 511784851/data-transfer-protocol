@@ -1,6 +1,9 @@
 syntax = "proto3";
 package service; 
 
+/*=====================================*/
+//API定义
+
 /*
  *@note 取用户信息
  *@path /account/user/profile
@@ -27,3 +30,39 @@ package service;
  *@return 返回PResult
  */
 
+ /*
+ *@note 注册用户
+ *@path /account/user/registration
+ *@method POST
+ *@cookie token&uuid
+ *@param ... TUser信息
+ *@return 成功返回PLevelInfo，失败返回PbResult
+ */
+ 
+ /*
+ *@note 获取等级权限信息
+ *@path /account/user/level
+ *@method GET
+ *@cookie token&uuid
+ *@param uuid 用户ID
+ *@return 成功返回PLevelInfo，失败返回PbResult
+ */
+ 
+ /*
+ *@note 批量获取等级权限信息
+ *@path /account/users/level
+ *@method POST
+ *@cookie token&uuid
+ *@param uuids 用户ID列表
+ *@return 成功返回PLevelInfos，失败返回PbResult
+ */
+ 
+ /*
+ *@note 批量获取某几项的等级权限
+ *@path /account/user/levels
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 用户ID
+ *@param levelIds	等级名称列表
+ *@return 成功返回PLevelInfo，失败返回PbResult
+ */

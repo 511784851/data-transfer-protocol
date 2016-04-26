@@ -3,10 +3,14 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "AccountProtos";
 
+/*=====================================*/
+//结构定义
+
 message PUserList {
 	repeated PUser list = 1; //PUser列表，最多100个
 }
 
+// 用户基础信息
 message PUser {
 	/*保留1~5用于扩展*/
 	
@@ -15,7 +19,7 @@ message PUser {
 	string username = 8; 			// 用户名，唯一
 	string nickname = 9; 			// 昵称
 	string headImgURL = 10; 		// 头像地址
-	string realname = 11; 			// 真实姓名
+	string realname = 11;			// 真实姓名
 	int32 gender = 12;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
 	string email = 13; 				// 邮箱地址
 	string birthday = 14; 			// 生日，格式19850101
@@ -106,6 +110,9 @@ message PLevelInfos {
 	repeated PLevelInfoEx list = 1; 	//成功的PUuidLevelInfo信息列表
 	repeated string failUuid = 2;		//失败的uuid列表
 }
+
+/*=====================================*/
+//API定义
 
 /*
  *@note 取用户信息
@@ -223,32 +230,4 @@ message PLevelInfos {
  *@cookie token&uuid
  *@param image 要上传的头像objectkey，PUpload返回的参数
  *@return 返回PResult
- */
-
- /*
- *@note 获取等级权限信息
- *@path /account/user/level
- *@method GET
- *@cookie token&uuid
- *@param uuid 用户ID
- *@return 成功返回PLevelInfo，失败返回PbResult
- */
- 
- /*
- *@note 批量获取等级权限信息
- *@path /account/users/level
- *@method POST
- *@cookie token&uuid
- *@param uuids 用户ID列表
- *@return 成功返回PLevelInfos，失败返回PbResult
- */
- 
- /*
- *@note 批量获取某几项的等级权限
- *@path /account/user/levels
- *@method POST
- *@cookie token&uuid
- *@param uuid 用户ID
- *@param levelNames	等级名称列表
- *@return 成功返回PLevelItems，失败返回PbResult
  */
