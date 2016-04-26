@@ -142,3 +142,6 @@ message PInt32Array {
  *@return 成功返回PUpload，失败返回PResult
  */
  
+message PCommentBool {
+	bool isEnable = 1; // 是否开启评论/回复
+}
