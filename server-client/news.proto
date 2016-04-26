@@ -27,6 +27,8 @@ message PArticle {
 	bool collected = 15;  //是否收藏此文章
 	int64 commentCnt = 16; //评论数
   int64 collectCnt = 17; //收藏数
+  int64 voteCnt = 18;      //点赞数
+  bool  vote = 19;      //自己是否点赞
 }
 
 //图片
@@ -309,6 +311,21 @@ message UserShowProfile {
   *@param  targetuuid 查看的目标用户
   *@return PersonStatistic
   */
+
+  /**
+  *@note news点赞
+  *@path /news/vote
+  *@cookie token&uuid
+  *@method GET
+  *@param  uid news发布者id
+  *@param  pid news id
+  *@return PResult
+  */
+
+
+
+
+
 
 
   //无*************这里的接口不推荐正式使用****************
