@@ -32,3 +32,14 @@ message PReporter {
 	string uuid = 1; //举报人
 	int64 time = 2; //举报时间
 }
+
+//敏感词列表
+message PKeyworks {
+	repeated PKeywork list = 1; //敏感词列表
+}
+
+//敏感词
+message PKeywork {
+	int64 id = 1; 
+	string work = 2;
+}
