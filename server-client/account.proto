@@ -175,7 +175,6 @@ message PLevelInfos {
  *@uri /account/binding/status
  *@method GET
  *@cookie token&uuid
- *@param uuid 登录用户ID
  *@return 成功返回PAccount，失败返回PbResult
  */
 
@@ -184,7 +183,6 @@ message PLevelInfos {
  *@uri /account/binding/phone
  *@method GET
  *@cookie token&uuid
- *@param uuid 登录用户ID
  *@param cellphone 有带区号的手机号码（如+86）
  *@param smscode 短讯服务代码
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
@@ -195,7 +193,6 @@ message PLevelInfos {
  *@uri /account/binding/wechat
  *@method GET
  *@cookie token&uuid
- *@param uuid 登录用户ID
  *@param code 授权临时票据(authorization code)
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
@@ -204,7 +201,7 @@ message PLevelInfos {
  *@note 绑定微博登录方式
  *@uri /account/binding/weibo
  *@method GET
- *@param uuid 登录用户ID
+ *@cookie token&uuid
  *@param wbuid 微信ID
  *@param wname 微信名称
  *@param wheadimgurl 微信头像路径
@@ -217,7 +214,7 @@ message PLevelInfos {
  *@note 绑定google登录方式
  *@uri /account/binding/google
  *@method GET
- *@param uuid 登录用户ID
+ *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
@@ -227,7 +224,7 @@ message PLevelInfos {
  *@note 绑定facebook登录方式
  *@uri /account/binding/facebook
  *@method GET
- *@param uuid 登录用户ID
+ *@cookie token&uuid
  *@param token Facebook User access token
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
