@@ -13,7 +13,8 @@ message PComment {
 	string headImgUrl = 4;  //评论者头像
 	string atUuid = 5;		//@用户ID
 	string atNickname = 6;	//@用户昵称
-	/*保留7~8用于扩展*/
+	/*保留7用于扩展*/
+	bool isShield = 8; //该评论是否被屏蔽
 	int32  vote = 9;   //请求者是否赞过或踩过，1:赞过,-1:踩过，否则为0
 	int32  children = 10;		//下一级子评论数
 	int32 upvotes = 11;		//赞数
