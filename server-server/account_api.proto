@@ -31,6 +31,15 @@ package service;
  */
 
 /*
+ *@note 获取多个用户的详情
+ *@uri /account/users/profile
+ *@method POST
+ *@param from 来源
+ *@param uuids 用户ID列表
+ *@return 成功返回PUserList, 失败返回PbResult
+ */
+
+/*
  *@note 修改用户的信息
  *@uri /account/user/profilex
  *@method POST
@@ -68,13 +77,14 @@ package service;
  *@return 成功返回PLevelInfos，失败返回PbResult
  */
  
- /*
+/*
  *@note 批量获取某几项的等级权限
- *@uri /account/user/levels
+ *@uri /account/user/levelrights
  *@method POST
  *@cookie token&uuid
+ *@param from 来源
  *@param uuid 用户ID
- *@param levelIds	等级名称列表
+ *@param rightIds 会员等级权限列表
  *@return 成功返回PLevelInfo，失败返回PbResult
  */
 
