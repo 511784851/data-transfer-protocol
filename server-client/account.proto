@@ -232,7 +232,7 @@ message PLevelInfos {
  /*
  *@note 获取带签名的文件上传URL
  *@uri /account/user/imageurl
- *@method GET
+ *@method POST
  *@cookie token&uuid
  *@digest 要上传的文件的md5 hexstring
  *@length 文件大小，字节
