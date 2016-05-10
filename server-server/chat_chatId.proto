@@ -9,7 +9,6 @@ message PChatIdMessage {
 	string chatId = 2;	//对应聊天系统中的chatid
 }
 
-
 /*
  *@note 通过uuid来获取chatid
  *@path /chat/chatid/getChatIdByUUID
