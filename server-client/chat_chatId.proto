@@ -1,0 +1,19 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "ChatIdResultProtos";
+
+// 通用操作结果返回(通过uuid来获取openid)
+message PChatIdMessage {
+	string uuid = 1;	//账户系统中的uuid
+	string chatId = 2;	//对应聊天系统中的chatid
+}
+
+
+/*
+ *@note 用户发文本信息
+ *@path /chat/chatid/getChatIdByUUID
+ *@method GET
+ *@param uuid  对照表中的uuid
+ *@return 返回PChatIdMessage
+ */
