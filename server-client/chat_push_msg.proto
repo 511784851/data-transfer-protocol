@@ -9,7 +9,6 @@ option java_outer_classname = "ChatPushMsgProtos";
  *@path /chat/push/msg/single
  *@method GET
  *@param uuid  用户uuid。
- *@param token  用户token。
  *@param chatId  用户chatId。
  *@param receiverId  消息接收者的chatid。
  *@param title  推送消息的标题。
@@ -30,7 +29,6 @@ option java_outer_classname = "ChatPushMsgProtos";
  *@path /chat/push/msg/multi
  *@method GET
  *@param uuid  用户uuid。
- *@param token  用户token。
  *@param chatId  用户chatId。
  *@param receiverIds  多个接收者的chatid列表，chatid之间用“逗号”隔开。
  *@param title  推送消息的标题。
