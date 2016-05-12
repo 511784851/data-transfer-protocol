@@ -108,3 +108,13 @@ package service;
  *@param count 最大数量
  *@return 成功返回PManyUUID，失败返回PbResult
  */
+
+/*
+ *@note 是否强制修改密码
+ *@uri /account/user/forcechangepwd
+ *@method GET
+ *@param from 调用方
+ *@param uuid 用户ID
+ *@param action 开关
+ *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
+ */
