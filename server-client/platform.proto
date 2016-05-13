@@ -21,9 +21,10 @@ message PReportList {
 
 //被举报人的信息
 message PReport {
-	repeated PReporter informers = 1; 	//举报人
-	string tuid = 2; 					//被举报人
-	int64 postid = 3; 					//被举报的帖子
+	int64 ID = 1; 
+	repeated PReporter informers = 2; 	//举报人
+	string tuid = 3; 					//被举报人
+	int64 postid = 4; 					//被举报的帖子
 	bool isProcess = 5; 				//是否已经处理
 }
 
@@ -43,3 +44,14 @@ message PKeywork {
 	int64 id = 1; 
 	string work = 2;
 }
+
+/**
+ *用户举报
+ *
+ *@path /platform-manager/report/new
+ *@cookie token&uuid
+ *@method GET
+ *@param uid 被举报人ID
+ *@param id 被举报的帖子ID
+ *@return PResult
+ */
