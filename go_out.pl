@@ -24,7 +24,8 @@ system($cmd);
 
 #################server_server protos#######################
 $server_server_protos = "server-server/login_api.proto ".
-                        "server-server/account_api.proto ";
+                        "server-server/account_api.proto ".
+						"server-server/notification_api.proto";
 -d ($output = $output."/service") || mkdir($output);
 $cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
 system($cmd);
