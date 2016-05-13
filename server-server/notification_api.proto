@@ -3,16 +3,15 @@ package service;
 
 message PPushMsg {
 	bytes data = 2;		// 不同服务需要存储的推送内容
-	repeated string uuid = 3;
+	repeated string uuids = 3;
 	string type = 4;
 	string subType = 5;
 	string title = 6;
 }
 
-
 /*
- *@note 添加推送消息
- *@path /v1/notification/pushmsg
+ *@note 推上消息
+ *@path /notification/pushup/msg
  *@method POST
  *@param from 发起调用的服务名
  *@

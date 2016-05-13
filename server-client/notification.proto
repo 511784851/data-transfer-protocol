@@ -1,0 +1,11 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "NotificationProtos";
+
+/*=====================================*/
+//结构定义
+
+message PPushMsgs {
+	repeated string list = 1; //PPushMsg列表
+}

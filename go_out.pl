@@ -15,6 +15,7 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/oss.proto ".
 						"server-client/news.proto ".
 						"server-client/comment.proto ".
+						"server-client/notification.proto ".
 						"server-client/social.proto ".
 						"server-client/platform.proto";
 
