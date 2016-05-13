@@ -13,7 +13,7 @@ message PPushMsg {
  *@note 推上消息
  *@path /notification/pushup/msg
  *@method POST
- *@param from 发起调用的服务名
+ *@param from 来源
  *@
  *@return 返回int32错误码
  */

@@ -9,3 +9,19 @@ option java_outer_classname = "NotificationProtos";
 message PPushMsgs {
 	repeated string list = 1; //PPushMsg列表
 }
+
+/*=====================================*/
+//API定义
+
+/*
+ *@note 推上消息
+ *@path /notification/pushdown/msg
+ *@method GET
+ *@param from 来源
+ *@param uuid 用户ID
+ *@param offset 偏移
+ *@param count  数量
+ *@param from 发起调用的服务名
+ *@
+ *@return 返回int32错误码
+ */
