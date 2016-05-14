@@ -14,7 +14,7 @@ message PPushMsgs {
 //API定义
 
 /*
- *@note 推上消息
+ *@note 上推消息
  *@path /notification/pushdown/msg
  *@method GET
  *@param from 来源

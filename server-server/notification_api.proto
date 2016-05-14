@@ -10,7 +10,7 @@ message PPushMsg {
 }
 
 /*
- *@note 推上消息
+ *@note 上推消息
  *@path /notification/pushup/msg
  *@method POST
  *@param from 来源
