@@ -8,6 +8,7 @@ option java_outer_classname = "NotificationProtos";
 
 message PPushMsgs {
 	repeated string list = 1; //PPushMsg列表
+	int64 maxId = 2;
 }
 
 /*=====================================*/
@@ -24,4 +25,11 @@ message PPushMsgs {
  *@param from 发起调用的服务名
  *@
  *@return 返回int32错误码
+ *@desc
+  	1、offset=0表示第0条记录，maxId=-1表示最后一条记录。
+  	2、当offset为正数时，count只能是正数。当offset为负数时，count可以是正数或负数
+  	3、当offset=0，count=20时，拉0-20的通知消息。
+ 	4、当offset=-1，count=-20时，拉【倒数第20条】到【最后】的通知消息。
+  	5、当offset=-1，count=20时，拉【倒数第20条】到【最后】的通知消息，和上面一样。
+	6、当offset=?，count=0时，只返回maxId，记录数据不返回，相当于查询记录最大数。
  */
