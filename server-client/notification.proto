@@ -97,6 +97,16 @@ message NotifyNewsVoteList {
   repeated NotifyNewsVote list = 1; //NotifyNewsVote列表，最多50个  
 }
 
+// 推送消息的个数
+message MsgCount {
+	string MsgType = 2;
+	int64 MsgCount = 3;
+}
+
+// 推送消息个数的数组
+message MsgCounts {
+	repeated MsgCount = 2;
+}
 
 /*=====================================*/
 //API定义
@@ -125,10 +135,20 @@ message NotifyNewsVoteList {
 
 /*
  *@note 设置某个推送消息为已读状态
- *@path /v1/notification/msg/read
+ *@path /v1/notification/msg/status
  *@method GET
  *@param msg_type 见 '推送消息类型'
  *@param msg_id 推送消息id
  *@cookie token&uuid
  *@return PResult
+ */
+
+/*
+ *@note 获取某个/所有推送消息的个数
+ *@path /v1/notification/msg/count
+ *@method GET
+ *@param msg_type 见 '推送消息类型'，取所有类型的填all
+ *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
+ *@cookie token&uuid
+ *@return 成功返回MsgCounts，失败返回PResult
  */
