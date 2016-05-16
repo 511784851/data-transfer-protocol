@@ -135,6 +135,10 @@ message UserShowProfile {
   bool friend = 27;       //是否是好友，是：true
 }
 
+message Relation {
+  int32 ship = 1; //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+}
+
 /**
  *@note 发布微博
  *@path /news/publish
