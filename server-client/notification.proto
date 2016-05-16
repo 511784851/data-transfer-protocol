@@ -117,7 +117,7 @@ message MsgCounts {
  *@method GET
  *@param msg_type 见 '推送消息类型'
  *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
- *@param msg_id 大于等于0，标志从哪一个消息开始获取，0为从头开始，如果msg_id不存在，则从msg_id后获取
+ *@param msg_id 标志从哪一个消息开始获取，-1为拉取最新的通知消息，如果msg_id不存在，则从附近小于msg_id获取，直到为0
  *@param count 获取的数量，最大值为50
  *@cookie token&uuid
  *@return 见各个类型的推送消息定义的结构
