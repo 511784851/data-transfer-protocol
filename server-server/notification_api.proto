@@ -15,6 +15,20 @@ message PPushMsg {
 	string otherKey3 = 11; 		// 详见 /chat/push/msg/single
 }
 
+
+//关注通知元消息
+message NotifyFollowMeta {
+  string uuidA = 1; 			//被关注者id
+  string uuidB = 2; 			//关注者id
+}
+
+//点赞通知元信息
+message NotifyNewsVoteMeta {
+  int32  postId = 1; 			//被点赞帖子id
+  string uuidA  = 2; 			//被点赞用户id
+  string uuidB  = 3; 			//点赞用户id
+}
+
 /*
  *@note 上推消息
  *@path /v1/notification/pushmsg
