@@ -3,34 +3,71 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "NotificationProtos";
 
+import "news.proto";
+
+/*
+推送消息类型，
+comment_news 	// 帖子评论
+comment_comment // 评论回复
+comment_vote 	// 评论投票
+social_accept 	// 好友申请
+news_follow 		// 关注我
+news_upvote 		// 帖子点赞
+*/
+
+
+
 /*=====================================*/
 //结构定义
 
-message PPushMsgs {
-	repeated string list = 1; //PPushMsg列表
-	int64 maxId = 2;
+message SimpleUser {
+  /*保留1~5用于扩展*/ 
+  string uuid = 6;        		// 服务端标志用户的唯一id
+  string username = 7;     	 	// 用户名，唯一
+  string nickname = 8;      	// 昵称
+  string headImgURL = 9;     	// 头像地址
 }
+
+//关注通知消息
+message NotifyFollow {
+  int64 messageId = 1;			//消息id 
+  SimpleUser followUser = 2; 	//关注我的用户
+  int64 time = 3; 				//关注的时间
+  int32 followship = 4;      	//两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  int32 status = 5; 			//0：未读；1：已读
+}
+
+//关注通知消息列表
+message NotifyFollowList {
+  repeated NotifyFollow list = 1; //NotifyFollow列表，最多50个
+}
+
+//点赞通知信息
+message NotifyNewsVote {
+  int64 messageId = 1;		//消息id 
+  SimpleUser voteUser = 2; 	//点赞的用户
+  PArticle article = 3; 	//点赞的news
+  int64 time = 4;   		//点赞时间
+  int32 status = 5; 		//0：未读；1：已读
+}
+
+//点赞通知信息列表
+message NotifyNewsVoteList {
+  repeated NotifyNewsVote list = 1; //NotifyNewsVote列表，最多50个  
+}
+
 
 /*=====================================*/
 //API定义
 
 /*
- *@note 下推消息
- *@path /notification/pushdown/msg
+ *@note 获取某个类型的推送消息
+ *@path /v1/notification/pushmsg
  *@method GET
- *@param from 来源
- *@param uuid 用户ID
- *@param offset 偏移
- *@param count  数量
- *@param from 发起调用的服务名
- *@
- *@return 返回int32错误码
- *@desc
-  	1、offset=0表示第0条记录，maxId=-1表示最后一条记录。
-  	2、当offset为正数时，count只能是正数。当offset为负数时，count可以是正数或负数
-	3、count最小值为-100，最大值为100
-  	4、当offset=0，count=20时，拉0-20的通知消息。
- 	5、当offset=-1，count=-20时，拉【倒数第20条】到【最后】的通知消息。
-  	6、当offset=-1，count=20时，拉【倒数第20条】到【最后】的通知消息，和上面一样。
-	7、当offset=?，count=0时，只返回maxId，记录数据不返回，相当于查询记录最大数。
+ *@param msg_type 见 '推送消息类型'
+ *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
+ *@param offset 大于等于0
+ *@param count 获取的数量，最大值为100
+ *@cookie token&uuid
+ *@return 见各个类型的推送消息定义的结构
  */

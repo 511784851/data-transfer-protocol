@@ -1,19 +1,39 @@
 syntax = "proto3";
 package service;
 
+// 服务之间推送消息定义
 message PPushMsg {
-	bytes data = 2;		// 不同服务需要存储的推送内容
-	repeated string uuids = 3;
-	string type = 4;
-	string subType = 5;
-	string title = 6;
+	bytes data = 2;				// 不同服务需要存储的推送内容
+	repeated string uuids = 3;	// 推送消息接受者
+	string type = 4;			// 推送消息类型，见 notification.proto
+	int64 time = 5;				// 推送消息产生时间
+	string title = 6; 			// 详见 /chat/push/msg/single
+	string description = 7; 	// 详见 /chat/push/msg/single
+	string alertContent = 8; 	// 详见 /chat/push/msg/single
+	string otherKey1 = 9; 		// 详见 /chat/push/msg/single
+	string otherKey2 = 10; 		// 详见 /chat/push/msg/single
+	string otherKey3 = 11; 		// 详见 /chat/push/msg/single
+}
+
+
+//关注通知元消息
+message NotifyFollowMeta {
+  string uuidA = 1; 			//被关注者id
+  string uuidB = 2; 			//关注者id
+}
+
+//点赞通知元信息
+message NotifyNewsVoteMeta {
+  int32  postId = 1; 			//被点赞帖子id
+  string uuidA  = 2; 			//被点赞用户id
+  string uuidB  = 3; 			//点赞用户id
 }
 
 /*
  *@note 上推消息
- *@path /notification/pushup/msg
+ *@path /v1/notification/pushmsg
  *@method POST
- *@param from 来源
- *@
+ *@param from 服务调用者
+ *@POST数据为 PPushMsg
  *@return 返回int32错误码
  */
