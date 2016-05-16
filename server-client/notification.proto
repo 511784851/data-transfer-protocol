@@ -3,34 +3,35 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "NotificationProtos";
 
+/*
+推送消息类型，
+comment_news 	// 帖子评论
+comment_comment // 评论回复
+comment_vote 	// 评论投票
+social_accept 	// 好友申请
+news_follow 		// 关注我
+news_upvote 		// 帖子点赞
+*/
+
+
+
 /*=====================================*/
 //结构定义
 
-message PPushMsgs {
-	repeated string list = 1; //PPushMsg列表
-	int64 maxId = 2;
-}
+
+
 
 /*=====================================*/
 //API定义
 
 /*
- *@note 下推消息
- *@path /notification/pushdown/msg
+ *@note 获取某个类型的推送消息
+ *@path /v1/notification/pushmsg
  *@method GET
- *@param from 来源
- *@param uuid 用户ID
- *@param offset 偏移
- *@param count  数量
- *@param from 发起调用的服务名
- *@
- *@return 返回int32错误码
- *@desc
-  	1、offset=0表示第0条记录，maxId=-1表示最后一条记录。
-  	2、当offset为正数时，count只能是正数。当offset为负数时，count可以是正数或负数
-	3、count最小值为-100，最大值为100
-  	4、当offset=0，count=20时，拉0-20的通知消息。
- 	5、当offset=-1，count=-20时，拉【倒数第20条】到【最后】的通知消息。
-  	6、当offset=-1，count=20时，拉【倒数第20条】到【最后】的通知消息，和上面一样。
-	7、当offset=?，count=0时，只返回maxId，记录数据不返回，相当于查询记录最大数。
+ *@param msg_type 见 '推送消息类型'
+ *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
+ *@param offset 大于等于0
+ *@param count 获取的数量，最大值为100
+ *@cookie token&uuid
+ *@return 见各个类型的推送消息定义的结构
  */
