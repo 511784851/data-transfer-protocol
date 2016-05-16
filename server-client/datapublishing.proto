@@ -1,0 +1,51 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "DataPublishingProtos";
+
+//import "account.proto";
+//import "news.proto";
+
+message PWords {
+	repeated string word = 1;
+}
+
+/*
+ *@note 热门搜索
+ *@path /datapublishing/search/hot
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PWords，失败返回PResult
+ */
+ 
+/*
+ *@note 搜索建议
+ *@path /datapublishing/search/suggestion
+ *@method GET
+ *@cookie token&uuid
+ *@param prefix 关键词前缀，由用户输入 
+ *@return 成功返回PWords，失败返回PResult
+ */
+  
+/*
+ *@note 根据关键词搜索用户
+ *@path /datapublishing/search/user
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PUserList，失败返回PResult
+ */
+ 
+/*
+ *@note 根据关键词搜索微博帖子
+ *@path /datapublishing/search/post
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PNews，失败返回PResult
+ */
+ 
