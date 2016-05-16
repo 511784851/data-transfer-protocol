@@ -62,12 +62,32 @@ message NotifyNewsVoteList {
 
 /*
  *@note 获取某个类型的推送消息
- *@path /v1/notification/pushmsg
+ *@path /v1/notification/msg
  *@method GET
  *@param msg_type 见 '推送消息类型'
  *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
  *@param offset 大于等于0
  *@param count 获取的数量，最大值为100
+ *@cookie token&uuid
+ *@return 见各个类型的推送消息定义的结构
+ */
+
+/*
+ *@note 删除某个类型的推送消息
+ *@path /v1/notification/msg
+ *@method DELETE
+ *@param msg_type 见 '推送消息类型'
+ *@param msg_id 推送消息id
+ *@cookie token&uuid
+ *@return 见各个类型的推送消息定义的结构
+ */
+
+/*
+ *@note 设置某个推送消息为已读状态
+ *@path /v1/notification/msg/read
+ *@method GET
+ *@param msg_type 见 '推送消息类型'
+ *@param msg_id 推送消息id
  *@cookie token&uuid
  *@return 见各个类型的推送消息定义的结构
  */
