@@ -98,14 +98,14 @@ message NotifyNewsVoteList {
 }
 
 // 推送消息的个数
-message MsgCount {
-	string MsgType = 2;
-	int64 MsgCount = 3;
+message PMsgCount {
+	string Type = 2;
+	int64 Count = 3;
 }
 
 // 推送消息个数的数组
 message MsgCounts {
-	repeated MsgCount = 2;
+	repeated PMsgCount MsgCounts = 2;
 }
 
 /*=====================================*/
