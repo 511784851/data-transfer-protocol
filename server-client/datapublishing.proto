@@ -3,11 +3,16 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "DataPublishingProtos";
 
-//import "account.proto";
-//import "news.proto";
+import "account.proto";
+import "news.proto";
 
 message PWords {
 	repeated string word = 1;
+}
+
+message PSearchResults {
+	PUserList user = 1;
+	PNews news = 2;
 }
 
 /*
@@ -15,18 +20,30 @@ message PWords {
  *@path /datapublishing/search/hot
  *@method GET
  *@cookie token&uuid
+ *@param stype 搜索类型，值包括（user、news、all），下同
  *@return 成功返回PWords，失败返回PResult
  */
  
 /*
- *@note 搜索建议
+ *@note 搜索建议（自动补齐）
  *@path /datapublishing/search/suggestion
  *@method GET
  *@cookie token&uuid
+ *@param stype 搜索类型
  *@param prefix 关键词前缀，由用户输入 
  *@return 成功返回PWords，失败返回PResult
  */
   
+/*
+ *@note 搜索所有内容
+ *@path /datapublishing/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@return 成功返回PSearchResults，失败返回PResult
+ */ 
+ 
+ 
 /*
  *@note 根据关键词搜索用户
  *@path /datapublishing/search/user
