@@ -21,6 +21,7 @@ message PSearchResults {
  *@method GET
  *@cookie token&uuid
  *@param stype 搜索类型，值包括（user、news、all），下同
+ *@param size 需要的热词数量
  *@return 成功返回PWords，失败返回PResult
  */
  
@@ -57,7 +58,7 @@ message PSearchResults {
  
 /*
  *@note 根据关键词搜索微博帖子
- *@path /datapublishing/search/post
+ *@path /datapublishing/search/news
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
