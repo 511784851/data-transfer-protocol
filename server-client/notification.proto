@@ -39,6 +39,11 @@ message NotifyComment {
   int32 status = 6; 		//0：未读；1：已读
 }
 
+// 帖子评论通知消息列表
+message NotifyCommentList {
+  repeated NotifyComment list = 1; //NotifyComment列表
+}
+
 // 评论回复通知消息
 message NotifyCommentReply {
   int64 messageId = 1; 		//消息id 
@@ -47,6 +52,11 @@ message NotifyCommentReply {
   PComment reply = 4;		//回复的内容
   int64 time = 5;		//回复的时间
   int32 status = 6; 		//0：未读；1：已读
+}
+
+// 评论回复通知消息列表
+message NotifyCommentReplyList {
+  repeated NotifyCommentReply list = 1; //NotifyCommentReply列表
 }
 
 // 评论投票通知消息
@@ -60,6 +70,11 @@ message NotifyCommentVote {
   int32 status = 7; 		//0：未读；1：已读
 }
 
+// 评论投票通知消息列表
+message NotifyCommentVoteList {
+  repeated NotifyCommentVote list = 1; //NotifyCommentVote列表
+}
+
 // 好友申请通知消息
 message NotifySocial {
   int64 messageId = 1; 		//消息id 
@@ -67,6 +82,11 @@ message NotifySocial {
   int64 time = 3;		//申请好友或接受好友的时间
   int32 socialType = 4; 	//0：申请好友；1：接受好友申请；2：拒绝好友申请
   int32 status = 5; 		//0：未读；1：已读
+}
+
+// 好友申请通知消息列表
+message NotifySocialList {
+  repeated NotifySocial list = 1; //NotifySocial列表
 }
 
 //关注通知消息
