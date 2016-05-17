@@ -132,17 +132,6 @@ message PInt32Array {
  *@return 成功返回PInt32Array，失败返回PResult
  */
 
-/*
- *@note 获取文件上传URL
- *@path /comment/uploadfileurl
- *@method GET
- *@cookie token&uuid
- *@digest 要上传的文件的md5 hexstring
- *@length 文件大小，字节
- *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
- *@return 成功返回PUpload，失败返回PResult
- */
- 
 message PCommentBool {
 	bool isEnable = 1; // 是否开启评论/回复
 }
