@@ -123,9 +123,14 @@ message PMsgCount {
 	int64 Count = 3;
 }
 
-// 推送消息个数的数组
-message MsgCounts {
-	repeated PMsgCount MsgCounts = 2;
+// 推送消息个数列表
+message PMsgCountList {
+	repeated PMsgCount MsgCount = 2;
+}
+
+// 消息id列表
+message PMsgIDList {
+	repeated string MsgID = 2;
 }
 
 /*=====================================*/
@@ -146,9 +151,9 @@ message MsgCounts {
 /*
  *@note 删除某个类型的推送消息
  *@path /v1/notification/msg
- *@method DELETE
+ *@method POST
  *@param msg_type 见 '推送消息类型'
- *@param msg_id 推送消息id
+ *@POST数据为 PMsgIDList
  *@cookie token&uuid
  *@return PResult 
  */
