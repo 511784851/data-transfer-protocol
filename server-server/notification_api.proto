@@ -31,7 +31,7 @@ message NotifyNewsVoteMeta {
 
 /*
  *@note 添加推送消息
- *@path /v1/notification/msg
+ *@path /v1/notification/inside/msg
  *@method POST
  *@param from 服务调用者
  *@POST数据为 PPushMsg

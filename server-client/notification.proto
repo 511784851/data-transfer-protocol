@@ -150,7 +150,7 @@ message PMsgIDList {
 
 /*
  *@note 删除某个类型的推送消息
- *@path /v1/notification/msg
+ *@path /v1/notification/msg/delete
  *@method POST
  *@param msg_type 见 '推送消息类型'
  *@POST数据为 PMsgIDList
