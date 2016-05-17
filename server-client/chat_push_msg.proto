@@ -13,9 +13,9 @@ option java_outer_classname = "ChatPushMsgProtos";
  *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
  *@param description  推送消息的描述。
  *@param alertContent  推送消息的的在终端设备中提示的标题。
- *@param otherKey1  接口中可以动态增加其他request参数，otherKey1名称只是做示范作用，可以根据实际情况自行定义。定义的<k-v>将在接收终端的收到推送内容体现出来。
- *@param otherKey2  接口中可以动态增加其他request参数，otherKey2名称只是做示范作用，可以根据实际情况自行定义。定义的<k-v>将在接收终端的收到推送内容体现出来。
- *@param otherKey3  接口中可以动态增加其他request参数，otherKey3名称只是做示范作用，可以根据实际情况自行定义。定义的<k-v>将在接收终端的收到推送内容体现出来。
+ *@param msg_time  推送消息的时间
+ *@param msg_type  推送消息的类型
+ *@param msg_title 推送消息的正文
  
  *@return 返回PResult
  */
