@@ -112,6 +112,21 @@ message PLevelInfos {
 	repeated string failUuid = 2;		//失败的uuid列表
 }
 
+//黑名单列表
+message PBlacklists {
+	repeated string list = 1;	//黑名单列表
+}
+
+//黑名单列表
+message PBlacklistsMap {
+	map<string,string> mapList = 1;	//黑名单Map列表
+}
+
+//黑名单列表返回
+message PBlacklistsRet {
+	repeated string succList = 1;	//成功的列表
+	repeated string failList = 2;   //失败的列表
+}
 /*=====================================*/
 //API定义
 

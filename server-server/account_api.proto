@@ -118,3 +118,40 @@ package service;
  *@param action 开关
  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
  */
+
+/*
+ *@note 分页获取黑名单
+ *@uri /account/user/blacklist
+ *@method GET
+ *@param from 调用方
+ *@param offset 偏移
+ *@param count 数量
+ *@return 成功返回(*PBlacklists, nil), 失败返回(nil, int32)
+ */
+
+/*
+ *@note 批量添加黑名单
+ *@uri /account/user/blacklist
+ *@method POST
+ *@param from 调用方
+ *@param bl 黑名单列表
+ *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ */
+
+/*
+ *@note 批量更新黑名单
+ *@uri /account/user/blacklist
+ *@method PUT
+ *@param from 调用方
+ *@param blm 黑名单映射表
+ *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ */
+
+/*
+ *@note 批量删除黑名单
+ *@uri /account/user/blacklist
+ *@method DELETE
+ *@param from 调用方
+ *@param blm 黑名单映射表
+ *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ */
