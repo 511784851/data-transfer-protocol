@@ -137,6 +137,12 @@ message UserShowProfile {
 
 message Relation {
   int32 ship = 1; //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  string uuidA = 2; //用户A
+  string uuidB = 3; //用户B
+  int32 folsA = 4; //用户A的关注数
+  int32 fansA = 5; //用户A的粉丝数
+  int32 folsB = 6; //用户B的关注数
+  int32 fansB = 7; //用户B的粉丝数
 }
 
 /**
@@ -179,6 +185,16 @@ message Relation {
   *@method GET
   *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
   *@param level 选择会员等级 all reg  vip vipp vo 默认all
+  *@return PNews
+  */
+
+ /**
+  *@note 根据帖子id列表获取对应帖子列表
+  *@path /news/listbyids
+  *@cookie token&uuid
+  *@method GET
+  *@method uuid 用户id
+  *@param keys uuid:post 列表
   *@return PNews
   */
 
