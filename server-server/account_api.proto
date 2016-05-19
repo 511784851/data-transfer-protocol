@@ -121,7 +121,7 @@ package service;
 
 /*
  *@note 分页获取黑名单
- *@uri /account/user/blacklist
+ *@uri /account/user/blacklist/get
  *@method GET
  *@param from 调用方
  *@param offset 偏移
@@ -131,7 +131,7 @@ package service;
 
 /*
  *@note 批量添加黑名单
- *@uri /account/user/blacklist
+ *@uri /account/user/blacklist/del
  *@method POST
  *@param from 调用方
  *@param bl 黑名单列表
@@ -140,8 +140,8 @@ package service;
 
 /*
  *@note 批量更新黑名单
- *@uri /account/user/blacklist
- *@method PUT
+ *@uri /account/user/blacklist/update
+ *@method POST
  *@param from 调用方
  *@param blm 黑名单映射表
  *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
@@ -149,9 +149,18 @@ package service;
 
 /*
  *@note 批量删除黑名单
- *@uri /account/user/blacklist
- *@method DELETE
+ *@uri /account/user/blacklist/del
+ *@method POST
  *@param from 调用方
  *@param blm 黑名单映射表
  *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ */
+
+/*
+ *@note 获取黑名单总数量
+ *@uri /account/user/blacklist/count
+ *@method POST
+ *@param from 调用方
+ *@param blm 黑名单映射表
+ *@return 成功返回(*PBlacklistsCount, nil), 失败返回(nil, int32)
  */

@@ -127,6 +127,12 @@ message PBlacklistsRet {
 	repeated string succList = 1;	//成功的列表
 	repeated string failList = 2;   //失败的列表
 }
+
+//黑名单列表数量
+message PBlacklistsCount {
+	int64 count = 1;     //黑名单数量
+}
+
 /*=====================================*/
 //API定义
 
