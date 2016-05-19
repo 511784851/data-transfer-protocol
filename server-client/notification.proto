@@ -163,6 +163,7 @@ message PMsgIDList {
  *@path /v1/notification/msg/status
  *@method POST
  *@param msg_type 见 '推送消息类型'
+ *@param status 0为未读，1为已读
  *@POST数据为 PMsgIDList
  *@cookie token&uuid
  *@return PResult

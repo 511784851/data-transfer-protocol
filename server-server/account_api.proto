@@ -126,7 +126,7 @@ package service;
  *@param from 调用方
  *@param offset 偏移
  *@param count 数量
- *@return 成功返回(*PBlacklists, nil), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklists, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -135,7 +135,7 @@ package service;
  *@method POST
  *@param from 调用方
  *@param bl 黑名单列表
- *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklistsRet, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -144,7 +144,7 @@ package service;
  *@method POST
  *@param from 调用方
  *@param blm 黑名单映射表
- *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklistsRet, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -153,7 +153,7 @@ package service;
  *@method POST
  *@param from 调用方
  *@param blm 黑名单映射表
- *@return 成功返回(*PBlacklistsRet, nil), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklistsRet, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -162,5 +162,5 @@ package service;
  *@method POST
  *@param from 调用方
  *@param blm 黑名单映射表
- *@return 成功返回(*PBlacklistsCount, nil), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklistsCount, No_Error), 失败返回(nil, int32)
  */
