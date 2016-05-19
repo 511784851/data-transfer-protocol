@@ -5,14 +5,9 @@ package service;
 message PPushMsg {
 	bytes data = 2;				// 不同服务需要存储的推送内容
 	repeated string uuids = 3;	// 推送消息接受者
-	string type = 4;			// 推送消息类型，见 notification.proto
+	string type = 4;				// 推送消息类型，见 notification.proto
 	int64 time = 5;				// 推送消息产生时间
-	string title = 6; 			// 详见 /chat/push/msg/single
-	string description = 7; 	// 详见 /chat/push/msg/single
-	string alertContent = 8; 	// 详见 /chat/push/msg/single
-	string otherKey1 = 9; 		// 详见 /chat/push/msg/single
-	string otherKey2 = 10; 		// 详见 /chat/push/msg/single
-	string otherKey3 = 11; 		// 详见 /chat/push/msg/single
+	string content = 6; 			// 客户端推送显示的内容
 }
 
 
