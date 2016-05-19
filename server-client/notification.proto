@@ -140,10 +140,10 @@ message PMsgIDList {
  *@note 获取某个类型的推送消息
  *@path /v1/notification/msg
  *@method GET
- *@param msg_type 见 '推送消息类型'
- *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
- *@param msg_id 标志从哪一个消息开始获取，-1为拉取最新的通知消息，如果msg_id不存在，则从附近小于msg_id获取，直到为0
- *@param count 获取的数量，最大值为50
+ *@url param msg_type 见 '推送消息类型'
+ *@url param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
+ *@url param msg_id 标志从哪一个消息开始获取，-1为拉取最新的通知消息，如果msg_id不存在，则从附近小于msg_id获取，直到为0
+ *@url param count 获取的数量，最大值为50
  *@cookie token&uuid
  *@return 见各个类型的推送消息定义的结构
  */
@@ -152,8 +152,8 @@ message PMsgIDList {
  *@note 删除某个类型的推送消息
  *@path /v1/notification/msg/delete
  *@method POST
- *@param msg_type 见 '推送消息类型'
- *@POST数据为 PMsgIDList
+ *@url param msg_type 见 '推送消息类型'
+ *@body PMsgIDList
  *@cookie token&uuid
  *@return PResult 
  */
@@ -162,9 +162,14 @@ message PMsgIDList {
  *@note 设置某个推送消息为已读状态
  *@path /v1/notification/msg/status
  *@method POST
+<<<<<<< HEAD
  *@param msg_type 见 '推送消息类型'
  *@param status 0为未读，1为已读
  *@POST数据为 PMsgIDList
+=======
+ *@url param msg_type 见 '推送消息类型'
+ *@body PMsgIDList
+>>>>>>> origin/master
  *@cookie token&uuid
  *@return PResult
  */
@@ -173,8 +178,8 @@ message PMsgIDList {
  *@note 获取某个/所有推送消息的个数
  *@path /v1/notification/msg/count
  *@method GET
- *@param msg_type 见 '推送消息类型'，取所有类型的填all
- *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
+ *@url param msg_type 见 '推送消息类型'，取所有类型的填all
+ *@url param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
  *@cookie token&uuid
  *@return 成功返回MsgCounts，失败返回PResult
  */
