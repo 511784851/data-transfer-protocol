@@ -141,8 +141,9 @@ message PBlacklistRet {
 
 //黑名单列表返回
 message PBlacklistExRet {
-	repeated PBlacklist succList = 1;	   //成功的列表
-	repeated string failList = 2;          //失败的列表
+	repeated PBlacklist succList = 1;	   //成功的黑名单列表
+	repeated PBlacklist existList = 2;	   //已经存在的黑名单列表
+	repeated string failList = 3;          //失败的列表
 }
 
 //黑名单列表数量
