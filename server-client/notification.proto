@@ -159,17 +159,12 @@ message PMsgIDList {
  */
 
 /*
- *@note 设置某个推送消息为已读状态
+ *@note 设置某个推送消息为未读状态或已读状态
  *@path /v1/notification/msg/status
  *@method POST
-<<<<<<< HEAD
- *@param msg_type 见 '推送消息类型'
- *@param status 0为未读，1为已读
- *@POST数据为 PMsgIDList
-=======
  *@url param msg_type 见 '推送消息类型'
+ *@url param status 0为未读，1为已读
  *@body PMsgIDList
->>>>>>> origin/master
  *@cookie token&uuid
  *@return PResult
  */
