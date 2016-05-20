@@ -112,9 +112,15 @@ message PLevelInfos {
 	repeated string failUuid = 2;		//失败的uuid列表
 }
 
-//黑名单列表
-message PBlacklistMap {
-	map<string,int64> mapList = 1;	//黑名单列表
+//黑名单项
+message PBlacklist {
+	int64 id = 1;   //黑名单ID
+	string val = 2; //黑名单值
+}
+
+//黑名单映射列表
+message PBlacklistList {
+	repeated PBlacklist list = 1;	//黑名单列表
 }
 
 //黑名单值列表
@@ -135,8 +141,8 @@ message PBlacklistRet {
 
 //黑名单列表返回
 message PBlacklistExRet {
-	map<string,int64> succList = 1;	   //成功的列表
-	repeated string failList = 2;      //失败的列表
+	repeated PBlacklist succList = 1;	   //成功的列表
+	repeated string failList = 2;          //失败的列表
 }
 
 //黑名单列表数量
