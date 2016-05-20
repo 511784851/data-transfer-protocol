@@ -68,3 +68,22 @@ message PSearchResults {
  *@return 成功返回PNews，失败返回PResult
  */
  
+/*
+ *@note 热门微博
+ *@path /datapublishing/hot/news
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PNews，失败返回PResult
+ */
+ 
+/*
+ *@note 热门用户
+ *@path /datapublishing/hot/user
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PUserList，失败返回PResult
+ */

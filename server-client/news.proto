@@ -29,6 +29,16 @@ message PArticle {
   int64 collectCnt = 17; //收藏数
   int64 voteCnt = 18;      //点赞数
   bool  vote = 19;      //自己是否点赞
+  PAtusers atusers = 20; //被@的用户列表
+}
+
+message PAtusers {
+  repeated PAtuser users = 1; //用户列表
+}
+
+message PAtuser {
+  string uuid = 1; //被@的用户id
+  string nickName = 2; //用户昵称
 }
 
 //图片
@@ -343,6 +353,15 @@ message Relation {
   */
 
 
+  /**
+  *@note @用户
+  *path /news/at
+  *@cookie token&uuid
+  *method GET
+  *param count   单次返回的记录条数，默认为20，最大不超过50。
+  *param cursor  下次查询的起点，默认为0
+  *@return PAtusers
+  */
 
 
 
