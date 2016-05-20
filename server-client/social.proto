@@ -94,6 +94,7 @@ message PSearchUserList {
  *@cookie token&uuid
  *@param start 从第几条开始加载 query参数
  *@param count 每次加载多少条 query参数
+ *@param level 获取特定等级好友时指定的等级(0:普通用户,1:VIP,2:VIP+,3:VO),不传该参数时返回所有等级好友
  *@return 成功PUserList, 失败PResult
  */
 
