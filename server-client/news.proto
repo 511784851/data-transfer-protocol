@@ -37,8 +37,8 @@ message PAtusers {
 }
 
 message PAtuser {
-  string uuid = 1; //被@的用户id
-  string nickName = 2; //用户昵称
+  string uuid = 1;      //被@的用户id
+  string nickName = 2;  //用户昵称
 }
 
 //图片
@@ -360,11 +360,8 @@ message Relation {
   *method GET
   *param count   单次返回的记录条数，默认为20，最大不超过50。
   *param cursor  下次查询的起点，默认为0
-  *@return PAtusers
+  *@return PUserList
   */
-
-
-
 
 
   //无*************这里的接口不推荐正式使用****************
