@@ -53,6 +53,7 @@ message NotifyCommentReply {
   PComment reply = 4;		//回复的内容
   int64 time = 5;		//回复的时间
   int32 status = 6; 		//0：未读；1：已读
+  SimpleUser replyUser = 7;	//被回复评论的用户
 }
 
 // 评论回复通知消息列表
@@ -83,6 +84,12 @@ message NotifySocial {
   int64 time = 3;		//申请好友或接受好友的时间
   int32 socialType = 4; 	//0：申请好友；1：接受好友申请；2：拒绝好友申请
   int32 status = 5; 		//0：未读；1：已读
+  // socialRelation 当前好友关系: A(自己), B(对方)
+  // 0：A --- B (A 和 B 完全没关系)
+  // 1: A --> B (A 向 B 申请好友，B 还未接受)
+  // 2: A <-- B (B 向 A 申请好友，A 还未接受)
+  // 3: A <-> B (B 与 A 是好友)
+  int32 socialRelation = 6;
 }
 
 // 好友申请通知消息列表
