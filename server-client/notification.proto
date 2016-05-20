@@ -90,6 +90,7 @@ message NotifySocial {
   // 2: A <-- B (B 向 A 申请好友，A 还未接受)
   // 3: A <-> B (B 与 A 是好友)
   int32 socialRelation = 6;
+  string notifyUUID = 7;	// 被通知用户的uuid
 }
 
 // 好友申请通知消息列表
