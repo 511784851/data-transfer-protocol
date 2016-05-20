@@ -22,9 +22,10 @@ news_upvote 		// 帖子点赞
 //结构定义
 
 message SimpleUser {
-  /*保留1~5用于扩展*/ 
-  string uuid = 6;        		// 服务端标志用户的唯一id
-  string username = 7;     	 	// 用户名，唯一
+  /*保留1~4用于扩展*/ 
+  int32 level = 5;		// 用户等级
+  string uuid = 6;        	// 服务端标志用户的唯一id
+  string username = 7;     	// 用户名，唯一
   string nickname = 8;      	// 昵称
   string headImgURL = 9;     	// 头像地址
 }
