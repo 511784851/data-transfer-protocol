@@ -124,20 +124,12 @@ package service;
  *@uri /account/user/blacklist/get
  *@method GET
  *@param from 调用方
+ *@param keyword 关键字
  *@param offset 偏移
  *@param count 数量
  *@param order 排序，asc升序，desc降序
    排序规则1、当order="asc"时，读取id从小到大
    排序规则2、当order="desc"时，读取id从大到小
- *@return 成功返回(*PBlacklistList, No_Error), 失败返回(nil, int32)
- */
-
-/*
- *@note 查询黑名单
- *@uri /account/user/blacklist/search
- *@method POST
- *@param from 调用方
- *@param keyword 关键字
  *@return 成功返回(*PBlacklistList, No_Error), 失败返回(nil, int32)
  */
 
