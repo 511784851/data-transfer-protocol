@@ -113,19 +113,30 @@ message PLevelInfos {
 }
 
 //黑名单列表
-message PBlacklists {
-	repeated string list = 1;	//黑名单列表
+message PBlacklistMap {
+	map<string,int64> mapList = 1;	//黑名单列表
 }
 
-//黑名单列表
-message PBlacklistsMap {
-	map<string,string> mapList = 1;	//黑名单Map列表
+//黑名单值列表
+message PBlacklistVal {
+	repeated string list = 1;	//黑名单值列表
+}
+
+//黑名单ID列表
+message PBlacklistID {
+	repeated int64 list = 1;	//黑名单ID列表
 }
 
 //黑名单列表返回
-message PBlacklistsRet {
-	repeated string succList = 1;	//成功的列表
-	repeated string failList = 2;   //失败的列表
+message PBlacklistRet {
+	repeated int64 succList = 1;	//成功的列表
+	repeated int64 failList = 2;    //失败的列表
+}
+
+//黑名单列表返回
+message PBlacklistExRet {
+	map<string,int64> succList = 1;	   //成功的列表
+	repeated string failList = 2;      //失败的列表
 }
 
 //黑名单列表数量

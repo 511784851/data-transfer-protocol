@@ -126,7 +126,10 @@ package service;
  *@param from 调用方
  *@param offset 偏移
  *@param count 数量
- *@return 成功返回(*PBlacklists, No_Error), 失败返回(nil, int32)
+ *@param order 排序，asc升序，desc降序
+   排序规则1、当order="asc"时，读取id从小到大
+   排序规则2、当order="desc"时，读取id从大到小
+ *@return 成功返回(*PBlacklistMap, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -134,8 +137,8 @@ package service;
  *@uri /account/user/blacklist/del
  *@method POST
  *@param from 调用方
- *@param bl 黑名单列表
- *@return 成功返回(*PBlacklistsRet, No_Error), 失败返回(nil, int32)
+ *@param blv 黑名单值列表
+ *@return 成功返回(*PBlacklistExRet, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -144,7 +147,7 @@ package service;
  *@method POST
  *@param from 调用方
  *@param blm 黑名单映射表
- *@return 成功返回(*PBlacklistsRet, No_Error), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklistRet, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -152,8 +155,8 @@ package service;
  *@uri /account/user/blacklist/del
  *@method POST
  *@param from 调用方
- *@param blm 黑名单映射表
- *@return 成功返回(*PBlacklistsRet, No_Error), 失败返回(nil, int32)
+ *@param bli 黑名单ID列表
+ *@return 成功返回(*PBlacklistRet, No_Error), 失败返回(nil, int32)
  */
 
 /*
@@ -161,6 +164,5 @@ package service;
  *@uri /account/user/blacklist/count
  *@method POST
  *@param from 调用方
- *@param blm 黑名单映射表
- *@return 成功返回(*PBlacklistsCount, No_Error), 失败返回(nil, int32)
+ *@return 成功返回(*PBlacklistCount, No_Error), 失败返回(nil, int32)
  */
