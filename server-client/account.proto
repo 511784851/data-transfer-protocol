@@ -140,7 +140,7 @@ message PBlacklistExRet {
 }
 
 //黑名单列表数量
-message PBlacklistsCount {
+message PBlacklistCount {
 	int64 count = 1;     //黑名单数量
 }
 
