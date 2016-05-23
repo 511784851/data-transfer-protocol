@@ -3,7 +3,7 @@ use File::Path;
 use Cwd;
 $pwd = cwd();
 
-$output = "output";
+$output = "../code/mobaxx/mobaxx/model_pb";
 if (@ARGV > 0) {
 	$output = $ARGV[0];
 } else {
