@@ -11,7 +11,7 @@ message PConversation {
 	int32 type = 3;                // 会话类型
 	string icon = 4;               // 会话图标url地址
 	string title = 5;	           // 会话名称
-	int64 tag = 6;	               // 会话tag
+	int64 tag = 6;	               // 会话tag：0-可以聊天，1-不能聊天（已不是好友关系）
 	int32 memberLimit = 7;         // 群成员数
     int32 superGroup = 8;	       // 0非大群，1大群  
     string parentId = 9;           // 父会话id，默认0
@@ -19,13 +19,17 @@ message PConversation {
     repeated int64 members = 11;   // 会话的成员列表openId
 }
 
+message PRoom {
+	string roomId = 1;             // 社区/聊天室ID
+    PConversation conversation = 2;// 聊天室会话信息
+}
+
 /*
  *@note 创建会话（单聊）
  *@path /chat/conversation/create/single
  *@method GET
- *@param token&uuid&chatId 登录用户信息（必须）
- *@param friend_uuid   好友uuid（非必须）
- *@param friend_chatId 好友chatId（必须）
+ *@param token&uuid 登录用户信息（必须）
+ *@param friend_uuid 好友uuid（必须）
  *@return 成功返回PConversation，失败返回PResult
  */
  
@@ -33,130 +37,20 @@ message PConversation {
  *@note 创建会话（群聊）
  *@path /chat/conversation/create/group
  *@method GET
- *@param token&uuid&chatId 登录用户信息（必须）
+ *@param token&uuid 登录用户信息（必须）
  *@param title 群聊名称（非必须）
  *@param icon  群聊头像url（非必须）
- *@param memberChatId 群组成员chatId数组（必须）     格式：memberChatId=1&memberChatId=2&memberChatId=3
+ *@param member_uuid 群组成员uuid数组（必须）     格式：member_uuid=1&member_uuid=2&member_uuid=3
  *@return 成功返回PConversation，失败返回PResult
  */
  
 /*
- *@note 增加会话成员
- *@path /chat/conversation/add/member
+ *@note 修改聊天tag（当有好友关系变更时调用此接口，用于标示是否可以聊天）
+ *@path /chat/conversation/update/tag
  *@method GET
- *@cookie token&uuid 增加会话成员的用户uuid，必须是群成员
- *@param conversationId 会话ID
- *@param uuidArray 需要增加的用户uuid数组   如：uuidArray=a&uuidArray=b&uuidArray=c
+ *@param uuid 用户uuid（必须）
+ *@param friend_uuid 好友uuid（必须）
+ *@param tag 聊天tag（0-建立好友关系 1-解除好友关系）
  *@return 返回PResult
  */
- 
-/*
- *@note 删除会话成员
- *@path /chat/conversation/remove/member
- *@method GET
- *@cookie token&uuid 删除会话成员的用户uuid，必须是群主
- *@param conversationId 会话ID
- *@param uuidArray 需要删除的用户uuid数组   如：uuidArray=a&uuidArray=b&uuidArray=c
- *@return 返回PResult
- */
- 
-/*
- *@note 修改会话名称
- *@path /chat/conversation/update/title
- *@method GET
- *@cookie token&uuid 
- *@param conversationId 会话ID
- *@param newTitle 会话新的名称
- *@return 返回PResult
- */
- 
- /*
- *@note 修改会话头像
- *@path /chat/conversation/update/icon
- *@method GET
- *@cookie token&uuid 
- *@param conversationId 会话ID
- *@param newIcon 会话新的头像URL
- *@return 返回PResult
- */
- 
- /*
- *@note 退出群聊（给全部群成员发送退出通知）
- *@path /chat/conversation/quit
- *@method GET
- *@cookie token&uuid
- *@param conversationId 会话ID
- *@return 返回PResult
- */
- 
- /*
- *@note 静默退出群聊（只给群主发送退出通知）
- *@path /chat/conversation/quit/silent
- *@method GET
- *@cookie token&uuid
- *@param conversationId 会话ID
- *@return 返回PResult
- */
- 
- /*
- *@note 修改会话群主
- *@path /chat/conversation/update/owner
- *@method GET
- *@cookie token&uuid
- *@param conversationId 会话ID
- *@param owner_uuid 要修改的群主uuid
- *@return 返回PResult
- */
- 
- /*
- *@note 修改会话最大人数
- *@path /chat/conversation/update/memberLimit
- *@method GET
- *@cookie token&uuid 
- *@param conversationId 会话ID
- *@param memberLimit 会话最大人数，如200
- *@return 返回PResult
- */
- 
- /*
- *@note 会话置顶
- *@path /chat/conversation/set/top
- *@method GET
- *@cookie token&uuid
- *@param conversationId 会话ID
- *@param isTop true:会话置顶，flase:取消会话置顶
- *@return 返回PResult
- */
- 
- /*
- *@note 修改会话状态
- *@path /chat/conversation/update/status
- *@method GET
- *@cookie token&uuid 
- *@param conversationIdArray 需要修改的会话ID数组   conversationIdArray=a&conversationIdArray=b&conversationIdArray=c
- *@param status 0:隐藏，1:可见
- *@return 返回PResult
- */
- 
- /*
- *@note 修改会话XPN状态
- *@path /chat/conversation/update/xpnStatus
- *@method GET
- *@cookie token&uuid 
- *@param conversationId 会话ID
- *@param status 0:接收通知，1:不接收通知
- *@return 返回PResult
- */
- 
- /*
- *@note 解散会话
- *@path /chat/conversation/disbind
- *@method GET
- *@cookie token&uuid 必须是群主
- *@param conversationId 会话ID
- *@return 返回PResult
- */
- 
- 
- 
  

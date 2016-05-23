@@ -6,15 +6,15 @@ option java_outer_classname = "SocialProtos";
 import "account.proto";
 
 message PFriendCount {
-	int64 count = 1; // 好友数量
+	int64 count = 1;	// 好友数量
 }
 
 // 搜索用户信息
 message PSearchUser {
-	bool isFriend = 1; // 是否已经是好友
-	bool isFollowing = 2; // 是否已经申请好友
+	bool isFriend = 1;	// 是否已经是好友
+	bool isFollowing = 2;	// 是否已经申请好友
 	/*保留3~6用于扩展*/
-	PUser user = 7; // 用户信息
+	PUser user = 7;		// 用户信息
 }
 
 // 搜索用户返回列表
@@ -94,6 +94,7 @@ message PSearchUserList {
  *@cookie token&uuid
  *@param start 从第几条开始加载 query参数
  *@param count 每次加载多少条 query参数
+ *@param level 获取特定等级好友时指定的等级(0:普通用户,1:VIP,2:VIP+,3:VO),不传该参数时返回所有等级好友
  *@return 成功PUserList, 失败PResult
  */
 
@@ -149,5 +150,5 @@ message PSearchUserList {
  *@method GET
  *@cookie token&uuid
  *@param key 搜索关键词 query参数
- *@return 成功PsearchUserList, 失败PResult
+ *@return 成功PUserList, 失败PResult
  */

@@ -18,3 +18,19 @@ message PMessage {
 	string type = 2;		//data消息结构名称，如"PResult"
 	bytes data = 3;			//具体的message数据，请根据type解析
 }
+
+/*
+ *@note 批量传输uuid
+ */
+message PManyUUID {
+	repeated string ManyUUID = 1;		//一串uuid
+}
+
+/*
+ *@note 批量传输errorCode
+ */
+message PManyErrorCode {
+	repeated int32 ManyErrorCode = 1;		//一串ErrorCode
+}
+
+

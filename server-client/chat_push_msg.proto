@@ -1,0 +1,36 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "ChatPushMsgProtos";
+
+
+/*
+ *@note 给用户推送消息。
+ *@path /chat/push/msg/single
+ *@method GET
+ *@param receiverUUID  消息接收者的uuid。
+ *@param title  推送消息的标题。
+ *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
+ *@param description  推送消息的描述。
+ *@param alertContent  推送消息的的在终端设备中提示的标题。
+ *@param info  回包给客户端的json数据，经过base64的encode，客户端decode后，得到的json格式为：{"MsgType":"aabb","Title":"eeff","Time":123456789} 
+ *@return 返回PResult
+ */
+ 
+ 
+
+/*
+ *@note 给用户推送消息(群发消息)。
+ *@path /chat/push/msg/multi
+ *@method GET
+ *@param receiverUUIDs  多个接收者的uuid列表，uuid之间用“逗号”隔开。
+ *@param title  推送消息的标题。
+ *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
+ *@param description  推送消息的描述。
+ *@param alertContent  推送消息的的在终端设备中提示的标题。
+ *@param info  回包给客户端的json数据，经过base64的encode，客户端decode后，得到的json格式为：{"MsgType":"aabb","Title":"eeff","Time":123456789} 
+ *@return 返回PResult
+ */
+ 
+ 
+ 

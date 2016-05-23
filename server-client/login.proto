@@ -26,6 +26,12 @@ message PRUsername {
 	repeated string names = 2; 	//推荐的用户名
 }
 
+// token信息
+message PToken {
+	string SaltMD5  = 2;   	 		// uuid加上某个字符串后做md5运算得到的字符串
+	int64 CreateTime = 3; 			// token产生时间
+}
+
 /*
  *@note 请求推荐的用户名
  *@path /login/username

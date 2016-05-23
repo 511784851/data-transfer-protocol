@@ -10,331 +10,383 @@ message PNews {
 
 //微博信息
 message PArticle {
-	int32 id = 1; 				//博文的ID
-	string uuid = 2; 			//博文的作者
-	string userName = 3; 		//作者名称
-	string userHead = 4; 		//作者头像
-	string content = 5; 		//文章正文(如果正文是保存的OSS上，那么这里是一个url)
-	string srcType = 6; 		//资源的类型（image表示上传的是图片，video表示上传的是视频，audio表示上传的是音频）
-	repeated PImage images = 7; //图片（最多九张）
-	PVideo video = 8; 			//视频
-	PAudio audio = 9; 			//音频
-	bool onOSS = 10; 			//正文是否在oss上
-	int64 pubishTime = 11; 		//发布时间
-	string position = 12; 		//位置
-	string tag = 13; 			//标签（多个可以用‘,’分隔）
-	bool self = 14; 			//这篇文章是查看人自己的写的
-	bool collected = 15;  //是否收藏此文章
-	int64 commentCnt = 16; //评论数
-  int64 collectCnt = 17; //收藏数
+	int32 id = 1;                //博文的ID
+	string uuid = 2;             //博文的作者
+	string userName = 3;         //作者名称
+	string userHead = 4;         //作者头像
+	string content = 5;          //文章正文(如果正文是保存的OSS上，那么这里是一个url)
+	string srcType = 6;          //资源的类型（image表示上传的是图片，video表示上传的是视频，audio表示上传的是音频）
+	repeated PImage images = 7;  //图片（最多九张）
+	PVideo video = 8;            //视频
+	PAudio audio = 9;            //音频
+	bool onOSS = 10;             //正文是否在oss上
+	int64 pubishTime = 11;       //发布时间
+	string position = 12;        //位置
+	string tag = 13;             //标签（多个可以用‘,’分隔）
+	bool self = 14;              //这篇文章是查看人自己的写的
+	bool collected = 15;         //是否收藏此文章
+	int64 commentCnt = 16;       //评论数
+	int64 collectCnt = 17;       //收藏数
+	int64 voteCnt = 18;          //点赞数
+	bool  vote = 19;             //自己是否点赞
+	PAtusers atusers = 20;       //被@的用户列表
+}
+
+message PAtusers {
+	repeated PAtuser users = 1;  //用户列表
+}
+
+message PAtuser {
+	string uuid = 1;             //被@的用户id
+ 	string nickName = 2;         //用户昵称
 }
 
 //图片
 message PImage {
-	string url = 1; 				//原图url
-	repeated PImageAD aDList = 2; 	//图片的热点广告 
-	string thumbnail = 3; 			//缩略图的url
-  string des = 4;       //图片描述
+	string url = 1;              //原图url
+	repeated PImageAD aDList = 2;//图片的热点广告 
+	string thumbnail = 3;        //缩略图的url
+	string des = 4;              //图片描述
 }
 
 //视频
 message PVideo {
-	string url = 1; //视频在OSS上的路径
-	string img = 2; //视频的缩略图
+	string url = 1;              //视频在OSS上的路径
+	string img = 2;              //视频的缩略图
 	repeated PVideoTag tags = 3; //视频的标签
-	int64 expires = 4; //视频的有效期（多少秒之后过期）
+	int64 expires = 4;           //视频的有效期（多少秒之后过期）
 }
 
 //音频
 message PAudio {
-	string url = 1; //音频在OSS上的路径
-	int32 length = 2; //音频长度
-	int64 expires = 3; //音频的有效期（多少秒之后过期）
+	string url = 1;              //音频在OSS上的路径
+	int32 length = 2;            //音频长度
+	int64 expires = 3;           //音频的有效期（多少秒之后过期）
 }
 
 //图片的热点广告
 message PImageAD {
 	float x = 1;
 	float y = 2;
-	string title = 3; //广告名称
-	float price = 4; //价格
-	int32 category = 5; //分类
-	string url = 6; //广告链接
+	string title = 3;            //广告名称
+	float price = 4;             //价格
+	int32 category = 5;          //分类
+	string url = 6;              //广告链接
 }
 
 //视频的标签
 message PVideoTag {
 	float x = 1;
 	float y = 2;
-	string text = 3; //标签内容
+	string text = 3;			//标签内容
 }
 
 
 
 
 message RecommendUserList {
-  repeated RecommendUser list = 1; //RecommendUser列表，最多100个
+	repeated RecommendUser list = 1; //RecommendUser列表，最多100个
 }
 
 message RecommendUser {
-  /*保留1~5用于扩展*/ 
-  string uuid = 6;        // 服务端标志用户的唯一id
-  string username = 7;      // 用户名，唯一
-  string nickname = 8;      // 昵称
-  string headImgURL = 9;     // 头像地址
-  int32 gender = 10;          // 性别，0就是女，其余的是男；人妖暂时不考虑
-  int32 membershipLevel = 11;    // 会员级别
-  int32 followship = 12;      //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
-  bool friend = 13;       //是否是好友，是：true
-  int64 chatId = 14;      //聊天id
+	/*保留1~5用于扩展*/ 
+	string uuid = 6;              //服务端标志用户的唯一id
+	string username = 7;          //用户名，唯一
+	string nickname = 8;          //昵称
+	string headImgURL = 9;        //头像地址
+	int32 gender = 10;            //性别，0就是女，其余的是男；人妖暂时不考虑
+	int32 membershipLevel = 11;   //会员级别
+	int32 followship = 12;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+	bool friend = 13;             //是否是好友，是：true
+	int64 chatId = 14;            //聊天id
 }
 
 message FollowOrFansList {
-  repeated RecommendUser list = 1; //关注、粉丝 列表，最多100个
-  int32 index = 2; //下次请求的起点
+	repeated RecommendUser list = 1;  //关注、粉丝 列表，最多100个
+	int32 index = 2;                  //下次请求的起点
 }
 
 //个人统计信息
 message PersonStatistic {
-  int32 friendCnt = 1; //朋友个数
-  int32 followCnt = 2; //follow人数
-  int32 fansCnt = 3; //fans个数
+	int32 friendCnt = 1;          //朋友个数
+	int32 followCnt = 2;          //follow人数
+	int32 fansCnt = 3;            //fans个数
 
-  int32 textCnt = 4; //发表的文字帖个数
-  int32 imageCnt = 5;
-  int32 audioCnt = 6;
-  int32 videoCnt = 7;
+	int32 textCnt = 4;            //发表的文字帖个数
+	int32 imageCnt = 5;
+	int32 audioCnt = 6;
+	int32 videoCnt = 7;
 }
 
 message UserShowProfile {
   /*保留1~5用于扩展*/ 
+  
+  string uuid = 6;              //服务端标志用户的唯一id
+  string username = 8;          //用户名，唯一
+  string nickname = 9;          //昵称
+  string headImgURL = 10;       //头像地址
+  string realname = 11;         //真实姓名
+  int32 gender = 12;            //性别，0就是女，其余的是男；人妖暂时不考虑
+  string email = 13;            //邮箱地址
+  string birthday = 14;         //生日，格式19850101
+  string cellphone = 15;        //手机号
+  int32 timeZone = 16;          //时区
+  string locale = 17;           //语言
+  int32 membershipLevel = 18;   //会员级别
+  int64 lastUpdateTime = 19;    //最后更新时间TUser结构，用户/系统修改
+  int64 lastLoginTime = 20;     //用户最后登陆时间
+  string userResume = 21;       //个人简介
+  string link1 = 22;            //链接1  
+  string link2 = 23;            //链接2  
+  string link3 = 24;            //链接3
+  int64 chatId = 25;            //聊天系统分配的id
+  
+  int32 followship = 26;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  bool friend = 27;             //是否是好友，是：true
+}
 
-  string uuid = 6;        // 服务端标志用户的唯一id
-  string username = 8;      // 用户名，唯一
-  string nickname = 9;      // 昵称
-  string headImgURL = 10;     // 头像地址
-  string realname = 11;       // 真实姓名
-  int32 gender = 12;          // 性别，0就是女，其余的是男；人妖暂时不考虑
-  string email = 13;        // 邮箱地址
-  string birthday = 14;       // 生日，格式19850101
-  string cellphone = 15;      // 手机号
-  int32 timeZone = 16;        // 时区
-  string locale = 17;       // 语言
-  int32 membershipLevel = 18;    // 会员级别
-  int64 lastUpdateTime = 19;    // 最后更新时间TUser结构，用户/系统修改
-  int64 lastLoginTime = 20;     // 用户最后登陆时间
-  string userResume = 21;     // 个人简介
-  string link1 = 22;          // 链接1  
-  string link2 = 23;            // 链接2  
-  string link3 = 24;            // 链接3
-  int64 chatId = 25;        // 聊天系统分配的id
-
-  int32 followship = 26;      //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
-  bool friend = 27;       //是否是好友，是：true
+message Relation {
+  int32 ship = 1;               //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  string uuidA = 2;             //用户A
+  string uuidB = 3;             //用户B
+  int32 folsA = 4;              //用户A的关注数
+  int32 fansA = 5;              //用户A的粉丝数
+  int32 folsB = 6;              //用户B的关注数
+  int32 fansB = 7;              //用户B的粉丝数
 }
 
 /**
- *@note 发布微博
- *@path /news/publish
+ *@note   发布微博
+ *@path   /news/publish
  *@cookie token&uuid
  *@method POST
- *@body PArticle数据流
-	images.url/video.url/audio.url 这些个url传的是pupload的objectKey
+ *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
  *@return PResult
  */
  
  
- /**
-  *@note 获取资源文件在oss上的状态（包括大于30个字的文字）
-  *@path /news/src/status
-  *@cookie token&uuid
-  *@method GET
-  *@param digest 要上传的文件的md5 hexstring
-  *@param length 文件大小，字节
-  *@param extension 扩展名 如jpg,png,gif,bmp,mp3,apk等(如果是纯的文本流可以不填写扩展名)
-  *@return 成功返回PUpload，失败返回PResult
-  */
+/**
+ *@note   获取资源文件在oss上的状态（包括大于30个字的文字）
+ *@path   /news/src/status
+ *@cookie token&uuid
+ *@method GET
+ *@param  digest 要上传的文件的md5 hexstring
+ *@param  length 文件大小，字节
+ *@param  extension 扩展名 如jpg,png,gif,bmp,mp3,apk等(如果是纯的文本流可以不填写扩展名)
+ *@return 成功返回PUpload，失败返回PResult
+ */
   
-  
- /**
-  *@note 获取多个资源文件在oss上的状态（如多个图片）
-  *@path /news/src/status/multi
-  *@cookie token&uuid
-  *@method POST
-  *@body PFileInfoArray
-  *@return 成功返回PUploadArray，失败返回PResult
-  */
- 
- 
- /**
-  *@note 微博刷新
-  *@path /news/list
-  *@cookie token&uuid
-  *@method GET
-  *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
-  *@param level 选择会员等级 all reg  vip vipp vo 默认all
-  *@return PNews
-  */
-
- /**
-  *@note 关注/取消关注
-  *@path /news/relation
-  *@cookie token&uuid
-  *@method GET
-  *@param uuid 关注/本关注对象的id
-  *@param do 为1时表示添加关注，为0时表示取消关注
-  *@return PResult
-  */
-
-  /**
-  *@note 关注系统的收索
-  *@path /news/relation/search
-  *@cookie token&uuid
-  *@method GET
-  *@param key 0：搜索粉丝 1：搜索关注者 2：搜索全部 3：搜索相互关注
-  *@param  uuid   被查找的用户uuid
-  *@param word 收索关键字
-  *@param cursor 下次查询的起点，默认为0
-  *@param count   单次返回的记录条数，默认为20，最大不超过50。 
-  *@return FollowOrFansList
-  */
-
- /**
-  *@note 获取关注列表
-  *@path /news/relation/followers
-  *@cookie token&uuid
-  *@method GET
-  *@param  uuid   被查找的用户uuid
-  *@param count   单次返回的记录条数，默认为20，最大不超过50。
-  *@param cursor  下次查询的起点，默认为0。
-  *@return FollowOrFansList
-  */
-
- /**
-  *@note 获取粉丝列表
-  *@path /news/relation/fans
-  *@cookie token&uuid
-  *@method GET
-  *@param  uuid   被查找的用户uuid
-  *param count   单次返回的记录条数，默认为20，最大不超过50。
-  *param cursor  下次查询的起点，默认为0。
-  *@return FollowOrFansList
-  */  
   
 /**
- *@note 个人微博主页
- *@path /news/home
+ *@note   获取多个资源文件在oss上的状态（如多个图片）
+ *@path   /news/src/status/multi
+ *@cookie token&uuid
+ *@method POST
+ *@body   PFileInfoArray
+ *@return 成功返回PUploadArray，失败返回PResult
+ */
+ 
+ 
+/**
+ *@note   微博刷新
+ *@path   /news/list
+ *@cookie token&uuid
+ *@method GET
+ *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@param  level 选择会员等级 all reg  vip vipp vo 默认all
+ *@return PNews
+ */
+
+/**
+ *@note   根据帖子id列表获取对应帖子列表
+ *@path   /news/listbyids
+ *@cookie token&uuid
+ *@method GET
+ *@method uuid 用户id
+ *@param  keys uuid:post 列表
+ *@return PNews
+ */
+
+/**
+ *@note   关注/取消关注
+ *@path   /news/relation
+ *@cookie token&uuid
+ *@method GET
+ *@param  uuid 关注/本关注对象的id
+ *@param  do 为1时表示添加关注，为0时表示取消关注
+ *@return PResult
+ */
+
+/**
+ *@note   关注系统的收索
+ *@path   /news/relation/search
+ *@cookie token&uuid
+ *@method GET
+ *@param  key 0：搜索粉丝 1：搜索关注者 2：搜索全部 3：搜索相互关注
+ *@param  uuid 被查找的用户uuid
+ *@param  word 收索关键字
+ *@param  cursor 下次查询的起点，默认为0
+ *@param  count 单次返回的记录条数，默认为20，最大不超过50。 
+ *@return FollowOrFansList
+ */
+
+/**
+ *@note   获取关注列表
+ *@path   /news/relation/followers
+ *@cookie token&uuid
+ *@method GET
+ *@param  uuid 被查找的用户uuid
+ *@param  count 单次返回的记录条数，默认为20，最大不超过50。
+ *@param  cursor 下次查询的起点，默认为0。
+ *@return FollowOrFansList
+ */
+
+/**
+ *@note   获取粉丝列表
+ *@path   /news/relation/fans
+ *@cookie token&uuid
+ *@method GET
+ *@param  uuid 被查找的用户uuid
+ *@param  count 单次返回的记录条数，默认为20，最大不超过50。
+ *@param  cursor 下次查询的起点，默认为0。
+ *@return FollowOrFansList
+ */  
+  
+/**
+ *@note   个人微博主页
+ *@path   /news/home
  *@method GET
  *@cookie token&uuid
- *@param id uuid
- *@param arctype 要查看的文章类型 值：all, text, image, audio, video
- *@param history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
- *param count   单次返回的记录条数，默认为20，最大不超过50。
+ *@param  id uuid
+ *@param  arctype 要查看的文章类型 值：all, text, image, audio, video
+ *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@param  count 单次返回的记录条数，默认为20，最大不超过50。
  *@return PNews
  */ 
  
- /**
-  *@note 删除微博
-  *@path /news/delete
-  *@cookie token&uuid
-  *@method GET
-  *@param id 微博的id
-  *@return PResult
-  */
+/**
+ *@note   删除微博
+ *@path   /news/delete
+ *@cookie token&uuid
+ *@method GET
+ *@param  id 微博的id
+ *@return PResult
+ */
 
 
- /**
-  *@note 收藏微博
-  *@path /news/collect
-  *@cookie token&uuid
-  *@method GET
-  *@param puuid 微博发布者uuid
-  *@param id 微博的id
-  *@return PResult
-  */
+/**
+ *@note   收藏微博
+ *@path   /news/collect
+ *@cookie token&uuid
+ *@method GET
+ *@param  puuid 微博发布者uuid
+ *@param  id 微博的id
+ *@return PResult
+ */
 
-   /**
-  *@note 获取收藏的微博
-  *@path /news/listcollects
-  *@cookie token&uuid
-  *@method GET
-  *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
-  *@return PNews
-  */
+/**
+ *@note   获取收藏的微博
+ *@path   /news/listcollects
+ *@cookie token&uuid
+ *@method GET
+ *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@return PNews
+ */
 
-   /**
-  *@note 取消收藏微博
-  *@path /news/uncollect
-  *@cookie token&uuid
-  *@method GET
-  *@param puuid 微博发布者uuid
-  *@param id 微博的id
-  *@return PResult
-  */
+/**
+ *@note   取消收藏微博
+ *@path   /news/uncollect
+ *@cookie token&uuid
+ *@method GET
+ *@param  puuid 微博发布者uuid
+ *@param  id 微博的id
+ *@return PResult
+ */
 
-   /**
-  *@note 移除微博
-  *@path /news/remove
-  *@cookie token&uuid
-  *@method GET
-  *@param puuid 微博发布者uuid
-  *@param id 微博的id
-  *@return PResult
-  */
+/**
+ *@note   移除微博
+ *@path   /news/remove
+ *@cookie token&uuid
+ *@method GET
+ *@param  puuid 微博发布者uuid
+ *@param  id 微博的id
+ *@return PResult
+ */
 
-   /**
-  *@note 举报微博
-  *@path /news/report
-  *@cookie token&uuid
-  *@method GET
-  *@param puuid 微博发布者uuid
-  *@param id 微博的id
-  *@return PResult
-  */
+/**
+ *@note   举报微博
+ *@path   /news/report
+ *@cookie token&uuid
+ *@method GET
+ *@param  puuid 微博发布者uuid
+ *@param  id 微博的id
+ *@return PResult
+ */
 
-  /**
-  *@note 查看其他用户首页
-  *@path /news/user/home
-  *@cookie token&uuid
-  *@method GET
-  *@param  targetuuid 查看的目标用户
-  *@return UserShowProfile
-  */
+/**
+ *@note   查看其他用户首页
+ *@path   /news/user/home
+ *@cookie token&uuid
+ *@method GET
+ *@param  targetuuid 查看的目标用户
+ *@return UserShowProfile
+ */
 
-  /**
-  *@note 查看用户个人的统计信息
-  *@path /news/user/statistic
-  *@cookie token&uuid
-  *@method GET
-  *@param  targetuuid 查看的目标用户
-  *@return PersonStatistic
-  */
+/**
+ *@note   查看用户个人的统计信息
+ *@path   /news/user/statistic
+ *@cookie token&uuid
+ *@method GET
+ *@param  targetuuid 查看的目标用户
+ *@return PersonStatistic
+ */
+
+/**
+ *@note   news点赞
+ *@path   /news/vote
+ *@cookie token&uuid
+ *@method GET
+ *@param  uid news发布者id
+ *@param  pid news id
+ *@return PResult
+ */
 
 
-  //无*************这里的接口不推荐正式使用****************
-   /**
-  *@note 获取推荐用户
-  *@path /news/recommenduser
-  *@cookie token&uuid
-  *@method GET
-  *@return RecommendUserList
-  */
+/**
+ *@note   @用户
+ *@path   /news/at
+ *@cookie token&uuid
+ *@method GET
+ *@param  count 单次返回的记录条数，默认为20，最大不超过50。
+ *@param  cursor 下次查询的起点，默认为0
+ *@return PUserList
+ */
 
-  /**
-  *@note 移除推荐用户,下次不再推荐
-  *@path /news/recommenduser/unlike
-  *@cookie token&uuid
-  *@method GET
-  *@param  puuid 移除推荐用户的uuid
-  *@return PResult
-  */
 
-  /**
- *@note 微博类型统计信息
- *@path /news/statistic
+//无*************这里的接口不推荐正式使用****************
+/**
+ *@note   获取推荐用户
+ *@path   /news/recommenduser
+ *@cookie token&uuid
+ *@method GET
+ *@return RecommendUserList
+ */
+
+/**
+ *@note   移除推荐用户,下次不再推荐
+ *@path   /news/recommenduser/unlike
+ *@cookie token&uuid
+ *@method GET
+ *@param  puuid 移除推荐用户的uuid
+ *@return PResult
+ */
+
+/**
+ *@note   微博类型统计信息
+ *@path   /news/statistic
  *@method GET
  *@cookie token&uuid
- *@param ouuid
+ *@param  ouuid
  *@return NewsStatistic
  */
  

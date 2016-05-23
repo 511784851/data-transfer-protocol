@@ -3,10 +3,14 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "AccountProtos";
 
+/*=====================================*/
+//结构定义
+
 message PUserList {
 	repeated PUser list = 1; //PUser列表，最多100个
 }
 
+// 用户基础信息
 message PUser {
 	/*保留1~5用于扩展*/
 	
@@ -15,7 +19,7 @@ message PUser {
 	string username = 8; 			// 用户名，唯一
 	string nickname = 9; 			// 昵称
 	string headImgURL = 10; 		// 头像地址
-	string realname = 11; 			// 真实姓名
+	string realname = 11;			// 真实姓名
 	int32 gender = 12;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
 	string email = 13; 				// 邮箱地址
 	string birthday = 14; 			// 生日，格式19850101
@@ -31,8 +35,9 @@ message PUser {
 	string link3 = 24;          	// 链接3
 	int64 chatId = 25;				// 聊天系统分配的id
 	PLevelInfo levelInfo = 26;		// 会员等级信息
-	bool disable = 27; 				//帐户是否被禁用
-	bool isAI = 28; 				//该帐户是否是机器人
+	bool disable = 27; 				// 帐户是否被禁用
+	bool isAI = 28; 				// 该帐户是否是机器人
+	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
 }
 
 message PPhoneMap {
@@ -107,9 +112,51 @@ message PLevelInfos {
 	repeated string failUuid = 2;		//失败的uuid列表
 }
 
+//黑名单项
+message PBlacklist {
+	int64 id = 1;   //黑名单ID
+	string val = 2; //黑名单值
+}
+
+//黑名单映射列表
+message PBlacklistList {
+	repeated PBlacklist list = 1;	//黑名单列表
+}
+
+//黑名单值列表
+message PBlacklistVal {
+	repeated string list = 1;	//黑名单值列表
+}
+
+//黑名单ID列表
+message PBlacklistID {
+	repeated int64 list = 1;	//黑名单ID列表
+}
+
+//黑名单列表返回
+message PBlacklistRet {
+	repeated int64 succList = 1;	//成功的列表
+	repeated int64 failList = 2;    //失败的列表
+}
+
+//黑名单列表返回
+message PBlacklistExRet {
+	repeated PBlacklist succList = 1;	   //成功的黑名单列表
+	repeated PBlacklist existList = 2;	   //已经存在的黑名单列表
+	repeated string failList = 3;          //失败的列表
+}
+
+//黑名单列表数量
+message PBlacklistCount {
+	int64 count = 1;     //黑名单数量
+}
+
+/*=====================================*/
+//API定义
+
 /*
  *@note 取用户信息
- *@path /account/user/profile
+ *@uri /account/user/profile
  *@cookie token&uuid
  *@param GET
  *@return 成功返回PUser，失败返回PResult
@@ -117,7 +164,7 @@ message PLevelInfos {
 
 /*
  *@note 更新用户信息（不包含添加用户信息）
- *@path /account/user/profile
+ *@uri /account/user/profile
  *@cookie token&uuid
  *@method POST
  *@param nickname 昵称
@@ -134,16 +181,16 @@ message PLevelInfos {
  
  /**
   *@note 检测手机号码是否已经注册
-  *path /account/user/chphone
-  *cookie token&uuid
-  *method POST
-  *param phones 加了区号的手机号码数组
-  *return PPhoneMap 手机号：uuid
+  *@uri /account/user/chphone
+  *@cookie token&uuid
+  *@method GET
+  *@param phones 加了区号的手机号码数组
+  *@return PPhoneMap 手机号：uuid
   */
  
  /**
   *@note 分页地获取用户的列表
-  *@path /account/user/users
+  *@uri /account/user/users
   *@cookie token&uuid
   *@method GET
   *@param from 服务名称（内部调用要传这个参数）
@@ -152,63 +199,80 @@ message PLevelInfos {
   *@return 成功返回PUserList，失败返回PResult
   */
 
+ /**
+  *@note 用户使能开关
+  *@uri /account/user/disable
+  *@cookie token&uuid
+  *@method GET
+  *@param from 调用方
+  *@param uuid 用户ID
+  *@param action 开关
+  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
+  */
+
 /*
  *@note 获取用户的账号绑定信息
- *@URL /account/binding/status
+ *@uri /account/binding/status
+ *@method GET
  *@cookie token&uuid
- *@return 成功返回PAccount，失败返回PResult
+ *@return 成功返回PAccount，失败返回PbResult
  */
 
 /*
  *@note 绑定手机号登录方式
- *@URL /account/binding/phone
+ *@uri /account/binding/phone
+ *@method GET
  *@cookie token&uuid
- *@param cellphone 手机号码
- *@param smscode 验证码
- *@return 返回PResult
+ *@param cellphone 有带区号的手机号码（如+86）
+ *@param smscode 短讯服务代码
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
 
 /*
  *@note 绑定微信登录方式
- *@URL /account/binding/wechat
+ *@uri /account/binding/wechat
+ *@method GET
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
- *@return 返回PResult
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
  
  /*
  *@note 绑定微博登录方式
- *@URL /account/binding/weibo
+ *@uri /account/binding/weibo
+ *@method GET
  *@cookie token&uuid
- *@param wbuid 用户微博uid
- *@param wname 用户微博昵称
- *@param wheadimgurl 用户微博头像地址
+ *@param wbuid 微信ID
+ *@param wname 微信名称
+ *@param wheadimgurl 微信头像路径
  *@param wgender 性别
- *@param wweihao 用户微号
- *@return 返回PResult
+ *@param wweihao 微信号
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
  
  /*
  *@note 绑定google登录方式
- *@URL /account/binding/google
+ *@uri /account/binding/google
+ *@method GET
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
- *@return 返回PResult
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
  
  /*
  *@note 绑定facebook登录方式
- *@URL /account/binding/facebook
+ *@uri /account/binding/facebook
+ *@method GET
  *@cookie token&uuid
  *@param token Facebook User access token
- *@return 返回PResult
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
 
  /*
  *@note 获取带签名的文件上传URL
- *@path /account/user/imageurl
- *@method GET
+ *@uri /account/user/imageurl
+ *@method POST
  *@cookie token&uuid
  *@digest 要上传的文件的md5 hexstring
  *@length 文件大小，字节
@@ -218,37 +282,18 @@ message PLevelInfos {
 
  /*
  *@note 修改用户头像
- *@path /account/user/headimage
+ *@uri /account/user/headimage
  *@method post
  *@cookie token&uuid
  *@param image 要上传的头像objectkey，PUpload返回的参数
  *@return 返回PResult
  */
 
- /*
- *@note 获取等级权限信息
- *@path /account/user/level
+/*
+ *@note 修改密码
+ *@uri /account/user/changepwd
  *@method GET
- *@cookie token&uuid
- *@param uuid 用户ID
- *@return 成功返回PLevelInfo，失败返回PbResult
- */
- 
- /*
- *@note 批量获取等级权限信息
- *@path /account/users/level
- *@method POST
- *@cookie token&uuid
- *@param uuids 用户ID列表
- *@return 成功返回PLevelInfos，失败返回PbResult
- */
- 
- /*
- *@note 批量获取某几项的等级权限
- *@path /account/user/levels
- *@method POST
- *@cookie token&uuid
- *@param uuid 用户ID
- *@param levelNames	等级名称列表
- *@return 成功返回PLevelItems，失败返回PbResult
+ *@param oldpwd 旧密码
+ *@param newpwd 新密码
+ *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
  */

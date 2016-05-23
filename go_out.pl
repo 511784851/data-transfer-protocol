@@ -16,7 +16,9 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/news.proto ".
 						"server-client/comment.proto ".
 						"server-client/social.proto ".
-						"server-client/platform.proto";
+						"server-client/platform.proto ".
+						"server-client/datapublishing.proto ".
+						"server-client/notification.proto ";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
@@ -24,7 +26,8 @@ system($cmd);
 
 #################server_server protos#######################
 $server_server_protos = "server-server/login_api.proto ".
-                        "server-server/account_api.proto ";
+                        "server-server/account_api.proto ".
+						"server-server/notification_api.proto";
 -d ($output = $output."/service") || mkdir($output);
 $cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
 system($cmd);
