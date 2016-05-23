@@ -7,29 +7,29 @@ import "news.proto";
 
 // 单条评论结构详细信息
 message PComment {
-	string id = 1;			//评论ID
-	string uuid = 2;		//评论者ID
+	string id = 1;		//评论ID
+	string uuid = 2;	//评论者ID
 	string nickname = 3;	//评论者昵称
-	string headImgUrl = 4;  //评论者头像
-	string atUuid = 5;		//@用户ID
+	string headImgUrl = 4;	//评论者头像
+	string atUuid = 5;	//@用户ID
 	string atNickname = 6;	//@用户昵称
 	/*保留7用于扩展*/
-	bool isShield = 8; //该评论是否被屏蔽
-	int32  vote = 9;   //请求者是否赞过或踩过，1:赞过,-1:踩过，否则为0
-	int32  children = 10;		//下一级子评论数
-	int32 upvotes = 11;		//赞数
+	bool isShield = 8;	//该评论是否被屏蔽
+	int32  vote = 9;	//请求者是否赞过或踩过，1:赞过,-1:踩过，否则为0
+	int32  children = 10;	//下一级子评论数
+	int32 upvotes = 11;	//赞数
 	int32 downvotes = 12;	//踩数
 	int64 createTime = 13;	//评论创建时间
-	string text = 14;		//评论文本内容
-	PAudio audio = 15;		//语音信息
+	string text = 14;	//评论文本内容
+	PAudio audio = 15;	//语音信息
 }
 
 // 某个用户等级的评论列表
 message PCommentLevel {
 	int32 level = 1;		//等级
 	int32 count = 2;		//评论数
-	int32 interactions = 3; //交互数（@次数）
-	repeated PComment comments = 4;
+	int32 interactions = 3;		//交互数（@次数）
+	repeated PComment comments = 4;	//评论内容
 }
 
 message PCommentList {
@@ -110,7 +110,7 @@ message PCommentList {
  */
 
 message PVoteUser {
-	string uuid = 1;		//赞或踩的用户信息
+	string uuid = 1;	//赞或踩的用户信息
 	string nickname = 2;
 	string headImgUrl = 3;
 }
