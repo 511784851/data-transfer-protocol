@@ -4,10 +4,11 @@ package service;
 // 服务之间推送消息定义
 message PPushMsg {
 	bytes data = 2;				// 不同服务需要存储的推送内容
-	repeated string uuids = 3;	// 推送消息接受者
-	string type = 4;				// 推送消息类型，见 notification.proto
-	int64 time = 5;				// 推送消息产生时间
-	string content = 6; 			// 客户端推送显示的内容
+	string fromUuid = 3;			// 推送消息发起者
+	repeated string toUuids = 4;	// 推送消息接受者
+	string type = 5;				// 推送消息类型，见 notification.proto
+	int64 time = 6;				// 推送消息产生时间
+	string content = 7; 			// 客户端推送显示的内容
 }
 
 
