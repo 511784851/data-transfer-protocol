@@ -14,6 +14,7 @@ comment_vote 	// 评论投票
 social_accept 	// 好友申请
 news_follow 		// 关注我
 news_upvote 		// 帖子点赞
+news_at         // 帖子@用户
 */
 
 
@@ -124,6 +125,18 @@ message NotifyNewsVote {
 //点赞通知信息列表
 message NotifyNewsVoteList {
   repeated NotifyNewsVote list = 1; //NotifyNewsVote列表，最多50个  
+}
+
+message NotifyNewsAt {
+  int64 messageId  = 1; //消息id
+  PArticle article = 2; //帖子
+  int64 time       = 3; //发帖时间
+  int32 status     = 4; //0：未读；1：已读
+}
+
+//帖子@通知信息列表
+message NotifyNewsAtList {
+  repeated NotifyNewsAt list = 1; //NotifyNewsAt列表，最多50个  
 }
 
 // 推送消息的个数

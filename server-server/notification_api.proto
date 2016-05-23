@@ -25,6 +25,13 @@ message NotifyNewsVoteMeta {
   string uuidB  = 3; 			//点赞用户id
 }
 
+//帖子@用户通知元信息
+message NotifyNewsAtMeta {
+	int32 postId 			= 1; //帖子id
+	repeated string uuidAs	= 2; //被@的用户id列表
+	string uuidB 			= 3; //发帖用户id
+}
+
 /*
  *@note 添加推送消息
  *@path /v1/notification/inside/msg
