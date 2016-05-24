@@ -55,6 +55,7 @@ message PVideo {
 	string img = 2;              //视频的缩略图
 	repeated PVideoTag tags = 3; //视频的标签
 	int64 expires = 4;           //视频的有效期（多少秒之后过期）
+	int32 type = 5;              //视频类型，0：本地视频，1：第三方视频
 }
 
 //音频
