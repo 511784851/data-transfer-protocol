@@ -18,7 +18,8 @@ mkdir($output);
 `perl javanano_out.pl $output`;
 
 $output = $output_root."/objc";
+$exe = "protoc";
 mkdir($output);
-`perl objc_out.pl $output`;
+`perl objc_out.pl $output $exe`;
 
 print("success");
