@@ -11,12 +11,17 @@ message PConversation {
 	int32 type = 3;                // 会话类型
 	string icon = 4;               // 会话图标url地址
 	string title = 5;	           // 会话名称
-	int64 tag = 6;	               // 会话tag
+	int64 tag = 6;	               // 会话tag：0-可以聊天，1-不能聊天（已不是好友关系）
 	int32 memberLimit = 7;         // 群成员数
     int32 superGroup = 8;	       // 0非大群，1大群  
     string parentId = 9;           // 父会话id，默认0
     int32 nodeType = 10;           // 是否 父会话，0-否，默认；1-是父会话
     repeated int64 members = 11;   // 会话的成员列表openId
+}
+
+message PRoom {
+	string roomId = 1;             // 社区/聊天室ID
+    PConversation conversation = 2;// 聊天室会话信息
 }
 
 /*
@@ -38,3 +43,14 @@ message PConversation {
  *@param member_uuid 群组成员uuid数组（必须）     格式：member_uuid=1&member_uuid=2&member_uuid=3
  *@return 成功返回PConversation，失败返回PResult
  */
+ 
+/*
+ *@note 修改聊天tag（当有好友关系变更时调用此接口，用于标示是否可以聊天）
+ *@path /chat/conversation/update/tag
+ *@method GET
+ *@param uuid 用户uuid（必须）
+ *@param friend_uuid 好友uuid（必须）
+ *@param tag 聊天tag（0-建立好友关系 1-解除好友关系）
+ *@return 返回PResult
+ */
+ 

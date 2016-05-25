@@ -1,0 +1,200 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "CommunityProtos";
+
+
+import "account.proto";
+
+/*=====================================*/
+// 结构定义
+
+// 社区的id信息，用于批量操作
+message PCommunityID {
+	repeated string ID = 2;	// 社区的全局唯一id，能用于检索社区信息
+}
+
+// 社区的基础信息
+message PCommunityBase {
+	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
+	string Name = 3;		// 社区名字
+	string ImgURL = 4;		// 社区头像地址
+}
+
+// 社区的基础信息列表
+message PCommunityBaseList {
+	repeated PCommunityBase List = 2;
+}
+
+// 社区信息
+message PCommunityInfo {
+	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
+	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者
+	int64 ID = 4;					// 社区id
+	string Name = 5;				// 社区名字
+	string ImgURL = 6;				// 社区头像
+	string BackgroundImg = 7;		// 社区背景图
+	string Introduce = 8;			// 社区介绍
+	int32 MemberCount = 9;			// 社区成员数量
+	int32 ForumPostCount = 10;		// 社区论坛帖子数量
+	int32 NoticePostCount = 11;		// 社区公告帖子数量
+}
+
+// ‘我的社区’返回的信息
+message PCommunityMe {
+	PCommunityInfo Info = 2;		// 我的社区信息
+	PCommunityBaseList List = 3; 	// 我关注的社区
+}
+
+// 社区资源信息
+message PCommunityResource {
+	string Type = 2;				// 资源类型，文字（txt），图片(img)，音频(audio)，视频(video)
+	string Name = 3;				// 文件名称
+	string URL = 4;					// 连接地址，上传地址/访问地址
+}
+
+// 社区资源信息列表
+message PCommunityResourceList {
+	repeated PCommunityResource Resource = 2;
+}
+
+// 帖子信息
+message PCommunityPostInfo {
+	string ID = 2;								// 帖子id 
+	PUserBase User = 3;							// 用户基础信息
+	string UUID = 4;							// 发布帖子的用户id
+	int64 Time = 5;								// 发布帖子的时间
+	string Title = 6;							// 帖子的标题
+	string Body = 7;							// 帖子的正文信息
+	PCommunityResourceList ResourcesList = 8;	// 帖子正文引用到的资源信息
+}
+
+// 帖子列表
+message PCommunityPostList {
+	repeated PCommunityPostInfo PostInfo = 2;
+}
+
+// ‘社区首页’返回的信息
+message PCommunityHome {
+	PCommunityInfo Info = 2;		// 我的社区信息
+	PCommunityPostList List = 3; 	// 我关注的社区
+}
+
+
+/*=====================================*/
+// API定义
+
+/*
+ *@note 批量获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
+ *      否则请在各自的模块里面单独实现此协议，参看comment模块
+ *@path /v1/community/uploadfileurls
+ *@method POST
+ *@cookie token&uuid
+ *@body   PFileInfoArray
+ *@return 成功返回PUploadArray，失败返回PResult
+ */
+
+//--- 社区相关操作
+/*
+ *@note  获取热门社区，伪造接口，以后会使用大数据接口替换
+ *@path /v1/community/fack/hot
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCommunityBaseList，失败返回PResult
+ */
+
+/*
+ *@note  获取推荐社区，伪造接口，以后会使用大数据接口替换
+ *@path /v1/community/fack/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCommunityBaseList，失败返回PResult
+ */
+
+/*
+ *@note 关注/取消关注社区
+ *@path /v1/community/follow
+ *@method POST
+ *@url param operate 'add'为添加关注，'del'为取消关注，'del_all'为取消所有关注
+ *@body PCommunityID 如果为'del_all'，可以不填
+ *@cookie token&uuid
+ *@return PResult 
+ */
+
+/*
+ *@note ‘我的社区’页面
+ *@path /v1/community/me
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCommunityMe，失败返回PResult
+ */
+
+/*
+ *@note  创建/启用/关闭社区
+ *@path /v1/community
+ *@url param operate 'create'为创建社区,'open'为打开社区,'close'为关闭社区'
+ *@url param id 当选择打开/关闭社区时，需要填社区id
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCommunityMe，失败返回PResult
+ */
+
+/*
+ *@note ‘社区首页’页面
+ *@path /v1/community/home
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCommunityHome，失败返回PResult
+ */
+	
+/*
+ *@note 修改‘社区首页’页面
+ *@path /v1/community/home
+ *@method POST
+ *@url param fields 要修改的选项，可选的有Name,ImgURL,BackgroundImg,Introduce修改多个以,分割
+ *@body PCommunityInfo  
+ *@cookie token&uuid
+ *@return 返回PResult
+ */
+
+// 帖子相关操作
+/*
+ *@note 社区发布论坛帖子
+ *@path /v1/community/post/forum
+ *@method POST
+ *@body PCommunityPostInfo
+ *@cookie token&uuid
+ *@return PResult
+ */
+
+/*
+ *@note 社区获取论坛帖子
+ *@path /v1/community/post/forum
+ *@method GET
+ *@url param id 论坛帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return PCommunityPostList
+ */
+
+/*
+ *@note 社区发布公告帖子
+ *@path /v1/community/post/notice
+ *@method POST
+ *@body PCommunityPostInfo
+ *@cookie token&uuid
+ *@return PResult
+ */
+
+/*
+ *@note 社区获取公告帖子
+ *@path /v1/community/post/forum
+ *@method GET
+ *@url param id 公告帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return PCommunityPostList
+ */
+
+
+

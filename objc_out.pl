@@ -3,7 +3,7 @@ use File::Path;
 use Cwd;
 $pwd = cwd();
 
-$output = "output";
+$output = "../code/mobaxx/mobaxx/model_pb";
 if (@ARGV > 0) {
 	$output = $ARGV[0];
 } else {
@@ -14,7 +14,7 @@ if (@ARGV > 0) {
 #################server_client protos#######################
 $server_client_protos = "server-client/*.proto ";
 
-$cmd = "protoc -Iserver-client --objc_out=".$output." ".$server_client_protos;
+$cmd = "protoc-mac -Iserver-client --objc_out=".$output." ".$server_client_protos;
 system($cmd);
 
 
