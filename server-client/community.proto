@@ -17,8 +17,8 @@ message PCommunityID {
 // 社区的基础信息
 message PCommunityBase {
 	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
-	string Name = 3;		// 社区名字
-	string ImgURL = 4;		// 社区头像地址
+	string Name = 3;			// 社区名字
+	string HeadImg = 4;		// 社区头像地址
 }
 
 // 社区的基础信息列表
@@ -31,8 +31,8 @@ message PCommunityInfo {
 	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
 	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者
 	int64 ID = 4;					// 社区id
-	string Name = 5;				// 社区名字
-	string ImgURL = 6;				// 社区头像
+	string Name = 5;					// 社区名字
+	string HeadImg = 6;				// 社区头像
 	string BackgroundImg = 7;		// 社区背景图
 	string Introduce = 8;			// 社区介绍
 	int32 MemberCount = 9;			// 社区成员数量
@@ -42,15 +42,15 @@ message PCommunityInfo {
 
 // ‘我的社区’返回的信息
 message PCommunityMe {
-	PCommunityInfo Info = 2;		// 我的社区信息
+	PCommunityInfo Info = 2;			// 我的社区信息
 	PCommunityBaseList List = 3; 	// 我关注的社区
 }
 
 // 社区资源信息
 message PCommunityResource {
 	string Type = 2;				// 资源类型，文字（txt），图片(img)，音频(audio)，视频(video)
-	string Name = 3;				// 文件名称
-	string URL = 4;					// 连接地址，上传地址/访问地址
+	string Name = 3;				// 资源名称
+	string URL = 4;				// 资源地址，上传地址/访问地址
 }
 
 // 社区资源信息列表
@@ -58,26 +58,35 @@ message PCommunityResourceList {
 	repeated PCommunityResource Resource = 2;
 }
 
+// 发布帖子的信息
+message PCommunityPostUpload {
+	string Title = 2;							// 帖子的标题
+	string Body = 3;								// 帖子的正文
+	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
+}
+
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
-	PUserBase User = 3;							// 用户基础信息
-	string UUID = 4;							// 发布帖子的用户id
+	int32 Type = 3;								// 帖子类型，0为论坛，1为公告
+	PUserBase User = 4;							// 用户基础信息
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	string Body = 7;							// 帖子的正文信息
-	PCommunityResourceList ResourcesList = 8;	// 帖子正文引用到的资源信息
+	string Body = 7;								// 帖子的正文信息
+	int64 ViewCount = 8;							// 论坛帖子信息
+	int64 CommentCount = 9;						// 论坛帖子评论数量
+	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
-// 帖子列表
+// 帖子信息列表
 message PCommunityPostList {
 	repeated PCommunityPostInfo PostInfo = 2;
 }
 
 // ‘社区首页’返回的信息
 message PCommunityHome {
-	PCommunityInfo Info = 2;		// 我的社区信息
-	PCommunityPostList List = 3; 	// 我关注的社区
+	PCommunityInfo Info = 2;			// 我的社区信息
+	PCommunityPostList List = 3; 	// 我关注的社区最近发布的帖子信息
 }
 
 
@@ -143,6 +152,7 @@ message PCommunityHome {
  *@note ‘社区首页’页面
  *@path /v1/community/home
  *@method GET
+ *@url param id 社区id
  *@cookie token&uuid
  *@return 成功返回PCommunityHome，失败返回PResult
  */
@@ -151,6 +161,7 @@ message PCommunityHome {
  *@note 修改‘社区首页’页面
  *@path /v1/community/home
  *@method POST
+ *@url param id 社区id
  *@url param fields 要修改的选项，可选的有Name,ImgURL,BackgroundImg,Introduce修改多个以,分割
  *@body PCommunityInfo  
  *@cookie token&uuid
@@ -161,8 +172,9 @@ message PCommunityHome {
 /*
  *@note 社区发布论坛帖子
  *@path /v1/community/post/forum
+ *@url param id 社区id
  *@method POST
- *@body PCommunityPostInfo
+ *@body PCommunityPostUpload
  *@cookie token&uuid
  *@return PResult
  */
@@ -171,7 +183,8 @@ message PCommunityHome {
  *@note 社区获取论坛帖子
  *@path /v1/community/post/forum
  *@method GET
- *@url param id 论坛帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
+ *@url param id
+ *@url param offset 论坛帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
  *@url param count 获取帖子个数
  *@cookie token&uuid
  *@return PCommunityPostList
@@ -180,15 +193,16 @@ message PCommunityHome {
 /*
  *@note 社区发布公告帖子
  *@path /v1/community/post/notice
+ *@url param id 社区id
  *@method POST
- *@body PCommunityPostInfo
+ *@body PCommunityPostUpload
  *@cookie token&uuid
  *@return PResult
  */
 
 /*
  *@note 社区获取公告帖子
- *@path /v1/community/post/forum
+ *@path /v1/community/post/notice
  *@method GET
  *@url param id 公告帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
  *@url param count 获取帖子个数
