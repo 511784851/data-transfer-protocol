@@ -18,7 +18,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/social.proto ".
 						"server-client/platform.proto ".
 						"server-client/datapublishing.proto ".
-						"server-client/notification.proto ";
+						"server-client/notification.proto ".
+						"server-client/community.proto ";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
