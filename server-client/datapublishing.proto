@@ -73,6 +73,7 @@ message PSearchResults {
  *@path /datapublishing/hot/news
  *@method GET
  *@cookie token&uuid
+ *@param type 微博类型 取值all text image video audio 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PNews，失败返回PResult
@@ -85,6 +86,7 @@ message PSearchResults {
  *@cookie token&uuid
  *@param pageindex 页号
  *@param pagesize 页大小
+ *@param level 用户等级 取值all reg vip vipp vo 默认all
  *@return 成功返回PUserList，失败返回PResult
  */
  
@@ -93,6 +95,7 @@ message PSearchResults {
  *@path /datapublishing/recommend/news
  *@method GET
  *@cookie token&uuid
+ *@param type 微博类型 取值all text image video audio 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PNews，失败返回PResult
@@ -103,6 +106,7 @@ message PSearchResults {
  *@path /datapublishing/recommend/user
  *@method GET
  *@cookie token&uuid
+ *@param level 用户等级 取值all reg vip vipp vo 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PUserList，失败返回PResult

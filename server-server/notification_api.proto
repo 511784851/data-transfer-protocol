@@ -12,13 +12,13 @@ message PPushMsg {
 }
 
 
-//关注通知元消息
+// 关注通知元消息
 message NotifyFollowMeta {
   string uuidA = 1; 			//被关注者id
   string uuidB = 2; 			//关注者id
 }
 
-//点赞通知元信息
+// 点赞通知元信息
 message NotifyNewsVoteMeta {
   int32  postId = 1; 			//被点赞帖子id
   string uuidA  = 2; 			//被点赞用户id
@@ -32,6 +32,19 @@ message NotifyNewsAtMeta {
 	string uuidB 			= 3; //发帖用户id
 }
 
+// 所有推送消息的基础信息
+message PNotifyBaseMsg {
+	int64 msgID = 1;// 推送消息的id，全局唯一
+	int64 time = 2;// 推送消息的时间，
+	int32 status = 3;// 推送消息状态，0为未读，1为已读
+	bytes data = 4;// 各个模块存储在数据库的原始数据，PPushMsg.Data
+}
+
+// 推送消息列表
+message PNotifyBaseMsgList {
+	repeated PNotifyBaseMsg list = 1;
+}
+
 /*
  *@note 添加推送消息
  *@path /v1/notification/inside/msg
@@ -39,4 +52,25 @@ message NotifyNewsAtMeta {
  *@param from 服务调用者
  *@POST数据为 PPushMsg
  *@return 返回int32错误码
+ */
+
+/*
+ *@note 删除申请好友推送消息
+ *@path /v1/notification/inside/del/uuidab
+ *@method GET
+ *@param uuida 用户ID A
+ *@param uuidb 用户ID B
+ *@return PResult
+ */
+
+/*
+ *@note 删除MsgId对应的贴子或评论
+ *@path /v1/notification/inside/del/msgids
+ *@method GET
+ *@param uuid 用户ID
+ *@param msg_type	消息类型
+ *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
+ *@param pmil	消息ID列表
+ *@param nextId	下一个消息ID
+ *@return 成功返回(PNotifyBaseMsgList,No_Error)，失败返回(nil, int32)
  */

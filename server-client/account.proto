@@ -10,7 +10,7 @@ message PUserList {
 	repeated PUser list = 1; //PUser列表，最多100个
 }
 
-// 用户基础信息
+// 用户信息
 message PUser {
 	/*保留1~5用于扩展*/
 	
@@ -38,6 +38,15 @@ message PUser {
 	bool disable = 27; 				// 帐户是否被禁用
 	bool isAI = 28; 				// 该帐户是否是机器人
 	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
+}
+
+// 用户基础信息
+message PUserBase {
+  int32 Level = 2;					// 用户等级
+  string UUID = 6;        			// 服务端标志用户的唯一id
+  string UserName = 7;     			// 用户名，唯一
+  string Nickname = 8;      		// 昵称
+  string HeadImgURL = 9;     		// 头像地址
 }
 
 message PPhoneMap {
