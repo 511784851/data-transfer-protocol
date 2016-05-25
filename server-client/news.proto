@@ -156,6 +156,10 @@ message Relation {
   int32 fansB = 7;              //用户B的粉丝数
 }
 
+message PNewsExist {
+	repeated bool exist = 1;	
+}
+
 /**
  *@note   发布微博
  *@path   /news/publish
