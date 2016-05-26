@@ -62,15 +62,3 @@ message PNotifyBaseMsgList {
  *@param uuidb 用户ID B
  *@return PResult
  */
-
-/*
- *@note 删除MsgId对应的贴子或评论
- *@path /v1/notification/inside/del/msgids
- *@method GET
- *@param uuid 用户ID
- *@param msg_type	消息类型
- *@param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
- *@param pmil	消息ID列表
- *@param nextId	下一个消息ID
- *@return 成功返回(PNotifyBaseMsgList,No_Error)，失败返回(nil, int32)
- */
