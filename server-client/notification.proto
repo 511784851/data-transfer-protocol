@@ -152,7 +152,7 @@ message PMsgCountList {
 
 // 消息id列表
 message PMsgIDList {
-	repeated int64 MsgID = 2;
+	repeated string MsgID = 2;
 }
 
 /*=====================================*/
