@@ -43,7 +43,7 @@ message PCommunityInfo {
 // ‘我的社区’返回的信息
 message PCommunityMe {
 	PCommunityInfo Info = 2;			// 我的社区信息
-	PCommunityBaseList List = 3; 	// 我关注的社区
+	PCommunityBaseList List = 3; 		// 我关注的社区
 }
 
 // 社区资源信息
@@ -86,7 +86,7 @@ message PCommunityPostList {
 // ‘社区首页’返回的信息
 message PCommunityHome {
 	PCommunityInfo Info = 2;			// 我的社区信息
-	PCommunityPostList List = 3; 	// 我关注的社区最近发布的帖子信息
+	PCommunityPostList List = 3; 		// 我关注的社区最近发布的帖子信息
 }
 
 
@@ -139,10 +139,18 @@ message PCommunityHome {
  */
 
 /*
- *@note  创建/启用/关闭社区
+ *@note  创建社区
  *@path /v1/community
- *@url param operate 'create'为创建社区,'open'为打开社区,'close'为关闭社区'
- *@url param id 当选择打开/关闭社区时，需要填社区id
+ *@method POST
+ *@cookie token&uuid
+ *@return 成功返回PCommunityMe，失败返回PResult
+ */
+
+/*
+ *@note  启用/关闭社区
+ *@path /v1/community
+ *@url param operate 'open'为打开社区,'close'为关闭社区'
+ *@url param id 社区id
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PCommunityMe，失败返回PResult
