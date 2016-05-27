@@ -19,11 +19,6 @@ message PConversation {
     repeated int64 members = 11;   // 会话的成员列表openId
 }
 
-message PRoom {
-	string roomId = 1;             // 社区/聊天室ID
-    PConversation conversation = 2;// 聊天室会话信息
-}
-
 /*
  *@note 创建会话（单聊）
  *@path /chat/conversation/create/single
@@ -54,3 +49,40 @@ message PRoom {
  *@return 返回PResult
  */
  
+/*
+ *@note 初始化社区聊天室
+ *@path /chat/room/init
+ *@method GET
+ *@param owner_uuid 管理员uuid（必须）
+ *@param communityId 社区ID（必须）
+ *@param title 聊天室名称（非必须）
+ *@param icon  聊天室头像url（非必须）
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 进入社区聊天室
+ *@path /chat/room/join
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 成功返回PConversation，失败返回PResult（注意：返回PResult[errorCode=1910002]时，意为群聊人数已达上限，此时可排队进入聊天室）
+ */
+ 
+/*
+ *@note 社区聊天室排队
+ *@path /chat/room/queue
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 返回PResult（此返回结果只标识是否进入排队，不代表已进入聊天室，系统排队成功后将给App用户推送通知消息）
+ */
+ 
+/*
+ *@note 退出社区聊天室
+ *@path /chat/room/exit
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 返回PResult
+ */
