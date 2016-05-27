@@ -151,7 +151,7 @@ message PCommunityHome {
  *@note 关注/取消关注社区
  *@path /v1/community/follow
  *@method POST
- *@url param operate 'add'为添加关注，'del'为取消关注，'del_all'为取消所有关注
+ *@url param operate 'add'为添加关注，'del'为取消关注
  *@body PCommunityID 如果为'del_all'，可以不填
  *@cookie token&uuid
  *@return PResult 
@@ -189,17 +189,6 @@ message PCommunityHome {
  */
 
 /*
- *@note 社区获取论坛帖子
- *@path /v1/community/post/forum
- *@method GET
- *@url param id
- *@url param offset 论坛帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
- *@url param count 获取帖子个数
- *@cookie token&uuid
- *@return PCommunityPostList
- */
-
-/*
  *@note 社区发布公告帖子
  *@path /v1/community/post/notice
  *@url param id 社区id
@@ -210,13 +199,67 @@ message PCommunityHome {
  */
 
 /*
- *@note 社区获取公告帖子
- *@path /v1/community/post/notice
+ *@note 社区获取帖子
+ *@path /v1/community/post
  *@method GET
- *@url param id 公告帖子的id偏移，-1代表从最新的帖子加载，否则从id-1的下一篇加载
+ *@url param id 社区id
+ *@url param type 帖子类型，可选参数有forum，notice，all
+ *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
  *@url param count 获取帖子个数
  *@cookie token&uuid
  *@return PCommunityPostList
+ */
+
+// 社区设定
+/*
+ *@note 设置-通知
+ *@path /v1/community/setting/notice
+ *@method GET
+ *@url param id 社区id
+ *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
+ *@url param count 获取通知个数
+ *@cookie token&uuid
+ *@return 
+ */
+
+/*
+ *@note 设置-我的帖子
+ *@path /v1/community/setting/post
+ *@method GET
+ *@url param id 社区id
+ *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return PCommunityPostList
+ */
+
+/*
+ *@note 设置-成员列表
+ *@path /v1/community/setting/member
+ *@method GET
+ *@url param id 社区id
+ *@url param time 
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return 
+ */
+
+/*
+ *@note 设置-邀请好友
+ *@path /v1/community/setting/invite
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 
+ */
+
+/*
+ *@note 设置-联系论坛
+ *@path /v1/community/setting/contact
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 
  */
 
 
