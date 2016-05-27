@@ -29,7 +29,7 @@ message PCommunityBaseList {
 // 社区信息
 message PCommunityInfo {
 	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
-	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者
+	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	int64 ID = 4;					// 社区id
 	string Name = 5;					// 社区名字
 	string HeadImg = 6;				// 社区头像
@@ -124,6 +124,8 @@ message PCommunityHome {
  *@note  创建社区
  *@path /v1/community
  *@method POST
+ *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce修改多个以,分割
+ *@body PCommunityInfo
  *@cookie token&uuid
  *@return 成功返回PCommunityMe，失败返回PResult
  */
@@ -152,7 +154,7 @@ message PCommunityHome {
  *@path /v1/community/follow
  *@method POST
  *@url param operate 'add'为添加关注，'del'为取消关注
- *@body PCommunityID 如果为'del_all'，可以不填
+ *@body PCommunityID 
  *@cookie token&uuid
  *@return PResult 
  */
