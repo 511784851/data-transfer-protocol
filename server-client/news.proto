@@ -372,6 +372,7 @@ message PNewsExist {
  *@method GET
  *@param  id uuid:postid
  *@return 返回html文件
+ *@example /news/shareshow?id=08771bd9-46e4-440b-bdbc-5ca3f857cbdc:3
  */
 
 //无*************这里的接口不推荐正式使用****************
