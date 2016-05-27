@@ -121,13 +121,11 @@ message PCommunityHome {
  */
 
 /*
- *@note 关注/取消关注社区
- *@path /v1/community/follow
+ *@note  创建社区
+ *@path /v1/community
  *@method POST
- *@url param operate 'add'为添加关注，'del'为取消关注，'del_all'为取消所有关注
- *@body PCommunityID 如果为'del_all'，可以不填
  *@cookie token&uuid
- *@return PResult 
+ *@return 成功返回PCommunityMe，失败返回PResult
  */
 
 /*
@@ -138,13 +136,6 @@ message PCommunityHome {
  *@return 成功返回PCommunityMe，失败返回PResult
  */
 
-/*
- *@note  创建社区
- *@path /v1/community
- *@method POST
- *@cookie token&uuid
- *@return 成功返回PCommunityMe，失败返回PResult
- */
 
 /*
  *@note  启用/关闭社区
@@ -154,6 +145,16 @@ message PCommunityHome {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PCommunityMe，失败返回PResult
+ */
+
+/*
+ *@note 关注/取消关注社区
+ *@path /v1/community/follow
+ *@method POST
+ *@url param operate 'add'为添加关注，'del'为取消关注，'del_all'为取消所有关注
+ *@body PCommunityID 如果为'del_all'，可以不填
+ *@cookie token&uuid
+ *@return PResult 
  */
 
 /*
@@ -170,7 +171,7 @@ message PCommunityHome {
  *@path /v1/community/home
  *@method POST
  *@url param id 社区id
- *@url param fields 要修改的选项，可选的有Name,ImgURL,BackgroundImg,Introduce修改多个以,分割
+ *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce修改多个以,分割
  *@body PCommunityInfo  
  *@cookie token&uuid
  *@return 返回PResult
