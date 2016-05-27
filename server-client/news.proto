@@ -356,7 +356,6 @@ message PNewsExist {
  *@return PResult
  */
 
-
 /**
  *@note   @用户
  *@path   /news/at
@@ -367,6 +366,13 @@ message PNewsExist {
  *@return PUserList
  */
 
+/**
+ *@note   分享news展示
+ *@path   /news/shareshow
+ *@method GET
+ *@param  id uuid:postid
+ *@return 返回html文件
+ */
 
 //无*************这里的接口不推荐正式使用****************
 /**
