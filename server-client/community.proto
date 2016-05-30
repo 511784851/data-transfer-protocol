@@ -14,16 +14,17 @@ message PCommunityID {
 	repeated string ID = 2;	// 社区的全局唯一id，能用于检索社区信息
 }
 
-// 社区的基础信息
+// 社区基础信息
 message PCommunityBase {
 	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
-	string Name = 3;			// 社区名字
+	string Name = 3;		// 社区名字
 	string HeadImg = 4;		// 社区头像地址
+	int64 FollowTime = 5;	// 关注社区的时间
 }
 
-// 社区的基础信息列表
+// 社区基础信息列表
 message PCommunityBaseList {
-	repeated PCommunityBase List = 2;
+	repeated PCommunityBase List = 2; 		// 我关注的社区
 }
 
 // 社区信息
@@ -31,26 +32,28 @@ message PCommunityInfo {
 	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
 	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	int64 ID = 4;					// 社区id
-	string Name = 5;					// 社区名字
+	string Name = 5;				// 社区名字
 	string HeadImg = 6;				// 社区头像
 	string BackgroundImg = 7;		// 社区背景图
 	string Introduce = 8;			// 社区介绍
-	int32 MemberCount = 9;			// 社区成员数量
-	int32 ForumPostCount = 10;		// 社区论坛帖子数量
-	int32 NoticePostCount = 11;		// 社区公告帖子数量
+	string OwnerUUID = 9;			// 社区创建者的uuid
+	string OwnerName = 10;			// 社区创建者的名字
+	int32 MemberCount = 11;			// 社区成员数量
+	int32 ForumPostCount = 12;		// 社区论坛帖子数量
+	int32 NoticePostCount = 13;		// 社区公告帖子数量
 }
 
 // ‘我的社区’返回的信息
 message PCommunityMe {
 	PCommunityInfo Info = 2;			// 我的社区信息
-	PCommunityBaseList List = 3; 		// 我关注的社区
+	PCommunityBaseList List = 3; 		// 我关注的社区，默认显示20条
 }
 
 // 社区资源信息
 message PCommunityResource {
 	string Type = 2;				// 资源类型，文字（txt），图片(img)，音频(audio)，视频(video)
 	string Name = 3;				// 资源名称
-	string URL = 4;				// 资源地址，上传地址/访问地址
+	string URL = 4;					// 资源地址，上传地址/访问地址
 }
 
 // 社区资源信息列表
@@ -61,7 +64,7 @@ message PCommunityResourceList {
 // 发布帖子的信息
 message PCommunityPostUpload {
 	string Title = 2;							// 帖子的标题
-	string Body = 3;								// 帖子的正文
+	string Body = 3;							// 帖子的正文
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
@@ -126,7 +129,7 @@ message PCommunityHome {
  *@method POST
  *@body PCommunityInfo， Name,HeadImg,BackgroundImg,Introduce都不能为空
  *@cookie token&uuid
- *@return 成功返回PCommunityMe，失败返回PResult
+ *@return 成功返回 PCommunityMe ，失败返回 PResult
  */
 
 /*
@@ -134,9 +137,18 @@ message PCommunityHome {
  *@path /v1/community/me
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PCommunityMe，失败返回PResult
+ *@return 成功返回 PCommunityMe ，失败返回PResult
  */
 
+/*
+ *@note 分页获取我关注的列表
+ *@path /v1/community/me/followlist
+ *@method GET
+ *@url param time 上一次获取到最后一个PCommunityBase的FollowTime,
+ *@url param count 获取个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityBaseList ，失败返回PResult
+ */
 
 /*
  *@note  启用/关闭社区
@@ -145,7 +157,7 @@ message PCommunityHome {
  *@url param id 社区id
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PCommunityMe，失败返回PResult
+ *@return 成功返回 PCommunityMe ，失败返回PResult
  */
 
 /*
@@ -164,7 +176,7 @@ message PCommunityHome {
  *@method GET
  *@url param id 社区id
  *@cookie token&uuid
- *@return 成功返回PCommunityHome，失败返回PResult
+ *@return 成功返回 PCommunityHome ，失败返回PResult
  */
 	
 /*
