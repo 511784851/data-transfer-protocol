@@ -40,6 +40,27 @@ message PUser {
 	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
 }
 
+// 扩展用户信息
+message PUserEx {
+	/*保留1~5用于扩展*/
+	
+	string uuid = 6; 				// 服务端标志用户的唯一id
+	string projectName = 7;			// 项目名称
+	string nickname = 8; 			// 昵称
+	string realname = 9;			// 真实姓名
+	int32 gender = 10;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
+	string birthday = 11; 			// 生日，格式19850101
+	string email = 12; 				// 邮箱地址
+	string cellphone = 13; 			// 手机号
+	int32 timeZone = 14;    		// 时区
+	string headImgURL = 15; 		// 头像地址
+	string locale = 16; 			// 语言
+	string resume = 17; 			// 简介
+	int64 lastUpdateTime = 18;  	// 最后更新时间TUser结构，用户/系统修改
+	int64 lastLoginTime = 19;  		// 用户最后登陆时间
+	bytes userData = 20;			// 用户数据
+}
+
 // 用户基础信息
 message PUserBase {
   int32 Level = 2;					// 用户等级
