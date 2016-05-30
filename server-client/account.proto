@@ -40,12 +40,16 @@ message PUser {
 	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
 }
 
+message PUserListEx {
+	repeated PUserEx list = 1; //PUser列表，最多100个
+}
+
 // 扩展用户信息
 message PUserEx {
 	/*保留1~5用于扩展*/
 	
 	string uuid = 6; 				// 服务端标志用户的唯一id
-	string projectName = 7;			// 项目名称
+	string project = 7;				// 项目名称
 	string nickname = 8; 			// 昵称
 	string realname = 9;			// 真实姓名
 	int32 gender = 10;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
