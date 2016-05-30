@@ -17,7 +17,7 @@ message PCommunityID {
 // 社区基础信息
 message PCommunityBase {
 	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
-	string Name = 3;		// 社区名字
+	string Name = 3;			// 社区名字
 	string HeadImg = 4;		// 社区头像地址
 	string FollowTime = 5;	// 关注社区的时间
 }
@@ -31,8 +31,8 @@ message PCommunityBaseList {
 message PCommunityInfo {
 	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
 	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
-	int64 ID = 4;					// 社区id
-	string Name = 5;				// 社区名字
+	string ID = 4;					// 社区id
+	string Name = 5;					// 社区名字
 	string HeadImg = 6;				// 社区头像
 	string BackgroundImg = 7;		// 社区背景图
 	string Introduce = 8;			// 社区介绍
@@ -46,14 +46,14 @@ message PCommunityInfo {
 // ‘我的社区’返回的信息
 message PCommunityMe {
 	PCommunityInfo Info = 2;			// 我的社区信息
-	PCommunityBaseList List = 3; 		// 我关注的社区，默认显示20条
+	PCommunityBaseList List = 3; 	// 我关注的社区，默认显示20条
 }
 
 // 社区资源信息
 message PCommunityResource {
 	string Type = 2;				// 资源类型，文字（txt），图片(img)，音频(audio)，视频(video)
 	string Name = 3;				// 资源名称
-	string URL = 4;					// 资源地址，上传地址/访问地址
+	string URL = 4;				// 资源地址，上传地址/访问地址
 	string Size = 5;				// 资源大小，可存文字长度，图片大小，音频，视频长度等信息
 }
 
@@ -65,19 +65,19 @@ message PCommunityResourceList {
 // 发布帖子的信息
 message PCommunityPostUpload {
 	string Title = 2;							// 帖子的标题
-	string Body = 3;							// 帖子的正文
+	string Body = 3;								// 帖子的正文
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
-	string Type = 3;							// 帖子类型，forum为论坛，notice为公告
+	string Type = 3;								// 帖子类型，forum为论坛，notice为公告
 	PUserBase User = 4;							// 用户基础信息
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	string Body = 7;							// 帖子的正文信息
-	int64 ViewCount = 8;						// 论坛帖子信息
+	string Body = 7;								// 帖子的正文信息
+	int64 ViewCount = 8;							// 论坛帖子信息
 	int64 CommentCount = 9;						// 论坛帖子评论数量
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
@@ -89,7 +89,7 @@ message PCommunityPostList {
 
 // ‘社区首页’返回的信息
 message PCommunityHome {
-	PCommunityInfo Info = 2;			// 我的社区信息
+	PCommunityInfo Info = 2;				// 我的社区信息
 	PCommunityPostList List = 3; 		// 我关注的社区最近发布的帖子信息
 }
 
