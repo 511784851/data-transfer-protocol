@@ -68,12 +68,12 @@ message PCommunityPostUpload {
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
-	int32 Type = 3;								// 帖子类型，0为论坛，1为公告
+	string Type = 3;							// 帖子类型，forum为论坛，notice为公告
 	PUserBase User = 4;							// 用户基础信息
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	string Body = 7;								// 帖子的正文信息
-	int64 ViewCount = 8;							// 论坛帖子信息
+	string Body = 7;							// 帖子的正文信息
+	int64 ViewCount = 8;						// 论坛帖子信息
 	int64 CommentCount = 9;						// 论坛帖子评论数量
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
@@ -124,8 +124,7 @@ message PCommunityHome {
  *@note  创建社区
  *@path /v1/community
  *@method POST
- *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce修改多个以,分割
- *@body PCommunityInfo
+ *@body PCommunityInfo， Name,HeadImg,BackgroundImg,Introduce都不能为空
  *@cookie token&uuid
  *@return 成功返回PCommunityMe，失败返回PResult
  */
