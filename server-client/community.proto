@@ -19,7 +19,7 @@ message PCommunityBase {
 	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
 	string Name = 3;		// 社区名字
 	string HeadImg = 4;		// 社区头像地址
-	int64 FollowTime = 5;	// 关注社区的时间
+	string FollowTime = 5;	// 关注社区的时间
 }
 
 // 社区基础信息列表
@@ -54,6 +54,7 @@ message PCommunityResource {
 	string Type = 2;				// 资源类型，文字（txt），图片(img)，音频(audio)，视频(video)
 	string Name = 3;				// 资源名称
 	string URL = 4;					// 资源地址，上传地址/访问地址
+	string Size = 5;				// 资源大小，可存文字长度，图片大小，音频，视频长度等信息
 }
 
 // 社区资源信息列表
