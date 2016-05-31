@@ -331,3 +331,21 @@ message PBlacklistCount {
  *@param newpwd 新密码
  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
  */
+
+/*
+ *@note   获取用户信息
+ *@path   /v1/account/users/:uuid
+ *@method GET
+ *@Accept json
+ *@param  uuid path  必填 目标用户UUID
+ *@param  tag  query 可选 仅获取部分字段时指定tag,获取多个字段时用+分隔(project,nickname,realname,gender,...),缺省返回所有字段
+ *@return 成功:PUserEx,失败:CXXResult
+ */
+
+/*
+ *@note   设置用户信息
+ *@path   /v1/account/user
+ *@method PATCH
+ *@param  common.PUserEx json 必填 要设置的用户信息字段
+ *@return 成功:PUserEx,失败:CXXResult
+ */
