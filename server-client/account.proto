@@ -332,6 +332,9 @@ message PBlacklistCount {
  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
  */
 
+/*=====================================*/
+//API V1 定义
+
 /*
  *@note   获取用户信息
  *@path   /v1/account/users/:uuid
@@ -340,6 +343,16 @@ message PBlacklistCount {
  *@param  uuid path  必填 目标用户UUID
  *@param  tag  query 可选 仅获取部分字段时指定tag,获取多个字段时用+分隔(project,nickname,realname,gender,...),缺省返回所有字段
  *@return 成功:PUserEx,失败:CXXResult
+ */
+
+/*
+ *@note   获取多个用户信息
+ *@path   /v1/account/users
+ *@method GET
+ *@Accept json
+ *@param  id  query 必填 目标用户UUID,要获取多个用户时用","分隔,如"/v1/account/users?id=1,2,3"
+ *@param  tag query 可选 仅获取部分字段时指定tag,获取多个字段时用+分隔(project,nickname,realname,gender,...),缺省返回所有字段
+ *@return 成功:PUserListEx,失败:CXXResult
  */
 
 /*
@@ -362,5 +375,14 @@ message PBlacklistCount {
  *@       "headImgURL": "headImgURL",
  *@       "locale":     "locale",
  *@       "resume":     "resume",
+ *@		  "userData":   "{\"x1\":\"x1_data\",\"x2\":\"x2_data\"}",
  *@ }
+ */
+
+/*
+ *@note   注册用户
+ *@path   /v1/register
+ *@method POST
+ *@param  common.PUserEx json 必填 要设置的用户信息字段
+ *@return 成功:No_Error,失败:CXXResult
  */
