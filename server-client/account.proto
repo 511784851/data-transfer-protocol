@@ -336,7 +336,7 @@ message PBlacklistCount {
  *@note   获取用户信息
  *@path   /v1/account/users/:uuid
  *@method GET
- *@Accept json
+ *@Accept JSON
  *@param  uuid path  必填 目标用户UUID
  *@param  tag  query 可选 仅获取部分字段时指定tag,获取多个字段时用+分隔(project,nickname,realname,gender,...),缺省返回所有字段
  *@return 成功:PUserEx,失败:CXXResult
@@ -346,6 +346,21 @@ message PBlacklistCount {
  *@note   设置用户信息
  *@path   /v1/account/user
  *@method PATCH
- *@param  common.PUserEx json 必填 要设置的用户信息字段
+ *@param  common.PUserEx JSON 必填 要设置的用户信息字段
  *@return 成功:PUserEx,失败:CXXResult
+ *@
+ *@ common.PUserEx JSON 格式说明:
+ *@ {
+ *@       "project":    "project",
+ *@       "nickname":   "nickname",
+ *@       "realname":   "realname",
+ *@       "gender":     "gender",
+ *@       "birthday":   "birthday",
+ *@       "email":      "email",
+ *@       "cellphone":  "cellphone",
+ *@       "timeZone":   "timeZone",
+ *@       "headImgURL": "headImgURL",
+ *@       "locale":     "locale",
+ *@       "resume":     "resume",
+ *@ }
  */
