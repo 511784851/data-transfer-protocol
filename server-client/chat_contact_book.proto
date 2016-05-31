@@ -1,0 +1,40 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "ChatContactBook";
+
+message PContactLinkInfo {
+	string uuid = 1;	// 通讯录联系人的uuid
+	string mobile = 2;	// 通讯录联系人的手机号码
+	string nickName = 3;	// 通讯录联系人的昵称
+	string hasLink = 4;	// 通讯录联系人是否已经加入好友
+}
+
+// 下载通讯录好友关系
+message PContactLinkInfoList {
+	repeated PContactLinkInfo ContactUsers = 1;
+}
+
+/*
+ *@note 上传手机通讯录。
+ *@path /chat/contact/upload
+ *@method POST
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
+ *@param contactBook  手机联系人通信录。通讯录为json格式，并且经过base64编码。 
+ *@param mode  上传通信的模式：all--全部更新模式；add--追加新增模式。
+ *@return 返回PResult，上传成功的标志
+ */
+ 
+
+/*
+ *@note 通讯录好友关系的下载。
+ *@path /chat/contact/listContact
+ *@method GET
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
+ *@return 成功PContactLinkInfoList, 失败PResult
+ */
+ 
+ 
+ 
