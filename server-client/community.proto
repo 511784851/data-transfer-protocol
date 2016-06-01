@@ -99,23 +99,24 @@ message PCommunityMember {
 	PUserBase User = 2;			// 社区成员信息
 	int32 IsFriend = 3;			// 0表示非好友，1表示是好友
 	int32 IsFollow = 4;			// 0表示未关注，1表示已关注
-	int64 Offset = 5;			// 用于分页显示索引下一个成员信息
+	string Offset = 5;			// 用于分页显示索引下一个成员信息
 }
 
 // 社区成员信息列表
 message PCommunityMemberList {
-	PCommunityMember List = 2;
+	repeated PCommunityMember List = 2;
 }
 
 // 社区好友信息
 message PCommunityFriend {
 	PUserBase User = 2;			// 好友信息
 	int32 Status = 3;			// 0表示未邀请，1表示已邀请
+	string Offset = 4;			// 用于分页显示索引下一个成员信息
 }
 
 // 社区好友信息列表
 message PCommunityFriendList {
-	PCommunityFriend List = 2;
+	repeated PCommunityFriend List = 2;
 }
 
 /*=====================================*/
@@ -169,7 +170,7 @@ message PCommunityFriendList {
  *@note 分页获取我关注的列表
  *@path /v1/community/me/followlist
  *@method GET
- *@url param time 上一次获取到最后一个PCommunityBase的FollowTime,
+ *@url param offset 上一次获取到最后一个PCommunityBase的FollowTime,
  *@url param count 获取个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityBaseList ，失败返回PResult
@@ -242,7 +243,7 @@ message PCommunityFriendList {
  *@method GET
  *@url param id 社区id
  *@url param type 帖子类型，可选参数有forum，notice，all
- *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
+ *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
  *@url param count 获取帖子个数
  *@cookie token&uuid
  *@return PCommunityPostList
@@ -259,14 +260,13 @@ message PCommunityFriendList {
  */
 
 
-
 // --- 社区设定
 /*
  *@note 设置-通知
  *@path /v1/community/setting/notice
  *@method GET
  *@url param id 社区id
- *@url param time 论坛帖子的时间偏移，-1代表从最新的通知加载，否则从time-1的下一篇加载
+ *@url param offset 
  *@url param count 获取通知个数
  *@cookie token&uuid
  *@return 
@@ -277,7 +277,7 @@ message PCommunityFriendList {
  *@path /v1/community/setting/post
  *@method GET
  *@url param id 社区id
- *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
+ *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
  *@url param count 获取帖子个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityPostList ，失败返回 PResult
@@ -288,10 +288,21 @@ message PCommunityFriendList {
  *@path /v1/community/setting/member
  *@method GET
  *@url param id 社区id
- *@url param offset -1代表从新加载成员列表，否则从offset-1的下一个加载
+ *@url param offset 
  *@url param count 获取成员个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityMemberList ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-好友列表
+ *@path /v1/community/setting/friend
+ *@method GET
+ *@url param id 社区id
+ *@url param offset 
+ *@url param count 获取好友个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityFriendList ，失败返回 PResult
  */
 
 /*
@@ -299,8 +310,9 @@ message PCommunityFriendList {
  *@path /v1/community/setting/invite
  *@method GET
  *@url param id 社区id
+ *@url param uuid 邀请的好友uuid
  *@cookie token&uuid
- *@return 成功返回 PCommunityFriendList ， 失败返回 PResult
+ *@return 返回 PResult
  */
 
 /*
