@@ -176,3 +176,152 @@ message PToken {
  *param newpwd 新密码
  *@return 返回PResult
  */
+
+
+// new api v1---
+/*
+ *@note 生成手机短信验证码
+ *@path /v1/login/authcode
+ *@method GET
+ *@url param phonecode 手机号
+ *@url param type 验证码的类型，用于判断手机号码是否被注册 1 新用户注册，2 密码重置
+ *@return 返回 PResult
+ */
+
+ /*
+  *@note 手机短信验证码验证
+  *@path /v1/login/authcode/checkout
+  *@method GET
+  *@url param phonecode 手机号
+  *@url param authcode 验证码
+  *@return PResult
+ */
+
+/*
+ *@note app启动时从服务端获取可用第三方登陆方式
+ *@path /v1/login/thirdparty/support
+ *@method GET
+ *@return 返回 PLoginType
+*/
+
+/*
+ *@note 手机号/用户名 注册
+ *@path /v1/login/register
+ *@method GET
+ *@url param phonecode 手机号
+ *@url param password 密码，不能为空
+ *@url param username 用户名称，不能为空
+ *@url param nickname 用户昵称
+ *@url param verifycode 发送给手机的验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但注册的时候要带上）
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@return 注册成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 手机号/用户名 登录
+ *@path /v1/login/login
+ *@method GET
+ *@url param username 手机号/用户名
+ *@url param password 密码(原始密码+3721再MD5加密)
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 微信登录，如果之前没登录过，自动创建账号
+ *@path /v1/login/thirdparty/wechat
+ *@method GET
+ *@url param code 授权临时票据(authorization code)
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 微博登录，如果之前没登录过，自动创建账号
+ *@path /v1/login/thirdparty/weibo
+ *@method GET
+ *@url param wbuid 用户微博uid
+ *@url param wbname 用户微博昵称
+ *@url param headimgurl 用户微博头像地址
+ *@url param gender 性别
+ *@url param weihao 用户微号
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+ /*
+ *@note facebook登录，如果之前没登录过，自动创建账号
+ *@path /v1/login/thirdparty/facebook
+ *@method GET
+ *@url param token Facebook User access token
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+ /*
+ *@note google登录，如果之前没登录过，自动创建账号
+ *@path /v1/login/thirdparty/google
+ *@method GET
+ *@url param code 授权临时票据(authorization code)
+ *@url param token 登陆验证数据(id token)
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 登出
+ *@path /v1/login/logout
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 令牌校验，打开App时若令牌信息存在，直接校验
+ *@path /v1/login/token/verification
+ *@method GET
+ *@cookie token&uuid
+ *@return 令牌有效或成功续期返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 获取推荐的用户名
+ *@path /v1/login/username
+ *@method GET
+ *@url param username 用户填写的用户名(如果这个用户还没有被注册，那么原封不动返回这个用户名)
+ *@return 成功返回 PRUsername ，失败返回 PRsult
+*/
+
+/*
+ *@note 重置密码
+ *@path /v1/login/resetpwd
+ *@method GET
+ *@url param phonecode 手机号码
+ *@url param authcode 验证码（再次验证手机验证码，界面上可以不显示验证码输入框，但修改密码的时候要带上）
+ *@url param password 新密码
+ *@return 返回 PResult
+ */

@@ -2,7 +2,6 @@ syntax = "proto3";
 package service;
 
 message PGetToken {
-	int32 type = 1;		// 固定为1
 	string token = 2; 	// 成功则返回实际token，失败返回空串
 }
 
@@ -68,4 +67,42 @@ message PGoogleAccount{
  *@param from 发起调用的服务名
  *@param uuid 用户的uuid
  *@return 返回PbResult
+ */
+
+// new
+/*
+ *@note 用户登出接口
+ *@path /v1/login/inside/logout
+ *@method POST
+ *@url param from 发起调用的服务名
+ *@body PManyUUID
+ *@return 成功返回 PManyErrorCode ，失败返回 PResult
+ */
+
+/*
+ *@note 获取用户token
+ *@path /v1/login/inside/token
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param uuid 用户的uuid
+ *@return 成功返回 PGetToken ，失败返回 PResult
+ */
+
+/*
+ *@note 获取用户账号绑定信息
+ *@URL /v1/login/inside/binding
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param uuid 用户的uuid
+ *@return 返回 PBindAccount
+ */
+
+/*
+ *@note 账号绑定
+ *@URL /v1/login/inside/binding
+ *@method POST
+ *@url param from 发起调用的服务名
+ *@url param uuid 用户的uuid
+ *@body PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
+ *@return 返回 PResult
  */

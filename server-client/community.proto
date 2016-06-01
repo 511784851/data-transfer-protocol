@@ -93,6 +93,30 @@ message PCommunityHome {
 	PCommunityPostList List = 3; 		// 我关注的社区最近发布的帖子信息
 }
 
+// ---社区设定
+// 社区成员信息
+message PCommunityMember {
+	PUserBase User = 2;			// 社区成员信息
+	int32 IsFriend = 3;			// 0表示非好友，1表示是好友
+	int32 IsFollow = 4;			// 0表示未关注，1表示已关注
+	int64 Offset = 5;			// 用于分页显示索引下一个成员信息
+}
+
+// 社区成员信息列表
+message PCommunityMemberList {
+	PCommunityMember List = 2;
+}
+
+// 社区好友信息
+message PCommunityFriend {
+	PUserBase User = 2;			// 好友信息
+	int32 Status = 3;			// 0表示未邀请，1表示已邀请
+}
+
+// 社区好友信息列表
+message PCommunityFriendList {
+	PCommunityFriend List = 2;
+}
 
 /*=====================================*/
 // API定义
@@ -224,13 +248,25 @@ message PCommunityHome {
  *@return PCommunityPostList
  */
 
-// 社区设定
+/*
+ *@note 评论社区帖子
+ *@path /v1/community/post/comment
+ *@method POST
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@cookie token&uuid
+ *@return PCommunityPostList
+ */
+
+
+
+// --- 社区设定
 /*
  *@note 设置-通知
  *@path /v1/community/setting/notice
  *@method GET
  *@url param id 社区id
- *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
+ *@url param time 论坛帖子的时间偏移，-1代表从最新的通知加载，否则从time-1的下一篇加载
  *@url param count 获取通知个数
  *@cookie token&uuid
  *@return 
@@ -244,7 +280,7 @@ message PCommunityHome {
  *@url param time 论坛帖子的时间偏移，-1代表从最新的帖子加载，否则从time-1的下一篇加载
  *@url param count 获取帖子个数
  *@cookie token&uuid
- *@return PCommunityPostList
+ *@return 成功返回 PCommunityPostList ，失败返回 PResult
  */
 
 /*
@@ -252,10 +288,10 @@ message PCommunityHome {
  *@path /v1/community/setting/member
  *@method GET
  *@url param id 社区id
- *@url param time 
- *@url param count 获取帖子个数
+ *@url param offset -1代表从新加载成员列表，否则从offset-1的下一个加载
+ *@url param count 获取成员个数
  *@cookie token&uuid
- *@return 
+ *@return 成功返回 PCommunityMemberList ，失败返回 PResult
  */
 
 /*
@@ -264,12 +300,58 @@ message PCommunityHome {
  *@method GET
  *@url param id 社区id
  *@cookie token&uuid
+ *@return 成功返回 PCommunityFriendList ， 失败返回 PResult
+ */
+
+/*
+ *@note 设置-添加管理员
+ *@path /v1/community/setting/manager
+ *@method GET
+ *@url param id 社区id
+ *@url param uuid 要添加为管理员的用户uuid
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 设置-论坛信件-获取
+ *@path /v1/community/setting/contact
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
  *@return 
  */
 
 /*
- *@note 设置-联系论坛
+ *@note 设置-联系论坛-发送
  *@path /v1/community/setting/contact
+ *@method POST
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 
+ */
+
+/*
+ *@note 设置-支持-标旗用户
+ *@path /v1/community/setting/flag
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 
+ */
+
+/*
+ *@note 设置-支持-论坛信件
+ *@path /v1/community/setting/mail
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 
+ */
+
+/*
+ *@note 设置-支持-禁用用户
+ *@path /v1/community/setting/user
  *@method GET
  *@url param id 社区id
  *@cookie token&uuid
