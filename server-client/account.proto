@@ -341,8 +341,7 @@ message PBlacklistCount {
  *@method GET
  *@Accept JSON
  *@param  uuid path  必填 目标用户UUID
- *@param  tag  query 可选 仅获取部分字段时指定tag,获取多个字段时用+分隔(project,nickname,realname,gender,...),缺省返回所有字段
- *@return 成功:PUserEx,失败:CXXResult
+ *@return 成功:JUserEx,失败:CXXResult
  */
 
 /*
@@ -351,16 +350,15 @@ message PBlacklistCount {
  *@method GET
  *@Accept json
  *@param  id  query 必填 目标用户UUID,要获取多个用户时用","分隔,如"/v1/account/users?id=1,2,3"
- *@param  tag query 可选 仅获取部分字段时指定tag,获取多个字段时用+分隔(project,nickname,realname,gender,...),缺省返回所有字段
- *@return 成功:PUserListEx,失败:CXXResult
+ *@return 成功:JUserListEx,失败:CXXResult
  */
 
 /*
  *@note   设置用户信息
  *@path   /v1/account/user
  *@method PATCH
- *@param  common.PUserEx JSON 必填 要设置的用户信息字段
- *@return 成功:PUserEx,失败:CXXResult
+ *@param  common.JUserEx JSON 必填 要设置的用户信息字段
+ *@return 成功:JUserEx,失败:CXXResult
  *@
  *@ common.PUserEx JSON 格式说明:
  *@ {
@@ -383,6 +381,6 @@ message PBlacklistCount {
  *@note   注册用户
  *@path   /v1/register
  *@method POST
- *@param  common.PUserEx json 必填 要设置的用户信息字段
+ *@param  common.JUserEx json 必填 要设置的用户信息字段
  *@return 成功:No_Error,失败:CXXResult
  */
