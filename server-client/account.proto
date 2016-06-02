@@ -336,51 +336,67 @@ message PBlacklistCount {
 //API V1 定义
 
 /*
- *@note   获取用户信息
- *@path   /v1/account/users/:uuid
- *@method GET
- *@Accept JSON
- *@param  uuid path  必填 目标用户UUID
- *@return 成功:JUserEx,失败:CXXResult
+ *@note     获取用户信息
+ *@path     /v1/account/users/:uuid
+ *@method   GET
+ *@cookie   token&uuid
+ *@uriParam uuid 用户ID
+ *@return   成功:PUserEx,失败:CXXResult
  */
 
 /*
- *@note   获取多个用户信息
- *@path   /v1/account/users
- *@method GET
- *@Accept json
- *@param  id  query 必填 目标用户UUID,要获取多个用户时用","分隔,如"/v1/account/users?id=1,2,3"
- *@return 成功:JUserListEx,失败:CXXResult
+ *@note     获取多个用户信息
+ *@path     /v1/account/users
+ *@method   GET
+ *@cookie   token&uuid
+ *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users?uuids=1,2,3"
+ *@return   成功:PUserListEx,失败:CXXResult
  */
 
 /*
- *@note   设置用户信息
- *@path   /v1/account/user
- *@method PATCH
- *@param  common.JUserEx JSON 必填 要设置的用户信息字段
- *@return 成功:JUserEx,失败:CXXResult
+ *@note      通过Json设置用户信息
+ *@path      /v1/account/user.json
+ *@method    POST
+ *@cookie    token&uuid
+ *@postParam json 用户信息
+ *@return    CXXResult
  *@
  *@ common.PUserEx JSON 格式说明:
  *@ {
- *@       "project":    "project",
- *@       "nickname":   "nickname",
- *@       "realname":   "realname",
- *@       "gender":     "gender",
- *@       "birthday":   "birthday",
- *@       "email":      "email",
- *@       "cellphone":  "cellphone",
- *@       "timeZone":   "timeZone",
- *@       "headImgURL": "headImgURL",
- *@       "locale":     "locale",
- *@       "resume":     "resume",
- *@		  "userData":   "{\"x1\":\"x1_data\",\"x2\":\"x2_data\"}",
- *@ }
+       	"project":    "project",
+       	"nickname":   "nickname",
+       	"realname":   "realname",
+       	"gender":     "gender",
+       	"birthday":   "birthday",
+       	"email":      "email",
+       	"cellphone":  "cellphone",
+       	"timeZone":   "timeZone",
+       	"headImgURL": "headImgURL",
+       	"locale":     "locale",
+       	"resume":     "resume",
+		"userData":
+		{
+			"x1":"x1_data",
+			"x2":"x2_data"
+		}
+	}
  */
 
 /*
- *@note   注册用户
- *@path   /v1/register
- *@method POST
- *@param  common.JUserEx json 必填 要设置的用户信息字段
- *@return 成功:No_Error,失败:CXXResult
+ *@note      通过Proto设置用户信息
+ *@path      /v1/account/user.proto
+ *@method    POST
+ *@cookie    token&uuid
+ *@uriParam  fields  字段ID,只设置某个字段，通过","分隔,如"/v1/account/fields?uuids=1,2,3"
+ *@postParam PUserEx 用户信息
+ *@return    CXXResult
+ */
+
+/*
+ *@note      注册用户
+ *@path      /v1/register
+ *@method    POST
+ *@cookie    token&uuid
+ *@postParam PUserEx 用户信息
+ *@return    CXXResult
  */
