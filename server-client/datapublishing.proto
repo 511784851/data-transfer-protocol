@@ -18,6 +18,8 @@ message PGuy {
 	int32 fansCount = 4;
 	//0:无关系，1：是粉丝，2：已关注，3：相互关注
 	int32 followShip = 5;
+	//0:无关系，1：是好友
+	int32 friendShip = 6;
 }
 
 message PGuyList {
