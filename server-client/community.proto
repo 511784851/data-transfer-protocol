@@ -93,6 +93,30 @@ message PCommunityHome {
 	PCommunityPostList List = 3; 		// 我关注的社区最近发布的帖子信息
 }
 
+// ---评论信息
+// 发表的评论
+message PCommunityPostComment {
+	string PostID = 2;	// 评论的帖子id 
+	string QuoteID = 3;	// 引用的评论id
+	string Content = 4;	// 评论的正文
+}
+
+// 评论详情
+message PCommunityCommentInfo {
+	int32 Floor = 2;			// 评论的层数
+	int32 UpVote = 3;		// 评论的赞的数量
+	int32 DownVote = 4;		// 评论的踩的数量
+	int64 Time = 5;			// 发表评论的时间
+	string Content = 6;		// 评论的正文
+	PUserBase User = 7;		// 发表评论的用户
+	*PCommunityCommentInfo QuoteInfo = 8; // 引用的评论信息
+}
+
+// 评论详情列表
+message PCommunityCommentInfoList {
+	repeated PCommunityCommentInfo List = 2;
+}
+
 // ---社区设定
 // 社区成员信息
 message PCommunityMember {
@@ -213,7 +237,7 @@ message PCommunityFriendList {
  *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce修改多个以,分割
  *@body PCommunityInfo  
  *@cookie token&uuid
- *@return 返回PResult
+ *@return 返回 PResult
  */
 
 // 帖子相关操作
@@ -224,7 +248,7 @@ message PCommunityFriendList {
  *@method POST
  *@body PCommunityPostUpload
  *@cookie token&uuid
- *@return PResult
+ *@return 返回 PResult
  */
 
 /*
@@ -234,29 +258,55 @@ message PCommunityFriendList {
  *@method POST
  *@body PCommunityPostUpload
  *@cookie token&uuid
- *@return PResult
+ *@return返回 PResult
  */
 
 /*
  *@note 社区获取帖子
- *@path /v1/community/post
+ *@path /v1/community/post/list
  *@method GET
  *@url param id 社区id
  *@url param type 帖子类型，可选参数有forum，notice，all
  *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
  *@url param count 获取帖子个数
  *@cookie token&uuid
- *@return PCommunityPostList
+ *@return 成功返回 PCommunityPostList ， 失败返回 PResult
+ */
+
+/*
+ *@note 获取评论列表
+ *@path /v1/community/comment
+ *@method GET
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@url param order 时间正序填0，点赞排序填1
+ *@url param offset 评论偏移值
+ *@url param count 获取评论的个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
  */
 
 /*
  *@note 评论社区帖子
- *@path /v1/community/post/comment
+ *@path /v1/community/comment
  *@method POST
  *@url param id 社区id
  *@url param postid 帖子id
+ *@body PCommunityPostComment
  *@cookie token&uuid
- *@return PCommunityPostList
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 对评论进行赞/踩
+ *@path /v1/community/comment/vote
+ *@method GET
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@url param commentid 评论id
+ *@url param type 赞为0，踩为1
+ *@cookie token&uuid
+ *@return 返回 PResult
  */
 
 
