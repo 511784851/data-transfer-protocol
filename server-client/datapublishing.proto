@@ -14,7 +14,10 @@ message PGuy {
 	string uuid = 1;
 	string nickname = 2;
 	string headImgURL = 3;
-	int32 fans_count = 4;  //粉丝数
+	//粉丝数
+	int32 fansCount = 4;
+	//0:无关系，1：是粉丝，2：已关注，3：相互关注
+	int32 followShip = 5;
 }
 
 message PGuyList {
