@@ -3,17 +3,88 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "DataPublishingProtos";
 
-import "account.proto";
-import "news.proto";
+//import "account.proto";
+//import "news.proto";
 
 message PWords {
 	repeated string word = 1;
 }
 
-message PSearchResults {
-	PUserList user = 1;
-	PNews news = 2;
+message PGuy {
+	string uuid = 1;
+	string nickname = 2;
+	string headImgURL = 3;
+	int32 fans_count = 4;  //粉丝数
 }
+
+message PGuyList {
+	repeated PGuy guy = 1;
+}
+
+message PSearchResults {
+	PGuyList guy = 1;
+	//PNews news = 2;
+}
+
+message PNewsData {
+	int32 views = 1;
+	int32 votes = 2;
+	int32 comments = 3;
+	int32 shares = 4;
+}
+
+message PRegionData {
+	int32 region = 1;
+	int32 count = 2;
+}
+
+message PAgeData {
+	int32 section = 1;
+	int32 count = 2;
+}
+
+message PDayData {
+	// 数据日期
+	string date = 1;
+	
+	// 粉丝男、女、活跃数
+	int32 maleFans = 2;
+	int32 femaleFans = 3;
+	int32 activeFans = 4;
+	
+	// 好友男、女、活跃数
+	int32 maleFriends = 5;
+	int32 femaleFriends = 6;
+	int32 activeFriends = 7;
+	
+	// 社区粉丝男、女、活跃数
+	int32 maleCommunityFans = 8;
+	int32 femaleCommunityFans = 9;
+	int32 activeCommunityFans = 10;
+	
+	// 粉丝地区分布
+	repeated PRegionData regionFans = 11;
+	// 粉丝年龄分布
+	repeated PAgeData ageFans = 12;
+	// 好友地区分布
+	repeated PRegionData regionFriends = 13;
+	// 好友年龄分布
+	repeated PAgeData ageFriends = 14;
+	// 社区粉丝地区分布
+	repeated PRegionData regionCommunityFans = 15;
+	// 社区粉丝年龄分布
+	repeated PAgeData ageCommunityFans = 16;
+	
+	// 帖子数据
+	map<string, PNewsData> weibo = 17;
+	// 社区帖子数据
+	map<string, PNewsData> communityPost = 18;
+}
+
+message PYearData {
+	repeated PDayData data = 1;
+}
+
 
 /*
  *@note 热搜词
@@ -54,7 +125,7 @@ message PSearchResults {
  *@param keyword 关键词
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PUserList，失败返回PResult
+ *@return 成功返回PGuyList，失败返回PResult
  */
  
 /*
@@ -87,7 +158,7 @@ message PSearchResults {
  *@param pageindex 页号
  *@param pagesize 页大小
  *@param level 用户等级 取值all reg vip vipp vo 默认all
- *@return 成功返回PUserList，失败返回PResult
+ *@return 成功返回PGuyList，失败返回PResult
  */
  
  /*
@@ -109,5 +180,5 @@ message PSearchResults {
  *@param level 用户等级 取值all reg vip vipp vo 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PUserList，失败返回PResult
+ *@return 成功返回PGuyList，失败返回PResult
  */
