@@ -213,36 +213,25 @@ message PBlacklistCount {
  *@return 返回PResult
  */
  
- /**
-  *@note 检测手机号码是否已经注册
-  *@uri /account/user/chphone
-  *@cookie token&uuid
-  *@method GET
-  *@param phones 加了区号的手机号码数组
-  *@return PPhoneMap 手机号：uuid
-  */
+/**
+ *@note 检测手机号码是否已经注册
+ *@uri /account/user/chphone
+ *@cookie token&uuid
+ *@method GET
+ *@param phones 加了区号的手机号码数组
+ *@return PPhoneMap 手机号：uuid
+ */
  
- /**
-  *@note 分页地获取用户的列表
-  *@uri /account/user/users
-  *@cookie token&uuid
-  *@method GET
-  *@param from 服务名称（内部调用要传这个参数）
-  *@param pageindex 要查看第几页
-  *@param pagesize 一页要显示几条数据
-  *@return 成功返回PUserList，失败返回PResult
-  */
-
- /**
-  *@note 用户使能开关
-  *@uri /account/user/disable
-  *@cookie token&uuid
-  *@method GET
-  *@param from 调用方
-  *@param uuid 用户ID
-  *@param action 开关
-  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
-  */
+/**
+ *@note 分页地获取用户的列表
+ *@uri /account/user/users
+ *@cookie token&uuid
+ *@method GET
+ *@param from 服务名称（内部调用要传这个参数）
+ *@param pageindex 要查看第几页
+ *@param pagesize 一页要显示几条数据
+ *@return 成功返回PUserList，失败返回PResult
+ */
 
 /*
  *@note 获取用户的账号绑定信息
@@ -271,7 +260,7 @@ message PBlacklistCount {
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
  
- /*
+/*
  *@note 绑定微博登录方式
  *@uri /account/binding/weibo
  *@method GET
@@ -284,7 +273,7 @@ message PBlacklistCount {
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
  
- /*
+/*
  *@note 绑定google登录方式
  *@uri /account/binding/google
  *@method GET
@@ -294,7 +283,7 @@ message PBlacklistCount {
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
  
- /*
+/*
  *@note 绑定facebook登录方式
  *@uri /account/binding/facebook
  *@method GET
@@ -303,7 +292,7 @@ message PBlacklistCount {
  *@return 成功返回PbResult(No_Error)，失败返回PbResult
  */
 
- /*
+/*
  *@note 获取带签名的文件上传URL
  *@uri /account/user/imageurl
  *@method POST
@@ -314,7 +303,7 @@ message PBlacklistCount {
  *@return 成功返回PUpload，失败返回PResult
  */
 
- /*
+/*
  *@note 修改用户头像
  *@uri /account/user/headimage
  *@method post

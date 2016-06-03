@@ -50,7 +50,7 @@ package service;
  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
  */
 
- /*
+/*
  *@note 注册用户
  *@uri /account/user/registration
  *@method POST
@@ -59,7 +59,7 @@ package service;
  *@return 成功返回PLevelInfo，失败返回PbResult
  */
  
- /*
+/*
  *@note 获取等级权限信息
  *@uri /account/user/level
  *@method GET
@@ -68,7 +68,7 @@ package service;
  *@return 成功返回PLevelInfo，失败返回PbResult
  */
  
- /*
+/*
  *@note 批量获取等级权限信息
  *@uri /account/users/level
  *@method POST
