@@ -9,6 +9,13 @@ message PChatIdMessage {
 	string chatId = 2;	//对应聊天系统中的chatid
 }
 
+// 通用操作结果返回(通过uuid来获取chatid)
+message PChatIdListMessage {
+	repeated PChatIdMessage chatIdMap = 1;
+}
+
+
+
 /*
  *@note 通过uuid来获取chatid
  *@path /chat/chatid/getUserChatID
@@ -16,3 +23,12 @@ message PChatIdMessage {
  *@param uuid  对照表中的uuid
  *@return 返回PChatIdMessage
  */
+
+ /*
+ *@note 通过uuid来获取chatid
+ *@path /chat/chatid/getUserListChatID
+ *@method GET
+ *@param uuids  对照表中要查询的所有uuid串，多个uuid之间用逗号隔开。
+ *@return 返回PChatIdMessage
+ */
+ 
