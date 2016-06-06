@@ -117,6 +117,28 @@ message PCommunityCommentInfoList {
 	repeated PCommunityCommentInfo List = 2;
 }
 
+// ---社区信件
+// 发布的论坛信件
+message PCommunityMailUpload {
+	string Content = 2;							// 信件正文
+	PCommunityResourceList ResourcesList = 10;	// 信件正文引用到的资源信息
+}
+
+// 论坛信件信息
+message PCommunityMailInfo {
+	string ID = 2;								// 信件id 
+	string ReplyID = 3;							// 信件回复id
+	int64 Time = 4;								// 发布信件的时间
+	string Content = 5;							// 信件正文
+	PUserBase User = 6;							// 发信用户基础信息
+	PCommunityResourceList ResourcesList = 7;	// 帖子正文引用到的资源信息
+}
+
+// 论坛信件列表
+message PCommunityMailList {
+	repeated PCommunityMailInfo PostInfo = 2;
+}
+
 // ---社区设定
 // 社区成员信息
 message PCommunityMember {
@@ -369,10 +391,11 @@ message PCommunityFriendList {
  */
 
 /*
- *@note 设置-添加管理员
- *@path /v1/community/setting/manager
+ *@note 设置-添加/删除管理员
+ *@path /v1/community/setting/admin/manager
  *@method GET
  *@url param id 社区id
+ *@url param operate add为添加，del为删除
  *@url param uuid 要添加为管理员的用户uuid
  *@cookie token&uuid
  *@return 返回 PResult
@@ -380,48 +403,64 @@ message PCommunityFriendList {
 
 /*
  *@note 设置-论坛信件-获取
- *@path /v1/community/setting/contact
+ *@path /v1/community/setting/mail
  *@method GET
  *@url param id 社区id
+ *@url param type 0表示未读信件，1表示已读信件
+ *@url param offset -1表示从头获取，否则填充最后一个信件id
+ *@url param count 表示获取个数
  *@cookie token&uuid
- *@return 
+ *@return 成功返回 PCommunityMailList ，失败返回 PResult
  */
 
 /*
  *@note 设置-联系论坛-发送
- *@path /v1/community/setting/contact
+ *@path /v1/community/setting/mail
  *@method POST
  *@url param id 社区id
+ *body PCommunityMailUpload
  *@cookie token&uuid
- *@return 
+ *@return 返回 PResult
  */
 
 /*
- *@note 设置-支持-标旗用户
- *@path /v1/community/setting/flag
+ *@note 设置-论坛信件-获取
+ *@path /v1/community/setting/admin/mail
  *@method GET
  *@url param id 社区id
+ *@url param type 0表示未回复信件，1表示已回复信件
+ *@url param offset -1表示从头获取，否则填充最后一个信件id
+ *@url param count 表示获取个数
  *@cookie token&uuid
- *@return 
+ *@return 成功返回 PCommunityMailList ，失败返回 PResult
  */
 
 /*
- *@note 设置-支持-论坛信件
+ *@note 设置-论坛信件-回复
+ *@path /v1/community/setting/admin/mail
+ *@method POST
+ *@url param id 社区id
+ *@url param reply 回复信件的id
+ *body PCommunityMailUpload
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityMailList ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-联系论坛-删除
  *@path /v1/community/setting/mail
- *@method GET
+ *@method DELETE
  *@url param id 社区id
  *@cookie token&uuid
- *@return 
+ *@return 返回 PResult
  */
 
 /*
  *@note 设置-支持-禁用用户
- *@path /v1/community/setting/user
+ *@path /v1/community/setting/admin/user
  *@method GET
  *@url param id 社区id
  *@cookie token&uuid
  *@return 
  */
-
-
 
