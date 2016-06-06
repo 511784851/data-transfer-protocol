@@ -65,7 +65,7 @@ message PCommunityResourceList {
 // 发布帖子的信息
 message PCommunityPostUpload {
 	string Title = 2;							// 帖子的标题
-	string Body = 3;								// 帖子的正文
+	string ForumType = 3;						// 论坛帖子的类型
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
@@ -73,12 +73,12 @@ message PCommunityPostUpload {
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
 	string Type = 3;								// 帖子类型，forum为论坛，notice为公告
-	PUserBase User = 4;							// 用户基础信息
+	string ForumType = 4;						// 论坛帖子的类型
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	string Body = 7;								// 帖子的正文信息
-	int64 ViewCount = 8;							// 论坛帖子信息
-	int64 CommentCount = 9;						// 论坛帖子评论数量
+	int64 ViewCount = 7;							// 论坛帖子信息
+	int64 CommentCount = 8;						// 论坛帖子评论数量
+	PUserBase User = 9;							// 用户基础信息
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
@@ -123,7 +123,8 @@ message PCommunityMember {
 	PUserBase User = 2;			// 社区成员信息
 	int32 IsFriend = 3;			// 0表示非好友，1表示是好友
 	int32 IsFollow = 4;			// 0表示未关注，1表示已关注
-	string Offset = 5;			// 用于分页显示索引下一个成员信息
+	int32 IsManager = 5;			// 0表示非管理员，1表示是管理员
+	string Offset = 6;			// 用于分页显示索引下一个成员信息
 }
 
 // 社区成员信息列表
@@ -279,8 +280,10 @@ message PCommunityFriendList {
  *@method GET
  *@url param id 社区id
  *@url param postid 帖子id
- *@url param order 时间正序填0，点赞排序填1
- *@url param offset 评论偏移值
+ *@url param order 时间正序填0，点赞排序填1，vip排序填2
+ *@url param direct 1为下一页，-1为上一页
+ *@url param offset 偏移值，direct=1时，填上一页最后一条评论的id，填-1表示获取第一页评论信息；
+						  direct=-1时，填上一页第一条评论的id，填-1表示获取最后一页评论信息；
  *@url param count 获取评论的个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
