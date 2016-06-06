@@ -74,6 +74,11 @@ message PUserBase {
   string HeadImgURL = 9;     		// 头像地址
 }
 
+// 用户基础信息列表
+message PUserBaseList {
+	repeated PUserBase list = 1; //PUserBase列表，最多100个
+}
+
 message PPhoneMap {
 	map<string,string> list = 1; //手机号：uuid
 }
