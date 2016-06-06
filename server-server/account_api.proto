@@ -167,3 +167,15 @@ package service;
  *@param from 调用方
  *@return 成功返回(*PBlacklistCount, No_Error), 失败返回(nil, int32)
  */
+
+/*=====================================*/
+//API V1 定义
+
+/*
+ *@note     获取多个用户基础信息
+ *@path     /v1/account/users/baseinfo
+ *@method   GET
+ *@cookie   token&uuid
+ *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users/baseinfo?uuids=1,2,3"
+ *@return   成功:PUserBaseList,失败:CXXResult
+ */
