@@ -156,6 +156,10 @@ message Relation {
   int32 fansB = 7;              //用户B的粉丝数
 }
 
+message Relations {
+	repeated Relation relations = 1; //若干个用户关注关系
+}
+
 message PNewsExist {
 	repeated bool exist = 1;	
 }
