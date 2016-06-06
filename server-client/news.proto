@@ -356,15 +356,6 @@ message PNewsExist {
  *@return PResult
  */
 
-/**
- *@note   @用户
- *@path   /news/at
- *@cookie token&uuid
- *@method GET
- *@param  count 单次返回的记录条数，默认为20，最大不超过50。
- *@param  cursor 下次查询的起点，默认为0
- *@return PUserList
- */
 
 /**
  *@note   分享news展示
@@ -375,32 +366,4 @@ message PNewsExist {
  *@example /news/shareshow?id=08771bd9-46e4-440b-bdbc-5ca3f857cbdc:3
  */
 
-//无*************这里的接口不推荐正式使用****************
-/**
- *@note   获取推荐用户
- *@path   /news/recommenduser
- *@cookie token&uuid
- *@method GET
- *@return RecommendUserList
- */
-
-/**
- *@note   移除推荐用户,下次不再推荐
- *@path   /news/recommenduser/unlike
- *@cookie token&uuid
- *@method GET
- *@param  puuid 移除推荐用户的uuid
- *@return PResult
- */
-
-/**
- *@note   微博类型统计信息
- *@path   /news/statistic
- *@method GET
- *@cookie token&uuid
- *@param  ouuid
- *@return NewsStatistic
- */
- 
-//无********************************************************
 
