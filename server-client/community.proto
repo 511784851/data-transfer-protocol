@@ -76,7 +76,7 @@ message PCommunityPostInfo {
 	string SubType = 4;							// 帖子的子类型
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	int64 ViewCount = 7;							// 论坛帖子信息
+	int64 ViewCount = 7;							// 论坛帖子查看数量
 	int64 CommentCount = 8;						// 论坛帖子评论数量
 	PUserBase User = 9;							// 用户基础信息
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
@@ -131,7 +131,8 @@ message PCommunityMailInfo {
 	int64 Time = 4;								// 发布信件的时间
 	string Content = 5;							// 信件正文
 	PUserBase User = 6;							// 发信用户基础信息
-	PCommunityResourceList ResourcesList = 7;	// 帖子正文引用到的资源信息
+	PCommunityResourceList ResourcesList = 7;	// 信件引用到的资源信息
+	PCommunityMailInfo QuoteInfo = 8;			// 信件引用的信件
 }
 
 // 论坛信件列表
@@ -406,7 +407,7 @@ message PCommunityFriendList {
  *@path /v1/community/setting/mail
  *@method GET
  *@url param id 社区id
- *@url param type 0表示未读信件，1表示已读信件
+ *@url param type 0表示所有信件，1表示已回复信件
  *@url param offset -1表示从头获取，否则填充最后一个信件id
  *@url param count 表示获取个数
  *@cookie token&uuid
@@ -428,7 +429,7 @@ message PCommunityFriendList {
  *@path /v1/community/setting/admin/mail
  *@method GET
  *@url param id 社区id
- *@url param type 0表示未回复信件，1表示已回复信件
+ *@url param type 0表示所有信件，1表示已回复信件
  *@url param offset -1表示从头获取，否则填充最后一个信件id
  *@url param count 表示获取个数
  *@cookie token&uuid
@@ -456,11 +457,25 @@ message PCommunityFriendList {
  */
 
 /*
- *@note 设置-支持-禁用用户
- *@path /v1/community/setting/admin/user
+ *@note 设置-支持-禁用/解禁用户
+ *@path /v1/community/setting/admin/disableduser
  *@method GET
  *@url param id 社区id
+ *@url param operate 0为解禁，1为禁用
+ *@url param uuid  设置用户id
+ *@url param time 禁用时间
  *@cookie token&uuid
- *@return 
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 设置-支持-踢出/解除踢出社区
+ *@path /v1/community/setting/admin/blacklist
+ *@method GET
+ *@url param id 社区id
+ *@url param operate 0为解除踢出社区，1为踢出社区
+ *@url param uuid  设置用户id
+ *@cookie token&uuid
+ *@return 返回 PResult
  */
 
