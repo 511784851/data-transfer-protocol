@@ -107,7 +107,7 @@ message PCommunityCommentInfo {
 	int32 UpVote = 3;		// 评论的赞的数量
 	int32 DownVote = 4;		// 评论的踩的数量
 	int32 Status = 5;		// -1表示已踩，1表示已赞，0表示啥都没有
-	int64 ID = 6;			// 评论id
+	string ID = 6;			// 评论id
 	int64 Time = 7;			// 发表评论的时间
 	string Content = 8;		// 评论的正文
 	PUserBase User = 9;		// 发表评论的用户
