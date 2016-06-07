@@ -52,9 +52,9 @@ message PCommunityMe {
 // 社区资源信息
 message PCommunityResource {
 	string Type = 2;				// 资源类型，文字（txt），图片(img)，音频(audio)，视频(video)
-	string Name = 3;				// 资源名称
-	string URL = 4;				// 资源地址，上传地址/访问地址
-	string Size = 5;				// 资源大小，可存文字长度，图片大小，音频，视频长度等信息
+	string Name = 3;				// 资源名称，（img,audio）要上传oss的资源，填充objectkey；如果是txt，存文字
+	string URL = 4;				// 资源地址，oss访问地址，或者第三方视频访问地址
+	string Size = 5;				// 资源大小，暂时只存储语音长度，单位是ms
 }
 
 // 社区资源信息列表
@@ -65,7 +65,7 @@ message PCommunityResourceList {
 // 发布帖子的信息
 message PCommunityPostUpload {
 	string Title = 2;							// 帖子的标题
-	string ForumType = 3;						// 论坛帖子的类型
+	string SubType = 3;							// 帖子的子类型
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
@@ -73,7 +73,7 @@ message PCommunityPostUpload {
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
 	string Type = 3;								// 帖子类型，forum为论坛，notice为公告
-	string ForumType = 4;						// 论坛帖子的类型
+	string SubType = 4;							// 帖子的子类型
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
 	int64 ViewCount = 7;							// 论坛帖子信息
@@ -96,9 +96,8 @@ message PCommunityHome {
 // ---评论信息
 // 发表的评论
 message PCommunityPostComment {
-	string PostID = 2;	// 评论的帖子id 
-	string QuoteID = 3;	// 引用的评论id
-	string Content = 4;	// 评论的正文
+	string QuoteID = 2;	// 引用的评论id，如果没有引用帖子，传空值
+	string Content = 3;	// 评论的正文
 }
 
 // 评论详情
@@ -106,10 +105,11 @@ message PCommunityCommentInfo {
 	int32 Floor = 2;			// 评论的层数
 	int32 UpVote = 3;		// 评论的赞的数量
 	int32 DownVote = 4;		// 评论的踩的数量
-	int64 Time = 5;			// 发表评论的时间
-	string Content = 6;		// 评论的正文
-	PUserBase User = 7;		// 发表评论的用户
-	PCommunityCommentInfo QuoteInfo = 8; // 引用的评论信息
+	int32 Status = 5;		// -1表示已踩，1表示已赞，0表示啥都没有
+	int64 Time = 6;			// 发表评论的时间
+	string Content = 7;		// 评论的正文
+	PUserBase User = 8;		// 发表评论的用户
+	PCommunityCommentInfo QuoteInfo = 9; // 引用的评论信息
 }
 
 // 评论详情列表
@@ -136,7 +136,7 @@ message PCommunityMailInfo {
 
 // 论坛信件列表
 message PCommunityMailList {
-	repeated PCommunityMailInfo PostInfo = 2;
+	repeated PCommunityMailInfo MailInfo = 2;
 }
 
 // ---社区设定
@@ -302,10 +302,10 @@ message PCommunityFriendList {
  *@method GET
  *@url param id 社区id
  *@url param postid 帖子id
- *@url param order 时间正序填0，点赞排序填1，vip排序填2
+ *@url param order 时间正序填0，点赞排序填1，下一条vip填2
  *@url param direct 1为下一页，-1为上一页
- *@url param offset 偏移值，direct=1时，填上一页最后一条评论的id，填-1表示获取第一页评论信息；
-						  direct=-1时，填上一页第一条评论的id，填-1表示获取最后一页评论信息；
+ *@url param offset 偏移值，direct=1时，填当前页最后一条评论的id，填-1表示获取第一页评论信息；
+						  direct=-1时，填当前页第一条评论的id，填-1表示获取最后一页评论信息；
  *@url param count 获取评论的个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
