@@ -132,7 +132,7 @@ message PCommunityMailInfo {
 	string Content = 5;							// 信件正文
 	PUserBase User = 6;							// 发信用户基础信息
 	PCommunityResourceList ResourcesList = 7;	// 信件引用到的资源信息
-	PCommunityMailInfo Replynfo = 8;			// 回复信件的信件
+	PCommunityMailInfo ReplyInfo = 8;			// 回复信件的信件
 }
 
 // 论坛信件列表
