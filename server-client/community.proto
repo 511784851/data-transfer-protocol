@@ -76,10 +76,11 @@ message PCommunityPostInfo {
 	string SubType = 4;							// 帖子的子类型
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	int64 ViewCount = 7;							// 论坛帖子查看数量
-	int64 CommentCount = 8;						// 论坛帖子评论数量
-	PUserBase User = 9;							// 用户基础信息
-	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
+	bool IsView = 7;								// 帖子是否被已查看
+	int64 ViewCount = 8;							// 论坛帖子查看数量
+	int64 CommentCount = 9;						// 论坛帖子评论数量
+	PUserBase User = 10;							// 用户基础信息
+	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
 }
 
 // 帖子信息列表
@@ -106,10 +107,11 @@ message PCommunityCommentInfo {
 	int32 UpVote = 3;		// 评论的赞的数量
 	int32 DownVote = 4;		// 评论的踩的数量
 	int32 Status = 5;		// -1表示已踩，1表示已赞，0表示啥都没有
-	int64 Time = 6;			// 发表评论的时间
-	string Content = 7;		// 评论的正文
-	PUserBase User = 8;		// 发表评论的用户
-	PCommunityCommentInfo QuoteInfo = 9; // 引用的评论信息
+	int64 ID = 6;			// 评论id
+	int64 Time = 7;			// 发表评论的时间
+	string Content = 8;		// 评论的正文
+	PUserBase User = 9;		// 发表评论的用户
+	PCommunityCommentInfo QuoteInfo = 10; // 引用的评论信息
 }
 
 // 评论详情列表
@@ -132,7 +134,7 @@ message PCommunityMailInfo {
 	string Content = 5;							// 信件正文
 	PUserBase User = 6;							// 发信用户基础信息
 	PCommunityResourceList ResourcesList = 7;	// 信件引用到的资源信息
-	PCommunityMailInfo ReplyInfo = 8;			// 回复信件的信件
+	PCommunityMailInfo ReplyInfo = 8;			// 回复的信件
 }
 
 // 论坛信件列表
@@ -295,6 +297,16 @@ message PCommunityFriendList {
  *@url param count 获取帖子个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityPostList ， 失败返回 PResult
+ */
+
+/*
+ *@note 标志已查看帖子
+ *@path /v1/community/post/viewing
+ *@method GET
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@cookie token&uuid
+ *@return 返回 PResult
  */
 
 /*
