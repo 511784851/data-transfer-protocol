@@ -26,6 +26,7 @@ message PReport {
 	string tuid = 3; 					//被举报人
 	int64 postid = 4; 					//被举报的帖子
 	bool isProcess = 5; 				//是否已经处理
+	int32 count = 6; 					//被举报的次数
 }
 
 //举报人
