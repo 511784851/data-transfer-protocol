@@ -177,7 +177,7 @@ message PCommunityUser {
 }
 
 message PCommunityUserList {
-	repeated PCommunityUser = 2;
+	repeated PCommunityUser List = 2;
 }
 
 /*=====================================*/
