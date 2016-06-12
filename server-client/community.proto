@@ -186,10 +186,9 @@ message PCommunityFlag {
 	string FlagID = 2;			// 标旗的id
 	int32 FlagType = 3;		// 标旗内容的类型，1是帖子，2是评论
 	int32 FlagCount = 4;		// 被标旗次数
-	int64 FlagTime = 5;		// 标旗的时间
-	int64 PostID = 6;			// 帖子id
-	int64 CommentID = 7;		// 评论id
-	string Type = 8;			// 帖子类型
+	string FlagTime = 5;		// 标旗的时间
+	string PostID = 6;			// 帖子id
+	string CommentID = 7;		// 评论id
 	string Title = 9;			// 帖子标题
 	string Content = 10;		// 帖子正文或者评论正文
 }
@@ -561,7 +560,7 @@ message PCommunityNotificationUnRead {
  *@url param id 社区id
  *@url param operate 0为解禁，1为禁用
  *@url param uuid  设置用户id
- *@url param time 禁用时长,单位分钟
+ *@url param time 禁用时长,单位分钟,永久禁用填-1
  *@cookie token&uuid
  *@return 返回 PResult
  */
@@ -636,7 +635,8 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/flag/location
  *@method GET
  *@url param id 社区id
- *@url param offset 
+ *@url param uuid 要查看的用户uuid
+ *@url param offset 上一页最后被标旗帖子/评论的时间，首页填-1
  *@url param count 表示获取个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityFlagList ， 失败返回 PResult 
