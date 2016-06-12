@@ -203,9 +203,9 @@ message PCommunityFlagList {
 message PCommunityNotification {
 	int32 Type = 2;			// 通知类型，0是帖子被评论，1是评论被引用，2是公告，
 	int64 ID = 3;			// 通知id
-	int64 Time = 3;			// 产生通知的时间
-	string Content = 5;	// 通知正文
-	PUserBase User = 6;	// type为0，1时传递的用户信息
+	int64 Time = 4;			// 产生通知的时间
+	string Content = 5;		// 通知正文
+	PUserBase User = 6;		// type为0，1时传递的用户信息
 }
 
 // 通知内容列表
