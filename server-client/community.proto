@@ -349,6 +349,19 @@ message PCommunityNotificationUnRead {
  */
 
 /*
+ *@note 查看用户发布的所有帖子信息
+ *@path /v1/community/user/post
+ *@method GET
+ *@url param id 社区id
+ *@url param uuid 被查看的用户uuid
+ *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPostList ，失败返回 PResult
+ */
+
+
+/*
  *@note 标志已查看帖子
  *@path /v1/community/post/viewing
  *@method GET
@@ -432,17 +445,6 @@ message PCommunityNotificationUnRead {
  *@url param count 获取通知个数
  *@cookie token&uuid
  *@return 
- */
-
-/*
- *@note 设置-我的帖子
- *@path /v1/community/setting/post
- *@method GET
- *@url param id 社区id
- *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
- *@url param count 获取帖子个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityPostList ，失败返回 PResult
  */
 
 /*
@@ -637,7 +639,7 @@ message PCommunityNotificationUnRead {
  *@url param offset 
  *@url param count 表示获取个数
  *@cookie token&uuid
- *@return 返回 
+ *@return 成功返回 PCommunityFlagList ， 失败返回 PResult 
  */
 
 /*
