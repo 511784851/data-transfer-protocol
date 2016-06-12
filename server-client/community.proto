@@ -176,8 +176,46 @@ message PCommunityUser {
 	int64 Time = 3; 
 }
 
+// 用户信息列表
 message PCommunityUserList {
 	repeated PCommunityUser List = 2;
+}
+
+// 标旗内容
+message PCommunityFlag {
+	string FlagID = 2;			// 标旗的id
+	int32 FlagType = 3;		// 标旗内容的类型，1是帖子，2是评论
+	int32 FlagCount = 4;		// 被标旗次数
+	int64 FlagTime = 5;		// 标旗的时间
+	int64 PostID = 6;			// 帖子id
+	int64 CommentID = 7;		// 评论id
+	string Type = 8;			// 帖子类型
+	string Title = 9;			// 帖子标题
+	string Content = 10;		// 帖子正文或者评论正文
+}
+
+// 标旗内容列表
+message PCommunityFlagList {
+	repeated PCommunityFlag List = 2;
+}
+
+// 通知内容
+message PCommunityNotification {
+	int32 Type = 2;			// 通知类型，0是帖子被评论，1是评论被引用，2是公告，
+	int64 ID = 3;			// 通知id
+	int64 Time = 3;			// 产生通知的时间
+	string Content = 5;	// 通知正文
+	PUserBase User = 6;	// type为0，1时传递的用户信息
+}
+
+// 通知内容列表
+message PCommunityNotificationList {
+	repeated PCommunityNotification List = 2;
+}
+
+// 未读通知状态
+message PCommunityNotificationUnRead {
+	bool Unread = 2;
 }
 
 /*=====================================*/
@@ -300,12 +338,12 @@ message PCommunityUserList {
 
 /*
  *@note 社区获取帖子
- *@path /v1/community/post/list
+ *@path /v1/community/post
  *@method GET
  *@url param id 社区id
- *@url param type 帖子类型，可选参数有forum，notice，all
+ *@url param type 获取帖子类型，可选参数有id，forum，notice，all
  *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
- *@url param count 获取帖子个数
+ *@url param count 获取帖子个数（type类型为id，这个参数不生效）
  *@cookie token&uuid
  *@return 成功返回 PCommunityPostList ， 失败返回 PResult
  */
@@ -343,6 +381,18 @@ message PCommunityUserList {
  *@url param postid 帖子id
  *@url param direct prev 为之前一条vip评论，next 为下一条vip评论，last 为最后一条vip评论
  *@url param offset 偏移值，评论id，依次评论为偏移值查找vip评论，如果没有查找到，返回PResult
+ *@url param count 获取评论的个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
+ */
+
+/*
+ *@note 获取评论列表，通过评论id定位
+ *@path /v1/community/comment/id
+ *@method GET
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@url param commentid 开始加载评论的id
  *@url param count 获取评论的个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
@@ -505,18 +555,18 @@ message PCommunityUserList {
 /*
  *@note 设置-支持-禁用/解禁用户
  *@path /v1/community/setting/admin/disableduser
- *@method GET
+ *@method POST
  *@url param id 社区id
  *@url param operate 0为解禁，1为禁用
  *@url param uuid  设置用户id
- *@url param time 禁用时间
+ *@url param time 禁用时长,单位分钟
  *@cookie token&uuid
  *@return 返回 PResult
  */
 
 /*
  *@note 设置-支持-禁用用户列表
- *@path /v1/community/setting/admin/disableduser/list
+ *@path /v1/community/setting/admin/disableduser
  *@method GET
  *@url param id 社区id
  *@url param offset 上一页最后一个被禁用用户的禁用时间，首页填-1
@@ -528,7 +578,7 @@ message PCommunityUserList {
 /*
  *@note 设置-支持-踢出/解除踢出社区
  *@path /v1/community/setting/admin/blacklist
- *@method GET
+ *@method POST
  *@url param id 社区id
  *@url param operate 0为解除踢出社区，1为踢出社区
  *@url param uuid  设置用户id
@@ -538,7 +588,7 @@ message PCommunityUserList {
 
 /*
  *@note 设置-支持-踢出社区用户列表
- *@path /v1/community/setting/admin/blacklist/list
+ *@path /v1/community/setting/admin/blacklist
  *@method GET
  *@url param id 社区id
  *@url param offset 上一页最后一个被禁用用户的禁用时间，首页填-1
@@ -546,7 +596,6 @@ message PCommunityUserList {
  *@cookie token&uuid
  *@return 成功返回 PCommunityUserList ，失败返回 PResult
  */
-
 
 /*
  *@note 标旗帖子
@@ -574,7 +623,7 @@ message PCommunityUserList {
  *@path /v1/community/flag/user
  *@method GET
  *@url param id 社区id
- *@url param offset 上一页最后一个被标旗用户的禁用时间，首页填-1
+ *@url param offset 上一页最后一个被标旗用户时间，首页填-1
  *@url param count 表示获取个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityUserList ，失败返回 PResult 
@@ -590,4 +639,46 @@ message PCommunityUserList {
  *@cookie token&uuid
  *@return 返回 
  */
+
+/*
+ *@note 移除标旗帖子
+ *@path /v1/community/flag
+ *@method DELETE
+ *@url param id 社区id
+ *@url param flagid 被移除的标旗id,多个id以,分割
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 获取用户通知列表
+ *@path /v1/community/setting/notification
+ *@method GET
+ *@url param id 社区id
+ *@url param offset 上一页的通知id，第一页填-1
+ *@url param count 表示获取个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityNotificationList , 失败返回 PResult
+ */
+
+/*
+ *@note 用户通知信息设置为已读
+ *@path /v1/community/setting/notification/status
+ *@method GET
+ *@url param id 社区id
+ *@url param notificationid 设置已读的通知id；如果设置全部，填all；如果设置多条(50条以内)，以,分割id
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 用户通知信息设置为已读
+ *@path /v1/community/setting/notification/unread
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityNotificationUnRead  , 失败返回 PResult
+ */
+
+
 
