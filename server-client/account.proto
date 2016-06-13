@@ -51,19 +51,20 @@ message PUserEx {
 	string uuid = 6; 				// 服务端标志用户的唯一id
 	string project = 7;				// 项目名称
 	string username = 8; 			// 用户名，唯一
-	string nickname = 9; 			// 昵称
-	string realname = 10;			// 真实姓名
-	int32 gender = 11;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
-	string birthday = 12; 			// 生日，格式19850101
-	string email = 13; 				// 邮箱地址
-	string cellphone = 14; 			// 手机号
-	int32 timeZone = 15;    		// 时区
-	string headImgURL = 16; 		// 头像地址
-	string locale = 17; 			// 语言
-	string userResume = 18; 		// 简介
-	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
-	int64 lastLoginTime = 20;  		// 用户最后登陆时间
-	map<string,string> userData = 21;// 用户数据
+	string password = 9; 			// 自有手机号码注册时输入的密码
+	string nickname = 10; 			// 昵称
+	string realname = 11;			// 真实姓名
+	int32 gender = 12;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
+	string birthday = 13; 			// 生日，格式19850101
+	string email = 14; 				// 邮箱地址
+	string cellphone = 15; 			// 手机号
+	int32 timeZone = 16;    		// 时区
+	string headImgURL = 17; 		// 头像地址
+	string locale = 18; 			// 语言
+	string userResume = 19; 		// 简介
+	int64 lastUpdateTime = 20;  	// 最后更新时间TUser结构，用户/系统修改
+	int64 lastLoginTime = 21;  		// 用户最后登陆时间
+	map<string,string> userData = 22;// 用户数据
 }
 
 // 用户基础信息
