@@ -484,7 +484,7 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/setting/friend
  *@method GET
  *@url param id 社区id
- *@url param offset 
+ *@url param offset 一开始以0开始，之后 offset + count 值偏移
  *@url param count 获取好友个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityFriendList ，失败返回 PResult
@@ -572,7 +572,28 @@ message PCommunityNotificationUnRead {
  *@url param reply 回复信件的id
  *body PCommunityMailUpload
  *@cookie token&uuid
- *@return 成功返回 PCommunityMailList ，失败返回 PResult
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 设置-查看私信
+ *@path /v1/community/setting/private/mail
+ *@method GET
+ *@url param id 社区id
+ *@url param mailid 信件id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityMailInfo ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-管理员发送私信
+ *@path /v1/community/setting/admin/private/mail
+ *@method POST
+ *@url param id 社区id
+ *@url param uuid 接收信件用户的uuid
+ *body PCommunityMailUpload
+ *@cookie token&uuid
+ *@return 返回 PResult
  */
 
 /*
