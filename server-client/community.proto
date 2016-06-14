@@ -140,7 +140,8 @@ message PCommunityMailInfo {
 
 // 论坛信件列表
 message PCommunityMailList {
-	repeated PCommunityMailInfo MailInfo = 2;
+	int64 Unread = 2;
+	repeated PCommunityMailInfo MailInfo = 3;
 }
 
 // ---社区设定
@@ -556,7 +557,6 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/setting/admin/mail
  *@method GET
  *@url param id 社区id
- *@url param type 0表示所有信件，1表示已回复信件
  *@url param offset -1表示从头获取，否则填充最后一个信件id
  *@url param count 表示获取个数
  *@cookie token&uuid
