@@ -75,8 +75,8 @@ message PGoogleAccount{
  *@path /v1/login/inside/logout
  *@method POST
  *@url param from 发起调用的服务名
- *@body PManyUUID
- *@return 成功返回 PManyErrorCode ，失败返回 PResult
+ *@body PStringList
+ *@return 成功返回 PInt32List ，失败返回 PResult
  */
 
 /*
@@ -108,11 +108,12 @@ message PGoogleAccount{
  */
 
 /*
- *@note 通过手机号码获取用户uuid
+ *@note 通过手机号码/用户名获取用户uuid
  *@URL /v1/login/inside/uuid
  *@method GET
  *@url param from 发起调用的服务名
- *@url param area 手机号码的区号
- *@url param phonecode 手机号码，以,分割
- *@return 成功返回 PManyUUID ，失败返回 PResult
+ *@url param type 手机号码填phone，用户名填username
+ *@url param fields 手机号码/用户名，以,分割
+ *@return 成功返回 PStringList ，失败返回 PResult; 
+ *@       返回的uuid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
  */
