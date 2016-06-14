@@ -106,3 +106,13 @@ message PGoogleAccount{
  *@body PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
  *@return 返回 PResult
  */
+
+/*
+ *@note 通过手机号码获取用户uuid
+ *@URL /v1/login/inside/uuid
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param area 手机号码的区号
+ *@url param phonecode 手机号码，以,分割
+ *@return 成功返回 PManyUUID ，失败返回 PResult
+ */
