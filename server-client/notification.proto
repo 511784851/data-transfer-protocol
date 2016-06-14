@@ -155,6 +155,10 @@ message PMsgIDList {
 	repeated string MsgID = 2;
 }
 
+message PSetting {
+	bool mute = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -199,4 +203,20 @@ message PMsgIDList {
  *@url param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
  *@cookie token&uuid
  *@return 成功返回MsgCounts，失败返回PResult
+ */
+
+/*
+ *@note 获取设置信息
+ *@path /v1/notification/msg/setting
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PSetting，失败返回PResult
+ */
+
+/*
+ *@note 设置设置信息
+ *@path /v1/notification/msg/setting
+ *@method POST
+ *@cookie token&uuid
+ *@return 返回PResult
  */
