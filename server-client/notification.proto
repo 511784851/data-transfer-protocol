@@ -217,6 +217,7 @@ message PSetting {
  *@note 设置设置信息
  *@path /v1/notification/msg/setting
  *@method POST
+ *@postParam ps PSetting
  *@cookie token&uuid
  *@return 返回PResult
  */
