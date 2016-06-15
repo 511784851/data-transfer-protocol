@@ -218,6 +218,8 @@ message PToken {
  *@url param model 设备型号
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param sign 根据应用id生成的串
  *@return 注册成功返回 PLogin ，失败返回 PResult
  */
 
@@ -232,6 +234,8 @@ message PToken {
  *@url param model 设备型号
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param sign 根据应用id生成的串
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -245,6 +249,8 @@ message PToken {
  *@url param model 设备型号
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param sign 根据应用id生成的串
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -262,6 +268,8 @@ message PToken {
  *@url param model 设备型号
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param sign 根据应用id生成的串
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -275,6 +283,8 @@ message PToken {
  *@url param model 设备型号
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param sign 根据应用id生成的串
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -289,6 +299,8 @@ message PToken {
  *@url param model 设备型号
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param sign 根据应用id生成的串
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 

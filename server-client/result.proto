@@ -34,3 +34,25 @@ message PManyErrorCode {
 }
 
 
+/*
+ *@note 批量传输string
+ */
+message PStringList {
+	repeated string List = 1;		
+}
+
+/*
+ *@note 批量传输int64
+ */
+message PInt64List {
+	repeated int64 List = 1;
+}
+
+/*
+ *@note 批量传输int32
+ */
+message PInt32List {
+	repeated int32 List = 1;
+}
+
+

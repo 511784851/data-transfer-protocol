@@ -145,6 +145,29 @@ message PYearData {
  */
  
 /*
+ *@note 根据关键词搜索社区帖子
+ *@path /datapublishing/community/post/search
+ *@method GET
+ *@cookie token&uuid
+ *@param coid 社区ID
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCommunityPostList，失败返回PResult
+ */ 
+ 
+/*
+ *@note 根据关键词搜索社区
+ *@path /datapublishing/community/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCommunityBaseList，失败返回PResult
+ */ 
+ 
+/*
  *@note 热门微博
  *@path /datapublishing/hot/news
  *@method GET
@@ -165,6 +188,16 @@ message PYearData {
  *@param level 用户等级 取值all reg vip vipp vo 默认all
  *@return 成功返回PGuyList，失败返回PResult
  */
+ 
+/*
+ *@note 热门社区
+ *@path /datapublishing/community/hot
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCommunityBaseList，失败返回PResult
+ */ 
  
  /*
  *@note 推荐微博
