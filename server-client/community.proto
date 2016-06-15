@@ -344,7 +344,11 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/post
  *@method GET
  *@url param id 社区id
- *@url param type 获取帖子类型，可选参数有id，forum，notice，all
+ *@url param type 获取帖子类型，可选参数有:
+ *@								id 获取offset指定id帖子的信息，可用于跳转到指定帖子
+ *@								forum 获取论坛帖子
+ *@ 							notice 获取公告帖子
+ *@								all 获取所有帖子，可用于社区首页刷新帖子
  *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
  *@url param count 获取帖子个数（type类型为id，这个参数不生效）
  *@cookie token&uuid
@@ -535,10 +539,11 @@ message PCommunityNotificationUnRead {
  */
 
 /*
- *@note 设置-联系论坛-删除
- *@path /v1/community/setting/mail
+ *@note 设置-联系论坛-管理员删除信件
+ *@path /v1/community/setting/admin/mail
  *@method DELETE
  *@url param id 社区id
+ *@url param mailid 要删除信件的id，多个信件id以,分割
  *@cookie token&uuid
  *@return 返回 PResult
  */
@@ -718,10 +723,11 @@ message PCommunityNotificationUnRead {
  */
 
 /*
- *@note 用户通知信息设置为已读
+ *@note 用户设置通知信息状态
  *@path /v1/community/setting/notification/status
  *@method GET
  *@url param id 社区id
+ *@url param view 0为设置已读，1为设置未读
  *@url param notificationid 设置已读的通知id；如果设置全部，填all；如果设置多条(50条以内)，以,分割id
  *@cookie token&uuid
  *@return 返回 PResult
