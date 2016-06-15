@@ -26,7 +26,6 @@ message PReport {
 	string tuid = 3; 					//被举报人
 	int64 postid = 4; 					//被举报的帖子
 	bool isProcess = 5; 				//是否已经处理
-	int32 count = 6; 					//被举报的次数
 }
 
 //举报人
@@ -36,14 +35,25 @@ message PReporter {
 }
 
 //敏感词列表
-message PKeyworks {
-	repeated PKeywork list = 1; //敏感词列表
+message PKeywords {
+	repeated PKeyword list = 1; //敏感词列表
 }
 
 //敏感词
-message PKeywork {
+message PKeyword {
 	int64 id = 1; 
 	string work = 2;
+}
+
+//黑名单列表
+message PBlacklists {
+	repeated Pblacklist list = 1;
+}
+
+//黑名单
+message Pblacklist {
+	int32 id = 1;
+	string val = 2;
 }
 
 /**
