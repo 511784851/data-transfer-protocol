@@ -19,7 +19,6 @@ message PCommunityBase {
 	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
 	string Name = 3;			// 社区名字
 	string HeadImg = 4;		// 社区头像地址
-	int64 FollowTime = 5;	// 关注社区的时间
 }
 
 // 社区基础信息列表
@@ -152,7 +151,6 @@ message PCommunityMember {
 	int32 IsFriend = 3;			// A(你）关系码: 0: A --- B(A与B不是好友); 1: A --> B(A是B的单向好友); 2: A <-- B(B是A的单向好友); 3: A <-> B(A与B是好友)
 	int32 IsFollow = 4;			// 0表示未关注，1表示已关注
 	int32 IsManager = 5;			// 0表示非管理员，1表示是管理员
-	int64 Offset = 6;			// 用于分页显示索引下一个成员信息
 }
 
 // 社区成员信息列表
@@ -272,7 +270,7 @@ message PCommunityNotificationUnRead {
  *@note 分页获取我关注的列表
  *@path /v1/community/me/followlist
  *@method GET
- *@url param offset 上一个社区的关注时间 PCommunityBase.FollowTime,
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityBaseList ，失败返回PResult
@@ -466,7 +464,7 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/setting/member
  *@method GET
  *@url param id 社区id
- *@url param offset 上一页的 PCommunityMember.Offset
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取成员个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityMemberList ，失败返回 PResult
