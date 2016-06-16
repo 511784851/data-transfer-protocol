@@ -169,17 +169,6 @@ message PCommunityFriendList {
 	repeated PCommunityFriend List = 2;
 }
 
-// 用户信息
-message PCommunityUser {
-	PUserBase User = 2;
-	int64 Time = 3; 
-}
-
-// 用户信息列表
-message PCommunityUserList {
-	repeated PCommunityUser List = 2;
-}
-
 // 标旗内容
 message PCommunityFlag {
 	string FlagID = 2;			// 标旗的id
@@ -616,10 +605,10 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/setting/admin/disableduser
  *@method GET
  *@url param id 社区id
- *@url param offset 上一页最后一个被禁用用户的禁用时间，首页填-1
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取个数
  *@cookie token&uuid
- *@return 成功返回 PCommunityUserList ，失败返回 PResult
+ *@return 成功返回 PUserBaseList ，失败返回 PResult
  */
 
 /*
@@ -638,10 +627,10 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/setting/admin/blacklist
  *@method GET
  *@url param id 社区id
- *@url param offset 上一页最后一个被禁用用户的禁用时间，首页填-1
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取个数
  *@cookie token&uuid
- *@return 成功返回 PCommunityUserList ，失败返回 PResult
+ *@return 成功返回 PUserBaseList ，失败返回 PResult
  */
 
 /*
@@ -670,10 +659,10 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/flag/user
  *@method GET
  *@url param id 社区id
- *@url param offset 上一页最后一个被标旗用户时间，首页填-1
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 表示获取个数
  *@cookie token&uuid
- *@return 成功返回 PCommunityUserList ，失败返回 PResult 
+ *@return 成功返回 PUserBaseList ，失败返回 PResult 
  */
 
 /*
@@ -682,7 +671,7 @@ message PCommunityNotificationUnRead {
  *@method GET
  *@url param id 社区id
  *@url param uuid 要查看的用户uuid
- *@url param offset 上一页最后被标旗帖子/评论的时间，首页填-1
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 表示获取个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityFlagList ， 失败返回 PResult 
