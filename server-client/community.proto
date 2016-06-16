@@ -149,7 +149,7 @@ message PCommunityMailList {
 // 社区成员信息
 message PCommunityMember {
 	PUserBase User = 2;			// 社区成员信息
-	int32 IsFriend = 3;			// 0表示非好友，1表示是好友
+	int32 IsFriend = 3;			// A(你）关系码: 0: A --- B(A与B不是好友); 1: A --> B(A是B的单向好友); 2: A <-- B(B是A的单向好友); 3: A <-> B(A与B是好友)
 	int32 IsFollow = 4;			// 0表示未关注，1表示已关注
 	int32 IsManager = 5;			// 0表示非管理员，1表示是管理员
 	int64 Offset = 6;			// 用于分页显示索引下一个成员信息
@@ -187,7 +187,7 @@ message PCommunityFlag {
 	string FlagID = 2;			// 标旗的id
 	int32 FlagType = 3;		// 标旗内容的类型，1是帖子，2是评论
 	int32 FlagCount = 4;		// 被标旗次数
-	string FlagTime = 5;		// 标旗的时间
+	int64 FlagTime = 5;		// 标旗的时间
 	string PostID = 6;			// 帖子id
 	string CommentID = 7;		// 评论id
 	string Title = 9;			// 帖子标题
@@ -489,7 +489,7 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/setting/friend
  *@method GET
  *@url param id 社区id
- *@url param offset 一开始以0开始，之后 offset + count 值偏移
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取好友个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityFriendList ，失败返回 PResult
