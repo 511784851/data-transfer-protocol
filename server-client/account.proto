@@ -38,6 +38,8 @@ message PUser {
 	bool disable = 27; 				// 帐户是否被禁用
 	bool isAI = 28; 				// 该帐户是否是机器人
 	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
+	string areaCode = 30;			// 地区代码
+	string areaName = 31;			// 地区名称
 }
 
 message PUserListEx {
