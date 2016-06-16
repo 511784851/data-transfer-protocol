@@ -162,6 +162,7 @@ message PCommunityMemberList {
 message PCommunityFriend {
 	PUserBase User = 2;				// 好友信息
 	int32 Status = 3;				// 0表示未邀请，1表示已邀请
+	int32 Membership = 4;			// 0表示无关系，1是创建者，2是管理者
 }
 
 // 社区好友信息列表
