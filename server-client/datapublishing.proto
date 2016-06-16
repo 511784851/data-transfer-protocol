@@ -31,11 +31,12 @@ message PSearchResults {
 	//PNews news = 2;
 }
 
-message PNewsData {
-	int32 views = 1;
-	int32 votes = 2;
-	int32 comments = 3;
-	int32 shares = 4;
+message PPostData {
+	int32 posts = 1;
+	int32 views = 2;
+	int32 votes = 3;
+	int32 comments = 4;
+	int32 shares = 5;
 }
 
 message PRegionData {
@@ -48,45 +49,26 @@ message PAgeData {
 	int32 count = 2;
 }
 
+message PFollowData {
+	int32 total = 1; // 粉丝总数
+	int32 male = 2;  // 男粉丝数
+	int32 female = 3;// 女粉丝数
+	int32 active = 4;// 活跃数
+	// 地区分布
+	repeated PRegionData region = 5;
+	// 年龄分布
+	repeated PAgeData age = 6;	
+}
+
 message PDayData {
 	// 数据日期
 	string date = 1;
 	
-	// 粉丝男、女、活跃数
-	int32 maleFans = 2;
-	int32 femaleFans = 3;
-	int32 activeFans = 4;
-	
-	// 好友男、女、活跃数
-	int32 maleFriends = 5;
-	int32 femaleFriends = 6;
-	int32 activeFriends = 7;
-	
-	// 社区粉丝男、女、活跃数
-	int32 maleCommunityFans = 8;
-	int32 femaleCommunityFans = 9;
-	int32 activeCommunityFans = 10;
-	
-	// 粉丝地区分布
-	repeated PRegionData regionFans = 11;
-	// 粉丝年龄分布
-	repeated PAgeData ageFans = 12;
-	// 好友地区分布
-	repeated PRegionData regionFriends = 13;
-	// 好友年龄分布
-	repeated PAgeData ageFriends = 14;
-	// 社区粉丝地区分布
-	repeated PRegionData regionCommunityFans = 15;
-	// 社区粉丝年龄分布
-	repeated PAgeData ageCommunityFans = 16;
-	
-	// 帖子数据
-	map<string, PNewsData> weibo = 17;
-	// 社区帖子数据
-	map<string, PNewsData> communityPost = 18;
+	PFollowData follow = 2;
+	PPostData  post = 3;
 }
 
-message PYearData {
+message PDaysData {
 	repeated PDayData data = 1;
 }
 
