@@ -128,7 +128,7 @@ message PCommunityMailUpload {
 
 // 论坛信件信息
 message PCommunityMailInfo {
-	string ID = 2;								// 信件id 
+	int64 ID = 2;								// 信件id 
 	string ReplyID = 3;							// 信件回复id
 	int64 Time = 4;								// 发布信件的时间
 	bool IsView = 5;							// 信件是否已读标志位
