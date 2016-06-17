@@ -224,22 +224,6 @@ message PCommunityNotificationUnRead {
 
 //--- 社区相关操作
 /*
- *@note  获取热门社区，伪造接口，以后会使用大数据接口替换
- *@path /v1/community/fack/hot
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PCommunityBaseList，失败返回PResult
- */
-
-/*
- *@note  获取推荐社区，伪造接口，以后会使用大数据接口替换
- *@path /v1/community/fack/recommend
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PCommunityBaseList，失败返回PResult
- */
-
-/*
  *@note  创建社区
  *@path /v1/community
  *@method POST
@@ -730,5 +714,40 @@ message PCommunityNotificationUnRead {
  *@return 成功返回 PCommunityNotificationUnRead  , 失败返回 PResult
  */
 
+/*
+ *@note 社区成员搜索
+ *@path /v1/community/search/member
+ *@method GET
+ *@url param id 社区id
+ *@url param keyword 关键词
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取数量
+ *@cookie token&uuid
+ *@return 成功返回 PUserBaseList ，失败返回 PResult
+ */ 
 
+/*
+ *@note 社区帖子搜索
+ *@path /v1/community/search/post
+ *@method GET
+ *@url param id 社区id
+ *@url param type 可选参数 forum 获取论坛帖子; notice 获取公告帖子; all 获取所有帖子
+ *@url param keyword 关键词
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取数量
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPostList ，失败返回PResult
+ */ 
 
+/*
+ *@note 社区搜索
+ *@path /v1/community/search/community
+ *@method GET
+ *@url param id 社区id
+ *@url param type 可选参数 hot (热门); recommend (推荐); follow (关注的); all (所有)
+ *@url param keyword 关键词 type=hot, type=recommend时，忽略这个字段
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取数量
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityBaseList ，失败返回PResult
+ */ 
