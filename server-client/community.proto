@@ -723,7 +723,7 @@ message PCommunityNotificationUnRead {
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取数量
  *@cookie token&uuid
- *@return 成功返回 PUserBaseList ，失败返回 PResult
+ *@return 成功返回 PCommunityMemberList ，失败返回 PResult
  */ 
 
 /*
