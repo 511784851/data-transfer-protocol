@@ -13,6 +13,7 @@ message PContactLinkInfo {
 // 下载通讯录好友关系
 message PContactLinkInfoList {
 	repeated PContactLinkInfo ContactUsers = 1;
+	string totalCount = 2;	// 总记录数
 }
 
 /*
