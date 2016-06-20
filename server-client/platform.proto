@@ -25,7 +25,7 @@ message PReport {
 	repeated PReporter informers = 2; 	//举报人
 	string tuid = 3; 					//被举报人
 	int64 postid = 4; 					//被举报的帖子
-	bool isProcess = 5; 				//是否已经处理
+	int64 isProcess = 5; 				//是否已经处理（没有处理为0，否则为处理的时间）
 }
 
 //举报人
