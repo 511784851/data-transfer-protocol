@@ -50,9 +50,9 @@ message PAgeData {
 }
 
 message PFollowData {
-	int32 total = 1; // 粉丝总数
-	int32 male = 2;  // 男粉丝数
-	int32 female = 3;// 女粉丝数
+	int32 total = 1; // 粉丝(成员)总数
+	int32 male = 2;  // 男粉(成员)丝数
+	int32 female = 3;// 女(成员)粉丝数
 	int32 active = 4;// 活跃数
 	// 地区分布
 	repeated PRegionData region = 5;
@@ -127,29 +127,6 @@ message PDaysData {
  */
  
 /*
- *@note 根据关键词搜索社区帖子
- *@path /datapublishing/community/post/search
- *@method GET
- *@cookie token&uuid
- *@param coid 社区ID
- *@param keyword 关键词
- *@param pageindex 页号
- *@param pagesize 页大小
- *@return 成功返回PCommunityPostList，失败返回PResult
- */ 
- 
-/*
- *@note 根据关键词搜索社区
- *@path /datapublishing/community/search
- *@method GET
- *@cookie token&uuid
- *@param keyword 关键词
- *@param pageindex 页号
- *@param pagesize 页大小
- *@return 成功返回PCommunityBaseList，失败返回PResult
- */ 
- 
-/*
  *@note 热门微博
  *@path /datapublishing/hot/news
  *@method GET
@@ -201,4 +178,15 @@ message PDaysData {
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PGuyList，失败返回PResult
+ */
+
+/*
+ *@note 获取VIP的粉丝、社区数据，某日期区间的数据获取过后，客户端应存储起来，避免重复请求
+ *@path /datapublishing/data
+ *@method GET
+ *@cookie token&uuid
+ *@param datatype 取"fans" 或"community"
+ *@param from 起始日期，如"2016-01-01"
+ *@param to   截止日期，如"2016-06-01"
+ *@return 成功返回PDaysData，失败返回PResult
  */
