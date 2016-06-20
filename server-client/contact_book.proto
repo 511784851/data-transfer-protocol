@@ -1,7 +1,7 @@
 syntax = "proto3";
 package common;
 option java_package = "com.blemobi.demo.probuf";
-option java_outer_classname = "ContactBook";
+option java_outer_classname = "ContactBookProtos";
 
 message PContactLinkInfo {
 	string uuid = 1;	// 通讯录联系人的uuid
@@ -16,12 +16,19 @@ message PContactLinkInfoList {
 	string totalCount = 2;	// 总记录数
 }
 
+// 访问设备的最后修改时间
+message PLastModifyInfo {
+	string devSerial = 1;	// 设备串行号
+	string modifyTime = 2;	// 最后时间
+}
+
 /*
  *@note 上传手机通讯录。
  *@path /contact/book/upload
  *@method POST
  *@param uuid  用户的uuid。
  *@param token  用户的token。
+ *@param devSerial  手机序列号
  *@param contactBook  手机联系人通信录。通讯录为json格式，并且经过base64编码。 
  *@param mode  上传通信的模式：all--全部更新模式；add--追加新增模式。
  *@return 返回PResult，上传成功的标志
@@ -34,7 +41,19 @@ message PContactLinkInfoList {
  *@method GET
  *@param uuid  用户的uuid。
  *@param token  用户的token。
+ *@param devSerial  手机序列号
  *@return 成功PContactLinkInfoList, 失败PResult
+ */
+ 
+
+/*
+ *@note 通讯录好友关系的下载。
+ *@path /contact/book/lastModify
+ *@method GET
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
+ *@param devSerial  手机序列号
+ *@return 成功PLastModifyInfo, 失败PResult
  */
  
  
