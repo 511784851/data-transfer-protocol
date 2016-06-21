@@ -50,6 +50,24 @@ message PReportCommunityUser {
 	int64 isProcess = 6; //是否已经处理（没有处理为0，否则为处理的时间）
 }
 
+/*********社区帖子***********/
+
+message PReportCommunityPostsList {
+	repeated PReportCommunityPosts list = 1;
+}
+
+message PReportCommunityPosts {
+	int64 ID = 1; 
+	repeated PInformer informers = 2; //举报人列表
+	string communityID = 3; //社区ID
+	string postsID = 4; //帖子ID
+	string uuid = 5; //帖子作者
+	string content = 6; //举报内容
+	int64 isProcess = 7; //是否已经处理（没有处理为0，否则为处理的时间）
+}
+
+
+
 //举报人
 message PInformer {
 	string uuid = 1; //举报人
@@ -101,3 +119,15 @@ message Pblacklist {
   *@param content 举报内容
   *@return PResult
   */
+  
+  /**
+   * 举报社区用户
+   *
+   *@path /platform-manager/report/community/user
+   *@cookie token&uuid
+   *@method POST
+   *@param uid 被举报人ID
+   *@param cid 被举报的社区ID
+   *@param content 举报内容
+   *@return PResult
+   */
