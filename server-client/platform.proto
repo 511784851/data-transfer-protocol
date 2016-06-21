@@ -41,6 +41,7 @@ message PReportCommunityUserList {
 	repeated PReportCommunityUser list = 1;
 }
 
+//社区Id，用户Uuid,举报的原因
 message PReportCommunityUser {
 	int64 ID = 1; 
 	repeated PInformer informers = 2; //举报人列表
@@ -56,6 +57,7 @@ message PReportCommunityPostsList {
 	repeated PReportCommunityPosts list = 1;
 }
 
+//社区Id,帖子Id,帖子创建者Uuid,举报的原因
 message PReportCommunityPosts {
 	int64 ID = 1; 
 	repeated PInformer informers = 2; //举报人列表
@@ -66,6 +68,23 @@ message PReportCommunityPosts {
 	int64 isProcess = 7; //是否已经处理（没有处理为0，否则为处理的时间）
 }
 
+/*********社区帖子评论***********/
+
+message PReportCommunityCommentList {
+	repeated PReportCommunityComment list = 1;
+}
+
+//社区Id,帖子Id,评论Id，评论发表者Uuid,举报的原因
+message PReportCommunityComment {
+	int64 ID = 1; 
+	repeated PInformer informers = 2; //举报人列表
+	string communityID = 3; //社区ID
+	string postsID = 4; //帖子ID
+	string commentID = 5; //评论ID
+	string uuid = 6; //评论发布者
+	string content = 7; //举报内容
+	int64 isProcess = 8; //是否已经处理（没有处理为0，否则为处理的时间）
+}
 
 
 //举报人
@@ -99,7 +118,7 @@ message Pblacklist {
 /**************************API 定义***********************************/
 
 /**
- *举报微博
+ * 举报微博
  *
  *@path /platform-manager/report/news
  *@cookie token&uuid
@@ -109,25 +128,52 @@ message Pblacklist {
  *@return PResult
  */
  
- /**
-  * 举报用户
-  *
-  *@path /platform-manager/report/user
-  *@cookie token&uuid
-  *@method POST
-  *@param uid 被举报人ID
-  *@param content 举报内容
-  *@return PResult
-  */
+/**
+ * 举报用户
+ *
+ *@path /platform-manager/report/user
+ *@cookie token&uuid
+ *@method POST
+ *@param uid 被举报人ID
+ *@param content 举报内容
+ *@return PResult
+ */
   
-  /**
-   * 举报社区用户
-   *
-   *@path /platform-manager/report/community/user
-   *@cookie token&uuid
-   *@method POST
-   *@param uid 被举报人ID
-   *@param cid 被举报的社区ID
-   *@param content 举报内容
-   *@return PResult
-   */
+/**
+ * 举报社区用户
+ *
+ *@path /platform-manager/report/community/user
+ *@cookie token&uuid
+ *@method POST
+ *@param uid 被举报人ID
+ *@param cid 被举报的社区ID
+ *@param content 举报内容
+ *@return PResult
+ */
+ 
+/**
+ * 举报社区帖子
+ *
+ *@path /platform-manager/report/community/posts
+ *@cookie token&uuid
+ *@method POST
+ *@param cid 被举报的社区ID
+ *@param pid 被举报的帖子ID
+ *@param uid 帖子作者ID
+ *@param content 举报内容
+ *@return PResult
+ */
+ 
+ /**
+ * 举报社区帖子的评论
+ *
+ *@path /platform-manager/report/community/comment
+ *@cookie token&uuid
+ *@method POST
+ *@param cid 被举报的社区ID
+ *@param pid 被举报的帖子ID
+ *@param ccid 被举报的评论ID
+ *@param uid 评论作者ID
+ *@param content 举报内容
+ *@return PResult
+ */
