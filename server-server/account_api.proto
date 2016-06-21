@@ -175,7 +175,7 @@ package service;
  *@cookie token&uuid
  *@uriParam from 来源
  *@uriParam uuid 用户ID
- *@return 成功返回PHeadImage，失败返回PbResult
+ *@return 成功返回PStringList，失败返回PbResult
  */
 
 /*=====================================*/

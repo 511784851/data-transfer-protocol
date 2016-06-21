@@ -69,11 +69,6 @@ message PUserEx {
 	map<string,string> userData = 22;// 用户数据
 }
 
-// 头像唯一ID
-message PHeadImage {
-	string HeadImgID = 1;
-}
-
 // 用户基础信息
 message PUserBase {
   int32 Level = 2;					// 用户等级
@@ -224,6 +219,8 @@ message PBlacklistCount {
  *@param link1 链接1
  *@param link2 链接2
  *@param link3 链接3
+ *@param areacode 地区代码
+ *@param areaname 地区名称
  *@return 返回PResult
  */
  
