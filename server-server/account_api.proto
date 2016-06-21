@@ -168,6 +168,16 @@ package service;
  *@return 成功返回(*PBlacklistCount, No_Error), 失败返回(nil, int32)
  */
 
+/*
+ *@note 获取用户头像唯一ID
+ *@uri /account/user/headimage
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam from 来源
+ *@uriParam uuid 用户ID
+ *@return 成功返回PHeadImage，失败返回PbResult
+ */
+
 /*=====================================*/
 //API V1 定义
 

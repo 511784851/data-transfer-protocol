@@ -69,6 +69,11 @@ message PUserEx {
 	map<string,string> userData = 22;// 用户数据
 }
 
+// 头像唯一ID
+message PHeadImage {
+	string HeadImgID = 1;
+}
+
 // 用户基础信息
 message PUserBase {
   int32 Level = 2;					// 用户等级

@@ -155,7 +155,7 @@ message PMsgIDList {
 	repeated string MsgID = 2;
 }
 
-message PSetting {
+message PNotifySetting {
 	bool mute = 1;
 }
 
