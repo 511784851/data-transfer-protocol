@@ -29,6 +29,7 @@ message PLastModifyInfo {
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param devSerial  手机序列号
+ *@param lastModify 最后修改时间
  *@param contactBook  手机联系人通信录。通讯录为json格式，并且经过base64编码。 
  *@param mode  上传通信的模式：all--全部更新模式；add--追加新增模式。
  *@return 返回PResult，上传成功的标志
