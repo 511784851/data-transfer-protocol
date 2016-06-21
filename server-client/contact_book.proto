@@ -43,12 +43,14 @@ message PLastModifyInfo {
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param devSerial  手机序列号
+ *@param pageSize  分页显示是每页记录数
+ *@param pageIndex  当前是第几页，页数的编号从1开始。 
  *@return 成功PContactLinkInfoList, 失败PResult
  */
  
 
 /*
- *@note 通讯录好友关系的下载。
+ *@note 通讯录好友关系的最后修改时间
  *@path /contact/book/lastModify
  *@method GET
  *@param uuid  用户的uuid。
