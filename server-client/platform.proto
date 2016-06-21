@@ -3,6 +3,11 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "PlatformProtos";
 
+//列出所有服务的状态（开启的还是关闭的）
+ message PServiceStatus {
+ 	map<string,bool> status = 1; 
+ }
+
 /*********微博***********/
 
 //被举报人列表
