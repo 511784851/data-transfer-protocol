@@ -3,33 +3,55 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "PlatformProtos";
 
-//列出所有服务的状态（开启的还是关闭的）
-message PServiceStatus {
-	map<string,bool> status = 1; 
-}
-
-//发布文字信息的来源（用于监管系统的验证文字信息是否合法中的参数）
-enum PFromType {
-	news = 0;
-	comment = 1;
-}
+/*********微博***********/
 
 //被举报人列表
-message PReportList {
-	repeated PReport list = 1;
+message PReportNewsList {
+	repeated PReportNews list = 1;
 }
 
 //被举报人的信息
-message PReport {
+message PReportNews {
 	int64 ID = 1; 
-	repeated PReporter informers = 2; 	//举报人
+	repeated PInformer informers = 2; 	//举报人
 	string tuid = 3; 					//被举报人
 	int64 postid = 4; 					//被举报的帖子
 	int64 isProcess = 5; 				//是否已经处理（没有处理为0，否则为处理的时间）
 }
 
+/*********用户***********/
+
+//被举报人列表
+message PReportUserList {
+	repeated PReportUser list = 1;
+}
+
+//被举报人的信息
+message PReportUser {
+	int64 ID = 1;
+	repeated PInformer informers = 2; 	//举报人列表
+	string uuid = 3; 					//被举报人
+	string content = 4; 				//举报内容
+	int64 isProcess = 5; 				//是否已经处理（没有处理为0，否则为处理的时间）
+}
+
+/*********社区用户***********/
+
+message PReportCommunityUserList {
+	repeated PReportCommunityUser list = 1;
+}
+
+message PReportCommunityUser {
+	int64 ID = 1; 
+	repeated PInformer informers = 2; //举报人列表
+	string communityID = 3; //社区ID
+	string uuid = 4; //被举报人
+	string content = 5; //举报内容
+	int64 isProcess = 6; //是否已经处理（没有处理为0，否则为处理的时间）
+}
+
 //举报人
-message PReporter {
+message PInformer {
 	string uuid = 1; //举报人
 	int64 time = 2; //举报时间
 }
@@ -56,13 +78,26 @@ message Pblacklist {
 	string val = 2;
 }
 
+/**************************API 定义***********************************/
+
 /**
- *用户举报
+ *举报微博
  *
- *@path /platform-manager/report/new
+ *@path /platform-manager/report/news
  *@cookie token&uuid
  *@method GET
  *@param uid 被举报人ID
  *@param id 被举报的帖子ID
  *@return PResult
  */
+ 
+ /**
+  * 举报用户
+  *
+  *@path /platform-manager/report/user
+  *@cookie token&uuid
+  *@method POST
+  *@param uid 被举报人ID
+  *@param content 举报内容
+  *@return PResult
+  */
