@@ -5,6 +5,7 @@ option java_outer_classname = "NotificationProtos";
 
 import "news.proto";
 import "comment.proto";
+import "account.proto";
 
 /*
 推送消息类型，
