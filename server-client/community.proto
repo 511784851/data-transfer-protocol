@@ -162,7 +162,7 @@ message PCommunityMemberList {
 message PCommunityFriend {
 	PUserBase User = 2;				// 好友信息
 	int32 Status = 3;				// 0表示未邀请，1表示已邀请
-	int32 Membership = 4;			// 0表示无关系，1是创建者，2是管理者
+	int32 Membership = 4;			// 0表示无关系，1是创建者，2是管理者，3是已关注社区
 }
 
 // 社区好友信息列表
@@ -257,7 +257,7 @@ message PCommunityNotificationUnRead {
  *@url param id 社区id
  *@method GET
  *@cookie token&uuid
- *@return 成功返回 PCommunityMe ，失败返回PResult
+ *@return ‘启用社区’成功返回 PCommunityMe ，失败返回 PResult ； ‘关闭社区’返回 PResult
  */
 
 /*
@@ -305,6 +305,17 @@ message PCommunityNotificationUnRead {
  *@note 发布社区公告帖子
  *@path /v1/community/post/notice
  *@url param id 社区id
+ *@method POST
+ *@body PCommunityPostUpload
+ *@cookie token&uuid
+ *@return返回 PResult
+ */
+
+/*
+ *@note 修改帖子内容
+ *@path /v1/community/post
+ *@url param id 社区id
+ *@url param postid 帖子id
  *@method POST
  *@body PCommunityPostUpload
  *@cookie token&uuid
@@ -743,7 +754,6 @@ message PCommunityNotificationUnRead {
  *@note 社区搜索
  *@path /v1/community/search/community
  *@method GET
- *@url param id 社区id
  *@url param type 可选参数 hot (热门); recommend (推荐); follow (关注的); all (所有)
  *@url param keyword 关键词 type=hot, type=recommend时，忽略这个字段
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
