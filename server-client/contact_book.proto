@@ -7,7 +7,7 @@ message PContactLinkInfo {
 	string uuid = 1;	// 通讯录联系人的uuid
 	string mobile = 2;	// 通讯录联系人的手机号码
 	string nickName = 3;	// 通讯录联系人的昵称
-	string hasLink = 4;	// 通讯录联系人是否已经加入好友
+	string hasLink = 4;	// 通讯录联系人是否已经加入好友。取值：1--已加好友，2--可以加好友，3--不能加好友
 }
 
 // 下载通讯录好友关系
