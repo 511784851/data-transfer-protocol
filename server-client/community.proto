@@ -111,6 +111,7 @@ message PCommunityCommentInfo {
 	string Content = 8;		// 评论的正文
 	PUserBase User = 9;		// 发表评论的用户
 	PCommunityCommentInfo QuoteInfo = 10; // 引用的评论信息
+	bool IsDelete = 11; // 标志帖子是否已经被删除，true为已删除，false为未删除
 }
 
 // 评论详情列表
