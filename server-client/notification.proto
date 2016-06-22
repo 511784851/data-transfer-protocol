@@ -150,6 +150,11 @@ message PNotifyCommunityInvite {
 	PUserBase User = 5; 		// 邀请我的用户
 }
 
+// 社区邀请通知消息列表
+message PNotifyCommunityInviteList {
+  repeated PNotifyCommunityInvite list = 1; // PNotifyCommunityInvite 列表
+}
+
 // 推送消息的个数
 message PMsgCount {
 	string Type = 2;
