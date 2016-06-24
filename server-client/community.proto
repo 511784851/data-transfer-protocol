@@ -87,6 +87,12 @@ message PCommunityPostList {
 	repeated PCommunityPostInfo PostInfo = 2;
 }
 
+// 帖子信息列表，包含被标旗数量
+message PCommunityFlagPostList {
+	repeated int32 FlagCount = 2;
+	repeated PCommunityPostInfo PostInfo = 3;
+}
+
 // ‘社区首页’返回的信息
 message PCommunityHome {
 	PCommunityInfo Info = 2;				// 我的社区信息
@@ -674,6 +680,18 @@ message PCommunityNotificationUnRead {
  *@return 成功返回 PCommunityFlagList ， 失败返回 PResult 
  */
 
+/*
+ *@note 标旗功能中查看用户帖子
+ *@path /v1/community/flag/userpost
+ *@method GET
+ *@url param id 社区id
+ *@url param uuid 要查看的用户uuid
+ *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return 成功返回  PCommunityFlagPostList ， 失败返回 PResult 
+ */
+ 
 /*
  *@note 移除标旗帖子
  *@path /v1/community/flag
