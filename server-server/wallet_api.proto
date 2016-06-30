@@ -1,0 +1,14 @@
+syntax = "proto3";
+package service; 
+
+/*=====================================*/
+//API定义
+
+/*
+ *@note 充值
+ *@uri /v1/wallet/diamond/recharge
+ *@method POST
+ *@cookie token&uuid
+ *@postParam money 金额(真实的钱)
+ *@return 返回PResult
+ */

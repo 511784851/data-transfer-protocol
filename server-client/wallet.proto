@@ -1,0 +1,190 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "WalletProtos";
+
+/*=====================================*/
+// 结构定义
+
+// 钻石信息
+message PDiamondInfo {
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
+	int32  type = 3;       // 类型（充值、购物、等额红包、拼手气红包）
+	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 5; // 头像地址
+	int32  money = 7;      // 钻数
+	int64  createTime = 8; // 创建时间
+}
+
+// 钻石信息列表
+message PDiamondInfoList {
+	PDiamondInfo list = 1; // 列表
+}
+
+// 红包信息
+message PRedPacketInfo {
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
+	int32  type = 3;       // 类型（等额红包、拼手气红包）
+	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 5; // 头像地址
+	int32  money = 7;      // 钻数
+	int64  createTime = 8; // 创建时间
+}
+
+// 红包信息列表
+message PRedPacketInfoList {
+	PRedPacketInfo list = 1; // 列表
+}
+
+// 抢红包成员
+message PRedPacketParticipant {
+	string name = 1;       // 名称
+	string headImgURL = 2; // 头像地址
+	int32  money = 3;      // 钻数
+	int64  createTime = 4; // 创建时间
+}
+
+// 红包详细信息
+message PRedPacketDetail {
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
+	int32  type = 3;       // 类型（等额红包、拼手气红包）
+	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 5; // 头像地址
+	int32  money = 6;      // 钻数
+	string remark = 7;     // 备注
+	repeated PRedPacketParticipant list = 8;  // 抢红包参与者
+	int64  createTime = 9; // 创建时间
+}
+
+// 礼物信息
+message PWalletGiftInfo {
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
+	string headImgURL = 3; // 头像地址
+	string giftId = 4;     // 礼物ID
+	int32  money = 5;      // 钻数
+	int32  num = 6;        // 数量
+	int64  createTime = 6; // 创建时间
+}
+
+// 礼物信息列表
+message PWalletGiftInfoList {
+	PWalletGiftInfo list = 1;
+}
+
+// 帮助信息
+message PWalletHelpInfo {
+	string id = 1;	       // 编号
+	string title = 2;      // 标题
+	string content = 3;    // 内容
+	int64  createTime = 6; // 创建时间
+}
+
+// 帮助信息列表
+message PWalletHelpInfoList {
+	PWalletHelpInfo list = 1;
+}
+
+/*=====================================*/
+// API定义
+
+/*
+ *@note 获取钻石与红包记录
+ *@uri /v1/wallet/diamond/record
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam start  开始查询时间(例如:2016-05)
+ *@uriParam end    结束查询时间(例如:2016-12)
+ *@uriParam offset 偏移
+ *@uriParam count  数量
+ *@uriParam type   类型(增加、支出)
+ *@return 成功返回PDiamondInfoList，失败返回PResult
+ */
+
+/*
+ *@note 发红包
+ *@uri /v1/wallet/redpacket/send
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam rtype    红包类型（等额红包、拼手气红包）
+ *@uriParam count    红包数量
+ *@uriParam money    红包金额
+ *@uriParam remark   备注
+ *@uriParam ttype    目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+ *@uriParam id       其它ID(可以是UUID、群ID等)
+ *@uriParam location GPS定位信息
+ *@uriParam exdata   扩展数据（可以放发社交与论坛内容）
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取红包记录
+ *@uri /v1/wallet/redpacket/record
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam start  开始查询时间(例如:2016-05)
+ *@uriParam end    结束查询时间(例如:2016-12)
+ *@uriParam offset 偏移
+ *@uriParam count  数量
+ *@uriParam type   类型（收到、发出）
+ *@return 成功返回PRedPacketInfoList，失败返回PResult
+ */
+
+/*
+ *@note 获取红包详情
+ *@uri /v1/wallet/redpacket/detail
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam id 红包编号
+ *@return 成功返回PRedPacketDetail，失败返回PResult
+ */
+
+/*
+ *@note 送礼物
+ *@uri /v1/wallet/gift/send
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam id 礼物ID
+ *@uriParam count 数量
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取礼物记录
+ *@uri /v1/wallet/gift/record
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam start  开始查询时间(例如:2016-05)
+ *@uriParam end    结束查询时间(例如:2016-12)
+ *@uriParam type   类型（收到、送出）
+ *@return 成功返回PWalletGiftInfoList，失败返回PResult
+ */
+
+/*
+ *@note 设置支付密码
+ *@uri /v1/wallet/paypwd
+ *@method POST
+ *@cookie token&uuid
+ *@uriParam password 支付密码
+ *@return 返回PResult
+ */
+
+/*
+ *@note 认证支付密码
+ *@uri /v1/wallet/paypwd/auth
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam password 支付密码
+ *@return 返回PResult
+ */
+
+/*
+ *@note 帮助中心
+ *@uri /v1/wallet/help/record
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回PWalletHelpInfoList
+ */
