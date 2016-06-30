@@ -323,6 +323,7 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/post
  *@url param id 社区id
  *@url param postid 帖子id
+ *@url param type 0为修改原帖子，1为发布新帖子
  *@method POST
  *@body PCommunityPostUpload
  *@cookie token&uuid
@@ -440,17 +441,6 @@ message PCommunityNotificationUnRead {
 
 
 // --- 社区设定
-/*
- *@note 设置-通知
- *@path /v1/community/setting/notice
- *@method GET
- *@url param id 社区id
- *@url param offset 
- *@url param count 获取通知个数
- *@cookie token&uuid
- *@return 
- */
-
 /*
  *@note 设置-成员列表
  *@path /v1/community/setting/member

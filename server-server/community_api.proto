@@ -1,0 +1,11 @@
+syntax = "proto3";
+package service; 
+
+/*
+ *@note 通过社区id获取社区基础信息列表
+ *@URL /v1/community/inside/communitybaseinfo
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param id 社区id，多个社区id以,分割
+ *@return 成功返回 PCommunityBaseList ，失败返回 PResult; 
+ */
