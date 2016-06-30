@@ -96,6 +96,11 @@ message PWalletHelpInfoList {
 	repeated PWalletHelpInfo list = 1;
 }
 
+// 支付安全码
+message PWalletToken {
+	string token = 1;
+}
+
 /*=====================================*/
 // API定义
 
@@ -117,6 +122,7 @@ message PWalletHelpInfoList {
  *@uri /v1/wallet/redpacket/send
  *@method GET
  *@cookie token&uuid
+ *@uriParam paytoken 支付Token
  *@uriParam rtype    红包类型（等额红包、拼手气红包）
  *@uriParam count    红包数量
  *@uriParam money    红包金额
@@ -184,6 +190,7 @@ message PWalletHelpInfoList {
  *@uri /v1/wallet/paypwd
  *@method POST
  *@cookie token&uuid
+ *@uriParam payToken 支付Token
  *@uriParam password 支付密码
  *@return 返回PResult
  */
@@ -194,7 +201,24 @@ message PWalletHelpInfoList {
  *@method GET
  *@cookie token&uuid
  *@uriParam password 支付密码
+ *@return 返回PWalletToken
+ */
+
+/*
+ *@note 发送验证码
+ *@uri /v1/wallet/authcode/send
+ *@method GET
+ *@cookie token&uuid
  *@return 返回PResult
+ */
+
+/*
+ *@note 认证验证码
+ *@uri /v1/wallet/authcode/auth
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam code 验证码
+ *@return 返回PWalletToken
  */
 
 /*
