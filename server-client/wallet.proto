@@ -35,7 +35,7 @@ message PRedPacketInfo {
 
 // 红包信息列表
 message PRedPacketInfoList {
-	PRedPacketInfo list = 1; // 列表
+	repeated PRedPacketInfo list = 1; // 列表
 }
 
 // 抢红包成员
@@ -59,6 +59,14 @@ message PRedPacketDetail {
 	int64  createTime = 9; // 创建时间
 }
 
+// 抢红包返回信息
+message PGrabRedPacketInfo {
+	string id = 1;                    // 编号
+	int32 money = 2;                  // 抢到的金额
+	string remark = 3;                // 备注
+	repeated PRedPacketInfo list = 4; // 红包列表
+}
+
 // 礼物信息
 message PWalletGiftInfo {
 	string id = 1;	       // 编号
@@ -72,7 +80,7 @@ message PWalletGiftInfo {
 
 // 礼物信息列表
 message PWalletGiftInfoList {
-	PWalletGiftInfo list = 1;
+	repeated PWalletGiftInfo list = 1;
 }
 
 // 帮助信息
@@ -85,7 +93,7 @@ message PWalletHelpInfo {
 
 // 帮助信息列表
 message PWalletHelpInfoList {
-	PWalletHelpInfo list = 1;
+	repeated PWalletHelpInfo list = 1;
 }
 
 /*=====================================*/
@@ -100,7 +108,7 @@ message PWalletHelpInfoList {
  *@uriParam end    结束查询时间(例如:2016-12)
  *@uriParam offset 偏移
  *@uriParam count  数量
- *@uriParam type   类型(增加、支出)
+ *@uriParam type   类型(0:全部、1:增加、2:支出)
  *@return 成功返回PDiamondInfoList，失败返回PResult
  */
 
@@ -118,6 +126,14 @@ message PWalletHelpInfoList {
  *@uriParam location GPS定位信息
  *@uriParam exdata   扩展数据（可以放发社交与论坛内容）
  *@return 返回PResult
+ */
+
+/*
+ *@note 抢红包
+ *@uri /v1/wallet/redpacket/grab
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回PGrabRedPacketInfo
  */
 
 /*
