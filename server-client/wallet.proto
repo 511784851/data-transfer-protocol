@@ -101,6 +101,18 @@ message PWalletToken {
 	string token = 1;
 }
 
+// 银行卡信息
+message PBankCardInfo {
+	string id = 1;           // 编号
+	string cardholder = 2;   // 持卡人
+	string cardNumber = 3;   // 卡号
+}
+
+// 银行卡信息列表
+message PBankCardInfoList {
+	repeated PBankCardInfo list = 1;
+}
+
 /*=====================================*/
 // API定义
 
@@ -187,11 +199,11 @@ message PWalletToken {
 
 /*
  *@note 设置支付密码
- *@uri /v1/wallet/paypwd
+ *@uri /v1/wallet/paypwd/set
  *@method POST
  *@cookie token&uuid
- *@uriParam payToken 支付Token
- *@uriParam password 支付密码
+ *@postParam payToken 支付Token
+ *@postParam password 支付密码
  *@return 返回PResult
  */
 
@@ -219,6 +231,25 @@ message PWalletToken {
  *@cookie token&uuid
  *@uriParam code 验证码
  *@return 返回PWalletToken
+ */
+
+/*
+ *@note 设置银行卡信息
+ *@uri /v1/wallet/bankcard/set
+ *@method POST
+ *@cookie token&uuid
+ *@postParam id         编号
+ *@postParam cardholder 持卡人
+ *@postParam cardNumber 卡号
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取所有银行卡信息
+ *@uri /v1/wallet/bankcards/get
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回PBankCardInfoList
  */
 
 /*
