@@ -6,6 +6,11 @@ option java_outer_classname = "WalletProtos";
 /*=====================================*/
 // 结构定义
 
+// 钻石数量信息
+message PDiamondCount {
+	int32 count = 1;
+}
+
 // 钻石信息
 message PDiamondInfo {
 	string id = 1;	       // 编号
@@ -67,6 +72,11 @@ message PGrabRedPacketInfo {
 	repeated PRedPacketInfo list = 4; // 红包列表
 }
 
+// 礼物数量信息
+message PWalletGiftCount {
+	int32 count = 1;
+}
+
 // 礼物信息
 message PWalletGiftInfo {
 	string id = 1;	       // 编号
@@ -115,6 +125,14 @@ message PBankCardInfoList {
 
 /*=====================================*/
 // API定义
+
+/*
+ *@note 获取钻数量
+ *@uri /v1/wallet/diamond/count
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PDiamondCount，失败返回PResult
+ */
 
 /*
  *@note 获取钻石与红包记录
@@ -174,6 +192,14 @@ message PBankCardInfoList {
  *@cookie token&uuid
  *@uriParam id 红包编号
  *@return 成功返回PRedPacketDetail，失败返回PResult
+ */
+
+/*
+ *@note 获取礼物数量
+ *@uri /v1/wallet/gift/count
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PWalletGiftCount，失败返回PResult
  */
 
 /*
