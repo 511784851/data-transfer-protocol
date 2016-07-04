@@ -1,0 +1,24 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "PaymentAlipayProtos";
+
+
+// 生成订单的编号和订单的签名信息
+message PAlipayOrderInfo {
+	string orderNo = 1;	// 订单的编号
+	string payInfo = 2;	// 订单的签名信息
+}
+
+/*
+ *@note 上传手机通讯录。
+ *@path /pay/alipay/paySign
+ *@method GET
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@param orderSubject  订单的主题
+ *@param orderBody 订单的内容描述
+ *@param orderPrice  订单的总价。以人民币的元为单位，精细到小数点后面两位。
+ *@return 成功PAlipayOrderInfo, 失败PResult
+ */
+ 
