@@ -24,7 +24,10 @@ message PDiamondInfo {
 
 // 钻石信息列表
 message PDiamondInfoList {
-	repeated PDiamondInfo list = 1; // 列表
+	int32 amount  = 1; // 总钻数
+	int32 earning = 2; // 收入总钻数
+	int32 expend  = 3; // 支出总钻数
+	repeated PDiamondInfo list = 4; // 列表
 }
 
 // 红包信息
@@ -270,31 +273,4 @@ message PBankCardInfoList {
  *@cookie token&uuid
  *@uriParam code 验证码
  *@return 返回PWalletToken
- */
-
-/*
- *@note 设置银行卡信息
- *@uri /v1/wallet/bankcard/set
- *@method POST
- *@cookie token&uuid
- *@postParam id         编号
- *@postParam cardholder 持卡人
- *@postParam cardNumber 卡号
- *@return 返回PResult
- */
-
-/*
- *@note 获取所有银行卡信息
- *@uri /v1/wallet/bankcards/get
- *@method GET
- *@cookie token&uuid
- *@return 返回PBankCardInfoList
- */
-
-/*
- *@note 帮助中心
- *@uri /v1/wallet/help/record
- *@method GET
- *@cookie token&uuid
- *@return 返回PWalletHelpInfoList
  */
