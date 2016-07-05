@@ -11,69 +11,68 @@ message PDiamondCount {
 	int32 count = 1;
 }
 
-// 钻石记录信息
+// 钻石信息
 message PDiamondInfo {
-	string id         = 1; // 编号
-	string name       = 2; // 名称
-	int32  type       = 3; // 类型（充值、购物、等额红包、拼手气红包）
-	int32  target     = 4; // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
+	int32  type = 3;       // 类型（充值、购物、等额红包、拼手气红包）
+	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
 	string headImgURL = 5; // 头像地址
-	int32  money      = 7; // 钻数
-	int64  createTime = 8; // 创建时间
+	int32  money = 6;      // 钻数
+	int64  createTime = 7; // 创建时间
 }
 
-// 钻石记录信息列表
+// 钻石信息列表
 message PDiamondInfoList {
-	int32 amount  = 1; // 总钻数
-	int32 earning = 2; // 收入总钻数
-	int32 expend  = 3; // 支出总钻数
-	repeated PDiamondInfo list = 4; // 列表
+	repeated PDiamondInfo list = 1; // 列表
 }
 
-// 红包记录信息
+// 红包信息
 message PRedPacketInfo {
-	string id         = 1; // 编号
-	string name       = 2; // 名称
-	int32  type       = 3; // 类型（等额红包、拼手气红包）
-	int32  target     = 4; // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
+	int32  type = 3;       // 类型（等额红包、拼手气红包）
+	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
 	string headImgURL = 5; // 头像地址
-	int32  money      = 7; // 钻数
-	int64  createTime = 8; // 创建时间
+	float  money = 6;      // 钻数
+	int64  createTime = 7; // 创建时间
 }
 
-// 红包记录信息列表
+// 红包信息列表
 message PRedPacketInfoList {
 	repeated PRedPacketInfo list = 1; // 列表
 }
 
 // 抢红包成员
 message PRedPacketParticipant {
-	string name       = 1; // 名称
-	string headImgURL = 2; // 头像地址
-	int32  money      = 3; // 钻数
-	int64  createTime = 4; // 创建时间
+	string uuid = 1;       // 用户ID
+	string name = 2;       // 名称
+	string headImgURL = 3; // 头像地址
+	float  money = 4;      // 钻数
+	int64  createTime = 5; // 创建时间
 }
 
 // 红包详细信息
 message PRedPacketDetail {
-	string id         = 1; // 编号
-	string name       = 2; // 名称
-	int32  type       = 3; // 类型（等额红包、拼手气红包）
-	int32  target     = 4; // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
-	string headImgURL = 5; // 头像地址
-	int32  money      = 6; // 钻数
-	string remark     = 7; // 备注
-	repeated PRedPacketParticipant list = 8;  // 抢红包参与者
-	int64  createTime = 9; // 创建时间
+	string id = 1;	       // 编号
+	string uuid = 2;       // 用户ID
+	string name = 3;       // 名称
+	int32  type = 4;       // 类型（等额红包、拼手气红包）
+	int32  target = 5;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 6; // 头像地址
+	int32  money = 7;      // 钻数
+	string remark = 8;     // 备注
+	repeated PRedPacketParticipant list = 9;  // 抢红包参与者
+	int64  createTime = 10; // 创建时间
 }
 
 // 抢红包返回信息
 message PGrabRedPacketInfo {
-	string         id            = 1; // 编号
-	int32          money         = 2; // 抢到的金额
-	string         remark        = 3; // 备注
-	PRedPacketInfo redPacketInfo = 4; // 红包列表
-	repeated PRedPacketParticipant list = 8;  // 抢红包参与者
+	string id = 1;                    // 编号
+	float money = 2;                  // 抢到的金额
+	string remark = 3;                // 备注
+	PRedPacketInfo redPacketInfo = 4; // 红包信息
+	repeated PRedPacketParticipant list = 5;  // 抢红包参与者
 }
 
 // 礼物数量信息
@@ -83,12 +82,12 @@ message PWalletGiftCount {
 
 // 礼物信息
 message PWalletGiftInfo {
-	string id         = 1; // 编号
-	string name       = 2; // 名称
+	string id = 1;	       // 编号
+	string name = 2;       // 名称
 	string headImgURL = 3; // 头像地址
-	string giftId     = 4; // 礼物ID
-	int32  money      = 5; // 钻数
-	int32  num        = 6; // 数量
+	string giftId = 4;     // 礼物ID
+	int32  money = 5;      // 钻数
+	int32  count = 6;      // 数量
 	int64  createTime = 7; // 创建时间
 }
 
@@ -97,9 +96,34 @@ message PWalletGiftInfoList {
 	repeated PWalletGiftInfo list = 1;
 }
 
+// 帮助信息
+message PWalletHelpInfo {
+	string id = 1;	       // 编号
+	string title = 2;      // 标题
+	string content = 3;    // 内容
+	int64  createTime = 4; // 创建时间
+}
+
+// 帮助信息列表
+message PWalletHelpInfoList {
+	repeated PWalletHelpInfo list = 1;
+}
+
 // 支付安全码
 message PWalletToken {
 	string token = 1;
+}
+
+// 银行卡信息
+message PBankCardInfo {
+	string id = 1;           // 编号
+	string cardholder = 2;   // 持卡人
+	string cardNumber = 3;   // 卡号
+}
+
+// 银行卡信息列表
+message PBankCardInfoList {
+	repeated PBankCardInfo list = 1;
 }
 
 /*=====================================*/
@@ -114,15 +138,15 @@ message PWalletToken {
  */
 
 /*
- *@note 获取钻石变动记录
+ *@note 获取钻石与红包记录
  *@uri /v1/wallet/diamond/record
  *@method GET
  *@cookie token&uuid
- *@uriParam start  开始查询时间(例如:2016-05)
- *@uriParam end    结束查询时间(例如:2016-12)
- *@uriParam offset 偏移
- *@uriParam count  数量
- *@uriParam type   类型(0:全部、1:增加、2:支出)
+ *@uriParam startdate  开始查询日期(例如:201605)
+ *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam offset     偏移
+ *@uriParam count      数量
+ *@uriParam type       类型(0:全部、1:增加、2:支出)
  *@return 成功返回PDiamondInfoList，失败返回PResult
  */
 
@@ -132,20 +156,20 @@ message PWalletToken {
  *@method GET
  *@cookie token&uuid
  *@uriParam paytoken 支付Token
- *@uriParam rtype    红包类型（等额红包、拼手气红包）
+ *@uriParam rtype    红包类型（0:等额红包、1:拼手气红包）
  *@uriParam count    红包数量
  *@uriParam money    红包金额
  *@uriParam remark   备注
- *@uriParam ttype    目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+ *@uriParam target   目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
  *@uriParam id       其它ID(可以是UUID、群ID等)
  *@uriParam location GPS定位信息
  *@uriParam exdata   扩展数据（可以放发社交与论坛内容）
- *@return 成功返回PRedPacketDetail,失败返回PResult
+ *@return 返回PResult
  */
 
 /*
  *@note 抢红包
- *@uri /v1/wallet/redpacket/grab/:id
+ *@uri /v1/wallet/redpacket/grab
  *@method GET
  *@cookie token&uuid
  *@return 返回PGrabRedPacketInfo
@@ -156,17 +180,17 @@ message PWalletToken {
  *@uri /v1/wallet/redpacket/record
  *@method GET
  *@cookie token&uuid
- *@uriParam start  开始查询时间(例如:2016-05)
- *@uriParam end    结束查询时间(例如:2016-12)
- *@uriParam offset 偏移
- *@uriParam count  数量
- *@uriParam type   类型（收到、发出）
+ *@uriParam startdate  开始查询日期(例如:201605)
+ *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam offset     偏移
+ *@uriParam count      数量
+ *@uriParam type       类型（0:收到、1:发出）
  *@return 成功返回PRedPacketInfoList，失败返回PResult
  */
 
 /*
  *@note 获取红包详情
- *@uri /v1/wallet/redpacket/detail/:id
+ *@uri /v1/wallet/redpacket/detail
  *@method GET
  *@cookie token&uuid
  *@uriParam id 红包编号
@@ -179,6 +203,16 @@ message PWalletToken {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PWalletGiftCount，失败返回PResult
+ */
+
+/*
+ *@note 收礼物
+ *@uri /v1/wallet/gift/recv
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam id 礼物ID
+ *@uriParam count 数量
+ *@return 返回PResult
  */
 
 /*
@@ -196,9 +230,9 @@ message PWalletToken {
  *@uri /v1/wallet/gift/record
  *@method GET
  *@cookie token&uuid
- *@uriParam start  开始查询时间(例如:2016-05)
- *@uriParam end    结束查询时间(例如:2016-12)
- *@uriParam type   类型（收到、送出）
+ *@uriParam startdate  开始查询日期(例如:201605)
+ *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam type       类型（0:收到、1:送出）
  *@return 成功返回PWalletGiftInfoList，失败返回PResult
  */
 
@@ -236,4 +270,31 @@ message PWalletToken {
  *@cookie token&uuid
  *@uriParam code 验证码
  *@return 返回PWalletToken
+ */
+
+/*
+ *@note 设置银行卡信息
+ *@uri /v1/wallet/bankcard/set
+ *@method POST
+ *@cookie token&uuid
+ *@postParam id         编号
+ *@postParam cardholder 持卡人
+ *@postParam cardNumber 卡号
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取所有银行卡信息
+ *@uri /v1/wallet/bankcards/get
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回PBankCardInfoList
+ */
+
+/*
+ *@note 帮助中心
+ *@uri /v1/wallet/help/record
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回PWalletHelpInfoList
  */
