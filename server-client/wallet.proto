@@ -140,12 +140,12 @@ message PWalletToken {
  *@uriParam id       其它ID(可以是UUID、群ID等)
  *@uriParam location GPS定位信息
  *@uriParam exdata   扩展数据（可以放发社交与论坛内容）
- *@return 返回PResult
+ *@return 成功返回PRedPacketDetail,失败返回PResult
  */
 
 /*
  *@note 抢红包
- *@uri /v1/wallet/redpacket/grab
+ *@uri /v1/wallet/redpacket/grab/:id
  *@method GET
  *@cookie token&uuid
  *@return 返回PGrabRedPacketInfo
@@ -166,7 +166,7 @@ message PWalletToken {
 
 /*
  *@note 获取红包详情
- *@uri /v1/wallet/redpacket/detail
+ *@uri /v1/wallet/redpacket/detail/:id
  *@method GET
  *@cookie token&uuid
  *@uriParam id 红包编号
