@@ -8,7 +8,7 @@ option java_outer_classname = "WalletProtos";
 
 // 钻石数量信息
 message PDiamondCount {
-	int32 count = 1;
+	float count = 1;
 }
 
 // 钻石信息
@@ -18,15 +18,15 @@ message PDiamondInfo {
 	int32  type = 3;       // 类型（充值、购物、等额红包、拼手气红包）
 	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
 	string headImgURL = 5; // 头像地址
-	int32  money = 6;      // 钻数
+	float  money = 6;      // 钻数
 	int64  createTime = 7; // 创建时间
 }
 
 // 钻石信息列表
 message PDiamondInfoList {
-	int32 amount  = 1; // 总钻数
-	int32 earning = 2; // 收入总钻数
-	int32 expend  = 3; // 支出总钻数
+	float amount  = 1; // 总钻数
+	float earning = 2; // 收入总钻数
+	float expend  = 3; // 支出总钻数
 	repeated PDiamondInfo list = 4; // 列表
 }
 
