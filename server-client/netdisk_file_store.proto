@@ -32,13 +32,26 @@ message PListNetFileInfo {
  *@return 成功PListNetFileInfo, 失败PResult
  */
  
+ message PUpdateFileInfo {
+	string extension = 1;
+	string fileUrl = 2;
+	string fileSize = 3;
+	string fileDigest  = 4;
+	string title = 5;
+	string description = 6;
+	string remark = 7;
+ }
+ 
+ message PListUpdateFileInfo {
+	repeated PUpdateFileInfo uploadFiles = 1;
+}
  /*
  *@note 上传文件到网盘中
  *@path /netdisk/file/upload
  *@method POST
  *@cookie uuid  用户的uuid。
  *@cookie token  用户的token。
- *@param files  上传的多个文件，为json格式，并且经过base64编码。 
+ *@param files  上传的多个文件，为PUpdateFileInfo格式，并且经过base64编码。 
  *@param protectDays  文件保护的天数，在保护的天数内，付费的用户才可以看。是整数；0代表公开，其他数字代表保护的天数。 
  *@param saveMode  保持模式。0--表示正常模式，遇到相同文件名时会返回失败；1--覆盖模式，遇到相同文件名时直接覆盖；2--更名模式，遇到相同文件名时会在文件名称后面加后缀(1),(2),(3),(....)	
  *@return 返回PResult，上传成功的标志。
