@@ -5,7 +5,13 @@ option java_outer_classname = "PlatformProtos";
 
 //列出所有服务的状态（开启的还是关闭的）
  message PServiceStatus {
- 	map<string,bool> status = 1; 
+ 	map<string,PService> status = 1; 
+ }
+ 
+ //每个服务的状态
+ message PService {
+	bool status = 1;
+	bool canDo = 2; //能否被操作
  }
 
 /*********微博***********/
