@@ -4,7 +4,7 @@ option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "DataPublishingProtos";
 
 //import "account.proto";
-//import "news.proto";
+import "news.proto";
 
 message PWords {
 	repeated string word = 1;
@@ -24,6 +24,19 @@ message PGuy {
 
 message PGuyList {
 	repeated PGuy guy = 1;
+}
+
+message PTopicNews {
+	//话题名称不带#号的
+	string topic = 1;
+	//相关的话题
+	repeated string rel = 2;
+	//话题查看数
+	int32 views = 3;
+	//参与该话题的帖子数
+	int32 count = 4;
+	//博文列表
+	repeated PArticle news = 5;
 }
 
 message PSearchResults {
@@ -125,6 +138,29 @@ message PDaysData {
  *@param pagesize 页大小
  *@return 成功返回PNews，失败返回PResult
  */
+
+/*
+ *@note 搜索话题
+ *@path /datapublishing/topic/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param uuid 如果要指定用户搜索，请给出此用户的uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PWords，失败返回PResult
+ */
+
+/*
+ *@note 查看话题
+ *@path /datapublishing/topic/view
+ *@method GET
+ *@cookie token&uuid
+ *@param topic 两头不带#号的话题名
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PTopicNews（当页号大于1时，返回PNews），失败返回PResult
+ */
  
 /*
  *@note 热门微博
@@ -158,6 +194,16 @@ message PDaysData {
  *@return 成功返回PCommunityBaseList，失败返回PResult
  */ 
  
+/*
+ *@note 热门话题
+ *@path /datapublishing/topic/hot
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PWords（不带#号），失败返回PResult
+ */ 
+
  /*
  *@note 推荐微博
  *@path /datapublishing/recommend/news
@@ -178,6 +224,16 @@ message PDaysData {
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PGuyList，失败返回PResult
+ */
+
+ /*
+ *@note 推荐话题
+ *@path /datapublishing/topic/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PWords(不带#号)，失败返回PResult
  */
 
 /*
