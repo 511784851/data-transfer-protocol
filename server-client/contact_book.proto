@@ -7,7 +7,7 @@ message PContactLinkInfo {
 	string uuid = 1;	// 通讯录联系人的uuid
 	string mobile = 2;	// 通讯录联系人的手机号码
 	string nickName = 3;	// 通讯录联系人的昵称
-	string hasLink = 4;	// 通讯录联系人是否已经加入好友
+	string hasLink = 4;	// 通讯录联系人是否已经加入好友。取值：1--已加好友，2--可以加好友，3--不能加好友
 }
 
 // 下载通讯录好友关系
@@ -26,8 +26,8 @@ message PLastModifyInfo {
  *@note 上传手机通讯录。
  *@path /contact/book/upload
  *@method POST
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
  *@param devSerial  手机序列号
  *@param lastModify 最后修改时间
  *@param contactBook  手机联系人通信录。通讯录为json格式，并且经过base64编码。 
@@ -40,8 +40,8 @@ message PLastModifyInfo {
  *@note 通讯录好友关系的下载。
  *@path /contact/book/listContact
  *@method GET
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
  *@param devSerial  手机序列号
  *@param pageSize  分页显示是每页记录数
  *@param pageIndex  当前是第几页，页数的编号从1开始。 
@@ -53,8 +53,8 @@ message PLastModifyInfo {
  *@note 通讯录好友关系的最后修改时间
  *@path /contact/book/lastModify
  *@method GET
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
  *@param devSerial  手机序列号
  *@return 成功PLastModifyInfo, 失败PResult
  */

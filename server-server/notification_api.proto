@@ -32,6 +32,12 @@ message NotifyNewsAtMeta {
 	string uuidB 			= 3; //发帖用户id
 }
 
+// 社区邀请通知元消息
+message PNotifyCommunityInviteMeta {
+	int64 communityId = 1; 	// 邀请加入的社区的id
+	string uuid = 2;			// 发起邀请用户的请求
+}
+
 // 所有推送消息的基础信息
 message PNotifyBaseMsg {
 	int64 msgID = 1;// 推送消息的id，全局唯一

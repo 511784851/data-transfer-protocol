@@ -87,6 +87,12 @@ message PCommunityPostList {
 	repeated PCommunityPostInfo PostInfo = 2;
 }
 
+// 帖子信息列表，包含被标旗数量
+message PCommunityFlagPostList {
+	repeated int32 FlagCount = 2;
+	repeated PCommunityPostInfo PostInfo = 3;
+}
+
 // ‘社区首页’返回的信息
 message PCommunityHome {
 	PCommunityInfo Info = 2;				// 我的社区信息
@@ -111,6 +117,7 @@ message PCommunityCommentInfo {
 	string Content = 8;		// 评论的正文
 	PUserBase User = 9;		// 发表评论的用户
 	PCommunityCommentInfo QuoteInfo = 10; // 引用的评论信息
+	bool IsDelete = 11; // 标志帖子是否已经被删除，true为已删除，false为未删除
 }
 
 // 评论详情列表
@@ -316,6 +323,7 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/post
  *@url param id 社区id
  *@url param postid 帖子id
+ *@url param type 0为修改原帖子，1为发布新帖子
  *@method POST
  *@body PCommunityPostUpload
  *@cookie token&uuid
@@ -433,17 +441,6 @@ message PCommunityNotificationUnRead {
 
 
 // --- 社区设定
-/*
- *@note 设置-通知
- *@path /v1/community/setting/notice
- *@method GET
- *@url param id 社区id
- *@url param offset 
- *@url param count 获取通知个数
- *@cookie token&uuid
- *@return 
- */
-
 /*
  *@note 设置-成员列表
  *@path /v1/community/setting/member
@@ -673,6 +670,18 @@ message PCommunityNotificationUnRead {
  *@return 成功返回 PCommunityFlagList ， 失败返回 PResult 
  */
 
+/*
+ *@note 标旗功能中查看用户帖子
+ *@path /v1/community/flag/userpost
+ *@method GET
+ *@url param id 社区id
+ *@url param uuid 要查看的用户uuid
+ *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
+ *@url param count 获取帖子个数
+ *@cookie token&uuid
+ *@return 成功返回  PCommunityFlagPostList ， 失败返回 PResult 
+ */
+ 
 /*
  *@note 移除标旗帖子
  *@path /v1/community/flag
