@@ -20,6 +20,7 @@ message PArticle {
 	PVideo video = 8;            //视频
 	PAudio audio = 9;            //音频
 	bool onOSS = 10;             //忽略该字段...
+	int64 pubishTime = 11;       //发布时间，上传时不用填
 	string position = 12;        //忽略该字段...
 	string tag = 13;             //忽略该字段...
 	bool self = 14;              //这篇文章是查看人自己的写的，上传时不用填
@@ -346,4 +347,3 @@ message PNewsExist {
  *@return 返回html文件
  *@example /news/shareshow?id=08771bd9-46e4-440b-bdbc-5ca3f857cbdc:3
  */
-	int64 pubishTime = 11;       //发布时间
