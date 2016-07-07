@@ -84,7 +84,7 @@ message PDayData {
 message PDaysData {
 	repeated PDayData data = 1;
 	// 给定日期区间的最小粉丝数
-	int32 minFans = 2
+	int32 minFans = 2;
 	// 给定日期区间的最大粉丝数
 	int32 maxFans = 3;
 }
