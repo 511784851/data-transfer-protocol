@@ -36,7 +36,7 @@ message PTopicNews {
 	//参与该话题的帖子数
 	int32 count = 4;
 	//博文列表
-	repeated PArticle news = 5;
+	repeated PArticle Articles = 5;
 }
 
 message PSearchResults {
@@ -83,6 +83,8 @@ message PDayData {
 
 message PDaysData {
 	repeated PDayData data = 1;
+	// 给定日期区间的最大粉丝数
+	int32 maxFans = 2;
 }
 
 
@@ -91,7 +93,7 @@ message PDaysData {
  *@path /datapublishing/search/hot
  *@method GET
  *@cookie token&uuid
- *@param stype 搜索类型，值包括（user、news、all），下同
+ *@param stype 搜索类型，值包括（user、news、topic、all），下同
  *@param size 需要的热词数量
  *@return 成功返回PWords，失败返回PResult
  */
