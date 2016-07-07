@@ -120,8 +120,8 @@ message PWalletToken {
  *@uri /v1/wallet/diamond/record
  *@method GET
  *@cookie token&uuid
- *@uriParam startdate  开始查询日期(例如:201605)
- *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam offset     偏移
  *@uriParam count      数量
  *@uriParam type       类型(0:全部、1:增加、2:支出)
@@ -158,8 +158,8 @@ message PWalletToken {
  *@uri /v1/wallet/redpacket/record
  *@method GET
  *@cookie token&uuid
- *@uriParam startdate  开始查询日期(例如:201605)
- *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam offset     偏移
  *@uriParam count      数量
  *@uriParam type       类型（0:收到、1:发出）
@@ -208,8 +208,8 @@ message PWalletToken {
  *@uri /v1/wallet/gift/record
  *@method GET
  *@cookie token&uuid
- *@uriParam startdate  开始查询日期(例如:201605)
- *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam type       类型（0:收到、1:送出）
  *@return 成功返回PWalletGiftInfoList，失败返回PResult
  */
