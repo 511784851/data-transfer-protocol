@@ -683,7 +683,7 @@ message PCommunityNotificationUnRead {
  */
  
 /*
- *@note 移除标旗帖子
+ *@note 管理员取消帖子的标旗状态
  *@path /v1/community/flag
  *@method DELETE
  *@url param id 社区id

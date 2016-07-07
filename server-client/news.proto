@@ -10,30 +10,30 @@ message PNews {
 
 //微博信息
 message PArticle {
-	int32 id = 1;                //博文的ID
-	string uuid = 2;             //博文的作者
-	string userName = 3;         //作者名称
-	string userHead = 4;         //作者头像
-	string content = 5;          //文章正文(如果正文是保存的OSS上，那么这里是一个url)
+	int32 id = 1;                //博文的ID，上传时不用填
+	string uuid = 2;             //博文的作者，上传时不用填
+	string userName = 3;         //作者名称，上传时不用填
+	string userHead = 4;         //作者头像，上传时不用填
+	string content = 5;          //文章正文
 	string srcType = 6;          //资源的类型（image表示上传的是图片，video表示上传的是视频，audio表示上传的是音频）
 	repeated PImage images = 7;  //图片（最多九张）
 	PVideo video = 8;            //视频
 	PAudio audio = 9;            //音频
-	bool onOSS = 10;             //正文是否在oss上
-	int64 pubishTime = 11;       //发布时间
-	string position = 12;        //位置
-	string tag = 13;             //标签（多个可以用‘,’分隔）
-	bool self = 14;              //这篇文章是查看人自己的写的
-	bool collected = 15;         //是否收藏此文章
-	int64 commentCnt = 16;       //评论数
-	int64 collectCnt = 17;       //收藏数
-	int64 voteCnt = 18;          //点赞数
-	bool  vote = 19;             //自己是否点赞
+	bool onOSS = 10;             //忽略该字段...
+	string position = 12;        //忽略该字段...
+	string tag = 13;             //忽略该字段...
+	bool self = 14;              //这篇文章是查看人自己的写的，上传时不用填
+	bool collected = 15;         //是否收藏此文章，上传时不用填
+	int64 commentCnt = 16;       //评论数，上传时不用填
+	int64 collectCnt = 17;       //收藏数，上传时不用填
+	int64 voteCnt = 18;          //点赞数，上传时不用填
+	bool  vote = 19;             //自己是否点赞，上传时不用填
 	PAtusers atusers = 20;       //被@的用户列表
 }
 
+// 被@的用户列表
 message PAtusers {
-	repeated PAtuser users = 1;  //用户列表
+	repeated PAtuser users = 1;  
 }
 
 message PAtuser {
@@ -82,15 +82,11 @@ message PVideoTag {
 	string text = 3;			//标签内容
 }
 
-
-
-
 message RecommendUserList {
 	repeated RecommendUser list = 1; //RecommendUser列表，最多100个
 }
 
 message RecommendUser {
-	/*保留1~5用于扩展*/ 
 	string uuid = 6;              //服务端标志用户的唯一id
 	string username = 7;          //用户名，唯一
 	string nickname = 8;          //昵称
@@ -112,7 +108,6 @@ message PersonStatistic {
 	int32 friendCnt = 1;          //朋友个数
 	int32 followCnt = 2;          //follow人数
 	int32 fansCnt = 3;            //fans个数
-
 	int32 textCnt = 4;            //发表的文字帖个数
 	int32 imageCnt = 5;
 	int32 audioCnt = 6;
@@ -120,8 +115,6 @@ message PersonStatistic {
 }
 
 message UserShowProfile {
-  /*保留1~5用于扩展*/ 
-  
   string uuid = 6;              //服务端标志用户的唯一id
   string username = 8;          //用户名，唯一
   string nickname = 9;          //昵称
@@ -141,7 +134,6 @@ message UserShowProfile {
   string link2 = 23;            //链接2  
   string link3 = 24;            //链接3
   int64 chatId = 25;            //聊天系统分配的id
-  
   int32 followship = 26;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
   bool friend = 27;             //是否是好友，是：true
 }
@@ -173,7 +165,6 @@ message PNewsExist {
  *@return PResult
  */
  
- 
 /**
  *@note   获取资源文件在oss上的状态（包括大于30个字的文字）
  *@path   /news/src/status
@@ -185,7 +176,6 @@ message PNewsExist {
  *@return 成功返回PUpload，失败返回PResult
  */
   
-  
 /**
  *@note   获取多个资源文件在oss上的状态（如多个图片）
  *@path   /news/src/status/multi
@@ -194,7 +184,6 @@ message PNewsExist {
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
  */
- 
  
 /**
  *@note   微博刷新
@@ -227,7 +216,7 @@ message PNewsExist {
  */
 
 /**
- *@note   关注系统的收索
+ *@note   关注系统的搜索
  *@path   /news/relation/search
  *@cookie token&uuid
  *@method GET
@@ -282,7 +271,6 @@ message PNewsExist {
  *@return PResult
  */
 
-
 /**
  *@note   收藏微博
  *@path   /news/collect
@@ -323,16 +311,6 @@ message PNewsExist {
  */
 
 /**
- *@note   举报微博
- *@path   /news/report
- *@cookie token&uuid
- *@method GET
- *@param  puuid 微博发布者uuid
- *@param  id 微博的id
- *@return PResult
- */
-
-/**
  *@note   查看其他用户首页
  *@path   /news/user/home
  *@cookie token&uuid
@@ -360,7 +338,6 @@ message PNewsExist {
  *@return PResult
  */
 
-
 /**
  *@note   分享news展示
  *@path   /news/shareshow
@@ -369,5 +346,4 @@ message PNewsExist {
  *@return 返回html文件
  *@example /news/shareshow?id=08771bd9-46e4-440b-bdbc-5ca3f857cbdc:3
  */
-
-
+	int64 pubishTime = 11;       //发布时间
