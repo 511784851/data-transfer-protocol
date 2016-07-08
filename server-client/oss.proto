@@ -49,6 +49,11 @@ message PUploadArray {
 	repeated PUpload uploads = 1;
 }
 
+// 多个文件的下载信息
+message PDownloadArray {
+	repeated PDownload downloads = 1;
+}
+
 message PFileInfo {
 	string digest = 1;	//要上传的文件的md5 hexstring
 	int32 length = 2;	//文件大小，字节
