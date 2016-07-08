@@ -73,3 +73,38 @@ message PFileInfoArray {
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
  */
+
+/*
+ *@note 获取上传文件的URL
+ *@path /oss/newfileurl
+ *@method GET
+ *@param filename 保存在oss上的文件名称
+ *@param contentmd5 上传的文件的MD5(可选,为空时上传时不验证MD5)
+ *@param contenttype 上传时指定的Content-Type(可选,默认为application/octet-stream)
+ *@return PUpload
+ */
+
+/*
+ *@note 获取多个上传文件的URL
+ *@path /oss/newfileurls
+ *@method GET
+ *@param filenames 保存在oss上的文件名称,用","分隔文件名称
+ *@param contenttype 上传时指定的Content-Type(可选,默认为application/octet-stream)
+ *@return PUploadArray
+ */
+
+/*
+ *@note 获取下载文件的URL
+ *@path /oss/downloadurl
+ *@method GET
+ *@param filename 下载文件的名称
+ *@return PDownload
+ */
+
+/*
+ *@note 获取多个下载文件的URL
+ *@path /oss/downloadurls
+ *@method GET
+ *@param filenames 下载文件的名称,使用","分隔
+ *@return PDownloadArray
+ */
