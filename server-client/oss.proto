@@ -26,6 +26,11 @@ message PUpload {
 	repeated string headers = 3; //必要增加的Http Header信息
 	string objectKey = 4;	//文件名。（要上传的文件如果存在，则通过此字段返回文件名）
 }
+
+// 用于构造下载文件HTTP请求的信息
+message PDownload {
+	string url = 1;   		//经服务端签好名的文件下载URL
+}
  
 /*
  *@note 获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
