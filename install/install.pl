@@ -4,7 +4,7 @@ use Cwd;
 use File::Copy;
 $pwd = cwd();
 
-print("------¿ªÊ¼°²×°GoµÚÈı·½ÒÀÀµ¿â\n");
+print("------å¼€å§‹å®‰è£…Goç¬¬ä¸‰æ–¹ä¾èµ–åº“\n");
 
 @libList = (
    # "github.com/go-sql-driver/mysql",
@@ -39,7 +39,7 @@ while($i<@libList)
     $i++;
 }
 
-print("\n°²×°½áÊø\n");
+print("\nå®‰è£…ç»“æŸ\n");
 
 my $logDir = "../../logs";
 if ( !(-e $logDir) )
@@ -47,7 +47,7 @@ if ( !(-e $logDir) )
     mkdir $logDir or die;
 }
 
-print("\n\n------´´½¨Ä¬ÈÏµÄÅäÖÃÎÄ¼ş¼°Ä¿Â¼\n");
+print("\n\n------åˆ›å»ºé»˜è®¤çš„é…ç½®æ–‡ä»¶åŠç›®å½•\n");
 my $dir = "../../cfg";
 if ( !(-e $dir) )
 {
@@ -61,12 +61,12 @@ if ( !(-e $file) )
 }
 else 
 {
-    print("\nÄ¬ÈÏÅäÖÃÎÄ¼ş-${file}ÒÑ¾­´æÔÚ£¬ÈçĞèÒª¸²¸ÇĞÂµÄ£¬ÇëÏÈÊÖ¶¯É¾³ıÒÑ´æÔÚµÄ£¡");
+    print("\né»˜è®¤é…ç½®æ–‡ä»¶-${file}å·²ç»å­˜åœ¨ï¼Œå¦‚éœ€è¦è¦†ç›–æ–°çš„ï¼Œè¯·å…ˆæ‰‹åŠ¨åˆ é™¤å·²å­˜åœ¨çš„ï¼");
 }
 
 
-print("\n´´½¨Ä¬ÈÏµÄÅäÖÃÎÄ¼ş½áÊø¡£\n");
+print("\nåˆ›å»ºé»˜è®¤çš„é…ç½®æ–‡ä»¶ç»“æŸã€‚\n");
 #system("copy def_cfg.ini ../../cfg/cfg.ini");
-##print("\nnet¿âÀïÃæµÄwebsokect¼ÇµÃ°ÑÀïÃætestÀïÃæµÄ´úÂë×¢ÊÍ¡£");
+##print("\nnetåº“é‡Œé¢çš„websokectè®°å¾—æŠŠé‡Œé¢testé‡Œé¢çš„ä»£ç æ³¨é‡Šã€‚");
 system("pause")
 
