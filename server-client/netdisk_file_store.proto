@@ -1,0 +1,83 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.demo.probuf";
+option java_outer_classname = "NetFileProtos";
+
+message PNetFileInfo {
+
+	string fileId = 1;				//文件的唯一标识ID号
+	string extension = 2;		//文件的扩展名。示范：mp3
+	string fileUrl = 3;			//文件在网络中的存储地址。示范：http://192.168.2.34/music/mylike.mp3
+	string fileSize = 4;		//文件长度，是一个long型整数
+	string fileDigest  = 5;		//文件的md5 hexstring
+	
+	string lastModify = 6;		//文件最后的修改时间，也就是上传时间，格林时间的long值
+	string protectEndTime = 7;	//文件的保护的终止时间，到这个时间后文件免费公开，格林时间的long值
+	string title = 8;			//文件的标题
+	string description = 9;		//文件的描述
+	string remark = 10;			//文件的备注信息
+	
+}
+
+message PListNetFileInfo {
+	repeated PNetFileInfo netFiles = 1;
+}
+
+/*
+ *@note 网盘中的文件显示
+ *@path /netdisk/file/list
+ *@method POST
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@return 成功PListNetFileInfo, 失败PResult
+ */
+ 
+ message PUpdateFileInfo {
+	string extension = 1;
+	string fileUrl = 2;
+	string fileSize = 3;
+	string fileDigest  = 4;
+	string title = 5;
+	string description = 6;
+	string remark = 7;
+ }
+ 
+ message PListUpdateFileInfo {
+	repeated PUpdateFileInfo uploadFiles = 1;
+}
+ /*
+ *@note 上传文件到网盘中
+ *@path /netdisk/file/upload
+ *@method POST
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@param files  上传的多个文件，为PUpdateFileInfo格式，并且经过base64编码。 
+ *@param protectDays  文件保护的天数，在保护的天数内，付费的用户才可以看。是整数；0代表公开，其他数字代表保护的天数。 
+ *@param saveMode  保持模式。0--表示正常模式，遇到相同文件名时会返回失败；1--覆盖模式，遇到相同文件名时直接覆盖；2--更名模式，遇到相同文件名时会在文件名称后面加后缀(1),(2),(3),(....)	
+ *@return 返回PResult，上传成功的标志。
+ */
+ 
+ /*
+ *@note 网盘中删除文件
+ *@path /netdisk/file/delete
+ *@method POST
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@param fileIds  要删除的多个文件的id，文件ID之间用逗号隔开。 
+ *@param checkExist  删除之前，是否检查要删除的文件是否都存在。取值为true或false；如果取值ture，删除文件时发现某个文件不存在，则返回失败的标注;如果取值false，则表示安静模式，直接操作，忽略检查。
+ *@return 返回PResult，删除成功的标志。
+ */
+  
+ /*
+ *@note 网盘中文件编辑，主要是编辑文件的title，desc，remark
+ *@path /netdisk/file/edit
+ *@method POST
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@param fileId  文件的唯一ID标识值。 
+ *@param title  文件的标题。 
+ *@param desc  文件的描述。 
+ *@param remark  文件的备注。 
+  *@return 返回PResult，编辑成功的标志，失败的情况有：文件不存在，title跟别的相同等。
+ */
+ 

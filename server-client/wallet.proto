@@ -37,7 +37,7 @@ message PRedPacketInfo {
 	int32  type = 3;       // 类型（等额红包、拼手气红包）
 	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
 	string headImgURL = 5; // 头像地址
-	float  money = 6;      // 钻数
+	int32  money = 6;      // 钻数
 	int64  createTime = 7; // 创建时间
 }
 
@@ -51,7 +51,7 @@ message PRedPacketParticipant {
 	string uuid = 1;       // 用户ID
 	string name = 2;       // 名称
 	string headImgURL = 3; // 头像地址
-	float  money = 4;      // 钻数
+	int32  money = 4;      // 钻数
 	int64  createTime = 5; // 创建时间
 }
 
@@ -72,7 +72,7 @@ message PRedPacketDetail {
 // 抢红包返回信息
 message PGrabRedPacketInfo {
 	string id = 1;                    // 编号
-	float money = 2;                  // 抢到的金额
+	int32 money = 2;                  // 抢到的金额
 	string remark = 3;                // 备注
 	PRedPacketInfo redPacketInfo = 4; // 红包信息
 	repeated PRedPacketParticipant list = 5;  // 抢红包参与者
@@ -120,8 +120,8 @@ message PWalletToken {
  *@uri /v1/wallet/diamond/record
  *@method GET
  *@cookie token&uuid
- *@uriParam startdate  开始查询日期(例如:201605)
- *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam offset     偏移
  *@uriParam count      数量
  *@uriParam type       类型(0:全部、1:增加、2:支出)
@@ -158,8 +158,8 @@ message PWalletToken {
  *@uri /v1/wallet/redpacket/record
  *@method GET
  *@cookie token&uuid
- *@uriParam startdate  开始查询日期(例如:201605)
- *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam offset     偏移
  *@uriParam count      数量
  *@uriParam type       类型（0:收到、1:发出）
@@ -208,8 +208,8 @@ message PWalletToken {
  *@uri /v1/wallet/gift/record
  *@method GET
  *@cookie token&uuid
- *@uriParam startdate  开始查询日期(例如:201605)
- *@uriParam enddate    结束查询日期(例如:201612)
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam type       类型（0:收到、1:送出）
  *@return 成功返回PWalletGiftInfoList，失败返回PResult
  */

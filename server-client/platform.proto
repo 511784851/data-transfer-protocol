@@ -124,6 +124,7 @@ message PBlacklists {
 message Pblacklist {
 	int32 id = 1;
 	string val = 2;
+	string other = 3; //如果是手机，那么这个就是手机的区号
 }
 
 /**************************API 定义***********************************/
