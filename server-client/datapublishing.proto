@@ -53,7 +53,7 @@ message PPostData {
 }
 
 message PRegionData {
-	int32 region = 1;
+	string region = 1;
 	int32 count = 2;
 }
 
