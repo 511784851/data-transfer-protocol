@@ -7,7 +7,7 @@ $pwd = cwd();
 print("------开始安装Go第三方依赖库\n");
 
 @libList = (
-   # "github.com/go-sql-driver/mysql",
+    "github.com/go-sql-driver/mysql",
     "github.com/google/protobuf",
     "github.com/astaxie/beego",
    ## "github.com/golang/net",
