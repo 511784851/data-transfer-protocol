@@ -17,8 +17,9 @@ message PCommunityID {
 // 社区基础信息
 message PCommunityBase {
 	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
-	string Name = 3;			// 社区名字
+	string Name = 3;		// 社区名字
 	string HeadImg = 4;		// 社区头像地址
+    string Introduce = 5;   // 社区介绍
 }
 
 // 社区基础信息列表
@@ -31,7 +32,7 @@ message PCommunityInfo {
 	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
 	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	string ID = 4;					// 社区id
-	string Name = 5;					// 社区名字
+	string Name = 5;				// 社区名字
 	string HeadImg = 6;				// 社区头像
 	string BackgroundImg = 7;		// 社区背景图
 	string Introduce = 8;			// 社区介绍
@@ -683,7 +684,7 @@ message PCommunityNotificationUnRead {
  */
  
 /*
- *@note 移除标旗帖子
+ *@note 管理员取消帖子的标旗状态
  *@path /v1/community/flag
  *@method DELETE
  *@url param id 社区id

@@ -26,6 +26,11 @@ message PUpload {
 	repeated string headers = 3; //必要增加的Http Header信息
 	string objectKey = 4;	//文件名。（要上传的文件如果存在，则通过此字段返回文件名）
 }
+
+// 用于构造下载文件HTTP请求的信息
+message PDownload {
+	string url = 1;   		//经服务端签好名的文件下载URL
+}
  
 /*
  *@note 获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
@@ -42,6 +47,11 @@ message PUpload {
 // 多个文件的上传信息
 message PUploadArray {
 	repeated PUpload uploads = 1;
+}
+
+// 多个文件的下载信息
+message PDownloadArray {
+	repeated PDownload downloads = 1;
 }
 
 message PFileInfo {
@@ -62,4 +72,39 @@ message PFileInfoArray {
  *@cookie token&uuid
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
+ */
+
+/*
+ *@note 获取上传文件的URL
+ *@path /oss/newfileurl
+ *@method GET
+ *@param filename 保存在oss上的文件名称
+ *@param contentmd5 上传的文件的MD5(可选,为空时上传时不验证MD5)
+ *@param contenttype 上传时指定的Content-Type(可选,默认为application/octet-stream)
+ *@return PUpload
+ */
+
+/*
+ *@note 获取多个上传文件的URL
+ *@path /oss/newfileurls
+ *@method GET
+ *@param filenames 保存在oss上的文件名称,用","分隔文件名称
+ *@param contenttype 上传时指定的Content-Type(可选,默认为application/octet-stream)
+ *@return PUploadArray
+ */
+
+/*
+ *@note 获取下载文件的URL
+ *@path /oss/downloadurl
+ *@method GET
+ *@param filename 下载文件的名称
+ *@return PDownload
+ */
+
+/*
+ *@note 获取多个下载文件的URL
+ *@path /oss/downloadurls
+ *@method GET
+ *@param filenames 下载文件的名称,使用","分隔
+ *@return PDownloadArray
  */
