@@ -107,7 +107,7 @@ message PInformer {
 //敏感词列表
 message PKeywords {
 	repeated PKeyword list = 1; //敏感词列表
-	int total = 2;//数据总量
+	int32 total = 2;//数据总量
 }
 
 //敏感词
