@@ -107,7 +107,7 @@ message PInformer {
 //敏感词列表
 message PKeywords {
 	repeated PKeyword list = 1; //敏感词列表
-	int total = 2;//数据总量
+	int32 total = 2;//数据总量
 }
 
 //敏感词
@@ -119,6 +119,7 @@ message PKeyword {
 //黑名单列表
 message PBlacklists {
 	repeated Pblacklist list = 1;
+	int32 total = 2; 
 }
 
 //黑名单
