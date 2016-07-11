@@ -30,6 +30,11 @@ message PDiamondInfoList {
 	repeated PDiamondInfo list = 4; // 列表
 }
 
+// 红包ID
+message PRedPacketID {
+	string id = 1;	       // 编号
+}
+
 // 红包信息
 message PRedPacketInfo {
 	string id = 1;	       // 编号
