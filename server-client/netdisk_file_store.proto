@@ -34,8 +34,8 @@ message PListNetFileInfo {
  *@note 网盘中的文件显示
  *@path /netdisk/file/list
  *@method POST
- *@cookie uuid  用户的uuid。
- *@cookie token  用户的token。
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
  *@return 成功PListNetFileInfo, 失败PResult
  */
  
