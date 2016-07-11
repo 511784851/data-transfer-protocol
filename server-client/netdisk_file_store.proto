@@ -5,7 +5,7 @@ option java_outer_classname = "NetFileProtos";
 
 /*
  * 在此应用的接口中的，有很多功能是从oss.proto文件中继承下来，而oss.proto中功能又是从阿里的oss继承过来。
- * 因此，在使用本应用接口是，先详细阅读oss.proto接口文档和阿里的oss的相关文档。
+ * 因此，在使用本应用接口时，先详细阅读oss.proto接口文档和阿里的oss的相关文档。
  */
 
 message PNetFileInfo {
