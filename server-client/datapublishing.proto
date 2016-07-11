@@ -45,11 +45,11 @@ message PSearchResults {
 }
 
 message PPostData {
-	int32 posts = 1;
-	int32 views = 2;
-	int32 votes = 3;
-	int32 comments = 4;
-	int32 shares = 5;
+	int32 posts = 1; //帖子数
+	int32 views = 2; //查看数
+	int32 votes = 3; //投票（点赞）数
+	int32 comments = 4; //评论数
+	int32 shares = 5; //分享数
 }
 
 message PRegionData {
@@ -78,7 +78,9 @@ message PDayData {
 	string date = 1;
 	// 帐户价值
 	int32 worth = 2;
+	// 粉丝（成员）数据
 	PFollowData follow = 3;
+	// 帖子数据
 	PPostData  post = 4;
 }
 
@@ -86,6 +88,29 @@ message PDaysData {
 	repeated PDayData data = 1;
 }
 
+message PGame {
+	string icon = 2;  //图标URL
+	string name = 3;  //名称
+	bool follow = 4;  //是否关注
+	
+	repeated PGuy club = 5;  //俱乐部
+	repeated PGuy player = 6;//职业队员
+	repeated PGuy famous = 7;//名人
+}
+
+message PGameList {
+	repeated PGame game = 1;
+}
+
+message PClub {
+	PGuy info = 4;	
+	repeated PGuy player = 5;//职业队员
+	repeated PGuy famous = 6;//名人
+}
+
+message PClubList {
+	repeated PClub club = 1;
+}
 
 /*
  *@note 热搜词
@@ -246,4 +271,13 @@ message PDaysData {
  *@param from 起始日期，如"2016-01-01"
  *@param to   截止日期，如"2016-06-01"
  *@return 成功返回PDaysData，失败返回PResult
+ */
+
+/*
+ *@note 注册推荐
+ *@path /datapublishing/register/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param type 取这些值 "game", "club", "famous"
+ *@return 根据type的取值分别返回PGameList,PClubList,PGuyList，失败返回PResult
  */
