@@ -45,11 +45,11 @@ message PSearchResults {
 }
 
 message PPostData {
-	int32 posts = 1;
-	int32 views = 2;
-	int32 votes = 3;
-	int32 comments = 4;
-	int32 shares = 5;
+	int32 posts = 1; //帖子数
+	int32 views = 2; //查看数
+	int32 votes = 3; //投票（点赞）数
+	int32 comments = 4; //评论数
+	int32 shares = 5; //分享数
 }
 
 message PRegionData {
@@ -76,19 +76,35 @@ message PFollowData {
 message PDayData {
 	// 数据日期
 	string date = 1;
-	
-	PFollowData follow = 2;
-	PPostData  post = 3;
+	// 帐户价值
+	int32 worth = 2;
+	// 粉丝（成员）数据
+	PFollowData follow = 3;
+	// 帖子数据
+	PPostData  post = 4;
 }
 
 message PDaysData {
 	repeated PDayData data = 1;
-	// 给定日期区间的最小粉丝数
-	int32 minFans = 2;
-	// 给定日期区间的最大粉丝数
-	int32 maxFans = 3;
 }
 
+message PGame {
+	//基本信息
+	PGuy info = 2;
+	//俱乐部
+	repeated PGuy club = 3;
+	//职业队员
+	repeated PGuy player = 4;
+	//名人
+	repeated PGuy famous = 5;
+}
+
+message PGameList {
+	//"game" "club" "famous"
+	string type = 1;
+	
+	repeated PGame game = 2;
+}
 
 /*
  *@note 热搜词
@@ -245,8 +261,26 @@ message PDaysData {
  *@path /datapublishing/data
  *@method GET
  *@cookie token&uuid
- *@param datatype 取"fans" 或"community"
+ *@param datatype "worth":帐户价值数据 "fans"或"user":用户粉丝及帖子数据 "community"：社区成员及帖子数据
  *@param from 起始日期，如"2016-01-01"
  *@param to   截止日期，如"2016-06-01"
  *@return 成功返回PDaysData，失败返回PResult
+ */
+
+/*
+ *@note 注册推荐
+ *@path /datapublishing/register/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param type 取这些值 "game", "club", "famous"
+ *@return PGameList, 失败返回PResult
+ */
+
+/*
+ *@note 关注游戏
+ *@path /datapublishing/register/game/follow
+ *@method GET
+ *@cookie token&uuid
+ *@param name 游戏名
+ *@return 成功返回PResult
  */

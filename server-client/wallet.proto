@@ -30,6 +30,11 @@ message PDiamondInfoList {
 	repeated PDiamondInfo list = 4; // 列表
 }
 
+// 红包ID
+message PRedPacketID {
+	string id = 1;	       // 编号
+}
+
 // 红包信息
 message PRedPacketInfo {
 	string id = 1;	       // 编号
@@ -142,7 +147,7 @@ message PWalletToken {
  *@uriParam id       其它ID(可以是UUID、群ID等)
  *@uriParam location GPS定位信息
  *@uriParam exdata   扩展数据（可以放发社交与论坛内容）
- *@return 返回PResult
+ *@return 成功返回PRedPacketID，失败返回PResult
  */
 
 /*

@@ -30,20 +30,9 @@ message PUpload {
 // 用于构造下载文件HTTP请求的信息
 message PDownload {
 	string url = 1;   		//经服务端签好名的文件下载URL
+	string thumb = 2;       //图片文件的缩略图URL
 }
  
-/*
- *@note 获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
- *      否则请在各自的模块里面单独实现此协议，参看comment模块
- *@path /oss/uploadfileurl
- *@method GET
- *@cookie token&uuid
- *@digest 要上传的文件的md5 hexstring
- *@length 文件大小，字节
- *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
- *@return 成功返回PUpload，失败返回PResult
- */
-
 // 多个文件的上传信息
 message PUploadArray {
 	repeated PUpload uploads = 1;
@@ -65,13 +54,29 @@ message PFileInfoArray {
 }
 
 /*
- *@note 批量获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
- *      否则请在各自的模块里面单独实现此协议，参看comment模块
- *@path /oss/uploadfileurls
+ *@note 内网访问获取带签名的文件上传URL
+ *@path /oss/uploadurl
+ *@method GET
+ *@digest 要上传的文件的md5 hexstring
+ *@length 文件大小，字节
+ *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
+ *@return 成功返回PUpload，失败返回PResult
+ */
+
+/*
+ *@note 内网访问批量获取带签名的文件上传URL
+ *@path /oss/uploadurls
  *@method POST
- *@cookie token&uuid
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
+ */
+
+/*
+ *@note 内网访问获取指定Object的访问URL
+ *@path /oss/fileurl
+ *@method GET
+ *@param  objectkey
+ *@return 成功返回PDownload，失败返回PResult
  */
 
 /*
