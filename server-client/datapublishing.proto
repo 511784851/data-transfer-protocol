@@ -89,27 +89,21 @@ message PDaysData {
 }
 
 message PGame {
-	string icon = 2;  //图标URL
-	string name = 3;  //名称
-	bool follow = 4;  //是否关注
-	
-	repeated PGuy club = 5;  //俱乐部
-	repeated PGuy player = 6;//职业队员
-	repeated PGuy famous = 7;//名人
+	//基本信息
+	PGuy info = 2;
+	//俱乐部
+	repeated PGuy club = 3;
+	//职业队员
+	repeated PGuy player = 4;
+	//名人
+	repeated PGuy famous = 5;
 }
 
 message PGameList {
-	repeated PGame game = 1;
-}
-
-message PClub {
-	PGuy info = 4;	
-	repeated PGuy player = 5;//职业队员
-	repeated PGuy famous = 6;//名人
-}
-
-message PClubList {
-	repeated PClub club = 1;
+	//"game" "club" "famous"
+	string type = 1;
+	
+	repeated PGame game = 2;
 }
 
 /*
@@ -279,7 +273,7 @@ message PClubList {
  *@method GET
  *@cookie token&uuid
  *@param type 取这些值 "game", "club", "famous"
- *@return 根据type的取值分别返回PGameList,PClubList,PGuyList，失败返回PResult
+ *@return PGameList, 失败返回PResult
  */
 
 /*
