@@ -88,6 +88,16 @@ message PDaysData {
 	repeated PDayData data = 1;
 }
 
+// 最新的数据
+message PNewestData {
+	// 数据日期
+	string date = 1;
+	// 粉丝(成员)数
+	int32 follows = 2;
+	//帖子数
+	int32 posts = 3;	
+}
+
 message PGame {
 	//基本信息
 	PGuy info = 2;
@@ -254,6 +264,15 @@ message PGameList {
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PWords(不带#号)，失败返回PResult
+ */
+
+/*
+ *@note 最新的数据
+ *@path /datapublishing/data/newest
+ *@method GET
+ *@cookie token&uuid
+ *@param datatype "user":用户粉丝及帖子数据 "community"：社区成员及帖子数据
+ *@return 成功返回PNewestData, 失败返回PResult
  */
 
 /*
