@@ -19,6 +19,7 @@ option java_outer_classname = "PlatformProtos";
 //被举报人列表
 message PReportNewsList {
 	repeated PReportNews list = 1;
+	int32 total = 2;
 }
 
 //被举报人的信息
