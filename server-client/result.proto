@@ -55,4 +55,12 @@ message PInt32List {
 	repeated int32 List = 1;
 }
 
+/*
+ *@note 批量传输bool
+ */
+message PBoolList {
+	repeated bool List = 1;
+}
+
+
 
