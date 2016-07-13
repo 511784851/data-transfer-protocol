@@ -3,6 +3,8 @@ package common;
 option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "NewsProtos";
 
+import "account.proto";
+
 // 微博详情列表
 message PPostInfoList {
 	repeated PPostInfo list = 1; //博文列表
@@ -28,7 +30,7 @@ message PPostInfo {
 	int64 collectCnt = 17;       //收藏数，上传时不用填
 	int64 voteCnt = 18;          //点赞数，上传时不用填
 	bool  vote = 19;             //自己是否点赞，上传时不用填
-	PAtusers atusers = 20;       //被@的用户列表
+	PAtUserList atusers = 20;       //被@的用户列表
 }
 
 // 被@的用户列表
