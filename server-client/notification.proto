@@ -38,7 +38,7 @@ message NotifyComment {
   int64 messageId = 1; 		//消息id 
   SimpleUser commentUser = 2;	//评论的用户
   PComment comment = 3;		//评论
-  PArticle article = 4; 	//评论相关的news
+  PPostInfo article = 4; 	//评论相关的news
   int64 time = 5;		//评论的时间
   int32 status = 6; 		//0：未读；1：已读
 }
@@ -69,7 +69,7 @@ message NotifyCommentVote {
   int64 messageId = 1; 		//消息id 
   SimpleUser voteUser = 2;	//投票的用户
   PComment comment = 3;		//被投票的评论
-  PArticle article = 4; 	//被投票评论相关的news
+  PPostInfo article = 4; 	//被投票评论相关的news
   int64 time = 5;		//投票的时间
   int32 voteType = 6; 		//0：赞；1：踩
   int32 status = 7; 		//0：未读；1：已读
@@ -119,7 +119,7 @@ message NotifyFollowList {
 message NotifyNewsVote {
   int64 messageId = 1;		//消息id 
   SimpleUser voteUser = 2; 	//点赞的用户
-  PArticle article = 3; 	//点赞的news
+  PPostInfo article = 3; 	//点赞的news
   int64 time = 4;   		//点赞时间
   int32 status = 5; 		//0：未读；1：已读
 }
@@ -131,7 +131,7 @@ message NotifyNewsVoteList {
 
 message NotifyNewsAt {
   int64 messageId  = 1; //消息id
-  PArticle article = 2; //帖子
+  PPostInfo article = 2; //帖子
   int64 time       = 3; //发帖时间
   int32 status     = 4; //0：未读；1：已读
 }
