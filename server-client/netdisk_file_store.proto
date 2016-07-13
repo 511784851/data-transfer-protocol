@@ -13,16 +13,20 @@ message PNetFileInfo {
 	string objectKey = 1;		//文件的唯一标识ID号
 	
 	string extension = 2;		//文件的扩展名。示范：mp3
-	string fileUrl = 3;			//文件在网络中的存储地址。示范：http://192.168.2.34/music/mylike.mp3
-	string fileSize = 4;		//文件长度，是一个long型整数
-	string fileDigest  = 5;		//文件的md5 hexstring
+	string fileSize = 3;		//文件长度，是一个long型整数
+	string fileDigest  = 4;		//文件的md5 hexstring
 	
-	string lastModify = 6;		//文件最后的修改时间，也就是上传时间，格林时间的long值
-	string protectEndTime = 7;	//文件的保护的终止时间，到这个时间后文件免费公开，格林时间的long值
+	string createTime = 5;		//文件的创建时间，也就是上传时间，格林时间的long值，
+	string disableLongtime = 6;	//文件的多久失效时间，在这时间内都是有限，单位毫秒
+	string protectLongtime = 7;	//文件的保护的时间，在这个时间内，都是保护状态，过了这时间后文件免费公开，单位毫秒
 	
-	string title = 8;			//文件的标题
-	string description = 9;		//文件的描述
-	string remark = 10;			//文件的备注信息
+	string shareFlag = 8;		//文件转发和共享标志，0--可以共享，1--不可以
+	string conserveFlag = 9;	//文件可以收藏，0--可以收藏，1--不可以
+	
+	
+	string title = 10;			//文件的标题
+	string description = 11;	//文件的描述
+	string remark = 12;			//文件的备注信息
 	
 }
 
@@ -41,13 +45,12 @@ message PListNetFileInfo {
  
  message PUpdateFileInfo {
 	string extension = 1;
-	string fileUrl = 2;
-	string fileSize = 3;
-	string fileDigest  = 4;
+	string fileSize = 2;
+	string fileDigest  = 3;
 	
-	string title = 5;
-	string description = 6;
-	string remark = 7;
+	string title = 4;
+	string description = 5;
+	string remark = 6;
  }
  
  message PListUpdateFileInfo {
@@ -60,7 +63,8 @@ message PListNetFileInfo {
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param files  上传的多个文件，为PUpdateFileInfo结构，并且经过base64编码。 
- *@param protectDays  文件保护的天数，在保护的天数内，付费的用户才可以看。是整数；0代表公开，其他数字代表保护的天数。 
+ *@param disableLongtime  文件的多久失效时间，在这时间内都是有限，单位毫秒
+ *@param protectLongtime  文件的保护的时间，在这个时间内，都是保护状态，过了这时间后文件免费公开，单位毫秒
  *@param saveMode  保持模式。0--表示正常模式，遇到相同文件名时会返回失败；1--覆盖模式，遇到相同文件名时直接覆盖
  *@return 成功返回PUploadArray，失败返回PResult。 关于结构体PUploadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PUploadArray
  */
