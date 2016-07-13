@@ -10,7 +10,7 @@ message PNews {
 
 //微博信息
 message PArticle {
-	int32 id = 1;                //博文的ID，上传时不用填
+	int64 id = 1;                //博文的ID，上传时不用填
 	string uuid = 2;             //博文的作者，上传时不用填
 	string userName = 3;         //作者名称，上传时不用填
 	string userHead = 4;         //作者头像，上传时不用填
@@ -21,8 +21,6 @@ message PArticle {
 	PAudio audio = 9;            //音频
 	bool onOSS = 10;             //忽略该字段...
 	int64 pubishTime = 11;       //发布时间，上传时不用填
-	string position = 12;        //忽略该字段...
-	string tag = 13;             //忽略该字段...
 	bool self = 14;              //这篇文章是查看人自己的写的，上传时不用填
 	bool collected = 15;         //是否收藏此文章，上传时不用填
 	int64 commentCnt = 16;       //评论数，上传时不用填
@@ -42,15 +40,15 @@ message PAtuser {
  	string nickName = 2;         //用户昵称
 }
 
-//图片
+// 图片
 message PImage {
 	string url = 1;              //原图url
-	repeated PImageAD aDList = 2;//图片的热点广告 
+	repeated PImageTag Tags = 2;//图片的热点广告 
 	string thumbnail = 3;        //缩略图的url
 	string des = 4;              //图片描述
 }
 
-//视频
+// 视频
 message PVideo {
 	string url = 1;              //视频在OSS上的路径
 	string img = 2;              //视频的缩略图
@@ -59,21 +57,24 @@ message PVideo {
 	int32 type = 5;              //视频类型，0：本地视频，1：第三方视频
 }
 
-//音频
+// 音频
 message PAudio {
 	string url = 1;              //音频在OSS上的路径
 	int32 length = 2;            //音频长度
 	int64 expires = 3;           //音频的有效期（多少秒之后过期）
-}
+} 
 
-//图片的热点广告
-message PImageAD {
-	float x = 1;
-	float y = 2;
-	string title = 3;            //广告名称
-	float price = 4;             //价格
-	int32 category = 5;          //分类
-	string url = 6;              //广告链接
+// 图片的标签信息
+message PImageTag {
+	int32 Type = 1;			// 1是标签物品，2是标签人
+	int32 SubType = 2;		// 标签子类型 
+	float X = 3;				// 标签x坐标相对图片的位置，百分比
+	float Y = 4;				// 标签y坐标相对图片的位置，百分比
+	string Name = 5;			// 标签的名称
+	string GoodPrice = 6;	// 物品的价格
+	string GoodLink = 7;		// 物品的链接
+	string PersonUuid = 8;	// 人物的uuid
+	string PersonName = 9;	// 用户的名称
 }
 
 //视频的标签
@@ -140,7 +141,7 @@ message UserShowProfile {
 }
 
 message Relation {
-  int32 ship = 1;               //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  int32 ship = 1;               //两用户间的关系、0:无关系，1,：A被B关注，2：A关注B，3：AB相互关注
   string uuidA = 2;             //用户A
   string uuidB = 3;             //用户B
   int32 folsA = 4;              //用户A的关注数
@@ -157,14 +158,7 @@ message PNewsExist {
 	repeated bool exist = 1;	
 }
 
-/**
- *@note   发布微博
- *@path   /news/publish
- *@cookie token&uuid
- *@method POST
- *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
- *@return PResult
- */
+// 文件上传接口
  
 /**
  *@note   获取资源文件在oss上的状态（包括大于30个字的文字）
@@ -185,25 +179,78 @@ message PNewsExist {
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
  */
- 
+
 /**
- *@note   微博刷新
- *@path   /news/list
+ *@note   发布微博
+ *@path   /news/publish
+ *@cookie token&uuid
+ *@method POST
+ *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
+ *@return 返回 PResult
+ */
+
+/**
+ *@note   删除微博
+ *@path   /news/delete
+ *@cookie token&uuid
+ *@method GET
+ *@param  postid 微博的id
+ *@return 返回 PResult
+ */
+
+/**
+ *@note   收藏微博
+ *@path   /news/collect
+ *@cookie token&uuid
+ *@method GET
+ *@param  postid 微博的id
+ *@return 返回 PResult
+ */
+
+/**
+ *@note   取消收藏微博
+ *@path   /news/uncollect
+ *@cookie token&uuid
+ *@method GET
+ *@param  id 微博的id
+ *@return 返回 PResult
+ */
+
+/**
+ *@note   获取收藏的微博列表
+ *@path   /news/listcollects
  *@cookie token&uuid
  *@method GET
  *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
- *@param  level 选择会员等级 all reg  vip vipp vo 默认all
  *@return PNews
  */
 
 /**
- *@note   根据帖子id列表获取对应帖子列表
- *@path   /news/listbyids
+ *@note   用户刷新微博
+ *@path   /news/user/timeline
  *@cookie token&uuid
  *@method GET
- *@method uuid 用户id
- *@param  keys uuid:post 列表
- *@return PNews
+ *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
+ *@return 成功返回 PNews ，失败返回 PResult
+ */
+
+/**
+ *@note   用户把制定微博从自己的timeline移除
+ *@path   /news/user/timeline
+ *@cookie token&uuid
+ *@method DELETE
+ *@param  postid 微博的id
+ *@return PResult
+ */
+
+/**
+ *@note   游客刷新微博
+ *@path   /news/guest/timeline
+ *@method GET
+ *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
+ *@return 成功返回 PNews ，失败返回 PResult
  */
 
 /**
@@ -211,22 +258,9 @@ message PNewsExist {
  *@path   /news/relation
  *@cookie token&uuid
  *@method GET
- *@param  uuid 关注/本关注对象的id
+ *@param  uuid 关注/取消关注对象的id
  *@param  do 为1时表示添加关注，为0时表示取消关注
- *@return PResult
- */
-
-/**
- *@note   关注系统的搜索
- *@path   /news/relation/search
- *@cookie token&uuid
- *@method GET
- *@param  key 0：搜索粉丝 1：搜索关注者 2：搜索全部 3：搜索相互关注
- *@param  uuid 被查找的用户uuid
- *@param  word 收索关键字
- *@param  cursor 下次查询的起点，默认为0
- *@param  count 单次返回的记录条数，默认为20，最大不超过50。 
- *@return FollowOrFansList
+ *@return 返回 PResult
  */
 
 /**
@@ -237,7 +271,7 @@ message PNewsExist {
  *@param  uuid 被查找的用户uuid
  *@param  count 单次返回的记录条数，默认为20，最大不超过50。
  *@param  cursor 下次查询的起点，默认为0。
- *@return FollowOrFansList
+ *@return 成功返回 FollowOrFansList ，失败返回 PResult
  */
 
 /**
@@ -248,7 +282,7 @@ message PNewsExist {
  *@param  uuid 被查找的用户uuid
  *@param  count 单次返回的记录条数，默认为20，最大不超过50。
  *@param  cursor 下次查询的起点，默认为0。
- *@return FollowOrFansList
+ *@return 成功返回 FollowOrFansList ，失败返回 PResult
  */  
   
 /**
@@ -258,66 +292,18 @@ message PNewsExist {
  *@cookie token&uuid
  *@param  id uuid
  *@param  arctype 要查看的文章类型 值：all, text, image, audio, video
- *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
  *@param  count 单次返回的记录条数，默认为20，最大不超过50。
- *@return PNews
+ *@return 成功返回 PNews ，失败返回 PResult
  */ 
- 
-/**
- *@note   删除微博
- *@path   /news/delete
- *@cookie token&uuid
- *@method GET
- *@param  id 微博的id
- *@return PResult
- */
-
-/**
- *@note   收藏微博
- *@path   /news/collect
- *@cookie token&uuid
- *@method GET
- *@param  puuid 微博发布者uuid
- *@param  id 微博的id
- *@return PResult
- */
-
-/**
- *@note   获取收藏的微博
- *@path   /news/listcollects
- *@cookie token&uuid
- *@method GET
- *@param  history 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
- *@return PNews
- */
-
-/**
- *@note   取消收藏微博
- *@path   /news/uncollect
- *@cookie token&uuid
- *@method GET
- *@param  puuid 微博发布者uuid
- *@param  id 微博的id
- *@return PResult
- */
-
-/**
- *@note   移除微博
- *@path   /news/remove
- *@cookie token&uuid
- *@method GET
- *@param  puuid 微博发布者uuid
- *@param  id 微博的id
- *@return PResult
- */
 
 /**
  *@note   查看其他用户首页
  *@path   /news/user/home
  *@cookie token&uuid
  *@method GET
- *@param  targetuuid 查看的目标用户
- *@return UserShowProfile
+ *@param  uuid 被查看的用户id
+ *@return 成功返回 UserShowProfile ，失败返回 PResult
  */
 
 /**
@@ -325,8 +311,8 @@ message PNewsExist {
  *@path   /news/user/statistic
  *@cookie token&uuid
  *@method GET
- *@param  targetuuid 查看的目标用户
- *@return PersonStatistic
+ *@param  uuid 被查看的用户id
+ *@return 成功返回 PersonStatistic ，失败返回 PResult
  */
 
 /**
@@ -334,16 +320,15 @@ message PNewsExist {
  *@path   /news/vote
  *@cookie token&uuid
  *@method GET
- *@param  uid news发布者id
- *@param  pid news id
- *@return PResult
+ *@param  postid 帖子id
+ *@return 返回 PResult
  */
 
 /**
  *@note   分享news展示
  *@path   /news/shareshow
  *@method GET
- *@param  id uuid:postid
+ *@param  postid 帖子id
  *@return 返回html文件
- *@example /news/shareshow?id=08771bd9-46e4-440b-bdbc-5ca3f857cbdc:3
+ *@example /news/shareshow?id=3
  */
