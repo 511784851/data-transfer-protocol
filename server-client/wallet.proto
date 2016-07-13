@@ -38,12 +38,13 @@ message PRedPacketID {
 // 红包信息
 message PRedPacketInfo {
 	string id = 1;	       // 编号
-	string name = 2;       // 名称
-	int32  type = 3;       // 类型（等额红包、拼手气红包）
-	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
-	string headImgURL = 5; // 头像地址
-	int32  money = 6;      // 钻数
-	int64  createTime = 7; // 创建时间
+	string uuid = 2;       // 用户ID
+	string name = 3;       // 名称
+	int32  type = 4;       // 类型（等额红包、拼手气红包）
+	int32  target = 54;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 6; // 头像地址
+	int32  money = 7;      // 钻数
+	int64  createTime = 8; // 创建时间
 }
 
 // 红包信息列表
