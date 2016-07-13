@@ -266,18 +266,17 @@ message PNewsExist {
  *@param  cursor 下次查询的起点，默认为0。
  *@return 成功返回 FollowOrFansList ，失败返回 PResult
  */  
-  
+
 /**
- *@note   个人微博主页
- *@path   /v1/news/home
+ *@note 个人微博主页
+ *@path /v1/news/home
  *@method GET
  *@cookie token&uuid
- *@param  id uuid
- *@param  arctype 要查看的文章类型 值：all, text, image, audio, video
- *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  count 单次返回的记录条数，默认为20，最大不超过50。
+ *@param uuid 用户的id
+ *@param type 要查看的文章类型 值：all, text, image, audio, video
+ *@param offset 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
  *@return 成功返回 PNews ，失败返回 PResult
- */ 
+ */
 
 /**
  *@note   查看其他用户首页
@@ -302,6 +301,7 @@ message PNewsExist {
  *@path   /v1/news/vote
  *@cookie token&uuid
  *@method GET
+ *@param  uuid 发帖子的用户id
  *@param  postid 帖子id
  *@return 返回 PResult
  */

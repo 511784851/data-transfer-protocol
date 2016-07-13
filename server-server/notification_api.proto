@@ -27,7 +27,7 @@ message NotifyNewsVoteMeta {
 
 //帖子@用户通知元信息
 message NotifyNewsAtMeta {
-	int32 postId 			= 1; //帖子id
+	int64 postId 			= 1; //帖子id
 	repeated string uuidAs	= 2; //被@的用户id列表
 	string uuidB 			= 3; //发帖用户id
 }
