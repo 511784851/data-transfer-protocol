@@ -36,7 +36,7 @@ message PTopicNews {
 	//参与该话题的帖子数
 	int32 count = 4;
 	//博文列表
-	repeated PArticle Articles = 5;
+	repeated PPostInfo Articles = 5;
 }
 
 message PSearchResults {
