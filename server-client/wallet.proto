@@ -13,7 +13,7 @@ message PDiamondCount {
 
 // 钻石信息
 message PDiamondInfo {
-	string id = 1;	       // 编号
+	string sid = 1;	       // 编号
 	string name = 2;       // 名称
 	int32  type = 3;       // 类型（充值、购物、等额红包、拼手气红包）
 	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
@@ -32,19 +32,20 @@ message PDiamondInfoList {
 
 // 红包ID
 message PRedPacketID {
-	string id = 1;	       // 编号
+	string rid = 1;	       // 编号
 }
 
 // 红包信息
 message PRedPacketInfo {
-	string id = 1;	       // 编号
-	string uuid = 2;       // 用户ID
-	string name = 3;       // 名称
-	int32  type = 4;       // 类型（等额红包、拼手气红包）
-	int32  target = 54;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
-	string headImgURL = 6; // 头像地址
-	int32  money = 7;      // 钻数
-	int64  createTime = 8; // 创建时间
+	string sid = 1;	       // 流水号
+	string rid = 2;        // 红包ID
+	string uuid = 3;       // 用户ID
+	string name = 4;       // 名称
+	int32  type = 5;       // 类型（等额红包、拼手气红包）
+	int32  target = 6;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 7; // 头像地址
+	int32  money = 8;      // 钻数
+	int64  createTime = 9; // 创建时间
 }
 
 // 红包信息列表
@@ -63,7 +64,7 @@ message PRedPacketParticipant {
 
 // 红包详细信息
 message PRedPacketDetail {
-	string id = 1;	       // 编号
+	string sid = 1;	       // 编号
 	string uuid = 2;       // 用户ID
 	string name = 3;       // 名称
 	int32  type = 4;       // 类型（等额红包、拼手气红包）
@@ -77,7 +78,7 @@ message PRedPacketDetail {
 
 // 抢红包返回信息
 message PGrabRedPacketInfo {
-	string id = 1;                    // 编号
+	string rid = 1;                   // 编号
 	int32 money = 2;                  // 抢到的金额
 	string remark = 3;                // 备注
 	PRedPacketInfo redPacketInfo = 4; // 红包信息
@@ -91,7 +92,7 @@ message PWalletGiftCount {
 
 // 礼物信息
 message PWalletGiftInfo {
-	string id = 1;	       // 编号
+	string sid = 1;	       // 编号
 	string name = 2;       // 名称
 	string headImgURL = 3; // 头像地址
 	string giftId = 4;     // 礼物ID
