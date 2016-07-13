@@ -159,6 +159,7 @@ message PNewsExist {
 	repeated bool exist = 1;	
 }
 
+/*
  *@note 批量获取带签名的文件上传URL。注意通过此接口获取的上传地址所上传的文件为非永久的，
  *      否则请在各自的模块里面单独实现此协议，参看comment模块
  *@note   获取多个资源文件在oss上的状态（如多个图片）
