@@ -303,11 +303,12 @@ message PGameList {
  */
 
 /*
- *@note 注册关注游戏
+ *@note 注册关注(取消关注)游戏
  *@path /datapublishing/register/game/follow
  *@method GET
  *@cookie token&uuid
  *@param name 游戏名
+ *@param action 1关注，0取消关注
  *@return 成功返回PResult
  */
 
@@ -321,5 +322,5 @@ message PGameList {
  *@param type "follower"：搜他的粉丝,"following":搜他关注的人
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PGuyList, 失败返回PResult
+ *@return 成功返回PFollowOrFansList, 失败返回PResult
  */
