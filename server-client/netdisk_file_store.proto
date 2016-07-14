@@ -17,7 +17,7 @@ message PNetFileInfo {
 	string fileDigest  = 4;		//文件的md5 hexstring
 	
 	string createTime = 5;		//文件的创建时间，也就是上传时间，格林时间的long值，
-	string disableLongtime = 6;	//文件的多久失效时间，在这时间内都是有限，单位毫秒
+	string disableLongtime = 6;	//文件的多久失效时间，在这时间内都是有效，单位毫秒
 	string protectLongtime = 7;	//文件的保护的时间，在这个时间内，都是保护状态，过了这时间后文件免费公开，单位毫秒
 	
 	string shareFlag = 8;		//文件转发和共享标志，0--可以共享，1--不可以
@@ -63,7 +63,7 @@ message PListNetFileInfo {
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param files  上传的多个文件，为PUpdateFileInfo结构，并且经过base64编码。 
- *@param disableLongtime  文件的多久失效时间，在这时间内都是有限，单位毫秒
+ *@param disableLongtime  文件的多久失效时间，在这时间内都是有效，单位毫秒
  *@param protectLongtime  文件的保护的时间，在这个时间内，都是保护状态，过了这时间后文件免费公开，单位毫秒
  *@param saveMode  保持模式。0--表示正常模式，遇到相同文件名时会返回失败；1--覆盖模式，遇到相同文件名时直接覆盖
  *@return 成功返回PUploadArray，失败返回PResult。 关于结构体PUploadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PUploadArray
@@ -86,6 +86,8 @@ message PListNetFileInfo {
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param objectKey  文件的唯一ID标识值。 
+ *@param shareFlag  文件转发和共享标志，0--可以共享，1--不可以
+ *@param conserveFlag  文件可以收藏，0--可以收藏，1--不可以
  *@param title  文件的标题。 
  *@param desc  文件的描述。 
  *@param remark  文件的备注。 
