@@ -292,11 +292,12 @@ message PGameList {
  *@method GET
  *@cookie token&uuid
  *@param type 取这些值 "game", "club", "famous"
+ *@param first 第一次请求时请给此参数置1，以优化服务端数据处理
  *@return PGameList, 失败返回PResult
  */
 
 /*
- *@note 关注游戏
+ *@note 注册关注游戏
  *@path /datapublishing/register/game/follow
  *@method GET
  *@cookie token&uuid
