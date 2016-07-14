@@ -302,5 +302,5 @@ message PRelation {
  *@method GET
  *@param  postid 帖子id
  *@return 返回html文件
- *@example /news/share?id=3
+ *@example /v1/news/share?postid=3
  */
