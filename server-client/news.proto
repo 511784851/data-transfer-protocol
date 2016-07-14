@@ -185,7 +185,7 @@ message PRelation {
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
  *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
- *@return 成功返回 PNews ，失败返回 PResult
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
 /**
@@ -203,7 +203,7 @@ message PRelation {
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
  *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
- *@return 成功返回 PNews ，失败返回 PResult
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
 /**
@@ -222,7 +222,7 @@ message PRelation {
  *@cookie token&uuid
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@return 成功返回 PNews ，失败返回 PResult
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
 /**
@@ -265,7 +265,7 @@ message PRelation {
  *@param uuid 用户的id
  *@param type 要查看的文章类型 值：all, text, image, audio, video
  *@param offset 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
- *@return 成功返回 PNews ，失败返回 PResult
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
 /**

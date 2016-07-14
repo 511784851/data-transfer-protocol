@@ -1,0 +1,74 @@
+syntax = "proto3";
+package service;
+
+
+
+/**
+ *@note 用户批量关注好友
+ *@path /v1/news/inside/multi/follow
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param uuid 发起关注的用户id
+ *@param targetuuids 被关注的用户id列表，多个用户用,分割
+ *@return 成功返回 PBoolList ，失败返回 PResult
+ */
+
+/**
+ *@note 用户批量获取好友关系状态
+ *@path /v1/news/inside/multi/follow/status
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param uuid 发起关注的用户id
+ *@param targetuuids 被关注的用户id列表，多个用户用,分割
+ *@return 成功返回 PInt32List ，失败返回 PResult
+ */
+
+/**
+ *@note 两个用户相互/取消关注
+ *@path /v1/news/inside/followab
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param uuida 用户a的id
+ *@param uuidb 用户b的id
+ *@param oper 为1时表示添加关注，为0时表示取消关注
+ *@return 返回 PResult
+ */
+
+/**
+ *@note 获取两个用户关注的状态
+ *@path /v1/news/inside/follow/relation
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param uuida 用户a的id
+ *@param uuidb 用户b的id
+ *@return 成功返回 PRelation ，失败返回 PResult
+ */
+
+/**
+ *@note 屏蔽帖子
+ *@path /v1/news/inside/post/hide
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param postid 帖子id
+ *@param oper 0表示要屏蔽，1表示要解除屏蔽
+ *@return 成功返回 PRelation ，失败返回 PResult
+ */
+
+/**
+ *@note 根据帖子id批量获取帖子
+ *@path /v1/news/inside/multi/post
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param postids 帖子id，多个帖子id用,分隔
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
+ */
+
+/**
+ *@note 批量判断某个帖子是否存在
+ *@path /v1/news/inside/multi/post/exist
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param postids 帖子id，多个帖子id用,分隔
+ *@return 成功返回 PBoolList ，失败返回 PResult
+ */
+
