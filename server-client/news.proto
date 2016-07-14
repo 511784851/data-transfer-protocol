@@ -47,7 +47,7 @@ message PAtUser {
 // 图片
 message PImage {
 	string url = 1;              //原图url
-	repeated PImageTag Tags = 2;//图片的热点广告 
+	PImageTagList Tags = 2;//图片的热点广告 
 	string thumbnail = 3;        //缩略图的url
 	string des = 4;              //图片描述
 }
@@ -67,6 +67,11 @@ message PAudio {
 	int32 length = 2;            //音频长度
 	int64 expires = 3;           //音频的有效期（多少秒之后过期）
 } 
+
+// 图片的标签信息列表
+message PImageTagList {
+	PImageTag List = 1;
+}
 
 // 图片的标签信息
 message PImageTag {
