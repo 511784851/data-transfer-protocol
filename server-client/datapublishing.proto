@@ -12,14 +12,20 @@ message PWords {
 
 message PGuy {
 	string uuid = 1;
-	string nickname = 2;
-	string headImgURL = 3;
+	//用户名
+	string username = 2;
+	//昵称
+	string nickname = 3;
+	//个性签名
+	string whatsup = 4;
+	//头像
+	string headImgURL = 5;
 	//粉丝数
-	int32 fansCount = 4;
+	int32 fansCount = 11;
 	//0:无关系，1：是粉丝，2：已关注，3：相互关注
-	int32 followShip = 5;
+	int32 followShip = 12;
 	//0:无关系，1：是好友
-	int32 friendShip = 6;
+	int32 friendShip = 13;
 }
 
 message PGuyList {
