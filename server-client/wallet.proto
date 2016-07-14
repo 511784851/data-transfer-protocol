@@ -8,7 +8,9 @@ option java_outer_classname = "WalletProtos";
 
 // 钻石数量信息
 message PDiamondCount {
-	int32 count = 1;
+	int32 totalMoney = 1;  // 总钻数
+	int32 incomeMoney = 2; // 收入钻数
+	int32 expendMoney = 3; // 支出钻数
 }
 
 // 钻石信息
@@ -24,10 +26,15 @@ message PDiamondInfo {
 
 // 钻石信息列表
 message PDiamondInfoList {
-	int32 amount  = 1; // 总钻数
-	int32 earning = 2; // 收入总钻数
-	int32 expend  = 3; // 支出总钻数
 	repeated PDiamondInfo list = 4; // 列表
+}
+
+// 钻石数量信息
+message PRedPacketCount {
+	int32 recvMoney = 1;   // 收到的钻数
+	int32 recvCount = 2;   // 收到的个数
+	int32 sendMoney = 3;   // 送出的钻数
+	int32 sendCount = 4;   // 送出的个数
 }
 
 // 红包ID
@@ -87,7 +94,11 @@ message PGrabRedPacketInfo {
 
 // 礼物数量信息
 message PWalletGiftCount {
-	int32 count = 1;
+	int32 totalCount = 1;  // 总礼物个数
+	int32 recvMoney = 2;   // 收到的钻数
+	int32 recvCount = 3;   // 收到的个数
+	int32 sendMoney = 4;   // 送出的钻数
+	int32 sendCount = 5;   // 送出的个数
 }
 
 // 礼物信息
@@ -119,6 +130,8 @@ message PWalletToken {
  *@uri /v1/wallet/diamond/count
  *@method GET
  *@cookie token&uuid
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@return 成功返回PDiamondCount，失败返回PResult
  */
 
@@ -131,7 +144,7 @@ message PWalletToken {
  *@uriParam enddate    结束查询日期(例如:1612)
  *@uriParam offset     偏移
  *@uriParam count      数量
- *@uriParam type       类型(0:全部、1:增加、2:支出)
+ *@uriParam type       类型(0:全部、1:收入、2:支出)
  *@return 成功返回PDiamondInfoList，失败返回PResult
  */
 
@@ -161,6 +174,16 @@ message PWalletToken {
  */
 
 /*
+ *@note 获取红包数量
+ *@uri /v1/wallet/redpacket/count
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
+ *@return 成功返回PRedPacketCount，失败返回PResult
+ */
+
+/*
  *@note 获取红包记录
  *@uri /v1/wallet/redpacket/record
  *@method GET
@@ -187,6 +210,8 @@ message PWalletToken {
  *@uri /v1/wallet/gift/count
  *@method GET
  *@cookie token&uuid
+ *@uriParam startdate  开始查询日期(例如:1605)
+ *@uriParam enddate    结束查询日期(例如:1612)
  *@return 成功返回PWalletGiftCount，失败返回PResult
  */
 
@@ -217,7 +242,7 @@ message PWalletToken {
  *@cookie token&uuid
  *@uriParam startdate  开始查询日期(例如:1605)
  *@uriParam enddate    结束查询日期(例如:1612)
- *@uriParam type       类型（0:收到、1:送出）
+ *@uriParam type       类型(0:收到、1:送出)
  *@return 成功返回PWalletGiftInfoList，失败返回PResult
  */
 
