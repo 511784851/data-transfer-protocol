@@ -128,7 +128,6 @@ message PInt32Array {
  *@path /comment/post/count
  *@method GET
  *@param postids 帖子ID，用|分隔 query参数
- *@param postuuids 帖子创建者ID, 用|分隔 query参数
  *@return 成功返回PInt32Array，失败返回PResult
  */
 
