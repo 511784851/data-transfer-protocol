@@ -70,7 +70,7 @@ message PAudio {
 
 // 图片的标签信息列表
 message PImageTagList {
-	PImageTag List = 1;
+	repeated PImageTag List = 1;
 }
 
 // 图片的标签信息
