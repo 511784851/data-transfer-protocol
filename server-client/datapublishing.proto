@@ -304,3 +304,16 @@ message PGameList {
  *@param name 游戏名
  *@return 成功返回PResult
  */
+
+/*
+ *@note 档案内follow搜索
+ *@path /datapublishing/follow/search
+ *@method GET
+ *@cookie token&uuid
+ *@param target 要对哪个目标用户（uuid）的档案进行搜索
+ *@param keyword 关键字，不能为空
+ *@param type "follower"：搜他的粉丝,"following":搜他关注的人
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList, 失败返回PResult
+ */
