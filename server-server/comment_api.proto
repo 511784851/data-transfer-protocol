@@ -1,0 +1,30 @@
+syntax = "proto3";
+package service;
+
+
+/*
+ *@note 取N个帖子的评论数
+ *@path /comment/post/count
+ *@method GET
+ *@param postids 帖子ID，用|分隔
+ *@param from 发起调用的服务方
+ *@return 成功返回PInt32Array，失败返回PResult
+ */
+
+/*
+ *@note 获取评论
+ *@path /comment/getcomment
+ *@method GET
+ *@param id 评论ID
+ *@param from 发起调用的服务方
+ *@return 成功返回PComment，失败返回PResult
+ */
+
+/*
+ *@note 获取多条评论
+ *@path /comment/getcomments
+ *@method GET
+ *@param ids 评论ID数组,以","分隔
+ *@param from 发起调用的服务方
+ *@return 返回PCommentLevel
+ */
