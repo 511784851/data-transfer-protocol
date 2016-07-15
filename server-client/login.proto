@@ -7,13 +7,14 @@ import "account.proto";
 
 message PLogin {
 	/*保留1~5用于扩展*/
-	string uuid = 6;      			//用户ID
-	string token = 7;				//统一访问令牌
-	string nickname = 8;			//用户昵称
-	string imgURL = 9;				//用户头像URL
-	int64 chatid = 10;				//用户聊天系统分配的聊天id
-	repeated int32 loginTypes = 11; //第三方登录类型(1 微信,2 微博,3 facebook,4 google)
-	PLevelInfo levelInfo = 12;		//会员等级信息
+	bool newUser = 5;				// 是否新注册用户标识，true为新用户，false为老用户
+	string uuid = 6;      			// 用户ID
+	string token = 7;				// 统一访问令牌
+	string nickname = 8;				// 用户昵称
+	string imgURL = 9;				// 用户头像URL
+	int64 chatid = 10;				// 用户聊天系统分配的聊天id
+	repeated int32 loginTypes = 11;	// 第三方登录类型(1 微信,2 微博,3 facebook,4 google)
+	PLevelInfo levelInfo = 12;		// 会员等级信息
 	
 	//其它需要下发的信息...
 }
