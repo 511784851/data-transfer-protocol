@@ -105,6 +105,8 @@ message PInformer {
 	int64 time = 2; //举报时间
 }
 
+/*********敏感词***********/
+
 //敏感词列表
 message PKeywords {
 	repeated PKeyword list = 1; //敏感词列表
@@ -116,6 +118,8 @@ message PKeyword {
 	int64 id = 1; 
 	string work = 2;
 }
+
+/*********黑名单***********/
 
 //黑名单列表
 message PBlacklists {
@@ -129,6 +133,46 @@ message Pblacklist {
 	string val = 2;
 	string other = 3; //如果是手机，那么这个就是手机的区号
 }
+
+/*********推荐关注***********/
+
+//推荐关注的游戏
+message PRecommendGame {
+	int32 id = 1;
+	string name = 2; 
+	string head = 3;
+	string desc = 4;
+}
+
+//推荐关注的游戏的列表
+message PRecommendGameList {
+	repeated PRecommendGame list = 1;
+}
+
+//推荐关注的俱乐部
+message PRecommendClub {
+	int32 id = 1;
+	string name = 2; 
+	string head = 3;
+	string desc = 4;
+}
+
+//推荐关注的俱乐部的列表
+message PRecommendClubList {
+	repeated PRecommendClub list = 1;
+}
+
+//推荐关注的名人
+message PRecommendStar {
+	int32 id = 1;
+	string uuid = 2;
+}
+
+//推荐关注的名人的列表
+message PRecommendStarList {
+	repeated PRecommendStar list = 1;
+}
+
 
 /**************************API 定义***********************************/
 

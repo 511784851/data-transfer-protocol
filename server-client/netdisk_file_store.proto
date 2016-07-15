@@ -43,7 +43,7 @@ message PListNetFileInfo {
  *@return 成功PListNetFileInfo, 失败PResult
  */
  
- message PUpdateFileInfo {
+message PUpdateFileInfo {
 	string extension = 1;
 	string fileSize = 2;
 	string fileDigest  = 3;
@@ -51,9 +51,9 @@ message PListNetFileInfo {
 	string title = 4;
 	string description = 5;
 	string remark = 6;
- }
+}
  
- message PListUpdateFileInfo {
+message PListUpdateFileInfo {
 	repeated PUpdateFileInfo uploadFiles = 1;
 }
  /*

@@ -114,12 +114,13 @@ message PWalletGiftCount {
 // 礼物信息
 message PWalletGiftInfo {
 	string sid = 1;	       // 编号
-	string name = 2;       // 名称
-	string headImgURL = 3; // 头像地址
-	string giftId = 4;     // 礼物ID
-	int32  money = 5;      // 钻数
-	int32  count = 6;      // 数量
-	int64  createTime = 7; // 创建时间
+	string uuid = 2;       // 用户ID
+	string name = 3;       // 名称
+	string headImgURL = 4; // 头像地址
+	int32 gid = 5;        // 礼物ID
+	int32  money = 6;      // 钻数
+	int32  count = 7;      // 数量
+	int64  createTime = 8; // 创建时间
 }
 
 // 礼物信息列表
@@ -137,6 +138,14 @@ message PWalletToken {
 
 /*
  *@note 获取钻数量
+ *@uri /v1/wallet/diamond/count/total
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PDiamondTotalCount，失败返回PResult
+ */
+
+/*
+ *@note 通过时间获取钻数量
  *@uri /v1/wallet/diamond/count
  *@method GET
  *@cookie token&uuid
@@ -177,10 +186,20 @@ message PWalletToken {
 
 /*
  *@note 抢红包
- *@uri /v1/wallet/redpacket/grab
+ *@uri /v1/wallet/redpacket/grab/rid
  *@method GET
  *@cookie token&uuid
  *@return 返回PGrabRedPacketInfo
+ */
+
+/*
+ *@note 抢完红包写备注
+ *@uri /v1/wallet/redpacket/remark
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam rid 红包ID
+ *@uriParam remark 备注
+ *@return 返回PResult
  */
 
 /*
@@ -208,11 +227,19 @@ message PWalletToken {
 
 /*
  *@note 获取红包详情
- *@uri /v1/wallet/redpacket/detail
+ *@uri /v1/wallet/redpacket/detail/:rid
  *@method GET
  *@cookie token&uuid
  *@uriParam id 红包编号
  *@return 成功返回PRedPacketDetail，失败返回PResult
+ */
+
+/*
+ *@note 获取礼物数量
+ *@uri /v1/wallet/gift/count/total
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PWalletGiftTotalCount，失败返回PResult
  */
 
 /*
@@ -226,32 +253,14 @@ message PWalletToken {
  */
 
 /*
- *@note 收礼物
- *@uri /v1/wallet/gift/recv
- *@method GET
- *@cookie token&uuid
- *@uriParam id 礼物ID
- *@uriParam count 数量
- *@return 返回PResult
- */
-
-/*
- *@note 送礼物
- *@uri /v1/wallet/gift/send
- *@method GET
- *@cookie token&uuid
- *@uriParam id 礼物ID
- *@uriParam count 数量
- *@return 返回PResult
- */
-
-/*
  *@note 获取礼物记录
  *@uri /v1/wallet/gift/record
  *@method GET
  *@cookie token&uuid
  *@uriParam startdate  开始日期(例如:1605)
  *@uriParam enddate    结束日期(例如:1612)
+ *@uriParam offset     偏移
+ *@uriParam count      数量
  *@uriParam type       类型(0:收到、1:送出)
  *@return 成功返回PWalletGiftInfoList，失败返回PResult
  */
