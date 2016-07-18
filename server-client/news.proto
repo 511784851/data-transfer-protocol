@@ -226,7 +226,8 @@ message PRelation {
  *@path   /v1/news/collect
  *@cookie token&uuid
  *@method GET
- *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
+ *@param  offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@param  count 获取收藏帖子数量,最大值为50
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
@@ -269,7 +270,7 @@ message PRelation {
  *@cookie token&uuid
  *@param uuid 用户的id
  *@param type 要查看的文章类型 值：all, text, image, audio, video
- *@param offset 刷新到最后一篇文章的时间还想看更多的文章，那么必须传这个参数，为晚于最后一篇文章的发布时间的时间，否则填0
+ *@param offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
