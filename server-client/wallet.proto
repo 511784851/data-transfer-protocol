@@ -119,7 +119,7 @@ message PWalletGiftInfo {
 	string uuid = 2;       // 用户ID
 	string name = 3;       // 名称
 	string headImgURL = 4; // 头像地址
-	int32 gid = 5;         // 礼物ID
+	int32  gid = 5;        // 礼物ID
 	int32  money = 6;      // 钻数
 	int32  count = 7;      // 数量
 	int64  createTime = 8; // 创建时间
@@ -157,7 +157,7 @@ message PWalletToken {
  */
 
 /*
- *@note 获取钻石与红包记录
+ *@note 获取钻石记录、红包记录等...
  *@uri /v1/wallet/diamond/record
  *@method GET
  *@cookie token&uuid
