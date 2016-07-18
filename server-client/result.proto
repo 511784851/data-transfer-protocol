@@ -70,7 +70,7 @@ message PBoolList {
  *@note 批量传输float64
  */
 message PFloat64List {
-	repeated float List = 1;
+	repeated float64 List = 1;
 }
 
 
