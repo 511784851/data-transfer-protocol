@@ -54,19 +54,39 @@ message PConversation {
  *@path /chat/room/init
  *@method GET
  *@param owner_uuid 管理员uuid（必须）
+ *@param owner_name 管理员名称（必须）
  *@param communityId 社区ID（必须）
+ *@param communityName 社区名称（必须）
  *@param title 聊天室名称（非必须）
  *@param icon  聊天室头像url（非必须）
  *@return 返回PResult
  */
  
+ 
+message PJoinRoom {
+	int64 code = 1;                // 状态吗
+	string oldRoomId = 2;          // 旧的聊天室ID
+	string oldRoomName = 3;	       // 旧的聊天室名称
+	string newRoomId = 4;          // 新的聊天室ID
+	string newRoomName = 5;	       // 新的聊天室名称
+	int32 queueSize = 6;           // 前面排队人数
+}
+
 /*
  *@note 进入社区聊天室
  *@path /chat/room/join
  *@method GET
- *@param token&uuid 登录用户信息（必须）
+ *@cookie token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
- *@return 成功返回PConversation，失败返回PResult（注意：返回PResult[errorCode=1910002]时，意为群聊人数已达上限，此时可排队进入聊天室）
+ *@param exitRoom    是否退出别的聊天室（1-是，0-否），默认0
+ *@param coverqueue  是否放弃别的排队  （1-是，0-否），默认0
+ *@return 进入成功返回PConversation，提示用户选择返回PJoinRoom，系统错误返回PResult
+ 		 *注意：返回PJoinRoom时根据code值做对应处理：
+ 		  code=1910002表示正在排队
+ 		  code=1910003表示两个聊天室需要选择一个排队
+ 		  code=1910004表示两个聊天室需要选择一个进入
+ 		  code=1910005表示人数已达上限可选择排队
+ 		  code=1910006表示排队成功
  */
  
 /*
@@ -78,6 +98,7 @@ message PConversation {
  *@return 返回PResult，当errorCode=0时，extraInfo表示排队人数。（此返回结果只标识是否进入排队，不代表已进入聊天室，系统排队成功后将给App用户推送通知消息）
  */
  
+ 
 /*
  *@note 退出社区聊天室
  *@path /chat/room/exit
@@ -85,4 +106,4 @@ message PConversation {
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
  *@return 返回PResult
- */
+ */ 

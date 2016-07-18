@@ -1,6 +1,6 @@
 syntax = "proto3";
 package common;
-option java_package = "com.blemobi.demo.probuf";
+option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "WalletProtos";
 
 /*=====================================*/
@@ -21,12 +21,13 @@ message PDiamondCount {
 // 钻石信息
 message PDiamondInfo {
 	string sid = 1;	       // 编号
-	string name = 2;       // 名称
-	int32  type = 3;       // 类型（充值、购物、等额红包、拼手气红包）
-	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
-	string headImgURL = 5; // 头像地址
-	int32  money = 6;      // 钻数
-	int64  createTime = 7; // 创建时间
+	string uuid = 2;       // 用户ID
+	string name = 3;       // 名称
+	int32  type = 4;       // 类型（充值、购物、等额红包、拼手气红包）
+	int32  target = 5;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 6; // 头像地址
+	int32  money = 7;      // 钻数
+	int64  createTime = 8; // 创建时间
 }
 
 // 钻石信息列表
@@ -138,6 +139,14 @@ message PWalletToken {
 
 /*
  *@note 获取钻数量
+ *@uri /v1/wallet/diamond/count/total
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PDiamondTotalCount，失败返回PResult
+ */
+
+/*
+ *@note 通过时间获取钻数量
  *@uri /v1/wallet/diamond/count
  *@method GET
  *@cookie token&uuid
@@ -178,10 +187,20 @@ message PWalletToken {
 
 /*
  *@note 抢红包
- *@uri /v1/wallet/redpacket/grab
+ *@uri /v1/wallet/redpacket/grab/rid
  *@method GET
  *@cookie token&uuid
  *@return 返回PGrabRedPacketInfo
+ */
+
+/*
+ *@note 抢完红包写备注
+ *@uri /v1/wallet/redpacket/remark
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam rid 红包ID
+ *@uriParam remark 备注
+ *@return 返回PResult
  */
 
 /*
@@ -209,11 +228,19 @@ message PWalletToken {
 
 /*
  *@note 获取红包详情
- *@uri /v1/wallet/redpacket/detail
+ *@uri /v1/wallet/redpacket/detail/:rid
  *@method GET
  *@cookie token&uuid
  *@uriParam id 红包编号
  *@return 成功返回PRedPacketDetail，失败返回PResult
+ */
+
+/*
+ *@note 获取礼物数量
+ *@uri /v1/wallet/gift/count/total
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PWalletGiftTotalCount，失败返回PResult
  */
 
 /*
