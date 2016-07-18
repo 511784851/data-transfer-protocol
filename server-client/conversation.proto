@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option java_package = "com.blemobi.demo.probuf";
+option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "ConversationProtos";
 
 message PConversation {
@@ -17,6 +17,15 @@ message PConversation {
     string parentId = 9;           // 父会话id，默认0
     int32 nodeType = 10;           // 是否 父会话，0-否，默认；1-是父会话
     repeated int64 members = 11;   // 会话的成员列表openId
+}
+
+message PJoinRoom {
+	int64 code = 1;                // 状态吗
+	string oldRoomId = 2;          // 旧的聊天室ID
+	string oldRoomName = 3;	       // 旧的聊天室名称
+	string newRoomId = 4;          // 新的聊天室ID
+	string newRoomName = 5;	       // 新的聊天室名称
+	int32 queueSize = 6;           // 前面排队人数
 }
 
 /*
@@ -60,16 +69,6 @@ message PConversation {
  *@param communityIcon 社区头像url（非必须）
  *@return 返回PResult
  */
- 
- 
-message PJoinRoom {
-	int64 code = 1;                // 状态吗
-	string oldRoomId = 2;          // 旧的聊天室ID
-	string oldRoomName = 3;	       // 旧的聊天室名称
-	string newRoomId = 4;          // 新的聊天室ID
-	string newRoomName = 5;	       // 新的聊天室名称
-	int32 queueSize = 6;           // 前面排队人数
-}
 
 /*
  *@note 进入社区聊天室
@@ -96,7 +95,6 @@ message PJoinRoom {
  *@param communityId 社区ID（必须）
  *@return 返回PResult，当errorCode=0时，extraInfo表示排队人数。（此返回结果只标识是否进入排队，不代表已进入聊天室，系统排队成功后将给App用户推送通知消息）
  */
- 
  
 /*
  *@note 退出社区聊天室
