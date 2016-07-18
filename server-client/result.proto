@@ -10,7 +10,7 @@ message PResult {
 	string extraInfo = 3;	//额外信息
 }
 
-message JsonResult {
+message PJResult {
 	int32 code = 1; // 错误码
 }
 
