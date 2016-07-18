@@ -1,7 +1,7 @@
 syntax = "proto3";
 package common;
 
-option java_package = "com.blemobi.demo.probuf";
+option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "FriendGroupProtos";
 
 message PGroup {
