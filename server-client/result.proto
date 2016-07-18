@@ -66,5 +66,12 @@ message PBoolList {
 	repeated bool List = 1;
 }
 
+/*
+ *@note 批量传输float64
+ */
+message PFloat64List {
+	repeated float List = 1;
+}
+
 
 
