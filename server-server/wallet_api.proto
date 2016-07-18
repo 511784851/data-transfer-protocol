@@ -14,24 +14,13 @@ package service;
  */
 
 /*
- *@note 收礼物
- *@uri /v1/wallet/gift/recv
+ *@note 收礼物与发礼物
+ *@uri /v1/wallet/gift
  *@method GET
  *@cookie token&uuid
- *@uriParam uuid 用户ID
- *@uriParam gid 礼物ID
- *@uriParam count 数量
- *@uriParam money 钻数
- *@return 返回PResult
- */
-
-/*
- *@note 送礼物
- *@uri /v1/wallet/gift/send
- *@method GET
- *@cookie token&uuid
- *@uriParam uuid 用户ID
- *@uriParam gid 礼物ID
+ *@uriParam type  操作类型（0:收礼物、1:发礼物）
+ *@uriParam uuid  用户ID
+ *@uriParam gid   礼物ID
  *@uriParam count 数量
  *@uriParam money 钻数
  *@return 返回PResult

@@ -1,6 +1,6 @@
 syntax = "proto3";
 package common;
-option java_package = "com.blemobi.demo.probuf";
+option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "WalletProtos";
 
 /*=====================================*/
@@ -21,12 +21,13 @@ message PDiamondCount {
 // 钻石信息
 message PDiamondInfo {
 	string sid = 1;	       // 编号
-	string name = 2;       // 名称
-	int32  type = 3;       // 类型（充值、购物、等额红包、拼手气红包）
-	int32  target = 4;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
-	string headImgURL = 5; // 头像地址
-	int32  money = 6;      // 钻数
-	int64  createTime = 7; // 创建时间
+	string uuid = 2;       // 用户ID
+	string name = 3;       // 名称
+	int32  type = 4;       // 类型（充值、购物、等额红包、拼手气红包）
+	int32  target = 5;     // 目标类型（发给好友、发到聊天群、发到贴子、发到论坛）
+	string headImgURL = 6; // 头像地址
+	int32  money = 7;      // 钻数
+	int64  createTime = 8; // 创建时间
 }
 
 // 钻石信息列表
