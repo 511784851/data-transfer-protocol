@@ -32,6 +32,7 @@ message PNetFileInfo {
 
 message PListNetFileInfo {
 	repeated PNetFileInfo netFiles = 1;
+	string DiskSize = 2; //网盘的总容量，取值为整数。单位为M
 }
 
 /*
