@@ -10,6 +10,10 @@ message PResult {
 	string extraInfo = 3;	//额外信息
 }
 
+message JsonResult {
+	int32 code = 1; // 错误码
+}
+
 /*
  *@note 通信消息结构
  */
