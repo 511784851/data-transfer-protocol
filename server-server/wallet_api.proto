@@ -9,7 +9,7 @@ package service;
  *@uri /v1/wallet/diamond/add
  *@method POST
  *@cookie token&uuid
- *@param count 充值钻数
+ *@param rmoney 金钱
  *@return 成功返回PDiamondCount，失败返回PResult
  */
 
@@ -18,10 +18,10 @@ package service;
  *@uri /v1/wallet/gift
  *@method GET
  *@cookie token&uuid
- *@uriParam type  操作类型（0:收礼物、1:发礼物）
- *@uriParam uuid  用户ID
- *@uriParam gid   礼物ID
- *@uriParam count 数量
- *@uriParam money 钻数
+ *@uriParam type   操作类型（0:收礼物、1:发礼物）
+ *@uriParam uuid   用户ID
+ *@uriParam gid    礼物ID
+ *@uriParam count  数量
+ *@uriParam vmoney 钻数
  *@return 返回PResult
  */
