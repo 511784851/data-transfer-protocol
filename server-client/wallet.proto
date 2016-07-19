@@ -4,6 +4,15 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "WalletProtos";
 
 /*=====================================*/
+// 说明
+/*
+sid表示流水ID
+rid表示红包ID
+rMoney表示真实的金钱
+vMoney表示虚拟钻石数
+*/
+
+/*=====================================*/
 // 结构定义
 
 // 钻石数量信息
