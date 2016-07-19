@@ -281,7 +281,7 @@ message PWalletToken {
  *@uri /v1/wallet/paypwd/set
  *@method POST
  *@cookie token&uuid
- *@postParam payToken 支付Token
+ *@postParam paytoken 支付Token
  *@postParam password 支付密码
  *@return 返回PResult
  */
