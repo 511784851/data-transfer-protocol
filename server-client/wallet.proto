@@ -57,6 +57,17 @@ message PRedPacketID {
 	string rid = 1;	       // 红包ID
 }
 
+// 发红包参数结构
+message PSendRedPacket {
+	string paytoken = 1;   // 支付Token
+	int32  type = 2;       // 红包类型（2:等额红包、3:拼手气红包）
+	int32  count = 3;      // 红包数量
+	int32  vMoney = 4;     // 红包金额
+	string remark = 5;     // 备注
+	int32  target = 6;     // 目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
+	string targetID = 7;   // 发送目标ID（可以是UUID、群ID等）
+}
+
 // 红包信息
 message PRedPacketInfo {
 	string sid = 1;	       // 流水号
