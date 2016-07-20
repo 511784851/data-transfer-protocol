@@ -9,8 +9,9 @@ package service;
  *@uri /v1/wallet/diamond/add
  *@method POST
  *@cookie token&uuid
- *@param rmoney 金钱
- *@return 成功返回PDiamondCount，失败返回PResult
+ *@postParam pid    充值ID
+ *@postParam rmoney 真实金钱
+ *@return 成功返回PDiamondTotalCount，失败返回PResult
  */
 
 /*
