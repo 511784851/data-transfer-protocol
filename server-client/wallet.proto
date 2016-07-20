@@ -6,6 +6,7 @@ option java_outer_classname = "WalletProtos";
 /*=====================================*/
 // 说明
 /*
+pid表示支付ID
 sid表示流水ID
 rid表示红包ID
 rMoney表示真实的金钱

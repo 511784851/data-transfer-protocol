@@ -18,7 +18,7 @@ message PAlipayOrderInfo {
  *@cookie token  用户的token。
  *@param orderSubject  订单的主题
  *@param orderBody 订单的内容描述
- *@param orderPrice  订单的总价。以人民币的元为单位，精细到小数点后面两位。
+ *@param amount  订单的总价。以人民币的元为单位的整数。
  *@return 成功PAlipayOrderInfo, 失败PResult
  */
  
