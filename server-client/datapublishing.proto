@@ -154,7 +154,7 @@ message PGameList {
  
  
 /*
- *@note 根据关键词搜索用户
+ *@note 搜索用户
  *@path /datapublishing/search/user
  *@method GET
  *@cookie token&uuid
@@ -165,14 +165,15 @@ message PGameList {
  */
  
 /*
- *@note 根据关键词搜索微博帖子
+ *@note 搜索微博帖子
  *@path /datapublishing/search/news
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
+ *@param uuid 指定用户搜索
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PNews，失败返回PResult
+ *@return 成功返回PPostInfoList，失败返回PResult
  */
 
 /*
@@ -195,7 +196,7 @@ message PGameList {
  *@param topic 两头不带#号的话题名
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PTopicNews（当页号大于1时，返回PNews），失败返回PResult
+ *@return 成功返回PTopicNews（当页号大于1时，返回PPostInfoList），失败返回PResult
  */
  
 /*
@@ -206,7 +207,7 @@ message PGameList {
  *@param type 微博类型 取值all text image video audio 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PNews，失败返回PResult
+ *@return 成功返回PPostInfoList，失败返回PResult
  */
  
 /*
@@ -248,7 +249,7 @@ message PGameList {
  *@param type 微博类型 取值all text image video audio 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PNews，失败返回PResult
+ *@return 成功返回PPostInfoList，失败返回PResult
  */
  
 /*
