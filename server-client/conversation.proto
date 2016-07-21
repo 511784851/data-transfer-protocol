@@ -76,7 +76,6 @@ message PRoomMember {
  */
 
 
-
 /*
  *@note 初始化/更新社区聊天室
  *@path /chat/room/init
