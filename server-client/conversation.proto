@@ -28,6 +28,14 @@ message PJoinRoom {
 	int32 queueSize = 6;           // 前面排队人数
 }
 
+message PCommunity {
+	string ownerUuid = 1;       // 超级管理员uuid
+	string communityId = 2;     // 社区ID
+	string communityName = 3;   // 社区名称
+	string communityIcon = 4;   // 社区头像url
+    repeated string uuids = 5;  // 普通管理员uuid
+}
+
 /*
  *@note 创建会话（单聊）
  *@path /chat/conversation/create/single
@@ -57,15 +65,6 @@ message PJoinRoom {
  *@param tag 聊天tag（0-建立好友关系 1-解除好友关系）
  *@return 返回PResult
  */
-
-
-message PCommunity {
-	string ownerUuid = 1;       // 超级管理员uuid
-	string communityId = 2;     // 社区ID
-	string communityName = 3;   // 社区名称
-	string communityIcon = 4;   // 社区头像url
-    repeated string uuids = 5;  // 普通管理员uuid
-}
 
 /*
  *@note 初始化/更新社区聊天室
@@ -103,6 +102,15 @@ message PCommunity {
 /*
  *@note 退出社区聊天室
  *@path /chat/room/exit
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 返回PResult
+ */ 
+ 
+ /*
+ *@note 释放聊天室排队成功占位
+ *@path /chat/room/release
  *@method GET
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
