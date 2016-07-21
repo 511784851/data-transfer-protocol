@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option java_package = "com.blemobi.sep.probuf";
+option java_package = "com.blemobi.demo.probuf";
 option java_outer_classname = "ConversationProtos";
 
 message PConversation {
@@ -61,9 +61,9 @@ message PJoinRoom {
 /*
  *@note 初始化/更新社区聊天室
  *@path /chat/room/init
- *@method GET
- *@param owner_uuid    管理员uuid（必须）
- *@param owner_name    管理员名称（必须）
+ *@method POST
+ *@param owner_uuid    超级管理员uuid，最大权限管理员（必须）
+ *@param uuids         普通管理员uuid，多个uuid用","隔开（非必须） 
  *@param communityId   社区ID（必须）
  *@param communityName 社区名称（必须）
  *@param communityIcon 社区头像url（非必须）
@@ -84,7 +84,6 @@ message PJoinRoom {
  		  code=1910003表示两个聊天室需要选择一个排队
  		  code=1910004表示两个聊天室需要选择一个进入
  		  code=1910005表示人数已达上限可选择排队
- 		  code=1910006表示排队成功
  */
  
 /*
