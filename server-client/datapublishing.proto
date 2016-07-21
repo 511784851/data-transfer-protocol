@@ -16,16 +16,22 @@ message PGuy {
 	string username = 2;
 	//昵称
 	string nickname = 3;
+	//真实姓名
+	string realname = 4;
 	//个性签名
-	string whatsup = 4;
+	string whatsup = 5;
 	//头像
-	string headImgURL = 5;
+	string headImgURL = 6;
 	//粉丝数
 	int32 fansCount = 11;
 	//0:无关系，1：是粉丝，2：已关注，3：相互关注
 	int32 followShip = 12;
 	//0:无关系，1：是好友
 	int32 friendShip = 13;
+	//帖子数
+	int32 posts = 14;
+	//成就数
+	int32 achievements = 15;
 }
 
 message PGuyList {
@@ -325,3 +331,30 @@ message PGameList {
  *@param pagesize 页大小
  *@return 成功返回PFollowOrFansList, 失败返回PResult
  */
+
+message PRank {
+	//排名
+	int32 rank = 1;
+	//粉丝数
+	int32 fans = 2;
+	//帖子数
+	int32 posts = 3;
+	//成就数
+	int32 achievements = 4;
+	
+	//排名列表
+	repeated PGuy guys = 5;	
+}
+
+/*
+ *@note 排行榜
+ *@path /datapublishing/rank
+ *@method GET
+ *@cookie token&uuid
+ *@param type  排行类型 "fans"|"posts"|"achievements"
+ *@param scope 统计范围 "friend"|"follower"|"following"|"region"
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PRank, 失败返回PResult
+ */
+
