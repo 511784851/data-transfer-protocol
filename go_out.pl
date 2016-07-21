@@ -21,6 +21,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/notification.proto ".
 						"server-client/community.proto ".
 						"server-client/wallet.proto ".
+						"server-client/contact_book.proto ".
+						"server-client/netdisk_file_store.proto ".
 						"server-client/conversation.proto ";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;

@@ -4,6 +4,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NewsProtos";
 
 import "account.proto";
+import "wallet.proto";
 
 // 微博详情列表
 message PPostInfoList {
@@ -30,7 +31,10 @@ message PPostInfo {
 	int64 collectCnt = 17;       //收藏数，上传时不用填
 	int64 voteCnt = 18;          //点赞数，上传时不用填
 	bool  vote = 19;             //自己是否点赞，上传时不用填
-	PAtUserList atusers = 20;       //被@的用户列表
+	PAtUserList atusers = 20;   	//被@的用户列表
+	bool IsDelete = 21;			//帖子已经被用户删除
+	bool IsHide = 22;				//帖子正在被审核
+    PRedPacketInfo RedPacket = 23;  //红包信息，上传时不用填
 }
 
 // 被@的用户列表
@@ -171,6 +175,17 @@ message PRelation {
  *@cookie token&uuid
  *@method POST
  *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
+ *@return 返回 PResult
+ */
+
+/**
+ *@note   发布红包微博
+ *@path   /v1/news/post/redpacket
+ *@cookie token&uuid
+ *@method POST
+ *@post   PArticle数据流
+ *@redpacket  PSendRedPacket数据流
+ *@post, redpacket分别以表单方式提交数据
  *@return 返回 PResult
  */
 
