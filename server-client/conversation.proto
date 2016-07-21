@@ -66,6 +66,8 @@ message PCommunity {
  *@return 返回PResult
  */
 
+
+
 /*
  *@note 初始化/更新社区聊天室
  *@path /chat/room/init
