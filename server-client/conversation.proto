@@ -29,19 +29,23 @@ message PJoinRoom {
 }
 
 message PCommunity {
-	string ownerUuid = 1;       // 超级管理员uuid
-	string communityId = 2;     // 社区ID
-	string communityName = 3;   // 社区名称
-	string communityIcon = 4;   // 社区头像url
-    repeated string uuids = 5;  // 普通管理员uuid
+	string ownerUuid = 1;          // 超级管理员uuid
+	string communityId = 2;        // 社区ID
+	string communityName = 3;      // 社区名称
+	string communityIcon = 4;      // 社区头像url
+    repeated string uuids = 5;     // 普通管理员uuid
 }
 
-message PRoomMember {
-	int32 size = 1;             // 成员数量
-	PUserBase User = 2;			// 成员信息
-	int32 IsFriend = 3;			// A(你）关系码: 0: A --- B(A与B不是好友); 1: A --> B(A是B的单向好友); 2: A <-- B(B是A的单向好友); 3: A <-> B(A与B是好友)
-	int32 IsFollow = 4;			// 0表示未关注，1表示已关注
-	int32 IsManager = 5;	    // 0表示成员，1表示是管理员，2表示是超级管理员
+message PMemberList {
+	int32 size = 1;                // 成员数量
+	repeated PMember list = 2;     // 成员信息
+}
+
+message PMember {
+	PUserEx user = 1;			   // 成员信息
+	int32 IsFriend = 2;			   // A(你）关系码: 0: A --- B(A与B不是好友); 1: A --> B(A是B的单向好友); 2: A <-- B(B是A的单向好友); 3: A <-> B(A与B是好友)
+	int32 IsFollow = 3;			   // 0表示未关注，1表示已关注
+	int32 IsManager = 4;	       // 0表示成员，1表示是管理员，2表示是超级管理员
 	
 }
 
@@ -133,7 +137,7 @@ message PRoomMember {
  *@method GET
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
- *@return 成功返回PRoomMember，失败返回PResult
+ *@return 成功返回PMemberList，失败返回PResult
  */ 
  
 /*
@@ -142,5 +146,5 @@ message PRoomMember {
  *@method GET
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
- *@return 成功返回PRoomMember，失败返回PResult
+ *@return 成功返回PMemberList，失败返回PResult
  */ 
