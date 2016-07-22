@@ -44,10 +44,11 @@ message PMemberList {
 }
 
 message PMember {
-	PUserEx user = 1;			   // 成员信息
-	int32 IsFriend = 2;			   // A(你）关系码: 0: A --- B(A与B不是好友); 1: A --> B(A是B的单向好友); 2: A <-- B(B是A的单向好友); 3: A <-> B(A与B是好友)
+	PUser user = 1;			       // 成员信息
+	int32 IsFriend = 2;			   // 0表示不是好友，1表示是好友
 	int32 IsFollow = 3;			   // 0表示未关注，1表示已关注
 	int32 IsManager = 4;	       // 0表示成员，1表示是管理员，2表示是超级管理员
+	int32 gameLevel = 5;           // 游戏化等级
 }
 
 /*
