@@ -73,3 +73,13 @@ package service;
  *@return 成功返回 PBoolList ，失败返回 PResult
  */
 
+/**
+ *@note   获取粉丝列表
+ *@path   /v1/news/indise/fans
+ *@cookie token&uuid
+ *@method GET
+ *@param  uuid 被查找的用户uuid
+ *@param  count 单次返回的记录条数，默认为20，最大不超过100
+ *@param  offset 下次查询的起点，默认为0。
+ *@return 成功返回 PStringList ，失败返回 PResult
+ */
