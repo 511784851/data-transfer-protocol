@@ -138,7 +138,7 @@ message PMember {
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
  *@return 成功返回PMemberList，失败返回PResult
- */ 
+ */
  
 /*
  *@note 获取聊天室排队成员信息
