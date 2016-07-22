@@ -44,7 +44,7 @@ message PMemberList {
 }
 
 message PMember {
-	PUser user = 1;			       // 成员信息
+	PUserBase user = 1;			   // 成员信息
 	int32 IsFriend = 2;			   // 0表示不是好友，1表示是好友
 	int32 IsFollow = 3;			   // 0表示未关注，1表示已关注
 	int32 IsManager = 4;	       // 0表示成员，1表示是管理员，2表示是超级管理员
