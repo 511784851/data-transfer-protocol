@@ -22,6 +22,11 @@ message PSearchUserList {
 	repeated PSearchUser searchUsers = 1;
 }
 
+// 是否是好友信息列表
+message PIsFriendList {
+	repeated bool isFriend = 1; // 是否是好友
+}
+
 /*
  *@note 获取推荐好友列表
  *@path /social/recommend
