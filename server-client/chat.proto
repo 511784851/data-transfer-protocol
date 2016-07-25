@@ -168,9 +168,6 @@ message PMember {
  */
  
  
- 
- 
- 
  /*----------------------------------*/
 // 通用操作结果返回(通过uuid来获取chatid)
 message PChatIdMessage {
