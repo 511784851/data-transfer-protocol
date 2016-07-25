@@ -155,7 +155,8 @@ message PMember {
  *@method GET
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
- *@param offset 加载更多时，offset每次加10，默认0
+ *@param offset 每次加载的起始值，offset = offset + count，默认0
+ *@param count 每次加载的数据量
  *@return 成功返回PMemberList，失败返回PResult
  */
  
@@ -165,7 +166,8 @@ message PMember {
  *@method GET
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
- *@param offset 加载更多时，offset每次加10，默认0
+ *@param offset 每次加载的起始值，offset = offset + count，默认0
+ *@param count 每次加载的数据量
  *@return 成功返回PMemberList，失败返回PResult
  */
  
