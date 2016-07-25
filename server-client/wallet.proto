@@ -295,7 +295,7 @@ message PWalletToken {
  */
 
 /*
- *@note 是否设置支付密码
+ *@note 是否设置了支付密码
  *@uri /v1/wallet/paypwd/isset
  *@method GET
  *@cookie token&uuid
