@@ -1,7 +1,39 @@
 syntax = "proto3";
 package common;
 option java_package = "com.blemobi.sep.probuf";
-option java_outer_classname = "MsgResultProtos";
+option java_outer_classname = "ChatProtos";
+
+
+
+// 通用操作结果返回(通过uuid来获取chatid)
+message PChatIdMessage {
+	string uuid = 1;	//账户系统中的uuid
+	string chatId = 2;	//对应聊天系统中的chatid
+}
+
+// 通用操作结果返回(通过uuids来获取chatids)
+message PChatIdListMessage {
+	repeated PChatIdMessage chatIdMap = 1;
+}
+
+
+
+/*
+ *@note 通过uuid来获取chatid
+ *@path /chat/chatid/getUserChatID
+ *@method GET
+ *@param uuid  对照表中的uuid
+ *@return 返回PChatIdMessage
+ */
+
+ /*
+ *@note 通过uuids来获取chatids
+ *@path /chat/chatid/getUserListChatID
+ *@method GET
+ *@param uuids  对照表中要查询的所有uuid串，多个uuid之间用逗号隔开。
+ *@return 返回PChatIdListMessage
+ */
+ 
 
 // 通用操作结果返回(单个消息)
 message PQuerySingleMessage {
@@ -160,3 +192,86 @@ message PFileMsg {
  *@param count  最大消息数量，即当前页最多的纪录数
  *@return 返回PQueryMoreMessage。
  */
+
+
+
+
+
+/*
+ *@note 给用户推送消息。
+ *@path /chat/push/msg/single
+ *@method GET
+ *@param receiverUUID  消息接收者的uuid。
+ *@param title  推送消息的标题。
+ *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
+ *@param description  推送消息的描述。
+ *@param alertContent  推送消息的的在终端设备中提示的标题。
+ *@param info  回包给客户端的json数据，经过base64的encode，客户端decode后，得到的json格式为：{"MsgType":"aabb","Title":"eeff","Time":123456789} 
+ *@return 返回PResult
+ */
+ 
+ 
+
+/*
+ *@note 给用户推送消息(群发消息)。
+ *@path /chat/push/msg/multi
+ *@method POST
+ *@param receiverUUIDs  多个接收者的uuid列表，uuid之间用“逗号”隔开。
+ *@param title  推送消息的标题。
+ *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
+ *@param description  推送消息的描述。
+ *@param alertContent  推送消息的的在终端设备中提示的标题。
+ *@param info  回包给客户端的json数据，经过base64的encode，客户端decode后，得到的json格式为：{"MsgType":"aabb","Title":"eeff","Time":123456789} 
+ *@return 返回PResult
+ */
+ 
+ 
+ 
+
+/*
+ *@note 同步用户信息到悟空（不包含添加用户信息）
+ *@path /chat/user/synUserInfo
+ *@method GET
+ *@param uuid  用户uuid。
+ *@param token  用户token。
+ *@return 返回PResult
+ */
+
+
+
+message PWkToken {
+	string appAccessToken = 1; // 应用appAccessToken
+	string domain = 2;	       // 应用domain
+	string appKey = 3;	       // 应用appKey
+	int64 openId = 4;	       // 用户openId
+	string nonce = 5;	       // 随机数
+	int64 timestamp = 6;	   // 时间戳
+	string signature = 7;      // 签名串，用于登录阿里悟空的凭证，每个signature的有效期为5分钟
+}
+  
+/*
+ *@note 获取用户登录阿里悟空的凭证信息
+ *@path /chat/user/token
+ *@method GET
+ *@param token&uuid 登录用户信息
+ *@param devType 设备类型（固定为"ios"或"android"）
+ *@return 成功返回PWkToken，失败返回PResult
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
