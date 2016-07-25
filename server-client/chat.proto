@@ -3,8 +3,175 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "ChatProtos";
 
+import "account.proto";
 
+message PWkToken {
+	string appAccessToken = 1;     // 应用appAccessToken
+	string domain = 2;	           // 应用domain
+	string appKey = 3;	           // 应用appKey
+	int64 openId = 4;	           // 用户openId
+	string nonce = 5;	           // 随机数
+	int64 timestamp = 6;	       // 时间戳
+	string signature = 7;          // 签名串，用于登录阿里悟空的凭证，每个signature的有效期为5分钟
+}
 
+message PConversation {
+	string conversationId = 1;     // 会话ID
+	int64 openId = 2;              // 会话创建者
+	int32 type = 3;                // 会话类型
+	string icon = 4;               // 会话图标url地址
+	string title = 5;	           // 会话名称
+	int64 tag = 6;	               // 会话tag：0-可以聊天，1-不能聊天（已不是好友关系）
+	int32 memberLimit = 7;         // 群成员数
+    int32 superGroup = 8;	       // 0非大群，1大群  
+    string parentId = 9;           // 父会话id，默认0
+    int32 nodeType = 10;           // 是否 父会话，0-否，默认；1-是父会话
+    repeated int64 members = 11;   // 会话的成员列表openId
+}
+
+message PJoinRoom {
+	int64 code = 1;                // 状态吗
+	string oldRoomId = 2;          // 旧的聊天室ID
+	string oldRoomName = 3;	       // 旧的聊天室名称
+	string newRoomId = 4;          // 新的聊天室ID
+	string newRoomName = 5;	       // 新的聊天室名称
+	int32 queueSize = 6;           // 前面排队人数
+}
+
+message PCommunity {
+	string ownerUuid = 1;          // 超级管理员uuid
+	string communityId = 2;        // 社区ID
+	string communityName = 3;      // 社区名称
+	string communityIcon = 4;      // 社区头像url
+    repeated string uuids = 5;     // 普通管理员uuid
+}
+
+message PMemberList {
+	int32 size = 1;                // 成员数量
+	repeated PMember list = 2;     // 成员信息
+}
+
+message PMember {
+	PUserBase user = 1;			   // 成员信息
+	int32 IsFriend = 2;			   // 0表示不是好友，1表示是好友
+	int32 IsFollow = 3;			   // 0表示未关注，1表示已关注
+	int32 IsManager = 4;	       // 0表示成员，1表示是管理员，2表示是超级管理员
+	int32 gameLevel = 5;           // 游戏化等级
+}
+
+/*
+ *@note 获取用户登录阿里悟空的凭证信息
+ *@path /chat/user/token
+ *@method GET
+ *@param token&uuid 登录用户信息
+ *@param devType 设备类型（固定为"ios"或"android"）
+ *@return 成功返回PWkToken，失败返回PResult
+ */
+
+/*
+ *@note 创建会话（单聊）
+ *@path /chat/conversation/create/single
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param friend_uuid 好友uuid（必须）
+ *@return 成功返回PConversation，失败返回PResult
+ */
+ 
+/*
+ *@note 创建会话（群聊）
+ *@path /chat/conversation/create/group
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param title 群聊名称（非必须）
+ *@param icon  群聊头像url（非必须）
+ *@param member_uuid 群组成员uuid数组（必须）     格式：member_uuid=1&member_uuid=2&member_uuid=3
+ *@return 成功返回PConversation，失败返回PResult
+ */
+ 
+/*
+ *@note 修改聊天tag（当有好友关系变更时调用此接口，用于标示是否可以聊天）
+ *@path /chat/conversation/update/tag
+ *@method GET
+ *@param uuid 用户uuid（必须）
+ *@param friend_uuid 好友uuid（必须）
+ *@param tag 聊天tag（0-建立好友关系 1-解除好友关系）
+ *@return 返回PResult
+ */
+
+/*
+ *@note 初始化/更新社区聊天室
+ *@path /chat/room/init
+ *@method POST
+ *@body   PCommunity数据流
+ *@return 返回PResult
+ */
+
+/*
+ *@note 进入社区聊天室
+ *@path /chat/room/join
+ *@method GET
+ *@cookie token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@param exitRoom    是否退出别的聊天室（1-是，0-否），默认0
+ *@param coverqueue  是否放弃别的排队  （1-是，0-否），默认0
+ *@return 进入成功返回PConversation，提示用户选择返回PJoinRoom，系统错误返回PResult
+ 		 *注意：返回PJoinRoom时根据code值做对应处理：
+ 		  code=1910002表示正在排队
+ 		  code=1910003表示两个聊天室需要选择一个排队
+ 		  code=1910004表示两个聊天室需要选择一个进入
+ 		  code=1910005表示人数已达上限可选择排队
+ */
+ 
+/*
+ *@note 社区聊天室排队
+ *@path /chat/room/queue
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 返回PResult，当errorCode=0时，extraInfo表示排队人数。（此返回结果只标识是否进入排队，不代表已进入聊天室，系统排队成功后将给App用户推送通知消息）
+ */
+ 
+/*
+ *@note 退出社区聊天室
+ *@path /chat/room/exit
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 返回PResult
+ */ 
+ 
+/*
+ *@note 释放聊天室排队成功占位
+ *@path /chat/room/release
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 返回PResult
+ */ 
+ 
+/*
+ *@note 获取聊天室成员信息
+ *@path /chat/room/member
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 成功返回PMemberList，失败返回PResult
+ */
+ 
+/*
+ *@note 获取聊天室排队成员信息
+ *@path /chat/room/queueMember
+ *@method GET
+ *@param token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 成功返回PMemberList，失败返回PResult
+ */
+ 
+ 
+ 
+ 
+ 
+ /*----------------------------------*/
 // 通用操作结果返回(通过uuid来获取chatid)
 message PChatIdMessage {
 	string uuid = 1;	//账户系统中的uuid
@@ -15,8 +182,6 @@ message PChatIdMessage {
 message PChatIdListMessage {
 	repeated PChatIdMessage chatIdMap = 1;
 }
-
-
 
 /*
  *@note 通过uuid来获取chatid
@@ -33,7 +198,6 @@ message PChatIdListMessage {
  *@param uuids  对照表中要查询的所有uuid串，多个uuid之间用逗号隔开。
  *@return 返回PChatIdListMessage
  */
- 
 
 // 通用操作结果返回(单个消息)
 message PQuerySingleMessage {
@@ -42,7 +206,6 @@ message PQuerySingleMessage {
 	string contentType = 3;	//消息类型：TextMsg/PictureMsg/AudioMsg/AudioImageMsg/FileMsg
 	bytes data = 4;		//对应该msg内容,对应是PTextMsg/PImageMsg/PAudioMsg/PAudioImageMsg/PFileMsg的数据的protobuff内容
 }
-
 
 // 通用操作结果返回(多个消息，历史消息查询)
 message PQueryMoreMessage {
@@ -61,12 +224,10 @@ message PMessageData {
 	bytes data = 6;		//对应该msg内容,对应是PTextMsg/PImageMsg/PAudioMsg/PAudioImageMsg/PFileMsg的数据的protobuff内容
 }
 
-
 // 文本消息的内容
 message PTextMsg {
 	string text = 1;//	文字消息内容
 }
-
 
 // 图片消息的内容
 message PImageMsg {
@@ -82,7 +243,6 @@ message PAudioMsg {
 	int32 audioVolumns = 3;	//(声音波形,int类型数组，可选字段)
 	string mediaUrl = 4; //media文件的url
 }
-
 
 // 音频视频消息的内容
 message PAudioImageMsg {
@@ -115,7 +275,6 @@ message PFileMsg {
  *@return 返回PResult  成功与否，看errorCode和errorMsg
  */
 
-
 /*
  *@note 用户发图片信息
  *@path /chat/message/sendImageMsg
@@ -127,7 +286,6 @@ message PFileMsg {
  *@param uploadFile  为文件上传的的form表单里的文件对象。
  *@return 返回PResult  成功与否，看errorCode和errorMsg
  */
-
 
 /*
  *@note 用户发音频信息
@@ -141,8 +299,6 @@ message PFileMsg {
  *@return 返回PResult  成功与否，看errorCode和errorMsg
  */
 
-
-
 /*
  *@note 用户发视频音频信息
  *@path /chat/message/sendAudioImageMsg
@@ -154,8 +310,6 @@ message PFileMsg {
  *@param uploadFile  为文件上传的的form表单里的文件对象。
  *@return 返回PResult  成功与否，看errorCode和errorMsg
  */
-
-
 
 /*
  *@note 用户发文件信息
@@ -169,7 +323,6 @@ message PFileMsg {
  *@return 返回PResult  成功与否，看errorCode和errorMsg
  */
 
-
 /*
  *@note 用户查询信息
  *@path /chat/message/queryMsg
@@ -178,7 +331,6 @@ message PFileMsg {
  *@param messageId  消息id
  *@return 返回PQuerySingleMessage。
  */
-
 
 /*
  *@note 用户查询信息
@@ -193,10 +345,6 @@ message PFileMsg {
  *@return 返回PQueryMoreMessage。
  */
 
-
-
-
-
 /*
  *@note 给用户推送消息。
  *@path /chat/push/msg/single
@@ -210,8 +358,6 @@ message PFileMsg {
  *@return 返回PResult
  */
  
- 
-
 /*
  *@note 给用户推送消息(群发消息)。
  *@path /chat/push/msg/multi
@@ -224,9 +370,6 @@ message PFileMsg {
  *@param info  回包给客户端的json数据，经过base64的encode，客户端decode后，得到的json格式为：{"MsgType":"aabb","Title":"eeff","Time":123456789} 
  *@return 返回PResult
  */
- 
- 
- 
 
 /*
  *@note 同步用户信息到悟空（不包含添加用户信息）
@@ -236,25 +379,3 @@ message PFileMsg {
  *@param token  用户token。
  *@return 返回PResult
  */
-
-
-
-message PWkToken {
-	string appAccessToken = 1; // 应用appAccessToken
-	string domain = 2;	       // 应用domain
-	string appKey = 3;	       // 应用appKey
-	int64 openId = 4;	       // 用户openId
-	string nonce = 5;	       // 随机数
-	int64 timestamp = 6;	   // 时间戳
-	string signature = 7;      // 签名串，用于登录阿里悟空的凭证，每个signature的有效期为5分钟
-}
-  
-/*
- *@note 获取用户登录阿里悟空的凭证信息
- *@path /chat/user/token
- *@method GET
- *@param token&uuid 登录用户信息
- *@param devType 设备类型（固定为"ios"或"android"）
- *@return 成功返回PWkToken，失败返回PResult
- */
-
