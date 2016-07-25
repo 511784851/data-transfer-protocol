@@ -34,7 +34,7 @@ message PAlipayOrderInfo {
 }
 
 /*
- *@note 上传手机通讯录。
+ *@note 获取支付宝的支付签名信息。
  *@path /payment/alipay/paySign
  *@method GET
  *@cookie uuid  用户的uuid。
