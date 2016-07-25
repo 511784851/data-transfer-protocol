@@ -151,6 +151,12 @@ message PWalletGiftInfoList {
 	repeated PWalletGiftInfo list = 1;
 }
 
+
+// 是否设置支付密码
+message PWalletPayPwdIsSet {
+	bool isset = 1;
+}
+
 // 支付安全码
 message PWalletToken {
 	string token = 1;
@@ -289,6 +295,14 @@ message PWalletToken {
  */
 
 /*
+ *@note 是否设置支付密码
+ *@uri /v1/wallet/paypwd/isset
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PWalletPayPwdIsSet, 返回PResult
+ */
+
+/*
  *@note 设置支付密码
  *@uri /v1/wallet/paypwd/set
  *@method POST
@@ -323,3 +337,4 @@ message PWalletToken {
  *@uriParam code 验证码
  *@return 返回PWalletToken
  */
+
