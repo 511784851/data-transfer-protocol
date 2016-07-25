@@ -17,6 +17,7 @@ news_follow 		// 关注我
 news_upvote 		// 帖子点赞
 news_at         	// 帖子@用户
 community_invite	// 邀请好友加入社区
+streaming  //第三方直播提醒 
 */
 
 
@@ -174,6 +175,23 @@ message PMsgIDList {
 
 message PNotifySetting {
 	bool mute = 1;
+}
+
+// 第三方直播消息
+message PStreamingMsg {
+  string uuid = 1; //作者uuid
+
+  int32 serial = 2; //序号(同一个直播消息,序号相同)
+  bool over = 3; //是否结束
+  string website = 4; //网站
+  string url = 5; //房间地址
+  string title = 6; //房间标题
+  int64 startTime = 7;//开始时间,unix秒数
+}
+
+// 第三方直播消息列表
+message PStreamingMsgList {
+  repeated PStreamingMsg list = 1;
 }
 
 /*=====================================*/

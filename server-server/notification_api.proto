@@ -51,6 +51,12 @@ message PNotifyBaseMsgList {
 	repeated PNotifyBaseMsg list = 1;
 }
 
+//直播消息元信息
+message PStreamingMsgMeta {
+	string uuid = 1;//直播者uuid
+  	int64 msgID = 2;//本消息id
+}
+
 /*
  *@note 添加推送消息
  *@path /v1/notification/inside/msg
