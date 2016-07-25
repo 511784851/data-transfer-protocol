@@ -11,8 +11,8 @@ message PUserList {
 }
 
 message PLiveBroadcastInfo {
-	string appName = 1;      // 软件名称
-	string domainName = 2;   // 域名
+	string website = 1;   // 网站
+	string url = 2;       // 直播网址
 }
 
 // 用户信息
