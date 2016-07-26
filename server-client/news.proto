@@ -96,7 +96,13 @@ message PVideoTag {
 	float y = 2;
 	string text = 3;			//标签内容
 }
- 
+
+//微博红包
+message PPostRedpacket {
+    PPostInfo Post = 1;
+    PSendRedPacket Redpacket = 2;
+}
+
 message PRecommendUser {
 	string uuid = 6;              //服务端标志用户的唯一id
 	string username = 7;          //用户名，唯一
@@ -183,9 +189,7 @@ message PRelation {
  *@path   /v1/news/post/redpacket
  *@cookie token&uuid
  *@method POST
- *@particle   PArticle数据流
- *@psendredpacket  PSendRedPacket数据流
- *@post, redpacket分别以表单方式提交数据
+ *@body PPostRedpacket 序列化二进制数据
  *@return 返回 PResult
  */
 
