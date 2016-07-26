@@ -162,6 +162,13 @@ message PWalletToken {
 	string token = 1;
 }
 
+message PSendRedPacketMsg {
+	string Rid = 1;       //红包ID
+	string Cid = 2;       //通用ID
+	string Location = 3;  //位置信息
+	string ExData = 4;    //扩展数据
+}
+
 /*=====================================*/
 // API定义
 
@@ -313,12 +320,12 @@ message PWalletToken {
  */
 
 /*
- *@note 认证支付密码
+ *@note 验证支付密码
  *@uri /v1/wallet/paypwd/auth
  *@method GET
  *@cookie token&uuid
  *@uriParam password 支付密码
- *@return 返回PWalletToken
+ *@return 成功返回PWalletToken, 失败返回PResult
  */
 
 /*
