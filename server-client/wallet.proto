@@ -207,7 +207,7 @@ message PWalletToken {
  *@uriParam vmoney   钻数
  *@uriParam remark   备注
  *@uriParam target   目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
- *@uriParam id       其它ID(可以是UUID、群ID等)
+ *@uriParam cid      通用ID(可以是UUID、群ID等)
  *@uriParam location GPS定位信息
  *@uriParam exdata   扩展数据（可以放发社交与论坛内容）
  *@return 成功返回PRedPacketID，失败返回PResult

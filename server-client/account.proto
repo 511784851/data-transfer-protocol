@@ -15,6 +15,10 @@ message PLiveBroadcastInfo {
 	string url = 2;       // 直播网址
 }
 
+message PLiveBroadcastInfoList {
+	repeated PLiveBroadcastInfo list = 1;
+}
+
 // 用户信息
 message PUser {
 	/*保留1~5用于扩展*/
@@ -46,7 +50,7 @@ message PUser {
 	string areaCode = 30;			// 地区代码
 	string areaName = 31;			// 地区名称
 	bool liveBroadcastRemind = 32;  // 直播提醒开关
-	repeated PLiveBroadcastInfo liveBroadcastInfo = 33;  // 直播提醒信息
+	PLiveBroadcastInfoList liveBroadcastInfo = 33;  // 直播提醒信息
 }
 
 message PUserListEx {

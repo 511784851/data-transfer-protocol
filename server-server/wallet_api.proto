@@ -9,7 +9,7 @@ package service;
  *@uri /v1/wallet/diamond/add
  *@method POST
  *@cookie token&uuid
- *@param rmoney 金钱
+ *@param rmoney 金钱(元)
  *@param ordernumber 订单号
  *@return 成功返回PDiamondCount，失败返回PResult
  */
