@@ -21,6 +21,12 @@ message PAlipayOrderInfo {
 	string orderNo = 1;	// 订单的编号
 	string payInfo = 2;	// 订单的签名信息
 }
+
+// 获取支付宝的订单支付状态的返回包
+message PAlipayOrderStatus {
+	string orderNo = 1;	// 订单的编号
+	string status = 2;	// 订单状态， 1--后端收款完成，2--前端已申请支付
+}
  
 /*
  *@note 获取微信App预支付签名信息
@@ -43,4 +49,15 @@ message PAlipayOrderInfo {
  *@param orderBody 订单的内容描述
  *@param amount  订单的总价。以人民币的元为单位的整数。
  *@return 成功PAlipayOrderInfo, 失败PResult
+ */
+
+
+/*
+ *@note 查询支付宝的订单支付状态。
+ *@path /payment/alipay/payStatus
+ *@method GET
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@param orderNo  订单的编号。
+ *@return 成功PAlipayOrderStatus, 失败PResult
  */
