@@ -162,13 +162,6 @@ message PWalletToken {
 	string token = 1;
 }
 
-message PSendRedPacketMsg {
-	string Rid = 1;       //红包ID
-	string Cid = 2;       //通用ID
-	string Location = 3;  //位置信息
-	string ExData = 4;    //扩展数据
-}
-
 /*=====================================*/
 // API定义
 
