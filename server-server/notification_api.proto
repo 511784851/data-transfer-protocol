@@ -54,7 +54,7 @@ message PNotifyBaseMsgList {
 //直播消息元信息
 message PStreamingMsgMeta {
 	string uuid = 1;//直播者uuid
-  	int64 msgID = 2;//本消息id
+  	int64 msgId = 2;//本消息id
 }
 
 /*
