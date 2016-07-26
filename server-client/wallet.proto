@@ -114,12 +114,13 @@ message PRedPacketDetail {
 
 // 抢红包返回信息
 message PGrabRedPacketInfo {
-	string rid = 1;                   // 红包ID
-	int32 vMoney = 2;                 // 抢到的金额
-	string remark = 3;                // 备注
-	int32 count = 4;                  // 红包个数
-	PRedPacketInfo redPacketInfo = 5; // 红包信息
+	string rid = 1;                           // 红包ID
+	int32 vMoney = 2;                         // 抢到的金额
+	string remark = 3;                        // 备注
+	int32 count = 4;                          // 红包个数
+	PRedPacketInfo redPacketInfo = 5;         // 红包信息
 	repeated PRedPacketParticipant list = 6;  // 抢红包参与者
+	int32 retCode = 7;                        // 返回码
 }
 
 // 礼物数量信息
