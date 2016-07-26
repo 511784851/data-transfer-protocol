@@ -71,15 +71,16 @@ message PSendRedPacket {
 
 // 红包信息
 message PRedPacketInfo {
-	string sid = 1;	       // 流水号
-	string rid = 2;        // 红包ID
-	string uuid = 3;       // 用户ID
-	string name = 4;       // 名称
-	int32  type = 5;       // 类型（2:等额红包、3:拼手气红包）
-	int32  target = 6;     // 目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
-	string headImgURL = 7; // 头像地址
-	int64  vMoney = 8;     // 钻数
-	int64  createTime = 9; // 创建时间
+	string sid = 1;	        // 流水号
+	string rid = 2;         // 红包ID
+	string uuid = 3;        // 用户ID
+	string name = 4;        // 名称
+	int32  type = 5;        // 类型（2:等额红包、3:拼手气红包）
+	int32  target = 6;      // 目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
+	string headImgURL = 7;  // 头像地址
+	int64  vMoney = 8;      // 钻数
+	string remark = 9;      // 备注
+	int64  createTime = 10; // 创建时间
 }
 
 // 红包信息列表
@@ -116,8 +117,9 @@ message PGrabRedPacketInfo {
 	string rid = 1;                   // 红包ID
 	int32 vMoney = 2;                 // 抢到的金额
 	string remark = 3;                // 备注
-	PRedPacketInfo redPacketInfo = 4; // 红包信息
-	repeated PRedPacketParticipant list = 5;  // 抢红包参与者
+	int32 count = 4;                  // 红包个数
+	PRedPacketInfo redPacketInfo = 5; // 红包信息
+	repeated PRedPacketParticipant list = 6;  // 抢红包参与者
 }
 
 // 礼物数量信息
@@ -215,10 +217,11 @@ message PWalletToken {
 
 /*
  *@note 抢红包
- *@uri /v1/wallet/redpacket/grab/rid
+ *@uri /v1/wallet/redpacket/grab
  *@method GET
  *@cookie token&uuid
- *@return 返回PGrabRedPacketInfo
+ *@uriParam rid 红包ID
+ *@return 成功返回PGrabRedPacketInfo,失败返回PResult
  */
 
 /*
@@ -256,10 +259,10 @@ message PWalletToken {
 
 /*
  *@note 获取红包详情
- *@uri /v1/wallet/redpacket/detail/:rid
+ *@uri /v1/wallet/redpacket/detail
  *@method GET
  *@cookie token&uuid
- *@uriParam id 红包编号
+ *@uriParam rid 红包ID
  *@return 成功返回PRedPacketDetail，失败返回PResult
  */
 
