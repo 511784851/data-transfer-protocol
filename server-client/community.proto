@@ -87,7 +87,7 @@ message PCommunityPostInfo {
 	int64 CommentCount = 9;						// 论坛帖子评论数量
 	PUserBase User = 10;							// 用户基础信息
 	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
-    PRedPacketInfo RedPacket = 12;              //红包信息
+    PRedPacketInfo Redpacket = 12;              //红包信息
 }
 
 // 帖子信息列表
