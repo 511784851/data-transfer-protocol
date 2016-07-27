@@ -238,6 +238,15 @@ message PWalletToken {
  */
 
 /*
+ *@note 获取红包状态
+ *@uri /v1/wallet/redpacket/status
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam rid 红包ID
+ *@return 返回PResult
+ */
+
+/*
  *@note 获取红包数量
  *@uri /v1/wallet/redpacket/count
  *@method GET
@@ -322,7 +331,7 @@ message PWalletToken {
 
 /*
  *@note 验证支付密码
- *@uri /v1/wallet/paypwd/auth
+ *@uri /v1/wallet/paypwd/check
  *@method GET
  *@cookie token&uuid
  *@uriParam password 支付密码
@@ -339,7 +348,7 @@ message PWalletToken {
 
 /*
  *@note 认证验证码
- *@uri /v1/wallet/authcode/auth
+ *@uri /v1/wallet/authcode/check
  *@method GET
  *@cookie token&uuid
  *@uriParam code 验证码
