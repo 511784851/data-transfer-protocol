@@ -3,8 +3,8 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "CommunityProtos";
 
-
 import "account.proto";
+import "wallet.proto";
 
 /*=====================================*/
 // 结构定义
@@ -69,6 +69,12 @@ message PCommunityPostUpload {
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
+// 发布红包帖子的信息
+message PCommunityRedpacketUpload {
+    PCommunityPostUpload Post = 2;
+    PSendRedPacket Redpacket = 3;
+}
+
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
@@ -81,6 +87,7 @@ message PCommunityPostInfo {
 	int64 CommentCount = 9;						// 论坛帖子评论数量
 	PUserBase User = 10;							// 用户基础信息
 	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
+    PRedPacketInfo RedPacket = 12;              //红包信息
 }
 
 // 帖子信息列表
@@ -315,6 +322,16 @@ message PCommunityNotificationUnRead {
  *@url param id 社区id
  *@method POST
  *@body PCommunityPostUpload
+ *@cookie token&uuid
+ *@return返回 PResult
+ */
+
+/*
+ *@note 发布社区红包帖子
+ *@path /v1/community/post/redpacket
+ *@url param id 社区id
+ *@method POST
+ *@body PCommunityRedpacketUpload
  *@cookie token&uuid
  *@return返回 PResult
  */
