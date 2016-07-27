@@ -94,7 +94,8 @@ message PRedPacketParticipant {
 	string name = 2;       // 名称
 	string headImgURL = 3; // 头像地址
 	int32  vMoney = 4;     // 钻数
-	int64  createTime = 5; // 创建时间
+	string remark = 5;     // 备注
+	int64  createTime = 6; // 创建时间
 }
 
 // 红包详细信息
