@@ -18,14 +18,26 @@ message PWeixinPay {
 
 // 生成订单的编号和订单的签名信息
 message PAlipayOrderInfo {
-	string orderNo = 1;	// 订单的编号
-	string payInfo = 2;	// 订单的签名信息
+	string orderNo = 1;	           // 订单的编号
+	string payInfo = 2;	           // 订单的签名信息
 }
 
-// 获取支付宝的订单支付状态的返回包
-message PAlipayOrderStatus {
-	string orderNo = 1;	// 订单的编号
-	string status = 2;	// 订单状态， 1--后端收款完成，2--前端已申请支付
+message PPayOrderList {
+	repeated PPayOrder payOrders = 1;// 支付订单信息
+}
+
+message PPayOrder {
+	string orderNo = 1;	           // 订单的编号
+	string payType = 2;            // 支付渠道（WX-微信,ZFB-支付宝）
+	string orderSubject = 3;	   // 商品名称
+	string orderBody = 4;	       // 商品描述
+	int64 amount = 5;	           // 预支付金额（单位：分）
+	int64 payTime = 6;	           // 发起支付时间
+	int32 payStatu = 7;	           // 支付状态， 0-支付中，1-支付成功，2-支付失败 ， 当pay_statu=1或2时，有以下数据
+	string bankType = 8;	       // 付款银行
+	int64 totalFee = 9;	           // 实际支付金额（单位：分）
+	string errCodeDes = 10;	       // 支付失败原因描述
+	int64 endTime = 11;	           // 支付完成时间
 }
  
 /*
@@ -51,13 +63,21 @@ message PAlipayOrderStatus {
  *@return 成功PAlipayOrderInfo, 失败PResult
  */
 
-
 /*
- *@note 查询支付宝的订单支付状态。
- *@path /payment/alipay/payStatus
+ *@note 查询订单支付详细信息。
+ *@path /payment/query/payOrder
  *@method GET
- *@cookie uuid  用户的uuid。
- *@cookie token  用户的token。
- *@param orderNo  订单的编号。
- *@return 成功PAlipayOrderStatus, 失败PResult
+ *@cookie uuid&token
+ *@param  orderNo  订单编号
+ *@return 成功PPayOrder, 失败PResult
+ */
+ 
+ /*
+ *@note 查询用户多个支付订单详细信息。
+ *@path /payment/query/payOrders
+ *@method GET
+ *@cookie uuid&token
+ *@param offset 查询更多起始值，offset=offset+count，默认0
+ *@param count 每次查询的数量
+ *@return 成功PPayOrderList, 失败PResult
  */
