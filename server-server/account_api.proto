@@ -164,7 +164,7 @@ package service;
  *@note 获取黑名单总数量
  *@uri /account/user/blacklist/count
  *@method POST
- *@param from 调用方
+ *@uriParam from 调用方
  *@return 成功返回(*PBlacklistCount, No_Error), 失败返回(nil, int32)
  */
 
@@ -176,6 +176,16 @@ package service;
  *@uriParam from 来源
  *@uriParam uuid 用户ID
  *@return 成功返回PStringList，失败返回PbResult
+ */
+
+/*
+ *@note 使能第三方直播提醒开关
+ *@uri /account/user/liveremind
+ *@method POST
+ *@uriParam from 调用方
+ *@uriParam uuid 用户ID
+ *@uriParam offon 开关(0:关, 1:开)
+ *@return 成功返回No_Error, 失败返回PbResult
  */
 
 /*=====================================*/

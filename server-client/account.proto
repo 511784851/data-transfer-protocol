@@ -10,13 +10,13 @@ message PUserList {
 	repeated PUser list = 1; //PUser列表，最多100个
 }
 
-message PLiveBroadcastInfo {
+message PLiveInfo {
 	string website = 1;   // 网站
 	string url = 2;       // 直播网址
 }
 
-message PLiveBroadcastInfoList {
-	repeated PLiveBroadcastInfo list = 1;
+message PLiveInfoList {
+	repeated PLiveInfo list = 1;
 }
 
 // 用户信息
@@ -49,8 +49,8 @@ message PUser {
 	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
 	string areaCode = 30;			// 地区代码
 	string areaName = 31;			// 地区名称
-	bool liveBroadcastRemind = 32;  // 直播提醒开关
-	PLiveBroadcastInfoList liveBroadcastInfo = 33;  // 直播提醒信息
+	bool liveRemind = 32;           // 直播提醒开关
+	PLiveInfoList liveInfo = 33;  // 直播提醒信息
 }
 
 message PUserListEx {
@@ -205,6 +205,11 @@ message PBlacklistCount {
 	int64 count = 1;     //黑名单数量
 }
 
+//第三方直播提醒开关
+message PLiveRemind {
+	bool offOn = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -232,6 +237,7 @@ message PBlacklistCount {
  *@param link3 链接3
  *@param areacode 地区代码
  *@param areaname 地区名称
+ *@param liveInfo 第三方直播提醒信息
  *@return 返回PResult
  */
  
