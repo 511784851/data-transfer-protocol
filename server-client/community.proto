@@ -323,6 +323,7 @@ message PCommunityNotificationUnRead {
  *@note 发布社区公告帖子
  *@path /v1/community/post/notice
  *@url param id 社区id
+ *@url param replaceid -1表示不置顶；0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
  *@method POST
  *@body PCommunityPostUpload
  *@cookie token&uuid
