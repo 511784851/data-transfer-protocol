@@ -47,7 +47,7 @@ message PPayOrder {
  *@param token&uuid 登录用户信息（必须）
  *@param orderSubject  订单的主题
  *@param orderBody 订单的内容描述
- *@param amount  订单的总价。以人民币的元为单位的整数（必须）
+ *@param amount  订单的总价。以人民币的分为单位的整数（必须）
  *@return 成功返回PWeixinPay，失败返回PResult
  */
 
@@ -59,7 +59,7 @@ message PPayOrder {
  *@cookie token  用户的token。
  *@param orderSubject  订单的主题
  *@param orderBody 订单的内容描述
- *@param amount  订单的总价。以人民币的元为单位的整数。
+ *@param amount  订单的总价。以人民币的分为单位的整数。
  *@return 成功PAlipayOrderInfo, 失败PResult
  */
 
