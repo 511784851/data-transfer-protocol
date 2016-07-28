@@ -238,7 +238,8 @@ message PLiveRemind {
  *@param link3 链接3
  *@param areacode 地区代码
  *@param areaname 地区名称
- *@param liveInfo 第三方直播提醒信息
+ *@param liveremind 第三方直播提醒开关
+ *@param liveinfo   第三方直播提醒信息
  *@return 返回PResult
  */
  
