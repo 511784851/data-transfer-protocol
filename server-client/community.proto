@@ -66,6 +66,7 @@ message PCommunityResourceList {
 message PCommunityPostUpload {
 	string Title = 2;							// 帖子的标题
 	string SubType = 3;							// 帖子的子类型
+    string BannerImg = 4;                       // 公告帖子的轮播图
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
@@ -78,16 +79,18 @@ message PCommunityRedpacketUpload {
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
-	string Type = 3;								// 帖子类型，forum为论坛，notice为公告
+	string Type = 3;							// 帖子类型，forum为论坛，notice为公告
 	string SubType = 4;							// 帖子的子类型
 	int64 Time = 5;								// 发布帖子的时间
 	string Title = 6;							// 帖子的标题
-	bool IsView = 7;								// 帖子是否被已查看
-	int64 ViewCount = 8;							// 论坛帖子查看数量
+	bool IsView = 7;							// 帖子是否被已查看
+	int64 ViewCount = 8;						// 论坛帖子查看数量
 	int64 CommentCount = 9;						// 论坛帖子评论数量
-	PUserBase User = 10;							// 用户基础信息
+	PUserBase User = 10;						// 用户基础信息
 	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
-    PRedPacketInfo Redpacket = 12;              //红包信息
+    PRedPacketInfo Redpacket = 12;              // 红包信息
+    string BannerImg = 13;                      // 公告帖子的轮播图
+    bool IsTop = 14;                            // 公告帖子是否置顶的标志位
 }
 
 // 帖子信息列表
@@ -337,13 +340,25 @@ message PCommunityNotificationUnRead {
  */
 
 /*
- *@note 修改帖子内容
- *@path /v1/community/post
+ *@note 修改公告帖子内容，并选择是否置顶发布
+ *@path /v1/community/post/notice
  *@url param id 社区id
  *@url param postid 帖子id
- *@url param type 0为修改原帖子，1为发布新帖子
- *@method POST
+ *@url param replaceid -1表示不置顶；0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
+ *@method PUT
  *@body PCommunityPostUpload
+ *@cookie token&uuid
+ *@return返回 PResult
+ */
+
+/*
+ *@note 修改置顶公告
+ *@path /v1/community/post/top_notice
+ *@url param id 社区id
+ *@url param oper 0 为取消置顶，1 为置顶
+ *@url param postid 帖子id
+ *@url param replaceid 0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
+ *@method GET
  *@cookie token&uuid
  *@return返回 PResult
  */
