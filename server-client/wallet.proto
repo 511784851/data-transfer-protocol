@@ -83,6 +83,17 @@ message PRedPacketInfo {
 	int64  createTime = 10; // 创建时间
 }
 
+// 发红包信息
+message PSendRedPacketInfo {
+	string uuid = 1;        // 用户ID
+	int32 type = 2;         // 类型（2:等额红包、3:拼手气红包）
+	int32 target = 3;       // 目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
+	int64 vMoney = 4;       // 钻石数
+	int32 count = 5;        // 红包个数
+	string remark = 6;      // 备注
+	int64 createTime = 7;   // 创建时间
+}
+
 // 红包信息列表
 message PRedPacketInfoList {
 	repeated PRedPacketInfo list = 1; // 列表
@@ -100,27 +111,14 @@ message PRedPacketParticipant {
 
 // 红包详细信息
 message PRedPacketDetail {
-	string sid = 1;	       // 流水号
-	string uuid = 2;       // 用户ID
-	string name = 3;       // 名称
-	int32  type = 4;       // 类型（2:等额红包、3:拼手气红包）
-	int32  target = 5;     // 目标类型（0:发给好友、1:发到聊天群、2:发到贴子、3:发到论坛）
-	string headImgURL = 6; // 头像地址
-	int32  vMoney = 7;     // 钻数
-	int32  count = 8;      // 数量
-	string remark = 9;     // 备注
-	repeated PRedPacketParticipant list = 10;  // 抢红包参与者
-	int64  createTime = 11; // 创建时间
-}
-
-// 抢红包返回信息
-message PGrabRedPacketInfo {
 	string rid = 1;                           // 红包ID
-	int32 vMoney = 2;                         // 抢到的金额
-	int32 count = 3;                          // 红包个数
-	PRedPacketInfo info = 4;                  // 红包信息
-	repeated PRedPacketParticipant list = 5;  // 抢红包参与者
+	string uuid = 2;                          // 用户ID
+	string name = 3;                          // 名称
+	string headImgURL = 4;                    // 头像地址
+	int32 vMoney = 5;                         // 抢到的金额
 	int32 status = 6;                         // 返回码, 1:红包已经抢过, 2:红包已被抢完, 3:红包已经过期, 4:可以抢红包
+	PSendRedPacketInfo info = 7;              // 红包信息
+	repeated PRedPacketParticipant list = 8;  // 抢红包参与者
 }
 
 // 礼物数量信息
