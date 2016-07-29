@@ -341,7 +341,7 @@ message PFileMsg {
  *@method POST
  *@param uuid  发送消息的用户uuid
  *@param conversationId  会话id
- *@param receivers  指定消息接收的群成员uuid列表,成员之间用逗号(,)隔开。
+ *@param receivers  指定消息接收的群成员uuid列表,成员之间用逗号(,)隔开。也可以补不填，将默认是会话里全部用户。
  *@param customType  自定义的消息类型，格式为整数。
  *@param customParam  自定义的消息内容，暂时定义为map格式的字符串。多条记录之间用逗号隔开，单条里面用等号来连接。示范为“k1=v2,k2=v2,k3=v3”。
  *@return 返回PResult  成功与否，看errorCode和errorMsg
