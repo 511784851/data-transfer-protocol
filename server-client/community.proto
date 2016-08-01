@@ -365,6 +365,16 @@ message PCommunityNotificationUnRead {
  */
 
 /*
+ *@note 已置顶公告再次置顶
+ *@path /v1/community/post/toppest
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@method GET
+ *@cookie token&uuid
+ *@return返回 PResult
+ */
+
+/*
  *@note 获取社区帖子
  *@path /v1/community/post
  *@method GET
