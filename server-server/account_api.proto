@@ -27,6 +27,10 @@ package service;
  *@param link1 链接1
  *@param link2 链接2
  *@param link3 链接3
+ *@param areacode 地区代码
+ *@param areaname 地区名称
+ *@param liveremind 第三方直播提醒开关
+ *@param liveinfo   第三方直播提醒信息
  *@return 返回PResult
  */
 
@@ -164,7 +168,7 @@ package service;
  *@note 获取黑名单总数量
  *@uri /account/user/blacklist/count
  *@method POST
- *@param from 调用方
+ *@uriParam from 调用方
  *@return 成功返回(*PBlacklistCount, No_Error), 失败返回(nil, int32)
  */
 
@@ -176,6 +180,25 @@ package service;
  *@uriParam from 来源
  *@uriParam uuid 用户ID
  *@return 成功返回PStringList，失败返回PbResult
+ */
+
+/*
+ *@note 使能第三方直播提醒开关
+ *@uri /account/user/liveremind
+ *@method POST
+ *@uriParam from 调用方
+ *@uriParam uuid 用户ID
+ *@uriParam offon 开关(0:关, 1:开)
+ *@return 成功返回No_Error, 失败返回PbResult
+ */
+
+/*
+ *@note     获取第三方直播提醒开关
+ *@path     /v1/account/user/liveremind
+ *@method   GET
+ *@cookie   token&uuid
+ *@uriParam uuid 用户ID
+ *@return   成功:PLiveRemind,失败:PbResult
  */
 
 /*=====================================*/

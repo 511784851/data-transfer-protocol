@@ -10,6 +10,15 @@ message PUserList {
 	repeated PUser list = 1; //PUser列表，最多100个
 }
 
+message PLiveInfo {
+	string website = 1;   // 网站
+	string url = 2;       // 直播网址
+}
+
+message PLiveInfoList {
+	repeated PLiveInfo list = 1;
+}
+
 // 用户信息
 message PUser {
 	/*保留1~5用于扩展*/
@@ -30,8 +39,8 @@ message PUser {
 	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
 	int64 lastLoginTime = 20;  		// 用户最后登陆时间
 	string userResume = 21; 		// 个人简介
-	string link1 = 22;       		// 链接1  
-	string link2 = 23;          	// 链接2  
+	string link1 = 22;       		// 链接1
+	string link2 = 23;          	// 链接2
 	string link3 = 24;          	// 链接3
 	int64 chatId = 25;				// 聊天系统分配的id
 	PLevelInfo levelInfo = 26;		// 会员等级信息
@@ -40,6 +49,8 @@ message PUser {
 	bool forceChangePwd = 29; 		// 是否登录时强制要修改密码
 	string areaCode = 30;			// 地区代码
 	string areaName = 31;			// 地区名称
+	bool liveRemind = 32;           // 直播提醒开关
+	PLiveInfoList liveInfo = 33;  // 直播提醒信息
 }
 
 message PUserListEx {
@@ -50,23 +61,23 @@ message PUserListEx {
 message PUserEx {
 	/*保留1~5用于扩展*/
 	
-	string uuid = 6; 				// 服务端标志用户的唯一id
-	string project = 7;				// 项目名称
-	string username = 8; 			// 用户名，唯一
-	string password = 9; 			// 自有手机号码注册时输入的密码
-	string nickname = 10; 			// 昵称
-	string realname = 11;			// 真实姓名
-	int32 gender = 12;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
-	string birthday = 13; 			// 生日，格式19850101
-	string email = 14; 				// 邮箱地址
-	string cellphone = 15; 			// 手机号
-	int32 timeZone = 16;    		// 时区
-	string headImgURL = 17; 		// 头像地址
-	string locale = 18; 			// 语言
-	string userResume = 19; 		// 简介
-	int64 lastUpdateTime = 20;  	// 最后更新时间TUser结构，用户/系统修改
-	int64 lastLoginTime = 21;  		// 用户最后登陆时间
-	map<string,string> userData = 22;// 用户数据
+	string uuid = 6; 			  	  // 服务端标志用户的唯一id
+	string project = 7;				  // 项目名称
+	string username = 8; 			  // 用户名，唯一
+	string password = 9; 			  // 自有手机号码注册时输入的密码
+	string nickname = 10; 			  // 昵称
+	string realname = 11;			  // 真实姓名
+	int32 gender = 12;    			  // 性别，0就是女，其余的是男；人妖暂时不考虑
+	string birthday = 13; 			  // 生日，格式19850101
+	string email = 14; 				  // 邮箱地址
+	string cellphone = 15; 			  // 手机号
+	int32 timeZone = 16;    		  // 时区
+	string headImgURL = 17; 		  // 头像地址
+	string locale = 18; 			  // 语言
+	string userResume = 19; 		  // 简介
+	int64 lastUpdateTime = 20;  	  // 最后更新时间TUser结构，用户/系统修改
+	int64 lastLoginTime = 21;  		  // 用户最后登陆时间
+	map<string,string> userData = 22; // 用户数据
 }
 
 // 用户基础信息
@@ -194,6 +205,11 @@ message PBlacklistCount {
 	int64 count = 1;     //黑名单数量
 }
 
+//第三方直播提醒开关
+message PLiveRemind {
+	bool offOn = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -211,6 +227,7 @@ message PBlacklistCount {
  *@cookie token&uuid
  *@method POST
  *@param nickname 昵称
+ *@param username 用户名
  *@param realname 真实姓名
  *@param gender 性别
  *@param birthday 生日
@@ -221,6 +238,8 @@ message PBlacklistCount {
  *@param link3 链接3
  *@param areacode 地区代码
  *@param areaname 地区名称
+ *@param liveremind 第三方直播提醒开关
+ *@param liveinfo   第三方直播提醒信息
  *@return 返回PResult
  */
  

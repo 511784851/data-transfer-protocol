@@ -1,0 +1,14 @@
+syntax = "proto3";
+package service; 
+
+/*=====================================*/
+//API定义
+
+/*
+ *@note 修改每天通知限制次数
+ *@uri /streaming-notification/daycountlimit
+ *@param GET
+ *@param from 调用方
+ *@param value 目标次数
+ *@return 返回PResult
+ */

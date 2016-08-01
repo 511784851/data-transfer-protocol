@@ -5,7 +5,7 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PaymentProtos";
 
-message PWeixin {
+message PWeixinPay {
 	string appid = 1;              // 应用ID
 	string partnerid = 2;	       // 商户号
 	string noncestr = 3;	       // 随机串
@@ -13,15 +13,71 @@ message PWeixin {
 	string prepayid = 5;	       // 预支付串
 	string package = 6;	           // 订单信息串
 	string sign = 7;               // 签名串
+	string orderNo = 8;	           // 订单的编号
 }
-  
+
+// 生成订单的编号和订单的签名信息
+message PAlipayOrderInfo {
+	string orderNo = 1;	           // 订单的编号
+	string payInfo = 2;	           // 订单的签名信息
+}
+
+message PPayOrderList {
+	repeated PPayOrder payOrders = 1;// 支付订单信息
+}
+
+message PPayOrder {
+	string orderNo = 1;	           // 订单的编号
+	string payType = 2;            // 支付渠道（WX-微信,ZFB-支付宝）
+	string orderSubject = 3;	   // 商品名称
+	string orderBody = 4;	       // 商品描述
+	int64 amount = 5;	           // 预支付金额（单位：分）
+	int64 payTime = 6;	           // 发起支付时间
+	int32 payStatu = 7;	           // 支付状态， 0-支付中，1-支付成功，2-支付失败 ， 当pay_statu=1或2时，有以下数据
+	string bankType = 8;	       // 付款银行
+	int64 totalFee = 9;	           // 实际支付金额（单位：分）
+	string errCodeDes = 10;	       // 支付失败原因描述
+	int64 endTime = 11;	           // 支付完成时间
+}
+ 
 /*
  *@note 获取微信App预支付签名信息
- *@path /pay/weixin/paySign
+ *@path /payment/weixin/paySign
  *@method GET
  *@param token&uuid 登录用户信息（必须）
- *@param order_no 订单号（必须）
- *@param name 商品名称（必须）
- *@param amount 支付金额（单位：元，支持两位小数点）（必须）
- *@return 成功返回PWeixin，失败返回PResult
+ *@param orderSubject  订单的主题
+ *@param orderBody 订单的内容描述
+ *@param amount  订单的总价。以人民币的分为单位的整数（必须）
+ *@return 成功返回PWeixinPay，失败返回PResult
+ */
+
+/*
+ *@note 获取支付宝的支付签名信息。
+ *@path /payment/alipay/paySign
+ *@method GET
+ *@cookie uuid  用户的uuid。
+ *@cookie token  用户的token。
+ *@param orderSubject  订单的主题
+ *@param orderBody 订单的内容描述
+ *@param amount  订单的总价。以人民币的分为单位的整数。
+ *@return 成功PAlipayOrderInfo, 失败PResult
+ */
+
+/*
+ *@note 查询订单支付详细信息。
+ *@path /payment/query/payOrder
+ *@method GET
+ *@cookie uuid&token
+ *@param  orderNo  订单编号
+ *@return 成功PPayOrder, 失败PResult
+ */
+ 
+ /*
+ *@note 查询用户多个支付订单详细信息。
+ *@path /payment/query/payOrders
+ *@method GET
+ *@cookie uuid&token
+ *@param offset 查询更多起始值，offset=offset+count，默认0
+ *@param count 每次查询的数量
+ *@return 成功PPayOrderList, 失败PResult
  */

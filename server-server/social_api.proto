@@ -21,3 +21,12 @@ package service;
  *@param from 发起调用的服务方
  *@return 成功PUserList, 失败PResult
  */
+
+/*
+ *@note 判断列表里的用户是否是好友
+ *@path /social/isfriends
+ *@method GET
+ *@param uuid 需要检查是否是好友的uuid query参数
+ *@param uuids, 需要检查是否是好友的uuids列表,使用","分隔 query参数
+ *@return 成功PBoolList, 失败PResult
+ */

@@ -1,0 +1,26 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "StreamingProtos";
+
+message PWebSiteInfo {
+	string name = 1; // 中文名称
+	string url = 2; // 网站网址
+}
+
+//支持的第三方直播网站列表,以后简称网站列表
+message PWebSiteList {
+	repeated PWebSiteInfo list = 1;
+}
+
+/**************************API 定义***********************************/
+
+/**
+ * 获取网站列表
+ *
+ *@path /streaming-notification/websites
+ *@cookie token&uuid(服务调用不填,非服务必填)
+ *@method GET
+ *@param from 调用方(服务调用必填,非服务不填)
+ *@return 成功返回PWebSiteList,失败返回PResult
+ */
