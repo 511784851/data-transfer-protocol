@@ -94,21 +94,21 @@ message PGoogleAccount{
 /*
  *@note 通过手机号码/用户名获取用户uuid
  *@URL /v1/login/inside/uuid
- *@method GET
- *@url param from 发起调用的服务名
- *@url param type 手机号码填phone，用户名填username
- *@url param fields 手机号码/用户名，以,分割
- *@return 成功返回 PStringList ，失败返回 PResult; 
+ *@method POST
+ *@post form param from 发起调用的服务名
+ *@post form param type 手机号码填phone，用户名填username
+ *@post form param fields 手机号码/用户名，以,分割
+ *@return 成功返回 PStringList ，失败返回 PResult;
  *@       返回的uuid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
  */
 
 /*
  *@note 通过用户uuid获取用户名/手机号码
  *@URL /v1/login/inside/binding/pid
- *@method GET
- *@url param from 发起调用的服务名
- *@url param type 手机号码填phone，用户名填username
- *@url param fields 用户uuid，以,分割
+ *@method POST
+ *@post form param from 发起调用的服务名
+ *@post form param type 手机号码填phone，用户名填username
+ *@post form param fields 用户uuid，以,分割
  *@return 成功返回 PStringList ，失败返回 PResult;
  *@       返回的pid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
  */
