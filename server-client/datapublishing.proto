@@ -278,6 +278,26 @@ message PGameList {
  */
 
 /*
+ *@note 热门俱乐部
+ *@path /datapublishing/club/hot
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
+ */ 
+
+/*
+ *@note 推荐俱乐部
+ *@path /datapublishing/club/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
+ */ 
+
+/*
  *@note 最新的数据
  *@path /datapublishing/data/newest
  *@method GET
@@ -346,7 +366,7 @@ message PRank {
  *@method GET
  *@cookie token&uuid
  *@param type  排行类型 "fans"|"posts"|"achievements"
- *@param scope 统计范围 "friend"|"follower"|"following"|"region"
+ *@param scope 统计范围 "friend"|"follower"|"following"|"region"|"public"
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PRank, 失败返回PResult
