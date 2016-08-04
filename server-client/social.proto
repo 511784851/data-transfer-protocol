@@ -113,11 +113,28 @@ message PIsFriendList {
  */
 
 /*
+ *@note 列出黑名单用户
+ *@path /social/listblocks
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功PUserList, 失败PResult
+ */
+
+/*
  *@note 拉黑好友
  *@path /social/block
  *@method POST
  *@cookie token&uuid
  *@param uuid 要拉黑的好友ID form参数
+ *@return PResult
+ */
+
+/*
+ *@note 从黑名单里移出用户
+ *@path /social/delblock
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 要移出黑名单的用户ID
  *@return PResult
  */
 

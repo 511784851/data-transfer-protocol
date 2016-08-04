@@ -17,22 +17,25 @@ message PNetFileInfo {
 	string fileDigest  = 4;		//文件的md5 hexstring
 	
 	string createTime = 5;		//文件的创建时间，也就是上传时间，格林时间的long值，
-	string disableLongtime = 6;	//文件的多久失效时间，在这时间内都是有效，单位毫秒
-	string protectLongtime = 7;	//文件的保护的时间，在这个时间内，都是保护状态，过了这时间后文件免费公开，单位毫秒
 	
-	string shareFlag = 8;		//文件转发和共享标志，0--可以共享，1--不可以
-	string conserveFlag = 9;	//文件可以收藏，0--可以收藏，1--不可以
+	string transferFlag = 6;	//文件转发标志，0--可以转发，1--不可以
+	string shareFlag = 7;		//文件共享标志，0--可以共享，1--不可以
+	string conserveFlag = 8;	//文件可以收藏，0--可以收藏，1--不可以
 	
 	
-	string title = 10;			//文件的标题
-	string description = 11;	//文件的描述
-	string remark = 12;			//文件的备注信息
+	string title = 9;			//文件的标题
+	string description = 10;	//文件的描述
+	string remark = 11;			//文件的备注信息
 	
 }
 
 message PListNetFileInfo {
 	repeated PNetFileInfo netFiles = 1;
 	string DiskSize = 2; //网盘的总容量，取值为整数。单位为M
+}
+
+message PBuildUrlInfo {
+	string publicURL = 1; //生成的下载的的url信息
 }
 
 /*
@@ -44,30 +47,23 @@ message PListNetFileInfo {
  *@return 成功PListNetFileInfo, 失败PResult
  */
  
-message PUpdateFileInfo {
-	string extension = 1;
-	string fileSize = 2;
-	string fileDigest  = 3;
-	
-	string title = 4;
-	string description = 5;
-	string remark = 6;
-}
- 
-message PListUpdateFileInfo {
-	repeated PUpdateFileInfo uploadFiles = 1;
-}
  /*
  *@note 上传文件到网盘中
  *@path /netdisk/file/upload
  *@method POST
  *@param uuid  用户的uuid。
  *@param token  用户的token。
- *@param files  上传的多个文件，为PUpdateFileInfo结构，并且经过base64编码。 
- *@param disableLongtime  文件的多久失效时间，在这时间内都是有效，单位毫秒
- *@param protectLongtime  文件的保护的时间，在这个时间内，都是保护状态，过了这时间后文件免费公开，单位毫秒
+ *@param extension 文件扩展名
+ *@param fileSize 文件长度
+ *@param fileDigest 文件的md5 hexstring
+ *@param title 文件标题
+ *@param description 文件描述
+ *@param remark 文件备注
+ *@param transferFlag 文件转发标志，0--可以转发，1--不可以
+ *@param shareFlag 文件共享标志，0--可以共享，1--不可以
+ *@param conserveFlag 文件可以收藏，0--可以收藏，1--不可以
  *@param saveMode  保持模式。0--表示正常模式，遇到相同文件名时会返回失败；1--覆盖模式，遇到相同文件名时直接覆盖
- *@return 成功返回PUploadArray，失败返回PResult。 关于结构体PUploadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PUploadArray
+ *@return 成功返回PUpload，失败返回PResult。 关于结构体PUpload，请看"data-transfer-protocol/server-client/oss.proto"中的PUpload
  */
  
  /*
@@ -87,6 +83,7 @@ message PListUpdateFileInfo {
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param objectKey  文件的唯一ID标识值。 
+ *@param transferFlag 文件转发标志，0--可以转发，1--不可以
  *@param shareFlag  文件转发和共享标志，0--可以共享，1--不可以
  *@param conserveFlag  文件可以收藏，0--可以收藏，1--不可以
  *@param title  文件的标题。 
@@ -94,6 +91,32 @@ message PListUpdateFileInfo {
  *@param remark  文件的备注。 
  *@return 返回PResult，编辑成功的标志。
  */
+
+ 
+ /*
+ *@note 生成文件对象直接下载的url地址
+ *@path /netdisk/file/makeDirectOssUrl
+ *@method POST
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
+ *@param objectKeys  文件的唯一ID标识值，多个objectKey之间用","作为分割符。连接起来的串。 
+ *@return 成功PDownloadArray，失败返回PResult。关于结构体PDownloadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
+ */
+
+ 
+ 
+ /*
+ *@note 生成分享的url地址
+ *@path /netdisk/file/makePublicUrl
+ *@method POST
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
+ *@param objectKey  文件的唯一ID标识值。 
+ *@param invalidLongtime  文件的失效时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将失效
+ *@param protectLongtime 文件的保护时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将公开，任何人都可以下载
+ *@return 返回PBuildUrlInfo，失败返回PResult。
+ */
+
  
  /*
  *@note 生成网盘中的URL下载地址
@@ -101,8 +124,6 @@ message PListUpdateFileInfo {
  *@method POST
  *@param uuid  用户的uuid。
  *@param token  用户的token。
- *@param ownerUuid  文件所有者的UUID。  
- *@param objectKey  文件的唯一ID标识值。 
+ *@param linkInfo  文件下载的linkInfo。  
  *@return 成功PDownload，失败返回PResult。关于结构体PDownload，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
- */
- 
+ */ 

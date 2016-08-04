@@ -89,7 +89,7 @@ message PCommunityPostInfo {
 	PUserBase User = 10;						// 用户基础信息
 	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
     PRedPacketInfo Redpacket = 12;              // 红包信息
-    string BannerImg = 13;                      // 公告帖子的轮播图
+    PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
     bool IsTop = 14;                            // 公告帖子是否置顶的标志位
 }
 

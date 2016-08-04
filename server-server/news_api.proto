@@ -75,7 +75,7 @@ package service;
 
 /**
  *@note   获取粉丝列表
- *@path   /v1/news/indise/fans
+ *@path   /v1/news/inside/fans
  *@cookie token&uuid
  *@method GET
  *@param  uuid 被查找的用户uuid
