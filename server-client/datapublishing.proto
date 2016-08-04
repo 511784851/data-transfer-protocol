@@ -298,6 +298,17 @@ message PGameList {
  */ 
 
 /*
+ *@note 搜索俱乐部
+ *@path /datapublishing/club/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
+ */
+
+/*
  *@note 最新的数据
  *@path /datapublishing/data/newest
  *@method GET
