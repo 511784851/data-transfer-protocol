@@ -99,8 +99,8 @@ message PBuildUrlInfo {
  *@method POST
  *@param uuid  用户的uuid。
  *@param token  用户的token。
- *@param objectKey  文件的唯一ID标识值。 
- *@return 成功PDownload，失败返回PResult。关于结构体PDownload，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
+ *@param objectKeys  文件的唯一ID标识值，多个objectKey之间用","作为分割符。连接起来的串。 
+ *@return 成功PDownloadArray，失败返回PResult。关于结构体PDownloadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
  */
 
  
