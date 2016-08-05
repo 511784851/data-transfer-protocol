@@ -463,3 +463,35 @@ message PAccountToken {
  *@postParam password  登录密码
  *@return 返回PResult
  */
+
+/*
+ *@note 解绑微信登录方式
+ *@uri /v1/account/unbinding/wechat
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ */
+ 
+/*
+ *@note 解绑微博登录方式
+ *@uri /v1/account/unbinding/weibo
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ */
+ 
+/*
+ *@note 解绑google登录方式
+ *@uri /v1/account/unbinding/google
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ */
+ 
+/*
+ *@note 解绑facebook登录方式
+ *@uri /v1/account/unbinding/facebook
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ */
