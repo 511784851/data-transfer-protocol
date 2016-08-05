@@ -218,6 +218,17 @@ message PAccountToken {
 	string token = 1;
 }
 
+// 是否实名认证
+message PIsReadNameInfo {
+	bool isReadName = 1;
+}
+
+// 基础信息
+message PAccountBaseInfo {
+	bool isReadName = 1;  //是否实名认证
+	string cellphone = 2; //手机号码
+}
+
 /*=====================================*/
 //API定义
 
@@ -276,7 +287,7 @@ message PAccountToken {
  *@uri /account/binding/status
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PAccount，失败返回PbResult
+ *@return 成功返回PAccount，失败返回PResult
  */
 
 /*
@@ -286,7 +297,7 @@ message PAccountToken {
  *@cookie token&uuid
  *@param cellphone 有带区号的手机号码（如+86）
  *@param smscode 短讯服务代码
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
 
 /*
@@ -295,7 +306,7 @@ message PAccountToken {
  *@method GET
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
@@ -308,7 +319,7 @@ message PAccountToken {
  *@param wheadimgurl 微信头像路径
  *@param wgender 性别
  *@param wweihao 微信号
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
@@ -318,7 +329,7 @@ message PAccountToken {
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
@@ -327,7 +338,7 @@ message PAccountToken {
  *@method GET
  *@cookie token&uuid
  *@param token Facebook User access token
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
 
 /*
@@ -356,7 +367,7 @@ message PAccountToken {
  *@method GET
  *@param oldpwd 旧密码
  *@param newpwd 新密码
- *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
+ *@return 成功返回PResult.Get(No_Error), 失败返回PResult
  */
 
 /*=====================================*/
@@ -382,7 +393,7 @@ message PAccountToken {
 
 /*
  *@note      通过Json设置用户信息
- *@uri      /v1/account/user.json
+ *@uri       /v1/account/user.json
  *@method    POST
  *@cookie    token&uuid
  *@postParam json 用户信息
@@ -411,7 +422,7 @@ message PAccountToken {
 
 /*
  *@note      通过Proto设置用户信息
- *@uri      /v1/account/user.proto
+ *@uri       /v1/account/user.proto
  *@method    POST
  *@cookie    token&uuid
  *@uriParam  fields  字段ID,只设置某个字段，通过","分隔,如"/v1/account/fields?uuids=1,2,3"
@@ -421,7 +432,7 @@ message PAccountToken {
 
 /*
  *@note      注册用户
- *@uri      /v1/register
+ *@uri       /v1/register
  *@method    POST
  *@cookie    token&uuid
  *@postParam PUserEx 用户信息
@@ -430,15 +441,23 @@ message PAccountToken {
 
 /*
  *@note      是否实名认证
- *@uri      /v1/account/user/isauth
+ *@uri       /v1/account/user/isreadname
  *@method    GET
  *@cookie    token&uuid
- *@return    PbResult
+ *@return    成功返回PIsReadNameInfo, 失败返回PResult
+ */
+
+/*
+ *@note      获取设置基础信息
+ *@uri       /v1/account/user/baseinfo
+ *@method    GET
+ *@cookie    token&uuid
+ *@return    成功返回PAccountBaseInfo, 失败返回PResult
  */
 
 /*
  *@note 修改背景图片
- *@uri /v1/account/user/backimage
+ *@uri  /v1/account/user/backimage
  *@method POST
  *@cookie token&uuid
  *@param image 要上传的头像objectkey，PUpload返回的参数
@@ -447,7 +466,7 @@ message PAccountToken {
 
 /*
  *@note 验证登录密码
- *@uri /v1/account/user/checkpwd
+ *@uri  /v1/account/user/checkpwd
  *@method GET
  *@cookie token&uuid
  *@uriParam password 登录密码
@@ -456,7 +475,7 @@ message PAccountToken {
 
 /*
  *@note 设置登录密码
- *@uri /v1/account/user/setpwd
+ *@uri  /v1/account/user/setpwd
  *@method POST
  *@cookie token&uuid
  *@postParam authtoken 验证Token
@@ -466,32 +485,32 @@ message PAccountToken {
 
 /*
  *@note 解绑微信登录方式
- *@uri /v1/account/unbinding/wechat
+ *@uri  /v1/account/unbinding/wechat
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
  *@note 解绑微博登录方式
- *@uri /v1/account/unbinding/weibo
+ *@uri  /v1/account/unbinding/weibo
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
  *@note 解绑google登录方式
- *@uri /v1/account/unbinding/google
+ *@uri  /v1/account/unbinding/google
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
  *@note 解绑facebook登录方式
- *@uri /v1/account/unbinding/facebook
+ *@uri  /v1/account/unbinding/facebook
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
