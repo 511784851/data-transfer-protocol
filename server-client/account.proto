@@ -83,13 +83,13 @@ message PUserEx {
 
 // 用户基础信息
 message PUserBase {
-  int32 level = 2;					// 用户等级
-  string uuid = 6;        			// 服务端标志用户的唯一id
-  string username = 7;     			// 用户名，唯一
-  string nickname = 8;      		// 昵称
-  string realname = 9;				// 真实姓名
-  string headImgURL = 10;     		// 头像地址
-  string userResume = 11;			// 简介
+  int32 Level = 2;					// 用户等级
+  string UUID = 6;        			// 服务端标志用户的唯一id
+  string UserName = 7;     			// 用户名，唯一
+  string Nickname = 8;      		// 昵称
+  string RealName = 9;				// 真实姓名
+  string HeadImgURL = 10;     		// 头像地址
+  string UserResume = 11;			// 简介
 }
 
 // 用户基础信息列表
