@@ -50,7 +50,8 @@ message PUser {
 	string areaCode = 30;			// 地区代码
 	string areaName = 31;			// 地区名称
 	bool liveRemind = 32;           // 直播提醒开关
-	PLiveInfoList liveInfo = 33;  // 直播提醒信息
+	PLiveInfoList liveInfo = 33;    // 直播提醒信息
+	string backImage = 34; 		    // 背景图片
 }
 
 message PUserListEx {
@@ -212,6 +213,11 @@ message PLiveRemind {
 	bool offOn = 1;
 }
 
+// 验证安全码
+message PAccountToken {
+	string token = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -358,7 +364,7 @@ message PLiveRemind {
 
 /*
  *@note     获取用户信息
- *@path     /v1/account/users/:uuid
+ *@uri     /v1/account/users/:uuid
  *@method   GET
  *@cookie   token&uuid
  *@uriParam uuid 用户ID
@@ -367,7 +373,7 @@ message PLiveRemind {
 
 /*
  *@note     获取多个用户信息
- *@path     /v1/account/users
+ *@uri     /v1/account/users
  *@method   GET
  *@cookie   token&uuid
  *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users?uuids=1,2,3"
@@ -376,7 +382,7 @@ message PLiveRemind {
 
 /*
  *@note      通过Json设置用户信息
- *@path      /v1/account/user.json
+ *@uri      /v1/account/user.json
  *@method    POST
  *@cookie    token&uuid
  *@postParam json 用户信息
@@ -405,7 +411,7 @@ message PLiveRemind {
 
 /*
  *@note      通过Proto设置用户信息
- *@path      /v1/account/user.proto
+ *@uri      /v1/account/user.proto
  *@method    POST
  *@cookie    token&uuid
  *@uriParam  fields  字段ID,只设置某个字段，通过","分隔,如"/v1/account/fields?uuids=1,2,3"
@@ -415,9 +421,45 @@ message PLiveRemind {
 
 /*
  *@note      注册用户
- *@path      /v1/register
+ *@uri      /v1/register
  *@method    POST
  *@cookie    token&uuid
  *@postParam PUserEx 用户信息
  *@return    CXXResult
+ */
+
+/*
+ *@note      是否实名认证
+ *@uri      /v1/account/user/isauth
+ *@method    GET
+ *@cookie    token&uuid
+ *@return    PbResult
+ */
+
+/*
+ *@note 修改背景图片
+ *@uri /v1/account/user/backimage
+ *@method POST
+ *@cookie token&uuid
+ *@param image 要上传的头像objectkey，PUpload返回的参数
+ *@return 返回PResult
+ */
+
+/*
+ *@note 验证登录密码
+ *@uri /v1/account/user/checkpwd
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam password 登录密码
+ *@return 成功返回PAccountToken, 失败返回PResult
+ */
+
+/*
+ *@note 设置登录密码
+ *@uri /v1/account/user/setpwd
+ *@method POST
+ *@cookie token&uuid
+ *@postParam authtoken 验证Token
+ *@postParam password  登录密码
+ *@return 返回PResult
  */
