@@ -512,7 +512,7 @@ message PBackThumbImageList {
 
 /*
  *@note 解绑登录方式
- *@uri  /v1/account/unbinding/wechat
+ *@uri  /v1/account/unbinding
  *@method GET
  *@cookie token&uuid
  *@uriParam type 解绑类型(0:wechat,1:weibo,2:google,3:facebook)
