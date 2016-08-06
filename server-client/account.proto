@@ -229,6 +229,17 @@ message PAccountBaseInfo {
 	string cellphone = 2; //手机号码
 }
 
+// 背景图片信息
+message PBackImage {
+	string objectKey = 1;     //背景图片objectkey
+	string url = 2;    //缩略图URL
+}
+
+// 背景缩略图列表
+message PBackThumbImageList {
+	repeated PBackImage list = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -456,11 +467,27 @@ message PAccountBaseInfo {
  */
 
 /*
+ *@note 获取背景缩略图列表
+ *@uri  /v1/account/user/backimage/thumblist
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PBackThumbImageList, 失败返回PResult
+ */
+
+/*
+ *@note 获取背景大图
+ *@uri  /v1/account/user/backimage
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PBackImage, 失败返回PResult
+ */
+
+/*
  *@note 修改背景图片
  *@uri  /v1/account/user/backimage
  *@method POST
  *@cookie token&uuid
- *@param image 要上传的头像objectkey，PUpload返回的参数
+ *@param image 要上传的背景图片objectkey
  *@return 返回PResult
  */
 
@@ -484,33 +511,10 @@ message PAccountBaseInfo {
  */
 
 /*
- *@note 解绑微信登录方式
+ *@note 解绑登录方式
  *@uri  /v1/account/unbinding/wechat
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
- 
-/*
- *@note 解绑微博登录方式
- *@uri  /v1/account/unbinding/weibo
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
- 
-/*
- *@note 解绑google登录方式
- *@uri  /v1/account/unbinding/google
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
- 
-/*
- *@note 解绑facebook登录方式
- *@uri  /v1/account/unbinding/facebook
- *@method GET
- *@cookie token&uuid
+ *@uriParam type 解绑类型(0:wechat,1:weibo,2:google,3:facebook)
  *@return 成功返回PResult(No_Error)，失败返回PResult
  */
