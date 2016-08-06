@@ -459,8 +459,8 @@ message PBackThumbImageList {
  */
 
 /*
- *@note      获取设置基础信息
- *@uri       /v1/account/user/baseinfo
+ *@note      获取初始化信息
+ *@uri       /v1/account/user/initinfo
  *@method    GET
  *@cookie    token&uuid
  *@return    成功返回PAccountBaseInfo, 失败返回PResult
