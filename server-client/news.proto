@@ -312,6 +312,17 @@ message PRelation {
  */
 
 /**
+ *@note   用户行为统计
+ *@path   /v1/news/behavior
+ *@cookie token&uuid
+ *@method GET
+ *@param  type 1、"view": 查看帖子；2、"share":分享帖子
+ *@param  uid 帖子发布者id
+ *@param  pid 帖子 id
+ *@return PResult  全部返回No_Error
+ */
+
+/**
  *@note   news点赞
  *@path   /v1/news/vote
  *@cookie token&uuid
