@@ -212,6 +212,7 @@ message PChatIdListMessage {
  *@note 通过uuid来获取chatid
  *@path /chat/chatid/getUserChatID
  *@method GET
+ *@cookie token&uuid 登录用户信息
  *@param uuid  对照表中的uuid
  *@return 返回PChatIdMessage
  */
@@ -220,6 +221,7 @@ message PChatIdListMessage {
  *@note 通过uuids来获取chatids
  *@path /chat/chatid/getUserListChatID
  *@method GET
+ *@cookie token&uuid 登录用户信息
  *@param uuids  对照表中要查询的所有uuid串，多个uuid之间用逗号隔开。
  *@return 返回PChatIdListMessage
  */
@@ -293,6 +295,7 @@ message PFileMsg {
  *@note 用户发送自定义消息
  *@path /chat/message/sendCustomMsg
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  发送消息的用户uuid
  *@param conversationId  会话id
  *@param receivers  指定消息接收的群成员uuid列表,成员之间用逗号(,)隔开。也可以补不填，将默认是会话里全部用户。
@@ -301,20 +304,11 @@ message PFileMsg {
  *@return 返回PResult  成功与否，看errorCode和errorMsg
  */
 
-
-/*
- *@note 用户查询信息
- *@path /chat/message/queryMsg
- *@method POST
- *@param uuid  发送消息的用户uuid
- *@param messageId  消息id
- *@return 返回PQuerySingleMessage。
- */
-
 /*
  *@note 用户查询信息
  *@path /chat/message/queryMoreMsg
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  发送消息的用户uuid
  *@param conversationId  会话id
  *@param cursor  会话id
@@ -328,6 +322,7 @@ message PFileMsg {
  *@note 给用户推送消息。(备注：由于此接口是GET方式，不招人喜欢。在后续版本中将废弃掉该接口;请用“/chat/push/msg/multi”接口来代替，两者接口完全兼容)
  *@path /chat/push/msg/single
  *@method GET
+ *@cookie token&uuid 登录用户信息
  *@param receiverUUID  消息接收者的uuid。
  *@param title  推送消息的标题。
  *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
@@ -341,6 +336,7 @@ message PFileMsg {
  *@note 给用户推送消息(群发消息)。
  *@path /chat/push/msg/multi
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param receiverUUIDs  多个接收者的uuid列表，uuid之间用“逗号”隔开。
  *@param title  推送消息的标题。
  *@param msgid  推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
@@ -354,6 +350,7 @@ message PFileMsg {
  *@note 同步用户信息到悟空（不包含添加用户信息）
  *@path /chat/user/synUserInfo
  *@method GET
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户uuid。
  *@param token  用户token。
  *@return 返回PResult
