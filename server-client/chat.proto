@@ -288,66 +288,6 @@ message PFileMsg {
 	string mediaUrl = 5; //media文件的url
 }
 
-/*
- *@note 用户发文本信息
- *@path /chat/message/sendTextMsg
- *@method GET
- *@param uuid  发送消息的用户uuid
- *@param conversationId  会话id
- *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
- *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
- *@param content  为TextMsg(文字消息)是的文本内容。
- *@return 返回PResult  成功与否，看errorCode和errorMsg
- */
-
-/*
- *@note 用户发图片信息
- *@path /chat/message/sendImageMsg
- *@method POST
- *@param uuid  发送消息的用户uuid
- *@param conversationId  会话id
- *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
- *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
- *@param uploadFile  为文件上传的的form表单里的文件对象。
- *@return 返回PResult  成功与否，看errorCode和errorMsg
- */
-
-/*
- *@note 用户发音频信息
- *@path /chat/message/sendAudioMsg
- *@method POST
- *@param uuid  发送消息的用户uuid
- *@param conversationId  会话id
- *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
- *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
- *@param uploadFile  为文件上传的的form表单里的文件对象。
- *@return 返回PResult  成功与否，看errorCode和errorMsg
- */
-
-/*
- *@note 用户发视频音频信息
- *@path /chat/message/sendAudioImageMsg
- *@method POST
- *@param uuid  发送消息的用户uuid
- *@param conversationId  会话id
- *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
- *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
- *@param uploadFile  为文件上传的的form表单里的文件对象。
- *@return 返回PResult  成功与否，看errorCode和errorMsg
- */
-
-/*
- *@note 用户发文件信息
- *@path /chat/message/sendFileMsg
- *@method POST
- *@param uuid  发送消息的用户uuid
- *@param conversationId  会话id
- *@param receivers  指定消息接收的群成员列表。多个成员里，重复此变量。receivers为空时,则是所有群成员 
- *@param msgType  取值为SELF(用户消息)或SYSTEM(系统消息)
- *@param uploadFile  为文件上传的的form表单里的文件对象。
- *@return 返回PResult  成功与否，看errorCode和errorMsg
- */
- 
 
 /*
  *@note 用户发送自定义消息
@@ -385,7 +325,7 @@ message PFileMsg {
  */
 
 /*
- *@note 给用户推送消息。
+ *@note 给用户推送消息。(备注：由于此接口是GET方式，不招人喜欢。在后续版本中将废弃掉该接口;请用“/chat/push/msg/multi”接口来代替，两者接口完全兼容)
  *@path /chat/push/msg/single
  *@method GET
  *@param receiverUUID  消息接收者的uuid。
