@@ -43,6 +43,7 @@ message PBuildUrlInfo {
  *@note 网盘中的文件显示
  *@path /netdisk/file/list
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@return 成功PListNetFileInfo, 失败PResult
@@ -52,6 +53,7 @@ message PBuildUrlInfo {
  *@note 上传文件到网盘中
  *@path /netdisk/file/upload
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param extension 文件扩展名
@@ -72,6 +74,7 @@ message PBuildUrlInfo {
  *@note 网盘中删除文件
  *@path /netdisk/file/delete
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param objectKeys  要删除的多个文件的objectKey，文件objectKey之间用逗号隔开。 
@@ -82,6 +85,7 @@ message PBuildUrlInfo {
  *@note 网盘中文件编辑，主要是编辑文件的title，desc，remark等属性
  *@path /netdisk/file/edit
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param objectKey  文件的唯一ID标识值。 
@@ -99,6 +103,7 @@ message PBuildUrlInfo {
  *@note 生成文件对象直接下载的url地址
  *@path /netdisk/file/makeDirectOssUrl
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param objectKeys  文件的唯一ID标识值，多个objectKey之间用","作为分割符。连接起来的串。 
@@ -110,6 +115,7 @@ message PBuildUrlInfo {
  *@note 生成分享的url地址
  *@path /netdisk/file/makePublicUrl
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param objectKey  文件的唯一ID标识值。 
@@ -123,6 +129,7 @@ message PBuildUrlInfo {
  *@note 生成网盘中的URL下载地址
  *@path /netdisk/file/downloadUrl
  *@method POST
+ *@cookie token&uuid 登录用户信息
  *@param uuid  用户的uuid。
  *@param token  用户的token。
  *@param linkInfo  文件下载的linkInfo。  
