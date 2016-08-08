@@ -145,6 +145,17 @@ message PCommentExtList {
  *@return 成功返回PCommentLevel，失败返回PResult
  */
 
+/*
+ *@note 分页加载评论的评论(每一条评论包含等级)
+ *@path /comment/subcomment
+ *@method GET
+ *@cookie token&uuid
+ *@param id 评论ID query参数
+ *@param offset 从第几条开始加载 query参数
+ *@param count 每次加载多少条 query参数
+ *@return 成功返回PCommentExtList，失败返回PResult
+ */
+
 message PVoteUser {
 	string uuid = 1;	//赞或踩的用户信息
 	string nickname = 2;
