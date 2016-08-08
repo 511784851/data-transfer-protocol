@@ -52,6 +52,8 @@ message PUser {
 	bool liveRemind = 32;           // 直播提醒开关
 	PLiveInfoList liveInfo = 33;    // 直播提醒信息
 	string backImage = 34; 		    // 背景图片
+	string idCardNo = 35;           // 身份证号码
+	string idCardImg = 36;          // 身份证照片
 }
 
 message PUserListEx {
@@ -218,21 +220,16 @@ message PAccountToken {
 	string token = 1;
 }
 
-// 是否实名认证
-message PIsReadNameInfo {
-	bool isReadName = 1;
-}
-
 // 基础信息
 message PAccountInitInfo {
-	bool isReadName = 1;  //是否实名认证
-	string cellphone = 2; //手机号码
+	int32 isReadName = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
+	string cellphone = 2;  //手机号码
 }
 
 // 背景图片信息
 message PBackImage {
-	string objectKey = 1;     //背景图片objectkey
-	string url = 2;    //缩略图URL
+	string objectKey = 1;   //背景图片objectkey
+	string url = 2;         //图片URL
 }
 
 // 背景缩略图列表
@@ -451,14 +448,6 @@ message PBackThumbImageList {
  */
 
 /*
- *@note      是否实名认证
- *@uri       /v1/account/user/isreadname
- *@method    GET
- *@cookie    token&uuid
- *@return    成功返回PIsReadNameInfo, 失败返回PResult
- */
-
-/*
  *@note      获取初始化信息
  *@uri       /v1/account/user/initinfo
  *@method    GET
@@ -487,7 +476,7 @@ message PBackThumbImageList {
  *@uri  /v1/account/user/backimage
  *@method POST
  *@cookie token&uuid
- *@param image 要上传的背景图片objectkey
+ *@uriParam objectkey 要上传的背景图片objectkey
  *@return 返回PResult
  */
 
@@ -517,4 +506,16 @@ message PBackThumbImageList {
  *@cookie token&uuid
  *@uriParam type 解绑类型(0:wechat,1:weibo,2:google,3:facebook)
  *@return 成功返回PResult(No_Error)，失败返回PResult
+ */
+
+/*
+ *@note 设置实名认证信息
+ *@uri  /v1/account/user/readauth
+ *@method POST
+ *@cookie token&uuid
+ *@postParam readname  真实姓名
+ *@postParam birthday  出生年月日
+ *@postParam idcardno  身份证号码
+ *@postParam idcardimg 身份证照片
+ *@return 返回PResult
  */
