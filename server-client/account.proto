@@ -224,7 +224,7 @@ message PIsReadNameInfo {
 }
 
 // 基础信息
-message PAccountBaseInfo {
+message PAccountInitInfo {
 	bool isReadName = 1;  //是否实名认证
 	string cellphone = 2; //手机号码
 }
@@ -463,7 +463,7 @@ message PBackThumbImageList {
  *@uri       /v1/account/user/initinfo
  *@method    GET
  *@cookie    token&uuid
- *@return    成功返回PAccountBaseInfo, 失败返回PResult
+ *@return    成功返回PAccountInitInfo, 失败返回PResult
  */
 
 /*
