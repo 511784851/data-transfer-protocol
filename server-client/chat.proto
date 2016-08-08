@@ -319,7 +319,7 @@ message PFileMsg {
  */
 
 /*
- *@note 给用户推送消息。(备注：由于此接口是GET方式，不招人喜欢。在后续版本中将废弃掉该接口;请用“/chat/push/msg/multi”接口来代替，两者接口完全兼容)
+ *@note 给用户推送消息。"alertContent+info"的内容不能查过230个字节。(备注：由于此接口是GET方式，不招人喜欢。在后续版本中将废弃掉该接口;请用“/chat/push/msg/multi”接口来代替，两者接口完全兼容)
  *@path /chat/push/msg/single
  *@method GET
  *@cookie token&uuid 登录用户信息
@@ -333,7 +333,7 @@ message PFileMsg {
  */
  
 /*
- *@note 给用户推送消息(群发消息)。
+ *@note 给用户推送消息(群发消息)。"alertContent+info"的内容不能查过230个字节。
  *@path /chat/push/msg/multi
  *@method POST
  *@cookie token&uuid 登录用户信息
