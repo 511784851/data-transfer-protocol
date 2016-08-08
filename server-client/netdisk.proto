@@ -48,6 +48,19 @@ message PBuildUrlInfo {
  *@param token  用户的token。
  *@return 成功PListNetFileInfo, 失败PResult
  */
+
+
+/*
+ *@note 查询网盘中的文件
+ *@path /netdisk/file/query
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@param uuid  用户的uuid。
+ *@param token  用户的token。
+ *@param keyword  以keyword为条件来查询出对应标题的文件。
+ *@return 成功PListNetFileInfo, 失败PResult
+ */
+ 
  
  /*
  *@note 上传文件到网盘中
