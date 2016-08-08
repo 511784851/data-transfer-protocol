@@ -510,7 +510,7 @@ message PBackThumbImageList {
 
 /*
  *@note 设置实名认证信息
- *@uri  /v1/account/user/readauth
+ *@uri  /v1/account/user/readnameauth
  *@method POST
  *@cookie token&uuid
  *@postParam readname  真实姓名
