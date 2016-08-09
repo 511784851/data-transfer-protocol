@@ -4,9 +4,9 @@ package common;
 
 /*
  *@note 触发任务内容通知
- *@path /gamification/task/notify
+ *@path /gamification/task/serNotify
  *@method POST
- *@cookie uuid&token
+ *@param uuid 用户uuid
  *@param from 发起调用的服务名
  *@param taskKey 任务ID（PTaskKey的成员,如PUBLISH、FOLLOW）
  *@return 返回PResult
