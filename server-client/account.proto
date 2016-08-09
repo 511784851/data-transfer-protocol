@@ -52,8 +52,6 @@ message PUser {
 	bool liveRemind = 32;           // 直播提醒开关
 	PLiveInfoList liveInfo = 33;    // 直播提醒信息
 	string backImage = 34; 		    // 背景图片
-	string idCardNo = 35;           // 身份证号码
-	string idCardImg = 36;          // 身份证照片
 }
 
 message PUserListEx {
