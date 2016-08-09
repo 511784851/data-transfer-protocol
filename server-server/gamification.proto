@@ -3,7 +3,7 @@ syntax = "proto3";
 package common;
 
 /*
- *@note 任务内容触发通知
+ *@note 触发任务内容通知
  *@path /gamification/task/notify
  *@method POST
  *@cookie uuid&token

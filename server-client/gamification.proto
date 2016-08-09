@@ -62,7 +62,7 @@ message PBadgeDetail {
 	int32 target = 7;         // 任务总数
 }
 
- /*
+/*
  *@note 接受任务
  *@path /gamification/task/accept
  *@method POST
@@ -71,7 +71,7 @@ message PBadgeDetail {
  *@return 返回PResult
  */
  
- /*
+/*
  *@note 获取用户游戏化任务信息
  *@path /gamification/user/task
  *@method get
@@ -79,7 +79,7 @@ message PBadgeDetail {
  *@return 成功返回PGamification，失败返回PResult
  */
  
-  /*
+/*
  *@note 获取用户游戏化成就信息
  *@path /gamification/user/achievement
  *@method get
