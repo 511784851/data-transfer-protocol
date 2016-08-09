@@ -173,6 +173,19 @@ message PRecommendStarList {
 	repeated PRecommendStar list = 1;
 }
 
+//意见反馈列表
+message PFeedbackList {
+	repeated PFeedback list = 1;
+}
+
+//意见反馈
+message PFeedback {
+	int32 id = 1;
+	string uuid = 2;
+	int64 time = 3;
+	string content = 4;
+}
+
 
 /**************************API 定义***********************************/
 
@@ -236,3 +249,13 @@ message PRecommendStarList {
  *@param content 举报内容
  *@return PResult
  */
+ 
+ /**
+  * 意见反馈
+  *
+  *@path /platform-manager/feedback
+  *@cookie token&uuid
+  *@method POST
+  *@param content 反馈内容
+  *@return PResult
+  */
