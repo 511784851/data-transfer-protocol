@@ -237,6 +237,14 @@ message PBackThumbImageList {
 	repeated PBackImage list = 1;
 }
 
+// 实名认证信息
+message PReadNameAuthInfo {
+	string readName = 1;   //真实姓名
+ 	string birthday = 2;   //出生年月日
+ 	string idCardNo = 3;   //身份证号码
+ 	string idCardImg  = 4; //身份证照片
+}
+
 /*=====================================*/
 //API定义
 
@@ -518,4 +526,12 @@ message PBackThumbImageList {
  *@postParam idcardno  身份证号码
  *@postParam idcardimg 身份证照片
  *@return 返回PResult
+ */
+
+/*
+ *@note 获取实名认证信息
+ *@uri  /v1/account/user/readnameauth
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PReadNameAuthInfo, 失败返回PResult
  */
