@@ -561,10 +561,8 @@ message PLanguageInfo {
  *@uri  /v1/account/user/privacy
  *@method POST
  *@cookie token&uuid
- *@postParam myfriend1    我的好友  (不让他(她)看我的朋友圈), (0:关,1:开)
- *@postParam myattention  我关注的人(不让他(她)看我的朋友圈), (0:关,1:开)
- *@postParam myfriend2    我的好友  (不看他(她)的朋友圈), (0:关,1:开)
- *@postParam myfans       我的粉丝  (不看他(她)的朋友圈), (0:关,1:开)
+ *@postParam key    参数(0:我的好友(不让他(她)看我的朋友圈),1:我关注的人,2:我的好友(不看他(她)的朋友圈),3:我的粉丝)
+ *@postparam offOn  开关(0:关,1:开)
  *@return 返回PResult
  */
 
