@@ -248,10 +248,10 @@ message PReadNameAuthInfo {
 
 // 隐私信息
 message PPrivacyInfo {
-	bool myfriend1 = 1;    //我的好友  (不让他(她)看我的朋友圈)
-	bool myattention = 2;  //我关注的人(不让他(她)看我的朋友圈)
-	bool myfriend2 = 3;    //我的好友  (不看他(她)的朋友圈)
-	bool myfans = 4;       //我的粉丝  (不看他(她)的朋友圈)
+	bool myFriend1 = 1;    //我的好友  (不让他(她)看我的朋友圈)
+	bool myAttention = 2;  //我关注的人(不让他(她)看我的朋友圈)
+	bool myFriend2 = 3;    //我的好友  (不看他(她)的朋友圈)
+	bool myFans = 4;       //我的粉丝  (不看他(她)的朋友圈)
 }
 
 // 语言信息
@@ -563,10 +563,10 @@ message PLanguageInfo {
  *@uri  /v1/account/user/privacy
  *@method POST
  *@cookie token&uuid
- *@postParam myfriend1    我的好友  (不让他(她)看我的朋友圈)
- *@postParam myattention  我关注的人(不让他(她)看我的朋友圈)
- *@postParam myfriend2    我的好友  (不看他(她)的朋友圈)
- *@postParam myfans       我的粉丝  (不看他(她)的朋友圈)
+ *@postParam myfriend1    我的好友  (不让他(她)看我的朋友圈), (0:关,1:开)
+ *@postParam myattention  我关注的人(不让他(她)看我的朋友圈), (0:关,1:开)
+ *@postParam myfriend2    我的好友  (不看他(她)的朋友圈), (0:关,1:开)
+ *@postParam myfans       我的粉丝  (不看他(她)的朋友圈), (0:关,1:开)
  *@return 返回PResult
  */
 
