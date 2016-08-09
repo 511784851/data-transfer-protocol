@@ -12,7 +12,7 @@ message PGamification {
 }
 
 message PTaskDetail {
-	int32 type = 1;          // 任务类型（1-日常任务，2-主线任务， 3-系统任务）
+	int32 type = 1;          // 任务类型（1-日常任务，2-主线任务， 3-系统任务）系统任务不可手动接受，主线任务只可接受一次，日常任务每天可接受一次
 	PTaskKey taskKey = 2;    // 任务ID
 	string description = 3;  // 任务描述
 	int32 progress = 4;      // 完成进度
