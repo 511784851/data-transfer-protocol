@@ -476,7 +476,7 @@ message PBackThumbImageList {
  *@uri  /v1/account/user/backimage
  *@method POST
  *@cookie token&uuid
- *@uriParam objectkey 要上传的背景图片objectkey
+ *@postParam objectkey 要上传的背景图片objectkey
  *@return 返回PResult
  */
 
