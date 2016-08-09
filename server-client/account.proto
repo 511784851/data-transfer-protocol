@@ -562,7 +562,7 @@ message PLanguageInfo {
  *@method POST
  *@cookie token&uuid
  *@postParam key    参数(0:我的好友(不让他(她)看我的朋友圈),1:我关注的人,2:我的好友(不看他(她)的朋友圈),3:我的粉丝)
- *@postparam offOn  开关(0:关,1:开)
+ *@postparam offon  开关(0:关,1:开)
  *@return 返回PResult
  */
 
