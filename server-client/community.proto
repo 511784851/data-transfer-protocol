@@ -43,7 +43,7 @@ message PCommunityInfo {
 	int32 NoticePostCount = 13;		// 社区公告帖子数量
 	string BottomNewsTxt = 14;		// 底部的最新资讯
 	string BottomBackgroundTxt = 15;// 底部的背景介绍
-	string BottomVideoTxt = 14;		// 底部的视频节目
+	string BottomVideoTxt = 16;		// 底部的视频节目
 }
 
 // ‘我的社区’返回的信息
