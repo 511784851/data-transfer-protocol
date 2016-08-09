@@ -246,6 +246,19 @@ message PReadNameAuthInfo {
  	string idCardImg  = 5; //身份证照片
 }
 
+// 隐私信息
+message PPrivacyInfo {
+	bool myfriend1 = 1;    //我的好友  (不让他(她)看我的朋友圈)
+	bool myattention = 2;  //我关注的人(不让他(她)看我的朋友圈)
+	bool myfriend2 = 3;    //我的好友  (不看他(她)的朋友圈)
+	bool myfans = 4;       //我的粉丝  (不看他(她)的朋友圈)
+}
+
+// 语言信息
+message PLanguageInfo {
+	string language = 1;   //语言
+}
+
 /*=====================================*/
 //API定义
 
@@ -535,4 +548,41 @@ message PReadNameAuthInfo {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PReadNameAuthInfo, 失败返回PResult
+ */
+
+/*
+ *@note 获取隐私信息
+ *@uri  /v1/account/user/privacy
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PPrivacyInfo, 失败返回PResult
+ */
+
+/*
+ *@note 设置隐私信息
+ *@uri  /v1/account/user/privacy
+ *@method POST
+ *@cookie token&uuid
+ *@postParam myfriend1    我的好友  (不让他(她)看我的朋友圈)
+ *@postParam myattention  我关注的人(不让他(她)看我的朋友圈)
+ *@postParam myfriend2    我的好友  (不看他(她)的朋友圈)
+ *@postParam myfans       我的粉丝  (不看他(她)的朋友圈)
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取语言
+ *@uri  /v1/account/user/language
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PLanguageInfo, 失败返回PResult
+ */
+
+/*
+ *@note 设置语言
+ *@uri  /v1/account/user/language
+ *@method POST
+ *@cookie token&uuid
+ *@postParam language 语言
+ *@return 返回PResult
  */
