@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package common;
+
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "GamificationProtos";
+
+message PGamification {
+	int32 experience = 1;          // 经验值
+	int32 level = 2;               // 等级
+	repeated PTaskDetail task = 3; // 任务列表
+}
+
+message PTaskDetail {
+	int32 type = 1;          // 任务类型（1-日常任务，2-主线任务）
+	PTaskKey taskKey = 2;    // 任务ID
+	string description = 3;  // 任务描述
+	int32 progress = 4;      // 完成进度
+	int32 statu = 5;         // 任务状态（1-未接受，2-进行中，3-已完成）
+	int32 target = 6;        // 任务总数
+	int32 experience = 7;    // 任务完成经验值
+}
+
+enum PTaskKey {
+    PUBLISH = 0;          // 发帖
+    FOLLOW = 1;           // 关注用户
+    VOTE = 2;             // 点赞帖子 
+    REPLY = 3;            // 回复帖子
+    ADDCOMMUNITY = 4;     // 加入社区
+    PUBLISHCOMMUNITY = 5; // 论坛发帖 
+    ADDFRIEND = 6;        // 加平台好友
+    FORWARD = 7;          // 转发帖子
+    REDPACKET = 8;        // 发红包 
+    REMIND = 9;           // @人
+    PROFILE = 10;         // 资料完善
+    OPENCONTACT = 11;     // 开启手机通讯录访问权限
+    ADDCONTACT = 12;      // 加手机通讯录好友 
+    FEEDBACK = 13;        // 意见反馈  
+    BINDACCOUNT = 14;     // 绑定第三方账号  
+    DOWNLOADAPP = 15;     // 下载机器人助手
+    ADDOTHERFRIEND = 16;  // 加第三方方平台好友
+    REGISTER = 17;        // 注册
+}
+
+message PAchievement {
+	int32 experience = 1;            // 经验值
+	int32 level = 2;                 // 等级
+	int32 nextLevelExperience = 3;   // 下一个等级经验值
+	int32 upgradeExperience = 4;     // 距离下一个等级需要的经验值
+	int32 badgeHave = 5;             // 已获得徽章数量
+	int32 badgeSum = 6;              // 徽章总数
+	repeated PBadgeDetail badge = 7; // 徽章列表
+}
+
+message PBadgeDetail {
+	int32 statu = 1;          // 获得状态（1-已获得，2-未获得）
+	string name = 2;          // 徽章名称
+	string icon = 3;          // 徽章图标
+	string description = 4;   // 徽章描述
+	string progress = 5;      // 进度，格式如：75%
+	int64 time = 6;           // 获得时间，statu=1时此值有效
+	int32 target = 7;         // 任务总数
+}
+
+ /*
+ *@note 接受任务
+ *@path /gamification/task/accept
+ *@method POST
+ *@cookie uuid&token
+ *@param taskKey 任务ID（PTaskKey的成员,如PUBLISH、FOLLOW）
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 获取用户游戏化任务信息
+ *@path /gamification/user/task
+ *@method get
+ *@cookie uuid&token
+ *@return 成功返回PGamification，失败返回PResult
+ */
+ 
+  /*
+ *@note 获取用户游戏化成就信息
+ *@path /gamification/user/achievement
+ *@method get
+ *@cookie uuid&token
+ *@return 成功返回PAchievement，失败返回PResult
+ */
