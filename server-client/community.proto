@@ -89,7 +89,7 @@ message PCommunityPostInfo {
 	PUserBase User = 10;						// 用户基础信息
 	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
     PRedPacketInfo Redpacket = 12;              // 红包信息
-    string BannerImg = 13;                      // 公告帖子的轮播图
+    PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
     bool IsTop = 14;                            // 公告帖子是否置顶的标志位
 }
 
@@ -359,6 +359,16 @@ message PCommunityNotificationUnRead {
  *@url param oper 0 为取消置顶，1 为置顶
  *@url param postid 帖子id
  *@url param replaceid 0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
+ *@method GET
+ *@cookie token&uuid
+ *@return返回 PResult
+ */
+
+/*
+ *@note 已置顶公告再次置顶
+ *@path /v1/community/post/toppest
+ *@url param id 社区id
+ *@url param postid 帖子id
  *@method GET
  *@cookie token&uuid
  *@return返回 PResult

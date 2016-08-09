@@ -212,3 +212,21 @@ package service;
  *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users/baseinfo?uuids=1,2,3"
  *@return   成功:PUserBaseList,失败:CXXResult
  */
+
+/*
+ *@note     设置实名认证状态
+ *@path     /v1/account/user/readnameauth/status
+ *@method   POST
+ *@cookie   token&uuid
+ *@postParam uuid   用户ID
+ *@postParam status 实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
+ *@return   返回:CXXResult
+ */
+
+/*
+ *@note 获取实名认证信息
+ *@uri  /v1/account/user/readnameauth
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PReadNameAuthInfo, 失败返回PResult
+ */

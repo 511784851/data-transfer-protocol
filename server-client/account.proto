@@ -50,7 +50,8 @@ message PUser {
 	string areaCode = 30;			// 地区代码
 	string areaName = 31;			// 地区名称
 	bool liveRemind = 32;           // 直播提醒开关
-	PLiveInfoList liveInfo = 33;  // 直播提醒信息
+	PLiveInfoList liveInfo = 33;    // 直播提醒信息
+	string backImage = 34; 		    // 背景图片
 }
 
 message PUserListEx {
@@ -86,7 +87,9 @@ message PUserBase {
   string UUID = 6;        			// 服务端标志用户的唯一id
   string UserName = 7;     			// 用户名，唯一
   string Nickname = 8;      		// 昵称
-  string HeadImgURL = 9;     		// 头像地址
+  string RealName = 9;				// 真实姓名
+  string HeadImgURL = 10;     		// 头像地址
+  string UserResume = 11;			// 简介
 }
 
 // 用户基础信息列表
@@ -210,6 +213,50 @@ message PLiveRemind {
 	bool offOn = 1;
 }
 
+// 验证安全码
+message PAccountToken {
+	string token = 1;
+}
+
+// 基础信息
+message PAccountInitInfo {
+	int32 authStatus = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
+	string cellphone = 2;  //手机号码
+}
+
+// 背景图片信息
+message PBackImage {
+	string objectKey = 1;   //背景图片objectkey
+	string url = 2;         //图片URL
+}
+
+// 背景缩略图列表
+message PBackThumbImageList {
+	repeated PBackImage list = 1;
+}
+
+// 实名认证信息
+message PReadNameAuthInfo {
+	int32 authStatus = 1;  //实名认证状态
+	string readName = 2;   //真实姓名
+ 	string birthday = 3;   //出生年月日
+ 	string idCardNo = 4;   //身份证号码
+ 	string idCardImg  = 5; //身份证照片
+}
+
+// 隐私信息
+message PPrivacyInfo {
+	bool myFriend1 = 1;    //我的好友  (不让他(她)看我的朋友圈)
+	bool myAttention = 2;  //我关注的人(不让他(她)看我的朋友圈)
+	bool myFriend2 = 3;    //我的好友  (不看他(她)的朋友圈)
+	bool myFans = 4;       //我的粉丝  (不看他(她)的朋友圈)
+}
+
+// 语言信息
+message PLanguageInfo {
+	string language = 1;   //语言
+}
+
 /*=====================================*/
 //API定义
 
@@ -268,7 +315,7 @@ message PLiveRemind {
  *@uri /account/binding/status
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PAccount，失败返回PbResult
+ *@return 成功返回PAccount，失败返回PResult
  */
 
 /*
@@ -278,7 +325,7 @@ message PLiveRemind {
  *@cookie token&uuid
  *@param cellphone 有带区号的手机号码（如+86）
  *@param smscode 短讯服务代码
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
 
 /*
@@ -287,7 +334,7 @@ message PLiveRemind {
  *@method GET
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
@@ -300,7 +347,7 @@ message PLiveRemind {
  *@param wheadimgurl 微信头像路径
  *@param wgender 性别
  *@param wweihao 微信号
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
@@ -310,7 +357,7 @@ message PLiveRemind {
  *@cookie token&uuid
  *@param code 授权临时票据(authorization code)
  *@param token 登陆验证数据(id token)
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
  
 /*
@@ -319,7 +366,7 @@ message PLiveRemind {
  *@method GET
  *@cookie token&uuid
  *@param token Facebook User access token
- *@return 成功返回PbResult(No_Error)，失败返回PbResult
+ *@return 成功返回PResult(No_Error)，失败返回PResult
  */
 
 /*
@@ -348,7 +395,7 @@ message PLiveRemind {
  *@method GET
  *@param oldpwd 旧密码
  *@param newpwd 新密码
- *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
+ *@return 成功返回PResult.Get(No_Error), 失败返回PResult
  */
 
 /*=====================================*/
@@ -356,7 +403,7 @@ message PLiveRemind {
 
 /*
  *@note     获取用户信息
- *@path     /v1/account/users/:uuid
+ *@uri     /v1/account/users/:uuid
  *@method   GET
  *@cookie   token&uuid
  *@uriParam uuid 用户ID
@@ -365,7 +412,7 @@ message PLiveRemind {
 
 /*
  *@note     获取多个用户信息
- *@path     /v1/account/users
+ *@uri     /v1/account/users
  *@method   GET
  *@cookie   token&uuid
  *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users?uuids=1,2,3"
@@ -374,7 +421,7 @@ message PLiveRemind {
 
 /*
  *@note      通过Json设置用户信息
- *@path      /v1/account/user.json
+ *@uri       /v1/account/user.json
  *@method    POST
  *@cookie    token&uuid
  *@postParam json 用户信息
@@ -403,7 +450,7 @@ message PLiveRemind {
 
 /*
  *@note      通过Proto设置用户信息
- *@path      /v1/account/user.proto
+ *@uri       /v1/account/user.proto
  *@method    POST
  *@cookie    token&uuid
  *@uriParam  fields  字段ID,只设置某个字段，通过","分隔,如"/v1/account/fields?uuids=1,2,3"
@@ -413,9 +460,129 @@ message PLiveRemind {
 
 /*
  *@note      注册用户
- *@path      /v1/register
+ *@uri       /v1/register
  *@method    POST
  *@cookie    token&uuid
  *@postParam PUserEx 用户信息
  *@return    CXXResult
+ */
+
+/*
+ *@note      获取初始化信息
+ *@uri       /v1/account/user/initinfo
+ *@method    GET
+ *@cookie    token&uuid
+ *@return    成功返回PAccountInitInfo, 失败返回PResult
+ */
+
+/*
+ *@note 获取背景缩略图列表
+ *@uri  /v1/account/user/backimage/thumblist
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PBackThumbImageList, 失败返回PResult
+ */
+
+/*
+ *@note 获取背景大图
+ *@uri  /v1/account/user/backimage
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PBackImage, 失败返回PResult
+ */
+
+/*
+ *@note 修改背景图片
+ *@uri  /v1/account/user/backimage
+ *@method POST
+ *@cookie token&uuid
+ *@postParam objectkey 要上传的背景图片objectkey
+ *@return 返回PResult
+ */
+
+/*
+ *@note 验证登录密码
+ *@uri  /v1/account/user/checkpwd
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam password 登录密码
+ *@return 成功返回PAccountToken, 失败返回PResult
+ */
+
+/*
+ *@note 设置登录密码
+ *@uri  /v1/account/user/setpwd
+ *@method POST
+ *@cookie token&uuid
+ *@postParam authtoken 验证Token
+ *@postParam password  登录密码
+ *@return 返回PResult
+ */
+
+/*
+ *@note 解绑登录方式
+ *@uri  /v1/account/unbinding
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam type 解绑类型(0:wechat,1:weibo,2:google,3:facebook)
+ *@return 成功返回PResult(No_Error)，失败返回PResult
+ */
+
+/*
+ *@note 设置实名认证信息
+ *@uri  /v1/account/user/readnameauth
+ *@method POST
+ *@cookie token&uuid
+ *@postParam readname  真实姓名
+ *@postParam birthday  出生年月日
+ *@postParam idcardno  身份证号码
+ *@postParam idcardimg 身份证照片
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取实名认证信息
+ *@uri  /v1/account/user/readnameauth
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PReadNameAuthInfo, 失败返回PResult
+ */
+
+/*
+ *@note 获取隐私信息
+ *@uri  /v1/account/user/privacy
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PPrivacyInfo, 失败返回PResult
+ */
+
+/*
+ *@note 设置隐私信息
+ *@uri  /v1/account/user/privacy
+ *@method POST
+ *@cookie token&uuid
+ *@postParam key    参数
+	"MyFriend1": 我的好友(不让他(她)看我的朋友圈)
+	"MyAttention": 我关注的人
+	"MyFriend2": 我的好友(不看他(她)的朋友圈)
+	"MyFans": 我的粉丝
+ *@postparam offon  开关(0:关,1:开)
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取语言
+ *@uri  /v1/account/user/language
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PLanguageInfo, 失败返回PResult
+ */
+
+/*
+ *@note 设置语言
+ *@uri  /v1/account/user/language
+ *@method POST
+ *@cookie token&uuid
+ *@postParam language 语言
+ *@return 返回PResult
  */

@@ -28,10 +28,8 @@ message PGuy {
 	int32 followShip = 12;
 	//0:无关系，1：是好友
 	int32 friendShip = 13;
-	//帖子数
-	int32 posts = 14;
-	//成就数
-	int32 achievements = 15;
+	//用来排行的值，表示粉丝数、帖子数、成就数等
+	int32 rankValue = 14;
 }
 
 message PGuyList {
@@ -280,6 +278,37 @@ message PGameList {
  */
 
 /*
+ *@note 热门俱乐部
+ *@path /datapublishing/club/hot
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
+ */ 
+
+/*
+ *@note 推荐俱乐部
+ *@path /datapublishing/club/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
+ */ 
+
+/*
+ *@note 搜索俱乐部
+ *@path /datapublishing/club/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
+ */
+
+/*
  *@note 最新的数据
  *@path /datapublishing/data/newest
  *@method GET
@@ -333,14 +362,10 @@ message PGameList {
  */
 
 message PRank {
-	//排名
+	//排行名次
 	int32 rank = 1;
-	//粉丝数
-	int32 fans = 2;
-	//帖子数
-	int32 posts = 3;
-	//成就数
-	int32 achievements = 4;
+	//用来排行的值，如粉丝数、帖子数、成就数
+	int32 rankValue = 2;
 	
 	//排名列表
 	repeated PGuy guys = 5;	
@@ -352,7 +377,7 @@ message PRank {
  *@method GET
  *@cookie token&uuid
  *@param type  排行类型 "fans"|"posts"|"achievements"
- *@param scope 统计范围 "friend"|"follower"|"following"|"region"
+ *@param scope 统计范围 "friend"|"follower"|"following"|"region"|"public"
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PRank, 失败返回PResult

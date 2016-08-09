@@ -22,7 +22,6 @@ message PPostInfo {
 	repeated PImage images = 7;  //图片（最多九张）
 	PVideo video = 8;            //视频
 	PAudio audio = 9;            //音频
-	bool onOSS = 10;             //忽略该字段...
 	int64 pubishTime = 11;       //发布时间，上传时不用填
 	string position = 12;        //发帖的地理位置
 	bool self = 14;              //这篇文章是查看人自己的写的，上传时不用填
@@ -62,7 +61,7 @@ message PVideo {
 	string img = 2;              //视频的缩略图
 	repeated PVideoTag tags = 3; //视频的标签
 	int64 expires = 4;           //视频的有效期（多少秒之后过期）
-	int32 type = 5;              //视频类型，0：本地视频，1：第三方视频
+	int32 type = 5;              //视频类型，0：本地视频，1：第三方视频，2：长视频
 }
 
 // 音频
@@ -231,12 +230,12 @@ message PRelation {
  */
 
 /**
- *@note   收藏/取消收藏微博
- *@path   /v1/news/collect
+ *@note 批量收藏/取消收藏微博
+ *@path /v1/news/collect
  *@cookie token&uuid
  *@method POST
- *@param  oper 为1时表示收藏，为0时表示取消收藏
- *@param  postid 微博的id
+ *@post form param: oper 为1时表示收藏，为0时表示取消收藏
+ *@post form param: postids 微博的id,多个id用,分割
  *@return 返回 PResult
  */
  
@@ -247,6 +246,7 @@ message PRelation {
  *@method GET
  *@param  offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@param  count 获取收藏帖子数量,最大值为50
+ *@param  type 要查看的文章类型 值：all, text, image, audio, video
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
@@ -312,6 +312,17 @@ message PRelation {
  */
 
 /**
+ *@note   用户行为统计
+ *@path   /v1/news/behavior
+ *@cookie token&uuid
+ *@method GET
+ *@param  type 1、"view": 查看帖子；2、"share":分享帖子
+ *@param  uid 帖子发布者id
+ *@param  pid 帖子 id
+ *@return PResult  全部返回No_Error
+ */
+
+/**
  *@note   news点赞
  *@path   /v1/news/vote
  *@cookie token&uuid
@@ -322,10 +333,9 @@ message PRelation {
  */
 
 /**
- *@note   分享news展示
- *@path   /v1/news/share
+ *@note 获取微博文章分享地址
+ *@path /v1/news/share_address
  *@method GET
  *@param  postid 帖子id
- *@return 返回html文件
- *@example /v1/news/share?postid=3
+ *@return 成功返回 PStringList（0是分享地址，1是默认缩略图地址） ，失败返回 PResult
  */
