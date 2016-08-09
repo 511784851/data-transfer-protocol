@@ -52,8 +52,6 @@ message PUser {
 	bool liveRemind = 32;           // 直播提醒开关
 	PLiveInfoList liveInfo = 33;    // 直播提醒信息
 	string backImage = 34; 		    // 背景图片
-	string idCardNo = 35;           // 身份证号码
-	string idCardImg = 36;          // 身份证照片
 }
 
 message PUserListEx {
@@ -222,7 +220,7 @@ message PAccountToken {
 
 // 基础信息
 message PAccountInitInfo {
-	int32 isReadName = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
+	int32 authStatus = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
 	string cellphone = 2;  //手机号码
 }
 
@@ -239,10 +237,24 @@ message PBackThumbImageList {
 
 // 实名认证信息
 message PReadNameAuthInfo {
-	string readName = 1;   //真实姓名
- 	string birthday = 2;   //出生年月日
- 	string idCardNo = 3;   //身份证号码
- 	string idCardImg  = 4; //身份证照片
+	int32 authStatus = 1;  //实名认证状态
+	string readName = 2;   //真实姓名
+ 	string birthday = 3;   //出生年月日
+ 	string idCardNo = 4;   //身份证号码
+ 	string idCardImg  = 5; //身份证照片
+}
+
+// 隐私信息
+message PPrivacyInfo {
+	bool myFriend1 = 1;    //我的好友  (不让他(她)看我的朋友圈)
+	bool myAttention = 2;  //我关注的人(不让他(她)看我的朋友圈)
+	bool myFriend2 = 3;    //我的好友  (不看他(她)的朋友圈)
+	bool myFans = 4;       //我的粉丝  (不看他(她)的朋友圈)
+}
+
+// 语言信息
+message PLanguageInfo {
+	string language = 1;   //语言
 }
 
 /*=====================================*/
@@ -534,4 +546,41 @@ message PReadNameAuthInfo {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PReadNameAuthInfo, 失败返回PResult
+ */
+
+/*
+ *@note 获取隐私信息
+ *@uri  /v1/account/user/privacy
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PPrivacyInfo, 失败返回PResult
+ */
+
+/*
+ *@note 设置隐私信息
+ *@uri  /v1/account/user/privacy
+ *@method POST
+ *@cookie token&uuid
+ *@postParam myfriend1    我的好友  (不让他(她)看我的朋友圈), (0:关,1:开)
+ *@postParam myattention  我关注的人(不让他(她)看我的朋友圈), (0:关,1:开)
+ *@postParam myfriend2    我的好友  (不看他(她)的朋友圈), (0:关,1:开)
+ *@postParam myfans       我的粉丝  (不看他(她)的朋友圈), (0:关,1:开)
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取语言
+ *@uri  /v1/account/user/language
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PLanguageInfo, 失败返回PResult
+ */
+
+/*
+ *@note 设置语言
+ *@uri  /v1/account/user/language
+ *@method POST
+ *@cookie token&uuid
+ *@postParam language 语言
+ *@return 返回PResult
  */
