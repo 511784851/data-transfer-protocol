@@ -807,8 +807,8 @@ message PCommunityNotificationUnRead {
  *@note 社区搜索
  *@path /v1/community/search/community
  *@method GET
- *@url param type 可选参数 hot (热门); recommend (推荐); follow (关注的); all (所有)
- *@url param keyword 关键词 type=hot, type=recommend时，忽略这个字段
+ *@url param follow (关注的); all (所有)
+ *@url param keyword 关键词
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取数量
  *@cookie token&uuid
