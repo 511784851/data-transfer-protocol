@@ -67,7 +67,7 @@ message PBadgeDetail {
  *@path /gamification/task/notify
  *@method POST
  *@cookie uuid&token
- *@param taskKey 任务ID（PTaskKey的成员,APP只有OPENCONTACT、两个任务）
+ *@param taskKey 任务ID（PTaskKey的成员,APP只有OPENCONTACT、DOWNLOADAPP两个任务）
  *@return 返回PResult
  */
  
