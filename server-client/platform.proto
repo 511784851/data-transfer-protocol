@@ -200,6 +200,7 @@ message PBanner {
 	int32 width = 5; //图片的宽
 	int64 expires = 6; //图片到期时间
 	bool enable = 7; //是否下架
+	int64 time = 8; //创建时间
 }
 
 
