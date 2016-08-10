@@ -59,6 +59,20 @@ message PMember {
 	int32 gameLevel = 5;           // 游戏化等级
 }
 
+
+message PEachMsg {
+	string receiverUUID = 1;		
+	string alertContent = 2;		
+	string info = 3;				
+}
+
+message PMoreMsg {
+	string title = 1;				// 推送消息的标题。
+	string msgid = 2;				// 推送消息的msgid，该字段是阿里悟空中要用，尚未知其含义，先随便填充一个值1000。
+	string description = 3;			// 推送消息的描述。
+	repeated PEachMsg list = 4;     // 成员信息
+}
+
 /*
  *@note 获取用户登录阿里悟空的凭证信息
  *@path /chat/user/token
@@ -268,6 +282,16 @@ message PChatIdListMessage {
  *@param info  推送给客户端的字符串
  *@return 返回PResult
  */
+
+/*
+ *@note 给用户推送消息(群发消息)。
+ *@path /chat/push/msg/more
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@param body 为PMoreMsg结构
+ *@return 返回PResult
+ */
+
 
 /*
  *@note 同步用户信息到悟空（不包含添加用户信息）

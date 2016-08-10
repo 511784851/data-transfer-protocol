@@ -44,8 +44,7 @@ message PBuildUrlInfo {
  *@path /netdisk/file/list
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id。
  *@return 成功PListNetFileInfo, 失败PResult
  */
 
@@ -55,8 +54,7 @@ message PBuildUrlInfo {
  *@path /netdisk/file/query
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
  *@param keyword  以keyword为条件来查询出对应标题的文件。
  *@return 成功PListNetFileInfo, 失败PResult
  */
@@ -67,8 +65,8 @@ message PBuildUrlInfo {
  *@path /netdisk/file/upload
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
+ *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param extension 文件扩展名
  *@param fileSize 文件长度
  *@param fileDigest 文件的md5 hexstring
@@ -88,8 +86,8 @@ message PBuildUrlInfo {
  *@path /netdisk/file/delete
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
+ *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param objectKeys  要删除的多个文件的objectKey，文件objectKey之间用逗号隔开。 
  *@return 返回PResult，删除成功的标志。
  */
@@ -99,8 +97,8 @@ message PBuildUrlInfo {
  *@path /netdisk/file/edit
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
+ *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param objectKey  文件的唯一ID标识值。 
  *@param transferFlag 文件转发标志，0--可以转发，1--不可以
  *@param shareFlag  文件转发和共享标志，0--可以共享，1--不可以
@@ -117,8 +115,7 @@ message PBuildUrlInfo {
  *@path /netdisk/file/makeDirectOssUrl
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
  *@param objectKeys  文件的唯一ID标识值，多个objectKey之间用","作为分割符。连接起来的串。 
  *@return 成功PDownloadArray，失败返回PResult。关于结构体PDownloadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
  */
@@ -129,8 +126,7 @@ message PBuildUrlInfo {
  *@path /netdisk/file/makePublicUrl
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
  *@param objectKey  文件的唯一ID标识值。 
  *@param invalidLongtime  文件的失效时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将失效
  *@param protectLongtime 文件的保护时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将公开，任何人都可以下载
@@ -143,8 +139,8 @@ message PBuildUrlInfo {
  *@path /netdisk/file/downloadUrl
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param uuid  用户的uuid。
- *@param token  用户的token。
+ *@param communityId  社区id
+ *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param linkInfo  文件下载的linkInfo。  
  *@return 成功PDownload，失败返回PResult。关于结构体PDownload，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
  */ 
