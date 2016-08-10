@@ -44,7 +44,6 @@ message PCommunityInfo {
 	string BottomNewsTxt = 14;		// 底部的最新资讯
 	string BottomBackgroundTxt = 15;// 底部的背景介绍
 	string BottomVideoTxt = 16;		// 底部的视频节目
-	PCommunityPostInfo BottomBackgroundPost = 17; // 底部的背景介绍
 }
 
 // ‘我的社区’返回的信息
@@ -112,6 +111,7 @@ message PCommunityFlagPostList {
 message PCommunityHome {
 	PCommunityInfo Info = 2;			// 我的社区信息
 	PUserBaseList List = 3; 			// 社区前五名成员列表
+	PCommunityPostInfo BottomBackgroundPost = 4; // 底部的背景介绍
 }
 
 // ---评论信息
