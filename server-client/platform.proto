@@ -186,6 +186,22 @@ message PFeedback {
 	string content = 4;
 }
 
+//banner图片列表
+message PBannerList {
+	repeated PBanner list = 1;	
+}
+
+//banner图片
+message PBanner {
+	int32 id = 1;
+	string src = 2; //图片地址
+	string url = 3; //点击链接地址
+	string text = 4; //文字
+	int32 width = 5; //图片的宽
+	int64 expires = 6; //图片到期时间
+	bool enable = 7; //是否下架
+}
+
 
 /**************************API 定义***********************************/
 
