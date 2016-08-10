@@ -41,12 +41,15 @@ message PCommunityInfo {
 	int32 MemberCount = 11;			// 社区成员数量
 	int32 ForumPostCount = 12;		// 社区论坛帖子数量
 	int32 NoticePostCount = 13;		// 社区公告帖子数量
+	string BottomNewsTxt = 14;		// 底部的最新资讯
+	string BottomBackgroundTxt = 15;// 底部的背景介绍
+	string BottomVideoTxt = 16;		// 底部的视频节目
 }
 
 // ‘我的社区’返回的信息
 message PCommunityMe {
 	PCommunityInfo Info = 2;			// 我的社区信息
-	PCommunityBaseList List = 3; 	// 我关注的社区，默认显示20条
+	PCommunityBaseList List = 3; 		// 我关注的社区，默认显示20条
 }
 
 // 社区资源信息
@@ -106,8 +109,9 @@ message PCommunityFlagPostList {
 
 // ‘社区首页’返回的信息
 message PCommunityHome {
-	PCommunityInfo Info = 2;				// 我的社区信息
-	PCommunityPostList List = 3; 		// 我关注的社区最近发布的帖子信息
+	PCommunityInfo Info = 2;			// 我的社区信息
+	PUserBaseList List = 3; 			// 社区前五名成员列表
+	PCommunityPostInfo BottomBackgroundPost = 4; // 底部的背景介绍
 }
 
 // ---评论信息
@@ -302,10 +306,21 @@ message PCommunityNotificationUnRead {
  *@path /v1/community/home
  *@method POST
  *@url param id 社区id
- *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce修改多个以,分割
+ *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce,
+				BottomNewsTxt,BottomBackgroundTxt,BottomVideoTxt修改多个以,分割
  *@body PCommunityInfo  
  *@cookie token&uuid
  *@return 返回 PResult
+ */
+
+/*
+ *@note 发布底部背景介绍
+ *@path /v1/community/bottom/background
+ *@url param id 社区id
+ *@method POST
+ *@body PCommunityPostUpload
+ *@cookie token&uuid
+ *@return返回 PResult
  */
 
 // 帖子相关操作
@@ -807,8 +822,8 @@ message PCommunityNotificationUnRead {
  *@note 社区搜索
  *@path /v1/community/search/community
  *@method GET
- *@url param type 可选参数 hot (热门); recommend (推荐); follow (关注的); all (所有)
- *@url param keyword 关键词 type=hot, type=recommend时，忽略这个字段
+ *@url param follow (关注的); all (所有)
+ *@url param keyword 关键词
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取数量
  *@cookie token&uuid

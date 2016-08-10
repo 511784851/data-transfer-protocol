@@ -234,6 +234,16 @@ message PGameList {
  *@param pagesize 页大小
  *@return 成功返回PCommunityBaseList，失败返回PResult
  */ 
+
+/*
+ *@note 推荐社区
+ *@path /datapublishing/community/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCommunityBaseList，失败返回PResult
+ */ 
  
 /*
  *@note 热门话题
