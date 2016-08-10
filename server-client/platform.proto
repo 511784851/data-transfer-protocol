@@ -203,6 +203,21 @@ message PBanner {
 	int64 time = 8; //创建时间
 }
 
+message PBannerSignle {
+	int32 id = 1;
+	string url = 2; //点击链接地址
+	string text = 3; //文字
+	int32 width = 4; //图片的宽
+	int64 expires = 5; //图片到期时间
+	bool enable = 6; //是否下架
+	repeated PBannerImage imgs = 7;
+}
+
+message PBannerImage {
+	string src = 1; //图片地址
+	int32 width = 2; //图片的宽
+}
+
 
 /**************************API 定义***********************************/
 
