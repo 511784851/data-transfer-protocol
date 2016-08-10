@@ -246,10 +246,8 @@ message PReadNameAuthInfo {
 
 // 隐私信息
 message PPrivacyInfo {
-	bool myFriend1 = 1;    //我的好友  (不让他(她)看我的朋友圈)
-	bool myAttention = 2;  //我关注的人(不让他(她)看我的朋友圈)
-	bool myFriend2 = 3;    //我的好友  (不看他(她)的朋友圈)
-	bool myFans = 4;       //我的粉丝  (不看他(她)的朋友圈)
+	bool myFans = 1;       //我的粉丝(不让他(她)看我的贴子)
+	bool myAttention = 2;  //我关注的人(不看他(她)的贴子)
 }
 
 // 语言信息
