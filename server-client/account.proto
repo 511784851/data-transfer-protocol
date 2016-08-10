@@ -51,7 +51,8 @@ message PUser {
 	string areaName = 31;			// 地区名称
 	bool liveRemind = 32;           // 直播提醒开关
 	PLiveInfoList liveInfo = 33;    // 直播提醒信息
-	string backImage = 34; 		    // 背景图片
+	string littleBackImage = 34; 	// 背景缩略图
+	string bigBackImage = 35;       // 背景大图
 }
 
 message PUserListEx {
