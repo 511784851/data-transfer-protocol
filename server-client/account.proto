@@ -51,7 +51,7 @@ message PUser {
 	string areaName = 31;			// 地区名称
 	bool liveRemind = 32;           // 直播提醒开关
 	PLiveInfoList liveInfo = 33;    // 直播提醒信息
-	string littleBackImage = 34; 	// 背景缩略图
+	string thumbBackImage = 34; 	// 背景缩略图
 	string bigBackImage = 35;       // 背景大图
 }
 
@@ -483,8 +483,16 @@ message PLanguageInfo {
  */
 
 /*
- *@note 获取背景大图
- *@uri  /v1/account/user/backimage
+ *@note 获取缩略图
+ *@uri  /v1/account/user/backimage/thumb
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PBackImage, 失败返回PResult
+ */
+
+/*
+ *@note 获取大图
+ *@uri  /v1/account/user/backimage/big
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PBackImage, 失败返回PResult
