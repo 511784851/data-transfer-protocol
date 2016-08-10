@@ -270,6 +270,16 @@ message PChatIdListMessage {
  */
 
 /*
+ *@note 给用户推送消息(群发消息)。
+ *@path /chat/push/msg/more
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@param body 为PMoreMsg结构
+ *@return 返回PResult
+ */
+
+
+/*
  *@note 同步用户信息到悟空（不包含添加用户信息）
  *@path /chat/user/synUserInfo
  *@method GET
