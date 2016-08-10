@@ -24,7 +24,7 @@ message PNetFileInfo {
 	
 	
 	string title = 9;			//文件的标题
-	string desc = 10;	//文件的描述
+	string desc = 10;			//文件的描述
 	string remark = 11;			//文件的备注信息
 	string miniPic = 12;		//文件的缩略图，图片格式为gif，内容的二进制数据流的base64编码
 
