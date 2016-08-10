@@ -24,9 +24,9 @@ message PNetFileInfo {
 	
 	
 	string title = 9;			//文件的标题
-	string desc = 10;	//文件的描述
+	string desc = 10;			//文件的描述
 	string remark = 11;			//文件的备注信息
-	string miniPic = 12;		//文件的缩略图，图片格式为gif，内容的二进制数据流的base64编码
+	string miniPic = 12;		//文件的缩略图的地址
 
 }
 
@@ -75,7 +75,7 @@ message PBuildUrlInfo {
  *@param title 文件标题
  *@param desc 文件描述
  *@param remark 文件备注
- *@param miniPic 文件的缩略图，图片格式为gif，内容的二进制数据流的base64编码
+ *@param miniPic 文件的缩略图的url地址
  *@param transferFlag 文件转发标志，0--可以转发，1--不可以
  *@param shareFlag 文件共享标志，0--可以共享，1--不可以
  *@param conserveFlag 文件可以收藏，0--可以收藏，1--不可以
