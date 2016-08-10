@@ -524,7 +524,7 @@ message PLanguageInfo {
  *@uri  /v1/account/unbinding
  *@method GET
  *@cookie token&uuid
- *@uriParam type 解绑类型(0:wechat,1:weibo,2:google,3:facebook)
+ *@uriParam type 解绑类型(1:wechat,2:weibo,3:facebook,4:google)
  *@return 成功返回PResult(No_Error)，失败返回PResult
  */
 
@@ -585,25 +585,4 @@ message PLanguageInfo {
  *@cookie token&uuid
  *@postParam language 语言
  *@return 返回PResult
- */
-
-/*
- *@note 设置等级信息
- *@uri  /v1/account/user/level
- *@method POST
- *@cookie token&uuid
- *@uriParam from 服务名称
- *@postParam uuids 用户ID,逗号分割(00001,00002,00003)
- *@postParam level 等级(0:普通用户等级权限, 1:VIP等级权限, 2:VIP+等级权限, 3:VO等级权限)
- *@return 返回PResult
- */
-
-/*
- *@note 获取VO的成员列表
- *@uri  /v1/account/user/vomembers
- *@method GET
- *@cookie token&uuid
- *@uriParam from 服务名称
- *@postParam uuid 用户ID
- *@return 成功返回PUserList, 失败返回PResult
  */
