@@ -194,9 +194,9 @@ message PBannerList {
 //banner图片
 message PBanner {
 	int32 id = 1;
-	string src = 2; //图片地址
-	string url = 3; //点击链接地址
-	string text = 4; //文字
+	string src = 2; //图片地址（客户端使用）
+	string url = 3; //点击链接地址（客户端使用）
+	string text = 4; //文字（客户端使用）
 	int32 width = 5; //图片的宽
 	int64 expires = 6; //图片到期时间
 	bool enable = 7; //是否下架
@@ -207,10 +207,8 @@ message PBannerSignle {
 	int32 id = 1;
 	string url = 2; //点击链接地址
 	string text = 3; //文字
-	int32 width = 4; //图片的宽
-	int64 expires = 5; //图片到期时间
-	bool enable = 6; //是否下架
-	repeated PBannerImage imgs = 7;
+	int64 expires = 4; //图片到期时间
+	repeated PBannerImage imgs = 5;
 }
 
 message PBannerImage {
@@ -291,3 +289,13 @@ message PBannerImage {
   *@param content 反馈内容
   *@return PResult
   */
+  
+  /**
+   * 获取图片轮播图（banner）
+   *
+   *@path /platform-manager/banner/app/list
+   *@cookie token&uuid
+   *@method GET
+   *@param width 需要获取的图片的长，不传返回那么随便给一张
+   *@return 成功 PBannerList ，失败 PResult
+   */
