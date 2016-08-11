@@ -116,7 +116,6 @@ message PCommentExtList {
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
- *@param level 用户等级
  *@param offset 从第几条开始加载
  *@param count 每次加载多少条
  *@return 成功返回PCommentExtList，失败返回PResult
