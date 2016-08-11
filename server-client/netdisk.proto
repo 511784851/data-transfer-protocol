@@ -40,13 +40,18 @@ message PBuildUrlInfo {
 }
 
 /*
- *@note 网盘中的文件显示
+ *@note 网盘中的文件显示，安装创建时间排序，最新的排在最上面。
  *@path /netdisk/file/list
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@param communityId  社区id。
+ *@param fromIndex  上次最后一条的记录的文件创建时间(long型的时间值)，首次访问传值“-1”。
+ *@param pageSize  本次请求要获取的记录数。
  *@return 成功PListNetFileInfo, 失败PResult
  */
+
+
+
 
 
 /*
@@ -56,6 +61,8 @@ message PBuildUrlInfo {
  *@cookie token&uuid 登录用户信息
  *@param communityId  社区id
  *@param keyword  以keyword为条件来查询出对应标题的文件。
+ *@param fromIndex  上次最后一条的记录的文件创建时间(long型的时间值)，首次访问传值“-1”。
+ *@param pageSize  本次请求要获取的记录数。
  *@return 成功PListNetFileInfo, 失败PResult
  */
  
