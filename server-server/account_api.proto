@@ -2,6 +2,19 @@ syntax = "proto3";
 package service; 
 
 /*=====================================*/
+//结构定义
+
+// 通知系统需要的基础信息
+message PNotifyBaseInfo {
+	string language = 1;
+}
+
+// 通知系统需要的基础信息列表
+message PNotifyBaseInfoList {
+	map<string,PNotifyBaseInfo> map = 1;
+}
+
+/*=====================================*/
 //API定义
 
 /*
@@ -276,4 +289,15 @@ package service;
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
  *@return 成功返回PUserList, 失败返回PResult
+ */
+
+
+/*
+ *@note 获取VO的成员列表
+ *@uri  /v1/account/user/notifybases
+ *@method POST
+ *@cookie token&uuid
+ *@uriParam from 服务名称
+ *@postParam uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
+ *@return 成功返回PNotifyBaseInfoList, 失败返回PResult
  */
