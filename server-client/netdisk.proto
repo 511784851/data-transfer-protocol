@@ -75,17 +75,18 @@ message PBuildUrlInfo {
  *@param communityId  社区id
  *@param extension 文件扩展名
  *@param fileSize 文件长度
- *@param fileDigest 文件的md5 hexstring
  *@param title 文件标题
  *@param desc 文件描述
  *@param remark 文件备注
  *@param miniPic 文件的缩略图的url地址
+ *@param objectKey 媒体文件的objectKey标识
  *@param transferFlag 文件转发标志，0--可以转发，1--不可以
  *@param shareFlag 文件共享标志，0--可以共享，1--不可以
  *@param conserveFlag 文件可以收藏，0--可以收藏，1--不可以
  *@param saveMode  保存模式。0--表示正常模式，遇到相同文件名时会返回失败；1--覆盖模式，遇到相同文件名时直接覆盖
- *@return 成功返回PUpload，失败返回PResult。 关于结构体PUpload，请看"data-transfer-protocol/server-client/oss.proto"中的PUpload
+ *@return 返回PResult。 操作成功的标志。
  */
+ 
  
  /*
  *@note 网盘中删除文件
