@@ -127,6 +127,7 @@ message PPersonStatistic {
 	int32 imageCnt = 5;
 	int32 audioCnt = 6;
 	int32 videoCnt = 7;
+	string CommunityID = 8;
 }
 
 // 微博用户详情
