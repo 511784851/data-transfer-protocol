@@ -26,7 +26,7 @@ message PNetFileInfo {
 	string title = 9;			//文件的标题
 	string desc = 10;			//文件的描述
 	string remark = 11;			//文件的备注信息
-	string miniPic = 12;		//文件的缩略图的地址
+	string miniPic = 12;		//文件的缩略图的objectKey
 
 }
 
