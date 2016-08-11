@@ -64,9 +64,8 @@ message PBuildUrlInfo {
  *@note 上传文件到网盘中
  *@path /netdisk/file/upload
  *@method POST
- *@cookie token&uuid 登录用户信息
+ *@cookie token&uuid 登录用户信息,同时是网盘的所有者或社区管理员。
  *@param communityId  社区id
- *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param extension 文件扩展名
  *@param fileSize 文件长度
  *@param fileDigest 文件的md5 hexstring
