@@ -276,10 +276,29 @@ message PLinkInfoList {
 	repeated PLinkInfo list = 1;
 }
 
+//个人统计信息
+message PAccountPersonStatistic {
+	int32 friendCnt = 1;          //朋友个数
+	int32 followCnt = 2;          //follow人数
+	int32 fansCnt = 3;            //fans个数
+	int32 textCnt = 4;            //发表的文字帖个数
+	int32 imageCnt = 5;
+	int32 audioCnt = 6;
+	int32 videoCnt = 7;
+	string CommunityID = 8;
+}
+
+// 微博用户详情
+message PAccountUserProfile {
+	PUser user = 1;
+	int32 followship = 2;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  	bool friend = 3;             //是否是好友，是：true
+}
+
 // 显示的个人档案信息
-message PPersonInfoEx {
-	PPersonStatistic statistic = 1;
-	PNewsUserProfile profile = 2;
+message PAccountPersonInfo {
+	PAccountPersonStatistic statistic = 1;
+	PAccountUserProfile profile = 2;
 	repeated PLinkInfo list = 3;
 }
 
@@ -636,8 +655,9 @@ message PPersonInfoEx {
 
 /*
  *@note 获取个人档案信息
- *@uri  /v1/account/user/personinfoex
+ *@uri  /v1/account/user/personinfo
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PPersonInfoEx, 失败返回PResult
+ *@uriParam uuid 用户ID
+ *@return 成功返回PAccountPersonInfo, 失败返回PResult
  */
