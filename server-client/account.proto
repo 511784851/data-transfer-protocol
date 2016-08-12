@@ -267,7 +267,7 @@ enum ELinkType {
 
 // 超链接信息
 message PLinkInfo {
-	int32 type = 1;    //类型
+	int32 type = 1;    //ELinkType类型
 	string url = 2;    //超链接地址
 }
 
@@ -607,7 +607,7 @@ message PLinkInfoList {
  *@uri  /v1/account/user/link
  *@method POST
  *@cookie token&uuid
- *@postParam PLinkInfoList 超链接信息列表
+ *@body PLinkInfoList 超链接信息列表
  *@return 返回PResult
  */
 
