@@ -276,8 +276,8 @@ message PLinkInfoList {
 	repeated PLinkInfo list = 1;
 }
 
-//个人统计信息
-message PAccountPersonStatistic {
+// 显示的个人档案信息
+message PAccountPersonInfo {
 	int32 friendCnt = 1;          //朋友个数
 	int32 followCnt = 2;          //follow人数
 	int32 fansCnt = 3;            //fans个数
@@ -286,20 +286,10 @@ message PAccountPersonStatistic {
 	int32 audioCnt = 6;
 	int32 videoCnt = 7;
 	string CommunityID = 8;
-}
-
-// 微博用户详情
-message PAccountUserProfile {
-	PUser user = 1;
-	int32 followship = 2;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
-  	bool friend = 3;             //是否是好友，是：true
-}
-
-// 显示的个人档案信息
-message PAccountPersonInfo {
-	PAccountPersonStatistic statistic = 1;
-	PAccountUserProfile profile = 2;
-	repeated PLinkInfo list = 3;
+	PUser user = 9;
+	int32 followship = 10;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+  	bool friend = 11;             //是否是好友，是：true
+	repeated PLinkInfo list = 12; //超链接列表
 }
 
 /*=====================================*/
