@@ -289,7 +289,7 @@ message PAccountPersonInfo {
 	PUser user = 9;
 	int32 followship = 10;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
   	bool friend = 11;             //是否是好友，是：true
-	repeated PLinkInfo list = 12; //超链接列表
+	PLinkInfoList linkInfos = 12; //超链接列表
 }
 
 /*=====================================*/
@@ -625,14 +625,6 @@ message PAccountPersonInfo {
  *@cookie token&uuid
  *@body PLinkInfoList 超链接信息列表
  *@return 返回PResult
- */
-
-/*
- *@note 获取超链接信息列表
- *@uri  /v1/account/user/link
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PLinkInfoList, 失败返回PResult
  */
 
 /*
