@@ -276,6 +276,13 @@ message PLinkInfoList {
 	repeated PLinkInfo list = 1;
 }
 
+// 显示的个人档案信息
+message PPersonInfoEx {
+	PPersonStatistic statistic = 1;
+	PNewsUserProfile profile = 2;
+	repeated PLinkInfo list = 3;
+}
+
 /*=====================================*/
 //API定义
 
@@ -617,4 +624,20 @@ message PLinkInfoList {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PLinkInfoList, 失败返回PResult
+ */
+
+/*
+ *@note 获取超链接信息列表
+ *@uri  /v1/account/user/link
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PLinkInfoList, 失败返回PResult
+ */
+
+/*
+ *@note 获取个人档案信息
+ *@uri  /v1/account/user/personinfoex
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PPersonInfoEx, 失败返回PResult
  */
