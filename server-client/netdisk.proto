@@ -26,7 +26,7 @@ message PNetFileInfo {
 	string title = 9;			//文件的标题
 	string desc = 10;			//文件的描述
 	string remark = 11;			//文件的备注信息
-	string miniPic = 12;		//文件的缩略图的objectKey
+	string miniPic = 12;		//文件的缩略图的url地址
 
 }
 
@@ -49,9 +49,6 @@ message PBuildUrlInfo {
  *@param pageSize  本次请求要获取的记录数。是可选参数。
  *@return 成功PListNetFileInfo, 失败PResult
  */
-
-
-
 
 
 /*
@@ -78,7 +75,7 @@ message PBuildUrlInfo {
  *@param title 文件标题
  *@param desc 文件描述
  *@param remark 文件备注
- *@param miniPic 文件的缩略图的url地址
+ *@param miniPic 文件的缩略图的objectKey
  *@param objectKey 媒体文件的objectKey标识
  *@param transferFlag 文件转发标志，0--可以转发，1--不可以
  *@param shareFlag 文件共享标志，0--可以共享，1--不可以
