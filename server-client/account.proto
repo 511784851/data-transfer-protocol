@@ -238,7 +238,7 @@ message PBackThumbImageList {
 
 // 实名认证信息
 message PReadNameAuthInfo {
-	int32 authStatus = 1;  //实名认证状态
+	int32 authStatus = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
 	string readName = 2;   //真实姓名
  	string birthday = 3;   //出生年月日
  	string idCardNo = 4;   //身份证号码
@@ -254,6 +254,13 @@ message PPrivacyInfo {
 // 语言信息
 message PLanguageInfo {
 	string language = 1;   //语言
+}
+
+// 超链接信息
+message PLinkInfo {
+	string link1 = 1;      // 链接1
+	string link2 = 2;      // 链接2
+	string link3 = 3;      // 链接3
 }
 
 /*=====================================*/
@@ -590,4 +597,25 @@ message PLanguageInfo {
  *@cookie token&uuid
  *@postParam language 语言
  *@return 返回PResult
+ */
+
+/*
+ *@note 设置超链接信息
+ *@uri  /v1/account/user/link
+ *@method POST
+ *@cookie token&uuid
+ *@postParam key 参数
+	"Link1": 超链接1
+	"Link2": 超链接2
+	"Link3": 超链接3
+ *@postparam val 超链接地址
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取超链接信息
+ *@uri  /v1/account/user/link
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PLinkInfo, 失败返回PResult
  */
