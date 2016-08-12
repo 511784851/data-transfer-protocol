@@ -214,11 +214,6 @@ message PLiveRemind {
 	bool offOn = 1;
 }
 
-// 验证安全码
-message PAccountToken {
-	string token = 1;
-}
-
 // 基础信息
 message PAccountInitInfo {
 	int32 authStatus = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
