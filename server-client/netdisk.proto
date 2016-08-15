@@ -39,37 +39,49 @@ message PBuildUrlInfo {
 	string publicURL = 1; //生成的下载的的url信息
 }
 
+message PCommunityCreator {
+	string cUuid = 1;	       // 社区创建者ID
+}
+
+
+/*
+ *@note 根据社区ID，好获取社区创建者的uuid
+ *@path /netdisk/community/findCreator
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@param communityId  社区id
+ *@return 返回PCommunityCreator, 失败PResult
+ */
+
 /*
  *@note 网盘中的文件显示，安装创建时间排序，最新的排在最上面。
  *@path /netdisk/file/list
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id。
+ *@param creatorUuid  创建者的uuid。
  *@param fromIndex  上次最后一条的记录的文件创建时间(long型的时间值)，首次访问传值“-1”。是可选参数。
  *@param pageSize  本次请求要获取的记录数。是可选参数。
  *@return 成功PListNetFileInfo, 失败PResult
  */
-
 
 /*
  *@note 查询网盘中的文件
  *@path /netdisk/file/query
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param keyword  以keyword为条件来查询出对应标题的文件。
  *@param fromIndex  上次最后一条的记录的文件创建时间(long型的时间值)，首次访问传值“-1”。是可选参数。
  *@param pageSize  本次请求要获取的记录数。是可选参数。
  *@return 成功PListNetFileInfo, 失败PResult
  */
- 
- 
+
  /*
  *@note 上传文件到网盘中
  *@path /netdisk/file/upload
  *@method POST
  *@cookie token&uuid 登录用户信息,同时是网盘的所有者或社区管理员。
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param extension 文件扩展名
  *@param fileSize 文件长度
  *@param title 文件标题
@@ -84,13 +96,12 @@ message PBuildUrlInfo {
  *@return 返回PResult。 操作成功的标志。
  */
  
- 
  /*
  *@note 网盘中删除文件
  *@path /netdisk/file/delete
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param objectKeys  要删除的多个文件的objectKey，文件objectKey之间用逗号隔开。 
  *@return 返回PResult，删除成功的标志。
@@ -101,7 +112,7 @@ message PBuildUrlInfo {
  *@path /netdisk/file/edit
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param objectKey  文件的唯一ID标识值。 
  *@param transferFlag 文件转发标志，0--可以转发，1--不可以
@@ -112,38 +123,35 @@ message PBuildUrlInfo {
  *@param remark  文件的备注。 
  *@return 返回PResult，编辑成功的标志。
  */
-
  
  /*
  *@note 生成文件对象直接下载的url地址
  *@path /netdisk/file/makeDirectOssUrl
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param objectKeys  文件的唯一ID标识值，多个objectKey之间用","作为分割符。连接起来的串。 
  *@return 成功PDownloadArray，失败返回PResult。关于结构体PDownloadArray，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
  */
 
- 
  /*
  *@note 生成分享的url地址
  *@path /netdisk/file/makePublicUrl
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param objectKey  文件的唯一ID标识值。 
  *@param invalidLongtime  文件的失效时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将失效
  *@param protectLongtime 文件的保护时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将公开，任何人都可以下载
  *@return 返回PBuildUrlInfo，失败返回PResult。
  */
 
- 
  /*
  *@note 生成网盘中的URL下载地址
  *@path /netdisk/file/downloadUrl
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param communityId  社区id
+ *@param creatorUuid  创建者的uuid。
  *@param uuid  网盘的所有者或社区管理员的uuid。
  *@param linkInfo  文件下载的linkInfo。  
  *@return 成功PDownload，失败返回PResult。关于结构体PDownload，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
