@@ -1,6 +1,12 @@
 syntax = "proto3";
 package service;
 
+// token信息
+message PToken {
+	string SaltMD5  = 2;   	 		// uuid加上某个字符串后做md5运算得到的字符串
+	int64 CreateTime = 3; 			// token产生时间
+}
+
 message PGetToken {
 	string token = 2; 	// 成功则返回实际token，失败返回空串
 }

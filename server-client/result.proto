@@ -73,5 +73,40 @@ message PFloat64List {
 	repeated double List = 1;
 }
 
+/*
+ *@note 单独传输string
+ */
+message PStringSingle {
+	string Val = 1;		
+}
+
+/*
+ *@note 单独传输int64
+ */
+message PInt64Single {
+	int64 Val = 1;
+}
+
+/*
+ *@note 单独传输int32
+ */
+message PInt32Single {
+	int32 Val = 1;
+}
+
+/*
+ *@note 单独传输bool
+ */
+message PBoolSingle {
+	bool Val = 1;
+}
+
+/*
+ *@note 单独传输float64
+ */
+message PFloat64Single {
+	double Val = 1;
+}
+
 
 
