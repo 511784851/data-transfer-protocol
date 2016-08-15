@@ -6,7 +6,8 @@ package service;
 
 // 通知系统需要的基础信息
 message PNotifyBaseInfo {
-	string language = 1;
+	string nickname = 1;   //昵称
+	string language = 2;   //语言
 }
 
 // 通知系统需要的基础信息列表
