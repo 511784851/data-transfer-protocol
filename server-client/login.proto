@@ -3,7 +3,7 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "LoginProtos";
 
-import "result.proto"
+import "result.proto";
 import "account.proto";
 
 message PLogin {
