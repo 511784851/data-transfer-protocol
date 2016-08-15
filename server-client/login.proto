@@ -31,6 +31,7 @@ message PLogin {
  *@method DELETE
  *@url param phonecode 手机号，需要带上区号。例：+8613512345678
  *@url param type 验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码
+ *@url param authcode 下发客户端的短信验证码
  *@return 成功返回 PStringSingle，其存储的是authtoken，用于验证手机号码下一步操作用，有效时间为5分钟； 失败则返回 PResult
  */
 
@@ -70,9 +71,9 @@ message PLogin {
  *@note 重置密码
  *@path /v1/login/account/password
  *@method PUT
- *@url param phonecode 手机号码
- *@url param authtoken 验证手机短信验证码后返回的authtoken
- *@url param password 新密码
+ *@form param phonecode 手机号码
+ *@form param authtoken 验证手机短信验证码后返回的authtoken
+ *@form param password 新密码
  *@return 返回 PResult
  */
 
@@ -94,61 +95,61 @@ message PLogin {
 /*
  *@note 微信登录，如果之前没登录过，自动创建账号
  *@path /v1/login/third_party/weixin/account
- *@method GET
- *@url param code 授权临时票据(authorization code)
- *@url param ostp 操作系统类型 0未知、1Android、2IOS
- *@url param osv 操作系统版本
- *@url param model 设备型号
- *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
- *@url param channel 渠道或应用平台
- *@url param appid 应用分配的id
+ *@method POST
+ *@form param code 授权临时票据(authorization code)
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
 /*
  *@note 微博登录，如果之前没登录过，自动创建账号
  *@path /v1/login/third_party/weibo/account
- *@method GET
- *@url param wbuid 用户微博uid
- *@url param wbname 用户微博昵称
- *@url param headimgurl 用户微博头像地址
- *@url param gender 性别
- *@url param weihao 用户微号
- *@url param ostp 操作系统类型 0未知、1Android、2IOS
- *@url param osv 操作系统版本
- *@url param model 设备型号
- *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
- *@url param channel 渠道或应用平台
- *@url param appid 应用分配的id
+ *@method POST
+ *@form param wbuid 用户微博uid
+ *@form param wbname 用户微博昵称
+ *@form param headimgurl 用户微博头像地址
+ *@form param gender 性别
+ *@form param weihao 用户微号
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
  /*
  *@note facebook登录，如果之前没登录过，自动创建账号
  *@path /v1/login/third_party/facebook/account
- *@method GET
- *@url param token Facebook User access token
- *@url param ostp 操作系统类型 0未知、1Android、2IOS
- *@url param osv 操作系统版本
- *@url param model 设备型号
- *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
- *@url param channel 渠道或应用平台
- *@url param appid 应用分配的id
+ *@method POST
+ *@form param token Facebook User access token
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
  /*
  *@note google登录，如果之前没登录过，自动创建账号
  *@path /v1/login/third_party/google/account
- *@method GET
- *@url param code 授权临时票据(authorization code)
- *@url param token 登陆验证数据(id token)
- *@url param ostp 操作系统类型 0未知、1Android、2IOS
- *@url param osv 操作系统版本
- *@url param model 设备型号
- *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
- *@url param channel 渠道或应用平台
- *@url param appid 应用分配的id
+ *@method POST
+ *@form param code 授权临时票据(authorization code)
+ *@form param token 登陆验证数据(id token)
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
