@@ -2,6 +2,16 @@ syntax = "proto3";
 package service;
 
 
+// 个人统计信息
+message PNewsUserStatistic {
+	int32 FollowCount = 2;       	// 关注用户总数
+	int32 FansCount = 3;				// 粉丝用户总数
+	int32 TxtPostCount = 4;			// 文字帖的个数
+	int32 ImgPostCount = 5;			// 图片帖的个数
+	int32 AudioPostCount = 6;		// 音频帖的个数
+	int32 VideoPostCount = 7;		// 视频帖的个数
+	int32 FollowShip = 8;			// 两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+}
 
 /**
  *@note 用户批量关注/取消关注好友
@@ -82,4 +92,14 @@ package service;
  *@param  count 单次返回的记录条数，默认为20，最大不超过100
  *@param  offset 下次查询的起点，默认为0。
  *@return 成功返回 PStringList ，失败返回 PResult
+ */
+
+/**
+ *@note 获取用户微博统计数据
+ *@path   /v1/news/inside/statistic
+ *@cookie token&uuid
+ *@method GET
+ *@param  uuid 发起查找用户的uuid，如果没有，不用填改字段
+ *@param  targetuuid 被查找的用户uuid
+ *@return 成功返回 PNewsUserStatistic ，失败返回 PResult
  */
