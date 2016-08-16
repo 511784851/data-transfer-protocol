@@ -276,8 +276,8 @@ message PLinkInfoList {
 	repeated PLinkInfo list = 1;
 }
 
-// 显示的个人档案信息
-message PAccountPersonInfo {
+// 显示贴子的个人档案信息
+message PAccountNewsPersonInfo {
 	int32 friendCnt = 1;          //朋友个数
 	int32 followCnt = 2;          //follow人数
 	int32 fansCnt = 3;            //fans个数
@@ -290,6 +290,14 @@ message PAccountPersonInfo {
 	int32 followship = 10;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
   	bool friend = 11;             //是否是好友，是：true
 	PLinkInfoList linkInfos = 12; //超链接列表
+}
+
+// 显示聊天的个人档案信息
+message PAccountChatPersonInfo {
+	string communityId = 1;     //社区ID
+	string communityName = 2;   //社区名称
+	string communityIcon = 3;   //社区图片
+	PUser user = 4;             //用户信息
 }
 
 /*=====================================*/
@@ -329,7 +337,6 @@ message PAccountPersonInfo {
  *@note 检测手机号码是否已经注册
  *@uri /account/user/chphone
  *@cookie token&uuid
- *@method GET
  *@param phones 加了区号的手机号码数组
  *@return PPhoneMap 手机号：uuid
  */
@@ -338,6 +345,7 @@ message PAccountPersonInfo {
  *@note 分页地获取用户的列表
  *@uri /account/user/users
  *@cookie token&uuid
+ *@method GET
  *@method GET
  *@param from 服务名称（内部调用要传这个参数）
  *@param pageindex 要查看第几页
@@ -636,10 +644,19 @@ message PAccountPersonInfo {
  */
 
 /*
- *@note 获取个人档案信息
- *@uri  /v1/account/user/personinfo
+ *@note 获取贴子里的个人档案信息
+ *@uri  /v1/account/user/newspersoninfo
  *@method GET
  *@cookie token&uuid
  *@uriParam uuid 用户ID
- *@return 成功返回PAccountPersonInfo, 失败返回PResult
+ *@return 成功返回PAccountNewsPersonInfo, 失败返回PResult
+ */
+
+/*
+ *@note 获取聊天里的个人档案信息
+ *@uri  /v1/account/user/chatpersoninfo
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam uuid 用户ID
+ *@return 成功返回PAccountChatPersonInfo, 失败返回PResult
  */
