@@ -288,7 +288,7 @@ message PChatIdListMessage {
  *@path /chat/push/msg/more
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param body 为PMoreMsg结构
+ *@body 为PMoreMsg结构
  *@return 返回PResult
  */
 
