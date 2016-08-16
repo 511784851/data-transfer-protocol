@@ -657,6 +657,5 @@ message PAccountChatPersonInfo {
  *@uri  /v1/account/user/chatpersoninfo
  *@method GET
  *@cookie token&uuid
- *@uriParam uuid 用户ID
  *@return 成功返回PAccountChatPersonInfo, 失败返回PResult
  */
