@@ -76,7 +76,7 @@ message PNotifyBaseInfoList {
  *@param ... TUser信息
  *@return 成功返回PLevelInfo，失败返回PbResult
  */
- 
+
 /*
  *@note 获取等级权限信息
  *@uri /account/user/level

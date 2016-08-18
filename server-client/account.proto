@@ -154,59 +154,20 @@ enum ERightId {
 
 //会员等级信息
 message PLevelInfo {
-	int32 levelType = 1;
-	map<string,bool> mapRight = 2;//会员等级权限列表
+	int32 levelType = 1;             //会员等级类型
+	map<string,bool> mapRight = 2;   //会员等级权限列表
 }
 
 //会员等级扩展
 message PLevelInfoEx {
-	string uuid = 1;	//用户ID
-	PLevelInfo levelInfo = 2;
+	string uuid = 1;	          //用户ID
+	PLevelInfo levelInfo = 2;     //会员等级信息
 }
 
 //批量会员等级信息
 message PLevelInfos {
 	repeated PLevelInfoEx list = 1; 	//成功的PUuidLevelInfo信息列表
 	repeated string failUuid = 2;		//失败的uuid列表
-}
-
-//黑名单项
-message PBlacklist {
-	int64 id = 1;   //黑名单ID
-	string val = 2; //黑名单值
-}
-
-//黑名单映射列表
-message PBlacklistList {
-	repeated PBlacklist list = 1;	//黑名单列表
-}
-
-//黑名单值列表
-message PBlacklistVal {
-	repeated string list = 1;	//黑名单值列表
-}
-
-//黑名单ID列表
-message PBlacklistID {
-	repeated int64 list = 1;	//黑名单ID列表
-}
-
-//黑名单列表返回
-message PBlacklistRet {
-	repeated int64 succList = 1;	//成功的列表
-	repeated int64 failList = 2;    //失败的列表
-}
-
-//黑名单列表返回
-message PBlacklistExRet {
-	repeated PBlacklist succList = 1;	   //成功的黑名单列表
-	repeated PBlacklist existList = 2;	   //已经存在的黑名单列表
-	repeated string failList = 3;          //失败的列表
-}
-
-//黑名单列表数量
-message PBlacklistCount {
-	int64 count = 1;     //黑名单数量
 }
 
 //第三方直播提醒开关
@@ -437,6 +398,7 @@ message PAccountChatPersonInfo {
  *@note 修改密码
  *@uri /account/user/changepwd
  *@method GET
+ *@cookie token&uuid
  *@param oldpwd 旧密码
  *@param newpwd 新密码
  *@return 成功返回PResult.Get(No_Error), 失败返回PResult
@@ -446,7 +408,7 @@ message PAccountChatPersonInfo {
 //API V1 定义
 
 /*
- *@note     获取用户信息
+ *@note     获取用户信息(支持多项目)
  *@uri     /v1/account/users/:uuid
  *@method   GET
  *@cookie   token&uuid
@@ -455,7 +417,7 @@ message PAccountChatPersonInfo {
  */
 
 /*
- *@note     获取多个用户信息
+ *@note     获取多个用户信息(支持多项目)
  *@uri     /v1/account/users
  *@method   GET
  *@cookie   token&uuid
@@ -464,7 +426,7 @@ message PAccountChatPersonInfo {
  */
 
 /*
- *@note      通过Json设置用户信息
+ *@note      通过Json设置用户信息(支持多项目)
  *@uri       /v1/account/user.json
  *@method    POST
  *@cookie    token&uuid
@@ -493,7 +455,7 @@ message PAccountChatPersonInfo {
  */
 
 /*
- *@note      通过Proto设置用户信息
+ *@note      通过Proto设置用户信息(支持多项目)
  *@uri       /v1/account/user.proto
  *@method    POST
  *@cookie    token&uuid
@@ -503,8 +465,8 @@ message PAccountChatPersonInfo {
  */
 
 /*
- *@note      注册用户
- *@uri       /v1/register
+ *@note      注册用户(支持多项目)
+ *@uri       /v1/account/register
  *@method    POST
  *@cookie    token&uuid
  *@postParam PUserEx 用户信息
