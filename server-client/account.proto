@@ -294,26 +294,6 @@ message PAccountChatPersonInfo {
  *@param liveinfo   第三方直播提醒信息
  *@return 返回PResult
  */
- 
-/**
- *@note 检测手机号码是否已经注册
- *@uri /account/user/chphone
- *@cookie token&uuid
- *@param phones 加了区号的手机号码数组
- *@return PPhoneMap 手机号：uuid
- */
- 
-/**
- *@note 分页地获取用户的列表
- *@uri /account/user/users
- *@cookie token&uuid
- *@method GET
- *@method GET
- *@param from 服务名称（内部调用要传这个参数）
- *@param pageindex 要查看第几页
- *@param pagesize 一页要显示几条数据
- *@return 成功返回PUserList，失败返回PResult
- */
 
 /*
  *@note 获取用户的账号绑定信息
