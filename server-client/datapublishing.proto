@@ -175,6 +175,7 @@ message PGameList {
  *@cookie token&uuid
  *@param keyword 关键词
  *@param uuid 指定用户搜索
+ *@param type 指定类型搜索，取值all text image video audio 默认all
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PPostInfoList，失败返回PResult
@@ -393,3 +394,12 @@ message PRank {
  *@return 成功返回PRank, 失败返回PResult
  */
 
+/*
+ *@note app上传位置信息
+ *@path /datapublishing/geo
+ *@method PUT
+ *@cookie token&uuid
+ *@param longitude 经度
+ *@param latitude 纬度
+ *@return PResult
+ */
