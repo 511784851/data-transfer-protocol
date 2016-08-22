@@ -61,17 +61,6 @@ message NotifyCommentList {
 message NotifyCommentReply {
   int64 messageId = 1; 		//消息id 
   SimpleUser commentUser = 2;	//评论的用户
-  PComment comment = 3;		//被回复的评论
-  PComment reply = 4;		//回复的内容
-  int64 time = 5;		//回复的时间
-  int32 status = 6; 		//0：未读；1：已读
-  SimpleUser replyUser = 7;	//被回复评论的用户
-}
-
-// 评论回复通知消息
-message NotifyCommentReplyExt {
-  int64 messageId = 1; 		//消息id 
-  SimpleUser commentUser = 2;	//评论的用户
   PCommentExt commentExt = 3;	//被回复的评论
   PCommentExt replyExt = 4;	//回复的内容
   int64 time = 5;		//回复的时间
