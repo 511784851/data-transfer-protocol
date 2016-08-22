@@ -22,6 +22,7 @@ message PLogin {
  *@method POST
  *@form param phonecode 手机号，需要带上区号。例：+8613512345678
  *@form param type 短信验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码
+ *@form param appid 应用分配的id
  *@return 返回 PResult
  */
 
@@ -32,6 +33,7 @@ message PLogin {
  *@url param phonecode 手机号，需要带上区号。例：+8613512345678
  *@url param type 验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码
  *@url param authcode 下发客户端的短信验证码
+ *@url param appid 应用分配的id
  *@return 成功返回 PStringSingle，其存储的是authtoken，用于验证手机号码下一步操作用，有效时间为5分钟； 失败则返回 PResult
  */
 
@@ -71,9 +73,23 @@ message PLogin {
  *@note 重置密码
  *@path /v1/login/account/password
  *@method PUT
+ *@form param type reset
  *@form param phonecode 手机号码
  *@form param authtoken 验证手机短信验证码后返回的authtoken
  *@form param password 新密码
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 修改密码
+ *@path /v1/login/account/password
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type modify
+ *@form param old 旧密码
+ *@form param new 新密码
+ *@form param appid 应用分配的id
  *@return 返回 PResult
  */
 
@@ -82,6 +98,7 @@ message PLogin {
  *@path /v1/login/account/recommended_username
  *@method GET
  *@url param username 用户填写的用户名(如果这个用户还没有被注册，那么原封不动返回这个用户名)
+ *@url param appid 应用分配的id
  *@return 成功返回 PStringList ，失败返回 PRsult
 */
 
@@ -154,10 +171,91 @@ message PLogin {
  */
 
 /*
+ *@note 获取用户的账号绑定状态
+ *@uri /v1/login/binding
+ *@method GET
+ *@cookie token&uuid
+ *@url param appid 应用分配的id
+ *@return 成功返回 PBoolList (0 手机号码；1 微信；2 微博；3 脸书；4 谷歌；5 用户名)，失败返回PResult,
+ */
+
+/*
+ *@note 解绑登录方式
+ *@uri  /v1/login/binding 
+ *@method DELETE
+ *@cookie token&uuid
+ *@url param type 解绑类型(0 手机号码；1 微信；2 微博；3 脸书；4 谷歌；5 用户名)
+ *@url param appid 应用分配的id
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 绑定手机号登录方式
+ *@uri /v1/login/binding 
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type phone
+ *@form param phonecode 手机号，需要带上区号。例：+8613512345678
+ *@form param authtoken 验证手机短信验证码后返回的authtoken
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 绑定微信登录方式
+ *@uri /v1/login/binding 
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type weixin
+ *@param code 授权临时票据(authorization code)
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+ 
+/*
+ *@note 绑定微博登录方式
+ *@uri /v1/login/binding
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type weibo
+ *@form param wbuid 微信ID
+ *@form param wname 微信名称
+ *@form param wheadimgurl 微信头像路径
+ *@form param wgender 性别
+ *@form param wweihao 微信号
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+ 
+/*
+ *@note 绑定google登录方式
+ *@uri /v1/login/binding 
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type google
+ *@form param code 授权临时票据(authorization code)
+ *@form param token 登陆验证数据(id token)
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+ 
+/*
+ *@note 绑定facebook登录方式
+ *@uri /v1/login/binding
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type facebook
+ *@form param token Facebook User access token
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+
+/*
  *@note 使用uuid&token登陆系统，并更新token
  *@path /v1/login/session
  *@method PUT
  *@cookie token&uuid
+ *@form param appid 应用分配的id
  *@return 令牌有效或成功续期返回 PLogin ，失败返回 PResult
  */
 
@@ -166,5 +264,6 @@ message PLogin {
  *@path /v1/login/session
  *@method DELETE
  *@cookie token&uuid
+ *@url param appid 应用分配的id
  *@return 返回 PResult
  */

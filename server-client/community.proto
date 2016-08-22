@@ -390,17 +390,26 @@ message PCommunityNotificationUnRead {
  */
 
 /*
- *@note 获取社区帖子
+ *@note 获取社区指定id的帖子
  *@path /v1/community/post
  *@method GET
  *@url param id 社区id
- *@url param type 获取帖子类型，可选参数有:
- *@								id 获取offset指定id帖子的信息，可用于跳转到指定帖子
- *@								forum 获取论坛帖子
+ *@url param type id
+ *@url param offset 贴子id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPostList ， 失败返回 PResult
+ */
+
+/*
+ *@note 分页获取社区帖子
+ *@path /v1/community/post
+ *@method GET
+ *@url param id 社区id
+ *@url param type 获取帖子类型， forum 获取论坛帖子
  *@ 							notice 获取公告帖子
  *@								all 获取所有帖子，可用于社区首页刷新帖子
- *@url param offset 论坛帖子的贴子id（ offset, offset+count]，-1代表从最新的帖子加载）
- *@url param count 获取帖子个数（type类型为id，这个参数不生效）
+ *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
+ *@url param count 获取帖子个数 
  *@cookie token&uuid
  *@return 成功返回 PCommunityPostList ， 失败返回 PResult
  */

@@ -296,65 +296,6 @@ message PAccountChatPersonInfo {
  */
 
 /*
- *@note 获取用户的账号绑定信息
- *@uri /account/binding/status
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PAccount，失败返回PResult
- */
-
-/*
- *@note 绑定手机号登录方式
- *@uri /account/binding/phone
- *@method GET
- *@cookie token&uuid
- *@param cellphone 有带区号的手机号码（如+86）
- *@param smscode 短讯服务代码
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
-
-/*
- *@note 绑定微信登录方式
- *@uri /account/binding/wechat
- *@method GET
- *@cookie token&uuid
- *@param code 授权临时票据(authorization code)
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
- 
-/*
- *@note 绑定微博登录方式
- *@uri /account/binding/weibo
- *@method GET
- *@cookie token&uuid
- *@param wbuid 微信ID
- *@param wname 微信名称
- *@param wheadimgurl 微信头像路径
- *@param wgender 性别
- *@param wweihao 微信号
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
- 
-/*
- *@note 绑定google登录方式
- *@uri /account/binding/google
- *@method GET
- *@cookie token&uuid
- *@param code 授权临时票据(authorization code)
- *@param token 登陆验证数据(id token)
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
- 
-/*
- *@note 绑定facebook登录方式
- *@uri /account/binding/facebook
- *@method GET
- *@cookie token&uuid
- *@param token Facebook User access token
- *@return 成功返回PResult(No_Error)，失败返回PResult
- */
-
-/*
  *@note 获取带签名的文件上传URL
  *@uri /account/user/imageurl
  *@method POST
@@ -372,16 +313,6 @@ message PAccountChatPersonInfo {
  *@cookie token&uuid
  *@param image 要上传的头像objectkey，PUpload返回的参数
  *@return 返回PResult
- */
-
-/*
- *@note 修改密码
- *@uri /account/user/changepwd
- *@method GET
- *@cookie token&uuid
- *@param oldpwd 旧密码
- *@param newpwd 新密码
- *@return 成功返回PResult.Get(No_Error), 失败返回PResult
  */
 
 /*=====================================*/
@@ -492,24 +423,6 @@ message PAccountChatPersonInfo {
  *@cookie token&uuid
  *@postParam objectkey 要上传的背景图片objectkey
  *@return 返回PResult
- */
-
-/*
- *@note 验证登录密码
- *@uri  /v1/account/user/checkpwd
- *@method GET
- *@cookie token&uuid
- *@uriParam password 登录密码
- *@return 返回PResult
- */
-
-/*
- *@note 解绑登录方式
- *@uri  /v1/account/unbinding
- *@method GET
- *@cookie token&uuid
- *@uriParam type 解绑类型(1:wechat,2:weibo,3:facebook,4:google)
- *@return 成功返回PResult(No_Error)，失败返回PResult
  */
 
 /*
