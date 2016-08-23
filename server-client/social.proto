@@ -174,3 +174,12 @@ message PIsFriendList {
  *@param key 搜索关键词 query参数
  *@return 成功PUserList, 失败PResult
  */
+
+/*
+ *@note 从推荐列表移除用户
+ *@path /social/delrecommend
+ *@method POST
+ *@cookie token&uuid
+ *@param uuid 要移出推荐列表的用户ID
+ *@return PResult
+ */
