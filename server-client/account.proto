@@ -24,7 +24,7 @@ message PUser {
 	/*保留1~5用于扩展*/
 	
 	string uuid = 6; 				// 服务端标志用户的唯一id
-	string password = 7; 			// 自有手机号码注册时输入的密码
+	string password = 7; 			// 自有手机号码注册时输入的密码      //这个可以移除，转移到Login
 	string username = 8; 			// 用户名，唯一
 	string nickname = 9; 			// 昵称
 	string headImgURL = 10; 		// 头像地址
@@ -39,9 +39,9 @@ message PUser {
 	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
 	int64 lastLoginTime = 20;  		// 用户最后登陆时间
 	string userResume = 21; 		// 个人简介
-	string link1 = 22;       		// 链接1
-	string link2 = 23;          	// 链接2
-	string link3 = 24;          	// 链接3
+	string link1 = 22;       		// 链接1      //这个可以移除
+	string link2 = 23;          	// 链接2      //这个可以移除
+	string link3 = 24;          	// 链接3      //这个可以移除
 	int64 chatId = 25;				// 聊天系统分配的id
 	PLevelInfo levelInfo = 26;		// 会员等级信息
 	bool disable = 27; 				// 帐户是否被禁用
@@ -67,7 +67,7 @@ message PUserEx {
 	string uuid = 6; 			  	  // 服务端标志用户的唯一id
 	string project = 7;				  // 项目名称
 	string username = 8; 			  // 用户名，唯一
-	string password = 9; 			  // 自有手机号码注册时输入的密码
+	string password = 9; 			  // 自有手机号码注册时输入的密码      //这个可以移除，转移到Login
 	string nickname = 10; 			  // 昵称
 	string realname = 11;			  // 真实姓名
 	int32 gender = 12;    			  // 性别，0就是女，其余的是男；人妖暂时不考虑
@@ -206,6 +206,11 @@ message PReadNameAuthInfo {
 message PPrivacyInfo {
 	bool myFans = 1;       //我的粉丝(不让他(她)看我的贴子)
 	bool myAttention = 2;  //我关注的人(不看他(她)的贴子)
+}
+
+// 隐私信息列表
+message PPrivacyInfoList {
+	repeated PPrivacyInfo list = 1;
 }
 
 // 语言信息
