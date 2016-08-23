@@ -16,6 +16,16 @@ message PNotifyBaseInfoList {
 	map<string,PNotifyBaseInfo> map = 1;
 }
 
+// 隐私信息-粉丝列表
+message PPrivacyFansList {
+	repeated bool list = 1;
+}
+
+// 隐私信息-关注列表
+message PPrivacyAttentionList {
+	repeated bool list = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -255,9 +265,17 @@ message PNotifyBaseInfoList {
  */
 
 /*
- *@note 获取隐私信息列表
- *@uri  /v1/account/users/privacy
+ *@note 获取隐私信息-粉丝列表
+ *@uri  /v1/account/users/privacy/fans
  *@method POST
  *@postParam uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
- *@return 成功返回PPrivacyInfoList, 失败返回PResult
+ *@return 成功返回PPrivacyFansList, 失败返回PResult
+ */
+
+/*
+ *@note 获取隐私信息-粉丝列表
+ *@uri  /v1/account/users/privacy/attention
+ *@method POST
+ *@postParam uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
+ *@return 成功返回PPrivacyAttentionList, 失败返回PResult
  */
