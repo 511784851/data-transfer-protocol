@@ -22,6 +22,8 @@ message PGuy {
 	string whatsup = 5;
 	//头像
 	string headImgURL = 6;
+	//等级
+	int32 level = 7;
 	//粉丝数
 	int32 fansCount = 11;
 	//0:无关系，1：是粉丝，2：已关注，3：相互关注
