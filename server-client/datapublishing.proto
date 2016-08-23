@@ -49,11 +49,6 @@ message PTopicNews {
 	repeated PPostInfo Articles = 5;
 }
 
-message PSearchResults {
-	PGuyList guy = 1;
-	//PNews news = 2;
-}
-
 message PPostData {
 	int32 posts = 1; //帖子数
 	int32 views = 2; //查看数
@@ -146,16 +141,6 @@ message PGameList {
  *@param prefix 关键词前缀，由用户输入 
  *@return 成功返回PWords，失败返回PResult
  */
-  
-/*
- *@note 搜索所有内容
- *@path /datapublishing/search
- *@method GET
- *@cookie token&uuid
- *@param keyword 关键词
- *@return 成功返回PSearchResults，失败返回PResult
- */ 
- 
  
 /*
  *@note 搜索用户
