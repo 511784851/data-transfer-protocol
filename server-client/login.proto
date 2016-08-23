@@ -94,6 +94,15 @@ message PLogin {
  */
 
 /*
+ *@note 验证登录密码
+ *@uri  /v1/login/account/password
+ *@method GET
+ *@cookie token&uuid
+ *@url param password 登录密码
+ *@return 返回PResult
+ */
+
+/*
  *@note 获取推荐的用户名
  *@path /v1/login/account/recommended_username
  *@method GET
