@@ -53,7 +53,7 @@ message PUser {
 	PLiveInfoList liveInfo = 33;    // 直播提醒信息
 	string thumbBackImage = 34; 	// 背景缩略图
 	string bigBackImage = 35;       // 背景大图
-	string isFollowing = 36;        // 是否关注
+	bool isFollowing = 36;          // 是否关注
 }
 
 message PUserListEx {
