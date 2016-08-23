@@ -172,7 +172,7 @@ message PLogin {
 
 /*
  *@note 获取用户的账号绑定状态
- *@uri /v1/login/binding
+ *@uri /v1/login/account/binding
  *@method GET
  *@cookie token&uuid
  *@url param appid 应用分配的id
@@ -181,7 +181,7 @@ message PLogin {
 
 /*
  *@note 解绑登录方式
- *@uri  /v1/login/binding 
+ *@uri  /v1/login/account/binding 
  *@method DELETE
  *@cookie token&uuid
  *@url param type 解绑类型(0 手机号码；1 微信；2 微博；3 脸书；4 谷歌；5 用户名)
@@ -191,7 +191,7 @@ message PLogin {
 
 /*
  *@note 绑定手机号登录方式
- *@uri /v1/login/binding 
+ *@uri /v1/login/account/binding 
  *@method PUT
  *@cookie token&uuid
  *@form param type phone
@@ -203,7 +203,7 @@ message PLogin {
 
 /*
  *@note 绑定微信登录方式
- *@uri /v1/login/binding 
+ *@uri /v1/login/account/binding 
  *@method PUT
  *@cookie token&uuid
  *@form param type weixin
@@ -214,7 +214,7 @@ message PLogin {
  
 /*
  *@note 绑定微博登录方式
- *@uri /v1/login/binding
+ *@uri /v1/login/account/binding
  *@method PUT
  *@cookie token&uuid
  *@form param type weibo
@@ -229,7 +229,7 @@ message PLogin {
  
 /*
  *@note 绑定google登录方式
- *@uri /v1/login/binding 
+ *@uri /v1/login/account/binding 
  *@method PUT
  *@cookie token&uuid
  *@form param type google
@@ -241,7 +241,7 @@ message PLogin {
  
 /*
  *@note 绑定facebook登录方式
- *@uri /v1/login/binding
+ *@uri /v1/login/account/binding
  *@method PUT
  *@cookie token&uuid
  *@form param type facebook
