@@ -260,7 +260,7 @@ message PPrivacyAttentionList {
  *@method POST
  *@cookie token&uuid
  *@uriParam from 服务名称
- *@postParam uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
+ *@body uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
  *@return 成功返回PNotifyBaseInfoList, 失败返回PResult
  */
 
@@ -268,7 +268,7 @@ message PPrivacyAttentionList {
  *@note 获取隐私信息-粉丝列表
  *@uri  /v1/account/users/privacy/fans
  *@method POST
- *@postParam uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
+ *@body uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
  *@return 成功返回PPrivacyFansList, 失败返回PResult
  */
 
@@ -276,6 +276,6 @@ message PPrivacyAttentionList {
  *@note 获取隐私信息-粉丝列表
  *@uri  /v1/account/users/privacy/attention
  *@method POST
- *@postParam uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
+ *@body uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
  *@return 成功返回PPrivacyAttentionList, 失败返回PResult
  */
