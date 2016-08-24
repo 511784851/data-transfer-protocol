@@ -18,12 +18,12 @@ message PNotifyBaseInfoList {
 
 // 隐私信息-粉丝列表
 message PPrivacyFansList {
-	repeated bool list = 1;
+	map<string,bool> map = 1;
 }
 
 // 隐私信息-关注列表
 message PPrivacyAttentionList {
-	repeated bool list = 1;
+	map<string,bool> map = 1;
 }
 
 /*=====================================*/
