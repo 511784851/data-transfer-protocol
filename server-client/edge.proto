@@ -40,5 +40,6 @@ message PEdgeVersion {
  *@path /v1/edge/share/news/post
  *@method GET
  *@cookie token&uuid
+ *@url param  postid 帖子id
  *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
  */

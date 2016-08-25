@@ -332,11 +332,3 @@ message PRelation {
  *@param  postid 帖子id
  *@return 返回 PResult
  */
-
-/**
- *@note 获取微博文章分享地址
- *@path /v1/news/share_address
- *@method GET
- *@param  postid 帖子id
- *@return 成功返回 PStringList（0是分享地址，1是默认缩略图地址） ，失败返回 PResult
- */
