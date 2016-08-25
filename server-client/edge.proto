@@ -1,0 +1,44 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "EdgeProtos";
+
+import "result.proto";
+
+message PEdgeVersion {
+	bool ForceUpdate = 1;				// 是否强制更新的标志位
+	bool RecommendUpdate = 2;			// 是否推荐更新的标志位
+	bool UpdateInAppStore = 3;			// 是否通过应用商店更新的标志位
+	string LatestVersion = 4; 			// 最新的版本号
+	string UpdateLink = 5;				// 更新地址；UpdateInAppStore为true，就跳转到商店的下载页面；false时为apk下载地址
+}
+
+/*
+ *@note 获取应用版本信息
+ *@path /v1/edge/version
+ *@method GET
+ *@url param ostp 操作系统类型 1 Android、2 IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台，格式如：‘主渠道号.子渠道号’ 渠道号为纯数字，用.分割
+ *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@url param appid 应用分配的id
+ *@return 成功返回 PEdgeVersion ，失败返回 PRsult
+ */
+
+/*
+ *@note 获取应用分享地址
+ *@path /v1/edge/share/app
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
+ */
+
+/*
+ *@note 获取微博帖子分享地址
+ *@path /v1/edge/share/news/post
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
+ */
