@@ -200,6 +200,17 @@ message PReadNameAuthInfo {
  	string birthday = 3;   //出生年月日
  	string idCardNo = 4;   //身份证号码
  	string idCardImg  = 5; //身份证照片
+	int32 authTime = 6;    //认证时间
+}
+
+// 实名认证信息列表
+message PReadNameAuthInfoList {
+	repeated PReadNameAuthInfo list = 1;
+}
+
+// 实名认证信息数量
+message PReadNameAuthInfoCount {
+	int64 count = 1;
 }
 
 // 隐私信息
