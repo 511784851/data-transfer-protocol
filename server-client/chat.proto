@@ -111,17 +111,6 @@ message PMoreMsg {
  *@param tag 聊天tag（0-建立好友关系 1-解除好友关系）
  *@return 返回PResult
  */
-  
-/*
- *@note 屏蔽聊天会话
- *@path /chat/conversation/update/xpn
- *@method GET
- *@cookie token&uuid 登录用户信息（必须）
- *@param conversationId 会话ID（必须）
- *@xpn  屏蔽类型（0: 接收通知，1: 不接收通知）
- *@return 返回PResult
- */
- 
 
 /*
  *@note 初始化/更新社区聊天室
@@ -131,16 +120,6 @@ message PMoreMsg {
  *@return 返回PResult
  */
 
-/*
- *@note 关闭开启社区聊天室
- *@path /chat/room/update/tag
- *@method GET
- *@param uuid 用户uuid
- *@param communityId 社区ID
- *@param tag 开启/关闭状态（2-开启  3-关闭）
- *@return 返回PResult
- */
- 
 /*
  *@note 进入社区聊天室
  *@path /chat/room/join
@@ -227,39 +206,8 @@ message PMoreMsg {
  *@return 返回PResult，注意：errorcode=1901010表示用户没有权限
  *备注：社区被禁言的用户数据会同步到会话的扩展字段extension中，key的格式为"pro_x"，pro_是固定前缀，x是uuid
  */
-
-
  
- /*----------------------------------*/
-// 通用操作结果返回(通过uuid来获取chatid)
-message PChatIdMessage {
-	string uuid = 1;	//账户系统中的uuid
-	string chatId = 2;	//对应聊天系统中的chatid
-}
-
-// 通用操作结果返回(通过uuids来获取chatids)
-message PChatIdListMessage {
-	repeated PChatIdMessage chatIdMap = 1;
-}
-
-/*
- *@note 通过uuid来获取chatid
- *@path /chat/chatid/getUserChatID
- *@method GET
- *@cookie token&uuid 登录用户信息
- *@param uuid  对照表中的uuid
- *@return 返回PChatIdMessage
- */
-
- /*
- *@note 通过uuids来获取chatids
- *@path /chat/chatid/getUserListChatID
- *@method GET
- *@cookie token&uuid 登录用户信息
- *@param uuids  对照表中要查询的所有uuid串，多个uuid之间用逗号隔开。
- *@return 返回PChatIdListMessage
- */
-
+ 
 
 /*
  *@note 用户发送自定义消息
