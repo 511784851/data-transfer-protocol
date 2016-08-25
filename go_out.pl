@@ -24,7 +24,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/contact.proto ".
 						"server-client/netdisk.proto ".
 						"server-client/streaming.proto ".
-						"server-client/chat.proto ";
+						"server-client/chat.proto ".
+						"server-client/gamification.proto ";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
