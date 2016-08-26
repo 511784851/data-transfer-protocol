@@ -16,14 +16,24 @@ message PNotifyBaseInfoList {
 	map<string,PNotifyBaseInfo> map = 1;
 }
 
+// 隐私信息-关注开关
+message PPrivacyFans {
+	bool enable = 1;
+}
+
 // 隐私信息-粉丝列表
 message PPrivacyFansList {
-	map<string,bool> map = 1;
+	repeated PPrivacyFans list = 1;
+}
+
+// 隐私信息-关注开关
+message PPrivacyAttention {
+	bool enable = 1;
 }
 
 // 隐私信息-关注列表
 message PPrivacyAttentionList {
-	map<string,bool> map = 1;
+	repeated PPrivacyAttention list = 1;
 }
 
 /*=====================================*/
@@ -249,6 +259,7 @@ message PPrivacyAttentionList {
  *@uri  /v1/account/users/privacy/fans
  *@method POST
  *@uriParam from 服务名称
+ *@uriParam project 项目名称
  *@body uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
  *@return 成功返回PPrivacyFansList, 失败返回PResult
  */
@@ -258,6 +269,7 @@ message PPrivacyAttentionList {
  *@uri  /v1/account/users/privacy/attention
  *@method POST
  *@uriParam from 服务名称
+ *@uriParam project 项目名称
  *@body uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
  *@return 成功返回PPrivacyAttentionList, 失败返回PResult
  */
