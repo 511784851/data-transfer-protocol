@@ -51,6 +51,7 @@ message PLogin {
  *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 注册成功返回 PLogin ，失败返回 PResult
  */
 
@@ -66,6 +67,7 @@ message PLogin {
  *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@url param channel 渠道或应用平台
  *@url param appid 应用分配的id
+ *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -129,6 +131,7 @@ message PLogin {
  *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -147,6 +150,7 @@ message PLogin {
  *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -161,6 +165,7 @@ message PLogin {
  *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -176,6 +181,7 @@ message PLogin {
  *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -265,6 +271,7 @@ message PLogin {
  *@method PUT
  *@cookie token&uuid
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 令牌有效或成功续期返回 PLogin ，失败返回 PResult
  */
 
