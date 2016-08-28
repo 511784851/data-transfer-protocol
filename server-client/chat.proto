@@ -6,27 +6,27 @@ option java_outer_classname = "ChatProtos";
 import "account.proto";
 
 message PWkToken {
-	string appAccessToken = 1;     // 应用appAccessToken
-	string domain = 2;	           // 应用domain
-	string appKey = 3;	           // 应用appKey
-	int64 openId = 4;	           // 用户openId
-	string nonce = 5;	           // 随机数
-	int64 timestamp = 6;	       // 时间戳
-	string signature = 7;          // 签名串，用于登录阿里悟空的凭证，每个signature的有效期为5分钟
+	string appAccessToken = 1;     // 百川应用AppSecret
+	string domain = 2;	           // 应用domain（已废弃）
+	string appKey = 3;	           // 百川应用appKey
+	int64 openId = 4;	           // 用户openId（已废弃）
+	string nonce = 5;	           // 随机数（已废弃）
+	int64 timestamp = 6;	       // 时间戳（已废弃）
+	string signature = 7;          // 登录百川密码
 }
 
 message PConversation {
 	string conversationId = 1;     // 会话ID
-	int64 openId = 2;              // 会话创建者
-	int32 type = 3;                // 会话类型
-	string icon = 4;               // 会话图标url地址
+	int64 openId = 2;              // 会话创建者（已废弃）
+	int32 type = 3;                // 会话类型（已废弃）
+	string icon = 4;               // 会话图标url地址（已废弃）
 	string title = 5;	           // 会话名称
-	int64 tag = 6;	               // 会话tag：0-可以聊天，1-不能聊天（已不是好友关系）
-	int32 memberLimit = 7;         // 群成员数
-    int32 superGroup = 8;	       // 0非大群，1大群  
-    string parentId = 9;           // 父会话id，默认0
-    int32 nodeType = 10;           // 是否 父会话，0-否，默认；1-是父会话
-    repeated int64 members = 11;   // 会话的成员列表openId
+	int64 tag = 6;	               // 会话tag：0-可以聊天，1-不能聊天（已不是好友关系）（已废弃）
+	int32 memberLimit = 7;         // 群成员数（已废弃）
+    int32 superGroup = 8;	       // 0非大群，1大群  （已废弃）
+    string parentId = 9;           // 父会话id，默认0（已废弃）
+    int32 nodeType = 10;           // 是否 父会话，0-否，默认；1-是父会话（已废弃）
+    repeated int64 members = 11;   // 会话的成员列表openId（已废弃）
 }
 
 message PJoinRoom {
@@ -74,42 +74,11 @@ message PMoreMsg {
 }
 
 /*
- *@note 获取用户登录阿里悟空的凭证信息
+ *@note 获取用户登录阿里百川的密码
  *@path /chat/user/token
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@param devType 设备类型（固定为"ios"或"android"）
  *@return 成功返回PWkToken，失败返回PResult
- */
-
-/*
- *@note 创建会话（单聊）
- *@path /chat/conversation/create/single
- *@method GET
- *@cookie token&uuid 登录用户信息（必须）
- *@param friend_uuid 好友uuid（必须）
- *@return 成功返回PConversation，失败返回PResult
- */
- 
-/*
- *@note 创建会话（群聊）
- *@path /chat/conversation/create/group
- *@method GET
- *@cookie token&uuid 登录用户信息（必须）
- *@param title 群聊名称（非必须）
- *@param icon  群聊头像url（非必须）
- *@param member_uuid 群组成员uuid数组（必须）     格式：member_uuid=1&member_uuid=2&member_uuid=3
- *@return 成功返回PConversation，失败返回PResult
- */
- 
-/*
- *@note 修改聊天tag（当有好友关系变更时调用此接口，用于标示是否可以聊天）
- *@path /chat/conversation/update/tag
- *@method GET
- *@param uuid 用户uuid（必须）
- *@param friend_uuid 好友uuid（必须）
- *@param tag 聊天tag（0-建立好友关系 1-解除好友关系）
- *@return 返回PResult
  */
 
 /*
