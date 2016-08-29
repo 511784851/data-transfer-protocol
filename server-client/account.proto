@@ -195,12 +195,13 @@ message PBackThumbImageList {
 
 // 实名认证信息
 message PReadNameAuthInfo {
-	int32 authStatus = 1;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
-	string readName = 2;   //真实姓名
- 	string birthday = 3;   //出生年月日
- 	string idCardNo = 4;   //身份证号码
- 	string idCardImg  = 5; //身份证照片
-	int32 authTime = 6;    //认证时间
+	string uuid = 1;       //用户ID
+	int32 authStatus = 2;  //实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
+	string readName = 3;   //真实姓名
+ 	string birthday = 4;   //出生年月日
+ 	string idCardNo = 5;   //身份证号码
+ 	string idCardImg  = 6; //身份证照片
+	int32 authTime = 7;    //认证时间
 }
 
 // 实名认证信息列表
