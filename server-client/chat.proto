@@ -173,7 +173,7 @@ message PMoreMsg {
  *@param memberUuid 成员uuid（必须）
  *@type 0表示禁言，1表示取消禁言（必须）
  *@return 返回PResult，注意：errorcode=1901010表示用户没有权限
- *备注：社区被禁言的用户数据会同步到会话的扩展字段extension中，key的格式为"pro_x"，pro_是固定前缀，x是uuid
+ *备注：用户在社区被禁言的数据会同步到百川用户的基本信息extra中，json的key固定为prohibitData,value表示被禁言的群ID列表，格式如：{"prohibitData":["18232315","184615131"]}
  */
  
  
