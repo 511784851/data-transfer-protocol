@@ -239,3 +239,21 @@ message PMoreMsg {
  *@param token  用户token。
  *@return 返回PResult
  */
+
+/*
+ *@note 批量获取带签名的文件上传URL(PFileInfoArray对象和PUploadArray对象请参阅oss.proto文件)
+ *@path /chat/oss/uploadurls
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body   PFileInfoArray
+ *@return 成功返回PUploadArray，失败返回PResult
+ */
+
+/*
+ *@note 获取多个下载文件的URL(PDownloadArray对象请参阅oss.proto文件)
+ *@path /chat/oss/downloadurls
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@param filenames 下载文件的名称,使用","分隔
+ *@return PDownloadArray
+ */
