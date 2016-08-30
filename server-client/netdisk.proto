@@ -52,6 +52,17 @@ message PCommunityCreator {
  *@param communityId  社区id
  *@return 返回PCommunityCreator, 失败PResult
  */
+ 
+
+/*
+ *@note 批量获取带签名的文件上传URL(PFileInfoArray对象和PUploadArray对象请参阅oss.proto文件)
+ *@path /netdisk/oss/uploadurls
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body   PFileInfoArray
+ *@return 成功返回PUploadArray，失败返回PResult
+ */
+
 
 /*
  *@note 网盘中的文件显示，安装创建时间排序，最新的排在最上面。
