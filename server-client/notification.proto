@@ -57,6 +57,11 @@ message NotifyCommentList {
   repeated NotifyComment list = 1; //NotifyComment列表
 }
 
+// 帖子评论通知消息列表
+message NotifyCommentExtList {
+  repeated NotifyCommentExt list = 1; //NotifyCommentExt列表
+}
+
 // 评论回复通知消息
 message NotifyCommentReply {
   int64 messageId = 1; 		//消息id 
