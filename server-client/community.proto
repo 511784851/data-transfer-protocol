@@ -5,6 +5,7 @@ option java_outer_classname = "CommunityProtos";
 
 import "account.proto";
 import "wallet.proto";
+import "result.proto";
 
 /*=====================================*/
 // 结构定义
