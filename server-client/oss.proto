@@ -80,6 +80,15 @@ message PFileInfoArray {
  */
 
 /*
+ *@note 内网获取多个下载文件的URL
+ *@path /oss/fileurls
+ *@method GET
+ *@param from 调用的服务名称
+ *@param filenames 下载文件的名称,使用","分隔
+ *@return 成功返回PDownloadArray，失败返回PResult
+ */
+
+/*
  *@note 内网获取上传文件的URL
  *@path /oss/newfileurl
  *@method GET
