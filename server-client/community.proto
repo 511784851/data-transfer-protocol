@@ -44,6 +44,7 @@ message PCommunityInfo {
 	string BottomNewsTxt = 14;		// 底部的最新资讯
 	string BottomBackgroundTxt = 15;// 底部的背景介绍
 	string BottomVideoTxt = 16;		// 底部的视频节目
+	string ManagerList = 17; 		// 社区管理员的uuid列表,多个管理员用','分割
 }
 
 // ‘我的社区’返回的信息
