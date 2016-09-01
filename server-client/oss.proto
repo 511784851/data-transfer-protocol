@@ -57,6 +57,7 @@ message PFileInfoArray {
  *@note 内网访问获取带签名的文件上传URL
  *@path /oss/uploadurl
  *@method GET
+ *@param from 调用的服务名称
  *@digest 要上传的文件的md5 hexstring
  *@length 文件大小，字节
  *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
@@ -66,6 +67,7 @@ message PFileInfoArray {
 /*
  *@note 内网访问批量获取带签名的文件上传URL
  *@path /oss/uploadurls
+ *@param from 调用的服务名称
  *@method POST
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
@@ -75,6 +77,7 @@ message PFileInfoArray {
  *@note 内网访问获取指定Object的访问URL
  *@path /oss/fileurl
  *@method GET
+ *@param from 调用的服务名称
  *@param  objectkey
  *@return 成功返回PDownload，失败返回PResult
  */
