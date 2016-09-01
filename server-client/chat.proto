@@ -164,7 +164,7 @@ message PMoreMsg {
  *@return 返回PResult，注意：errorcode=1901010表示用户没有权限
  */
  
-  /*
+ /*
  *@note 聊天室管理员禁言
  *@path /chat/room/prohibit
  *@method GET
@@ -176,6 +176,14 @@ message PMoreMsg {
  *备注：用户在社区被禁言的数据会同步到百川用户的基本信息extra中，json的key固定为prohibitData,value表示被禁言的群ID列表，格式如：{"prohibitData":["18232315","184615131"]}
  */
  
+ /*
+ *@note 查询用户是否被禁言
+ *@path /chat/room/checkPro
+ *@method GET
+ *@cookie token&uuid 登录用户信息（必须）
+ *@param communityId 社区ID（必须）
+ *@return 成功返回PBoolSingle[true:已被禁言,false:未被禁言]，失败返回PResult
+ */
  
 
 /*
