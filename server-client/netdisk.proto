@@ -156,14 +156,3 @@ message PCommunityCreator {
  *@param protectLongtime 文件的保护时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将公开，任何人都可以下载
  *@return 返回PBuildUrlInfo，失败返回PResult。
  */
-
- /*
- *@note 生成网盘中的URL下载地址
- *@path /netdisk/file/downloadUrl
- *@method POST
- *@cookie token&uuid 登录用户信息
- *@param creatorUuid  创建者的uuid。
- *@param uuid  网盘的所有者或社区管理员的uuid。
- *@param linkInfo  文件下载的linkInfo。  
- *@return 成功PDownload，失败返回PResult。关于结构体PDownload，请看"data-transfer-protocol/server-client/oss.proto"中的PDownload
- */ 
