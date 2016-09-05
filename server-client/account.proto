@@ -221,6 +221,10 @@ message PPrivacyInfo {
 }
 
 // 语言信息
+// "zh-cn" : 中文简体
+// "zh-tw" : 中文繁体
+// "en-us" : English
+// "ko-kr" : 韩文
 message PLanguageInfo {
 	string language = 1;   //语言
 }
