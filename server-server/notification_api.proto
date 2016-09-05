@@ -11,7 +11,6 @@ message PPushMsg {
 	string content = 7; 			// 客户端推送显示的内容
 }
 
-
 // 关注通知元消息
 message NotifyFollowMeta {
   string uuidA = 1; 			//被关注者id
@@ -55,6 +54,11 @@ message PNotifyBaseMsgList {
 message PStreamingMsgMeta {
 	string uuid = 1;//直播者uuid
   	int64 msgId = 2;//本消息id
+}
+
+//通知语言变量列表
+message PNotifyLangVars {
+	repeated string list = 1;
 }
 
 /*
