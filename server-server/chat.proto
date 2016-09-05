@@ -15,3 +15,13 @@ option java_outer_classname = "ChatServProtos";
  *@param info  推送给客户端的字符串
  *@return 返回PResult
  */
+ 
+ /*
+ *@note 用户退出社区时退出社区聊天室
+ *@path /chat/conversation/exit
+ *@method get
+ *@param from 调用的服务名
+ *@param uuid 用户uuid
+ *@param communityId  社区ID
+ *@return 返回PResult
+ */
