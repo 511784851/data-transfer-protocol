@@ -9,3 +9,13 @@ package service;
  *@url param id 社区id，多个社区id以,分割
  *@return 成功返回 PCommunityBaseList ，失败返回 PResult; 
  */
+
+
+/*
+ *@note 通过社区id获取社区信息
+ *@URL /v1/community/inside/communityinfo
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param id 社区id
+ *@return 成功返回 PCommunityInfo ，失败返回 PResult; 
+ */
