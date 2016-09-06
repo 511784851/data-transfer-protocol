@@ -15,7 +15,7 @@ message PLogin {
 	string username = 10;			// 用户名称
 	PInt32List loginTypes = 11;		// 第三方登录类型(1 微信,2 微博,3 facebook,4 google)
 	PLevelInfo levelInfo = 12;		// 会员等级信息
-}
+} 
 
 /*
  *@note 生成手机短信验证码
@@ -23,6 +23,7 @@ message PLogin {
  *@method POST
  *@form param phonecode 手机号，需要带上区号。例：+8613512345678
  *@form param type 短信验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码
+ *@form param lang "zh-cn" //中文简体；"zh-tw" //中文繁体；"en-us" //English；"ko-kr" //韩文
  *@form param appid 应用分配的id
  *@return 返回 PResult
  */
