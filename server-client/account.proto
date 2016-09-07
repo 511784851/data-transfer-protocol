@@ -220,11 +220,13 @@ message PPrivacyInfo {
 	bool myAttention = 2;  //我关注的人(不看他(她)的贴子)
 }
 
-// 语言信息
+// 支持的语言列表常量
 // "zh-cn" : 中文简体
 // "zh-tw" : 中文繁体
 // "en-us" : English
 // "ko-kr" : 韩文
+
+// 语言信息
 message PLanguageInfo {
 	string language = 1;   //语言
 }
