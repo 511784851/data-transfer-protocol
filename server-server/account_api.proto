@@ -1,5 +1,7 @@
 syntax = "proto3";
 package service; 
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "AccountApiProtos";
 
 /*=====================================*/
 //结构定义
