@@ -197,7 +197,6 @@ message PPrivacyAttentionList {
  *@note     获取多个用户基础信息
  *@path     /v1/account/users/baseinfo
  *@method   GET
- *@cookie   token&uuid
  *@uriParam from 服务名称
  *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users/baseinfo?uuids=1,2,3"
  *@return   成功:PUserBaseList,失败:CXXResult
@@ -207,7 +206,6 @@ message PPrivacyAttentionList {
  *@note 设置等级信息
  *@uri  /v1/account/user/level
  *@method POST
- *@cookie token&uuid
  *@uriParam from 服务名称
  *@postParam uuids 用户ID,逗号分割(00001,00002,00003)
  *@postParam level 等级(0:普通用户等级权限, 1:VIP等级权限, 2:VIP+等级权限, 3:VO等级权限)
@@ -218,7 +216,6 @@ message PPrivacyAttentionList {
  *@note 添加VO的成员
  *@uri  /v1/account/user/vomembers/add
  *@method POST
- *@cookie token&uuid
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
  *@postParam members 成员用户ID列表,逗号分割(00001,00002,00003)
@@ -229,7 +226,6 @@ message PPrivacyAttentionList {
  *@note 删除VO的成员
  *@uri  /v1/account/user/vomembers/del
  *@method POST
- *@cookie token&uuid
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
  *@postParam members 成员用户ID列表,逗号分割(00001,00002,00003)
@@ -240,7 +236,6 @@ message PPrivacyAttentionList {
  *@note 获取VO的成员列表
  *@uri  /v1/account/user/vomembers/get
  *@method GET
- *@cookie token&uuid
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
  *@return 成功返回PUserList, 失败返回PResult
@@ -250,7 +245,6 @@ message PPrivacyAttentionList {
  *@note 获取推送多语言基础信息
  *@uri  /v1/account/user/notifybases
  *@method POST
- *@cookie token&uuid
  *@uriParam from 服务名称
  *@body uuids 用户ID,以逗号割开(例如:xxxxxxxx,xxxxxxxxxx,xxxxxxxxxxxxx)
  *@return 成功返回PNotifyBaseInfoList, 失败返回PResult
@@ -298,7 +292,6 @@ message PPrivacyAttentionList {
  *@note     设置实名认证状态
  *@path     /v1/account/user/readnameauth/status
  *@method   POST
- *@cookie   token&uuid
  *@uriParam from 服务名称
  *@postParam uuid   用户ID
  *@postParam status 实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
