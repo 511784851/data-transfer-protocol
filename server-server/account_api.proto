@@ -245,7 +245,7 @@ message PPrivacyAttentionList {
  */
 
 /*
- *@note 获取VO的成员列表
+ *@note 获取推送多语言基础信息
  *@uri  /v1/account/user/notifybases
  *@method POST
  *@cookie token&uuid
