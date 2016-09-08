@@ -1,22 +1,6 @@
 syntax = "proto3";
 package service; 
 
-import "account.proto";
-
-// 社区用户信息
-message PIndiseCommunityUser {
-	PUserBase User = 2;			// 用户基础信息
-	int64 FollowTime = 3;		// 关注社区的时间
-	int64 ForbidTime = 4; 		// 用户禁用到期时间
-	int64 BeBlacklistTime = 5;	// 用户被提出社区的时间
-}
-
-// 社区用户列表信息
-message PIndiseCommunityUserList {
-	repeated PIndiseCommunityUser List = 2;
-}
-
-
 /*
  *@note 通过社区id获取社区基础信息列表
  *@URL /v1/community/inside/communitybaseinfo
@@ -25,6 +9,7 @@ message PIndiseCommunityUserList {
  *@url param id 社区id，多个社区id以,分割
  *@return 成功返回 PCommunityBaseList ，失败返回 PResult; 
  */
+
 
 /*
  *@note 通过社区id获取社区信息
