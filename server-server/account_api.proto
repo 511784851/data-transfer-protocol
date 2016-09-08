@@ -213,8 +213,8 @@ message PPrivacyAttentionList {
  */
 
 /*
- *@note 添加VO的成员
- *@uri  /v1/account/user/vomembers/add
+ *@note 添加VO的成员列表
+ *@uri  /v1/account/user/vomembers
  *@method POST
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
@@ -223,9 +223,9 @@ message PPrivacyAttentionList {
  */
 
 /*
- *@note 删除VO的成员
- *@uri  /v1/account/user/vomembers/del
- *@method POST
+ *@note 删除VO的成员列表
+ *@uri  /v1/account/user/vomembers
+ *@method DELETE
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
  *@postParam members 成员用户ID列表,逗号分割(00001,00002,00003)
@@ -234,7 +234,7 @@ message PPrivacyAttentionList {
 
 /*
  *@note 获取VO的成员列表
- *@uri  /v1/account/user/vomembers/get
+ *@uri  /v1/account/user/vomembers
  *@method GET
  *@uriParam from 服务名称
  *@postParam uuid 用户ID
