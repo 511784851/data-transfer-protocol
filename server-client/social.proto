@@ -33,6 +33,7 @@ message PIsFriendList {
  *@method GET
  *@cookie token&uuid
  *@param count 加载多少条 query参数
+ *@param start 从第几条开始加载(可选，缺省为0)
  *@return 成功PUserList, 失败PResult
  */
 
