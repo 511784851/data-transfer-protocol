@@ -232,6 +232,20 @@ message PCommunityNotificationUnRead {
 	int64 Unread = 2;
 }
 
+
+// 社区用户信息
+message PIndiseCommunityUser {
+	PUserBase User = 2;			// 用户基础信息
+	int64 FollowTime = 3;		// 关注社区的时间
+	int64 ForbidTime = 4; 		// 用户禁用到期时间
+	int64 BeBlacklistTime = 5;	// 用户被提出社区的时间
+}
+
+// 社区用户列表信息
+message PIndiseCommunityUserList {
+	repeated PIndiseCommunityUser List = 2;
+}
+
 /*=====================================*/
 // API定义
 
