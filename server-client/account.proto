@@ -307,7 +307,7 @@ message PAccountChatPersonInfo {
  *@param link1 链接1
  *@param link2 链接2
  *@param link3 链接3
- *@param areacode 地区代码(格式:"^[a-zA-Z]{1,6};(\\d{1,10})$")
+ *@param areacode 地区代码(格式:"^[a-zA-Z]{1,6};(\\d{0,10})$")
  *@param areaname 地区名称
  *@param liveremind 第三方直播提醒开关
  *@param liveinfo   第三方直播提醒信息
