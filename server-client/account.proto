@@ -307,7 +307,7 @@ message PAccountChatPersonInfo {
  *@param link1 链接1
  *@param link2 链接2
  *@param link3 链接3
- *@param areacode 地区代码
+ *@param areacode 地区代码(格式:"^[a-zA-Z]{1,6};(\\d{1,10})$")
  *@param areaname 地区名称
  *@param liveremind 第三方直播提醒开关
  *@param liveinfo   第三方直播提醒信息
@@ -342,7 +342,6 @@ message PAccountChatPersonInfo {
  *@uri     /v1/account/users/:uuid
  *@method   GET
  *@cookie   token&uuid
- *@uriParam uuid 用户ID
  *@return   成功:PUserEx,失败:CXXResult
  */
 
@@ -360,6 +359,7 @@ message PAccountChatPersonInfo {
  *@uri       /v1/account/user.json
  *@method    POST
  *@cookie    token&uuid
+ *@uriParam  uuid 用户ID
  *@postParam json 用户信息
  *@return    CXXResult
  *@
@@ -389,8 +389,9 @@ message PAccountChatPersonInfo {
  *@uri       /v1/account/user.proto
  *@method    POST
  *@cookie    token&uuid
+ *@uriParam  uuid 用户ID
  *@uriParam  fields  字段ID,只设置某个字段，通过","分隔,如"/v1/account/fields?uuids=1,2,3"
- *@postParam PUserEx 用户信息
+ *@body PUserEx 用户信息
  *@return    CXXResult
  */
 
@@ -399,7 +400,7 @@ message PAccountChatPersonInfo {
  *@uri       /v1/account/register
  *@method    POST
  *@cookie    token&uuid
- *@postParam PUserEx 用户信息
+ *@body PUserEx 用户信息
  *@return    CXXResult
  */
 
