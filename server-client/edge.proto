@@ -43,3 +43,11 @@ message PEdgeVersion {
  *@url param  postid 帖子id
  *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
  */
+
+/*
+ *@note 客户端定时获取token有效时间
+ *@path /v1/edge/token/expiration
+ *@method GET
+ *@cookie token&uuid
+ *@return 返回 PInt64Single 单位秒；建议客户端在剩余时间在30分钟以下去更新token
+ */
