@@ -239,12 +239,21 @@ message PMoreMsg {
 
 
 /*
- *@note 同步用户信息到悟空（不包含添加用户信息）
+ *@note 同步用户信息到阿里
  *@path /chat/user/synUserInfo
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@param uuid  用户uuid。
  *@param token  用户token。
+ *@return 返回PResult
+ */
+
+/*
+ *@note 同步用户信息到阿里
+ *@path /chat/user/synPUserInfo
+ *@method @POST
+ *@cookie token&uuid 登录用户信息
+ *@body 为PUser结构
  *@return 返回PResult
  */
 
