@@ -128,3 +128,23 @@ message PGoogleAccount{
  *@return 成功返回 PStringList ，失败返回 PResult;
  *@       返回的pid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
  */
+
+/*
+ *@note 用户名注册
+ *@path /v1/login/inside/account
+ *@method POST
+ *@form param from 发起调用的服务名
+ *@form param password 密码， SHA256(原始密码+3721) 
+ *@form param username 用户名称，不能为空
+ *@return 注册成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 修改用户密码
+ *@path /v1/login/inside/account/password
+ *@method PUT
+ *@form param from 发起调用的服务名
+ *@form param password 密码， SHA256(原始密码+3721) 
+ *@form param uuid 用户id
+ *@return 返回 PResult
+ */
