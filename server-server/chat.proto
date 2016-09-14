@@ -41,6 +41,18 @@ message PMemberServ {
  */
  
  
+  /*
+ *@note 用户被踢出社区时踢出社区聊天室
+ *@path /chat/conversation/remove
+ *@method get
+ *@param from 调用的服务名
+ *@param uuid 用户uuid
+ *@param communityId 社区ID
+ *@param memberUuid 被踢成员uuid
+ *@return 返回PResult
+ */
+ 
+ 
  /*---------------- 粉丝管理系统Api开始---------------- */
   /*
  *@note 获取聊天室成员信息
