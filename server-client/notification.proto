@@ -282,3 +282,12 @@ message PStreamingMsgList {
  *@cookie token&uuid
  *@return 返回PResult
  */
+
+/*
+ *@note 添加推送消息(只用于水军压力测试,真实客户端可以不用管)
+ *@path /v1/notification/test/inside/msg
+ *@method POST
+ *@param from 服务调用者
+ *@body PPushMsg
+ *@return 返回int32错误码
+ */

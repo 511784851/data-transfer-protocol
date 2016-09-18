@@ -66,7 +66,7 @@ message PNotifyLangVars {
  *@path /v1/notification/inside/msg
  *@method POST
  *@param from 服务调用者
- *@POST数据为 PPushMsg
+ *@body PPushMsg
  *@return 返回int32错误码
  */
 
