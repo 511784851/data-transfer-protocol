@@ -6,7 +6,7 @@ package common;
  *@path /oss/uploadurl
  *@method GET
  *@param from 调用的服务名称
- *@param bucket 文件要存放的oss桶， 0 不持久桶，文件会过期，1持久桶
+ *@param bucket 文件要存放的oss桶， 0 不持久桶，文件会过期，1持久桶，3静态文件桶
  *@digest 要上传的文件的md5 hexstring
  *@length 文件大小，字节
  *@extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
@@ -18,7 +18,7 @@ package common;
  *@path /oss/uploadurls
  *@method POST
  *@param from 调用的服务名称
- *@param bucket 文件要存放的oss桶， 0 不持久桶，文件会过期，1持久桶
+ *@param bucket 文件要存放的oss桶， 0 不持久桶，文件会过期，1持久桶，3静态文件桶
  *@body   PFileInfoArray
  *@return 成功返回PUploadArray，失败返回PResult
  */
@@ -28,7 +28,7 @@ package common;
  *@path /oss/downloadurl
  *@method GET
  *@param from 调用的服务名称
- *@param bucket 文件存放的oss桶， 0不持久桶，1持久桶
+ *@param bucket 文件存放的oss桶， 0不持久桶，1持久桶，3静态文件桶
  *@param objectkey 下载文件的名称
  *@return 成功返回PDownload，失败返回PResult
  */
@@ -38,7 +38,7 @@ package common;
  *@path /oss/downloadurls
  *@method GET
  *@param from 调用的服务名称
- *@param bucket 文件存放的oss桶， 0不持久桶，1持久桶
+ *@param bucket 文件存放的oss桶， 0不持久桶，1持久桶，3静态文件桶
  *@param objectkeys 下载文件的名称,使用","分隔
  *@return 成功返回PDownloadArray，失败返回PResult
  */
