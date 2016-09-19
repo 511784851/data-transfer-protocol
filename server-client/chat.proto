@@ -73,9 +73,6 @@ message PMoreMsg {
 	repeated PEachMsg list = 4;     // 成员信息
 }
 
-
-import "account.proto";
-
 message PMemberServList {
 	int32 size = 1;                  // 成员数量
 	repeated PMemberServ member = 2; // 成员信息
