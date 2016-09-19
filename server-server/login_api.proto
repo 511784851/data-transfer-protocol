@@ -3,8 +3,11 @@ package service;
 
 // token信息
 message PToken {
-	string SaltMD5  = 2;   	 		// uuid加上某个字符串后做md5运算得到的字符串
-	int64 CreateTime = 3; 			// token产生时间
+	int32 Ver = 2;				// token对应版本号
+	int64 Time = 3; 			// token产生时间
+	int64 SubSalt = 4;			// 随机的int64
+	string Ostp = 5;			// token对应的客户端类型；m为移动设备，w为pc端
+	string MD5  = 6;   	 		// uuid与字符串运算生成的md5值
 }
 
 message PGetToken {
