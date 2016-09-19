@@ -73,6 +73,21 @@ message PMoreMsg {
 	repeated PEachMsg list = 4;     // 成员信息
 }
 
+
+import "account.proto";
+
+message PMemberServList {
+	int32 size = 1;                  // 成员数量
+	repeated PMemberServ member = 2; // 成员信息
+}
+
+message PMemberServ {
+	PUserBase user = 1;			     // 成员信息
+	int32 spot =2;                   // 第几位
+	int64 time = 3;                  // 加入时间
+	int32 isManager = 4;	         // 0表示成员，1表示是管理员，2表示是超级管理员
+}
+
 /*
  *@note 获取用户登录阿里百川的密码
  *@path /chat/user/token
