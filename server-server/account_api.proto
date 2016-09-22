@@ -293,7 +293,8 @@ message PPrivacyAttentionList {
  *@uri  /v1/account/user/upgrade
  *@method POST
  *@uriParam from 服务名称(只提供给fan-management系统用)
- *@postParam uuids 用户ID,逗号分割(00001,00002,00003)
+ *@postParam uuid  VOID
+ *@postParam uuids 成员ID,逗号分割(00001,00002,00003)
  *@return 返回PResult
  */
 
