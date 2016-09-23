@@ -213,31 +213,31 @@ message PPrivacyAttentionList {
  */
 
 /*
- *@note 添加VO的成员列表
+ *@note 添加VO的VIP+成员列表
  *@uri  /v1/account/user/vomembers
  *@method POST
  *@uriParam from 服务名称
- *@postParam uuid 用户ID
+ *@postParam uuid VOID
  *@postParam members 成员用户ID列表,逗号分割(00001,00002,00003)
  *@return 返回PResult
  */
 
 /*
- *@note 删除VO的成员列表
+ *@note 删除VO的VIP+成员列表
  *@uri  /v1/account/user/vomembers
  *@method DELETE
  *@uriParam from 服务名称
- *@postParam uuid 用户ID
+ *@postParam uuid VOID
  *@postParam members 成员用户ID列表,逗号分割(00001,00002,00003)
  *@return 返回PResult
  */
 
 /*
- *@note 获取VO的成员列表
+ *@note 获取VO的VIP+成员列表
  *@uri  /v1/account/user/vomembers
  *@method GET
  *@uriParam from 服务名称
- *@postParam uuid 用户ID
+ *@uriParam uuid VOID
  *@return 成功返回PUserList, 失败返回PResult
  */
 
@@ -286,16 +286,6 @@ message PPrivacyAttentionList {
  *@method GET
  *@uriParam from 服务名称
  *@return 成功返回PReadNameAuthInfoCount, 失败返回PResult
- */
-
-/*
- *@note 升级等级为VIP+
- *@uri  /v1/account/user/upgrade
- *@method POST
- *@uriParam from 服务名称(只提供给fan-management系统用)
- *@postParam uuid  VOID
- *@postParam uuids 成员ID,逗号分割(00001,00002,00003)
- *@return 返回PResult
  */
 
 /*
