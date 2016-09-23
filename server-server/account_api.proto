@@ -208,7 +208,7 @@ message PPrivacyAttentionList {
  *@method POST
  *@uriParam from 服务名称
  *@postParam uuids 用户ID,逗号分割(00001,00002,00003)
- *@postParam level 等级(0:普通用户等级权限, 1:VIP等级权限, 2:VIP+等级权限, 3:VO等级权限)
+ *@postParam level 等级(0:普通用户等级权限, 1:VIP等级权限, 3:VO等级权限, 不可以设置VIP+)
  *@return 返回PResult
  */
 
