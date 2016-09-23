@@ -238,6 +238,8 @@ message PPrivacyAttentionList {
  *@method GET
  *@uriParam from 服务名称
  *@uriParam uuid VOID
+ *@uriParam offset 偏移
+ *@uriParam count  数量
  *@return 成功返回PUserList, 失败返回PResult
  */
 
