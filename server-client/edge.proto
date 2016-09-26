@@ -44,6 +44,16 @@ message PEdgeVersion {
  *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
  */
 
+
+ /*
+ *@note 获取APP下载地址
+ *@path /v1/edge/share/download
+ *@method GET
+ *@url param ostp 操作系统类型 1 Android、2 IOS
+ *@url param uuid 发起分享的用户id
+ *@url param channel 渠道或应用平台，格式如：‘主渠道号.子渠道号’ 渠道号为纯数字，用.分割
+ *@return 成功返回 PEdgeVersion ，失败返回 PRsult
+ */
 /*
  *@note 客户端定时获取token有效时间
  *@path /v1/edge/token/expiration

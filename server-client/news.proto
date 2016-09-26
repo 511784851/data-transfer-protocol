@@ -332,3 +332,18 @@ message PRelation {
  *@param  postid 帖子id
  *@return 返回 PResult
  */
+
+/**
+ *@note 查询用户已发布的微博ID列表
+ *@path   /v1/news/user/postids
+ *@method GET
+ *@cookie token&uuid
+ *@param  uuid 		 被查询的用户的uuid
+ *@param  votemin    过滤条件:点赞数最小值.
+ *@param  votemax	 过滤条件:点赞数最大值.
+ *@param  timestart  过滤条件:起始时间.格式为UTC时间的RFC3339字符串
+ *@param  timeend   过滤条件:结束时间.格式为UTC时间的RFC3339字符串
+ *@param offset 分页查询的起始微博ID,如果没有,默认为0
+ *@param count  分页查询返回的最大条数,如果没有,默认为10,最大值1000
+ *@return 成功返回 PInt64List ，失败返回 PResult
+ */

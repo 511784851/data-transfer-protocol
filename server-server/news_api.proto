@@ -103,3 +103,13 @@ message PNewsUserStatistic {
  *@param  targetuuid 被查找的用户uuid
  *@return 成功返回 PNewsUserStatistic ，失败返回 PResult
  */
+
+/**
+ *@note   内部发布微博
+ *@path   /v1/news/inside/post
+ *@param  uuid   作为微博发布者的用户id
+ *@cookie token&uuid
+ *@method POST
+ *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
+ *@return 返回 PResult
+ */
