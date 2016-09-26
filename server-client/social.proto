@@ -47,6 +47,15 @@ message PIsFriendList {
  */
 
 /*
+ *@note 批量申请好友
+ *@path /social/addfriends
+ *@method POST
+ *@cookie token&uuid
+ *@param uuids 申请的好友ID,使用","分隔
+ *@return PResult
+ */
+
+/*
  *@note 分页获取未处理的好友申请列表
  *@path /social/listfollowers
  *@method GET
@@ -72,6 +81,14 @@ message PIsFriendList {
  *@method POST
  *@cookie token&uuid
  *@param uuid 申请人的ID form参数
+ *@return PResult
+ */
+
+/*
+ *@note 接受所有好友申请
+ *@path /social/acceptallfriend
+ *@method POST
+ *@cookie token&uuid
  *@return PResult
  */
 
