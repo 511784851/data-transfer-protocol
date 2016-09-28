@@ -312,7 +312,15 @@ message PRole {
  
  
  
-  /*---------------- 粉丝管理系统Api开始---------------- */
+ /*---------------- 粉丝管理系统Api开始---------------- */
+ /*
+ *@note 获取聊天室群ID
+ *@path /chat/conversation/tribeId
+ *@method GET
+ *@cookie token&uuid 登录用户信息（必须）
+ *@return 成功返回PStringSingle，失败返回PResult
+ */
+ 
   /*
  *@note 获取聊天室成员信息
  *@path /chat/conversation/member
