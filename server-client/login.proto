@@ -272,6 +272,11 @@ message PLogin {
  *@path /v1/login/session
  *@method PUT
  *@cookie token&uuid
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 令牌有效或成功续期返回 PLogin ，失败返回 PResult
