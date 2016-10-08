@@ -538,6 +538,16 @@ message PAccountChatPersonInfo {
  */
 
 /*
+ *@note 设置用户名与密码(只能设置一次)
+ *@uri /v1/account/user/username
+ *@method POST
+ *@cookie token&uuid
+ *@postParam username 用户名
+ *@postParam password 密码
+ *@return 返回PbResult
+ */
+
+/*
  *@note 设置用户信息
  *@uri /v1/account/user/profile
  *@method POST
@@ -545,7 +555,6 @@ message PAccountChatPersonInfo {
  *规则：
   1、不想设置某字段，不添加字段及可
   2、字段名区分大小写
- *@postParam Username   用户名(只能设置一次)
  *@postParam Nickname   昵称
  *@postParam Gender     性别
  *@postParam Birthday   生日
@@ -555,3 +564,4 @@ message PAccountChatPersonInfo {
  *@postParam UserResume 个性签名
  *@return 返回PbResult
  */
+
