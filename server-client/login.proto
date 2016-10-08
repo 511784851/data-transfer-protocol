@@ -201,7 +201,7 @@ message PLogin {
  *@uri  /v1/login/account/binding 
  *@method DELETE
  *@cookie token&uuid
- *@url param type 解绑类型(0 手机号码；1 微信；2 微博；3 脸书；4 谷歌；5 用户名)
+ *@url param type 解绑类型(1 微信；2 微博；3 脸书；4 谷歌)
  *@url param appid 应用分配的id
  *@return 返回 PResult
  */
