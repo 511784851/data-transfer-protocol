@@ -60,6 +60,8 @@ message PPostData {
 }
 
 message PRegionData {
+	//形如CN;44或US; 即国外代码只有国家代码和分号，当region在本地字典中查找不到时，
+	//请忽略此条数据，归到“其它”项里面，不要显示空白出来
 	string region = 1;
 	int32 count = 2;
 }
