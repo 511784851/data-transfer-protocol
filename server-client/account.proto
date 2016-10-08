@@ -283,6 +283,11 @@ message PAccountChatPersonInfo {
 	PUser user = 5;             //用户信息
 }
 
+// 推荐用户名列表
+message PAccountRecommendUsername {
+	repeated string list = 1;   //用户名列表
+}
+
 /*=====================================*/
 //API定义
 
@@ -535,4 +540,13 @@ message PAccountChatPersonInfo {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回PAccountChatPersonInfo, 失败返回PResult
+ */
+
+/*
+ *@note 推荐用户名
+ *@uri /v1/account/recommend/username
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam username 用户名
+ *@return 返回PAccountRecommendUsername
  */
