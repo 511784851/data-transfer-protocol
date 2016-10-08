@@ -24,17 +24,17 @@ message PUser {
 	/*保留1~5用于扩展*/
 	
 	string uuid = 6; 				// 服务端标志用户的唯一id
-	string password = 7; 			// 自有手机号码注册时输入的密码      //这个可以移除，转移到Login
+	string password = 7; 			// 自有手机号码注册时输入的密码      //这个可以移除
 	string username = 8; 			// 用户名，唯一
 	string nickname = 9; 			// 昵称
 	string headImgURL = 10; 		// 头像地址
 	string realname = 11;			// 真实姓名
 	int32 gender = 12;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
 	string email = 13; 				// 邮箱地址
-	string birthday = 14; 			// 生日，格式19850101
-	string cellphone = 15; 			// 手机号
-	int32 timeZone = 16;    		// 时区
-	string locale = 17; 			// 语言
+	string birthday = 14; 			// 生日，格式1985-01-01
+	string cellphone = 15; 			// 手机号     //这个可以移除
+	int32 timeZone = 16;    		// 时区       //客户端没用到
+	string locale = 17; 			// 语言       //客户端没用到
 	int32 membershipLevel = 18;    	// 会员级别
 	int64 lastUpdateTime = 19;  	// 最后更新时间TUser结构，用户/系统修改
 	int64 lastLoginTime = 20;  		// 用户最后登陆时间
@@ -549,4 +549,59 @@ message PAccountRecommendUsername {
  *@cookie token&uuid
  *@uriParam username 用户名
  *@return 返回PAccountRecommendUsername
+ */
+
+/*
+ *@note 设置昵称
+ *@uri /v1/account/user/nickname
+ *@method POST
+ *@cookie token&uuid
+ *@postParam nickname 昵称
+ *@return 返回PbResult
+ */
+
+/*
+ *@note 设置性别
+ *@uri /v1/account/user/gender
+ *@method POST
+ *@cookie token&uuid
+ *@postParam gender 性别(0:女，1:男)
+ *@return 返回PbResult
+ */
+
+/*
+ *@note 设置生日
+ *@uri /v1/account/user/birthday
+ *@method POST
+ *@cookie token&uuid
+ *@postParam birthday 生日(格式:1985-01-01)
+ *@return 返回PbResult
+ */
+
+/*
+ *@note 设置邮箱
+ *@uri /v1/account/user/email
+ *@method POST
+ *@cookie token&uuid
+ *@postParam email 邮箱
+ *@return 返回PbResult
+ */
+
+/*
+ *@note 设置地区
+ *@uri /v1/account/user/area
+ *@method POST
+ *@cookie token&uuid
+ *@postParam code 地区代码
+ *@postParam name 地区名称
+ *@return 返回PbResult
+ */
+
+/*
+ *@note 设置个性签名
+ *@uri /v1/account/user/resume
+ *@method POST
+ *@cookie token&uuid
+ *@postParam resume 个性签名
+ *@return 返回PbResult
  */
