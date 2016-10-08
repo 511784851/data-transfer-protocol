@@ -55,6 +55,7 @@ message PUser {
 	string bigBackImage = 35;       // 背景大图
 	bool isFollowing = 36;          // 是否关注
 	int64 registerTime = 37;  		// 注册时间
+	PLinkInfoList linkList = 38;    // 第三方链接列表
 }
 
 message PUserListEx {
