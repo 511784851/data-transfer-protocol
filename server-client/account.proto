@@ -283,11 +283,6 @@ message PAccountChatPersonInfo {
 	PUser user = 5;             //用户信息
 }
 
-// 推荐用户名列表
-message PAccountRecommendUsername {
-	repeated string list = 1;   //用户名列表
-}
-
 /*=====================================*/
 //API定义
 
@@ -543,65 +538,20 @@ message PAccountRecommendUsername {
  */
 
 /*
- *@note 推荐用户名
- *@uri /v1/account/recommend/username
- *@method GET
- *@cookie token&uuid
- *@uriParam username 用户名
- *@return 返回PAccountRecommendUsername
- */
-
-/*
- *@note 设置昵称
- *@uri /v1/account/user/nickname
+ *@note 设置用户信息
+ *@uri /v1/account/user/profile
  *@method POST
  *@cookie token&uuid
- *@postParam nickname 昵称
- *@return 返回PbResult
- */
-
-/*
- *@note 设置性别
- *@uri /v1/account/user/gender
- *@method POST
- *@cookie token&uuid
- *@postParam gender 性别(0:女，1:男)
- *@return 返回PbResult
- */
-
-/*
- *@note 设置生日
- *@uri /v1/account/user/birthday
- *@method POST
- *@cookie token&uuid
- *@postParam birthday 生日(格式:1985-01-01)
- *@return 返回PbResult
- */
-
-/*
- *@note 设置邮箱
- *@uri /v1/account/user/email
- *@method POST
- *@cookie token&uuid
- *@postParam email 邮箱
- *@return 返回PbResult
- */
-
-/*
- *@note 设置地区
- *@uri /v1/account/user/area
- *@method POST
- *@cookie token&uuid
- *@postParam code 地区代码
- *@postParam name 地区名称
- *@return 返回PbResult
- */
-
-/*
- *@note 设置个性签名
- *@uri /v1/account/user/resume
- *@method POST
- *@cookie token&uuid
- *@postParam resume 个性签名
+ *规则：
+  1、不想设置某字段，不添加字段及可
+  2、字段名区分大小写
+ *@postParam Username   用户名(只能设置一次)
+ *@postParam Nickname   昵称
+ *@postParam Gender     性别
+ *@postParam Birthday   生日
+ *@postParam Email      邮箱
+ *@postParam AreaCode   地区代码
+ *@postParam AreaName   地区名称
+ *@postParam UserResume 个性签名
  *@return 返回PbResult
  */

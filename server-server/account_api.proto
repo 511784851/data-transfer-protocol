@@ -299,13 +299,3 @@ message PPrivacyAttentionList {
  *@postParam status 实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
  *@return   返回:CXXResult
  */
-
-/*
- *@note 设置用户名(只能设置一次)
- *@uri /v1/account/user/username
- *@method POST
- *@uriParam from 服务名称
- *@postParam uuid      用户ID
- *@postParam username  用户名
- *@return 返回PResult
- */
