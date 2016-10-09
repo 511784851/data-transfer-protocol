@@ -56,6 +56,7 @@ message PUser {
 	bool isFollowing = 36;          // 是否关注
 	int64 registerTime = 37;  		// 注册时间
 	PLinkInfoList linkList = 38;    // 第三方链接列表
+	int32 authStatus = 39;          // 实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
 }
 
 message PUserListEx {
