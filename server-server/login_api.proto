@@ -10,59 +10,6 @@ message PToken {
 	string MD5  = 6;   	 		// uuid与字符串运算生成的md5值
 }
 
-message PGetToken {
-	string token = 2; 	// 成功则返回实际token，失败返回空串
-}
-
-message PBindAccount {
-	repeated bool bindTypes = 2; 	//绑定登录类型(0手机,1 微信,2 微博,3 facebook,4 google)
-}
-
-message PCellphoneAccount {
-	string cellphone = 2; 		//手机号码
-	string smscode = 3;			//短信验证码	
-}
-
-message PWeiXinAccount{
-	string code = 2;			//授权临时票据
-}
-
-message PWeiBoAccount{
-	string wbuid = 2;			//用户微博uid
-	string wbname = 3;			//用户微博昵称
-	string headimgurl = 4;		//用户微博头像地址
-	string gender = 5;			//性别
-	string weihao = 6;			//用户微号
-}
-
-message PFacebookAccount{
-	string token = 2; 			//Facebook User access token	
-}
-
-message PGoogleAccount{
-	string code = 2; 			//授权临时票据
-	string token = 3;			//登陆验证数据
-}
-
-
-/*
- *@note 账号绑定
- *@URL /login/binding
- *@Method POST 		使用post方式上传数据，数据类型见：
- *@					PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
- *@return 返回PResult
- */
-
-/*
- *@note 用户登出接口
- *@path /login/inside/logout
- *@method GET
- *@param from 发起调用的服务名
- *@param uuid 用户的uuid
- *@return 返回PbResult
- */
-
-// new
 /*
  *@note 用户登出接口
  *@path /v1/login/inside/logout
@@ -78,38 +25,9 @@ message PGoogleAccount{
  *@method GET
  *@url param from 发起调用的服务名
  *@url param uuid 用户的uuid
- *@return 成功返回 PGetToken ，失败返回 PResult
+ *@return 成功返回 PStringSingle ，失败返回 PResult
  */
-
-/*
- *@note 获取用户账号绑定信息
- *@URL /v1/login/inside/binding/status
- *@method GET
- *@url param from 发起调用的服务名
- *@url param uuid 用户的uuid
- *@return 返回 PBindAccount
- */
-
-/*
- *@note 账号绑定
- *@URL /v1/login/inside/binding/account
- *@method POST
- *@url param from 发起调用的服务名
- *@url param uuid 用户的uuid
- *@body PWeiXinAccount，PWeiBoAccount，PFacebookAccount，PGoogleAccount,PCellphoneAccount
- *@return 返回 PResult
- */
-
-/*
- *@note 解除账号绑定
- *@URL /v1/login/inside/binding/account
- *@method DELETE
- *@url param from 发起调用的服务名
- *@url param uuid 用户的uuid
- *@url param type 解除绑定的账号类型
- *@return 返回 PResult
- */
-
+ 
 /*
  *@note 通过手机号码/用户名获取用户uuid
  *@URL /v1/login/inside/uuid
@@ -130,6 +48,17 @@ message PGoogleAccount{
  *@post form param fields 用户uuid，以,分割
  *@return 成功返回 PStringList ，失败返回 PResult;
  *@       返回的pid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
+ */
+
+/*
+ *@note 绑定用户名
+ *@path /v1/login/inside/binding/username
+ *@method POST
+ *@form param from 发起调用的服务名
+ *@form param uuid 用户的id
+ *@form param username 用户名
+ *@form param password 密码， SHA256(原始密码+3721) 
+ *@return 返回 PResult
  */
 
 /*
