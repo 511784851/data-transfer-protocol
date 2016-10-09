@@ -111,6 +111,7 @@ message PRecommendUser {
 	int32 membershipLevel = 11;   //会员级别
 	int32 followship = 12;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
 	bool friend = 13;             //是否是好友，是：true
+	int32 leveltype = 14;         //用户等级
 }
 
 message PFollowOrFansList {
