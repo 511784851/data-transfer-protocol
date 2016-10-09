@@ -313,7 +313,7 @@ message PRole {
  
  
  /*---------------- 粉丝管理系统Api开始---------------- */
- 说明，粉丝管理系统返回数据全部为JSON格式，JSON内容对应message结构
+ /*说明，粉丝管理系统返回数据全部为JSON格式，JSON内容对应message结构*/
  /*
  *@note 获取用户登录阿里百川的密码
  *@path /chat/user/signature

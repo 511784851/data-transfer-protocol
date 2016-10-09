@@ -3,7 +3,7 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "EdgeProtos";
 
-import "result.proto";
+/*import "result.proto";*/
 
 message PEdgeVersion {
 	bool ForceUpdate = 1;				// 是否强制更新的标志位
