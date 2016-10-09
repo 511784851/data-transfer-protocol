@@ -313,6 +313,15 @@ message PRole {
  
  
  /*---------------- 粉丝管理系统Api开始---------------- */
+ 说明，粉丝管理系统返回数据全部为JSON格式，JSON内容对应message结构
+ /*
+ *@note 获取用户登录阿里百川的密码
+ *@path /chat/user/signature
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 成功返回PWkToken，失败返回PResult
+ */
+ 
  /*
  *@note 获取聊天室群ID
  *@path /chat/conversation/tribeId
