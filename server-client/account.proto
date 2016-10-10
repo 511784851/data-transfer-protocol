@@ -247,6 +247,7 @@ enum ELinkType {
 	quanmin = 7; //全民TV
 	weibo = 8;   //新浪微博
 	qzone = 9;   //QQ空间
+	link1 = 10;  //自定义链接1
 }
 
 // 超链接信息
