@@ -1,0 +1,12 @@
+syntax = "proto3";
+package service; 
+
+// 每天的平均在线时间
+message POnlineData {
+	int64 date = 1;
+	int32 value = 2;
+}
+
+message POnlineDataArray {
+	repeated POnlineData array = 1;
+}
