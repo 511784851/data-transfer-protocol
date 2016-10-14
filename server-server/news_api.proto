@@ -65,12 +65,17 @@ message PNewsUserStatistic {
  *@return 成功返回 PRelation ，失败返回 PResult
  */
 
-/**
- *@note 根据帖子id批量获取帖子
+ /**
+ *@note 根据过滤条件批量获取帖子
  *@path /v1/news/inside/multi/post
  *@method GET
  *@param from 发起调用的服务方，必须在consul上注册
  *@param postids 帖子id，多个帖子id用,分隔
+ *@param type   帖子类型:all(全部)，text(文字)，image(图片)，audio(音频)，video(第三方视频)
+ *@param sorttype 本参数在过滤条件“querytype”为1时才有效, 表示排序方式, 取值: 0:时间正序、1:按评论数排序、2:按点赞数排序
+ *@param timestart 本参数在过滤条件“querytype”为1时才有效, 表示查询时间点之后的帖子, 0表示查所有的帖子.取值为int64的Unix时间戳
+ *@param offset  分页查询的偏移,为已返回的微博帖子的个数, 如果没有,默认为0
+ *@param count  分页查询返回的最大条数,如果没有,默认为10
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
