@@ -3,6 +3,8 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PlatformProtos";
 
+import "news.proto";
+
 //列出所有服务的状态（开启的还是关闭的）
  message PServiceStatus {
  	map<string,PService> status = 1; 
@@ -202,6 +204,7 @@ message PBanner {
 	bool enable = 7; //是否下架
 	int64 time = 8; //创建时间
 	string inside = 9; //如果是内部链接，这个值有效，news表示微博，其他待定
+	PPostInfo postInfo = 10; //微博的详情
 }
 
 message PBannerSignle {
