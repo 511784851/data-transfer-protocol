@@ -201,6 +201,7 @@ message PBanner {
 	int64 expires = 6; //图片到期时间
 	bool enable = 7; //是否下架
 	int64 time = 8; //创建时间
+	string inside = 9; //如果是内部链接，这个值有效，news表示微博，其他待定
 }
 
 message PBannerSignle {
