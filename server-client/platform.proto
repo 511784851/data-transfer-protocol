@@ -220,6 +220,11 @@ message PBannerImage {
 	int32 width = 2; //图片的宽
 }
 
+//默认头像
+message PDefaultHeadList {
+	repeated string list = 1; //objectkey数组
+}
+
 
 /**************************API 定义***********************************/
 
@@ -303,3 +308,14 @@ message PBannerImage {
    *@param width 需要获取的图片的长，不传返回那么随便给一张
    *@return 成功 PBannerList ，失败 PResult
    */
+
+   
+   /**
+	* 获取多个默认的头像
+	*
+	*@path /platform-manager/default/head
+	*@cookie token&uuid
+	*@method GET
+	*@param count 要获取的头像的个数（默认是10）
+	*@return 成功 PDefaultHeadList，失败PResult
+    */
