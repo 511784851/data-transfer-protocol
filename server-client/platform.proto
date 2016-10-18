@@ -222,7 +222,12 @@ message PBannerImage {
 
 //默认头像
 message PDefaultHeadList {
-	repeated string list = 1; //objectkey数组
+	repeated PDefaultHead list = 1; //objectkey数组
+}
+
+message PDefaultHead {
+	int32 id = 1;
+	string url = 2; //如果是app请求，这里是完整的url，如果是后台请求，这里是objkey
 }
 
 
