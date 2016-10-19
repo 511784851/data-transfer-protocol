@@ -228,7 +228,9 @@ message PDefaultHeadList {
 
 message PDefaultHead {
 	int32 id = 1;
-	string url = 2; //如果是app请求，这里是完整的url，如果是后台请求，这里是objkey
+	string url = 2; //完整的url
+	string oKey = 3; //objectkey
+	int hType = 4; //图片的类型 0 女，1 男，2 其它
 }
 
 
