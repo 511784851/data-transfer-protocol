@@ -220,12 +220,13 @@ message PBannerImage {
 	int32 width = 2; //图片的宽
 }
 
-//默认头像
+//默认头像列表
 message PDefaultHeadList {
 	int32 total = 1; //数量总数
 	repeated PDefaultHead list = 2; //objectkey数组
 }
 
+//默认头像
 message PDefaultHead {
 	int32 id = 1;
 	string url = 2; //完整的url
