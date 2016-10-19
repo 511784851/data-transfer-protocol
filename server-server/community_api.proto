@@ -56,6 +56,16 @@ package service;
  */
 
 /*
+ *@note 获取用户是否为社区成员
+ *@URL /v1/community/inside/user/member_status
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param id 社区id
+ *@url param uuid 用户id
+ *@return 成功返回 PBoolSingle（true为是，false为不是） ，失败返回 PResult;
+ */
+
+/*
  *@note 获取用户在指定社区的禁用状态
  *@URL /v1/community/inside/user/forbid_status
  *@method GET
@@ -63,6 +73,16 @@ package service;
  *@url param id 社区id
  *@url param uuid 用户id
  *@return 成功返回 PBoolSingle（true为禁用，false为未禁用） ，失败返回 PResult;
+ */
+
+/*
+ *@note 获取用户在指定社区的黑名单状态
+ *@URL /v1/community/inside/user/blacklist_status
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param id 社区id
+ *@url param uuid 用户id
+ *@return 成功返回 PBoolSingle（true为黑名单，false为黑名单） ，失败返回 PResult;
  */
 
 /*
