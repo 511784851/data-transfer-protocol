@@ -154,6 +154,18 @@ message PRelation {
   int32 fansB = 7;              //用户B的粉丝数
 }
 
+// 用户关注的主题
+message PSubject {
+  	string ID = 2;			// 主题id
+	string Name = 3;		// 主题名字
+	string HeadImg = 4;		// 主题头像地址
+}
+
+// 主题信息列表
+message PSubjectList {
+	repeated PSubject List = 2; 		// 我关注的主题
+}
+
 ////////////////////////////////////////////////////////////////
 /*
  *@note 访问获取带签名的文件上传URL
@@ -203,13 +215,15 @@ message PRelation {
  *@return 返回 PResult
  */
 
-/**
+ /**
  *@note   用户刷新微博
  *@path   /v1/news/user/timeline
  *@cookie token&uuid
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp,vo,vip2(包含vip和vipp)
+ *@param  type  刷新类型 news:个人动态; community:社区Timeline.如果没有该参数则默认为刷新个人动态
+ *@param  subjectid   主题的id
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
@@ -347,4 +361,24 @@ message PRelation {
  *@param offset 分页查询的起始微博ID,如果没有,默认为0
  *@param count  分页查询返回的最大条数,如果没有,默认为10,最大值1000
  *@return 成功返回 PStringList，失败返回 PResult
+ */
+
+ /**
+ *@note   关注/取消关注主题
+ *@path   /v1/news/follow/subject
+ *@cookie token&uuid
+ *@method POST
+ *@param  oper 为1时表示添加关注，为0时表示取消关注
+ *@param  subjectid   关注/取消关注主题的id,目前是社区Id
+ *@return 返回 PResult
+ */
+
+ /**
+ *@note   获取用户关注的主题
+ *@path   /v1/news/follow/subject
+ *@cookie token&uuid
+ *@method GET
+ *@param  offset 分页查询的偏移,为已经查询的条数
+ *@param  count  查询结果条数
+ *@return 返回 PSubjectList,失败返回 PResult
  */
