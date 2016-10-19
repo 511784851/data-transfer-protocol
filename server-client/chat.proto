@@ -90,6 +90,15 @@ message PRole {
 	string communityId = 2;          // 社区ID
 }
 
+message PFriendRemark {
+	string uuid = 1;                 // 好友的uuid
+	string remark = 2;               // 好友名称的备注
+}
+
+message PFriendRemarkList {
+	repeated PFriendRemark friends = 1; // 好友名称备注列表
+}
+
 /*
  *@note 获取用户登录阿里百川的密码
  *@path /chat/user/token
@@ -365,3 +374,35 @@ message PRole {
  *@return 返回PResult，注意：errorcode=1901010表示用户没有权限
  */
  /*----------------  粉丝管理系统Api结束---------------- */
+ 
+ /*----------------  聊天中的好友备注-开始 ---------------- */
+/*
+ *@note 更改聊天中的好友备注
+ *@path /chat/friendremark/update
+ *@method POST
+ *@cookie token&uuid 登录用户信息（必须，边缘服务器需要的身份鉴定）
+ *@param uuid  当前用户的uuid
+ *@param fuuid  好友的uuid
+ *@param remark  好友的备注名称
+ *@return 返回PResult
+ */
+
+/*
+ *@note 聊天中的好友备注列表
+ *@path /chat/friendremark/list
+ *@method GET
+ *@cookie token&uuid 登录用户信息（必须，边缘服务器需要的身份鉴定）
+ *@param uuid  当前用户的uuid
+ *@return 成功返回PFriendRemarkList，失败返回PResult
+ */
+ /*----------------  聊天中的好友备注-结束---------------- */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

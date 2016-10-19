@@ -382,3 +382,21 @@ message PSubjectList {
  *@param  count  查询结果条数
  *@return 返回 PSubjectList,失败返回 PResult
  */
+
+ /**
+ *@note   用户是否已经点赞过指定的帖子
+ *@path   /v1/news/vote/exist
+ *@cookie token&uuid
+ *@method GET
+ *@param  postid 帖子ID
+ *@return 返回 PBoolSingle,失败返回 PResult
+ */
+
+  /**
+ *@note   判断用户A是否关注了用户B
+ *@path   /v1/news/follow/relation
+ *@cookie token&uuid   用户A的id
+ *@method GET
+ *@param  uuid 用户B的id
+ *@return 返回 PBoolSingle,失败返回 PResult
+ */
