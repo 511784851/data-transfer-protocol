@@ -231,7 +231,7 @@ message PDefaultHead {
 	int32 id = 1;
 	string url = 2; //完整的url
 	string oKey = 3; //objectkey
-	int hType = 4; //图片的类型 0 女，1 男，2 其它
+	int32 hType = 4; //图片的类型 0 女，1 男，2 其它
 }
 
 
