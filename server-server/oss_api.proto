@@ -42,3 +42,25 @@ package common;
  *@param objectkeys 下载文件的名称,使用","分隔
  *@return 成功返回PDownloadArray，失败返回PResult
  */
+
+/*
+ *@note 初始化分片上传
+ *@path /oss/multipartupload/init
+ *@method GET
+ *@param from 调用的服务名称
+ *@param bucket 文件要存放的oss桶， 0 不持久桶，文件会过期，1持久桶，3静态文件桶
+ *@param digest 文件摘要
+ *@param length 文件大小，单位字节
+ *@param extension 扩展名
+ *@return 成功返回PMultiPartUpload，失败返回PResult
+ */
+
+/*
+ *@note 中止分片上传
+ *@path /oss/multipartupload/abort
+ *@method GET
+ *@param from 调用的服务名称
+ *@param uploadid 初始化时返回在的上传ID
+ *@param objectkey 文件名称
+ *@return PResult，成功errCode为0
+ */

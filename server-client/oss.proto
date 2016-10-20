@@ -52,3 +52,18 @@ message PFileInfo {
 message PFileInfoArray {
 	repeated PFileInfo fileInfos = 1;
 }
+
+message PMultiPartUpload {
+	//要上传的文件是否存在
+	bool exists = 1;
+	//最终的文件名，一般与init接口指定的objectkey一致
+	string objectKey = 2;
+	//阿里oss返回的上传ID，请于上传期间保存
+	string uploadId = 3;
+	//与阿里oss交互的域名
+	string domain = 4;
+	string accessKeyId = 5;
+	string expires = 6;
+	//签名数组
+	repeated string sign = 7;
+}
