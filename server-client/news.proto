@@ -241,7 +241,7 @@ message PSubjectList {
  *@path   /v1/news/guest/timeline
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp)
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
@@ -383,20 +383,20 @@ message PSubjectList {
  *@return 返回 PSubjectList,失败返回 PResult
  */
 
- /**
- *@note   用户是否已经点赞过指定的帖子
+/**
+ *@note   帖子是否已经被用户点赞,返回点赞数
  *@path   /v1/news/vote/exist
  *@cookie token&uuid
  *@method GET
  *@param  postid 帖子ID
- *@return 返回 PBoolSingle,失败返回 PResult
+ *@return 返回 PPostInfo.失败返回 PResult
  */
 
-  /**
- *@note   判断用户A是否关注了用户B
+/**
+ *@note   判断用户A是否关注了用户B,返回B的粉丝数
  *@path   /v1/news/follow/relation
  *@cookie token&uuid   用户A的id
  *@method GET
  *@param  uuid 用户B的id
- *@return 返回 PBoolSingle,失败返回 PResult
+ *@return 返回 PRelation,失败返回 PResult
  */
