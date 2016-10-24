@@ -251,7 +251,7 @@ message PStreamingMsgList {
  *@method POST
  *@url param msg_type 见 '推送消息类型'
  *@url param status 0为未读，1为已读
- *@body PMsgIDList
+ *@body PMsgIDList 如果body为空，则表示所有的MsgID
  *@cookie token&uuid
  *@return PResult
  */
