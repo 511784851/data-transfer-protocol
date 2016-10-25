@@ -160,6 +160,7 @@ message PSubject {
 	string Name = 3;		// 主题名字
 	string HeadImg = 4;		// 主题头像地址
 	bool IsFollowed = 5;    //是否已关注. true:已关注
+	bool IsSelf = 6;        //是自己的社区.true:是
 }
 
 // 主题信息列表
