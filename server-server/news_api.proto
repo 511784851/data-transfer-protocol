@@ -116,13 +116,3 @@ message PNewsUserStatistic {
  *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
  *@return 返回 PResult
  */
-
- /**
- *@note   社区缓存信息刷新
- *@path   /v1/news/inside/refreshcache/community
- *@method POST
- *@param  oper 操作类型: 0:加入社区,1:退出社区;2:启用社区，3：关闭社区
- *@param  subjectId  社区ID
- *@param  uuid  用户ID
- *@return 返回 PResult
- */
