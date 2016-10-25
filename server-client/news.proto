@@ -400,3 +400,12 @@ message PSubjectList {
  *@param  uuid 用户B的id
  *@return 返回 PRelation,失败返回 PResult
  */
+
+ /**
+ *@note   获取微博帖子信息
+ *@path   /v1/news/post
+ *@cookie token&uuid
+ *@method GET
+ *@param  postid   微博帖子ID
+ *@return 成功返回 PPostInfo, 失败返回 PResult
+ */
