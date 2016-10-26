@@ -20,6 +20,7 @@ message PCommunityBase {
 	string Name = 3;		// 社区名字
 	string HeadImg = 4;		// 社区头像地址
     string Introduce = 5;   // 社区介绍
+	int32 Status = 6		// 社区状态；0社区开启状态；1社区关闭状态；
 }
 
 // 社区基础信息列表
