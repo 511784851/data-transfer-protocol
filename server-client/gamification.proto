@@ -113,18 +113,19 @@ message PNotify {
  
 
 message PSubscribeArray {
-    repeated PSubscribe subscribe= 1;
+    repeated PSubscribe subscribe = 1;
 }
+
 message PSubscribe {
     string uuid = 1;  // 用户uuid
     int32 msgid = 2;  // 消息ID
-    bool state = 3;   // 订阅状态（true：订阅，false：取消订阅）
-    int64 time = 4;   // 消息失效时间（为0表示永久，非空格式为时间戳）
+    int64 time = 3;   // 消息有效时间（-1表示永久，0表示取消订阅，其它表示失效时间的时间戳）
 }
  
 message PCallbackArray {
-    repeated PCallback callback= 1;
+    repeated PCallback callback = 1;
 }
+
 message PCallback {
     string uuid = 1;  // 用户uuid
     int32 msgid = 2;  // 消息ID

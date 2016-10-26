@@ -17,5 +17,5 @@ package common;
  *@method POST
  *@url param from 调用的服务名
  *@body PCallbackArray数据流
- *@return 成功返回PBoolList(对应uuid-msgid是否取消订阅)，失败返回PResult
+ *@return 成功返回PInt64List(-1表示永久，0表示取消订阅，其它表示失效时间的时间戳)，失败返回PResult
  */
