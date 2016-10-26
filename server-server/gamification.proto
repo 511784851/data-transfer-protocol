@@ -3,11 +3,19 @@ syntax = "proto3";
 package common;
 
 /*
- *@note 触发任务内容通知
- *@path /gamification/task/serNotify
+ *@note 任务消息订阅
+ *@path url（统一为： /v1/servicename/inside/task/msg/subscribe）
  *@method POST
- *@param uuid 用户uuid
- *@param from 发起调用的服务名
- *@param taskKey 任务ID（PTaskKey的成员,如PUBLISH、FOLLOW）
+ *@url param from 调用的服务名
+ *@body PSubscribeArray数据流
  *@return 返回PResult
+ */
+ 
+  /*
+ *@note 任务消息回调
+ *@path /gamification/task/msg/callback
+ *@method POST
+ *@url param from 调用的服务名
+ *@body PCallbackArray数据流
+ *@return 成功返回PBoolList(对应uuid-msgid是否取消订阅)，失败返回PResult
  */

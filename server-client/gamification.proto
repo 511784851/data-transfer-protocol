@@ -5,94 +5,137 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "GamificationProtos";
 
-message PGamification {
-	int32 experience = 1;          // 经验值
-	int32 level = 2;               // 等级
-	repeated PTaskDetail task = 3; // 任务列表
+message PUserBasic {
+	int32 level = 1;                     // 经验等级（0-6依次为：注册用户、青铜、白银、黄金、白金、钻石、至尊）
+	int64 exp = 2;                       // 经验值
+	int32 nextLevel = 3;                 // 下一个经验等级（如果=-1表示已是最高等级）
+	int64 nextExp = 4;                   // 距离下一个经验等级还需的经验值（如果nextLevel=-1此值无效）
 }
 
+message PTaskList {
+	PUserBasic userBasic = 1;            // 用户基础信息
+	int32 taskTotal = 2;                 // 任务总数
+	int32 taskComplete = 3;              // 已完成任务数
+	int32 taskNotComplete = 4;           // 未完成任务数
+	repeated PTaskDetail taskDetail = 5; // 任务列表
+}
+
+/*taskId描述（暂时定义如下 ，客户端需根据此ID实现多语言）
+ *CREATEPOST           // 发帖
+ *FOLLOW               // 关注
+ *RECEIVEFOLLOW        // 被关注
+ *TAPLIKE              // 点赞帖子 
+ *RECEIVELIKE          // 帖子被点赞 
+ *COMMENT              // 评论帖子
+ *REPLYCOMMENT         // 回复（评论）帖子
+ *JOINCOMMUNITY        // 加入社区
+ *CREATECOMMUNITYPOST  // 论坛发帖
+ *ADDFIREND            // 加平台好友
+ *RECEIVEFIREND        // 被平台用户添加好友
+ *REPOST               // 转发帖子
+ *REMIND               // @人
+ *SHAREHOMEPAGE        // 分享个人主页
+ *SHAREPOST            // 分享帖子
+ *FEEDBACK             // 意见反馈  
+ *ADDCONTACTFIREND     // 加手机通讯录好友   
+ *BINDINGACCOUNT       // 绑定第三方账号  
+ *COMPLETEPROFILE      // 基本资料完善
+ *OPENCONTACTACCESS    // 开启电话簿访问权限
+ *REGISTER             // 注册
+*/
 message PTaskDetail {
-	int32 type = 1;          // 任务类型（1-日常任务，2-主线任务， 3-系统任务）系统任务不可手动接受，主线任务只可接受一次，日常任务每天可接受一次
-	PTaskKey taskKey = 2;    // 任务ID
-	string description = 3;  // 任务描述
-	int32 progress = 4;      // 完成进度
-	int32 statu = 5;         // 任务状态（1-未接受，2-进行中，3-已完成）
-	int32 target = 6;        // 任务总数
-	int32 experience = 7;    // 任务完成经验值
+	PTaskType taskType = 1;              // 任务类型
+	string taskId = 2;                   // 任务ID
+	string progress = 3;                 // 任务进度（格式:0/3）
+	int32 state = 4;                     // 任务状态（0-未接受，1-进行中，2-已完成）
+	int64 exp = 5;                       // 任务完成经验值
 }
 
-enum PTaskKey {
-    PUBLISH = 0;          // 发帖
-    FOLLOW = 1;           // 关注用户
-    VOTE = 2;             // 点赞帖子 
-    REPLY = 3;            // 回复帖子
-    ADDCOMMUNITY = 4;     // 加入社区
-    PUBLISHCOMMUNITY = 5; // 论坛发帖 
-    ADDFRIEND = 6;        // 加平台好友
-    FORWARD = 7;          // 转发帖子
-    REDPACKET = 8;        // 发红包 
-    REMIND = 9;           // @人
-    PROFILE = 10;         // 资料完善
-    OPENCONTACT = 11;     // 开启手机通讯录访问权限
-    ADDCONTACT = 12;      // 加手机通讯录好友 
-    FEEDBACK = 13;        // 意见反馈  
-    BINDACCOUNT = 14;     // 绑定第三方账号  
-    DOWNLOADAPP = 15;     // 下载机器人助手
-    ADDOTHERFRIEND = 16;  // 加第三方方平台好友
-    REGISTER = 17;        // 注册
-    VIP = 18;             // 成为VIP
+enum PTaskType {
+    ONETIME = 0;             // 一次任务
+    DAILY = 1;               // 每日任务
 }
 
-message PAchievement {
-	int32 experience = 1;            // 经验值
-	int32 level = 2;                 // 等级
-	int32 nextLevelExperience = 3;   // 下一个等级经验值
-	int32 upgradeExperience = 4;     // 距离下一个等级需要的经验值
-	int32 badgeHave = 5;             // 已获得徽章数量
-	int32 badgeSum = 6;              // 徽章总数
-	repeated PBadgeDetail badge = 7; // 徽章列表
+
+message PNnotifyList {
+	int32 count = 1;                       // 未读通知数量
+	repeated PNotify notify  = 2;          // 通知内容
 }
 
-message PBadgeDetail {
-	int32 statu = 1;          // 获得状态（1-已获得，2-未获得）
-	string name = 2;          // 徽章名称
-	string icon = 3;          // 徽章图标
-	string description = 4;   // 徽章描述
-	string progress = 5;      // 进度，格式如：75%
-	int64 time = 6;           // 获得时间，statu=1时此值有效
-	int32 target = 7;         // 任务总数
+/* type对应的消息模版暂时如下，使用params参数依次替换[index]内容，主要是考虑实现多语音
+ *1:恭喜，您的经验等级提升为[0]
+ *2:恭喜，您完成了任务[0]
+ *3:您的好友[0]经验等级提升为[1]
+ *4：您关注的人[0]经验等级提升为[1]
+ */
+message PNotify {
+	int32 type = 1;             // 通知类型
+	int64 time = 2;             // 时间
+	repeated string params = 3; // 填充参数列表
 }
+
 
 /*
- *@note 触发任务内容通知
- *@path /gamification/task/notify
- *@method POST
+ *@note 获取我的任务列表
+ *@path /gamification/task/list
+ *@method GET
  *@cookie uuid&token
- *@param taskKey 任务ID（PTaskKey的成员,APP只有OPENCONTACT、DOWNLOADAPP两个任务）
- *@return 返回PResult
+ *@return 成功返回PTaskList，失败返回PResult
  */
  
 /*
  *@note 接受任务
- *@path /gamification/task/accept
+ *@path /gamification/task/receive
  *@method POST
  *@cookie uuid&token
- *@param taskKey 任务ID（PTaskKey的成员,如PUBLISH、FOLLOW）
- *@return 返回PResult
+ *@param taskId 任务ID
+ *@return 成功返回PTaskList，失败返回PResult
  */
  
-/*
- *@note 获取用户游戏化任务信息
- *@path /gamification/user/task
- *@method get
+ /*
+ *@note 接受全部任务
+ *@path /gamification/task/receive/all
+ *@method POST
  *@cookie uuid&token
- *@return 成功返回PGamification，失败返回PResult
+ *@return 成功返回PTaskList，失败返回PResult
  */
  
+ 
 /*
- *@note 获取用户游戏化成就信息
- *@path /gamification/user/achievement
- *@method get
+ *@note 获取通知消息列表
+ *@path /gamification/task/notify
+ *@method GET
  *@cookie uuid&token
- *@return 成功返回PAchievement，失败返回PResult
+ *@return 成功返回PTaskList，失败返回PResult
  */
+ 
+ /*
+ *@note 获取通知消息
+ *@path /gamification/task/notify
+ *@method GET
+ *@cookie uuid&token
+ *@return 成功返回PTaskList，失败返回PResult
+ */
+ 
+ 
+ 
+ 
+
+message PSubscribeArray {
+    repeated PSubscribe subscribe= 1;
+}
+message PSubscribe {
+    string uuid = 1;  // 用户uuid
+    int32 msgid = 2;  // 消息ID
+    bool state = 3;   // 订阅状态（true：订阅，false：取消订阅）
+    int64 time = 4;   // 消息失效时间（为0表示永久，非空格式为时间戳）
+}
+ 
+message PCallbackArray {
+    repeated PCallback callback= 1;
+}
+message PCallback {
+    string uuid = 1;  // 用户uuid
+    int32 msgid = 2;  // 消息ID
+    int64 time = 3;   // 消息时间（时间戳）
+}
