@@ -63,9 +63,9 @@ message PNnotifyList {
 }
 
 /* type对应的消息模版暂时如下，使用params参数依次替换[index]内容，主要是考虑实现多语音
- *1:恭喜，您的经验等级提升为[0]
- *2:恭喜，您完成了任务[0]
- *3:您的好友[0]经验等级提升为[1]
+ *1：恭喜，您的经验等级提升为[0]
+ *2：恭喜，您完成了任务[0]
+ *3：您的好友[0]经验等级提升为[1]
  *4：您关注的人[0]经验等级提升为[1]
  */
 message PNotify {
@@ -106,18 +106,9 @@ message PNotify {
  *@path /gamification/task/notify
  *@method GET
  *@cookie uuid&token
- *@return 成功返回PTaskList，失败返回PResult
+ *@return 成功返回PNnotifyList，失败返回PResult
  */
- 
- /*
- *@note 获取通知消息
- *@path /gamification/task/notify
- *@method GET
- *@cookie uuid&token
- *@return 成功返回PTaskList，失败返回PResult
- */
- 
- 
+
  
  
 
