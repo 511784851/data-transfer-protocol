@@ -110,7 +110,6 @@ message PNotify {
  */
 
  
- 
 
 message PSubscribeArray {
     repeated PSubscribe subscribe = 1;
