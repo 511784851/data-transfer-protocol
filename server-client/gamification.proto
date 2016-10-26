@@ -5,7 +5,7 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "GamificationProtos";
 
-message PUserBasic {
+message PGameUserBasic {
 	int32 level = 1;                     // 经验等级（0-6依次为：注册用户、青铜、白银、黄金、白金、钻石、至尊）
 	int64 exp = 2;                       // 经验值
 	int32 nextLevel = 3;                 // 下一个经验等级（如果=-1表示已是最高等级）
@@ -13,7 +13,7 @@ message PUserBasic {
 }
 
 message PTaskList {
-	PUserBasic userBasic = 1;            // 用户基础信息
+	PGameUserBasic userBasic = 1;        // 用户基础信息
 	int32 taskTotal = 2;                 // 任务总数
 	int32 taskComplete = 3;              // 已完成任务数
 	int32 taskNotComplete = 4;           // 未完成任务数
