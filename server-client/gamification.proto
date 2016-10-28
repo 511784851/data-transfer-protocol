@@ -8,10 +8,10 @@ option java_outer_classname = "GamificationProtos";
 
 message PGameUserBasic {
 	int32 level = 1;                     // 经验等级（1-9依次为：新手、菜鸟、青铜、白银、黄金、白金、钻石、大师、王者）
-	string levelName = 2;                // 经验等级名称
+	string levelName = 2;                // 经验等级名称（预留）
 	int64 exp = 3;                       // 经验值
 	int32 nextLevel = 4;                 // 下一个经验等级（如果=level表示已是最高等级）
-	string nextLevelName = 5;            // 下一个经验等级名称
+	string nextLevelName = 5;            // 下一个经验等级名称（预留）
 	int64 nextLevelExp = 6;              // 下一个经验等级的最低经验值
 }
 
@@ -29,7 +29,7 @@ message PTaskInfo {
 	int64 exp = 2;                       // 任务完成经验值
 	int32 state = 3;                     // 任务状态（0-未接受，1-进行中，2-可领奖，3-已完成）
 	string des = 4;                      // 任务描述
-	repeated PSubTaskInfo subTaskInfo = 5; // 子任务列表
+	repeated PSubTaskInfo subTaskInfo = 5; // 子任务列表（为了以后任务有组合情况，目前一般只有一个子任务）
 }
 message PSubTaskInfo {
 	string type = 1;                     // 子任务ID
