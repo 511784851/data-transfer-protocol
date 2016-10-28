@@ -28,14 +28,10 @@ message PTaskInfo {
 	string taskId = 1;                   // 任务ID
 	int64 exp = 2;                       // 任务完成经验值
 	int32 state = 3;                     // 任务状态（0-未接受，1-进行中，2-可领奖，3-已完成）
-	string des = 4;                      // 任务描述
-	repeated PSubTaskInfo subTaskInfo = 5; // 子任务列表（为了以后任务有组合情况，目前一般只有一个子任务）
-}
-message PSubTaskInfo {
-	string type = 1;                     // 子任务ID
-	int32 complete = 2;                  // 已完成数量
-	int32 num = 3;                       // 任务总数量
-	string des = 4;                      // 子任务描述
+	string type = 4;                     // 子任务ID
+	int32 complete = 5;                  // 已完成数量
+	int32 num = 6;                       // 任务总数量
+	string des = 7;                      // 子任务描述
 }
 
 message PLevelList {
