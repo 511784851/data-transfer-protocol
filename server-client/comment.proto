@@ -191,6 +191,7 @@ message PCommentBool {
  *@param  min  评论被点赞数最小值
  *@param  max  评论被点赞数最大值
  *@param  level  等级 0:普通用户;1:vip;2:vipp;3:vo;4:游客
+ *@param  offset 分页偏移,为已返回的条数
  *@param  count  查询结果条数.默认10,最大50
  *@return 返回PStringList,失败返回PbResult
  */
