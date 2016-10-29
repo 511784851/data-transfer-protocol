@@ -5,85 +5,111 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "GamificationProtos";
 
-
 message PGameUserBasic {
-	int32 level = 1;                     // 经验等级（1-9依次为：新手、菜鸟、青铜、白银、黄金、白金、钻石、大师、王者）
-	string levelName = 2;                // 经验等级名称（预留）
-	int64 exp = 3;                       // 经验值
-	int32 nextLevel = 4;                 // 下一个经验等级（如果=level表示已是最高等级）
-	string nextLevelName = 5;            // 下一个经验等级名称（预留）
-	int64 nextLevelExp = 6;              // 下一个经验等级的最低经验值
+	int32 level = 1;                     // 经验等级（0-6依次为：注册用户、青铜、白银、黄金、白金、钻石、至尊）
+	int64 exp = 2;                       // 经验值
+	int32 nextLevel = 3;                 // 下一个经验等级（如果=-1表示已是最高等级）
+	int64 nextExp = 4;                   // 距离下一个经验等级还需的经验值（如果nextLevel=-1此值无效）
 }
 
 message PTaskList {
 	PGameUserBasic userBasic = 1;        // 用户基础信息
-	int32 taskTotal = 2;                 // 任务总数（包括日常和主线）
-	int32 dailyTaskTotal = 3;            // 日常任务总数
-	int32 dailyTaskCompleteTotal = 4;    // 已完成日常任务数
-	repeated PTaskInfo mainTask = 5;     // 主线任务列表
-	repeated PTaskInfo dailyTask = 6;    // 日常任务列表
+	int32 taskTotal = 2;                 // 任务总数
+	int32 taskComplete = 3;              // 已完成任务数
+	int32 taskNotComplete = 4;           // 未完成任务数
+	repeated PTaskDetail taskDetail = 5; // 任务列表
 }
 
-message PTaskInfo {
-	int32 taskId = 1;                    // 任务ID
-	int64 exp = 2;                       // 任务完成经验值
-	int32 state = 3;                     // 任务状态（0-未接受，1-进行中，2-可领奖，3-已完成）
-	int32 type = 4;                      // 任务类型ID
-	int32 complete = 5;                  // 已完成数量
-	int32 num = 6;                       // 任务总数量
-	string des = 7;                      // 任务描述
+/*taskId描述（暂时定义如下 ，客户端需根据此ID实现多语言）
+ *CREATEPOST           // 发帖
+ *FOLLOW               // 关注
+ *RECEIVEFOLLOW        // 被关注
+ *TAPLIKE              // 点赞帖子 
+ *RECEIVELIKE          // 帖子被点赞 
+ *COMMENT              // 评论帖子
+ *REPLYCOMMENT         // 回复（评论）帖子
+ *JOINCOMMUNITY        // 加入社区
+ *CREATECOMMUNITYPOST  // 论坛发帖
+ *ADDFIREND            // 加平台好友
+ *RECEIVEFIREND        // 被平台用户添加好友
+ *REPOST               // 转发帖子
+ *REMIND               // @人
+ *SHAREHOMEPAGE        // 分享个人主页
+ *SHAREPOST            // 分享帖子
+ *FEEDBACK             // 意见反馈  
+ *ADDCONTACTFIREND     // 加手机通讯录好友   
+ *BINDINGACCOUNT       // 绑定第三方账号  
+ *COMPLETEPROFILE      // 基本资料完善
+ *OPENCONTACTACCESS    // 开启电话簿访问权限
+ *REGISTER             // 注册
+*/
+message PTaskDetail {
+	PTaskType taskType = 1;              // 任务类型
+	string taskId = 2;                   // 任务ID
+	string progress = 3;                 // 任务进度（格式:0/3）
+	int32 state = 4;                     // 任务状态（0-未接受，1-进行中，2-已完成）
+	int64 exp = 5;                       // 任务完成经验值
 }
 
-message PLevelList {
-	PGameUserBasic userBasic = 1;        // 用户基础信息
-	repeated PLevelInfo levelInfo = 2;   // 等级列表
+enum PTaskType {
+    ONETIME = 0;             // 一次任务
+    DAILY = 1;               // 每日任务
 }
-message PLevelInfo {
-	int32 id = 1;                        // 等级ID
-	string name = 2;                     // 等级名称
-	int64 minExp = 3;                    // 经验值范围（小）
-	int64 maxExp = 4;                    // 经验值范围（大）
+
+
+message PNnotifyList {
+	int32 count = 1;                       // 未读通知数量
+	repeated PNotify notify  = 2;          // 通知内容
 }
+
+/* type对应的消息模版暂时如下，使用params参数依次替换[index]内容，主要是考虑实现多语音
+ *1：恭喜，您的经验等级提升为[0]
+ *2：恭喜，您完成了任务[0]
+ *3：您的好友[0]经验等级提升为[1]
+ *4：您关注的人[0]经验等级提升为[1]
+ */
+message PNotify {
+	int32 type = 1;             // 通知类型
+	int64 time = 2;             // 时间
+	repeated string params = 3; // 填充参数列表
+}
+
 
 /*
- *@note 获取我的基础信息和任务列表
+ *@note 获取我的任务列表
  *@path /gamification/task/list
  *@method GET
  *@cookie uuid&token
- *@param language 用户语言
  *@return 成功返回PTaskList，失败返回PResult
  */
  
 /*
- *@note 获取我的基础信息和等级列表
- *@path /gamification/level/list
- *@method GET
- *@cookie uuid&token
- *@param language 用户语言
- *@return 成功返回PLevelList，失败返回PResult
- */
- 
-/*
- *@note 接任务
+ *@note 接受任务
  *@path /gamification/task/receive
  *@method POST
  *@cookie uuid&token
- *@param taskIds 任务ID（多个任务ID用","隔开）
- *@return 返回PResult
+ *@param taskId 任务ID
+ *@return 成功返回PTaskList，失败返回PResult
  */
  
-/*
- *@note 领奖励
- *@path /gamification/task/reward
+ /*
+ *@note 接受全部任务
+ *@path /gamification/task/receive/all
  *@method POST
  *@cookie uuid&token
- *@param taskId 任务ID
- *@return 返回PResult
+ *@return 成功返回PTaskList，失败返回PResult
+ */
+ 
+ 
+/*
+ *@note 获取通知消息列表
+ *@path /gamification/task/notify
+ *@method GET
+ *@cookie uuid&token
+ *@return 成功返回PNnotifyList，失败返回PResult
  */
 
-
-
-
+ 
 
 message PSubscribeArray {
     repeated PSubscribe subscribe = 1;
