@@ -4,7 +4,13 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "AchievementProtos";
 
 message PAchievementTypes {
-	repeated PAchievementType data = 1;
+	//总成就点数
+	int32 totalPoints = 1; 
+	
+	//已获得成就点数
+	int32 gainPoints = 2;
+
+	repeated PAchievementType data = 3;
 }
 
 message PAchievementType {
@@ -14,10 +20,10 @@ message PAchievementType {
 	//成就大类型名称
 	string title = 2;
 	
-	//总成就点数
+	//此类别总成就点数
 	int32 totalPoints = 3; 
 	
-	//已获得成就点数
+	//此类别已获得成就点数
 	int32 gainPoints = 4;
 	
 	//子成就
@@ -35,18 +41,22 @@ message PAchievementSubType {
 	string desc = 3;
 
 	//达成可获得的成就点
-	int32 points;
+	int32 points = 5;
 
 	//完成进度
-	int32 complete;
-	int32 total;
+	int32 complete = 6;
+	int32 total = 7;
 	
 	//达成时间，unix时间戳
-	int64 time;
+	int64 time = 8;
 }
 
 message PAchievementPKTypes{
-	repeated PAchievementType data = 1;
+	//双方已获得成就点数
+	int32 myPoints = 1;
+	int32 hePoints = 2;
+
+	repeated PAchievementType data = 3;
 }
 
 message PAchievementPKType {
@@ -76,7 +86,7 @@ message PAchievementPKSubType {
 	int32 hePoints = 4;
 
 	//达成时间，unix时间戳
-	int64 time;
+	int64 time = 5;
 }
 
 /*
