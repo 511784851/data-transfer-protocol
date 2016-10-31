@@ -1,10 +1,7 @@
 syntax = "proto3";
-
 package common;
-
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "TaskProtos";
-
 
 message PTaskUserBasic {
 	int32 level = 1;                     // 经验等级（1-9依次为：新手、菜鸟、青铜、白银、黄金、白金、钻石、大师、王者）
