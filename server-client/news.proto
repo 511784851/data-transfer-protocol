@@ -179,7 +179,7 @@ message PSubjectSearchList {
  */
 message PStrQueryRet {
 	int32    Next = 1;		//下一次查询的起点(偏移), 为0表示遍历结束
-	repeated string List = 2 //结果数组
+	repeated string List = 2; //结果数组
 }
 
 ////////////////////////////////////////////////////////////////
