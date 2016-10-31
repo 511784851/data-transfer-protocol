@@ -3,7 +3,7 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "OssProtos";
 
-// OSS STS凭证传输结构
+// OSS STS 凭证传输结构
 message PSts {
 	string accessKeyId = 1;
 	string accessKeySecret = 2;
