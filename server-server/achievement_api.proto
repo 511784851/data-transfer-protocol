@@ -15,3 +15,13 @@ message PAchievementAction {
 message PAchievementActions {
 	repeated PAchievementAction array = 1;
 }
+
+ /*
+ *@note 成就触发动作
+ *@path /v1/achievement/inside/action
+ *@method POST
+ *@cookie token&uuid
+ *@param from 服务名，消息来自哪个服务
+ *@body 消息数组结构 PAchievementActions
+ *@return PResult
+ */
