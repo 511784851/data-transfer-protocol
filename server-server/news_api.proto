@@ -116,3 +116,21 @@ message PNewsUserStatistic {
  *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
  *@return 返回 PResult
  */
+
+ /**
+ *@note   根据Id获取主题信息
+ *@path   /v1/news/inside/follow/subject
+ *@method GET
+ *@param  uuid   用户Id
+ *@param  subjectids  主题ID,多个Id以,分开
+ *@return 返回 PSubjectList,失败返回 PResult
+ */
+
+ /*
+ *@note 任务消息订阅
+ *@path /v1/news/inside/task/msg/subscribe
+ *@method POST
+ *@param from 调用的服务名
+ *@param PSubscribeArray 订阅消息
+ *@return 返回PResult
+ */
