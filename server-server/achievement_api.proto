@@ -1,0 +1,17 @@
+syntax = "proto3";
+package service; 
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "AchievementProtos";
+
+// 来自各个服务的消息
+message PAchievementAction {
+    string uuid = 1;  // 用户ID
+    int32 msgid = 2;  // 消息ID
+    int32 value = 3;  // 整数类型的值，如好友数、加入的社区数
+	bytes extra = 4;  // 额外的数据，根据msgid不同而不同
+}
+
+// 消息数组
+message PAchievementActions {
+	repeated PAchievementAction array = 1;
+}

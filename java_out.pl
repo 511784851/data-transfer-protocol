@@ -22,7 +22,7 @@ system($cmd);
 
 
 #################server_server protos#######################
-$server_server_protos = "server-server/friend_group.proto ";
+$server_server_protos = "server-server/achievement_api.proto ";
 $cmd = "protoc --java_out=".$output." ".$server_server_protos;
 system($cmd);
 
