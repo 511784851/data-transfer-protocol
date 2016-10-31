@@ -3,7 +3,7 @@ syntax = "proto3";
 package common;
 
 /*
- *@note 任务消息订阅
+ *@note 消息订阅
  *@path url（统一为： /v1/servicename/inside/task/msg/subscribe）
  *@method POST
  *@url param from 调用的服务名
@@ -12,8 +12,8 @@ package common;
  */
  
  /*
- *@note 任务消息回调
- *@path /gamification/task/msg/callback
+ *@note 消息回调
+ *@path /task/msg/callback
  *@method POST
  *@url param from 调用的服务名
  *@body PCallbackArray数据流
