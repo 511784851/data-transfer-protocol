@@ -26,7 +26,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/streaming.proto ".
 						"server-client/chat.proto ".
 						"server-client/task.proto ".
-						"server-client/edge.proto ";
+						"server-client/edge.proto ".
+						"server-client/achievement.proto";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
