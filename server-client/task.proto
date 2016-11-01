@@ -27,7 +27,7 @@ message PTaskInfo {
 	int32 taskid = 1;                    // 任务ID
 	int64 exp = 2;                       // 任务完成经验值
 	int32 state = 3;                     // 任务状态（0-未接受，1-进行中，2-可领奖，3-已完成）
-	int32 id = 4;                        // 任务类型ID
+	int32 type = 4;                      // 任务类型
 	int32 complete = 5;                  // 已完成数量
 	int32 num = 6;                       // 任务总数量
 	string desc = 7;                     // 任务描述
