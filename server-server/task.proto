@@ -13,7 +13,7 @@ package common;
  
  /*
  *@note 消息回调
- *@path /task/msg/callback
+ *@path /task/callback/msgid
  *@method POST
  *@url param from 调用的服务名
  *@body PCallbackArray数据流

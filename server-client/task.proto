@@ -24,13 +24,13 @@ message PTaskList {
 }
 
 message PTaskInfo {
-	int32 taskId = 1;                    // 任务ID
+	int32 taskid = 1;                    // 任务ID
 	int64 exp = 2;                       // 任务完成经验值
 	int32 state = 3;                     // 任务状态（0-未接受，1-进行中，2-可领奖，3-已完成）
-	int32 type = 4;                      // 任务类型ID
+	int32 id = 4;                        // 任务类型ID
 	int32 complete = 5;                  // 已完成数量
 	int32 num = 6;                       // 任务总数量
-	string des = 7;                      // 任务描述
+	string desc = 7;                     // 任务描述
 }
 
 message PTaskLevelList {
@@ -46,7 +46,7 @@ message PTaskLevel {
 
 /*
  *@note 获取我的基础信息和任务列表
- *@path /task/list
+ *@path /task/user/list
  *@method GET
  *@cookie uuid&token
  *@param language 用户语言
@@ -55,7 +55,7 @@ message PTaskLevel {
  
 /*
  *@note 获取我的基础信息和等级列表
- *@path /task/level
+ *@path /task/user/level
  *@method GET
  *@cookie uuid&token
  *@param language 用户语言
@@ -64,7 +64,7 @@ message PTaskLevel {
  
 /*
  *@note 接任务
- *@path /task/receive
+ *@path /task/user/receive
  *@method POST
  *@cookie uuid&token
  *@param taskIds 任务ID（多个任务ID用","隔开）
@@ -73,7 +73,7 @@ message PTaskLevel {
  
 /*
  *@note 领奖励
- *@path /task/reward
+ *@path /task/user/reward
  *@method POST
  *@cookie uuid&token
  *@param taskId 任务ID
