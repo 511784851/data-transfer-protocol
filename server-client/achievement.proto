@@ -47,7 +47,7 @@ message PAchievementSubType {
 	int32 complete = 6;
 	int32 total = 7;
 	
-	//达成时间，unix时间戳
+	//达成时间，unix时间戳，秒
 	int64 time = 8;
 }
 
@@ -56,7 +56,7 @@ message PAchievementPKTypes{
 	int32 myPoints = 1;
 	int32 hePoints = 2;
 
-	repeated PAchievementType data = 3;
+	repeated PAchievementPKType data = 3;
 }
 
 message PAchievementPKType {
@@ -85,7 +85,7 @@ message PAchievementPKSubType {
 	int32 myPoints = 3;
 	int32 hePoints = 4;
 
-	//达成时间，unix时间戳
+	//达成时间，unix时间戳，秒
 	int64 time = 5;
 }
 
