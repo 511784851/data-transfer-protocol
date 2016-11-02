@@ -196,8 +196,8 @@ message PCommentBool {
  *@return 返回PStringList,失败返回PbResult
  */
 
- /*
- *@note 查询评论是否被用户赞/踩过
+/*
+ *@note 查询评论是否被用户赞/踩过，并返回赞、踩数
  *@path /comment/vote/exist
  *@method GET
  *@cookie token&uuid

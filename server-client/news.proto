@@ -374,9 +374,9 @@ message PStrQueryRet {
  *@param  votemax	 过滤条件:点赞数最大值.
  *@param  timestart  过滤条件:起始时间.格式为UTC时间的time.RFC3339字符串,如:2016-09-27T01:27:48Z
  *@param  timeend   过滤条件:结束时间.格式为UTC时间的time.RFC3339字符串,如:2016-09-27T01:27:48Z
- *@param offset 分页查询的起始微博ID,如果没有,默认为0
- *@param count  分页查询返回的最大条数,如果没有,默认为10,最大值1000
- *@return 成功返回 PStringList，失败返回 PResult
+ *@param  offset 分页查询的偏移,为上次查询返回的PStrQueryRet.Next,如果没有,默认为0
+ *@param  count  分页查询返回的最大条数,如果没有,默认为10,最大值50
+ *@return 成功返回 PStrQueryRet ，失败返回 PResult
  */
 
  /**
