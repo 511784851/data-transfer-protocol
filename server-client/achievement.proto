@@ -120,8 +120,10 @@ message PAchievementFriend {
 	string name = 2;
 	//好友头像URL
 	string icon = 3;
+	//用户等级
+	int32 level = 4;
 	//好友成就点数
-	int32 points = 4;
+	int32 points = 5;
 }
 
 /*
