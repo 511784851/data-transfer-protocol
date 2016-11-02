@@ -75,7 +75,7 @@ message PAchievementPKType {
 }
 
 message PAchievementPKSubType {
-	// 成就子类型ID
+	//成就子类型ID
 	int32 id = 1;
 
 	//成就标题
@@ -86,7 +86,8 @@ message PAchievementPKSubType {
 	int32 hePoints = 4;
 
 	//达成时间，unix时间戳，秒
-	int64 time = 5;
+	int64 myTime = 5;
+	int64 heTime = 6;
 }
 
 /*
@@ -106,4 +107,29 @@ message PAchievementPKSubType {
  *@param target 被PK的用户ID
  *@param lang 客户端语言
  *@return 成功返回PAchievementPKTypes，失败返回PResult
+ */
+
+message PAchievementFriends {
+	repeated PAchievementFriend data = 1;
+}
+
+message PAchievementFriend {
+	//UUID
+	string uuid = 1;
+	//好友昵称
+	string name = 2;
+	//好友头像URL
+	string icon = 3;
+	//好友成就点数
+	string points = 4;
+}
+
+/*
+ *@note 好列列表
+ *@path /v1/achievement/friend
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号，从1开始
+ *@param pagesize 每页显示数量
+ *@return 成功返回PAchievementFriends，失败返回PResult
  */
