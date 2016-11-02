@@ -121,7 +121,7 @@ message PAchievementFriend {
 	//好友头像URL
 	string icon = 3;
 	//好友成就点数
-	string points = 4;
+	int32 points = 4;
 }
 
 /*
