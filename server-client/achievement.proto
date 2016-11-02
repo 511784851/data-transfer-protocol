@@ -131,5 +131,6 @@ message PAchievementFriend {
  *@cookie token&uuid
  *@param pageindex 页号，从1开始
  *@param pagesize 每页显示数量
+ *@param keyword 搜索关键字，可为空
  *@return 成功返回PAchievementFriends，失败返回PResult
  */
