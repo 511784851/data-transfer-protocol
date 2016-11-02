@@ -59,7 +59,7 @@ message PTaskLevel {
  *@method GET
  *@cookie uuid&token
  *@param language 用户语言
- *@return 成功返回PLevelList，失败返回PResult
+ *@return 成功返回PTaskLevelList，失败返回PResult
  */
  
 /*
