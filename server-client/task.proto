@@ -80,7 +80,16 @@ message PTaskLevel {
  *@return 返回PResult
  */
 
-
+/*
+ *@note 开启APP权限通知
+ *@path /task/callback/app
+ *@method POST
+ *@cookie uuid&token
+ *@param type 任务类型（4070：开启电话簿访问权限）
+ *@return 返回PResult
+ */
+ 
+ 
 
 
 
