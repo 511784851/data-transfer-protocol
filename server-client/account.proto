@@ -96,6 +96,7 @@ message PUserBase {
   string RealName = 9;				// 真实姓名
   string HeadImgURL = 10;     		// 头像地址
   string UserResume = 11;			// 简介
+  string Language = 12;             // 语言
 }
 
 // 用户基础信息列表
