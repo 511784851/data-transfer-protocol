@@ -17,7 +17,8 @@ news_follow 		// 关注我
 news_upvote 		// 帖子点赞
 news_at         	// 帖子@用户
 community_invite	// 邀请好友加入社区
-streaming  //第三方直播提醒 
+streaming  			// 第三方直播提醒 
+achievement			// 达成成就
 */
 
 /*=====================================*/
@@ -219,6 +220,31 @@ message PStreamingMsg {
 message PStreamingMsgList {
   repeated PStreamingMsg list = 1;
 }
+
+
+//成就达成通知消息
+message PAchievementMsg {
+	//消息id 
+	int64 messageId = 1;
+	
+	//是谁达成了
+	PUserBase who = 2;
+	
+	//成就名称
+	string achievementName = 3;
+	
+	//达成时间
+	int64 time = 4;
+	
+	//是否好友
+	bool isFriend = 5;			
+}
+
+//成就达成通知消息列表
+message PAchievementMsgList {
+  repeated PAchievementMsg list = 1; //最多50个
+}
+
 
 /*=====================================*/
 //API定义

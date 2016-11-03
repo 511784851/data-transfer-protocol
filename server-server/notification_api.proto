@@ -9,7 +9,7 @@ message PPushMsg {
 	string type = 5;			  // 推送消息类型，见 notification.proto
 	int64 time = 6;				  // 推送消息产生时间
 	string content = 7; 		  // 客户端推送显示的内容
-	repeated string contentEx = 8;// 扩展数据
+	repeated string contentArgs = 8;// content中的参数数据
 }
 
 // 关注通知元消息
@@ -55,6 +55,13 @@ message PNotifyBaseMsgList {
 message PStreamingMsgMeta {
 	string uuid = 1;//直播者uuid
   	int64 msgId = 2;//本消息id
+}
+
+//成就消息元信息
+message PAchievementMsgMeta {
+	string uuid = 1;
+	//成就ID
+	int32 aid = 2;
 }
 
 //通知语言变量列表
