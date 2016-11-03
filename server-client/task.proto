@@ -58,6 +58,12 @@ message PTaskRankingUser {
 	int32 num = 5;                       // 名次
 }
 
+message PTaskUserPk {
+	PTaskUserBasic userBasic = 1;        // 用户基础信息
+	PTaskUserBasic pkUserBasic = 2;      // 对方用户基础信息
+	int32 userTaskTotol = 3;             // 自己已完成任务总数
+	int32 pkUserTaskTotol = 4;           // 对方已完成任务总数
+}
 
 
 /*
@@ -110,10 +116,21 @@ message PTaskRankingUser {
  *@path /task/user/ranking
  *@method GET
  *@cookie uuid&token
+ *@param language 用户语言
  *@param type 任务类型（0：总排名，1:好友,2:关注）
  *@return 成功返回PTaskRanking，失败返回PResult
  */
 
+ /*
+ *@note 获取PK
+ *@path /task/user/pk
+ *@method GET
+ *@cookie uuid&token
+ *@param language 用户语言
+ *@param pk_uuid 要PK的用户uuid
+ *@return 成功返回PTaskUserPk，失败返回PResult
+ */
+ 
 
 
 message PSubscribeArray {
