@@ -44,6 +44,22 @@ message PTaskLevel {
 	int64 maxExp = 4;                    // 经验值范围（大）
 }
 
+message PTaskRanking {
+	PTaskUserBasic userBasic = 1;        // 用户基础信息
+	int32 num = 2;                       // 用户排名多少位
+	repeated PTaskRankingUser user = 3;  // 用户列表
+}
+
+message PTaskRankingUser {
+	string uuid = 1;                     // 用户uuid
+	string nickname = 2;                 // 用户昵称
+	string headimg = 3;                  // 用户头像url
+	int64 exp = 4;                       // 用户经验值
+	int32 num = 5;                       // 名次
+}
+
+
+
 /*
  *@note 获取我的基础信息和任务列表
  *@path /task/user/list
@@ -89,7 +105,14 @@ message PTaskLevel {
  *@return 返回PResult
  */
  
- 
+ /*
+ *@note 获取排名
+ *@path /task/user/ranking
+ *@method GET
+ *@cookie uuid&token
+ *@param type 任务类型（0：总排名，1:好友,2:关注）
+ *@return 成功返回PTaskRanking，失败返回PResult
+ */
 
 
 
