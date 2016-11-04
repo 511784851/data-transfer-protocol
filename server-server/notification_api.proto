@@ -57,11 +57,14 @@ message PStreamingMsgMeta {
   	int64 msgId = 2;//本消息id
 }
 
-//成就消息元信息
-message PAchievementMsgMeta {
+//任务和成就消息元信息
+message PGameMsgMeta {
 	string uuid = 1;
 	//成就ID
 	int32 aid = 2;
+	
+	//任务部分的字段从6开始编码
+	//...
 }
 
 //通知语言变量列表
