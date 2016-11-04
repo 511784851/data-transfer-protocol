@@ -16,8 +16,11 @@ social_accept 		// 好友申请
 news_follow 		// 关注我
 news_upvote 		// 帖子点赞
 news_at         	// 帖子@用户
-community_invite	// 邀请好友加入社区
-streaming  //第三方直播提醒 
+community_invite	// 社区邀请
+streaming           // 第三方提醒
+achievement         // 达成成就
+task                // 游戏化任务
+achievement_task    // 达成成就 和 游戏化任务
 */
 
 /*=====================================*/
@@ -25,21 +28,21 @@ streaming  //第三方直播提醒
 
 message SimpleUser {
   /*保留1~4用于扩展*/ 
-  int32 level = 5;		// 用户等级
+  int32 level = 5;		    // 用户等级
   string uuid = 6;        	// 服务端标志用户的唯一id
   string username = 7;     	// 用户名，唯一
-  string nickname = 8;      	// 昵称
-  string headImgURL = 9;     	// 头像地址
+  string nickname = 8;      // 昵称
+  string headImgURL = 9;    // 头像地址
 }
 
 // 帖子评论通知消息
 message NotifyComment {
-  int64 messageId = 1; 		//消息id 
+  int64 messageId = 1; 		    //消息id 
   SimpleUser commentUser = 2;	//评论的用户
-  PComment comment = 3;		//评论
-  PPostInfo article = 4; 	//评论相关的news
-  int64 time = 5;		//评论的时间
-  int32 status = 6; 		//0：未读；1：已读
+  PComment comment = 3;		    //评论
+  PPostInfo article = 4; 	    //评论相关的news
+  int64 time = 5;		        //评论的时间
+  int32 status = 6; 		    //0：未读；1：已读
 }
 
 // 帖子评论通知消息
