@@ -55,8 +55,13 @@ message PAchievementPKTypes{
 	//双方已获得成就点数
 	int32 myPoints = 1;
 	int32 hePoints = 2;
+	
+	//he的头像昵称、游戏化等级信息
+	string nickname = 3;
+	string icon = 4;
+	string level = 5;
 
-	repeated PAchievementPKType data = 3;
+	repeated PAchievementPKType data = 6;
 }
 
 message PAchievementPKType {
