@@ -60,7 +60,8 @@ message PStreamingMsgMeta {
 //任务和成就消息元信息
 message PGameMsgMeta {
 	//0表示成就信息  1表示任务信息
-	string tp = 1;
+	int32 tp = 1;
+	
 	string uuid = 2;
 
 	//成就部分的信息
