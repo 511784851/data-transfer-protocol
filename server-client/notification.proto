@@ -223,6 +223,42 @@ message PStreamingMsgList {
   repeated PStreamingMsg list = 1;
 }
 
+
+//成就达成通知消息
+message PAchievementMsg {
+	//消息id 
+	int64 messageId = 1;
+	
+	//是谁达成了
+	PUserBase who = 2;
+	
+	//成就名称
+	string achievementName = 3;
+	
+	//达成时间
+	int64 time = 4;
+	
+	//是否好友
+	bool isFriend = 5;			
+}
+
+//任务通知消息
+message PTaskMsg {
+	
+}
+
+message PGameMsg {
+	int32 tp = 1; // 0表示PAchievementMsg，1表示PTaskMsg
+	PAchievementMsg m1 = 2;
+	PTaskMsg m2 = 3;
+}
+
+//成就达成通知消息列表
+message PGameMsgList {
+	  repeated PGameMsg list = 1;
+}
+
+
 /*=====================================*/
 //API定义
 

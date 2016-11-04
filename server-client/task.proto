@@ -44,6 +44,14 @@ message PTaskLevel {
 	int64 maxExp = 4;                    // 经验值范围（大）
 }
 
+message PTaskUserPk {
+	PTaskUserBasic userBasic = 1;        // 用户基础信息
+	PTaskUserBasic pkUserBasic = 2;      // 对方用户基础信息
+	int32 userTaskTotol = 3;             // 自己已完成任务总数
+	int32 pkUserTaskTotol = 4;           // 对方已完成任务总数
+}
+
+
 /*
  *@note 获取我的基础信息和任务列表
  *@path /task/user/list
@@ -89,8 +97,27 @@ message PTaskLevel {
  *@return 返回PResult
  */
  
+ /*
+ *@note 排行榜
+ *@path /task/user/rank
+ *@method GET
+ *@cookie token&uuid
+ *@param scope 统计范围 "friend"|"follower"|"public"
+ *@param language 用户语言
+ *@return 成功返回PRank（PRank中rank=-1，表示未进入排行）, 失败返回PResult
+ */
  
 
+ /*
+ *@note 获取PK
+ *@path /task/user/pk
+ *@method GET
+ *@cookie uuid&token
+ *@param language 用户语言
+ *@param pk_uuid 要PK的用户uuid
+ *@return 成功返回PTaskUserPk，失败返回PResult
+ */
+ 
 
 
 message PSubscribeArray {
