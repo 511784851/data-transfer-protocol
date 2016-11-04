@@ -59,7 +59,7 @@ message PAchievementPKTypes{
 	//he的头像昵称、游戏化等级信息
 	string nickname = 3;
 	string icon = 4;
-	string level = 5;
+	int32 level = 5;
 
 	repeated PAchievementPKType data = 6;
 }
