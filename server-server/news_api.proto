@@ -134,3 +134,14 @@ message PNewsUserStatistic {
  *@param PSubscribeArray 订阅消息
  *@return 返回PResult
  */
+
+/**
+*@note   内部获取关注列表
+*@path   /v1/inside/news/follow
+*@method GET
+ *@param uuida 查找的用户uuid
+*@param  uuidb 被查找的用户uuid
+*@param  count 单次返回的记录条数，默认为20，最大不超过100。
+*@param  offset 下次查询的起点，为上一次结果中的PFollowOrFansList.Index. 默认为0。
+*@return 成功返回 PFollowOrFansList ，失败返回 PResult
+*/
