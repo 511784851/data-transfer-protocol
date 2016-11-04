@@ -240,9 +240,20 @@ message PAchievementMsg {
 	bool isFriend = 5;			
 }
 
+//任务通知消息
+message PTaskMsg {
+	
+}
+
+message PGameMsg {
+	int32 tp = 1; // 0表示PAchievementMsg，1表示PTaskMsg
+	PAchievementMsg m1 = 2;
+	PTaskMsg m2 = 3;
+}
+
 //成就达成通知消息列表
-message PAchievementMsgList {
-  repeated PAchievementMsg list = 1; //最多50个
+message PGameMsgList {
+	  repeated PGameMsg list = 1;
 }
 
 
