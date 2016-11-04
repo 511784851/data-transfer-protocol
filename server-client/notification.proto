@@ -249,8 +249,8 @@ message PTaskMsg {
 
 message PGameMsg {
 	int32 tp = 1; // 0表示PAchievementMsg，1表示PTaskMsg
-	PAchievementMsg m1 = 2;
-	PTaskMsg m2 = 3;
+	PAchievementMsg achievement = 2;
+	PTaskMsg task = 3;
 }
 
 //成就达成通知消息列表
