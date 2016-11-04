@@ -245,6 +245,9 @@ message PGameMsg {
 	
 	//任务部分定义，从11开始
 	//...
+	
+	int32 level = 11; // 等级
+	string levelNmae = 12;// 等级名称
 }
 
 //成就达成通知消息列表

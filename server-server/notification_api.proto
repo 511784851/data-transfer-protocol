@@ -72,6 +72,9 @@ message PGameMsgMeta {
 	
 	//任务部分的字段从6开始编码
 	//...
+	
+	//等级ID
+	int32 level = 6; // 等级
 }
 
 //通知语言变量列表
