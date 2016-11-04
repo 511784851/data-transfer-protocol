@@ -51,6 +51,16 @@ message PTaskUserPk {
 	int32 pkUserTaskTotol = 4;           // 对方已完成任务总数
 }
 
+message PExpLevelList {
+	repeated PExpLevel expLevel = 1;     // 等级列表
+}
+message PExpLevel {
+	int32 id = 1;                        // 等级ID
+	string titleSc = 2;                  // 等级中文繁体
+	string titleTc = 3;                  // 等级中文简体
+	string titleEn = 4;                  // 等级英文
+	string titleKr = 5;                  // 等级韩文
+}
 
 /*
  *@note 获取我的基础信息和任务列表
