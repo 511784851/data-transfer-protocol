@@ -1,7 +1,7 @@
 syntax = "proto3";
 package service;
 option java_package = "com.blemobi.sep.probuf";
-option java_outer_classname = "NotificationProtos";
+option java_outer_classname = "NotificationApiProtos";
 
 // 服务之间推送消息定义
 message PPushMsg {
