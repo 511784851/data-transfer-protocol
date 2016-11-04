@@ -230,18 +230,18 @@ message PGameMsg {
 	//达成时间
 	int64 time = 2;
 	
-	//消息主体
-	PUserBase who = 3;
+	string uuid = 3;
+	string nickname = 4;
 	
 	//是否好友
-	bool isFriend = 4;
+	bool isFriend = 5;
 	
 	//0表示PAchievementMsg，1表示PTaskMsg
-	int32 tp = 5; 
+	int32 tp = 6; 
 	
-	//成就部分定义，占用6~10
+	//成就部分定义，占用7~10
 	//成就名称
-	string achievementName = 6;
+	string achievementName = 10;
 	
 	//任务部分定义，从11开始
 	//...
