@@ -248,6 +248,8 @@ message PGameMsg {
 	
 	int32 level = 11; // 等级
 	string levelNmae = 12;// 等级名称
+	
+	int32 status = 20;  //状态(0:未读,1:已读)
 }
 
 //成就达成通知消息列表
