@@ -61,7 +61,7 @@ message PMember {
 
 
 message PEachMsg {
-	string receiverUUID = 1;		
+	string receiverUUID = 1;		//指定消息接收的成员uuid列表,成员之间用逗号(,)隔开。
 	string alertContent = 2;		
 	string info = 3;				
 }
