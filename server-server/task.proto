@@ -20,6 +20,15 @@ package common;
  *@return 成功返回PInt64List(-1表示永久，0表示取消订阅，其它表示失效时间的时间戳)，失败返回PResult
  */
  
+  /*
+ *@note 用户基础信息变更回调
+ *@path /task/callback/userBase
+ *@method POST
+ *@url param from 调用的服务名
+ *@body PUserBaseList数据流（PUserBase中用户昵称，头像，等级，语言必须有）
+ *@return 返回PResult
+ */
+ 
  /*
  *@note 获取等级列表
  *@path /task/callback/level
