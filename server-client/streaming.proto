@@ -39,12 +39,13 @@ message PStreamingManualList {
 
 // 第三方直播通知直播记录
 message PStreamingLive {
-    string anchor = 1; // 主播uuid
-    PStreamingRoom room = 2; // 直播房间
-    int64 liveTime = 3; // 直播时间,unix时间戳,精确到秒
-    int64 noticeTime = 4; // 提醒时间,unix时间戳,精确到秒
-    int64 clickCount = 5; // 点击人数
-    bool isOpen = 6; // 是否进行中
+    string id = 1; // 记录id
+    string anchor = 2; // 主播uuid
+    PStreamingRoom room = 3; // 直播房间
+    int64 liveTime = 4; // 直播时间,unix时间戳,精确到秒
+    int64 noticeTime = 5; // 提醒时间,unix时间戳,精确到秒
+    int64 clickCount = 6; // 点击人数
+    bool isOpen = 7; // 是否进行中
 }
 
 message PStreamingLiveList {
@@ -126,7 +127,7 @@ message PStreamingAnchorList {
  *@cookie token&uuid 登录用户信息
  *@param status 0表示关闭,其他表示开启
  *@param scope all表示全部网站,website表示指定网站(直播平台),anchor表示指定主播
- *@param value scope为all,忽略此参数,scope为website,此参数为网站名称,scope为anchor,此参数为主播uuid
+ *@param value scope为all,忽略此参数,scope为website,此参数为网站名称,多个用逗号隔开,scope为anchor,此参数为主播uuid,多个用逗号隔开
  *@return 返回PResult
  */
 
