@@ -9,7 +9,7 @@ package service;
  *@path /streaming-notification/websites
  *@method GET
  *@param from 调用方
- *@return 成功返回PWebSiteList,失败返回PResult
+ *@return 成功返回PStreamingWebSiteList,失败返回PResult
  */
 
 /*
@@ -51,15 +51,15 @@ package service;
  */
 
 /*
- *@note 分页获取直播历史
- *@uri /streaming-notification/live/history
+ *@note 分页获取直播记录
+ *@uri /streaming-notification/live/list
  *@param GET
  *@param from 调用方
  *@param scope anchor表示主播,time表示时间,click表示点击人数,website表示网站直播平台
  *@param value 
     scope为anchor,参数为主播的uuid,
-    scope为time,获取早于value代表的时间,
-    scope为click,获取小于value代表的人数,-1是大到小排序,-2是小大到排序,
+    scope为time,获取早于value代表的时间,unix时间戳,精确到秒,-1是大到小排序,-2是小到大排序
+    scope为click,获取小于value代表的人数,-1是大到小排序,-2是小到大排序
     scope为website,参数为网站直播平台名称,
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
@@ -74,7 +74,7 @@ package service;
  *@param scope anchor表示主播,live表示直播次数,website表示网站直播平台
  *@param value 
     scope为anchor,参数为主播的uuid,
-    scope为live,获取小于value代表的次数,-1是大到小排序,-2是小大到排序,
+    scope为live,获取小于value代表的次数,-1是大到小排序,-2是小到大排序,
     scope为website,参数为网站直播平台名称,
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]

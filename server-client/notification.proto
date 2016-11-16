@@ -209,7 +209,7 @@ message PNotifySetting {
 // 第三方直播消息
 message PStreamingMsg {
   string messageId = 1; //消息id
-  repeated PStreamingLiveInfo list = 2; //直播内容
+  PStreamingLiveList lives = 2; //直播内容
 }
 
 // 第三方直播消息列表
