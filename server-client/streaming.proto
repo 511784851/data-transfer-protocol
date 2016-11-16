@@ -16,7 +16,7 @@ message PWebSiteList {
 // 第三方直播通知房间信息
 message PStreamingRoomInfo {
     PWebSiteInfo webSite = 1; // 网站(直播平台)
-    string room = 2; // 房间号
+    string Number = 2; // 房间号
     string url = 3; // 房间url
 }
 
@@ -27,7 +27,7 @@ message PStreamingRoomList {
 // 第三方直播通知主播手动提醒通知
 message PStreamingManualInfo {
     string anchor = 1; // 主播uuid
-    PStreamingRoomInfo room = 2; // 房间号
+    PStreamingRoomInfo room = 2; // 房间
     int64 liveTime = 3; // 直播时间,unix时间戳,精确到秒
     int64 noticeTime = 4; // 提醒时间,unix时间戳,精确到秒
 }
@@ -65,14 +65,14 @@ message PStreamingConfigList {
 // 第三方直播通知主播信息
 message PStreamingAnchor {
     string uuid = 1; // 主播uuid
-    PStreamingRoomList room = 2; // 房间列表
+    PStreamingRoomList rooms = 2; // 房间列表
     int64 dayCount = 3; // 每天通知次数限制
     int64 manualDayCount = 4; // 每天手动通知次数限制
     int64 liveCount = 5; // 直播次数
     int64 lastPushTime = 6; // 最后一次通知时间,unix时间戳,精确到秒
     PStreamingLiveInfo lastLive = 7; // 最后一次直播
     bool isShield = 8; // 监管平台是否屏蔽
-    bool isOpen = 9; // 是否开启直醒通知
+    bool isClose = 9; // 是否开启直醒通知
 }
 
 // 第三方直播通知主播列表
