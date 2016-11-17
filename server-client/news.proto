@@ -186,8 +186,8 @@ message PStrQueryRet {
  *@note 用户关注的所有vo的列表，所有好友的列表
  */
 message PCanAtUserList {
-	repeated PUserBase VOList = 1;
-	repeated PUserBase FriendList = 2;
+	PUserBaseList VOList = 1;
+	PUserBaseList FriendList = 2;
 }
 
 ////////////////////////////////////////////////////////////////
