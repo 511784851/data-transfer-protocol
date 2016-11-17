@@ -14,6 +14,11 @@ message PPushMsg {
 	repeated string contentArgs = 8;// content中的参数数据
 }
 
+// 批量推送消息列表
+message PPushMsgList {
+	repeated PPushMsg list = 1;  //消息列表
+}
+
 // 关注通知元消息
 message NotifyFollowMeta {
   string uuidA = 1; 			//被关注者id
