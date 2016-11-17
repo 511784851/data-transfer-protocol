@@ -4,7 +4,7 @@
  *@method POST
  *@url param from 发起调用的服务名
  *@body PBinaryMsgList 序列化的二进制数据；具体PBinaryMsg存储的数据，要根据实际的MsgType以及from字段来解析
- *@return 返回 PResult; 
+ *@return 返回 PResult;
  */
 
 // login 推送的消息有
@@ -12,4 +12,15 @@
     PBinaryMsg.MsgType = 0
     PBinaryMsg.MsgData = proto.Marshal(&PStringList{List: []string{uuid, token}})
 
+// account 推送消息有
+1. 同步用户等级更改消息，account将会在用户等级更改时，通知news、achievement服务
+    PBinaryMsg.MsgType = 0
+    PBinaryMsg.MsgData = proto.Marshal(&PStringList{List: []string{uuid1, uuid2}})
 
+2. 同步用户PUserBase更改消息，account将会在用户PUserBase更改时，通知news、achievement服务
+    PBinaryMsg.MsgType = 1
+    PBinaryMsg.MsgData = proto.Marshal(&PStringList{List: []string{uuid1, uuid2}})
+
+3. 同步用户PUserBase的消息，account将会在用户PUserBase更改时，推送PUserBase给task服务
+    PBinaryMsg.MsgType = 2
+    PBinaryMsg.MsgData = proto.Marshal(&PUserBaseList{})
