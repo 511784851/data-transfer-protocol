@@ -24,18 +24,6 @@ message PStreamingRoomList {
     repeated PStreamingRoom list = 1;
 }
 
-// 第三方直播通知主播手动提醒通知
-message PStreamingManual {
-    string anchor = 1; // 主播uuid
-    PStreamingRoom room = 2; // 房间
-    int64 liveTime = 3; // 直播时间,unix时间戳,精确到秒
-    int64 noticeTime = 4; // 提醒时间,unix时间戳,精确到秒
-}
-
-
-message PStreamingManualList {
-    repeated PStreamingManual list = 1;
-}
 
 // 第三方直播通知直播记录
 message PStreamingLive {
@@ -46,6 +34,7 @@ message PStreamingLive {
     int64 noticeTime = 5; // 提醒时间,unix时间戳,精确到秒
     int64 clickCount = 6; // 点击人数
     bool isOpen = 7; // 是否进行中
+    bool isManual = 8; // 是否手动增加
 }
 
 message PStreamingLiveList {
@@ -69,7 +58,7 @@ message PStreamingAnchor {
     PStreamingRoomList rooms = 2; // 房间列表
     int64 dayCount = 3; // 每天通知次数限制
     int64 manualDayCount = 4; // 每天手动通知次数限制
-    int64 liveCount = 5; // 直播次数
+    int64 liveCount = 5; // 直播次数,一直累积
     int64 lastPushTime = 6; // 最后一次通知时间,unix时间戳,精确到秒
     PStreamingLive lastLive = 7; // 最后一次直播
     bool isShield = 8; // 监管平台是否屏蔽
@@ -93,41 +82,50 @@ message PStreamingAnchorList {
 
 /*
  *@note 分页获取主播手动提醒通知
- *@uri /streaming-notification/anchor/manual/broadcast
+ *@uri /streaming-notification/anchor/manual/notice
  *@param GET
  *@cookie token&uuid 登录用户信息
- *@param uuid 主播的uuid
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
- *@return 成功返回PStreamingManual, 失败返回PResult
+ *@return 成功返回PStreamingLiveList, 失败返回PResult
  */
 
 /*
  *@note 增加主播手动提醒通知
- *@uri /streaming-notification/anchor/manual/broadcast
+ *@uri /streaming-notification/anchor/manual/notice
  *@param POST
  *@cookie token&uuid 登录用户信息
- *@param PStreamingManual
+ *@param PStreamingLive
  *@return 返回PResult
  */
 
 /*
  *@note 撤销/删除主播手动提醒通知
- *@uri /streaming-notification/anchor/manual/broadcast
+ *@uri /streaming-notification/anchor/manual/notice
  *@param DELETE
  *@cookie token&uuid 登录用户信息
- *@param PStreamingManual
+ *@param PStreamingLive
  *@return 返回PResult
  */
 
 /*
- *@note 粉丝开关提醒通知
- *@uri /streaming-notification/fan/change/broadcast
+ *@note 分页获取主播信息
+ *@uri /streaming-notification/fan/anchor/list
  *@param GET
  *@cookie token&uuid 登录用户信息
- *@param status 0表示关闭,其他表示开启
- *@param scope all表示全部网站,website表示指定网站(直播平台),anchor表示指定主播
- *@param value scope为all,忽略此参数,scope为website,此参数为网站名称,多个用逗号隔开,scope为anchor,此参数为主播uuid,多个用逗号隔开
+ *@param offset 偏移量,第一次填0,以后offoset=offset+count
+ *@param count 数量,默认值20,范围[15,30]
+ *@return 成功返回PStreamingAnchorList, 失败返回PResult
+ */
+
+/*
+ *@note 粉丝开关提醒通知
+ *@uri /streaming-notification/fan/change/setting
+ *@param POST
+ *@cookie token&uuid 登录用户信息
+ *@param all 0表示屏蔽所有,其他表示开启
+ *@param websites 屏蔽网站列表,网站名称,多个用逗号隔开
+ *@param anchors 屏蔽主播列表,主播uuid,多个用逗号隔开
  *@return 返回PResult
  */
 
