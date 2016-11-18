@@ -44,8 +44,9 @@ message PPrivacyAttentionList {
 /*
  *@note 取用户信息
  *@uri /account/user/profile
- *@cookie token&uuid
- *@param GET
+ *@method GET
+ *@param from 来源
+ *@param uuid 用户ID
  *@return 成功返回PUser，失败返回PResult;PUser定义见account.proto
  */
 

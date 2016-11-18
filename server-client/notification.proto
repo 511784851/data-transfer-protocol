@@ -6,6 +6,7 @@ option java_outer_classname = "NotificationProtos";
 import "news.proto";
 import "comment.proto";
 import "account.proto";
+import "streaming.proto";
 
 /*
 推送消息类型，
@@ -16,8 +17,11 @@ social_accept 		// 好友申请
 news_follow 		// 关注我
 news_upvote 		// 帖子点赞
 news_at         	// 帖子@用户
-community_invite	// 邀请好友加入社区
-streaming  //第三方直播提醒 
+community_invite	// 社区邀请
+streaming           // 第三方提醒
+achievement         // 达成成就
+task                // 游戏化任务
+achievement_task    // 达成成就 和 游戏化任务
 */
 
 /*=====================================*/
@@ -25,21 +29,21 @@ streaming  //第三方直播提醒
 
 message SimpleUser {
   /*保留1~4用于扩展*/ 
-  int32 level = 5;		// 用户等级
+  int32 level = 5;		    // 用户等级
   string uuid = 6;        	// 服务端标志用户的唯一id
   string username = 7;     	// 用户名，唯一
-  string nickname = 8;      	// 昵称
-  string headImgURL = 9;     	// 头像地址
+  string nickname = 8;      // 昵称
+  string headImgURL = 9;    // 头像地址
 }
 
 // 帖子评论通知消息
 message NotifyComment {
-  int64 messageId = 1; 		//消息id 
+  int64 messageId = 1; 		    //消息id 
   SimpleUser commentUser = 2;	//评论的用户
-  PComment comment = 3;		//评论
-  PPostInfo article = 4; 	//评论相关的news
-  int64 time = 5;		//评论的时间
-  int32 status = 6; 		//0：未读；1：已读
+  PComment comment = 3;		    //评论
+  PPostInfo article = 4; 	    //评论相关的news
+  int64 time = 5;		        //评论的时间
+  int32 status = 6; 		    //0：未读；1：已读
 }
 
 // 帖子评论通知消息
@@ -204,21 +208,49 @@ message PNotifySetting {
 
 // 第三方直播消息
 message PStreamingMsg {
-  string uuid = 1; //作者uuid
-  int64 messageId = 2; //消息id
-
-  int64 serial = 3; //序号(同一个直播消息,序号相同)
-  bool over = 4; //是否结束
-  string website = 5; //网站
-  string url = 6; //房间地址
-  string title = 7; //房间标题
-  int64 startTime = 8;//开始时间,unix秒数
+  string messageId = 1; //消息id
+  PStreamingLiveList lives = 2; //直播内容
 }
 
 // 第三方直播消息列表
 message PStreamingMsgList {
   repeated PStreamingMsg list = 1;
 }
+
+message PGameMsg {
+	//消息id 
+	int64 messageId = 1;
+	
+	//达成时间
+	int64 time = 2;
+	
+	string uuid = 3;
+	string nickname = 4;
+	
+	//是否好友
+	bool isFriend = 5;
+	
+	//0表示PAchievementMsg，1表示PTaskMsg
+	int32 tp = 6; 
+	
+	//成就部分定义，占用7~10
+	//成就名称
+	string achievementName = 10;
+	
+	//任务部分定义，从11开始
+	//...
+	
+	int32 level = 11; // 等级
+	string levelNmae = 12;// 等级名称
+	
+	int32 status = 20;  //状态(0:未读,1:已读)
+}
+
+//成就达成通知消息列表
+message PGameMsgList {
+	  repeated PGameMsg list = 1;
+}
+
 
 /*=====================================*/
 //API定义
@@ -251,7 +283,7 @@ message PStreamingMsgList {
  *@method POST
  *@url param msg_type 见 '推送消息类型'
  *@url param status 0为未读，1为已读
- *@body PMsgIDList
+ *@body PMsgIDList 如果body为空，则表示所有的MsgID，只能全部设为已读，不能全部设为未读
  *@cookie token&uuid
  *@return PResult
  */

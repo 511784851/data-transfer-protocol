@@ -20,6 +20,15 @@ package service;
  */
 
 /*
+ *@note 获取用户创建/管理的社区id
+ *@URL /v1/community/inside/communityid_ex
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param uuid 用户id
+ *@return 成功返回 PInt64List ，失败返回 PResult; list[0] 为社区id，list[1] 为是否创建者（1是创建者）
+ */
+
+/*
  *@note 通过社区id获取社区信息
  *@URL /v1/community/inside/communityinfo
  *@method GET

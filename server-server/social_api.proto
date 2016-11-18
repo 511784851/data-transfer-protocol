@@ -14,12 +14,23 @@ package service;
  *@note 分页获取好友列表
  *@path /social/listfriends
  *@method GET
- *@cookie token&uuid
+ *@param uuid 用户ID
  *@param start 从第几条开始加载
  *@param count 每次加载多少条
  *@param level 获取特定等级好友时指定的等级(0:普通用户,1:VIP,2:VIP+,3:VO),不传该参数时返回所有等级好友
  *@param from 发起调用的服务方
  *@return 成功PUserList, 失败PResult
+ */
+
+/*
+ *@note 分页获取好友列表
+ *@path /social/listfriendsex
+ *@method GET
+ *@param uuid 用户ID
+ *@param start 从第几条开始加载
+ *@param count 每次加载多少条
+ *@param from 发起调用的服务方
+ *@return 成功PUserBaseList, 失败PResult
  */
 
 /*
@@ -29,4 +40,75 @@ package service;
  *@param uuid 需要检查是否是好友的uuid query参数
  *@param uuids, 需要检查是否是好友的uuids列表,使用","分隔 query参数
  *@return 成功PBoolList, 失败PResult
+ */
+
+
+/*
+ *@note 获取被用户忽略的好友推荐
+ *@path /social/getignored
+ *@param uuid 用户 UUID
+ *@return 成功PManyUUID, 失败PResult
+ */
+
+/*
+ *@note 判断两个用户是否是好友
+ *@path /social/isfriend
+ *@method GET
+ *@param uuid1 需要检查是否是好友的uuid1 query参数
+ *@param uuid2 需要检查是否是好友的uuid2 query参数
+ *@return 好友"1", 非好友"0"
+ */
+
+/*
+ *@note 判断列表里的用户是否是好友
+ *@path /social/isfriends
+ *@method GET
+ *@param uuid 需要检查是否是好友的uuid query参数
+ *@param uuids, 需要检查是否是好友的uuids列表,使用","分隔 query参数
+ *@return 成功PBoolList, 失败PResult
+ */
+
+/*
+ *@note 判断列表里的用户是否是好友
+ *@path /social/isfriendlist
+ *@method GET
+ *@param uuid 需要检查是否是好友的uuid query参数
+ *@param uuids, 需要检查是否是好友的uuids列表,使用","分隔 query参数
+ *@return 好友"1", 非好友"0"
+ */
+
+/*
+ *@note 获取两个用户社交关系
+ *@path /social/relation
+ *@method GET
+ *@param uuid1 用户 A 的 UUID
+ *@param uuid2 用户 B 的 UUID
+ *@return 0: A --- B; 1: A --> B; 2: A <-- B; 3: A <-> B
+ */
+
+/*
+ *@note 获取某个用户和一组用户的社交关系列表
+ *@path /social/relationlist
+ *@method GET
+ *@param uuid 用户 A 的 UUID
+ *@param uuids 一组用户的uuid, 使用","分隔
+ *@return 0: A --- B; 1: A --> B; 2: A <-- B; 3: A <-> B
+ */
+
+/*
+ *@note 增加推荐好友
+ *@path /social/addrecommend
+ *@method POST
+ *@param uuid 用户 UUID
+ *@param targets,score 推荐的好友uuid数组及其分数，使用","分隔
+ *@return 失败PResult
+ */
+
+/*
+ *@note 任务消息订阅
+ *@path /v1/social/inside/task/msg/subscribe
+ *@method POST
+ *@uriParam from 调用的服务名
+ *@body PSubscribeArray数据流
+ *@return 返回PResult
  */

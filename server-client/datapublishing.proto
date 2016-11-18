@@ -233,7 +233,23 @@ message PGameList {
  *@param pageindex 页号
  *@param pagesize 页大小
  *@return 成功返回PCommunityBaseList，失败返回PResult
+ */
+
+/*
+ *@note 热门社区主题
+ *@path /datapublishing/community/subject/hot
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PSubjectList，失败返回PResult
  */ 
+
+/*
+ *@note 推荐社区主题
+ *@path /datapublishing/community/subject/recommend
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PSubjectList，失败返回PResult
+ */
  
 /*
  *@note 热门话题

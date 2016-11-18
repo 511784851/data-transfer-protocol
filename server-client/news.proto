@@ -30,10 +30,13 @@ message PPostInfo {
 	int64 collectCnt = 17;       //收藏数，上传时不用填
 	int64 voteCnt = 18;          //点赞数，上传时不用填
 	bool  vote = 19;             //自己是否点赞，上传时不用填
-	PAtUserList atusers = 20;   	//被@的用户列表
-	bool IsDelete = 21;			//帖子已经被用户删除
-	bool IsHide = 22;				//帖子正在被审核
+	PAtUserList atusers = 20;    //被@的用户列表
+	bool IsDelete = 21;			 //帖子已经被用户删除,上传时不用填
+	bool IsHide = 22;			 //帖子正在被审核,上传时不用填
     PRedPacketInfo RedPacket = 23;  //红包信息，上传时不用填
+    int32 leveltype = 24;         //用户等级,上传时不用填
+	bool IsPreView = 25;		  //预览标记,上传时不用填,true表示用于预览,发布后的帖子标记是false
+	PPostInfo refPost = 26;			 //引用的帖子,上传时只填帖子ID
 }
 
 // 被@的用户列表
@@ -159,11 +162,35 @@ message PSubject {
   	string ID = 2;			// 主题id
 	string Name = 3;		// 主题名字
 	string HeadImg = 4;		// 主题头像地址
+	bool IsFollowed = 5;    //是否已关注. true:已关注
+	bool IsSelf = 6;        //是自己的社区.true:是
 }
 
 // 主题信息列表
 message PSubjectList {
-	repeated PSubject List = 2; 		// 我关注的主题
+	repeated PSubject List = 2; 		//我关注的主题
+}
+
+// 主题搜索结果
+message PSubjectSearchList {
+	repeated PSubject MySubject = 2; 		//我关注的主题
+	repeated PSubject OtherSubject = 3; 	//其他主题
+}
+
+/*
+ *@note 批量传输字符串类型查询结果
+ */
+message PStrQueryRet {
+	int32    Next = 1;		//下一次查询的起点(偏移), 为0表示遍历结束
+	repeated string List = 2; //结果数组
+}
+
+/*
+ *@note 用户关注的所有vo的列表，所有好友的列表
+ */
+message PCanAtUserList {
+	PUserBaseList VOList = 1;
+	PUserBaseList FriendList = 2;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -241,7 +268,7 @@ message PSubjectList {
  *@path   /v1/news/guest/timeline
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp)
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
@@ -358,9 +385,9 @@ message PSubjectList {
  *@param  votemax	 过滤条件:点赞数最大值.
  *@param  timestart  过滤条件:起始时间.格式为UTC时间的time.RFC3339字符串,如:2016-09-27T01:27:48Z
  *@param  timeend   过滤条件:结束时间.格式为UTC时间的time.RFC3339字符串,如:2016-09-27T01:27:48Z
- *@param offset 分页查询的起始微博ID,如果没有,默认为0
- *@param count  分页查询返回的最大条数,如果没有,默认为10,最大值1000
- *@return 成功返回 PStringList，失败返回 PResult
+ *@param  offset 分页查询的偏移,为上次查询返回的PStrQueryRet.Next,如果没有,默认为0
+ *@param  count  分页查询返回的最大条数,如果没有,默认为10,最大值50
+ *@return 成功返回 PStrQueryRet ，失败返回 PResult
  */
 
  /**
@@ -383,20 +410,48 @@ message PSubjectList {
  *@return 返回 PSubjectList,失败返回 PResult
  */
 
- /**
- *@note   用户是否已经点赞过指定的帖子
+/**
+ *@note   帖子是否已经被用户点赞,返回点赞数
  *@path   /v1/news/vote/exist
  *@cookie token&uuid
  *@method GET
  *@param  postid 帖子ID
- *@return 返回 PBoolSingle,失败返回 PResult
+ *@return 返回 PPostInfo.失败返回 PResult
  */
 
-  /**
- *@note   判断用户A是否关注了用户B
+/**
+ *@note   判断用户A是否关注了用户B,返回B的粉丝数
  *@path   /v1/news/follow/relation
  *@cookie token&uuid   用户A的id
  *@method GET
  *@param  uuid 用户B的id
- *@return 返回 PBoolSingle,失败返回 PResult
+ *@return 返回 PRelation,失败返回 PResult
+ */
+
+ /**
+ *@note   获取微博帖子信息
+ *@path   /v1/news/post
+ *@cookie token&uuid
+ *@method GET
+ *@param  postid   微博帖子ID
+ *@return 成功返回 PPostInfo, 失败返回 PResult
+ */
+
+/**
+ *@note 搜索主题，对于"MyTimeline"的搜索结果是一次性返回(最多50条)
+ *@path  /v1/news/search/subject
+ *@method GET
+ *@cookie token&uuid
+ *@param  keyword 	 搜索关键字
+ *@param  offset 	 针对非"MyTimeline"的分页偏移,为已返回的结果数目
+ *@param  count 	 针对非"MyTimeline"的搜索结果条数
+ *@return 成功返回 PSubjectSearchList ，失败返回 PResult
+ */
+
+ /**
+ *@note   获取@用户的列表
+ *@path   /v1/news/at/userlist
+ *@cookie token&uuid
+ *@method GET
+ *@return 成功返回 PCanAtUserList, 失败返回 PResult
  */

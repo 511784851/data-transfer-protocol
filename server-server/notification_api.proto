@@ -1,14 +1,22 @@
 syntax = "proto3";
 package service;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "NotificationApiProtos";
 
 // 服务之间推送消息定义
 message PPushMsg {
-	bytes data = 2;				// 不同服务需要存储的推送内容
-	string fromUuid = 3;			// 推送消息发起者
-	repeated string toUuids = 4;	// 推送消息接受者
-	string type = 5;				// 推送消息类型，见 notification.proto
-	int64 time = 6;				// 推送消息产生时间
-	string content = 7; 			// 客户端推送显示的内容
+	bytes data = 2;				  // 不同服务需要存储的推送内容
+	string fromUuid = 3;		  // 推送消息发起者
+	repeated string toUuids = 4;  // 推送消息接受者
+	string type = 5;			  // 推送消息类型，见 notification.proto
+	int64 time = 6;				  // 推送消息产生时间
+	string content = 7; 		  // 客户端推送显示的内容
+	repeated string contentArgs = 8;// content中的参数数据
+}
+
+// 批量推送消息列表
+message PPushMsgList {
+	repeated PPushMsg list = 1;  //消息列表
 }
 
 // 关注通知元消息
@@ -34,7 +42,7 @@ message NotifyNewsAtMeta {
 // 社区邀请通知元消息
 message PNotifyCommunityInviteMeta {
 	int64 communityId = 1; 	// 邀请加入的社区的id
-	string uuid = 2;			// 发起邀请用户的请求
+	string uuid = 2;		// 发起邀请用户的请求
 }
 
 // 所有推送消息的基础信息
@@ -52,8 +60,25 @@ message PNotifyBaseMsgList {
 
 //直播消息元信息
 message PStreamingMsgMeta {
-	string uuid = 1;//直播者uuid
-  	int64 msgId = 2;//本消息id
+	string msgId = 1;//本消息id
+}
+
+//任务和成就消息元信息
+message PGameMsgMeta {
+	//0表示成就信息  1表示任务信息
+	int32 tp = 1;
+	
+	string uuid = 2;
+
+	//成就部分的信息
+	//成就ID
+	int32 aid = 3;
+	
+	//任务部分的字段从6开始编码
+	//...
+	
+	//等级ID
+	int32 level = 6; // 等级
 }
 
 //通知语言变量列表
@@ -67,7 +92,7 @@ message PNotifyLangVars {
  *@method POST
  *@param from 服务调用者
  *@body PPushMsg
- *@return 返回int32错误码
+ *@return PResult
  */
 
 /*

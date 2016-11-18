@@ -109,4 +109,20 @@ message PFloat64Single {
 }
 
 
+/*
+ *@note 带类型的二进制数据包，通过解析MsgType后再把MsgData反序列化为proto
+ */
+message PBinaryMsg {
+	int32 MsgType = 1;
+	bytes MsgData = 2;
+}
+
+/*
+ *@note PBinaryMsg的列表
+ */
+message PBinaryMsgList {
+	repeated PBinaryMsg List = 1;
+}
+
+
 

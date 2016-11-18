@@ -1,0 +1,143 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "AchievementProtos";
+
+message PAchievementTypes {
+	//总成就点数
+	int32 totalPoints = 1; 
+	
+	//已获得成就点数
+	int32 gainPoints = 2;
+
+	repeated PAchievementType data = 3;
+}
+
+message PAchievementType {
+	//成就大类型ID
+	int32 id = 1;
+	
+	//成就大类型名称
+	string title = 2;
+	
+	//此类别总成就点数
+	int32 totalPoints = 3; 
+	
+	//此类别已获得成就点数
+	int32 gainPoints = 4;
+	
+	//子成就
+	repeated PAchievementSubType sub = 5;
+}
+
+message PAchievementSubType {
+	// 成就子类型ID
+	int32 id = 1;
+
+	//成就标题
+	string title = 2;
+
+	//成就描述
+	string desc = 3;
+
+	//达成可获得的成就点
+	int32 points = 5;
+
+	//完成进度
+	int32 complete = 6;
+	int32 total = 7;
+	
+	//达成时间，unix时间戳，秒
+	int64 time = 8;
+}
+
+message PAchievementPKTypes{
+	//双方已获得成就点数
+	int32 myPoints = 1;
+	int32 hePoints = 2;
+	
+	//he的头像昵称、游戏化等级信息
+	string nickname = 3;
+	string icon = 4;
+	int32 level = 5;
+
+	repeated PAchievementPKType data = 6;
+}
+
+message PAchievementPKType {
+	//成就大类型ID
+	int32 id = 1;
+	
+	//成就大类型名称
+	string title = 2;
+	
+	//双方已获得成就点数
+	int32 myPoints = 3;
+	int32 hePoints = 4;
+	
+	//子成就
+	repeated PAchievementPKSubType sub = 5;
+}
+
+message PAchievementPKSubType {
+	//成就子类型ID
+	int32 id = 1;
+
+	//成就标题
+	string title = 2;
+
+	//双方已获得成就点数
+	int32 myPoints = 3;
+	int32 hePoints = 4;
+
+	//达成时间，unix时间戳，秒
+	int64 myTime = 5;
+	int64 heTime = 6;
+}
+
+/*
+ *@note 成就查看
+ *@path /v1/achievement/view
+ *@method GET
+ *@cookie token&uuid
+ *@param lang 客户端语言
+ *@return 成功返回PAchievementTypes，失败返回PResult
+ */
+
+/*
+ *@note 成就PK
+ *@path /v1/achievement/pk
+ *@method GET
+ *@cookie token&uuid
+ *@param target 被PK的用户ID
+ *@param lang 客户端语言
+ *@return 成功返回PAchievementPKTypes，失败返回PResult
+ */
+
+message PAchievementFriends {
+	repeated PAchievementFriend data = 1;
+}
+
+message PAchievementFriend {
+	//UUID
+	string uuid = 1;
+	//好友昵称
+	string name = 2;
+	//好友头像URL
+	string icon = 3;
+	//用户等级
+	int32 level = 4;
+	//好友成就点数
+	int32 points = 5;
+}
+
+/*
+ *@note 好列列表
+ *@path /v1/achievement/friend
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号，从1开始
+ *@param pagesize 每页显示数量
+ *@param keyword 搜索关键字，可为空
+ *@return 成功返回PAchievementFriends，失败返回PResult
+ */

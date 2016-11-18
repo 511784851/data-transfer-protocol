@@ -1,0 +1,151 @@
+syntax = "proto3";
+package common;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "TaskProtos";
+
+message PTaskUserBasic {
+	int32 level = 1;                     // 经验等级（1-9依次为：新手、菜鸟、青铜、白银、黄金、白金、钻石、大师、王者）
+	string levelName = 2;                // 经验等级名称（预留）
+	int64 exp = 3;                       // 经验值
+	int32 nextLevel = 4;                 // 下一个经验等级（如果=level表示已是最高等级）
+	string nextLevelName = 5;            // 下一个经验等级名称（预留）
+	int64 nextLevelExp = 6;              // 下一个经验等级的最低经验值
+	string nickname = 7;                 // 用户昵称
+	string headimg = 8;                  // 用户头像url
+}
+
+message PTaskList {
+	PTaskUserBasic userBasic = 1;        // 用户基础信息
+	int32 taskTotal = 2;                 // 任务总数（包括日常和主线）
+	int32 dailyTaskTotal = 3;            // 日常任务总数
+	int32 dailyTaskCompleteTotal = 4;    // 已完成日常任务数
+	repeated PTaskInfo mainTask = 5;     // 主线任务列表
+	repeated PTaskInfo dailyTask = 6;    // 日常任务列表
+}
+
+message PTaskInfo {
+	int32 taskid = 1;                    // 任务ID
+	int64 exp = 2;                       // 任务完成经验值
+	int32 state = 3;                     // 任务状态（0-未接受，1-进行中，2-可领奖，3-已完成）
+	int32 type = 4;                      // 任务类型
+	int32 complete = 5;                  // 已完成数量
+	int32 num = 6;                       // 任务总数量
+	string desc = 7;                     // 任务描述
+}
+
+message PTaskLevelList {
+	PTaskUserBasic userBasic = 1;        // 用户基础信息
+	repeated PTaskLevel taskLevel = 2;   // 等级列表
+}
+message PTaskLevel {
+	int32 id = 1;                        // 等级ID
+	string name = 2;                     // 等级名称
+	int64 minExp = 3;                    // 经验值范围（小）
+	int64 maxExp = 4;                    // 经验值范围（大）
+}
+
+message PTaskUserPk {
+	PTaskUserBasic userBasic = 1;        // 用户基础信息
+	PTaskUserBasic pkUserBasic = 2;      // 对方用户基础信息
+	int32 userTaskTotol = 3;             // 自己已完成任务总数
+	int32 pkUserTaskTotol = 4;           // 对方已完成任务总数
+}
+
+message PExpLevelList {
+	repeated PExpLevel expLevel = 1;     // 等级列表
+}
+message PExpLevel {
+	int32 id = 1;                        // 等级ID
+	string titleSc = 2;                  // 等级中文繁体
+	string titleTc = 3;                  // 等级中文简体
+	string titleEn = 4;                  // 等级英文
+	string titleKr = 5;                  // 等级韩文
+}
+
+/*
+ *@note 获取我的基础信息和任务列表
+ *@path /task/user/list
+ *@method GET
+ *@cookie uuid&token
+ *@param language 用户语言
+ *@return 成功返回PTaskList，失败返回PResult
+ */
+ 
+/*
+ *@note 获取我的基础信息和等级列表
+ *@path /task/user/level
+ *@method GET
+ *@cookie uuid&token
+ *@param language 用户语言
+ *@return 成功返回PTaskLevelList，失败返回PResult
+ */
+ 
+/*
+ *@note 接任务
+ *@path /task/user/receive
+ *@method POST
+ *@cookie uuid&token
+ *@param taskIds 任务ID（多个任务ID用","隔开）
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 领奖励
+ *@path /task/user/reward
+ *@method POST
+ *@cookie uuid&token
+ *@param taskId 任务ID
+ *@return 返回PResult
+ */
+
+/*
+ *@note 开启APP权限通知
+ *@path /task/callback/app
+ *@method POST
+ *@cookie uuid&token
+ *@param type 任务类型（4070：开启电话簿访问权限）
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 排行榜
+ *@path /task/user/rank
+ *@method GET
+ *@cookie token&uuid
+ *@param scope 统计范围 "friend"|"follower"|"public"
+ *@param language 用户语言
+ *@return 成功返回PRank（PRank中rank=-1，表示未进入排行）, 失败返回PResult
+ */
+ 
+
+ /*
+ *@note 获取PK
+ *@path /task/user/pk
+ *@method GET
+ *@cookie uuid&token
+ *@param language 用户语言
+ *@param pk_uuid 要PK的用户uuid
+ *@return 成功返回PTaskUserPk，失败返回PResult
+ */
+ 
+
+
+message PSubscribeArray {
+    repeated PSubscribe subscribe = 1;
+}
+
+message PSubscribe {
+    string uuid = 1;  // 用户uuid
+    int32 msgid = 2;  // 消息ID
+    int64 time = 3;   // 消息有效时间（-1表示永久，0表示取消订阅，其它表示失效时间的时间戳）
+}
+ 
+message PCallbackArray {
+    repeated PCallback callback = 1;
+}
+
+message PCallback {
+    string uuid = 1;  // 用户uuid
+    int32 msgid = 2;  // 消息ID
+    int64 time = 3;   // 消息时间（时间戳）
+}

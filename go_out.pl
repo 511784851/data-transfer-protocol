@@ -25,8 +25,9 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/netdisk.proto ".
 						"server-client/streaming.proto ".
 						"server-client/chat.proto ".
-						"server-client/gamification.proto ".
-						"server-client/edge.proto ";
+						"server-client/task.proto ".
+						"server-client/edge.proto ".
+						"server-client/achievement.proto";
 
 $cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
 system($cmd);
@@ -38,7 +39,8 @@ $server_server_protos = "server-server/login_api.proto ".
 						"server-server/notification_api.proto ".
 						"server-server/wallet_api.proto ".
 						"server-server/datapublishing_api.proto ".
-						"server-server/news_api.proto";
+						"server-server/news_api.proto ".
+						"server-server/achievement_api.proto";
 -d ($output = $output."/service") || mkdir($output);
 $cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
 system($cmd);
