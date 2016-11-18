@@ -234,6 +234,21 @@ message PDefaultHead {
 	int32 hType = 4; //图片的类型 0 女，1 男，2 其它
 }
 
+//app启动广告图
+message PLaunchAD {
+	int32 id = 1;
+	string link = 2; //跳转的链接 
+	int32 time = 3; //停留时间（单位：秒）
+	int32 number = 4; //重新进入App多少次后再显示广告图
+	string src = 5; //objectkey或图片路径
+	int32 status = 6; //当前状态 0关闭，1开启
+	int32 language = 7; //语言版本 1 简体中文，2 繁体中文，3 英文，4 韩文
+}
+
+message PLaunchADList {
+	repeated PLaunchAD list = 1;
+}
+
 
 /**************************API 定义***********************************/
 
