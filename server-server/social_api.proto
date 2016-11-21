@@ -112,3 +112,11 @@ package service;
  *@body PSubscribeArray数据流
  *@return 返回PResult
  */
+
+/*
+ *@note 删除VO好友列表
+ *@path /v1/social/delvofriends
+ *@method DELETE
+ *@cookie token&uuid
+ *@return PResult
+ */
