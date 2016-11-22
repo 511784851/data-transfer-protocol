@@ -296,7 +296,7 @@ message PAccountVoMemberTag {
 
 // 游戏列表
 message PAccountVoMemberTagList {
-    repeated PVoMemberTag list = 1; // 列表
+    repeated PAccountVoMemberTag list = 1; // 列表
 }
 
 // VIP+与VO相关信息
