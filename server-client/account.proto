@@ -608,7 +608,7 @@ message PVoBase {
 
 /*
  *@note VO主页
- *@uri /v1/account/vos/:uuid
+ *@uri /v1/account/vo/home
  *@method GET
  *@cookie token&uuid
  *@return PVoBase VO基础信息
