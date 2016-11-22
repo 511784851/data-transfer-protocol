@@ -183,9 +183,24 @@ message PFeedbackList {
 //意见反馈
 message PFeedback {
 	int32 id = 1;
-	string uuid = 2;
-	int64 time = 3;
-	string content = 4;
+	string uuid = 2; //反馈人的UUID
+	int64 time = 3; //反馈时间
+	string content = 4; //问题描述（可以为空）
+	repeated string images = 5; //问题的图片url（可以为空）
+	int32 qType = 6; //问题的类型编号（PFeedbackQuestion的id属性）
+	int32 mood = 7; //心情的编号（0其他，1开心，2一般，3难过）
+	int32 status = 8; //处理状态
+}
+
+//意见反馈的问题类型
+message PFeedbackQuestion {
+	int32 id = 1; 
+	string content = 2;
+}
+
+message PFeedbackQuestionList {
+	int32 moodID = 1; //心情的编号（0其他，1开心，2一般，3难过）
+	repeated PFeedbackQuestion questions = 2;
 }
 
 //banner图片列表
@@ -316,12 +331,26 @@ message PLaunchADList {
  /**
   * 意见反馈
   *
-  *@path /platform-manager/feedback
+  *@path /platform-manager/feedback/add
   *@cookie token&uuid
   *@method POST
-  *@param content 反馈内容
+  *@param content 反馈内容（可以为空）
+  *@param images 图片的objkey，多个以,分隔（可以为空）
+  *@param qtype 问题的类型编号（PFeedbackQuestion的id属性）
+  *@param mood 心情的编号（0其他，1开心，2一般，3难过）
   *@return PResult
   */
+  
+  /**
+   * 意见反馈，获取某心情对应的问题类型
+   *
+   *@path /platform-manager/feedback/questions
+   *@cookie token&uuid
+   *@method GET
+   *@param mid 心情的编号（0其他，1开心，2一般，3难过）
+   *@param lid 语言的编号（1简体中文，2繁体中文，3英文，4韩文）
+   *@return PFeedbackQuestionList
+   */
   
   /**
    * 获取图片轮播图（banner）
