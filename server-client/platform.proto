@@ -349,7 +349,7 @@ message PLaunchADList {
    *@method GET
    *@param tid 类型的编号（1意见反馈，2举报用户，3举报帖子）
    *@param mid 心情的编号（0其他，1开心，2一般，3难过）
-   *@param lid 语言的编号（1简体中文，2繁体中文，3英文，4韩文）
+   *@param lid 语言的编号（zh-cn简体中文，zh-tw繁体中文，en-us英文，ko-kr韩文）
    *@return PFeedbackQuestionList
    */
    
@@ -364,6 +364,16 @@ message PLaunchADList {
    *@param ext 文件后缀
    *@return PUpload(在oss.proto文件里)
    */
+   
+/**
+ * 批量获取上传文件的状态
+ *
+ *@path /platform-manager/multupload/status
+ *@cookie token&uuid
+ *@method POST
+ *@body  PFileInfoArray
+ *@return 成功返回PUploadArray，失败返回PResult
+ */
   
   /**
    * 获取图片轮播图（banner）
