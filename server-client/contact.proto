@@ -9,7 +9,7 @@ message PContactLinkInfo {
 	string nickName = 3;	// 通讯录联系人的昵称
 	string hasLink = 4;	// 通讯录联系人是否已经加入好友。取值：1--已加好友，2--可以加好友，3--不能加好友，4--对方等级高(不能加，也不能邀请)
 	string headImgURL = 5;	// 用户图像url地址
-	string levelType = 6;	// 用户等级(完全遵循account.proto中ELevelType的规范：0=普通用户,1=VIP用户,2=VIP+用户,3=VO用户,4=游客)	
+	int32 levelType = 6;	// 用户等级(完全遵循account.proto中ELevelType的规范：0=普通用户,1=VIP用户,2=VIP+用户,3=VO用户,4=游客)	
 }
 
 // 下载通讯录好友关系
