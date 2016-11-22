@@ -287,6 +287,43 @@ message PAccountChatPersonInfo {
 	PUser user = 5;             //用户信息
 }
 
+// VIP+所属标签
+message PAccountVoMemberTag {
+    int32  tagID = 1; // 标签ID
+    string name  = 2; // 名称
+    string image = 3; // 显示图片（VO队员列表显示）
+}
+
+// 游戏列表
+message PAccountVoMemberTagList {
+    repeated PVoMemberTag list = 1; // 列表
+}
+
+// VIP+与VO相关信息
+message PAccountVoMember {
+    string uuid = 1;                       // 用户ID
+    string dispname = 2;                   // 显示名称（用户获取显示用）
+    string position = 3;                   // 职位
+    string portrait = 4;                   // 形象照
+    repeated PAccountVoMemberTag tags = 5; // 标签
+}
+
+// VO成员列表
+message PAccountVoMemberList {
+    repeated PAccountVoMember list = 1; // 列表
+}
+
+// VO基础信息
+message PVoBase {
+    int64  fans = 1;         // 粉丝数
+    string resume = 2;       // 简介
+    string username = 3;     // 名称
+    string nickname = 4;     // 昵称
+    string background = 5;   // 背景图
+    string communityID = 6;  // 社区ID
+    int32  relationship = 7; // 与当前用户的关系：0:无关系，1,：是粉丝，2：已关注，3：相互关注
+}
+
 /*=====================================*/
 //API定义
 
@@ -569,3 +606,29 @@ message PAccountChatPersonInfo {
  *@return 返回PbResult
  */
 
+/*
+ *@note VO主页
+ *@uri /v1/account/vos/:uuid
+ *@method GET
+ *@cookie token&uuid
+ *@return PVoBase VO基础信息
+ */
+
+/*
+ *@note VO成员列表
+ *@uri /v1/account/vo/members
+ *@method GET
+ *@cookie token&uuid
+ *@param offset 开始位置
+ *@param count 获取数量
+ *@param tagID 过滤标签（默认不进行过滤，排序根据添加时间排序）
+ *@return PAccountVoMemberList 成员列表
+ */
+
+/*
+ *@note 获取VO的成员的标签列表
+ *@uri /v1/account/vo/member/tags
+ *@method GET
+ *@cookie token&uuid
+ *@return PAccountVoMemberTagList 游戏列表
+ */

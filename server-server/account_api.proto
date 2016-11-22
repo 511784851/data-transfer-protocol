@@ -300,3 +300,30 @@ message PPrivacyAttentionList {
  *@postParam status 实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
  *@return   返回:CXXResult
  */
+
+/*
+ *@note 添加VO成员（原来通过uuid列表添加成员的接口作废）
+ *@uri /v1/account/inside/vo/members
+ *@method POST
+ *@uriParam from 服务名称
+ *@body PAccountVoMember 成员信息
+ *@return 返回CXXResult
+ */
+
+/*
+ *@note 设置VIP+与VO相关信息（根据需要修改的字段提供fields）
+ *@uri /v1/account/inside/vo/members/:uuid
+ *@method PUT
+ *@uriParam from 服务名称
+ *@postParam fields PAccountVoMember字段枚举
+ *@body PAccountVoMember 成员信息
+ *@return 返回CXXResult
+ */
+
+/*
+ *@note 获取VIP+与VO相关信息
+ *@uri /v1/account/inside/vo/members/:uuid
+ *@method GET
+ *@uriParam from 服务名称
+ *@return PAccountVoMember 成员信息
+ */
