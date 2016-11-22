@@ -347,9 +347,22 @@ message PLaunchADList {
    *@path /platform-manager/feedback/questions
    *@cookie token&uuid
    *@method GET
+   *@param tid 类型的编号（1意见反馈，2举报用户，3举报帖子）
    *@param mid 心情的编号（0其他，1开心，2一般，3难过）
    *@param lid 语言的编号（1简体中文，2繁体中文，3英文，4韩文）
    *@return PFeedbackQuestionList
+   */
+   
+  /**
+   * 获取上传文件的状态
+   *
+   *@path /platform-manager/upload/status
+   *@cookie token&uuid
+   *@method GET
+   *@param digest 文件的MD5值
+   *@param length 文件长度
+   *@param ext 文件后缀
+   *@return PUpload(在oss.proto文件里)
    */
   
   /**
