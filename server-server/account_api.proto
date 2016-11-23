@@ -306,6 +306,7 @@ message PPrivacyAttentionList {
  *@uri /v1/account/inside/vo/members
  *@method POST
  *@uriParam from 服务名称
+ *@uriParam project 项目名称
  *@uriParam void VO用户ID
  *@body PAccountVoMember 成员信息
  *@return 返回CXXResult
@@ -316,6 +317,7 @@ message PPrivacyAttentionList {
  *@uri /v1/account/inside/vo/members
  *@method PUT
  *@uriParam from 服务名称
+ *@uriParam project 项目名称
  *@uriParam void VO用户ID
  *@postParam fields PAccountVoMember字段枚举
  *@body PAccountVoMember 成员信息
@@ -327,7 +329,9 @@ message PPrivacyAttentionList {
  *@uri /v1/account/inside/vo/members
  *@method GET
  *@uriParam from 服务名称
+ *@uriParam project 项目名称
  *@uriParam void VO用户ID
- *@uriParam uuid 成员ID
- *@return PAccountVoMember 成员信息
+ *@uriParam offset 偏移
+ *@uriParam count  数量
+ *@return PAccountVoMemberList 成员信息
  */
