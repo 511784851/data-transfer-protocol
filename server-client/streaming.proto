@@ -36,6 +36,7 @@ message PStreamingLive {
     bool isOpen = 7; // 是否进行中
     bool isManual = 8; // 是否手动增加
     string beforeId = 9;// 前面直播记录id
+    bool isPush = 10;// 是否推送过
 }
 
 message PStreamingLiveList {
