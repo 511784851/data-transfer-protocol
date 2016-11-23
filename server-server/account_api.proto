@@ -335,3 +335,13 @@ message PPrivacyAttentionList {
  *@uriParam count  数量
  *@return PAccountVoMemberList 成员信息
  */
+
+/*
+ *@note 检查用户是否属于水军
+ *@uri /v1/account/inside/robots
+ *@method POST
+ *@uriParam from 服务名称
+ *@uriParam project 项目名称
+ *@body PStringList uuid列表
+ *@return PStringList 属于水军的列表
+ */
