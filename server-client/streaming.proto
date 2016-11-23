@@ -35,6 +35,7 @@ message PStreamingLive {
     int64 clickCount = 6; // 点击人数
     bool isOpen = 7; // 是否进行中
     bool isManual = 8; // 是否手动增加
+    string beforeId = 9;// 前面直播记录id
 }
 
 message PStreamingLiveList {
