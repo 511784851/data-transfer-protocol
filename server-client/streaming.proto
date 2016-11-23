@@ -81,6 +81,15 @@ message PStreamingAnchorList {
  */
 
 /*
+ *@note 获取主播指定时间的直播提醒次数
+ *@path /streaming-notification/anchor/manual/notice/rest/count
+ *@cookie token&uuid
+ *@method GET
+ *@param day unix时间戳,最低精确到天
+ *@return 成功返回PInt64Single,失败返回PResult
+ */
+
+/*
  *@note 分页获取主播手动提醒通知
  *@uri /streaming-notification/anchor/manual/notice
  *@param GET
