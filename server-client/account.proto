@@ -97,6 +97,7 @@ message PUserBase {
   string HeadImgURL = 10;     		// 头像地址
   string UserResume = 11;			// 简介
   string Language = 12;             // 语言
+  bool IsAI = 13;				 	// 是否水军， true表示水军
 }
 
 // 用户基础信息列表
