@@ -150,3 +150,12 @@ message PNewsUserStatistic {
 *@param  offset 下次查询的起点，为上一次结果中的PFollowOrFansList.Index. 默认为0。
 *@return 成功返回 PFollowOrFansList ，失败返回 PResult
 */
+
+/**
+ *@note 批量判断某个帖子状态
+ *@path /v1/news/inside/multi/post/status
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param postids 帖子id，多个帖子id用,分隔
+ *@return 成功返回 PInt32List, 0:正常, 1:不存在, 2:已删除, 3:已屏蔽。失败返回 PResult
+ */

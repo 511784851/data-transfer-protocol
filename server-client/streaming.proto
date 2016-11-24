@@ -35,6 +35,8 @@ message PStreamingLive {
     int64 clickCount = 6; // 点击人数
     bool isOpen = 7; // 是否进行中
     bool isManual = 8; // 是否手动增加
+    string beforeId = 9;// 前面直播记录id
+    bool isPush = 10;// 是否推送过
 }
 
 message PStreamingLiveList {
@@ -78,6 +80,15 @@ message PStreamingAnchorList {
  *@cookie token&uuid
  *@method GET
  *@return 成功返回PStreamingWebSiteList,失败返回PResult
+ */
+
+/*
+ *@note 获取主播指定时间的直播提醒次数
+ *@path /streaming-notification/anchor/manual/notice/rest/count
+ *@cookie token&uuid
+ *@method GET
+ *@param day unix时间戳,最低精确到天
+ *@return 成功返回PInt64Single,失败返回PResult
  */
 
 /*

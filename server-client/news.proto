@@ -31,12 +31,14 @@ message PPostInfo {
 	int64 voteCnt = 18;          //点赞数，上传时不用填
 	bool  vote = 19;             //自己是否点赞，上传时不用填
 	PAtUserList atusers = 20;    //被@的用户列表
-	bool IsDelete = 21;			 //帖子已经被用户删除,上传时不用填
-	bool IsHide = 22;			 //帖子正在被审核,上传时不用填
+	bool IsDelete = 21;          //帖子已经被用户删除,上传时不用填
+	bool IsHide = 22;            //帖子正在被审核,上传时不用填
     PRedPacketInfo RedPacket = 23;  //红包信息，上传时不用填
-    int32 leveltype = 24;         //用户等级,上传时不用填
-	bool IsPreView = 25;		  //预览标记,上传时不用填,true表示用于预览,发布后的帖子标记是false
-	PPostInfo refPost = 26;			 //引用的帖子,上传时只填帖子ID
+    int32 leveltype = 24;           //用户等级,上传时不用填
+	bool IsPreView = 25;            //预览标记,上传时不用填,true表示用于预览,发布后的帖子标记是false
+	PPostInfo refPost = 26;         //引用的帖子,上传时只填帖子ID
+	int64 editTime = 27;            //编辑时间，上传时不用填
+	int64 delTime = 28;             //删除时间，上传时不用填
 }
 
 // 被@的用户列表
