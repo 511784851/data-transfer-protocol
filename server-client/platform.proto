@@ -27,13 +27,13 @@ message PReportNewsList {
 //被举报人的信息
 message PReportNews {
 	int64 ID = 1; 
-	int64 postid = 2; 					//被举报的帖子
-	string content = 3; 				//举报内容
-	int64 isProcess = 4; 				//是否已经处理（0待处理，1已处理）
-	int64 time = 5; //举报时间
-	int32 qType = 6; //问题类型
-	repeated string imgs = 7; //图片的objkey
-	string UUID = 8;
+	string UUID = 2; //举报人
+	int64 postid = 3; 					//被举报的帖子
+	string content = 4; 				//举报内容
+	int64 isProcess = 5; 				//是否已经处理（0待处理，1已处理）
+	int64 time = 6; //举报时间
+	string qType = 7; //问题类型
+	repeated string imgs = 8;
 }
 
 /*********用户***********/
@@ -51,8 +51,8 @@ message PReportUser {
 	string content = 4; 				//举报内容
 	int64 isProcess = 5; 				//是否已经处理（0待处理，1已处理）
 	int64 time = 6; //举报时间
-	int32 qType = 7; //问题类型
-	repeated string imgs = 8; //图片的objkey
+	string qType = 7; //问题类型
+	repeated string imgs = 8;
 }
 
 /*********社区用户***********/
@@ -280,7 +280,7 @@ message PLaunchADList {
  *@cookie token&uuid
  *@method POST
  *@param id 被举报的帖子ID
- *@param qType 问题类型（可通过/platform-manager/feedback/questions?mid=0|1|2|3&tid=3&lid=zh-cn|zh-tw|en-us|ko-kr获取）
+ *@param qtype 问题类型
  *@return PResult
  */
  
@@ -291,9 +291,7 @@ message PLaunchADList {
  *@cookie token&uuid
  *@method POST
  *@param uid 被举报人ID
- *@param content 举报内容（可以为空）
- *@param qType 问题类型（可通过/platform-manager/feedback/questions?mid=0|1|2|3&tid=2&lid=zh-cn|zh-tw|en-us|ko-kr获取）
- *@param imgs 图片的objkey（多个以,分隔）
+ *@param qtype 问题类型
  *@return PResult
  */
   
