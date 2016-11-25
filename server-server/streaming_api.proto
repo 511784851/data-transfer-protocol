@@ -82,9 +82,10 @@ package service;
  */
 
 /*
- *@note 关闭系统
- *@path /streaming-notification/system/pause
+ *@note 设置系统状态
+ *@path /streaming-notification/system/setting
  *@method GET
  *@param from 调用方(仅限于监管web系统)
+ *@param status pause表示暂停,run表示运行
  *@return 返回PResult
  */
