@@ -317,11 +317,12 @@ message PAccountVoMemberList {
 
 // VO基础信息
 message PAccountVoBase {
-    int32  fans = 1;         // 粉丝数
-    PUserBase user = 2;      // 用户基础信息
-    string communityID = 3;  // 社区ID
-    int32  relationship = 4; // 与当前用户的关系：0:无关系，1,：是粉丝，2：已关注，3：相互关注
-    string bigBackImage = 5; // 背景大图
+    int32  fans = 1;           // 粉丝数
+    PUserBase user = 2;        // 用户基础信息
+    string communityID = 3;    // 社区ID
+    int32  relationship = 4;   // 与当前用户的关系：0:无关系，1,：是粉丝，2：已关注，3：相互关注
+    string bigBackImage = 5;   // 背景大图
+    string thumbBackImage = 6; // 背景缩略图
 }
 
 /*=====================================*/
