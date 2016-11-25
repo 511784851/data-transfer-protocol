@@ -87,7 +87,7 @@ message PStreamingAnchorList {
  *@path /streaming-notification/anchor/manual/notice/rest/count
  *@cookie token&uuid
  *@method GET
- *@param day unix时间戳,最低精确到天
+ *@param day unix时间戳
  *@return 成功返回PInt64Single,失败返回PResult
  */
 

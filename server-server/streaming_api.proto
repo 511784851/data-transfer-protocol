@@ -80,3 +80,11 @@ package service;
  *@param count 数量,默认值20,范围[15,30]
  *@return 成功返回PStreamingAnchorList, 失败返回PResult
  */
+
+/*
+ *@note 关闭系统
+ *@path /streaming-notification/system/pause
+ *@method GET
+ *@param from 调用方(仅限于监管web系统)
+ *@return 返回PResult
+ */
