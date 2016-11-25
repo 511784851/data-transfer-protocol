@@ -277,6 +277,7 @@ message PAccountNewsPersonInfo {
 	int32 followship = 10;        //两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
   	bool friend = 11;             //是否是好友，是：true
 	PLinkInfoList linkInfos = 12; //超链接列表
+    PUserBase supervisor = 13; //如果是VIP+，这里会携带所属vo的基础信息
 }
 
 // 显示聊天的个人档案信息
