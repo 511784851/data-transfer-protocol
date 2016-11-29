@@ -148,3 +148,12 @@ message PStreamingAnchorList {
  *@param PStreamingLive
  *@return 返回PResult
  */
+
+/*
+ *@note 搜索关注的主播
+ *@path /streaming-notification/fan/search/anchor
+ *@cookie token&uuid
+ *@method GET
+ *@param keyword 关键字
+ *@return 成功返回PGuyList,失败返回PResult
+ */

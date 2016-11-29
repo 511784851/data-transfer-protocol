@@ -16,7 +16,7 @@ package service;
  *@note 获取系统参数
  *@uri /streaming-notification/args
  *@param GET
- *@param from 调用方
+ *@param from 调用方(仅限于监管web系统)
  *@return 成功返回PStreamingConfigList,失败返回PResult
  */
 
@@ -24,7 +24,7 @@ package service;
  *@note 设置系统参数
  *@uri /streaming-notification/args
  *@param POST
- *@param from 调用方
+ *@param from 调用方(仅限于监管web系统)
  *@param value PStreamingConfigList
  *@return 返回PResult
  */
