@@ -3,6 +3,8 @@ package common;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "StreamingProtos";
 
+import "result.proto";
+
 message PStreamingWebSite {
 	string name = 1; // 中文名称
 	string url = 2; // 网站网址
@@ -72,6 +74,16 @@ message PStreamingAnchorList {
     repeated PStreamingAnchor list = 1;
 }
 
+// 第三方直播通知粉丝信息
+message PStreamingFan {
+    string uuid = 1; // uuid
+    int64 dayCount = 2; // 每天通知次数限制
+    int64 lastPushTime = 3; // 最后一次通知时间,unix时间戳,精确到秒
+    PStringList refuseAnchors = 4; // 屏蔽主播uuid列表
+    PStringList refuseWebSites = 5; // 屏蔽网站平台名字列表
+    bool refuseAll = 6; // 是否屏蔽全部
+}
+
 /**************************API 定义***********************************/
 
 /*
@@ -130,14 +142,20 @@ message PStreamingAnchorList {
  */
 
 /*
- *@note 粉丝开关提醒通知
+ *@note 粉丝修改提醒通知设置
  *@uri /streaming-notification/fan/change/setting
  *@param POST
  *@cookie token&uuid 登录用户信息
- *@param all 0表示屏蔽所有,其他表示开启
- *@param websites 屏蔽网站列表,网站名称,多个用逗号隔开
- *@param anchors 屏蔽主播列表,主播uuid,多个用逗号隔开
+ *@param PStreamingFan
  *@return 返回PResult
+ */
+
+/*
+ *@note 粉丝获取提醒通知设置
+ *@uri /streaming-notification/fan/setting
+ *@param GET
+ *@cookie token&uuid 登录用户信息
+ *@return 成功返回PStreamingFan, 失败返回PResult
  */
 
 /*
@@ -150,7 +168,7 @@ message PStreamingAnchorList {
  */
 
 /*
- *@note 搜索关注的主播
+ *@note 粉丝搜索关注的主播
  *@path /streaming-notification/fan/search/anchor
  *@cookie token&uuid
  *@method GET
