@@ -345,3 +345,14 @@ message PPrivacyAttentionList {
  *@body PStringList uuid列表
  *@return PStringList 属于水军的列表
  */
+
+ /*
+  *@note 检查用户是否是VO成员
+  *@uri /v1/account/inside/vo/member/state
+  *@method GET
+  *@uriParam from 服务名称
+  *@uriParam project 项目名称
+  *@uriParam void VO用户ID
+  *@uriParam uuid 成员ID
+  *@return PBoolSingle 是否成员
+  */
