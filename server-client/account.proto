@@ -624,7 +624,7 @@ message PAccountVoBase {
  *@uriParam void VO用户ID
  *@uriParam offset 开始位置
  *@uriParam count 获取数量
- *@uriParam tags 过滤标签（参数可选，传递形式为多个标签tagID以,分割：tags=1,2,3）
+ *@uriParam tags 过滤标签（参数可选，传递形式为多个标签tagID以','分割：tags=1,2,3）
  *@return PAccountVoMemberList 成员列表
  */
 
