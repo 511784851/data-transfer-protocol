@@ -79,8 +79,8 @@ message PStreamingFan {
     string uuid = 1; // uuid
     int64 dayCount = 2; // 每天通知次数限制
     int64 lastPushTime = 3; // 最后一次通知时间,unix时间戳,精确到秒
-    PStringList refuseAnchors = 4; // 屏蔽主播uuid列表
-    PStringList refuseWebSites = 5; // 屏蔽网站平台名字列表
+    repeated string refuseAnchors = 4;// 屏蔽主播uuid列表
+    repeated string refuseWebSites = 5; // 屏蔽网站平台名字列表
     bool refuseAll = 6; // 是否屏蔽全部
 }
 
