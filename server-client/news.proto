@@ -39,6 +39,7 @@ message PPostInfo {
 	PPostInfo refPost = 26;         //引用的帖子,上传时只填帖子ID
 	int64 editTime = 27;            //编辑时间，上传时不用填
 	int64 delTime = 28;             //删除时间，上传时不用填
+	int64 RefCnt = 29;              //帖子被转发次数，上传时不用填
 }
 
 // 被@的用户列表
