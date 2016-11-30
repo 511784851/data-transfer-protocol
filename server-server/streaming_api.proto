@@ -31,7 +31,7 @@ package service;
 
 /*
  *@note 主播开关提醒通知
- *@uri /streaming-notification/anchor/change/setting
+ *@uri /streaming-notification/inside/anchor/change/setting
  *@param POST
  *@param from 调用方
  *@param uuid 主播uuid,由调用者保证等级为vip/vip+
