@@ -4,6 +4,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "StreamingProtos";
 
 import "result.proto";
+import "account.proto";
 
 message PStreamingWebSite {
 	string name = 1; // 中文名称
@@ -59,15 +60,12 @@ message PStreamingConfigList {
 
 // 第三方直播通知主播信息
 message PStreamingAnchor {
-    string uuid = 1; // 主播uuid
-    PStreamingRoomList rooms = 2; // 房间列表
-    int64 dayCount = 3; // 每天通知次数限制
-    int64 manualDayCount = 4; // 每天手动通知次数限制
-    int64 liveCount = 5; // 直播次数,一直累积
-    int64 lastPushTime = 6; // 最后一次通知时间,unix时间戳,精确到秒
-    PStreamingLive lastLive = 7; // 最后一次直播
-    bool isShield = 8; // 监管平台是否屏蔽
-    bool isClose = 9; // 是否开启直醒通知
+    PUserBase base = 1; // 主播基础信息
+    PUserBase supervisor = 2; // 所属VO信息
+    bool isShield = 3; // 是否屏蔽
+    bool isSubscribe = 4; // 是否订阅
+    PStreamingRoom room = 5; // 绑定房间
+    bool IsClose = 6; // 是否开启直播提醒
 }
 
 // 第三方直播通知主播列表
@@ -77,13 +75,8 @@ message PStreamingAnchorList {
 
 // 第三方直播通知粉丝信息
 message PStreamingFan {
-    string uuid = 1; // uuid
-    int64 dayCount = 2; // 每天通知次数限制
-    int64 lastPushTime = 3; // 最后一次通知时间,unix时间戳,精确到秒
-    repeated string removeAnchors = 4;// 移除主播uuid列表
-    repeated string refuseAnchors = 5;// 屏蔽主播uuid列表
-    repeated string refuseWebSites = 6; // 屏蔽网站平台名字列表
-    bool refuseAll = 7; // 是否屏蔽全部
+    bool refuseAll = 1; // 是否屏蔽全部
+    repeated string refuseWebSites = 2; // 屏蔽网站平台名字列表
 }
 
 /**************************API 定义***********************************/
@@ -97,93 +90,66 @@ message PStreamingFan {
  */
 
 /*
- *@note 主播修改提醒通知设置
- *@uri /streaming-notification/anchor/change/setting
- *@cookie token&uuid
- *@param POST
- *@param status 0表示关闭,其他表示开启
- *@param rooms PStreamingRoomList,开启时需要带此参数,关闭时忽略此参数
- *@return 返回PResult
- */
-
-/*
- *@note 获取主播指定时间的直播提醒次数
- *@path /streaming-notification/anchor/manual/notice/rest/count
- *@cookie token&uuid
- *@method GET
- *@param day unix时间戳
- *@return 成功返回PInt64Single,失败返回PResult
- */
-
-/*
- *@note 分页获取主播手动提醒通知
- *@uri /streaming-notification/anchor/manual/notice
- *@param GET
- *@cookie token&uuid 登录用户信息
- *@param offset 偏移量,第一次填0,以后offoset=offset+count
- *@param count 数量,默认值20,范围[15,30]
- *@return 成功返回PStreamingLiveList, 失败返回PResult
- */
-
-/*
- *@note 增加主播手动提醒通知
- *@uri /streaming-notification/anchor/manual/notice
- *@param POST
- *@cookie token&uuid 登录用户信息
- *@param PStreamingLive
- *@return 返回PResult
- */
-
-/*
- *@note 撤销/删除主播手动提醒通知
- *@uri /streaming-notification/anchor/manual/notice
- *@param DELETE
- *@cookie token&uuid 登录用户信息
- *@param PStreamingLive
- *@return 返回PResult
- */
-
-/*
- *@note 粉丝列出所有主播
- *@uri /streaming-notification/fan/list/anchor
- *@param GET
- *@cookie token&uuid 登录用户信息
- *@return 成功返回PStreamingAnchorList, 失败返回PResult
- */
-
-/*
- *@note 粉丝更新主播
- *@uri /streaming-notification/fan/update/anchor
- *@param GET
- *@cookie token&uuid 登录用户信息
- *@param PStreamingFan
- *@return 返回PResult
- */
-
-/*
  *@note 粉丝获取提醒通知设置
  *@uri /streaming-notification/fan/setting
- *@param GET
+ *@method GET
  *@cookie token&uuid 登录用户信息
  *@return 成功返回PStreamingFan, 失败返回PResult
  */
 
 /*
  *@note 粉丝修改提醒通知设置
- *@uri /streaming-notification/fan/change/setting
- *@param POST
+ *@uri /streaming-notification/fan/setting
+ *@method POST
  *@cookie token&uuid 登录用户信息
- *@param PStreamingFan
+ *@body PStreamingFan
  *@return 返回PResult
  */
 
 /*
- *@note 粉丝进入直播房间,目的是统计直播房间的观看人数
- *@uri /streaming-notification/fan/entry/room
- *@param POST
+ *@note 粉丝获取关注主播列表
+ *@uri /streaming-notification/fan/relation/anchor
+ *@method GET
  *@cookie token&uuid 登录用户信息
- *@param PStreamingLive
+ *@return 成功返回PStreamingAnchorList, 失败返回PResult
+ */
+
+/*
+ *@note 粉丝修改关注主播列表
+ *@uri /streaming-notification/fan/relation/anchor
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PStreamingAnchor 仅填充UUID,isSubscribe字段
  *@return 返回PResult
+ */
+
+/*
+ *@note 粉丝获取订阅主播列表
+ *@uri /streaming-notification/fan/subscribe/anchor
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 成功返回PStreamingAnchorList, 失败返回PResult
+ */
+
+/*
+ *@note 粉丝修改订阅主播列表
+ *@uri /streaming-notification/fan/subscribe/anchor
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PStreamingAnchor 仅填充UUID,isShield字段
+ *@return 返回PResult
+ */
+
+/*
+ *@note 粉丝查看直播列表
+ *@uri /streaming-notification/fan/live/list
+ *@cookie token&uuid
+ *@method GET
+ *@param scope 范围
+    scope为living,正在直播
+    scope为live,将要直播
+    scope为all,全部(正在直播+将要直播)
+ *@return 成功返回PStreamingLiveList, 失败返回PResult
  */
 
 /*
@@ -198,13 +164,66 @@ message PStreamingFan {
     scope为all,搜全部(正在直播+将要直播)
     scope为subscribe,搜全部订阅/添加
     scope为relation,搜关注的主播
- *@return 成功返回PGuyList,失败返回PResult
+ *@return 成功返回PStreamingAnchorList,失败返回PResult
  */
 
 /*
- *@note 粉丝查看直播列表
- *@uri /streaming-notification/fan/live/list
+ *@note 主播获取提醒通知设置
+ *@uri /streaming-notification/anchor/setting
  *@cookie token&uuid
- *@param GET
+ *@method GET
+ *@return 成功返回PStreamingAnchor,失败返回PResult
+ */
+
+/*
+ *@note 主播修改提醒通知设置
+ *@uri /streaming-notification/anchor/setting
+ *@cookie token&uuid
+ *@method POST
+ *@body PStreamingAnchor 仅填充room,IsClose字段
+ *@return 返回PResult
+ */
+
+/*
+ *@note 获取主播指定时间的直播提醒次数
+ *@path /streaming-notification/anchor/manual/notice/rest/count
+ *@cookie token&uuid
+ *@method GET
+ *@param day unix时间戳
+ *@return 成功返回PInt64Single,失败返回PResult
+ */
+
+/*
+ *@note 增加主播手动提醒通知
+ *@uri /streaming-notification/anchor/manual/notice
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PStreamingLive 仅填充LiveTime直播时间,NoticeTime提醒时间字段
+ *@return 返回PResult
+ */
+
+/*
+ *@note 撤销/删除主播手动提醒通知
+ *@uri /streaming-notification/anchor/manual/notice
+ *@method DELETE
+ *@cookie token&uuid 登录用户信息
+ *@body PStreamingLive 仅填充id字段
+ *@return 返回PResult
+ */
+
+/*
+ *@note 主播获取手动提醒通知
+ *@uri /streaming-notification/anchor/manual/notice
+ *@method GET
+ *@cookie token&uuid 登录用户信息
  *@return 成功返回PStreamingLiveList, 失败返回PResult
+ */
+
+/*
+ *@note 粉丝进入直播房间,目的是统计直播房间的观看人数
+ *@uri /streaming-notification/fan/entry/room
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PStreamingLive 仅填充id字段
+ *@return 返回PResult
  */

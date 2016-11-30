@@ -33,8 +33,8 @@ package service;
  *@note 主播开关提醒通知
  *@uri /streaming-notification/inside/anchor/change/setting
  *@param POST
- *@param from 调用方
- *@param uuid 主播uuid,由调用者保证等级为vip/vip+
+ *@param from 调用方(仅限于监管web系统)
+ *@param uuid 主播uuid
  *@param status 0表示关闭,其他表示开启
  *@param rooms PStreamingRoomList,开启时需要带此参数,关闭时忽略此参数
  *@return 返回PResult
@@ -54,7 +54,7 @@ package service;
  *@note 分页获取直播记录
  *@uri /streaming-notification/live/list
  *@param GET
- *@param from 调用方
+ *@param from 调用方(仅限于监管web系统)
  *@param scope anchor表示主播,time表示时间,click表示点击人数,website表示网站直播平台
  *@param value 
     scope为anchor,参数为主播的uuid,
