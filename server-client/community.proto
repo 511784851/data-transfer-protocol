@@ -424,6 +424,7 @@ message PIndiseCommunityUserList {
  *@url param type 获取帖子类型， forum 获取论坛帖子
  *@ 							notice 获取公告帖子
  *@								all 获取所有帖子，可用于社区首页刷新帖子
+ *@url param sub_type 自定义类型标签的id
  *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
  *@url param count 获取帖子个数 
  *@cookie token&uuid
@@ -854,3 +855,201 @@ message PIndiseCommunityUserList {
  *@cookie token&uuid
  *@return 成功返回 PCommunityBaseList ，失败返回PResult
  */ 
+
+// 1.2.x 社区新功能
+/*=====================================*/
+// 结构定义
+
+// 社区模块定义,这里只做定义，不需要实际输出宏定义
+/*
+enum ECommunityModule {
+    ESetting = 0;           // 设置，必选项
+    EIntroduce = 1;         // 背景介绍，必选项
+    ENotice = 2;            // 公告
+    EMemberList = 3;        // 成员列表
+    EGamerList = 4;         // 队员，只有VO有，其他没有这个模块
+    EMemberDynamics = 5;    // 成员动态
+    EVideoProgram = 6;      // 视频节目
+    EForum = 7;             // 论坛
+    EChat = 8;              // 聊天
+    EPeopleNearby = 9;      // 附近
+    EPhotoAlbum = 10;       // 图集
+    ERanking = 11;          // 排行榜
+    EStore = 12;            // 商店
+}
+*/
+
+// 社区Banner资源信息
+message PCommunityBannerInfo {
+    bool Enable = 1;                    // true为启用，false为禁止
+    string Name = 2;                    // banner的自定义名字
+    PCommunityResource ImgRes = 3;      // banner的图片资源信息；
+    PCommunityResource LinkRes = 4;     // banner链接信息，空(无链接)；非空时，type可选的有：url(链接地址)； post(帖子id)； notice(公告id)；对应信息保存在URL字段
+}
+
+// 社区Banner资源信息列表
+message PCommunityBannerInfoList {
+	repeated PCommunityBannerInfo List = 1;
+}
+
+// 用户的自定义标签类型
+message PCommunityUserDefined {
+    int32 TypeID = 1;           // 类型id
+    string TypeName = 2;        // 用户自定义的名字
+}
+
+// 论坛帖子的自定义标签类型列表
+message PCommunityUserDefinedList {
+	repeated PCommunityUserDefined List = 1;
+}
+
+// 社区成员的布局方案1
+// ForumSubTypeList 中id的默认值为：0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
+message PCommunityLayout_Plan1 {
+    int32 Color = 1;                                    // 方案1的配色
+    int32 MemberCount = 2;                              // 社区成员数量
+    int32 ContentType = 3;                              // 内容模块id; -1 为公告; >= 0 为论坛可选模块的id
+    PUserBaseList TopUserList = 4;                      // top成员列表
+    PCommunityBannerInfoList BannerList = 5;            // banner列表
+    PCommunityUserDefinedList MiddleModules = 6;        // 中间定义的功能模块列表,多个模块以','分割
+    PCommunityUserDefinedList BottomModules = 7;        // 底部定义的功能模块列表,多个模块以','分割
+    PCommunityUserDefinedList ForumSubTypeList = 8;     // 论坛帖子的自定义标签类型列表
+}
+
+// 社区成员的布局
+message PCommunityLayout {
+    int32 PlanID = 1;                                   // 布局方案id
+    PCommunityLayout_Plan1 Plan1 = 2;                   // 方案1的布局
+}
+
+// 社区信息 v1.2.x
+message PCommunityInfo_1_2_x {
+    PCommunityBase BaseInfo = 1;                        // 社区基础信息
+    PCommunityLayout MemberLayout = 2;                  // 社区成员的布局
+}
+
+// ‘社区首页’返回的信息 v1.2.x
+message PCommunityHome_1_2_x {
+    int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
+    string Advertisement = 2;                           // 监管后台设置的广告
+    string ManagerUserID = 3;                           // 社区管理员的uuid列表,多个管理员用','分割    
+    PUserBase Owner = 4;                                // 社区创建者的信息
+    PCommunityInfo_1_2_x CommunityInfo = 5;             // 社区信息
+	PCommunityPostInfo BackgroundPost = 6;              // 底部的背景介绍
+}
+
+// 图集里面图片的信息
+message PCommunityPhotoAlbum {
+    int64 Time = 1;         // 添加到图集的时间
+    string URL = 2;         // 图片的访问地址
+}
+
+// 图集里面图片的信息列表
+message PCommunityPhotoAlbumList {
+    repeated PCommunityPhotoAlbum List = 1;             // 图集列表
+}
+
+// 按照日期排列的图集里面图片的信息列表
+message PCommunityPhotoAlbumDateList {
+    repeated int64 DateTime = 1;                        // 日期的时间戳
+    repeated PCommunityPhotoAlbumList List = 2;         // 图集列表
+}
+
+// 声望用户信息 
+message PCommunityReputationUser {
+    PUserBase User = 1;                                 // 用户基础信息 
+    int32 ReputationVal = 2;                            // 声望值，/v1.2/community/ranking api中传递的offset值
+}
+
+// 声望用户信息 
+message PCommunityRankingUser {
+    PCommunityReputationUser ReputationUser = 1;        // 声望用户信息 
+}
+
+// 声望用户信息列表
+message PCommunityRankingUserList {
+    repeated PCommunityRankingUser List = 1;         // 列表
+}
+
+/*=====================================*/
+// API定义
+
+
+/*
+ *@note  创建社区
+ *@path /v1.2/community
+ *@method POST
+ *@body PCommunityInfo_1_2_x
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityMe ，失败返回 PResult
+ */
+ 
+/*
+ *@note  修改社区
+ *@path /v1.2/community
+ *@method PUT
+ *@url param id 社区id
+ *@url param plan_id 布局方案id 
+ *@url param fields 要修改的选项，
+        方案1的可选的有:
+        Name,HeadImg,Introduce,Color,BannerList,MiddleModules,BottomModules,修改多个以,分割
+ *@body PCommunityInfo_1_2_x
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+ 
+/*
+ *@note  增加banner
+ *@path /v1.2/community/banner
+ *@method POST
+ *@url param id 社区id
+ *@body PCommunityBannerInfo
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityBannerInfoList , 失败返回 PResult
+ */
+ 
+/*
+ *@note ‘社区首页’页面
+ *@path /v1.2/community/home
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityHome_1_2_x ，失败返回PResult
+ */
+ 
+/*
+ *@note  获取社区的图集列表
+ *@path /v1.2/community/photoalbum/date
+ *@method GET
+ *@url param id 社区id
+ *@url param type 图集的分类；与论坛帖子的自定义标签类型列表一致
+ *@url param date 时间戳，表示从那一天的时间开始查询，需要是0点的时间戳；比如2016年11月30日，要传 1480435200
+ *@url param count 要获取的分页数，表示从date开始查询多少天的图集列表；默认传5，最大不能超过20
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPhotoAlbumDateList ，失败返回 PResult
+ */
+ 
+/*
+ *@note  获取社区的图集列表
+ *@path /v1.2/community/photoalbum/list
+ *@method GET
+ *@url param id 社区id
+ *@url param type 图集的分类；与论坛帖子的自定义标签类型列表一致
+ *@url param offset 传已有的图片数量的个数，如已刷新图片100张，则传100
+ *@url param count 要获取的分页数，表示从time开始查询多少张图集；默认传12，最大不能超过48
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPhotoAlbumList ，失败返回 PResult
+ */
+ 
+/*
+ *@note  获取社区的排行榜
+ *@path /v1.2/community/ranking
+ *@method GET
+ *@url param id 社区id
+ *@url param type 排行榜类型， reputation 代表排行榜
+ *@url param offset 获取排行版的偏移值；初始值传0，否则传最后一个榜单的分值
+ *@url param count 要获取的分页数，默认传20
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPhotoAlbumList ，失败返回 PResult
+ */
+ 
