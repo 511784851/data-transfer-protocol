@@ -34,9 +34,7 @@ package service;
  *@uri /streaming-notification/inside/anchor/change/setting
  *@param POST
  *@param from 调用方(仅限于监管web系统)
- *@param uuid 主播uuid
- *@param status 0表示关闭,其他表示开启
- *@param rooms PStreamingRoomList,开启时需要带此参数,关闭时忽略此参数
+ *@param PStreamingAnchor
  *@return 返回PResult
  */
 

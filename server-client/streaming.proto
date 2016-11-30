@@ -9,6 +9,7 @@ import "account.proto";
 message PStreamingWebSite {
 	string name = 1; // 中文名称
 	string url = 2; // 网站网址
+    int64 id = 3; // 网站编码
 }
 
 //支持的第三方直播网站列表,以后简称网站列表
@@ -33,14 +34,14 @@ message PStreamingLive {
     string id = 1; // 记录id
     string anchor = 2; // 主播uuid
     PStreamingRoom room = 3; // 直播房间
-    int64 liveTime = 4; // 直播时间,unix时间戳,精确到秒
-    int64 noticeTime = 5; // 提醒时间,unix时间戳,精确到秒
+    int64 liveTime = 4; // 直播时间,unix时间戳,精确到秒,北京时间
+    int64 noticeTime = 5; // 提醒时间,unix时间戳,精确到秒,北京时间
     int64 clickCount = 6; // 点击人数
     bool isOpen = 7; // 是否进行中
     bool isManual = 8; // 是否手动增加
     string beforeId = 9;// 前面直播记录id
     bool isPush = 10;// 是否推送过
-    int64 lastLiveTime = 11; // 上一次直播时间,unix时间戳,精确到秒
+    int64 lastLiveTime = 11; // 上一次直播时间,unix时间戳,精确到秒,北京时间
 }
 
 message PStreamingLiveList {
@@ -60,12 +61,11 @@ message PStreamingConfigList {
 
 // 第三方直播通知主播信息
 message PStreamingAnchor {
-    PUserBase base = 1; // 主播基础信息
-    PUserBase supervisor = 2; // 所属VO信息
-    bool isShield = 3; // 是否屏蔽
-    bool isSubscribe = 4; // 是否订阅
-    PStreamingRoom room = 5; // 绑定房间
-    bool IsClose = 6; // 是否开启直播提醒
+    PUserSupervisor user = 1; // 基础属性
+    bool isShield = 2; // 是否屏蔽
+    bool isSubscribe = 3; // 是否订阅
+    PStreamingRoom room = 4; // 绑定房间
+    bool IsClose = 5; // 是否开启直播提醒
 }
 
 // 第三方直播通知主播列表
@@ -102,7 +102,8 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/setting
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PStreamingFan
+ *@param refuseAll 是否屏蔽所有 0-是,1-否
+ *@param refuseWebSites 平台id,1-斗鱼,2-虎牙,多个用逗号隔开
  *@return 返回PResult
  */
 
@@ -119,7 +120,8 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/relation/anchor
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PStreamingAnchor 仅填充UUID,isSubscribe字段
+ *@param anchor 主播uuid
+ *@param action 添加/移除 0-移除,1-添加
  *@return 返回PResult
  */
 
@@ -136,7 +138,8 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/subscribe/anchor
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PStreamingAnchor 仅填充UUID,isShield字段
+ *@param anchor 主播uuid
+ *@param action 订阅/取消订阅 0-取消订阅,1-订阅
  *@return 返回PResult
  */
 
@@ -180,7 +183,9 @@ message PStreamingFan {
  *@uri /streaming-notification/anchor/setting
  *@cookie token&uuid
  *@method POST
- *@body PStreamingAnchor 仅填充room,IsClose字段
+ *@param action 开启/关闭 0-关闭,1-开启
+ *@param website 平台id,1-斗鱼,2-虎牙
+ *@param room 房间
  *@return 返回PResult
  */
 
@@ -189,7 +194,7 @@ message PStreamingFan {
  *@path /streaming-notification/anchor/manual/notice/rest/count
  *@cookie token&uuid
  *@method GET
- *@param day unix时间戳
+ *@param day unix时间戳,北京时间
  *@return 成功返回PInt64Single,失败返回PResult
  */
 
@@ -198,7 +203,8 @@ message PStreamingFan {
  *@uri /streaming-notification/anchor/manual/notice
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PStreamingLive 仅填充LiveTime直播时间,NoticeTime提醒时间字段
+ *@param liveTime 直播时间,unix时间戳,北京时间
+ *@param noticeTime 提醒时间,unix时间戳,北京时间
  *@return 返回PResult
  */
 
@@ -207,7 +213,7 @@ message PStreamingFan {
  *@uri /streaming-notification/anchor/manual/notice
  *@method DELETE
  *@cookie token&uuid 登录用户信息
- *@body PStreamingLive 仅填充id字段
+ *@param liveId 直播id
  *@return 返回PResult
  */
 
@@ -224,6 +230,6 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/entry/room
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PStreamingLive 仅填充id字段
+ *@param liveId 直播id
  *@return 返回PResult
  */
