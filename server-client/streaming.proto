@@ -192,6 +192,12 @@ message PStreamingFan {
  *@cookie token&uuid
  *@method GET
  *@param keyword 关键字
+ *@param scope 范围
+    scope为living,搜正在直播
+    scope为live,搜将要直播
+    scope为all,搜全部(正在直播+将要直播)
+    scope为subscribe,搜全部订阅/添加
+    scope为relation,搜关注的主播
  *@return 成功返回PGuyList,失败返回PResult
  */
 
