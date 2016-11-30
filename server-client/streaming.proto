@@ -39,6 +39,7 @@ message PStreamingLive {
     bool isManual = 8; // 是否手动增加
     string beforeId = 9;// 前面直播记录id
     bool isPush = 10;// 是否推送过
+    int64 lastLiveTime = 11; // 上一次直播时间,unix时间戳,精确到秒
 }
 
 message PStreamingLiveList {
@@ -79,9 +80,10 @@ message PStreamingFan {
     string uuid = 1; // uuid
     int64 dayCount = 2; // 每天通知次数限制
     int64 lastPushTime = 3; // 最后一次通知时间,unix时间戳,精确到秒
-    repeated string refuseAnchors = 4;// 屏蔽主播uuid列表
-    repeated string refuseWebSites = 5; // 屏蔽网站平台名字列表
-    bool refuseAll = 6; // 是否屏蔽全部
+    repeated string removeAnchors = 4;// 移除主播uuid列表
+    repeated string refuseAnchors = 5;// 屏蔽主播uuid列表
+    repeated string refuseWebSites = 6; // 屏蔽网站平台名字列表
+    bool refuseAll = 7; // 是否屏蔽全部
 }
 
 /**************************API 定义***********************************/
@@ -92,6 +94,16 @@ message PStreamingFan {
  *@cookie token&uuid
  *@method GET
  *@return 成功返回PStreamingWebSiteList,失败返回PResult
+ */
+
+/*
+ *@note 主播修改提醒通知设置
+ *@uri /streaming-notification/anchor/change/setting
+ *@cookie token&uuid
+ *@param POST
+ *@param status 0表示关闭,其他表示开启
+ *@param rooms PStreamingRoomList,开启时需要带此参数,关闭时忽略此参数
+ *@return 返回PResult
  */
 
 /*
@@ -132,19 +144,17 @@ message PStreamingFan {
  */
 
 /*
- *@note 分页获取主播信息
- *@uri /streaming-notification/fan/anchor/list
+ *@note 粉丝列出所有主播
+ *@uri /streaming-notification/fan/list/anchor
  *@param GET
  *@cookie token&uuid 登录用户信息
- *@param offset 偏移量,第一次填0,以后offoset=offset+count
- *@param count 数量,默认值20,范围[15,30]
  *@return 成功返回PStreamingAnchorList, 失败返回PResult
  */
 
 /*
- *@note 粉丝修改提醒通知设置
- *@uri /streaming-notification/fan/change/setting
- *@param POST
+ *@note 粉丝更新主播
+ *@uri /streaming-notification/fan/update/anchor
+ *@param GET
  *@cookie token&uuid 登录用户信息
  *@param PStreamingFan
  *@return 返回PResult
@@ -156,6 +166,15 @@ message PStreamingFan {
  *@param GET
  *@cookie token&uuid 登录用户信息
  *@return 成功返回PStreamingFan, 失败返回PResult
+ */
+
+/*
+ *@note 粉丝修改提醒通知设置
+ *@uri /streaming-notification/fan/change/setting
+ *@param POST
+ *@cookie token&uuid 登录用户信息
+ *@param PStreamingFan
+ *@return 返回PResult
  */
 
 /*
@@ -174,4 +193,12 @@ message PStreamingFan {
  *@method GET
  *@param keyword 关键字
  *@return 成功返回PGuyList,失败返回PResult
+ */
+
+/*
+ *@note 粉丝查看直播列表
+ *@uri /streaming-notification/fan/live/list
+ *@cookie token&uuid
+ *@param GET
+ *@return 成功返回PStreamingLiveList, 失败返回PResult
  */
