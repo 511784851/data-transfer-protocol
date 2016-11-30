@@ -59,35 +59,32 @@ message PStreamingConfigList {
     repeated PStreamingConfig list = 1;
 }
 
-// 第三方直播通知主播信息
-message PStreamingAnchor {
+message PStreamingRelation {
     PUserSupervisor user = 1; // 基础属性
-    bool isShield = 2; // 是否屏蔽
-    bool isSubscribe = 3; // 是否订阅
-    PStreamingRoom room = 4; // 绑定房间
-    bool IsClose = 5; // 是否开启直播提醒
+    bool isShield = 2; // 是否添加
 }
 
-// 第三方直播通知主播列表
-message PStreamingAnchorList {
-    repeated PStreamingAnchor list = 1;
+message PStreamingRelationList {
+    repeated PStreamingRelation list = 1;
+}
+
+message PStreamingSubscribe {
+    PUserSupervisor user = 1; // 基础属性
+    bool isSubscribe = 2; // 是否订阅
+}
+
+message PStreamingSubscribeList {
+    repeated PStreamingSubscribe list = 1;
 }
 
 // 第三方直播通知粉丝信息
 message PStreamingFan {
     bool refuseAll = 1; // 是否屏蔽全部
-    repeated string refuseWebSites = 2; // 屏蔽网站平台名字列表
+    repeated string refuseWebSites = 2; // 屏蔽网站平台id列表
+    bool isSend = 3; // 是否发送提醒通知
 }
 
 /**************************API 定义***********************************/
-
-/*
- *@note 获取网站列表
- *@path /streaming-notification/websites
- *@cookie token&uuid
- *@method GET
- *@return 成功返回PStreamingWebSiteList,失败返回PResult
- */
 
 /*
  *@note 粉丝获取提醒通知设置
@@ -102,21 +99,24 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/setting
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param refuseAll 是否屏蔽所有 0-是,1-否
- *@param refuseWebSites 平台id,1-斗鱼,2-虎牙,多个用逗号隔开
+ *@param action  0-关,1-开
+ *@param scope 范围
+    scope为send,发送提醒通知
+    scope为receive,接收所有提醒通知
+    scope为网站平台id,1-斗鱼,2-虎牙
  *@return 返回PResult
  */
 
 /*
- *@note 粉丝获取关注主播列表
+ *@note 粉丝获取已关注的主播列表
  *@uri /streaming-notification/fan/relation/anchor
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@return 成功返回PStreamingAnchorList, 失败返回PResult
+ *@return 成功返回PStreamingRelationList, 失败返回PResult
  */
 
 /*
- *@note 粉丝修改关注主播列表
+ *@note 粉丝修改已关注的主播
  *@uri /streaming-notification/fan/relation/anchor
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -126,15 +126,15 @@ message PStreamingFan {
  */
 
 /*
- *@note 粉丝获取订阅主播列表
+ *@note 粉丝获取已订阅的主播列表
  *@uri /streaming-notification/fan/subscribe/anchor
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@return 成功返回PStreamingAnchorList, 失败返回PResult
+ *@return 成功返回PStreamingSubscribeList, 失败返回PResult
  */
 
 /*
- *@note 粉丝修改订阅主播列表
+ *@note 粉丝修改已订阅的主播
  *@uri /streaming-notification/fan/subscribe/anchor
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -156,7 +156,7 @@ message PStreamingFan {
  */
 
 /*
- *@note 粉丝搜索关注的主播
+ *@note 粉丝搜索主播
  *@path /streaming-notification/fan/search/anchor
  *@cookie token&uuid
  *@method GET
@@ -183,7 +183,6 @@ message PStreamingFan {
  *@uri /streaming-notification/anchor/setting
  *@cookie token&uuid
  *@method POST
- *@param action 开启/关闭 0-关闭,1-开启
  *@param website 平台id,1-斗鱼,2-虎牙
  *@param room 房间
  *@return 返回PResult
