@@ -892,15 +892,27 @@ message PCommunityBannerInfoList {
 	repeated PCommunityBannerInfo List = 1;
 }
 
-// 用户的自定义标签类型
-message PCommunityUserDefined {
-    int32 TypeID = 1;           // 类型id
-    string TypeName = 2;        // 用户自定义的名字
+// 用户的自定义功能模块
+message PCommunityModules {
+    int32 Id = 1;           // 类型id
+    string Name = 2;        // 自定义的模块名字
 }
 
-// 论坛帖子的自定义标签类型列表
-message PCommunityUserDefinedList {
-	repeated PCommunityUserDefined List = 1;
+// 用户的自定义功能模块列表
+message PCommunityModulesList {
+	repeated PCommunityModules List = 1;
+}
+
+// 用户的自定义论坛帖子标签
+message PCommunityForumTag {
+    int32 Id = 1;           // 标签id
+    int32 Type = 2;         // 自定义的论坛帖子分类；1是以帖子为单位归类；2是以用户id为单位归类
+    string Name = 3;        // 自定义的标签名字
+}
+
+// 用户的自定义论坛帖子标签列表
+message PCommunityForumTagList {
+	repeated PCommunityForumTag List = 1;
 }
 
 // 社区成员的布局方案1
@@ -911,9 +923,9 @@ message PCommunityLayout_Plan1 {
     int32 ContentType = 3;                              // 内容模块id; -1 为公告; >= 0 为论坛可选模块的id
     PUserBaseList TopUserList = 4;                      // top成员列表
     PCommunityBannerInfoList BannerList = 5;            // banner列表
-    PCommunityUserDefinedList MiddleModules = 6;        // 中间定义的功能模块列表,多个模块以','分割
-    PCommunityUserDefinedList BottomModules = 7;        // 底部定义的功能模块列表,多个模块以','分割
-    PCommunityUserDefinedList ForumSubTypeList = 8;     // 论坛帖子的自定义标签类型列表
+    PCommunityModulesList MiddleModules = 6;            // 中间定义的功能模块列表,多个模块以','分割
+    PCommunityModulesList BottomModules = 7;            // 底部定义的功能模块列表,多个模块以','分割
+    PCommunityForumTagList ForumSubTypeList = 8;        // 论坛帖子的自定义标签类型列表
 }
 
 // 社区成员的布局
@@ -923,18 +935,18 @@ message PCommunityLayout {
 }
 
 // 社区信息 v1.2.x
-message PCommunityInfo_1_2_x {
+message PCommunityInfo_1_2 {
     PCommunityBase BaseInfo = 1;                        // 社区基础信息
     PCommunityLayout MemberLayout = 2;                  // 社区成员的布局
 }
 
 // ‘社区首页’返回的信息 v1.2.x
-message PCommunityHome_1_2_x {
+message PCommunityHome_1_2 {
     int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
     string Advertisement = 2;                           // 监管后台设置的广告
     string ManagerUserID = 3;                           // 社区管理员的uuid列表,多个管理员用','分割    
     PUserBase Owner = 4;                                // 社区创建者的信息
-    PCommunityInfo_1_2_x CommunityInfo = 5;             // 社区信息
+    PCommunityInfo_1_2 CommunityInfo = 5;               // 社区信息
 	PCommunityPostInfo BackgroundPost = 6;              // 底部的背景介绍
 }
 
@@ -979,7 +991,7 @@ message PCommunityRankingUserList {
  *@note  创建社区
  *@path /v1.2/community
  *@method POST
- *@body PCommunityInfo_1_2_x
+ *@body PCommunityInfo_1_2
  *@cookie token&uuid
  *@return 成功返回 PCommunityMe ，失败返回 PResult
  */
@@ -993,7 +1005,7 @@ message PCommunityRankingUserList {
  *@url param fields 要修改的选项，
         方案1的可选的有:
         Name,HeadImg,Introduce,Color,BannerList,MiddleModules,BottomModules,修改多个以,分割
- *@body PCommunityInfo_1_2_x
+ *@body PCommunityInfo_1_2
  *@cookie token&uuid
  *@return 返回 PResult
  */
@@ -1014,7 +1026,7 @@ message PCommunityRankingUserList {
  *@method GET
  *@url param id 社区id
  *@cookie token&uuid
- *@return 成功返回 PCommunityHome_1_2_x ，失败返回PResult
+ *@return 成功返回 PCommunityHome_1_2 ，失败返回PResult
  */
  
 /*
