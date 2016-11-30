@@ -167,3 +167,82 @@ package service;
  *@body PCommunityPostUpload
  *@return返回 PResult
  */
+ 
+ 
+ // 1.2.x 社区新功能
+/*=====================================*/
+// 结构定义
+
+
+/*=====================================*/
+// API定义
+
+/*
+ *@note 获取社区当前设置的广告信息
+ *@URL /v1.2/community/inside/ad
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param id 社区id
+ *@return 成功返回 PCommunityResource ，失败返回 PResult;
+ */
+ 
+/*
+ *@note 设置社区当前设置的广告信息
+ *@URL /v1.2/community/inside/ad
+ *@method PUT
+ *@form param from 发起调用的服务名
+ *@form param id 社区id
+ *@form param name 图片在oss的object key
+ *@return 返回 PResult;
+ */
+
+/*
+ *@note 获取社区的论坛帖子的自定义类型列表
+ *@URL /v1.2/community/inside/fourme/tag/user_defined
+ *@method GET
+ *@url param from 发起调用的服务名
+ *@url param id 社区id
+ *@return 成功返回 PCommunityUserDefinedList ，失败返回 PResult;
+ */
+ 
+/*
+ *@note 创建社区的论坛帖子的自定义类型
+ *@URL /v1.2/community/inside/fourme/tag/user_defined
+ *@method POST
+ *@form param from 发起调用的服务名
+ *@form param id 社区id
+ *@form param type_name 新增的自定义类型标签的名字
+ *@return 成功返回 PCommunityUserDefined ，失败返回 PResult;
+ */
+ 
+/*
+ *@note 修改社区的论坛帖子的自定义类型
+ *@URL /v1.2/community/inside/fourme/tag/user_defined
+ *@method PUT
+ *@form param from 发起调用的服务名
+ *@form param id 社区id
+ *@form param type_id 自定义类型标签的id
+ *@form param type_name 修改的标签名
+ *@return 返回 PResult;
+ */
+ 
+/*
+ *@note 删除社区的论坛帖子的自定义类型
+ *@URL /v1.2/community/inside/fourme/tag/user_defined
+ *@method DELETE
+ *@url param from 发起调用的服务名
+ *@url param id 社区id
+ *@url param type_id 自定义类型标签的id
+ *@return 返回 PResult;
+ */
+ 
+/*
+ *@note 修改社区的论坛帖子的类型
+ *@URL /v1.2/community/inside/fourme/post/type
+ *@method PUT
+ *@form param from 发起调用的服务名
+ *@form param id 社区id
+ *@form param post_id 帖子id
+ *@form param type_id 自定义类型标签的id , 多个以','分割
+ *@return 返回 PResult;
+ */
