@@ -325,6 +325,18 @@ message PAccountVoBase {
     string thumbBackImage = 6; // 背景缩略图
 }
 
+// 用户基础信息包含VO信息
+message PUserSupervisor {
+    PUserBase user       = 1; // 用户
+    PUserBase supervisor = 2; // 所属VO
+}
+
+// PUserSupervisor列表
+message PUserSupervisorList {
+    repeated PUserSupervisor list = 1; // 列表
+}
+
+
 /*=====================================*/
 //API定义
 
