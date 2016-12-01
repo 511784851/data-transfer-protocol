@@ -58,6 +58,7 @@ message PStreamingAnchor {
     PUserSupervisor user = 1; // 基础属性
     bool isSubscribe = 2; // 是否订阅
     bool isAdd = 3; // 是否添加
+    PStreamingRoom room = 4; // 直播房间
 }
 
 message PStreamingAnchorList {
@@ -194,7 +195,7 @@ message PStreamingManualList {
  *@uri /streaming-notification/anchor/setting
  *@cookie token&uuid
  *@method GET
- *@return 成功返回PStreamingRoom,失败返回PResult
+ *@return 成功返回PStreamingAnchor,失败返回PResult
  */
 
 /*
