@@ -35,9 +35,8 @@ message PStreamingLive {
     PUserSupervisor anchor = 2; // 主播
     PStreamingRoom room = 3; // 直播房间
     bool isLiving = 4; // 是否直播中
-    string lastLiveTime = 5; // 上一次直播时间,10:1509/12/2016格式,24小时制
-    string nextLiveTime = 6; // 即将直播时间,10:1509/12/2016格式,24小时制
-    int64 timeZone = 7; // 0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
+    int64 lastLiveTime = 5; // 上一次直播时间,unix时间戳
+    int64 nextLiveTime = 6; // 即将直播时间,unix时间戳
 }
 
 message PStreamingLiveList {
@@ -83,10 +82,9 @@ message PStreamingRest {
 // 第三方直播手动提醒通知记录
 message PStreamingManual {
     string id = 1; // 记录id
-    string createTime = 2; // 创建时间,10:1509/12/2016格式,24小时制
-    string liveTime = 3; // 直播时间,10:1509/12/2016格式,24小时制
-    string noticeTime = 4; // 提醒时间,10:1509/12/2016格式,24小时制
-    int64 timeZone = 5; // 0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
+    int64 createTime = 2; // 创建时间,unix时间戳
+    int64 liveTime = 3; // 直播时间,unix时间戳
+    int64 noticeTime = 4; // 提醒时间,unix时间戳
 }
 
 message PStreamingManualList {
@@ -212,8 +210,7 @@ message PStreamingManualList {
  *@path /streaming-notification/anchor/manual/notice/rest/count
  *@cookie token&uuid
  *@method GET
- *@param day 09/12/2016格式
- *@param timeZone 时区,0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
+ *@param day unix时间戳
  *@return 成功返回PStreamingRest,失败返回PResult
  */
 
@@ -222,9 +219,8 @@ message PStreamingManualList {
  *@uri /streaming-notification/anchor/manual/notice
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param liveTime 直播时间,10:1509/12/2016格式,24小时制
- *@param noticeTime 提醒时间,10:1509/12/2016格式,24小时制
- *@param timeZone 时区,0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
+ *@param liveTime 直播时间,unix时间戳
+ *@param noticeTime 提醒时间,unix时间戳
  *@return 返回PResult
  */
 
