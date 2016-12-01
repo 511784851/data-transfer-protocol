@@ -32,6 +32,8 @@ message PGuy {
 	int32 friendShip = 13;
 	//用来排行的值，表示粉丝数、帖子数、成就数等
 	int32 rankValue = 14;
+	//距离(单位km)
+	float distance = 15;
 }
 
 message PGuyList {
@@ -407,4 +409,16 @@ message PRank {
  *@param longitude 经度
  *@param latitude 纬度
  *@return PResult
+ */
+
+/*
+ *@note 社区附近的人
+ *@path /datapublishing/community/nearby
+ *@method GET
+ *@cookie token&uuid
+ *@param longitude 经度
+ *@param latitude 纬度
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PGuyList，失败返回PResult
  */
