@@ -32,16 +32,11 @@ message PStreamingRoomList {
 // 第三方直播通知直播记录
 message PStreamingLive {
     string id = 1; // 记录id
-    string anchor = 2; // 主播uuid
+    PUserSupervisor anchor = 2; // 主播
     PStreamingRoom room = 3; // 直播房间
-    int64 liveTime = 4; // 直播时间,unix时间戳,精确到秒,北京时间
-    int64 noticeTime = 5; // 提醒时间,unix时间戳,精确到秒,北京时间
-    int64 clickCount = 6; // 点击人数
-    bool isOpen = 7; // 是否进行中
-    bool isManual = 8; // 是否手动增加
-    string beforeId = 9;// 前面直播记录id
-    bool isPush = 10;// 是否推送过
-    int64 lastLiveTime = 11; // 上一次直播时间,unix时间戳,精确到秒,北京时间
+    bool isLiving = 4; // 是否直播中
+    int64 lastLiveTime = 5; // 上一次直播时间,unix时间戳,精确到秒,北京时间
+    int64 nextLiveTime = 6; // 即将直播时间,unix时间戳,精确到秒,北京时间
 }
 
 message PStreamingLiveList {
@@ -59,22 +54,14 @@ message PStreamingConfigList {
     repeated PStreamingConfig list = 1;
 }
 
-message PStreamingRelation {
-    PUserSupervisor user = 1; // 基础属性
-    bool isShield = 2; // 是否添加
-}
-
-message PStreamingRelationList {
-    repeated PStreamingRelation list = 1;
-}
-
-message PStreamingSubscribe {
+message PStreamingAnchor {
     PUserSupervisor user = 1; // 基础属性
     bool isSubscribe = 2; // 是否订阅
+    bool isAdd = 3; // 是否添加
 }
 
-message PStreamingSubscribeList {
-    repeated PStreamingSubscribe list = 1;
+message PStreamingAnchorList {
+    repeated PStreamingAnchor list = 1;
 }
 
 // 第三方直播通知粉丝信息
@@ -112,7 +99,7 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/relation/anchor
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@return 成功返回PStreamingRelationList, 失败返回PResult
+ *@return 成功返回PStreamingAnchorList, 失败返回PResult
  */
 
 /*
@@ -130,7 +117,7 @@ message PStreamingFan {
  *@uri /streaming-notification/fan/subscribe/anchor
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@return 成功返回PStreamingSubscribeList, 失败返回PResult
+ *@return 成功返回PStreamingAnchorList, 失败返回PResult
  */
 
 /*
@@ -141,6 +128,18 @@ message PStreamingFan {
  *@param anchor 主播uuid
  *@param action 订阅/取消订阅 0-取消订阅,1-订阅
  *@return 返回PResult
+ */
+
+/*
+ *@note 粉丝搜索主播
+ *@path /streaming-notification/fan/search/anchor
+ *@cookie token&uuid
+ *@method GET
+ *@param keyword 关键字
+ *@param scope 范围
+    scope为subscribe,搜全部订阅/添加
+    scope为relation,搜关注的主播
+ *@return 成功返回PStreamingAnchorList,失败返回PResult
  */
 
 /*
@@ -156,8 +155,8 @@ message PStreamingFan {
  */
 
 /*
- *@note 粉丝搜索主播
- *@path /streaming-notification/fan/search/anchor
+ *@note 粉丝搜索直播
+ *@path /streaming-notification/fan/search/live
  *@cookie token&uuid
  *@method GET
  *@param keyword 关键字
@@ -165,21 +164,19 @@ message PStreamingFan {
     scope为living,搜正在直播
     scope为live,搜将要直播
     scope为all,搜全部(正在直播+将要直播)
-    scope为subscribe,搜全部订阅/添加
-    scope为relation,搜关注的主播
- *@return 成功返回PStreamingAnchorList,失败返回PResult
+ *@return 成功返回PStreamingLiveList,失败返回PResult
  */
 
 /*
- *@note 主播获取提醒通知设置
+ *@note 主播获取绑定房间
  *@uri /streaming-notification/anchor/setting
  *@cookie token&uuid
  *@method GET
- *@return 成功返回PStreamingAnchor,失败返回PResult
+ *@return 成功返回PStreamingRoom,失败返回PResult
  */
 
 /*
- *@note 主播修改提醒通知设置
+ *@note 主播修改绑定房间
  *@uri /streaming-notification/anchor/setting
  *@cookie token&uuid
  *@method POST
@@ -193,7 +190,7 @@ message PStreamingFan {
  *@path /streaming-notification/anchor/manual/notice/rest/count
  *@cookie token&uuid
  *@method GET
- *@param day unix时间戳,北京时间
+ *@param day 北京时间,2006-01-02格式
  *@return 成功返回PInt64Single,失败返回PResult
  */
 
@@ -202,8 +199,8 @@ message PStreamingFan {
  *@uri /streaming-notification/anchor/manual/notice
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param liveTime 直播时间,unix时间戳,北京时间
- *@param noticeTime 提醒时间,unix时间戳,北京时间
+ *@param liveTime 直播时间,2006-01-02T15:04:05格式,北京时间
+ *@param noticeTime 提醒时间,2006-01-02T15:04:05格式,北京时间
  *@return 返回PResult
  */
 
