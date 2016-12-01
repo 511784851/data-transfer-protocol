@@ -9,7 +9,7 @@ import "account.proto";
 message PStreamingWebSite {
 	string name = 1; // 中文名称
 	string url = 2; // 网站网址
-    int64 id = 3; // 网站编码
+    int64 id = 3; // 网站平台id,1-斗鱼,2-虎牙
 }
 
 //支持的第三方直播网站列表,以后简称网站列表
@@ -67,7 +67,7 @@ message PStreamingAnchorList {
 // 第三方直播通知粉丝信息
 message PStreamingFan {
     bool refuseAll = 1; // 是否屏蔽全部
-    repeated string refuseWebSites = 2; // 屏蔽网站平台id列表
+    repeated string refuseWebSites = 2; // 屏蔽网站平台id列表,1-斗鱼,2-虎牙
     bool isSend = 3; // 是否发送提醒通知
     PStreamingRoom room = 4; // 直播房间
     PStreamingManualList manuals = 5; // 已创建提醒列表
@@ -204,6 +204,7 @@ message PStreamingManualList {
  *@method POST
  *@param website 平台id,1-斗鱼,2-虎牙
  *@param room 房间
+ *@param action 是否绑定, 0-解除绑定, 1-绑定
  *@return 返回PResult
  */
 
