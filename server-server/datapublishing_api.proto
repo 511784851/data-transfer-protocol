@@ -11,15 +11,11 @@ message POnlineDataArray {
 	repeated POnlineData array = 1;
 }
 
-message PLongArray {
-	repeated int64 data = 1;
-}
-
 /*
- *@note 
+ *@note 批量获取最后心跳时间
  *@path /datapublishing/inside/heartbeat/last
  *@method GET
  *@param from 服务名，用于校验内网调用
  *@param uuids 用逗号分隔的一众uuid
- *@return 成功返回PLongArray，失败返回PResult
+ *@return 成功返回PInt64List，失败返回PResult
  */
