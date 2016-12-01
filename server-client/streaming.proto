@@ -35,8 +35,8 @@ message PStreamingLive {
     PUserSupervisor anchor = 2; // 主播
     PStreamingRoom room = 3; // 直播房间
     bool isLiving = 4; // 是否直播中
-    int64 lastLiveTime = 5; // 上一次直播时间,10:1509/12/2016格式,24小时制
-    int64 nextLiveTime = 6; // 即将直播时间,10:1509/12/2016格式,24小时制
+    string lastLiveTime = 5; // 上一次直播时间,10:1509/12/2016格式,24小时制
+    string nextLiveTime = 6; // 即将直播时间,10:1509/12/2016格式,24小时制
     int64 timeZone = 7; // 0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
 }
 
@@ -70,6 +70,13 @@ message PStreamingFan {
     bool refuseAll = 1; // 是否屏蔽全部
     repeated string refuseWebSites = 2; // 屏蔽网站平台id列表
     bool isSend = 3; // 是否发送提醒通知
+}
+
+
+message PStreamingRest {
+    int64 count = 1; // 余下次数
+    PStreamingRoom room = 2; // 绑定的房间
+    bool isSend = 3; // 是否开启发送提醒
 }
 
 /**************************API 定义***********************************/
@@ -193,7 +200,7 @@ message PStreamingFan {
  *@method GET
  *@param day 09/12/2016格式
  *@param timeZone 时区,0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
- *@return 成功返回PInt64Single,失败返回PResult
+ *@return 成功返回PStreamingRest,失败返回PResult
  */
 
 /*
