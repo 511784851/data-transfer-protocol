@@ -360,9 +360,17 @@ message PPrivacyAttentionList {
 /*
  *@note 获取成员的VO信息
  *@uri /v1/account/inside/users/vo
- *method POST
+ *@method POST
  *uriParam from 服务名称
  *uriParam project 项目名称
  *@body PStringList uuid列表
  *@return PStringList 用户对应VO的ID列表，如果用户不是VO成员则为空
+ */
+
+/*
+ *@note 获取所有等级权限定义
+ *@uri /v1/account/inside/levels
+ *@method GET
+ *@uriParam from 服务名称
+ *@return PLevelInfoList
  */

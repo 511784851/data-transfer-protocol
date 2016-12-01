@@ -336,6 +336,10 @@ message PUserSupervisorList {
     repeated PUserSupervisor list = 1; // 列表
 }
 
+// 权限列表
+message PLevelInfoList {
+    repeated PLevelInfo list = 1;
+}
 
 /*=====================================*/
 //API定义
