@@ -69,6 +69,8 @@ message PStreamingFan {
     bool refuseAll = 1; // 是否屏蔽全部
     repeated string refuseWebSites = 2; // 屏蔽网站平台id列表
     bool isSend = 3; // 是否发送提醒通知
+    PStreamingRoom room = 4; // 直播房间
+    PStreamingManualList manuals = 5; // 已创建提醒列表
 }
 
 
