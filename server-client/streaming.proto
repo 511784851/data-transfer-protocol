@@ -80,6 +80,19 @@ message PStreamingRest {
     string nick = 4; // 昵称
 }
 
+// 第三方直播手动提醒通知记录
+message PStreamingManual {
+    string id = 1; // 记录id
+    string createTime = 2; // 创建时间,10:1509/12/2016格式,24小时制
+    string liveTime = 3; // 直播时间,10:1509/12/2016格式,24小时制
+    string noticeTime = 4; // 提醒时间,10:1509/12/2016格式,24小时制
+    int64 timeZone = 5; // 0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
+}
+
+message PStreamingManualList {
+    repeated PStreamingManual list = 1;
+}
+
 /**************************API 定义***********************************/
 
 /*
@@ -220,7 +233,7 @@ message PStreamingRest {
  *@uri /streaming-notification/anchor/manual/notice
  *@method DELETE
  *@cookie token&uuid 登录用户信息
- *@param liveId 直播id
+ *@param id 记录id
  *@return 返回PResult
  */
 
@@ -229,7 +242,7 @@ message PStreamingRest {
  *@uri /streaming-notification/anchor/manual/notice
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@return 成功返回PStreamingLiveList, 失败返回PResult
+ *@return 成功返回PStreamingManualList, 失败返回PResult
  */
 
 /*
@@ -237,6 +250,6 @@ message PStreamingRest {
  *@uri /streaming-notification/fan/entry/room
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param liveId 直播id
+ *@param id 直播id
  *@return 返回PResult
  */
