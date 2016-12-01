@@ -35,8 +35,9 @@ message PStreamingLive {
     PUserSupervisor anchor = 2; // 主播
     PStreamingRoom room = 3; // 直播房间
     bool isLiving = 4; // 是否直播中
-    int64 lastLiveTime = 5; // 上一次直播时间,unix时间戳,精确到秒,北京时间
-    int64 nextLiveTime = 6; // 即将直播时间,unix时间戳,精确到秒,北京时间
+    int64 lastLiveTime = 5; // 上一次直播时间,10:15PM09/12/16格式
+    int64 nextLiveTime = 6; // 即将直播时间,10:15PM09/12/16格式
+    int64 timeZone = 7; // 0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
 }
 
 message PStreamingLiveList {
@@ -199,8 +200,9 @@ message PStreamingFan {
  *@uri /streaming-notification/anchor/manual/notice
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@param liveTime 直播时间,2006-01-02T15:04:05格式,北京时间
- *@param noticeTime 提醒时间,2006-01-02T15:04:05格式,北京时间
+ *@param liveTime 直播时间,10:15PM09/12/16格式
+ *@param noticeTime 提醒时间,10:15PM09/12/16格式
+ *@param timeZone 时区,0-UTC0时区,1-UTC+1时区,-1-UTC-1时区,类推
  *@return 返回PResult
  */
 
