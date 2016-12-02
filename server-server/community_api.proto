@@ -183,7 +183,7 @@ package service;
  *@method GET
  *@url param from 发起调用的服务名
  *@url param id 社区id
- *@return 成功返回 PCommunityResource ，失败返回 PResult;
+ *@return 成功返回 PCommunityBannerInfo ，失败返回 PResult;
  */
  
 /*
@@ -192,7 +192,7 @@ package service;
  *@method PUT
  *@form param from 发起调用的服务名
  *@form param id 社区id
- *@form param name 图片在oss的object key
+ *@body PCommunityBannerInfo
  *@return 返回 PResult;
  */
 

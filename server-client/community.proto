@@ -5,6 +5,7 @@ option java_outer_classname = "CommunityProtos";
 
 import "account.proto";
 import "wallet.proto";
+import "result.proto";
 
 /*=====================================*/
 // 结构定义
@@ -919,13 +920,14 @@ message PCommunityForumTagList {
 // ForumSubTypeList 中id的默认值为：0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
 message PCommunityLayout_Plan1 {
     int32 Color = 1;                                    // 方案1的配色
-    int32 MemberCount = 2;                              // 社区成员数量
+    int32 MemberCount = 2;                              // 社区成员数量；创建时不需要传
     int32 ContentType = 3;                              // 内容模块id; -1 为公告; >= 0 为论坛可选模块的id
-    PUserBaseList TopUserList = 4;                      // top成员列表
+    PUserBaseList TopUserList = 4;                      // top成员列表；创建时不需要传
     PCommunityBannerInfoList BannerList = 5;            // banner列表
-    PCommunityModulesList MiddleModules = 6;            // 中间定义的功能模块列表,多个模块以','分割
-    PCommunityModulesList BottomModules = 7;            // 底部定义的功能模块列表,多个模块以','分割
-    PCommunityForumTagList ForumSubTypeList = 8;        // 论坛帖子的自定义标签类型列表
+    PCommunityModulesList AllModules = 6;               // 所有的功能模块列表
+    PInt32List MiddleModules = 7;                       // 中间定义的功能模块列表
+    PInt32List BottomModules = 8;                       // 底部定义的功能模块列表
+    PCommunityForumTagList ForumSubTypeList = 9;        // 论坛帖子的自定义标签类型列表
 }
 
 // 社区成员的布局
@@ -943,7 +945,7 @@ message PCommunityInfo_1_2 {
 // ‘社区首页’返回的信息 v1.2.x
 message PCommunityHome_1_2 {
     int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
-    string Advertisement = 2;                           // 监管后台设置的广告
+    PCommunityBannerInfo Advertisement = 2;             // 监管后台设置的广告
     string ManagerUserID = 3;                           // 社区管理员的uuid列表,多个管理员用','分割    
     PUserBase Owner = 4;                                // 社区创建者的信息
     PCommunityInfo_1_2 CommunityInfo = 5;               // 社区信息
@@ -983,9 +985,26 @@ message PCommunityRankingUserList {
     repeated PCommunityRankingUser List = 1;				// 列表
 }
 
+// 布局1的配置信息
+message PCommunityLayoutConfigPlan1 {
+	PInt32List Color = 1;                                   // 可选的颜色方案
+}
+
+// 社区布局的配置信息
+message PCommunityLayoutConfig {
+	PCommunityLayoutConfigPlan1 Plan1 = 1;                  // 布局1的配置信息
+}
+
 /*=====================================*/
 // API定义
 
+/*
+ *@note  获取社区模板的配置信息
+ *@path /v1.2/community/layout/config
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityLayoutConfig ，失败返回 PResult
+ */
 
 /*
  *@note  创建社区
@@ -1004,7 +1023,7 @@ message PCommunityRankingUserList {
  *@url param fields 要修改的选项，
         方案1的可选的有:
         Name,HeadImg,Introduce,Color,ContentType,BannerList,MiddleModules,BottomModules,修改多个以,分割
-		如果要修改布局方案，即Color,ContentType,BannerList,MiddleModules,BottomModules时，PCommunityInfo_1_2要PlanID要填1
+		如果要修改布局方案，即Color,ContentType,BannerList,AllModules,MiddleModules,BottomModules时，PCommunityInfo_1_2要PlanID要填1
  *@body PCommunityInfo_1_2
  *@cookie token&uuid
  *@return 返回 PResult
