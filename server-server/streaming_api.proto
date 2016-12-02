@@ -30,12 +30,12 @@ package service;
  */
 
 /*
- *@note 主播开关提醒通知
- *@uri /streaming-notification/inside/anchor/change/setting
+ *@note 监管屏蔽/解除屏蔽主播
+ *@uri /streaming-notification/inside/anchor/setting
  *@param POST
  *@param from 调用方(仅限于监管web系统)
- *@param status 0表示关闭,其他表示开启
- *@param rooms PStreamingRoomList,开启时需要带此参数,关闭时忽略此参数
+ *@param uuid 主播uuid
+ *@param action 0表示关闭,1-表示开启
  *@return 返回PResult
  */
 

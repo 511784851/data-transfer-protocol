@@ -178,6 +178,15 @@ message PStreamingManualList {
  */
 
 /*
+ *@note 粉丝移除直播
+ *@uri /streaming-notification/fan/remove/live
+ *@cookie token&uuid
+ *@method GET
+ *@param id 直播id
+ *@return 返回PResult
+ */
+
+/*
  *@note 粉丝搜索直播
  *@path /streaming-notification/fan/search/live
  *@cookie token&uuid
