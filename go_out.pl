@@ -2,7 +2,7 @@
 use File::Path;
 use Cwd;
 $pwd = cwd();
-
+ 
 $output = "../go-commons";
 if (@ARGV > 0) {
 	$output = $ARGV[0];
