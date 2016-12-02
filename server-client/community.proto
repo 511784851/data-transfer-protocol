@@ -927,7 +927,6 @@ message PCommunityLayout_Plan1 {
     PCommunityModulesList AllModules = 6;               // 所有的功能模块列表
     PInt32List MiddleModules = 7;                       // 中间定义的功能模块列表
     PInt32List BottomModules = 8;                       // 底部定义的功能模块列表
-    PCommunityForumTagList ForumSubTypeList = 9;        // 论坛帖子的自定义标签类型列表
 }
 
 // 社区成员的布局
@@ -940,16 +939,16 @@ message PCommunityLayout {
 message PCommunityInfo_1_2 {
     PCommunityBase BaseInfo = 1;                        // 社区基础信息
     PCommunityLayout MemberLayout = 2;                  // 社区成员的布局
+    PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告
+    PCommunityForumTagList ForumSubTypeList = 4;        // 论坛帖子的自定义标签类型列表
 }
 
 // ‘社区首页’返回的信息 v1.2.x
 message PCommunityHome_1_2 {
     int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
-    PCommunityBannerInfo Advertisement = 2;             // 监管后台设置的广告
-    string ManagerUserID = 3;                           // 社区管理员的uuid列表,多个管理员用','分割    
-    PUserBase Owner = 4;                                // 社区创建者的信息
-    PCommunityInfo_1_2 CommunityInfo = 5;               // 社区信息
-	PCommunityPostInfo BackgroundPost = 6;              // 底部的背景介绍
+    PUserBase Owner = 2;                                // 社区创建者的信息
+    PCommunityInfo_1_2 CommunityInfo = 3;               // 社区信息
+	PCommunityPostInfo BackgroundPost = 4;              // 底部的背景介绍
 }
 
 // 图集里面图片的信息
