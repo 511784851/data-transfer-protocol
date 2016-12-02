@@ -124,5 +124,29 @@ message PBinaryMsgList {
 	repeated PBinaryMsg List = 1;
 }
 
+/*
+ *@note 服务健康信息
+ */
+message PServiceHealth {
+	int32  status = 1;                   //服务状态
+	repeated string healInfoList = 2;    //健康信息
+}
+
+/*
+ *@note 服务健康状态
+ */
+message PServicesStatus {
+	int32  status = 1;                   //服务状态
+}
+
+/*
+ *@note 服务心跳信息
+ */
+message PServiceHeartbeatInfo {
+	int64          tokenExpiration  = 1; //token有效期
+	int32          status           = 2;//服务总体状态。0：所有服务正常; 1：存在服务异常
+	repeated int32 abnormalIdList   = 3; //异常的服务id列表
+}
+
 
 

@@ -51,6 +51,7 @@ message PAtUserList {
 message PAtUser {
 	string uuid = 1;             //被@的用户id
  	string nickName = 2;         //用户昵称
+ 	int32  level = 3;            //用户等级
 }
 
 // 图片
@@ -194,6 +195,11 @@ message PStrQueryRet {
 message PCanAtUserList {
 	PUserBaseList VOList = 1;
 	PUserBaseList FriendList = 2;
+}
+
+//Timeline在Rds的存储结构
+message PTimelineRdsStore {
+	repeated string List = 1; //帖子ID数组
 }
 
 ////////////////////////////////////////////////////////////////
