@@ -1,8 +1,8 @@
 #! /usr/bin/perl
 use File::Path;
-use Cwd;
+use Cwd; 
 $pwd = cwd();
-
+ 
 $output = "../go-commons";
 if (@ARGV > 0) {
 	$output = $ARGV[0];
