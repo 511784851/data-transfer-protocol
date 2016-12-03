@@ -416,6 +416,7 @@ message PRank {
  *@path /datapublishing/community/nearby
  *@method GET
  *@cookie token&uuid
+ *@param coid 社区ID
  *@param longitude 经度
  *@param latitude 纬度
  *@param pageindex 页号
