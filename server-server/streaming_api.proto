@@ -15,7 +15,7 @@ package service;
 /*
  *@note 获取系统参数
  *@uri /streaming-notification/args
- *@param GET
+ *@method GET
  *@param from 调用方(仅限于监管web系统)
  *@return 成功返回PStreamingConfigList,失败返回PResult
  */
@@ -23,16 +23,16 @@ package service;
 /*
  *@note 设置系统参数
  *@uri /streaming-notification/args
- *@param POST
+ *@method POST
  *@param from 调用方(仅限于监管web系统)
- *@param value PStreamingConfigList
+ *@param 参数名-即PStreamingConfig的english字段
  *@return 返回PResult
  */
 
 /*
  *@note 监管屏蔽/解除屏蔽主播
  *@uri /streaming-notification/inside/anchor/setting
- *@param POST
+ *@method POST
  *@param from 调用方(仅限于监管web系统)
  *@param uuid 主播uuid
  *@param action 0表示关闭,1-表示开启
@@ -42,7 +42,7 @@ package service;
 /*
  *@note 获取直播消息(提醒通知)详情
  *@uri /streaming-notification/msg/detail
- *@param GET
+ *@method GET
  *@param from 调用方
  *@param uuid 粉丝uuid
  *@param msgid 消息id
@@ -52,7 +52,7 @@ package service;
 /*
  *@note 分页获取直播记录
  *@uri /streaming-notification/live/list
- *@param GET
+ *@method GET
  *@param from 调用方(仅限于监管web系统)
  *@param scope anchor表示主播,time表示时间,click表示点击人数,website表示网站直播平台
  *@param value 
@@ -68,7 +68,7 @@ package service;
 /*
  *@note 分页获取主播信息
  *@uri /streaming-notification/anchor/list
- *@param GET
+ *@method GET
  *@param from 调用方
  *@param scope anchor表示主播,live表示直播次数,website表示网站直播平台
  *@param value 
