@@ -2,7 +2,7 @@
 use File::Path;
 use Cwd;
 $pwd = cwd();
-
+ 
 $output = "output";
 if (@ARGV > 0) {
 	$output = $ARGV[0];
