@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 use File::Path;
 use Cwd;
-$pwd = cwd();
+$pwd = cwd(); 
 
 $output = "../code/mobaxx/mobaxx/model_pb";
 $exe = "protoc-mac";
