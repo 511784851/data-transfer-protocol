@@ -13,6 +13,16 @@ package service;
  */
 
 /*
+ *@note 修改获取网站icon
+ *@path /streaming-notification/websites/icon
+ *@method POST
+ *@param from 调用方
+ *@param id 网站平台id
+ *@param icon icon的url地址
+ *@return 返回PResult
+ */
+
+/*
  *@note 获取系统参数
  *@uri /streaming-notification/args
  *@method GET
@@ -59,7 +69,7 @@ package service;
     scope为anchor,参数为主播的uuid,
     scope为time,获取早于value代表的时间,unix时间戳,精确到秒,-1是大到小排序,-2是小到大排序
     scope为click,获取小于value代表的人数,-1是大到小排序,-2是小到大排序
-    scope为website,参数为网站直播平台名称,
+    scope为website,参数为网站直播平台id,
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
  *@return 成功返回PStreamingLiveList, 失败返回PResult
@@ -74,7 +84,7 @@ package service;
  *@param value 
     scope为anchor,参数为主播的uuid,
     scope为live,获取小于value代表的次数,-1是大到小排序,-2是小到大排序,
-    scope为website,参数为网站直播平台名称,
+    scope为website,参数为网站直播平台id,
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
  *@return 成功返回PStreamingAnchorList, 失败返回PResult

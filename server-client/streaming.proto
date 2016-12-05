@@ -10,6 +10,7 @@ message PStreamingWebSite {
 	string name = 1; // 中文名称
 	string url = 2; // 网站网址
     int64 id = 3; // 网站平台id,1-斗鱼,2-虎牙
+    string iconUrl = 4; // 网站平台图标地址
 }
 
 //支持的第三方直播网站列表,以后简称网站列表
@@ -41,7 +42,9 @@ message PStreamingLive {
 
 message PStreamingLiveList {
     repeated PStreamingLive list = 1;
-    int64 count = 2; // 总数
+    int64 livingCount = 2; // 正在直播总数
+    int64 liveCount = 3; // 即将直播总数
+    int64 allCount = 4; // 全部总数
 }
 
 message PStreamingConfig {
@@ -72,7 +75,6 @@ message PStreamingFan {
     repeated string refuseWebSites = 2; // 屏蔽网站平台id列表,1-斗鱼,2-虎牙
     bool isSend = 3; // 是否发送提醒通知
     PStreamingRoom room = 4; // 直播房间
-    PStreamingManualList manuals = 5; // 已创建提醒列表
 }
 
 
@@ -96,6 +98,14 @@ message PStreamingManualList {
 }
 
 /**************************API 定义***********************************/
+
+/*
+ *@note 获取网站列表
+ *@path /streaming-notification/websites
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 成功返回PStreamingWebSiteList,失败返回PResult
+ */
 
 /*
  *@note 粉丝获取提醒通知设置
@@ -252,6 +262,8 @@ message PStreamingManualList {
  *@uri /streaming-notification/anchor/manual/notice
  *@method GET
  *@cookie token&uuid 登录用户信息
+ *@param offset 偏移起始量
+ *@param count 数量
  *@return 成功返回PStreamingManualList, 失败返回PResult
  */
 
