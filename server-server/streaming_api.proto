@@ -13,12 +13,13 @@ package service;
  */
 
 /*
- *@note 修改获取网站icon
+ *@note 修改网站icon
  *@path /streaming-notification/websites/icon
  *@method POST
  *@param from 调用方
  *@param id 网站平台id
- *@param icon icon的url地址
+ *@param smallIcon 小图标地址url
+ *@param bigIcon 大图标地址url
  *@return 返回PResult
  */
 
