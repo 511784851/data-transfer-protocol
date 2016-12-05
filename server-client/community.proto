@@ -885,12 +885,12 @@ message PCommunityBannerInfo {
     bool Enable = 1;                                    // true为启用，false为禁止
     string Name = 2;                                    // banner的自定义名字
     PCommunityResource ImgRes = 3;                      // banner的图片资源信息；
-    PCommunityResource LinkRes = 4;                     // banner链接信息，空(无链接)；非空时，type可选的有：url(链接地址)； post(帖子id)； notice(公告id)；对应信息保存在URL字段
+    PCommunityResource LinkRes = 4;                     // banner链接信息，空(无链接)；非空时，type可选的有：url(链接地址)； post(帖子id)； notice(公告id)；对应信息保存在URL字段;如果链接需要保存名字，则保存在Name字段
 }
 
 // 社区Banner资源信息列表
 message PCommunityBannerInfoList {
-	repeated PCommunityBannerInfo List = 1;
+	repeated PCommunityBannerInfo List = 1;             // banner图的顺序跟客户端编辑时顺序一致；开启的广告显示在前面，不开启的广告显示在后面
 }
 
 // 用户的自定义功能模块
@@ -909,6 +909,7 @@ message PCommunityForumTag {
     int32 ID = 1;                                       // 标签id
     int32 Type = 2;                                     // 自定义的论坛帖子分类；1是以帖子为单位归类；2是以用户id为单位归类
     string Name = 3;                                    // 自定义的标签名字
+    bool Enable = 4;                                    // 是否启用该标签 
 }
 
 // 用户的自定义论坛帖子标签列表
@@ -955,6 +956,7 @@ message PCommunityHomeV12 {
 message PCommunityPhotoAlbum {
     int64 Time = 1;                                     // 添加到图集的时间
     string URL = 2;                                     // 图片的访问地址
+    string ThumURL = 3;                                 // 图片缩略图的访问地址
 }
 
 // 图集里面图片的信息列表
@@ -984,14 +986,9 @@ message PCommunityRankingUserList {
     repeated PCommunityRankingUser List = 1;			// 列表
 }
 
-// 布局1的配置信息
-message PCommunityLayoutConfigPlan1 {
-	PInt32List Color = 1;                               // 可选的颜色方案
-}
-
 // 社区布局的配置信息
 message PCommunityLayoutConfig {
-	PCommunityLayoutConfigPlan1 Plan1 = 1;              // 布局1的配置信息
+	PInt32List Color = 1;                               // 可选的颜色方案
 }
 
 /*=====================================*/
@@ -1026,16 +1023,6 @@ message PCommunityLayoutConfig {
  *@body PCommunityInfoV12
  *@cookie token&uuid
  *@return 返回 PResult
- */
- 
-/*
- *@note  增加banner
- *@path /v1.2/community/banner
- *@method POST
- *@url param id 社区id
- *@body PCommunityBannerInfo
- *@cookie token&uuid
- *@return 成功返回 PCommunityBannerInfoList , 失败返回 PResult
  */
  
 /*
