@@ -263,7 +263,7 @@ message PStreamingManualList {
  *@uri /streaming-notification/anchor/manual/notice
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@param offset 偏移起始量
+ *@param offset 偏移起始量,从0开始
  *@param count 数量,范围[15,30],默认20条
  *@return 成功返回PStreamingManualList, 失败返回PResult
  */
