@@ -97,6 +97,7 @@ message PCommunityPostInfo {
     PRedPacketInfo Redpacket = 12;              // 红包信息
     PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
     bool IsTop = 14;                            // 公告帖子是否置顶的标志位
+    bool IsDel = 15;                            // 帖子是否删除的标记位
 }
 
 // 帖子信息列表
@@ -120,7 +121,7 @@ message PCommunityHome {
 // ---评论信息
 // 发表的评论
 message PCommunityPostComment {
-	string QuoteID = 2;	// 引用的评论id，如果没有引用帖子，传空值
+	string QuoteID = 2;	// 引用的评论id，如果没有引用评论，传空值
 	string Content = 3;	// 评论的正文
 }
 
