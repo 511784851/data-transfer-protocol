@@ -257,7 +257,7 @@ message PTimelineRdsStore {
  *@cookie token&uuid
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp,vo,vip2(包含vip和vipp)
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp,vo,vip2(包含vip和vipp), offical(官方社区timeline), other(普通社区timeline)
  *@param  type  刷新类型 news:个人动态; community:社区Timeline.如果没有该参数则默认为刷新个人动态
  *@param  subjectid   主题的id
  *@return 成功返回 PPostInfoList ，失败返回 PResult
@@ -277,7 +277,7 @@ message PTimelineRdsStore {
  *@path   /v1/news/guest/timeline
  *@method GET
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp)
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp), offical(官方社区timeline), other(普通社区timeline)
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
@@ -340,7 +340,7 @@ message PTimelineRdsStore {
  *@method GET
  *@cookie token&uuid
  *@param uuid 用户的id
- *@param type 要查看的文章类型 值：all, text, image, audio, video
+ *@param type 要查看的文章类型 值：all, text, image, audio, video, it(图文贴image_text)
  *@param offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */

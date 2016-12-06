@@ -61,3 +61,19 @@ message PEdgeVersion {
  *@cookie token&uuid
  *@return 返回 PInt64Single 单位秒；建议客户端在剩余时间在30分钟以下去更新token
  */
+
+ /*
+ *@note 心跳处理,返回token信息和健康信息
+ *@path /v1/edge/heartbeat
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PServiceHeartbeatInfo,失败返回 PRsult
+ */
+
+ /*
+ *@note 平台健康信息
+ *@path /v1/edge/platformhealth
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PServiceHealthList ,失败返回 PRsult
+ */
