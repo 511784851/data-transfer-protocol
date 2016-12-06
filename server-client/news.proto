@@ -340,7 +340,7 @@ message PTimelineRdsStore {
  *@method GET
  *@cookie token&uuid
  *@param uuid 用户的id
- *@param type 要查看的文章类型 值：all, text, image, audio, video, it(图文贴image_text)
+ *@param type 要查看的文章类型 值：all, text, image, audio, video, imgtext(图文贴)
  *@param offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
