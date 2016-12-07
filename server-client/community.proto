@@ -17,11 +17,12 @@ message PCommunityID {
 
 // 社区基础信息
 message PCommunityBase {
-	string ID = 2;			// 社区的全局唯一id，能用于检索社区信息
-	string Name = 3;		// 社区名字
-	string HeadImg = 4;		// 社区头像地址
-    string Introduce = 5;   // 社区介绍
-	int32 Status = 6;		// 社区状态；0社区开启状态；1社区关闭状态；
+	string ID = 2;                              // 社区的全局唯一id，能用于检索社区信息
+	string Name = 3;                            // 社区名字
+	string HeadImg = 4;                         // 社区头像地址
+    string Introduce = 5;                       // 社区介绍
+	int32 Status = 6;                           // 社区状态；0社区开启状态；1社区关闭状态；
+    PCommunityResourceList IntroduceRes = 7;    // 社区介绍；图文混排
 }
 
 // 社区基础信息列表
@@ -263,6 +264,7 @@ message PIndiseCommunityUserList {
  */
 
 //--- 社区相关操作
+// v1.2 不再维护该接口
 /*
  *@note  创建社区
  *@path /v1/community
@@ -310,6 +312,7 @@ message PIndiseCommunityUserList {
  *@return PResult 
  */
 
+// v1.2 不再维护该接口
 /*
  *@note ‘社区首页’页面
  *@path /v1/community/home
@@ -319,6 +322,7 @@ message PIndiseCommunityUserList {
  *@return 成功返回 PCommunityHome ，失败返回PResult
  */
 	
+// v1.2 不再维护该接口
 /*
  *@note 修改‘社区首页’页面
  *@path /v1/community/home
@@ -331,6 +335,7 @@ message PIndiseCommunityUserList {
  *@return 返回 PResult
  */
 
+// v1.2 不再维护该接口
 /*
  *@note 发布底部背景介绍
  *@path /v1/community/bottom/background
@@ -1019,8 +1024,8 @@ message PCommunityLayoutConfig {
  *@url param id 社区id
  *@url param fields 要修改的选项，
         方案1的可选的有:
-        Name,HeadImg,Introduce,ForumTagList,ModulesList,Color,ContentType,BannerList,MiddleModules,BottomModules,修改多个以,分割
-		如果要修改布局方案，即Color,ContentType,BannerList,AllModules,MiddleModules,BottomModules时，PCommunityInfoV12要PlanID要填1
+        Name,HeadImg,IntroduceRes,ForumTagList,ModulesList,Color,ContentType,BannerList,MiddleModules,BottomModules,Color,修改多个以,分割
+		如果要修改布局方案，即ContentType,BannerList,AllModules,MiddleModules,BottomModules时，PCommunityInfoV12要PlanID要填1
  *@body PCommunityInfoV12
  *@cookie token&uuid
  *@return 返回 PResult
@@ -1068,6 +1073,6 @@ message PCommunityLayoutConfig {
  *@url param offset 获取排行版的偏移值；初始值传0，否则传最后一个榜单的分值
  *@url param count 要获取的分页数，默认传20
  *@cookie token&uuid
- *@return 成功返回 PCommunityPhotoAlbumList ，失败返回 PResult
+ *@return 成功返回 PCommunityRankingUserList，失败返回 PResult
  */
  
