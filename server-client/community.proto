@@ -431,7 +431,7 @@ message PIndiseCommunityUserList {
  *@url param type 获取帖子类型， forum 获取论坛帖子
  *@ 							notice 获取公告帖子
  *@								all 获取所有帖子，可用于社区首页刷新帖子
- *@url param sub_type 自定义类型标签的id
+ *@url param tag 自定义类型标签的id; 0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
  *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
  *@url param count 获取帖子个数 
  *@cookie token&uuid
@@ -955,7 +955,6 @@ message PCommunityHomeV12 {
     int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
     PUserBase Owner = 2;                                // 社区创建者的信息
     PCommunityInfoV12 CommunityInfo = 3;                // 社区信息
-	PCommunityPostInfo BackgroundPost = 4;              // 底部的背景介绍
 }
 
 // 图集里面图片的信息
