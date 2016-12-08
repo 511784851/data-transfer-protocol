@@ -1,5 +1,5 @@
 syntax = "proto3";
-package service; 
+package bbproto; 
 
 /*
  *@note 通过社区id获取社区基础信息列表

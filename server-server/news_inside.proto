@@ -1,5 +1,5 @@
 syntax = "proto3";
-package service;
+package bbproto;
 
 
 // 个人统计信息

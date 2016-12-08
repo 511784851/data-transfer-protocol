@@ -1,6 +1,5 @@
 syntax = "proto3";
-
-package common;
+package bbproto;
 
 /*
  *@note 消息订阅

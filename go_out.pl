@@ -4,6 +4,10 @@ use Cwd;
 $pwd = cwd();
  
 $output = "../go-commons";
+mkdir($output);
+$output = $output."/bbproto";
+mkdir($output);
+
 if (@ARGV > 0) {
 	$output = $ARGV[0];
 }
@@ -27,22 +31,29 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/chat.proto ".
 						"server-client/task.proto ".
 						"server-client/edge.proto ".
-						"server-client/achievement.proto";
+						"server-client/achievement.proto ".
+						"server-server/login_inside.proto ".
+                        "server-server/account_inside.proto ".
+						"server-server/notification_inside.proto ".
+						"server-server/wallet_inside.proto ".
+						"server-server/datapublishing_inside.proto ".
+						"server-server/news_inside.proto ".
+						"server-server/achievement_inside.proto";
 
-$cmd = "protoc -Iserver-client --go_out=".$output." ".$server_client_protos;
+$cmd = "protoc -Iserver-client -Iserver-server --go_out=".$output." ".$server_client_protos;
 system($cmd);
 
 
 #################server_server protos#######################
-$server_server_protos = "server-server/login_api.proto ".
-                        "server-server/account_api.proto ".
-						"server-server/notification_api.proto ".
-						"server-server/wallet_api.proto ".
-						"server-server/datapublishing_api.proto ".
-						"server-server/news_api.proto ".
-						"server-server/achievement_api.proto";
--d ($output = $output."/service") || mkdir($output);
-$cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
+$server_server_protos = "server-server/login_inside.proto ".
+                        "server-server/account_inside.proto ".
+						"server-server/notification_inside.proto ".
+						"server-server/wallet_inside.proto ".
+						"server-server/datapublishing_inside.proto ".
+						"server-server/news_inside.proto ".
+						"server-server/achievement_inside.proto";
+## -d ($output = $output."/service") || mkdir($output);
+## $cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
 system($cmd);
 
 if (@ARGV == 0) {
