@@ -228,6 +228,26 @@ message PFriendRemarkList {
  *@return 成功返回PBoolSingle，失败返回PResult
  */
 
+ /*
+ *@note 用户离开社区聊天室主屏
+ *@path /chat/room/leave
+ *@method GET
+ *@cookie token&uuid 登录用户信息（必须）
+ *@param uuid 用户uuid（必须）
+ *@return 返回PResult
+ */
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  *@note 用户发送自定义消息
  *@path /chat/message/sendCustomMsg
