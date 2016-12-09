@@ -926,12 +926,11 @@ message PCommunityForumTagList {
 // 社区成员的布局方案1
 // ForumTagList 中id的默认值为：0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
 message PCommunityLayoutPlan1 {
-    int32 MemberCount = 2;                              // 社区成员数量；创建时不需要传
-    int32 ContentType = 3;                              // 内容模块id; -1 为公告; >= 0 为论坛可选模块的id
-    PUserBaseList TopUserList = 4;                      // top成员列表；创建时不需要传
+    int32 ContentType = 1;                              // 内容模块id; -1 为公告; >= 0 为论坛可选模块的id
+    PUserBaseList TopUserList = 2;                      // top成员列表；创建时不需要传
+    PInt32List MiddleModulesID = 3;                     // 中间定义的功能模块列表
+    PInt32List BottomModulesID = 4;                     // 底部定义的功能模块列表
     PCommunityBannerInfoList BannerList = 5;            // banner列表
-    PInt32List MiddleModulesID = 7;                     // 中间定义的功能模块列表
-    PInt32List BottomModulesID = 8;                     // 底部定义的功能模块列表
 }
 
 // 社区成员的布局
@@ -953,8 +952,9 @@ message PCommunityInfoV12 {
 // ‘社区首页’返回的信息 v1.2.x
 message PCommunityHomeV12 {
     int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
-    PUserBase Owner = 2;                                // 社区创建者的信息
-    PCommunityInfoV12 CommunityInfo = 3;                // 社区信息
+    int32 MemberCount = 2;                              // 社区成员数量
+    PUserBase Owner = 3;                                // 社区创建者的信息
+    PCommunityInfoV12 CommunityInfo = 4;                // 社区信息
 }
 
 // 图集里面图片的信息
