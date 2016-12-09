@@ -960,8 +960,9 @@ message PCommunityHomeV12 {
 // 图集里面图片的信息
 message PCommunityPhotoAlbum {
     int64 ID = 1;                                       // 图片的ID，用于索引下一张图片
-    string URL = 2;                                     // 图片的访问地址
-    string ThumURL = 3;                                 // 图片缩略图的访问地址
+    int64 Time = 2;                                     // 图片对应的帖子发布时间
+    string URL = 3;                                     // 图片的访问地址
+    string ThumURL = 4;                                 // 图片缩略图的访问地址
 }
 
 // 图集里面图片的信息列表
