@@ -959,7 +959,7 @@ message PCommunityHomeV12 {
 
 // 图集里面图片的信息
 message PCommunityPhotoAlbum {
-    int64 Time = 1;                                     // 添加到图集的时间
+    int64 ID = 1;                                       // 图片的ID，用于索引下一张图片
     string URL = 2;                                     // 图片的访问地址
     string ThumURL = 3;                                 // 图片缩略图的访问地址
 }
@@ -983,7 +983,9 @@ message PCommunityReputationUser {
 
 // 声望用户信息 
 message PCommunityRankingUser {
-    PCommunityReputationUser ReputationUser = 1;        // 声望用户信息 
+    int32 MyRanking = 1;                                // 我在排行榜的位置，只在第一次获取排行榜时返回
+    int32 MyReputationVal = 2;                          // 我的声望值，只在第一次获取排行榜时返回
+    PCommunityReputationUser ReputationUser = 3;        // 声望用户信息 
 }
 
 // 声望用户信息列表
@@ -1023,8 +1025,8 @@ message PCommunityLayoutConfig {
  *@url param id 社区id
  *@url param fields 要修改的选项，
         方案1的可选的有:
-        Name,HeadImg,IntroduceRes,ForumTagList,ModulesList,Color,ContentType,BannerList,MiddleModules,BottomModules,Color,修改多个以,分割
-		如果要修改布局方案，即ContentType,BannerList,AllModules,MiddleModules,BottomModules时，PCommunityInfoV12要PlanID要填1
+        Name,HeadImg,IntroduceRes,ForumTagList,ModulesList,Color,ContentType,BannerList,MiddleModules,BottomModules,修改多个以,分割
+		如果要修改布局方案，即ContentType,BannerList,MiddleModules,BottomModules时，PCommunityInfoV12要PlanID要填1
  *@body PCommunityInfoV12
  *@cookie token&uuid
  *@return 返回 PResult
@@ -1057,7 +1059,7 @@ message PCommunityLayoutConfig {
  *@method GET
  *@url param id 社区id
  *@url param type 图集的分类；与论坛帖子的自定义标签类型列表一致
- *@url param offset 传已有的图片数量的个数，如已刷新图片100张，则传100
+ *@url param offset 默认传0，否则传最后一个PCommunityPhotoAlbum的ID
  *@url param count 要获取的分页数，表示从time开始查询多少张图集；默认传12，最大不能超过48
  *@cookie token&uuid
  *@return 成功返回 PCommunityPhotoAlbumList ，失败返回 PResult
@@ -1069,7 +1071,7 @@ message PCommunityLayoutConfig {
  *@method GET
  *@url param id 社区id
  *@url param type 排行榜类型， reputation 代表排行榜
- *@url param offset 获取排行版的偏移值；初始值传0，否则传最后一个榜单的分值
+ *@url param offset 获取排行版的偏移值；初始值传0,否则传排行榜的名次(如从第38名排行用户查，则传38)
  *@url param count 要获取的分页数，默认传20
  *@cookie token&uuid
  *@return 成功返回 PCommunityRankingUserList，失败返回 PResult
