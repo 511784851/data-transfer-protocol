@@ -101,6 +101,8 @@ package bbproto;
  *@url param from 发起调用的服务名
  *@url param id 社区id
  *@url param level 用户等级；"reg"(普通用户), "vip"(vip用户), "vipp"(vip+用户), "vo"(官方授权用户); 否则不按照等级筛选，返回所有社区成员
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取成员个数
  *@return 成功返回 PIndiseCommunityUserList ，失败返回 PResult;
  */
 
@@ -111,6 +113,8 @@ package bbproto;
  *@url param from 发起调用的服务名
  *@url param id 社区id
  *@url param level 用户等级；"reg"(普通用户), "vip"(vip用户), "vipp"(vip+用户), "vo"(官方授权用户)
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取成员个数
  *@return 成功返回 PIndiseCommunityUserList ，失败返回 PResult;
  */
 
@@ -121,6 +125,8 @@ package bbproto;
  *@url param from 发起调用的服务名
  *@url param id 社区id
  *@url param level 用户等级；"reg"(普通用户), "vip"(vip用户), "vipp"(vip+用户), "vo"(官方授权用户)
+  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取成员个数
  *@return 成功返回 PIndiseCommunityUserList ，失败返回 PResult;
  */
 
