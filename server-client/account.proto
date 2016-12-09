@@ -576,6 +576,7 @@ message PLevelInfoList {
  *@uri  /v1/account/user/link
  *@method GET
  *@cookie token&uuid
+ *@uriParam uuid 获取其他用户的超链接时传其他用户的UUID
  *@return 成功返回PLinkInfoList, 失败返回PResult
  */
 
