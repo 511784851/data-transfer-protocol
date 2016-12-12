@@ -1,5 +1,5 @@
 syntax = "proto3";
-package common;
+package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "ContactProtos";
 

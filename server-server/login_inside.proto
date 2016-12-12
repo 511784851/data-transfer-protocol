@@ -1,5 +1,5 @@
 syntax = "proto3";
-package service;
+package bbproto;
 
 // token信息
 message PToken {

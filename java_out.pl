@@ -23,8 +23,8 @@ system($cmd);
 
 
 #################server_server protos#######################
-$server_server_protos = "server-server/achievement_api.proto ".
-						"server-server/notification_api.proto ";
+$server_server_protos = "server-server/achievement_inside.proto ".
+						"server-server/notification_inside.proto ";
 $cmd = "protoc --java_out=".$output." ".$server_server_protos;
 system($cmd);
 

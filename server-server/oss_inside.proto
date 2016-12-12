@@ -1,5 +1,5 @@
 syntax = "proto3";
-package common;
+package bbproto;
 
 /*
  *@note 内网访问获取带签名的文件上传URL

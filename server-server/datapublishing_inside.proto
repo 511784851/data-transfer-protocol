@@ -1,5 +1,5 @@
 syntax = "proto3";
-package service; 
+package bbproto; 
 
 // 每天的平均在线时间
 message POnlineData {

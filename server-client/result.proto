@@ -1,5 +1,5 @@
 syntax = "proto3";
-package common;
+package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "ResultProtos";
 
@@ -125,11 +125,28 @@ message PBinaryMsgList {
 }
 
 /*
+ *@note 服务健康检查项
+ */
+message PHealthItem {
+	string name   = 1;                   //检查项名称
+	int32  status = 2;                   //状态
+	map<string,string> detail = 3; 
+}
+
+/*
  *@note 服务健康信息
  */
 message PServiceHealth {
-	int32  status = 1;                   //服务状态
-	repeated string healInfoList = 2;    //健康信息
+	int32  status = 1;                        //服务状态
+	string serviceName = 2;                    //服务名                       
+	repeated PHealthItem healInfoList = 3;    //健康信息
+}
+
+/*
+ *@note 服务健康信息
+ */
+message PServiceHealthList {              
+	repeated PServiceHealth list = 3;    //健康信息列表
 }
 
 /*

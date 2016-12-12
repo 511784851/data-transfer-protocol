@@ -1,5 +1,5 @@
 syntax = "proto3";
-package service;
+package bbproto;
 
 
 // 个人统计信息
@@ -158,4 +158,22 @@ message PNewsUserStatistic {
  *@param from 发起调用的服务方，必须在consul上注册
  *@param postids 帖子id，多个帖子id用,分隔
  *@return 成功返回 PInt32List, 0:正常, 1:不存在, 2:已删除, 3:已屏蔽。失败返回 PResult
+ */
+
+ /**
+ *@note   获取微博帖子作者uuid
+ *@path   /v1/news/inside/post/author
+ *@method GET
+  *@param from 发起调用的服务方，必须在consul上注册
+ *@param  postid   微博帖子ID
+ *@return 成功返回 PStringSingle ，失败返回 PResult
+ */
+
+/**
+ *@note   批量获取帖子点赞数
+ *@path   /v1/news/inside/multi/post/votecount
+ *@method GET
+ *@param from 发起调用的服务方，必须在consul上注册
+ *@param  postids 帖子ID列表, 多个帖子id用,分隔.最大个数1000
+ *@return 返回 PInt32List.失败返回 PResult
  */
