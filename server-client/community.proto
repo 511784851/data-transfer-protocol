@@ -953,8 +953,9 @@ message PCommunityInfoV12 {
 message PCommunityHomeV12 {
     int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
     int32 MemberCount = 2;                              // 社区成员数量
-    PUserBase Owner = 3;                                // 社区创建者的信息
-    PCommunityInfoV12 CommunityInfo = 4;                // 社区信息
+	string ManagerList = 3;                             // 社区管理员的uuid列表,多个管理员用','分割
+    PUserBase Owner = 4;                                // 社区创建者的信息
+    PCommunityInfoV12 CommunityInfo = 5;                // 社区信息
 }
 
 // 图集里面图片的信息
