@@ -3,6 +3,9 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "AccountApiProtos";
 
+import "common_inside.proto";
+import "account.proto";
+
 /*=====================================*/
 //结构定义
 
@@ -367,10 +370,10 @@ message PPrivacyAttentionList {
  *@return PStringList 用户对应VO的ID列表，如果用户不是VO成员则为空
  */
 
-/*
- *@note 获取所有等级权限定义
- *@uri /v1/account/inside/levels
- *@method GET
- *@uriParam from 服务名称
- *@return PLevelInfoList
- */
+service account {
+    /*
+     *@note 获取所有等级权限定义
+     *@return PLevelInfoList 所有等级权限列表
+     */
+    rpc GetAllLevels(PEmpty) returns (PLevelInfoList);
+ }
