@@ -16,7 +16,7 @@ package service;
  *@note 修改网站icon
  *@path /streaming-notification/websites/icon
  *@method POST
- *@param from 调用方
+ *@param from 调用方(仅限于监管web系统)
  *@param id 网站平台id
  *@param smallIcon 小图标地址url
  *@param bigIcon 大图标地址url
@@ -80,7 +80,7 @@ package service;
  *@note 分页获取主播信息
  *@uri /streaming-notification/anchor/list
  *@method GET
- *@param from 调用方
+ *@param from 调用方(仅限于监管web系统)
  *@param scope anchor表示主播,live表示直播次数,website表示网站直播平台
  *@param value 
     scope为anchor,参数为主播的uuid,
