@@ -8,14 +8,11 @@
  */
 
 // login 推送的消息有
-/*
 1. 同步token的消息,login将会在用户登录，登出的时候，通知edge服务某个uuid用户的token发生更改了
     PBinaryMsg.MsgType = 0
     PBinaryMsg.MsgData = proto.Marshal(&PStringList{List: []string{uuid, token}})
-*/
 
 // account 推送消息有
-/*
 1. 同步用户等级更改消息，account将会在用户等级更改时，通知news、achievement服务
     PBinaryMsg.MsgType = 0
     PBinaryMsg.MsgData = proto.Marshal(&PStringList{List: []string{uuid1, uuid2}})
@@ -27,10 +24,3 @@
 3. 同步用户PUserBase的消息，account将会在用户PUserBase更改时，推送PUserBase给task服务
     PBinaryMsg.MsgType = 2
     PBinaryMsg.MsgData = proto.Marshal(&PUserBaseList{})
-*/
-
-syntax = "proto3";
-
-package bbproto;
-
-message PEmpty {}
