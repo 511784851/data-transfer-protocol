@@ -187,7 +187,7 @@ package bbproto;
  *@note 获取社区当前设置的广告信息
  *@URL /v1.2/community/inside/ad
  *@method GET
- *@url param from 发起调用的服务名
+ *@url param from 发起调用的服务名;只限粉丝管理系统调用
  *@url param id 社区id
  *@return 成功返回 PCommunityBannerInfo ，失败返回 PResult;
  */
@@ -196,7 +196,7 @@ package bbproto;
  *@note 设置社区当前设置的广告信息
  *@URL /v1.2/community/inside/ad
  *@method PUT
- *@form param from 发起调用的服务名
+ *@form param from 发起调用的服务名;只限粉丝管理系统调用
  *@form param id 社区id
  *@body PCommunityBannerInfo
  *@return 返回 PResult;
@@ -206,16 +206,17 @@ package bbproto;
  *@note 获取社区的论坛帖子的自定义类型列表
  *@URL /v1.2/community/inside/fourme/tag
  *@method GET
- *@url param from 发起调用的服务名
+ *@url param from 发起调用的服务名;只限粉丝管理系统调用
  *@url param id 社区id
  *@return 成功返回 PCommunityForumTagList ，失败返回 PResult;
  */
  
+// 0.9版本不支持
 /*
  *@note 创建社区的论坛帖子的自定义类型
  *@URL /v1.2/community/inside/fourme/tag
  *@method POST
- *@form param from 发起调用的服务名
+ *@form param from 发起调用的服务名;只限粉丝管理系统调用
  *@form param id 社区id
  *@form param tag_type 自定义的论坛帖子分类；1是以帖子为单位归类；2是以用户id为单位归类
  *@form param tag_name 自定义的标签名字
@@ -226,18 +227,20 @@ package bbproto;
  *@note 修改社区的论坛帖子的自定义类型
  *@URL /v1.2/community/inside/fourme/tag
  *@method PUT
- *@form param from 发起调用的服务名
+ *@form param from 发起调用的服务名;只限粉丝管理系统调用
  *@form param id 社区id
  *@form param tag_id 自定义类型标签的id
  *@form param tag_name 修改的标签名
+ *@form param disable 标签是否被禁用的标志位
  *@return 返回 PResult;
  */
  
+// 0.9版本不支持
 /*
  *@note 删除社区的论坛帖子的自定义类型
  *@URL /v1.2/community/inside/fourme/tag
  *@method DELETE
- *@url param from 发起调用的服务名
+ *@url param from 发起调用的服务名;只限粉丝管理系统调用
  *@url param id 社区id
  *@url param tag_id 自定义类型标签的id
  *@return 返回 PResult;
@@ -247,9 +250,20 @@ package bbproto;
  *@note 修改社区的论坛帖子的类型
  *@URL /v1.2/community/inside/fourme/post/type
  *@method PUT
- *@form param from 发起调用的服务名
+ *@form param from 发起调用的服务名;只限粉丝管理系统调用
  *@form param id 社区id
  *@form param post_id 帖子id
+ *@form param type_id 自定义类型标签的id , 多个以','分割
+ *@return 返回 PResult;
+ */
+
+/*
+ *@note 修改社区用户的论坛帖子分类属性
+ *@URL /v1.2/community/inside/fourme/uuid/type
+ *@method PUT
+ *@form param from 发起调用的服务名;只限粉丝管理系统调用
+ *@form param id 社区id
+ *@form param uuid 用户id
  *@form param type_id 自定义类型标签的id , 多个以','分割
  *@return 返回 PResult;
  */
