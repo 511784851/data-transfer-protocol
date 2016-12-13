@@ -12,19 +12,14 @@ if (@ARGV > 0) {
 }
 
 #################server_client protos#######################
-$server_client_protos = "server-client/result.proto ".
-                        "server-client/account.proto ".
-                        "server-client/notification.proto ".
-						"server-client/login.proto ".
-						"server-client/chat.proto ";
+$server_client_protos = "server-client/*t.proto ";
 $cmd = "protoc -Iserver-client --java_out=".$output." ".$server_client_protos;
 system($cmd);
 
 
 
 #################server_server protos#######################
-$server_server_protos = "server-server/achievement_inside.proto ".
-						"server-server/notification_inside.proto ";
+$server_server_protos = "server-server/*.proto ";
 $cmd = "protoc --java_out=".$output." ".$server_server_protos;
 system($cmd);
 
