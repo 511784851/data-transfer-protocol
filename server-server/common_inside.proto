@@ -32,5 +32,13 @@
 syntax = "proto3";
 
 package bbproto;
+import "result.proto";
 
 message PEmpty {}
+
+service Common {
+ /*
+ *@note 获取服务健康信息
+ */
+  rpc HealthCheck(PEmpty) returns (PServiceHealth) {}
+}
