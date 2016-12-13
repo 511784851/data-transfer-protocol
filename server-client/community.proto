@@ -915,7 +915,7 @@ message PCommunityForumTag {
     int32 ID = 1;                                       // 标签id
     int32 Type = 2;                                     // 自定义的论坛帖子分类；1是以帖子为单位归类；2是以用户id为单位归类
     string Name = 3;                                    // 自定义的标签名字
-    bool Enable = 4;                                    // 是否启用该标签 
+    bool Disable = 4;                                   // 是否禁用该标签 
 }
 
 // 用户的自定义论坛帖子标签列表
