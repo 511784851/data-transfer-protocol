@@ -419,7 +419,8 @@ message PRank {
  *@param coid 社区ID
  *@param longitude 经度
  *@param latitude 纬度
- *@param pageindex 页号
+ *@param pageindex 页号，从1开始
  *@param pagesize 页大小
+ *@param gender 性别 0女 1男 其它或不传此参数表示全部
  *@return 成功返回PGuyList，失败返回PResult
  */
