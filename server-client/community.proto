@@ -883,6 +883,7 @@ enum ECommunityModule {
     EPhotoAlbum = 10;       // 图集
     ERanking = 11;          // 排行榜
     EStore = 12;            // 商店
+    ELink = 13;             // 链接
 }
 */
 
