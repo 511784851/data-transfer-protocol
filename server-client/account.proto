@@ -350,6 +350,7 @@ message PLevelInfoList {
 message PAccountVoMemberBase {
     PAccountVoMember user = 1; // VIP+信息
     PUserBase supervisor  = 2; // VO
+    PUserBase ubase = 3; // 基础信息
 }
 
 /*=====================================*/
