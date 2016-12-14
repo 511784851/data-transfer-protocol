@@ -304,10 +304,14 @@ message PAccountVoMemberTagList {
 // VIP+与VO相关信息
 message PAccountVoMember {
     string uuid = 1;                       // 用户ID
-    string dispname = 2;                   // 显示名称（用户获取显示用）
+    string dispname = 2;                   // 显示名称（姓名）
     string position = 3;                   // 职位
     string portrait = 4;                   // 形象照
     repeated PAccountVoMemberTag tags = 5; // 标签
+    string background = 6;                 // 背景图
+    string birthday = 7;                   // 生日
+    string birthplace = 8;                 // 出生地
+    string introduction = 9;               // 简介
 }
 
 // VO成员列表
@@ -340,6 +344,12 @@ message PUserSupervisorList {
 // 权限列表
 message PLevelInfoList {
     repeated PLevelInfo list = 1;
+}
+
+// VIP+主页信息
+message PAccountVoMemberBase {
+    PAccountVoMember user = 1; // VIP+信息
+    PUserBase supervisor  = 2; // VO
 }
 
 /*=====================================*/
@@ -653,4 +663,13 @@ message PLevelInfoList {
  *@cookie token&uuid
  *@uriParam void VO用户ID
  *@return PAccountVoMemberTagList 游戏列表
+ */
+
+/*
+ *@note VIP+主页
+ *@uri /v1/account/vo/member/home
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam 被查看用户ID，如果不传默认取cookie中的uuid
+ *@return PAccountVoMemberBase
  */
