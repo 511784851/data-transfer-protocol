@@ -231,7 +231,7 @@ package bbproto;
  *@form param id 社区id
  *@form param tag_id 自定义类型标签的id
  *@form param tag_name 修改的标签名
- *@form param disable 标签是否被禁用的标志位
+ *@form param disable 标签是否被禁用的标志位;1为被禁用，0为未被禁用
  *@return 返回 PResult;
  */
  

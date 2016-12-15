@@ -877,13 +877,13 @@ enum ECommunityModule {
     EGamerList = 4;         // 队员，只有VO有，其他没有这个模块
     EMemberDynamics = 5;    // 成员动态
     EVideoProgram = 6;      // 视频节目
-    EForum = 7;             // 论坛
-    EChat = 8;              // 聊天
-    EPeopleNearby = 9;      // 附近
-    EPhotoAlbum = 10;       // 图集
-    ERanking = 11;          // 排行榜
-    EStore = 12;            // 商店
-    ELink = 13;             // 链接
+    ELink = 7;              // 链接
+    EForum = 8;             // 论坛
+    EChat = 9;              // 聊天
+    EPeopleNearby = 10;     // 附近
+    EPhotoAlbum = 11;       // 图集
+    ERanking = 12;          // 排行榜
+    EStore = 13;            // 商店
 }
 */
 
@@ -1062,6 +1062,8 @@ message PCommunityLayoutConfig {
  *@method GET
  *@url param id 社区id
  *@url param type 图集的分类；与论坛帖子的自定义标签类型列表一致
+ *@url param date 时间戳，表示只看某一天的图集；如果看所有时间的图集，则传0
+ *@url param direction 翻页方向，-1是向前翻，1(其他)是向后翻 
  *@url param offset 默认传0，否则传最后一个PCommunityPhotoAlbum的ID
  *@url param count 要获取的分页数，表示从time开始查询多少张图集；默认传12，最大不能超过48
  *@cookie token&uuid
