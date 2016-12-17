@@ -33,7 +33,7 @@
    action: 0: 删除, 1: 增加
 
     PBinaryMsg.MsgType = 3
-    PBinaryMsg.MsgData = proto.Marshal(&PStringList{[]string{uuid, action}})
+    PBinaryMsg.MsgData = proto.Marshal(&PStringList{[]string{void, uuid, action}})
 */
 
 syntax = "proto3";
