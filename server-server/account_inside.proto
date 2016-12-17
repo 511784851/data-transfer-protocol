@@ -370,6 +370,15 @@ message PPrivacyAttentionList {
  *@return PStringList 用户对应VO的ID列表，如果用户不是VO成员则为空
  */
 
+/*
+ *@note 获取VO成员ID
+ *@uri /v1/account/inside/vo/member/ids
+ *@uriParam from 服务名称
+ *@uriParam project 项目名称
+ *@uriParam void VO用户ID
+ *@return VO成员ID列表
+ */
+
 service account {
     /*
      *@note 获取所有等级权限定义

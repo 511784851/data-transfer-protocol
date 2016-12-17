@@ -24,9 +24,16 @@
     PBinaryMsg.MsgType = 1
     PBinaryMsg.MsgData = proto.Marshal(&PStringList{List: []string{uuid1, uuid2}})
 
-3. 同步用户PUserBase的消息，account将会在用户PUserBase更改时，推送PUserBase给task服务
+3. 同步用户PUserBase的消息，account将会在用户PUserBase更改时，推送PUserBase给task,chat服务
     PBinaryMsg.MsgType = 2
     PBinaryMsg.MsgData = proto.Marshal(&PUserBaseList{})
+
+4. 同步VO成员ID的消息，account将会在VO成员增加或删除时，推送uuid给Community服务
+   格式[]string{uuid, action}
+   action: 0: 删除, 1: 增加
+
+    PBinaryMsg.MsgType = 3
+    PBinaryMsg.MsgData = proto.Marshal(&PStringList{[]string{uuid, action}})
 */
 
 syntax = "proto3";
