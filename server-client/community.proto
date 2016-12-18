@@ -986,14 +986,14 @@ message PCommunityReputationUser {
 
 // 声望用户信息 
 message PCommunityRankingUser {
-    int32 MyRanking = 1;                                // 我在排行榜的位置，只在第一次获取排行榜时返回
-    int32 MyReputationVal = 2;                          // 我的声望值，只在第一次获取排行榜时返回
-    PCommunityReputationUser ReputationUser = 3;        // 声望用户信息 
+    PCommunityReputationUser ReputationUser = 1;        // 声望用户信息 
 }
 
 // 声望用户信息列表
 message PCommunityRankingUserList {
-    repeated PCommunityRankingUser List = 1;			// 列表
+    int32 MyRanking = 1;                                // 我在排行榜的位置，只在第一次获取排行榜时返回
+    int32 MyRankingVal = 2;                             // 我在排行榜的分值，只在第一次获取排行榜时返回
+    repeated PCommunityRankingUser List = 3;            // 列表
 }
 
 // 社区布局的配置信息
