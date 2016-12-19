@@ -182,7 +182,8 @@ message PCommunityMember {
 
 // 社区成员信息列表
 message PCommunityMemberList {
-	repeated PCommunityMember List = 2;
+    int32 Count = 1;	                    // 社区成员总数，在第一次调用时返回
+    repeated PCommunityMember List = 2;     // 社区成员列表
 }
 
 // 社区好友信息
@@ -957,6 +958,7 @@ message PCommunityHomeV12 {
 	string ManagerList = 3;                             // 社区管理员的uuid列表,多个管理员用','分割
     PUserBase Owner = 4;                                // 社区创建者的信息
     PCommunityInfoV12 CommunityInfo = 5;                // 社区信息
+    bool IsVOMember = 6;                                // 是否创建者(VO)任命的VIPP
 }
 
 // 图集里面图片的信息
