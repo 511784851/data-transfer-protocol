@@ -61,7 +61,8 @@ package bbproto;
  *@path /oss/multipartupload/abort
  *@method GET
  *@param from 调用的服务名称
- *@param uploadid 初始化时返回在的上传ID
+ *@param bucket 文件要存放的oss桶， 0 不持久桶，文件会过期，1持久桶，3静态文件桶
+ *@param uploadid 初始化时返回的上传ID
  *@param objectkey 文件名称
  *@return PResult，成功errCode为0
  */
