@@ -47,5 +47,5 @@ service Common {
  /*
  *@note 获取服务健康信息
  */
-  rpc HealthCheck(PEmpty) returns (PServiceHealth) {}
+  rpc GetPlatformHealthInfo(PEmpty) returns (stream PServiceHealth) {}
 }
