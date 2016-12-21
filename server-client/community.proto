@@ -558,11 +558,34 @@ message PInsideCommunityUserList {
  */
 
 /*
- *@note 设置-好友列表
+ *@note 设置-好友列表；VO用户调用此接口会返回空
  *@path /v1/community/setting/friend
  *@method GET
  *@url param id 社区id
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取好友个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityFriendList ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-粉丝列表
+ *@path /v1/community/setting/fans
+ *@method GET
+ *@url param id 社区id
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取好友个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityFriendList ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-获取粉丝/好友列表
+ *@path /v1/community/setting/relation/list
+ *@method GET
+ *@url param id 社区id
+ *@url param type 0表示粉丝列表；1表示好友列表
+*@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取好友个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityFriendList ，失败返回 PResult
@@ -846,6 +869,8 @@ message PInsideCommunityUserList {
  *@url param id 社区id
  *@url param type 可选参数 forum 获取论坛帖子; notice 获取公告帖子; all 获取所有帖子
  *@url param keyword 关键词
+ *@url param beg 查询的开始时间，传时间戳，单位为秒；传0/不填 表示从好早，好早，好早之前到end
+ *@url param end 查询的截止时间，传时间戳，单位为秒；传0/不填 表示当前时间
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取数量
  *@cookie token&uuid
