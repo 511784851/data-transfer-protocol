@@ -273,15 +273,6 @@ message PTimelineRdsStore {
  */
 
 /**
- *@note   游客刷新微博列表
- *@path   /v1/news/guest/timeline
- *@method GET
- *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp), offical(官方社区timeline), other(普通社区timeline)
- *@return 成功返回 PPostInfoList ，失败返回 PResult
- */
-
-/**
  *@note 批量收藏/取消收藏微博
  *@path /v1/news/collect
  *@cookie token&uuid
@@ -473,4 +464,14 @@ message PTimelineRdsStore {
  *@param uuid 被查看主页的用户的id
  *@param offset 分页的偏移,为已返回的结果的最后一条帖子ID,第一页填0
  *@return 成功返回 PPostInfoList，第一页的第一个帖子为置顶帖, 失败返回 PResult
+ */
+
+/**
+ *@note   刷新全局微博列表(类似游客刷微博)
+ *@path   /v1/news/global/timeline
+ *@method GET
+ *@cookie token&uuid
+ *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
+ *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp)
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
