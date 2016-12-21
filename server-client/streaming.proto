@@ -84,6 +84,7 @@ message PStreamingRest {
     PStreamingRoom room = 2; // 绑定的房间
     bool isSend = 3; // 是否开启发送提醒
     string nick = 4; // 昵称
+    int64 dayCount = 5; // 每天次数
 }
 
 // 第三方直播手动提醒通知记录
