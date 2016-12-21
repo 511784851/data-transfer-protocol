@@ -182,7 +182,8 @@ message PCommunityMember {
 
 // 社区成员信息列表
 message PCommunityMemberList {
-	repeated PCommunityMember List = 2;
+    int32 Count = 1;	                    // 社区成员总数，在第一次调用时返回
+    repeated PCommunityMember List = 2;     // 社区成员列表
 }
 
 // 社区好友信息
@@ -238,7 +239,7 @@ message PCommunityNotificationUnRead {
 
 
 // 社区用户信息
-message PIndiseCommunityUser {
+message PInsideCommunityUser {
 	PUserBase User = 2;			// 用户基础信息
 	int64 FollowTime = 3;		// 关注社区的时间
 	int64 ForbidTime = 4; 		// 用户禁用到期时间
@@ -246,8 +247,8 @@ message PIndiseCommunityUser {
 }
 
 // 社区用户列表信息
-message PIndiseCommunityUserList {
-	repeated PIndiseCommunityUser List = 2;
+message PInsideCommunityUserList {
+	repeated PInsideCommunityUser List = 2;
 }
 
 /*=====================================*/
@@ -557,11 +558,34 @@ message PIndiseCommunityUserList {
  */
 
 /*
- *@note 设置-好友列表
+ *@note 设置-好友列表；VO用户调用此接口会返回空
  *@path /v1/community/setting/friend
  *@method GET
  *@url param id 社区id
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取好友个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityFriendList ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-粉丝列表
+ *@path /v1/community/setting/fans
+ *@method GET
+ *@url param id 社区id
+ *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
+ *@url param count 获取好友个数
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityFriendList ，失败返回 PResult
+ */
+
+/*
+ *@note 设置-获取粉丝/好友列表
+ *@path /v1/community/setting/relation/list
+ *@method GET
+ *@url param id 社区id
+ *@url param type 0表示粉丝列表；1表示好友列表
+*@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取好友个数
  *@cookie token&uuid
  *@return 成功返回 PCommunityFriendList ，失败返回 PResult
@@ -845,6 +869,8 @@ message PIndiseCommunityUserList {
  *@url param id 社区id
  *@url param type 可选参数 forum 获取论坛帖子; notice 获取公告帖子; all 获取所有帖子
  *@url param keyword 关键词
+ *@url param beg 查询的开始时间，传时间戳，单位为秒；传0/不填 表示从好早，好早，好早之前到end
+ *@url param end 查询的截止时间，传时间戳，单位为秒；传0/不填 表示当前时间
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
  *@url param count 获取数量
  *@cookie token&uuid
@@ -957,12 +983,13 @@ message PCommunityHomeV12 {
 	string ManagerList = 3;                             // 社区管理员的uuid列表,多个管理员用','分割
     PUserBase Owner = 4;                                // 社区创建者的信息
     PCommunityInfoV12 CommunityInfo = 5;                // 社区信息
+    bool IsVOMember = 6;                                // 是否创建者(VO)任命的VIPP
 }
 
 // 图集里面图片的信息
 message PCommunityPhotoAlbum {
     int64 ID = 1;                                       // 图片的ID，用于索引下一张图片
-    int64 Time = 2;                                     // 图片对应的帖子发布时间
+    int64 Time = 2;                                     // 服务端不返回该字段
     string URL = 3;                                     // 图片的访问地址
     string ThumURL = 4;                                 // 图片缩略图的访问地址
 }
@@ -986,14 +1013,14 @@ message PCommunityReputationUser {
 
 // 声望用户信息 
 message PCommunityRankingUser {
-    int32 MyRanking = 1;                                // 我在排行榜的位置，只在第一次获取排行榜时返回
-    int32 MyReputationVal = 2;                          // 我的声望值，只在第一次获取排行榜时返回
-    PCommunityReputationUser ReputationUser = 3;        // 声望用户信息 
+    PCommunityReputationUser ReputationUser = 1;        // 声望用户信息 
 }
 
 // 声望用户信息列表
 message PCommunityRankingUserList {
-    repeated PCommunityRankingUser List = 1;			// 列表
+    int32 MyRanking = 1;                                // 我在排行榜的位置，只在第一次获取排行榜时返回
+    int32 MyRankingVal = 2;                             // 我在排行榜的分值，只在第一次获取排行榜时返回
+    repeated PCommunityRankingUser List = 3;            // 列表
 }
 
 // 社区布局的配置信息
@@ -1064,7 +1091,7 @@ message PCommunityLayoutConfig {
  *@url param type 图集的分类；与论坛帖子的自定义标签类型列表一致
  *@url param date 时间戳，表示只看某一天的图集；如果看所有时间的图集，则传0
  *@url param direction 翻页方向，-1是向前翻，1(其他)是向后翻 
- *@url param offset 默认传0，否则传最后一个PCommunityPhotoAlbum的ID
+ *@url param offset 传最后一个PCommunityPhotoAlbum的ID
  *@url param count 要获取的分页数，表示从time开始查询多少张图集；默认传12，最大不能超过48
  *@cookie token&uuid
  *@return 成功返回 PCommunityPhotoAlbumList ，失败返回 PResult

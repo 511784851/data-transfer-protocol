@@ -305,24 +305,12 @@ message PPrivacyAttentionList {
  */
 
 /*
- *@note 添加VO成员（原来通过uuid列表添加成员的接口作废）
- *@uri /v1/account/inside/vo/members
- *@method POST
- *@uriParam from 服务名称
- *@uriParam project 项目名称
- *@uriParam void VO用户ID
- *@body PAccountVoMember 成员信息
- *@return 返回CXXResult
- */
-
-/*
  *@note 设置VIP+与VO相关信息（根据需要修改的字段提供fields）
  *@uri /v1/account/inside/vo/members
  *@method PUT
  *@uriParam from 服务名称
  *@uriParam project 项目名称
  *@uriParam void VO用户ID
- *@postParam fields PAccountVoMember字段枚举
  *@body PAccountVoMember 成员信息
  *@return 返回CXXResult
  */
@@ -368,6 +356,15 @@ message PPrivacyAttentionList {
  *uriParam project 项目名称
  *@body PStringList uuid列表
  *@return PStringList 用户对应VO的ID列表，如果用户不是VO成员则为空
+ */
+
+/*
+ *@note 获取VO成员ID
+ *@uri /v1/account/inside/vo/member/ids
+ *@uriParam from 服务名称
+ *@uriParam project 项目名称
+ *@uriParam void VO用户ID
+ *@return VO成员ID列表
  */
 
 service account {

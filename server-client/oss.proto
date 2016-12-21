@@ -3,22 +3,6 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "OssProtos";
 
-// OSS STS 凭证传输结构
-message PSts {
-	string accessKeyId = 1;
-	string accessKeySecret = 2;
-	string securityToken = 3;
-	string expiration = 4;
-}
-
-/*
- *@note 申请STS凭证
- *@path /oss/sts
- *@method GET
- *@cookie token&uuid
- *@return 成功返回PSts，失败返回PResult
- */
- 
 // 用于构造上传文件HTTP请求的信息
 message PUpload {
 	bool exists = 1;		//要上传的文件是否存在

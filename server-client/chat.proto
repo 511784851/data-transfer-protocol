@@ -150,12 +150,12 @@ message PFriendRemarkList {
  */ 
  
 /*
- *@note 释放聊天室排队成功占位
- *@path /chat/room/release
+ *@note 检查用户是否在聊天室
+ *@path /chat/room/in
  *@method GET
  *@param token&uuid 登录用户信息（必须）
  *@param communityId 社区ID（必须）
- *@return 返回PResult
+ *@return 成功返回PBoolSingle， 返回PResult
  */ 
  
 /*

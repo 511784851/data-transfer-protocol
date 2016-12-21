@@ -150,7 +150,7 @@ message PGameList {
  
 /*
  *@note 搜索用户
- *@path /datapublishing/search/user
+ *@path /datapublishing/user/search
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
@@ -161,7 +161,7 @@ message PGameList {
  
 /*
  *@note 搜索微博帖子
- *@path /datapublishing/search/news
+ *@path /datapublishing/news/search
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
@@ -197,7 +197,7 @@ message PGameList {
  
 /*
  *@note 热门微博
- *@path /datapublishing/hot/news
+ *@path /datapublishing/news/hot
  *@method GET
  *@cookie token&uuid
  *@param type 微博类型 取值all text image video audio 默认all
@@ -208,7 +208,7 @@ message PGameList {
  
 /*
  *@note 热门用户
- *@path /datapublishing/hot/user
+ *@path /datapublishing/user/hot
  *@method GET
  *@cookie token&uuid
  *@param pageindex 页号
