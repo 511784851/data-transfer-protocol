@@ -89,7 +89,7 @@ message PToken {
 
 
 
-service ILogin {
+service IGRpcLogin {
     /*
      *@note 用户登出接口
      *@param 要登出用户的uuid列表 
