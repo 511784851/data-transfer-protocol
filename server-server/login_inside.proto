@@ -96,14 +96,14 @@ service IGrpcLogin {
      *@return 成功返回 PInt32List ，失败返回 PResult
      */
     rpc UserLogout(PStringList) returns (PInt32List);
-
-    /*
-     *@note 获取用户token;只限edge服务调用
-     *@param 要获取token的用户uuid
-     *@return 成功返回 PStringSingle ，失败返回 PResult
-     */
-    rpc GetToken(PStringSingle) returns (PInt32List);
  
+    /*
+     *@note 获取用户token列表;只限edge服务调用
+     *@param 要获取token的用户uuid列表
+     *@return 成功返回 PStringList ，失败返回 PResult
+     */
+    rpc GetToken(PStringList) returns (PStringList);
+
     /*
      *@note 判断用户的token是否存在
      *@param 参数数组 [0]m表示移动端，w表示网页端 [1]...uuid列表
