@@ -80,3 +80,81 @@ message PToken {
  *@form param uuid 用户id
  *@return 返回 PResult
  */
+
+
+
+service ILogin {
+    /*
+     *@note 用户登出接口
+     *@param 要登出用户的uuid列表 
+     *@return 成功返回 PInt32List ，失败返回 PResult
+     */
+    rpc UserLogout(PStringList) returns (PInt32List);
+
+    /*
+     *@note 获取用户token;只限edge服务调用
+     *@param 要获取token的用户uuid
+     *@return 成功返回 PStringSingle ，失败返回 PResult
+     */
+    rpc GetToken(PStringSingle) returns (PInt32List);
+ 
+    /*
+     *@note 判断用户的token是否存在
+     *@param 参数数组 [0]m表示移动端，w表示网页端 [1]...uuid列表
+     *@return 成功返回 PBoolList ，失败返回 PResult;
+     */
+    rpc TokenExist(PStringList) returns (PBoolList);
+
+    /*
+     *@note 通过手机号码获取用户uuid
+     *@param 要获取uuid的手机号码列表
+     *@return 成功返回 PStringList ，失败返回 PResult;
+     *@       返回的uuid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
+     */
+    rpc GetUUIDByPhoneCode(PStringList) returns (PStringList);
+
+    /*
+     *@note 通过用户名获取用户uuid
+     *@param 要获取uuid的用户名列表
+     *@return 成功返回 PStringList ，失败返回 PResult;
+     *@       返回的uuid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
+     */
+    rpc GetUUIDByUsername(PStringList) returns (PStringList);
+
+    /*
+     *@note 通过用户uuid获取手机号码
+     *@param 用户uuid 列表
+     *@return 成功返回 PStringList ，失败返回 PResult;
+     *@       返回的pid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
+     */
+    rpc GetPhoneCodeByUUID(PStringList) returns (PStringList);
+
+    /*
+     *@note 通过用户uuid获取用户名
+     *@param 用户uuid 列表
+     *@return 成功返回 PStringList ，失败返回 PResult;
+     *@       返回的pid顺序与fields顺序一致，如果fields对应的用户没有查询到，PStringList对应项为空串
+     */
+    rpc GetUsernameByUUID(PStringList) returns (PStringList);
+
+    /*
+     *@note 绑定用户名
+     *@param 参数数组 [0]uuid  [1]用户名 [2]密码,SHA256(原始密码+3721) 
+     *@return 返回 PResult
+     */
+    rpc BindUsername(PStringList) returns (PEmpty);
+
+    /*
+     *@note 用户名注册
+     *@param 参数数组 [0]用户名 [1]密码,SHA256(原始密码+3721) 
+     *@return 注册成功返回 PLogin ，失败返回 PResult
+     */
+    rpc RegisterByUsername(PStringList) returns (PLogin);
+
+    /*
+     *@note 重置用户密码
+     *@param 参数数组 [0]用户名 [1]密码,SHA256(原始密码+3721) 
+     *@return 返回 PResult
+     */
+    rpc ResetPassword(PStringList) returns (PEmpty);
+ }
