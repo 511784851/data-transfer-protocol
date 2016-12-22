@@ -1,6 +1,10 @@
 syntax = "proto3";
 package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "LoginApiProtos";
 
+import "common_inside.proto";
+import "login.proto";
 // token信息
 message PToken {
 	int32 Ver = 2;				// token对应版本号
