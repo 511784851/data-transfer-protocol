@@ -1108,4 +1108,15 @@ message PCommunityLayoutConfig {
  *@cookie token&uuid
  *@return 成功返回 PCommunityRankingUserList，失败返回 PResult
  */
- 
+
+/*
+ *@note 修改社区的论坛帖子的类型
+ *@URL /v1.2/community/fourme/post/type
+ *@method PUT
+ *@form param from 发起调用的服务名;只限粉丝管理系统调用
+ *@form param id 社区id
+ *@form param oper 0为设置某个帖子为x类型帖子；1为移除某个帖子x类型帖子；
+ *@form param post_id 帖子id
+ *@form param post_tag 自定义类型标签的id , 多个以','分割
+ *@return 返回 PResult;
+ */
