@@ -13,13 +13,23 @@ package bbproto;
  */
 
 /*
+ *@note 访问获取带签名的文件上传URL
+ *@path /streaming-notification/icon/uploadfileurl
+ *@method GET
+ *@param from 调用方(仅限于监管web系统)
+ *@param digest 要上传的文件的md5 hexstring
+ *@param length 文件大小，字节
+ *@param extension 扩展名 如jpg,png等
+ *@return 成功返回PUpload，失败返回PResult
+ */
+
+/*
  *@note 修改网站icon
  *@path /streaming-notification/websites/icon
  *@method POST
  *@param from 调用方(仅限于监管web系统)
  *@param id 网站平台id
- *@param smallIcon 小图标地址url
- *@param bigIcon 大图标地址url
+ *@param objectKey 上传图标的objectKey
  *@return 返回PResult
  */
 
