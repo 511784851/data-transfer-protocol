@@ -1079,6 +1079,7 @@ message PCommunityLayoutConfig {
  *@url param type 图集的分类；与论坛帖子的自定义标签类型列表一致
  *@url param date 时间戳，表示从那一天的时间开始查询，需要是0点的时间戳；比如2016年11月30日，要传 1480435200
  *@url param count 要获取的分页数，表示从date开始查询多少天的图集列表；默认传5，最大不能超过20
+ *@url param uuid 指定用户的图集,如果为空，则取所有用户的图集
  *@cookie token&uuid
  *@return 成功返回 PCommunityPhotoAlbumDateList ，失败返回 PResult
  */
@@ -1093,6 +1094,7 @@ message PCommunityLayoutConfig {
  *@url param direction 翻页方向，-1是向前翻，1(其他)是向后翻 
  *@url param offset 传最后一个PCommunityPhotoAlbum的ID
  *@url param count 要获取的分页数，表示从time开始查询多少张图集；默认传12，最大不能超过48
+ *@url param uuid 指定用户的图集,如果为空，则取所有用户的图集
  *@cookie token&uuid
  *@return 成功返回 PCommunityPhotoAlbumList ，失败返回 PResult
  */
@@ -1108,4 +1110,15 @@ message PCommunityLayoutConfig {
  *@cookie token&uuid
  *@return 成功返回 PCommunityRankingUserList，失败返回 PResult
  */
- 
+
+/*
+ *@note 修改社区的论坛帖子的类型
+ *@URL /v1.2/community/fourme/post/type
+ *@method PUT
+ *@form param id 社区id
+ *@form param oper 0为设置某个帖子为x类型帖子；1为移除某个帖子x类型帖子；
+ *@form param post_id 帖子id
+ *@form param post_tag 自定义类型标签的id , 多个以','分割
+ *@cookie token&uuid
+ *@return 返回 PResult;
+ */
