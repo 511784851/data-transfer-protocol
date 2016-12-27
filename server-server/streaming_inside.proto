@@ -102,9 +102,17 @@ package bbproto;
  */
 
 /*
- *@note 设置系统状态
+ *@note 获取系统状态
  *@path /streaming-notification/system/setting
  *@method GET
+ *@param from 调用方(仅限于监管web系统)
+ *@return 成功返回PStringSingle, 失败返回PResult
+ */
+
+/*
+ *@note 设置系统状态
+ *@path /streaming-notification/system/setting
+ *@method POST
  *@param from 调用方(仅限于监管web系统)
  *@param status pause表示暂停,run表示运行
  *@return 返回PResult
