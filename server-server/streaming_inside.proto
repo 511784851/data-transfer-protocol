@@ -83,7 +83,7 @@ package bbproto;
     scope为website,参数为网站直播平台id,
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
- *@return 成功返回PStreamingLiveList, 失败返回PResult
+ *@return 成功返回PStreamingLiveInsideList, 失败返回PResult
  */
 
 /*
@@ -98,7 +98,7 @@ package bbproto;
     scope为website,参数为网站直播平台id,
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
- *@return 成功返回PStreamingAnchorList, 失败返回PResult
+ *@return 成功返回PStreamingAnchorInsideList, 失败返回PResult
  */
 
 /*

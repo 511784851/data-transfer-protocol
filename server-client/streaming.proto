@@ -99,6 +99,33 @@ message PStreamingManualList {
     repeated PStreamingManual list = 1;
 }
 
+// 第三方直播手动主播(服务内部用)
+message PStreamingAnchorInside {
+    string uuid = 1;// 编号uuid
+    string imageUrl = 2; // 头像网址
+    string imageThumb = 3;// 头像缩略图网址
+    string nick = 4;// 昵称
+    string IconThumb = 5;// 平台图标
+    string room = 6;// 房间号
+    bool isEnable = 7; // 状态
+}
+
+message PStreamingAnchorInsideList {
+    repeated PStreamingAnchorInside list = 1;
+}
+
+// 第三方直播手动直播(服务内部用)
+message PStreamingLiveInside {
+    string id = 1; // 记录id
+    PStreamingAnchorInside anchor = 2; // 主播
+    int64 clickCount = 3; // 点击人数
+    int64 liveTime = 4; // unix时间戳,精确到秒
+}
+
+message PStreamingLiveInsideList {
+    repeated PStreamingLiveInside list = 1;
+}
+
 /**************************API 定义***********************************/
 
 /*
