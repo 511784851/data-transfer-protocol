@@ -312,11 +312,13 @@ message PAccountVoMember {
     string birthday = 7;                   // 生日
     string birthplace = 8;                 // 出生地
     string introduction = 9;               // 简介
+    int64  joinTime = 10;                  // 加入时间（只读）
 }
 
 // VO成员列表
 message PAccountVoMemberList {
     repeated PAccountVoMember list = 1; // 列表
+    map<string, PUserBase>    bases = 2; // uuid:PUserBase
 }
 
 // VO基础信息
