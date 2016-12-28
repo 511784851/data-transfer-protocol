@@ -104,14 +104,14 @@ message PStreamingAnchorInside {
     string uuid = 1;// 编号uuid
     string imageUrl = 2; // 头像网址
     string nick = 3;// 昵称
-    string IconThumb = 4;// 平台图标
+    string iconThumb = 4;// 平台图标
     string room = 5;// 房间号
     bool isEnable = 6; // 状态
 }
 
 message PStreamingAnchorInsideList {
     repeated PStreamingAnchorInside list = 1;
-    int64 Count = 2; // 主播总数
+    int64 count = 2; // 主播总数
 }
 
 // 第三方直播手动直播(服务内部用)
@@ -124,7 +124,7 @@ message PStreamingLiveInside {
 
 message PStreamingLiveInsideList {
     repeated PStreamingLiveInside list = 1;
-    int64 Count = 2; // 直播总数
+    int64 count = 2; // 直播总数
 }
 
 /**************************API 定义***********************************/
