@@ -91,12 +91,13 @@ package bbproto;
  *@uri /streaming-notification/anchor/list
  *@method GET
  *@param from 调用方(仅限于监管web系统)
- *@param scope all表示全部,anchor表示主播,live表示直播次数,website表示网站直播平台,name表示用户名搜索
+ *@param scope all表示全部,anchor表示主播,live表示直播次数,website表示网站直播平台,status表示状态
  *@param value 
+    scope为all,参数无意义,
     scope为anchor,参数为主播的uuid,
     scope为live,获取小于value代表的次数,-1是大到小排序,-2是小到大排序,
     scope为website,参数为网站直播平台id,
-    scope为all,参数无意义
+    scope为status,0-监管禁止,1-监管允许
  *@param offset 偏移量,第一次填0,以后offoset=offset+count
  *@param count 数量,默认值20,范围[15,30]
  *@return 成功返回PStreamingAnchorInsideList, 失败返回PResult

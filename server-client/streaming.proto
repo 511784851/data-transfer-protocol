@@ -107,6 +107,7 @@ message PStreamingAnchorInside {
     string iconThumb = 4;// 平台图标
     string room = 5;// 房间号
     bool isEnable = 6; // 状态
+    int64 liveCount = 7; // 直播次数
 }
 
 message PStreamingAnchorInsideList {
