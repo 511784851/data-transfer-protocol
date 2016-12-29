@@ -177,3 +177,12 @@ message PNewsUserStatistic {
  *@param  postids 帖子ID列表, 多个帖子id用,分隔.最大个数1000
  *@return 返回 PInt32List.失败返回 PResult
  */
+
+ /**
+ *@note   刷全局微博列表
+ *@path   /v1/news/inside/guest/timeline
+ *@method GET
+ *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
+ *@param  level 选择查看什么等级的微博列表 all,reg,vip,vipp,vip2, vo
+ *@return 成功返回 PPostInfoList ，失败返回 PResult
+ */
