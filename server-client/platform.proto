@@ -270,6 +270,30 @@ message PLaunchADList {
 	repeated PLaunchAD list = 1;
 }
 
+//标签类型列表
+message PVIPPTagTypeList {
+	repeated PVIPPTagType list = 1;
+}
+
+//标签类型
+message PVIPPTagType {
+	int32 id = 1;
+	string name = 2;
+}
+
+//标签项目列表
+message PVIPPTagItemList {
+	repeated PVIPPTagItem list = 1;
+}
+
+//标签项目
+message PVIPPTagItem {
+	int32 id = 1;
+	int32 tid = 2;
+	string img = 3;
+	string name = 4;
+}
+
 
 /**************************API 定义***********************************/
 
