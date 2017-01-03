@@ -270,6 +270,16 @@ message PLaunchADList {
 	repeated PLaunchAD list = 1;
 }
 
+message PVIPPTagList {
+	repeated PVIPPTag list = 1;
+}
+
+message PVIPPTag {
+	int32 id = 1;
+	string name = 2;
+	repeated PVIPPTagItem items = 3;
+}
+
 //标签类型列表
 message PVIPPTagTypeList {
 	repeated PVIPPTagType list = 1;
