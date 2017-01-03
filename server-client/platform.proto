@@ -302,6 +302,7 @@ message PVIPPTagItem {
 	int32 tid = 2;
 	string img = 3;
 	string name = 4;
+	string src = 5;
 }
 
 
