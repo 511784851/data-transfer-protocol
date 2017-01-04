@@ -1028,6 +1028,20 @@ message PCommunityLayoutConfig {
 	PStringList Color = 1;                              // 可选的颜色方案
 }
 
+// 声望排行榜的描述内容
+message PCommunityRankingReputationDescribe {
+    string Remark = 1;                                  // 备注
+    repeated string Title = 10;                         // 操作
+    repeated string Cycle = 11;                         // 周期
+    repeated int32 Times = 12;                          // 奖励次数
+    repeated int32 Val = 13;                            // 声望
+}
+
+// 排行榜的描述内容
+message PCommunityRankingDescribe {
+    PCommunityRankingReputationDescribe Reputation = 3;            // 声望排行榜的描述内容
+}
+
 /*=====================================*/
 // API定义
 
@@ -1109,6 +1123,16 @@ message PCommunityLayoutConfig {
  *@url param count 要获取的分页数，默认传20
  *@cookie token&uuid
  *@return 成功返回 PCommunityRankingUserList，失败返回 PResult
+ */
+
+/*
+ *@note  获取社区的排行榜的详细描述
+ *@path /v1.2/community/ranking/describe
+ *@method GET
+ *@url param type 排行榜类型， reputation 代表排行榜
+ *@url param lang "zh-cn" 中文简体；"zh-tw" 中文繁体；"en-us" English；"ko-kr" 韩文
+ *@cookie token&uuid
+ *@return 返回 PCommunityRankingDescribe
  */
 
 /*
