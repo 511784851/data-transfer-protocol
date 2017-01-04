@@ -14,6 +14,7 @@ message PToken {
 	int64 SubSalt = 4;			// 随机的int64
 	string Ostp = 5;			// token对应的客户端类型；m为移动设备，w为pc端
 	string MD5  = 6;   	 		// uuid与字符串运算生成的md5值
+    int32 LoginTP = 7;          // 用户原始登录的类型；Ostp为m时才有意义(1 微信,2 微博,3 facebook,4 google)
 }
 
 /*
