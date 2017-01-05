@@ -953,7 +953,7 @@ message PCommunityForumTagList {
 // 社区成员的布局方案1
 // ForumTagList 中id的默认值为：0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
 message PCommunityLayoutPlan1 {
-    int32 ContentType = 1;                              // 内容模块id; -1 为公告; >= 0 为论坛可选模块的id
+    int32 ContentType = 1;                              // 内容模块id; -404为空；-1 为公告; >= 0 为论坛可选模块的id
     PUserBaseList TopUserList = 2;                      // top成员列表；创建时不需要传
     PInt32List MiddleModulesID = 3;                     // 中间定义的功能模块列表
     PInt32List BottomModulesID = 4;                     // 底部定义的功能模块列表
@@ -1145,4 +1145,15 @@ message PCommunityRankingDescribe {
  *@form param post_tag 自定义类型标签的id , 多个以','分割
  *@cookie token&uuid
  *@return 返回 PResult;
+ */
+
+/*
+ *@note 获取vo在所有社区发布的论坛帖
+ *@path /v1.2/community/vo/forum
+ *@method GET
+ *@url param uuid 被查看的vo用户uuid
+ *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
+ *@url param count 获取帖子个数 
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityPostList , 失败返回 PResult
  */
