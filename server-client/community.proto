@@ -1148,10 +1148,10 @@ message PCommunityRankingDescribe {
  */
 
 /*
- *@note 获取vo在所有社区发布的论坛帖
- *@path /v1.2/community/vo/forum
+ *@note 获取用户在所有社区发布的论坛帖
+ *@path /v1.2/community/user/forum
  *@method GET
- *@url param uuid 被查看的vo用户uuid
+ *@url param uuid 被查看的用户uuid
  *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
  *@url param count 获取帖子个数 
  *@cookie token&uuid
