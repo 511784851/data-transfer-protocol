@@ -442,3 +442,11 @@ message PNotifySummaryList {
  *@cookie token&uuid
  *@return *PResult
  */
+
+/*
+ *@note 通知首页
+ *@uri /v2/notification/home
+ *@method GET
+ *@cookie token&uuid
+ *@return *PNotifySummaryList
+ */
