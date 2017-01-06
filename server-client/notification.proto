@@ -346,6 +346,7 @@ enum ENotifyCategory {
     SysNotification  = 2; // 系统通知
     SocialRequest    = 3; // 好友请求
     CommunityRequest = 4; // 社区请求
+    Achievement      = 5; // 社区请求
 }
 
 // 评论帖子消息定义
@@ -400,7 +401,7 @@ message PNotifySummaryList {
  *@note 获取通知消息
  *@uri /v2/notification/messages
  *@method GET
- *@urlParam category 通知分类：1:我的通知、2:系统通知、3:好友请求、4:社区请求
+ *@urlParam category 通知分类：1:我的通知、2:系统通知、3:好友请求、4:社区请求、5:成就
  *@urlParam offset 分页偏移值，从0开始
  *@urlParam count 获取的数量，最大值20
  *@cookie token&uuid
@@ -421,7 +422,7 @@ message PNotifySummaryList {
  *@note 清空某一分类下面的通知
  *@uri /v2/notification/messages
  *@method POST
- *@urlParam category 通知分类：1:我的通知、2:系统通知、3:好友请求、4:社区请求
+ *@urlParam category 通知分类：1:我的通知、2:系统通知、3:好友请求、4:社区请求、5:成就
  *@cookie token&uuid
  *@return *PResult
  */
