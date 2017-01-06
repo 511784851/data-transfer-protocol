@@ -23,6 +23,7 @@ message PCommunityBase {
     string Introduce = 5;                       // 社区介绍
 	int32 Status = 6;                           // 社区状态；0社区开启状态；1社区关闭状态；
     PCommunityResourceList IntroduceRes = 7;    // 社区介绍；图文混排
+    bool IsMember = 8;                          // 用户是否已经加入社区的标志位
 }
 
 // 社区基础信息列表
@@ -1042,6 +1043,15 @@ message PCommunityRankingDescribe {
     PCommunityRankingReputationDescribe Reputation = 3;            // 声望排行榜的描述内容
 }
 
+// VO社区信息
+message PCommunityInfoVO {
+	int32 Status = 2;				// 社区状态，-1没有创建社区;0社区开启状态；1社区关闭状态；
+	int32 MemberCount = 3;			// 社区成员数量
+	int32 ForumPostCount = 4;		// 社区论坛帖子数量
+	int32 NoticePostCount = 5;		// 社区公告帖子数量
+    PCommunityHomeV12 Home = 6;     // 社区信息
+}
+
 /*=====================================*/
 // API定义
 
@@ -1156,4 +1166,12 @@ message PCommunityRankingDescribe {
  *@url param count 获取帖子个数 
  *@cookie token&uuid
  *@return 成功返回 PCommunityPostList , 失败返回 PResult
+ */
+
+/*
+ *@note VO用户调用此接口直接获取自己社区的信息，不再调用‘我的社区’接口
+ *@path /v1/community/vo
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityInfoVO，失败返回PResult
  */
