@@ -3,7 +3,7 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "DataPublishingProtos";
 
-//import "account.proto";
+import "community.proto";
 import "news.proto";
 
 message PWords {
@@ -423,4 +423,18 @@ message PRank {
  *@param pagesize 页大小
  *@param gender 性别 0女 1男 其它或不传此参数表示全部
  *@return 成功返回PGuyList，失败返回PResult
+ */
+
+message PDiscover {
+	PGuyList user = 1;
+	PCommunityBaseList community = 2;
+	PWords topic = 3;
+}
+
+/*
+ *@note 搜索发现
+ *@path /datapublishing/discover
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PDiscover，失败返回PResult
  */
