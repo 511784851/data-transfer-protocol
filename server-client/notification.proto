@@ -346,7 +346,7 @@ enum ENotifyCategory {
     SysNotification  = 2; // 系统通知
     SocialRequest    = 3; // 好友请求
     CommunityRequest = 4; // 社区请求
-    Achievement      = 5; // 社区请求
+    Achievement      = 5; // 成就系统通知
 }
 
 // 评论帖子消息定义
