@@ -3,6 +3,9 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NotificationApiProtos";
 
+import "common_inside.proto"; // common_inside.proto
+import "notification.proto";  // server-client/notification.proto
+
 // 服务之间推送消息定义
 message PPushMsg {
 	bytes data = 2;				  // 不同服务需要存储的推送内容
@@ -103,3 +106,31 @@ message PNotifyLangVars {
  *@param uuidb 用户ID B
  *@return PResult
  */
+
+// *********** v2 ************
+
+// 发送到通知系统的消息
+message PNotifyInternalMessage {
+    bool            stateless = 1; // 是否无状态消息，即不需要进行服务回调
+    string          service   = 2; // 请求服务名称
+    PNotifyMessage  message   = 3; // 具体消息
+    repeated string recipient = 4; // 消息接收的对象的UUID列表
+}
+
+// 发送到通知系统的消息列表
+message PNotifyInternalMessageList {
+    repeated PNotifyInternalMessage list = 1; // 列表
+}
+
+// 通知系统RPC服务
+service Notify {
+    // 发送单个通知消息，单个通知消息可能有多个接收者
+    rpc Send(PNotifyInternalMessageList) returns (PEmpty);
+}
+
+// 通知消息填充的RPC回调服务
+service NotifyCallback {
+    // 填充回调
+    // 实现填充回调的服务填充响应自定义消息结构，保持原来的数据不变返回到通知系统
+    rpc Fill(PNotifyMessageList) returns (PNotifyMessageList);
+}
