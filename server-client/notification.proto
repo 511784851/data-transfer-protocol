@@ -394,7 +394,7 @@ message PNotifySummary {
 
 // 通知首页分类消息列表
 message PNotifySummaryList {
-    PNotifySummary list = 1; // 分类消息概要，客户端按照顺序显示消息概要
+    repeated PNotifySummary list = 1; // 分类消息概要，客户端按照顺序显示消息概要
 }
 
 /*
