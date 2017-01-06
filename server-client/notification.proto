@@ -388,8 +388,8 @@ message PNotifyMessageList {
 
 // 通知首页分类消息概要
 message PNotifySummary {
-    ENotifyCategory    category    = 1; // 通知分类，通知、好友请求、社区请求
-    PNotifyMessageList messageList = 2; // 消息列表，最新收到的N消息，N具体跟需求定
+    ENotifyCategory         category    = 1; // 通知分类，通知、好友请求、社区请求
+    repeated PNotifyMessage messageList = 2; // 消息列表，最新收到的N消息，N具体跟需求定
 }
 
 // 通知首页分类消息列表
