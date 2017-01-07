@@ -451,3 +451,11 @@ message PNotifySummaryList {
  *@cookie token&uuid
  *@return *PNotifySummaryList
  */
+
+/*
+ *@note 通知状态（是否存在未读消息，小红点）
+ *@uri /v2/notification/state
+ *@method GET
+ *@cookie token&uuid
+ *@return *PInt32Single 0: 不存在未读消息，1: 存在未读消息
+ */
