@@ -115,7 +115,6 @@ message PNotifyInternalMessage {
     string          service   = 2; // 请求服务名称
     PNotifyMessage  message   = 3; // 具体消息
     repeated string recipient = 4; // 消息接收的对象的UUID列表
-    map<string, string> args  = 5; // 消息参数
 }
 
 // 发送到通知系统的消息列表
