@@ -328,10 +328,24 @@ message PGameMsgList {
 
 // 通知类型，具体的消息类型
 enum ENotifyType {
-    CommentNews    = 0; // 评论帖子
-    CommentComment = 1; // 评论评论
-    SocialApply    = 2; // 好友申请
-    SocialAccept   = 3; // 接受好友申请
+    // 我的通知
+    CommentNews     = 0; // 评论帖子
+    CommentComment  = 1; // 评论评论
+    CommentVote     = 2; // 评论赞/踩
+    NewsFollow      = 3; // 关注
+    NewsVote        = 4; // 点赞/踩
+    NewsAt          = 5; // @我
+    SocialAccept    = 6; // 接受好友申请
+
+    // 系统通知
+    Community       = 100; // 社区通知（系统通知部分）
+    MyTask          = 101; // 我的任务（系统通知等级提升）
+    MyAchievement   = 102; // 我的成就（系统通知获得成就）
+    RealNameAuth    = 103; // 实名认证
+    Streaming       = 104; // 第三方直播
+
+    SocialApply     = 200; // 好友申请
+    CommunityInvite = 201; // 社区邀请
 }
 
 // 通知消息状态，已读/未读
@@ -373,6 +387,7 @@ message PNotifySocial {
 // 自定义消息
 message PNotifyRawMessage {
     string              content      = 1; // 通知内容/PUSH消息/系统通知内容
+
     PNotifyComment      commentNews  = 5; // 帖子评论消息
     PNotifyCommentReply commentReply = 6; // 评论的评论
     PNotifySocial       socialApply  = 7; // 好友请求
