@@ -294,6 +294,7 @@ message PAccountVoMemberTag {
     int32  tagID = 1; // 标签ID
     string name  = 2; // 名称
     string image = 3; // 显示图片（VO队员列表显示）
+    string type  = 4; // 标签分类
 }
 
 // 游戏列表
