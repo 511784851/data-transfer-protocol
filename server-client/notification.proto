@@ -330,6 +330,8 @@ message PGameMsgList {
 enum ENotifyType {
     CommentNews    = 0; // 评论帖子
     CommentComment = 1; // 评论评论
+    SocialApply    = 2; // 好友申请
+    SocialAccept   = 3; // 接受好友申请
 }
 
 // 通知消息状态，已读/未读
@@ -362,11 +364,18 @@ message PNotifyCommentReply {
   PCommentExt replyExt   = 3; //回复的内容
 }
 
+// 好友申请通知消息
+message PNotifySocial {
+  // 0: 申请好友，1: 接受申请，2: 拒绝申请
+  int32 state = 1;
+}
+
 // 自定义消息
 message PNotifyRawMessage {
     string              content      = 1; // 通知内容/PUSH消息/系统通知内容
-    PNotifyComment      commentNews  = 2; // 帖子评论消息
-    PNotifyCommentReply commentReply = 3; // 评论的评论
+    PNotifyComment      commentNews  = 5; // 帖子评论消息
+    PNotifyCommentReply commentReply = 6; // 评论的评论
+    PNotifySocial       socialApply  = 7; // 好友请求
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
