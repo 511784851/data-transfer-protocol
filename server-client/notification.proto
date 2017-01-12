@@ -384,13 +384,66 @@ message PNotifySocial {
   int32 state = 1;
 }
 
-// 自定义消息
-message PNotifyRawMessage {
-    string              content      = 1; // 通知内容/PUSH消息/系统通知内容
+// 评论投票通知消息
+message PNotifyCommentVote {
+  int32       type       = 1; // 0：赞；1：踩
+  PPostInfo   article    = 2; // 被投票评论相关的news
+  PCommentExt commentExt = 3; // 被投票的评论
+}
 
-    PNotifyComment      commentNews  = 5; // 帖子评论消息
-    PNotifyCommentReply commentReply = 6; // 评论的评论
-    PNotifySocial       socialApply  = 7; // 好友请求
+// 帖子点赞通知信息
+message PNotifyNewsVote {
+  int32     type    = 1; // 0：赞；1：踩（当前只有赞）
+  PPostInfo article = 2; // 帖子
+}
+
+// 帖子@我
+message PNotifyNewsAt {
+  PPostInfo article = 1; // 帖子
+}
+
+// 第三方直播提醒
+message PNotifyStreaming {
+  PStreamingLiveList lives = 1; //直播内容
+}
+
+// 社区
+message PNotifyCommunity {
+	int64  id   = 1; // 社区的id
+	string name = 2; // 社区名字
+}
+
+// 社区邀请
+message PNotifyCommunityRequest {
+	int64  id    = 1; // 社区的id
+	string name  = 2; // 社区名字
+    int32  state = 3; // 邀请状态；0：邀请请求，1：同意请求，2：拒绝请求
+}
+
+// 自定义消息
+//
+// TODO(littlematthew)：
+//      理论上只有自定义文本样式的通知需要自定义结构
+//      其他通知可以使用通用URI形式处理，需要客户端支持
+//      比如使用URL scheme：blemobi://moudle/page?param1=xxx&param2=xxx
+//      这样理论上跳转APP每个页面都是可以控制的
+message PNotifyRawMessage {
+    // 关注我(NewsFollow)         - 跳转用户个人档，使用外层的from获得用户信息
+    // 同意好友请求(SocialAccept) - 跳转用户个人档，使用外层from获得用户信息
+    // 获得成就(MyAchievement)    - 跳转成就页面
+    // 等级提升(MyTask)           - 跳转我的任务页面
+    // 实名认证通知(RealNameAuth) - 跳转实名认证结果页，结果从这个页面获取
+    string                  content         = 1; // 通知内容/PUSH消息/系统通知内容
+
+    PNotifyComment          commentNews     = 5;  // 帖子评论消息
+    PNotifyCommentReply     commentReply    = 6;  // 评论的评论
+    PNotifySocial           socialApply     = 7;  // 好友请求
+    PNotifyCommentVote      commentVote     = 8;  // 评论赞/踩
+    PNotifyNewsVote         newsVote        = 9;  // 帖子赞/踩
+    PNotifyNewsAt           newsAt          = 10; // @我
+    PNotifyStreaming        streaming       = 11; // 第三方直播提醒
+    PNotifyCommunity        community       = 12; // 社区通知
+    PNotifyCommunityRequest communityInvite = 13; // 社区邀请
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
