@@ -338,11 +338,16 @@ enum ENotifyType {
     SocialAccept    = 6; // 接受好友申请
 
     // 系统通知
-    Community       = 100; // 社区通知（系统通知部分）
-    MyTask          = 101; // 我的任务（系统通知等级提升）
-    MyAchievement   = 102; // 我的成就（系统通知获得成就）
-    RealNameAuth    = 103; // 实名认证
-    Streaming       = 104; // 第三方直播
+    CommunityAdminPromotion = 100; // 社区提升管理员
+    MyTask                  = 101; // 我的任务（等级提升）
+    MyAchievement           = 102; // 我的成就（获得成就）
+    RealNameAuthSuccess     = 103; // 实名认证通过
+    Streaming               = 104; // 第三方直播
+    CommunityAdminRevoke    = 105; // 社区取消管理员资格
+    CommunityVippPromotion  = 106; // 社区任命VIP+
+    CommunityVippRevoke     = 107; // 社区取消VIP+
+    CommunityKickedOut      = 108; // 社区踢出会员
+    RealNameAuthFailed      = 109; // 实名认证失败
 
     SocialApply     = 200; // 好友申请
     CommunityInvite = 201; // 社区邀请
@@ -373,9 +378,9 @@ message PNotifyComment {
 
 // 评论回复通知消息
 message PNotifyCommentReply {
-  PPostInfo   article    = 1; //评论相关的news
-  PCommentExt commentExt = 2; //被回复的评论
-  PCommentExt replyExt   = 3; //回复的内容
+  PPostInfo   article    = 1; // 评论相关的news
+  PCommentExt commentExt = 2; // 被回复的评论
+  PCommentExt replyExt   = 3; // 回复的内容
 }
 
 // 好友申请通知消息
@@ -409,31 +414,20 @@ message PNotifyStreaming {
 
 // 社区
 message PNotifyCommunity {
-	int64  id   = 1; // 社区的id
-	string name = 2; // 社区名字
+	int64  id     = 1; // 社区的id
+	string name   = 2; // 社区名字
 }
 
 // 社区邀请
 message PNotifyCommunityRequest {
-	int64  id    = 1; // 社区的id
-	string name  = 2; // 社区名字
-    int32  state = 3; // 邀请状态；0：邀请请求，1：同意请求，2：拒绝请求
+    int64  id    = 1; // 社区的id
+    string name  = 2; // 社区的名称
+    int32  state = 3; // 邀请状态，1：同意邀请，2：拒绝邀请
 }
 
 // 自定义消息
-//
-// TODO(littlematthew)：
-//      理论上只有自定义文本样式的通知需要自定义结构
-//      其他通知可以使用通用URI形式处理，需要客户端支持
-//      比如使用URL scheme：blemobi://moudle/page?param1=xxx&param2=xxx
-//      这样理论上跳转APP每个页面都是可以控制的
 message PNotifyRawMessage {
-    // 关注我(NewsFollow)         - 跳转用户个人档，使用外层的from获得用户信息
-    // 同意好友请求(SocialAccept) - 跳转用户个人档，使用外层from获得用户信息
-    // 获得成就(MyAchievement)    - 跳转成就页面
-    // 等级提升(MyTask)           - 跳转我的任务页面
-    // 实名认证通知(RealNameAuth) - 跳转实名认证结果页，结果从这个页面获取
-    string                  content         = 1; // 通知内容/PUSH消息/系统通知内容
+    string                  content         = 1;  // 服务端国际化(成就名称、等级名称等)
 
     PNotifyComment          commentNews     = 5;  // 帖子评论消息
     PNotifyCommentReply     commentReply    = 6;  // 评论的评论
@@ -442,8 +436,8 @@ message PNotifyRawMessage {
     PNotifyNewsVote         newsVote        = 9;  // 帖子赞/踩
     PNotifyNewsAt           newsAt          = 10; // @我
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
-    PNotifyCommunity        community       = 12; // 社区通知
-    PNotifyCommunityRequest communityInvite = 13; // 社区邀请
+    PNotifyCommunity        community       = 12; // 社区通知/社区邀请
+    PNotifyCommunityRequest communityInvite = 13; // 社区通知/社区邀请
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
