@@ -195,3 +195,12 @@ message PNewsUserStatistic {
  *@body   PPostInfo数据流. images.url/video.url/audio.url 这些个url传的是upload的objectKey
  *@return 返回 PResult
  */
+
+service IGrpcNews {
+    /*
+     *@note 编辑帖子
+     *@param PPostInfo 编辑后的帖子 
+     *@return 返回错误码 PStringSingle 
+     */
+    rpc PostEdit(PPostInfo) returns (PStringSingle);
+ }
