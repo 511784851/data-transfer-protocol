@@ -1,6 +1,7 @@
 syntax = "proto3";
 package bbproto;
-
+import "result.proto";
+import "news.proto";
 
 // 个人统计信息
 message PNewsUserStatistic {
