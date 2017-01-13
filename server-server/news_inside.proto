@@ -186,3 +186,12 @@ message PNewsUserStatistic {
  *@param  level 选择查看什么等级的微博列表 all,reg,vip,vipp,vip2, vo
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
+
+/**
+ *@note   编辑微博(支持编辑:正文文本、图片、音频、视频、@用户列表、地址位置、被转发的原始帖)
+ *@path   /v1/news/inside/post/edit
+ *@method POST
+ *@param  from 发起调用的服务方，必须在consul上注册
+ *@body   PPostInfo数据流. images.url/video.url/audio.url 这些个url传的是upload的objectKey
+ *@return 返回 PResult
+ */

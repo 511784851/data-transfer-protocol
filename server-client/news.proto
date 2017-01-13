@@ -475,3 +475,12 @@ message PTimelineRdsStore {
  *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp)
  *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
+
+ /**
+ *@note   编辑微博
+ *@path   /v1/news/post/edit
+ *@cookie token&uuid
+ *@method POST
+ *@body   PPostInfo数据流. images.url/video.url/audio.url 这些个url传的是upload的objectKey
+ *@return 返回 PResult
+ */
