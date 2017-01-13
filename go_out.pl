@@ -39,22 +39,10 @@ $server_client_protos = "server-client/result.proto ".
 						"server-server/wallet_inside.proto ".
 						"server-server/datapublishing_inside.proto ".
 						"server-server/news_inside.proto ".
-						"server-server/achievement_inside.proto";
+						"server-server/achievement_inside.proto ".
+						"server-server/community_inside.proto";
 
 $cmd = "protoc -Iserver-client -Iserver-server --go_out=".$output." ".$server_client_protos;
-system($cmd);
-
-
-#################server_server protos#######################
-$server_server_protos = "server-server/login_inside.proto ".
-                        "server-server/account_inside.proto ".
-						"server-server/notification_inside.proto ".
-						"server-server/wallet_inside.proto ".
-						"server-server/datapublishing_inside.proto ".
-						"server-server/news_inside.proto ".
-						"server-server/achievement_inside.proto";
-## -d ($output = $output."/service") || mkdir($output);
-## $cmd = "protoc -Iserver-server --go_out=".$output." ".$server_server_protos;
 system($cmd);
 
 if (@ARGV == 0) {

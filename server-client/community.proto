@@ -581,7 +581,7 @@ message PInsideCommunityUserList {
  */
 
 /*
- *@note 设置-获取粉丝/好友列表
+ *@note 设置-获取粉丝/好友列表;已经是社区成员的粉丝/好友不会出现在返回值中
  *@path /v1/community/setting/relation/list
  *@method GET
  *@url param id 社区id
