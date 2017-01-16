@@ -201,7 +201,7 @@ service IGrpcNews {
     /*
      *@note 编辑帖子
      *@param PPostInfo 编辑后的帖子 
-     *@return 返回错误码 PStringSingle 
+     *@return 返回PResult 
      */
-    rpc PostEdit(PPostInfo) returns (PStringSingle);
+    rpc GrpcPostEdit(PPostInfo) returns (PResult);
  }
