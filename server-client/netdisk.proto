@@ -156,3 +156,75 @@ message PCommunityCreator {
  *@param protectLongtime 文件的保护时长，从当前开始计算，单位是毫秒。在这终止时间后，文件将公开，任何人都可以下载
  *@return 返回PBuildUrlInfo，失败返回PResult。
  */
+
+ 
+ 
+ 
+ 
+ /*
+ * 以下是新的协议，以上旧的协议暂时保留
+ */
+ message PNetFile {
+    string fileId = 1;          // 唯一标识
+ 	string communityId = 2;     // 社区Id
+ 	string uuid = 3;            // 作者uuid
+	string objectKey = 4;		// 文件objectKey
+	string objectKey = 5;		// 文件url
+	string extension = 6;		// 文件的扩展名。示范：mp3
+	int64 fileSize = 7;		    // 文件长度
+	string fileDigest  = 8;		// 文件的md5 hexstring
+	int64 createTime = 9;		// 文件的创建时间
+	bool transferFlag = 10;	    // 文件转发标志，0--可以转发，1--不可以
+	bool shareFlag = 11;		// 文件共享标志，0--可以共享，1--不可以
+	bool conserveFlag = 12;	    // 文件可以收藏，0--可以收藏，1--不可以
+	string title = 13;			// 文件的标题
+	string desc = 14;			// 文件的描述
+	string remark = 15;			// 文件的备注信息
+	string miniObjectKey = 16;	// 文件缩略图objectKey
+	string miniPic = 17;		// 文件缩略图url
+}
+
+message PNetFilelist {
+	repeated PNetFile netFile = 1;
+	int32 DiskSize = 2;         //总数量
+}
+
+/*
+ *@note 添加文件信息
+ *@path /netdisk/v1/file/add
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PNetFile
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 编辑文件信息
+ *@path /netdisk/v1/file/edit
+ *@method PUT
+ *@cookie token&uuid 登录用户信息
+ *@body PNetFile
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 删除文件信息
+ *@path /netdisk/v1/file/delete
+ *@method DELETE
+ *@cookie token&uuid 登录用户信息
+ *@url param fileId 文件Id
+ *@url param communityId 社区Id
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 查询文件信息列表
+ *@path /netdisk/v1/file/list
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区Id
+ *@url param title 按文件标题查询
+ *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“-1”。
+ *@url param pageSize  本次请求要获取的记录数。默认20
+ *@return 成功PNetFilelist, 失败PResult
+ */
