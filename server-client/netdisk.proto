@@ -169,7 +169,7 @@ message PCommunityCreator {
  	string communityId = 2;     // 社区Id
  	string uuid = 3;            // 作者uuid
 	string objectKey = 4;		// 文件objectKey
-	string objectKey = 5;		// 文件url
+	string url = 5;		        // 文件url
 	string extension = 6;		// 文件的扩展名。示范：mp3
 	int64 fileSize = 7;		    // 文件长度
 	string fileDigest  = 8;		// 文件的md5 hexstring
@@ -181,7 +181,7 @@ message PCommunityCreator {
 	string desc = 14;			// 文件的描述
 	string remark = 15;			// 文件的备注信息
 	string miniObjectKey = 16;	// 文件缩略图objectKey
-	string miniPic = 17;		// 文件缩略图url
+	string miniUrl = 17;		// 文件缩略图url
 }
 
 message PNetFilelist {
