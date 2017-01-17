@@ -25,6 +25,7 @@ message PLogin {
  *@form param phonecode 手机号，需要带上区号。例：+8613512345678
  *@form param type 短信验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码，4 使用手机号码快速登录
  *@form param lang "zh-cn" //中文简体；"zh-tw" //中文繁体；"en-us" //English；"ko-kr" //韩文
+ *@form param imei 手机设备串号
  *@form param appid 应用分配的id
  *@return 返回 PResult
  */
@@ -62,7 +63,7 @@ message PLogin {
  *@note 手机号/用户名 登录
  *@path /v1/login/account
  *@method GET
- *@url param account 手机号/用户名
+ *@url param account 手机号，需要带上区号。例：+8613512345678
  *@url param password 密码, SHA256(原始密码+3721)
  *@url param ostp 操作系统类型 0未知、1Android、2IOS
  *@url param osv 操作系统版本
