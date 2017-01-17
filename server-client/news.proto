@@ -484,3 +484,21 @@ message PTimelineRdsStore {
  *@body   PPostInfo数据流. images.url/video.url/audio.url 这些个url传的是upload的objectKey
  *@return 返回 PResult
  */
+
+ /**
+ *@note 获取用户收藏数量
+ *@path /v1/news/collect/count
+ *@cookie token&uuid
+ *@method GET
+ *@return 返回 PInt64Single
+ */
+
+ /**
+ *@note 批量取消收藏微博
+ *@path /v1/news/uncollect
+ *@cookie token&uuid
+ *@method POST
+ *@param  actiontype : 可选参数,没有指定则默认为 multi.  all(取消全部)、multi(取消多个,由postids参数指定)
+ *@post form param: postids 微博的id,多个id用,分割.最大500个
+ *@return 返回 PResult
+ */
