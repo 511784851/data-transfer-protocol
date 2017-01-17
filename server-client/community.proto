@@ -100,6 +100,7 @@ message PCommunityPostInfo {
     PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
     bool IsTop = 14;                            // 公告帖子是否置顶的标志位
     bool IsDel = 15;                            // 帖子是否删除的标记位
+	string CommunityID = 16;					// 社区id 
 }
 
 // 帖子信息列表
@@ -1174,4 +1175,22 @@ message PCommunityInfoVO {
  *@method GET
  *@cookie token&uuid
  *@return 成功返回 PCommunityInfoVO，失败返回PResult
+ */
+
+/*
+ *@note 获取用户关注的社区个数 
+ *@path /v1.2/community/follow/count
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功 PInt64Single
+ */
+
+/*
+ *@note 取消关注社区
+ *@path /v1.2/community/follow
+ *@method DELETE
+ *@url param type all表示删除所有关注的社区, id表示删除指定id的社区
+ *@url param id 要退出的社区id，多个以,分割
+ *@cookie token&uuid
+ *@return PResult 
  */

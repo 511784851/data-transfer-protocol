@@ -7,6 +7,7 @@ import "result.proto";
 import "account.proto";
 
 message PLogin {
+    bool forceBindPhone = 4;        // 用户是否需要强制绑定手机号码，如果是，则需要绑定手机号码
 	bool newUser = 5;				// 是否新注册用户标识，true为新用户，false为老用户
 	string uuid = 6;      			// 用户ID
 	string token = 7;				// 统一访问令牌
@@ -22,7 +23,7 @@ message PLogin {
  *@path /v1/login/authcode
  *@method POST
  *@form param phonecode 手机号，需要带上区号。例：+8613512345678
- *@form param type 短信验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码
+ *@form param type 短信验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码，4 使用手机号码快速登录
  *@form param lang "zh-cn" //中文简体；"zh-tw" //中文繁体；"en-us" //English；"ko-kr" //韩文
  *@form param appid 应用分配的id
  *@return 返回 PResult
@@ -63,6 +64,22 @@ message PLogin {
  *@method GET
  *@url param account 手机号/用户名
  *@url param password 密码, SHA256(原始密码+3721)
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 手机号快速登录
+ *@path /v1/login/phone/account
+ *@method GET
+ *@url param account 手机号
+ *@url param authtoken 验证手机短信验证码后返回的authtoken
  *@url param ostp 操作系统类型 0未知、1Android、2IOS
  *@url param osv 操作系统版本
  *@url param model 设备型号
@@ -123,7 +140,7 @@ message PLogin {
 */
 
 /*
- *@note 微信登录，如果之前没登录过，自动创建账号
+ *@note 微信登录; 如果是新用户/老用户未绑定手机号码，则跳转到第三方绑定手机号码接口
  *@path /v1/login/third_party/weixin/account
  *@method POST
  *@form param code 授权临时票据(authorization code)
@@ -138,7 +155,7 @@ message PLogin {
  */
 
 /*
- *@note 微博登录，如果之前没登录过，自动创建账号
+ *@note 微博登录; 如果是新用户/老用户未绑定手机号码，则跳转到第三方绑定手机号码接口
  *@path /v1/login/third_party/weibo/account
  *@method POST
  *@form param wbuid 用户微博uid
@@ -157,7 +174,7 @@ message PLogin {
  */
 
  /*
- *@note facebook登录，如果之前没登录过，自动创建账号
+ *@note facebook登录; 如果是新用户/老用户未绑定手机号码，则跳转到第三方绑定手机号码接口
  *@path /v1/login/third_party/facebook/account
  *@method POST
  *@form param token Facebook User access token
@@ -172,7 +189,7 @@ message PLogin {
  */
 
  /*
- *@note google登录，如果之前没登录过，自动创建账号
+ *@note google登录; 如果是新用户/老用户未绑定手机号码，则跳转到第三方绑定手机号码接口
  *@path /v1/login/third_party/google/account
  *@method POST
  *@form param code 授权临时票据(authorization code)
@@ -185,6 +202,23 @@ message PLogin {
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
+ *@note 第三方登录绑定手机号码调用的接口
+ *@path /v1/login/third_party/bind
+ *@method PUT
+ *@url param uuid 第三方登录返回的uuid
+ *@url param account 手机号
+ *@url param authtoken 验证手机短信验证码后返回的authtoken
+ *@url param ostp 操作系统类型 0未知、1Android、2IOS 
+ *@url param osv 操作系统版本
+ *@url param model 设备型号
+ *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@url param channel 渠道或应用平台
+ *@url param appid 应用分配的id
+ *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@return 成功返回 PLogin ，失败返回 PResult
  */
 
 /*
