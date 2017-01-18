@@ -80,7 +80,7 @@ message PLogin {
  *@path /v1/login/phone/account
  *@method GET
  *@url param account 手机号，需要带上区号。例：+8613512345678
- *@url param authtoken 验证手机短信验证码后返回的authtoken
+ *@url param code 手机短信验证码
  *@url param ostp 操作系统类型 0未知、1Android、2IOS
  *@url param osv 操作系统版本
  *@url param model 设备型号
