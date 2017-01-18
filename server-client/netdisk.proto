@@ -212,19 +212,18 @@ message PNetFilelist {
  *@path /netdisk/v1/file/delete
  *@method DELETE
  *@cookie token&uuid 登录用户信息
- *@url param fileId 文件Id
- *@url param communityId 社区Id
+ *@url param fileIds 文件Id（多个id用 ","隔开）
  *@return 返回PResult
  */
  
 /*
- *@note 查询文件信息列表
+ *@note 查询文件信息
  *@path /netdisk/v1/file/list
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@url param communityId 社区Id
- *@url param title 按文件标题查询
- *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“-1”。
- *@url param pageSize  本次请求要获取的记录数。默认20
+ *@url param title 按文件标题模糊查询
+ *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
+ *@url param pageSize  要获取的记录数
  *@return 成功PNetFilelist, 失败PResult
  */
