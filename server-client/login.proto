@@ -210,6 +210,8 @@ message PLogin {
  *@path /v1/login/third_party/bind
  *@method PUT
  *@url param uuid 第三方登录返回的uuid
+ *@url param token 第三方登录返回的token
+ *@url param new 如果是老用户，则填0；如果是新用户，则填1
  *@url param account 手机号
  *@url param authtoken 验证手机短信验证码后返回的authtoken
  *@url param ostp 操作系统类型 0未知、1Android、2IOS 
