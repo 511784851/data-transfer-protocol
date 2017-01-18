@@ -63,7 +63,7 @@ message PLogin {
  *@note 手机号/用户名 登录
  *@path /v1/login/account
  *@method GET
- *@url param account 手机号，需要带上区号。例：+8613512345678
+ *@url param account 手机号（区号可选）/用户名
  *@url param password 密码, SHA256(原始密码+3721)
  *@url param ostp 操作系统类型 0未知、1Android、2IOS
  *@url param osv 操作系统版本
@@ -79,7 +79,7 @@ message PLogin {
  *@note 手机号快速登录
  *@path /v1/login/phone/account
  *@method GET
- *@url param account 手机号
+ *@url param account 手机号，需要带上区号。例：+8613512345678
  *@url param authtoken 验证手机短信验证码后返回的authtoken
  *@url param ostp 操作系统类型 0未知、1Android、2IOS
  *@url param osv 操作系统版本
