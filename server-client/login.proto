@@ -209,18 +209,20 @@ message PLogin {
  *@note 第三方登录绑定手机号码调用的接口
  *@path /v1/login/third_party/bind
  *@method PUT
- *@url param uuid 第三方登录返回的uuid
- *@url param token 第三方登录返回的token
- *@url param new 如果是老用户，则填0；如果是新用户，则填1
- *@url param account 手机号
- *@url param authtoken 验证手机短信验证码后返回的authtoken
- *@url param ostp 操作系统类型 0未知、1Android、2IOS 
- *@url param osv 操作系统版本
- *@url param model 设备型号
- *@url param imei 手机取IMEI，无IMEI用WIFI的MAC地址
- *@url param channel 渠道或应用平台
- *@url param appid 应用分配的id
- *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param uuid 第三方登录返回的uuid
+ *@form param token 第三方登录返回的token
+ *@form param username 用户名(可选项)
+ *@form param password 密码(可选项)， SHA256(原始密码+3721) 
+ *@form param new 如果是老用户，则填0；如果是新用户，则填1
+ *@form param account 手机号
+ *@form param authtoken 验证手机短信验证码后返回的authtoken
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS 
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 成功返回 PLogin ，失败返回 PResult
  */
 
