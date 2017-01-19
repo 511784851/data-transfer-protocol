@@ -307,7 +307,7 @@ message PVIPPTagItem {
 
 //帮助信息的菜单列表
 message PHelpMenuList {
-	repeated List PHelpMenu = 1;
+	repeated PHelpMenu List = 1;
 }
 
 //帮助信息的菜单
