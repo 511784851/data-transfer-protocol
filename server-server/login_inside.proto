@@ -167,16 +167,16 @@ service IGrpcLogin {
     rpc ResetPassword(PStringList) returns (PEmpty);
 
     /*
-     *@note 设置指定用户可以不绑定手机号码即可登录
-     *@param 用户uuid 列表
-     *@return 返回 PResult
-     */
-    rpc SetForceBindPhoneCode(PStringList) returns (PEmpty);
-
-    /*
-     *@note 解除指定用户可以不绑定手机号码即可登录
+     *@note 设置用户可以不绑定手机号码即可登录
      *@param 用户uuid 列表
      *@return 返回 PResult
      */
     rpc ResetForceBindPhoneCode(PStringList) returns (PEmpty);
+
+    /*
+     *@note设置用户必须绑定手机号码才能登录
+     *@param 用户uuid 列表
+     *@return 返回 PResult
+     */
+    rpc SetForceBindPhoneCode(PStringList) returns (PEmpty);
  }
