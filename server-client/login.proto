@@ -31,6 +31,19 @@ message PLogin {
  */
 
 /*
+ *@note 生成手机短信验证码
+ *@path /v1/login/authcode
+ *@method POST
+ *@form param phonecode 手机号，需要带上区号。例：+8613512345678
+ *@form param type 短信验证码的类型； 5 第三方登录绑定手机号码
+ *@form param bind_type 要绑定的第三方登录类型， 1 微信；2 微博；3 脸书；4 谷歌
+ *@form param lang "zh-cn" //中文简体；"zh-tw" //中文繁体；"en-us" //English；"ko-kr" //韩文
+ *@form param imei 手机设备串号
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
+
+/*
  *@note 验证手机短信验证码
  *@path /v1/login/authcode
  *@method DELETE
