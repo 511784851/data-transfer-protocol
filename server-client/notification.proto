@@ -342,12 +342,13 @@ enum ENotifyType {
     MyTask                  = 101; // 我的任务（等级提升）
     MyAchievement           = 102; // 我的成就（获得成就）
     RealNameAuthSuccess     = 103; // 实名认证通过
-    Streaming               = 104; // 第三方直播
+    Streaming               = 104; // 第三方直播-正在直播
     CommunityAdminRevoke    = 105; // 社区取消管理员资格
     CommunityVippPromotion  = 106; // 社区任命VIP+
     CommunityVippRevoke     = 107; // 社区取消VIP+
     CommunityKickedOut      = 108; // 社区踢出会员
     RealNameAuthFailed      = 109; // 实名认证失败
+    StreamingSoon           = 110; // 第三方直播-即将直播
 
     SocialApply     = 200; // 好友申请
     CommunityInvite = 201; // 社区邀请
