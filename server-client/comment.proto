@@ -204,3 +204,12 @@ message PCommentBool {
  *@param id 评论ID
  *@return 返回PComment,失败返回PbResult
  */
+
+ /*
+ *@note   删除评论
+ *@path   /comment/delete
+ *@method DELETE
+ *@cookie token&uuid
+ *@param  id 评论ID
+ *@return 返回PResult
+ */
