@@ -331,11 +331,12 @@ enum ENotifyType {
     // 我的通知
     CommentNews     = 0; // 评论帖子
     CommentComment  = 1; // 评论评论
-    CommentVote     = 2; // 评论赞/踩
+    CommentVote     = 2; // 评论赞
     NewsFollow      = 3; // 关注
-    NewsVote        = 4; // 点赞/踩
+    NewsVote        = 4; // 帖子点赞
     NewsAt          = 5; // @我
     SocialAccept    = 6; // 接受好友申请
+    CommentDownVote = 7; // 评论踩
 
     // 系统通知
     CommunityAdminPromotion = 100; // 社区提升管理员
@@ -437,8 +438,8 @@ message PNotifyRawMessage {
     PNotifyNewsVote         newsVote        = 9;  // 帖子赞/踩
     PNotifyNewsAt           newsAt          = 10; // @我
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
-    PNotifyCommunity        community       = 12; // 社区通知/社区邀请
-    PNotifyCommunityRequest communityInvite = 13; // 社区通知/社区邀请
+    PNotifyCommunity        community       = 12; // 社区通知
+    PNotifyCommunityRequest communityInvite = 13; // 社区邀请
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
