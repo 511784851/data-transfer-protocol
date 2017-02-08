@@ -416,15 +416,15 @@ message PNotifyStreaming {
 
 // 社区
 message PNotifyCommunity {
-	int64  id     = 1; // 社区的id
+	string id     = 1; // 社区的id
 	string name   = 2; // 社区名字
 }
 
 // 社区邀请
 message PNotifyCommunityRequest {
-    int64  id    = 1; // 社区的id
-    string name  = 2; // 社区的名称
-    int32  state = 3; // 邀请状态，1：同意邀请，2：拒绝邀请
+    string  id    = 1; // 社区的id
+    string  name  = 2; // 社区的名称
+    int32   state = 3; // 邀请状态，1：同意邀请，2：拒绝邀请
 }
 
 // 自定义消息
