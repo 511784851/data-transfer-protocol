@@ -142,12 +142,13 @@ service NotifyCallback {
 }
 
 /*
- *@note 非Go服务发送通知消息
+ *@note 非Go服务发送系统通知消息
  *@note 自定义国际化参数通过URL QueryString传递
  *@example 如自定义参数task：POST /v2/notification/inside/messages?task=task1&type=103&from=service）
- *@path /v2/notification/inside/messages
+ *@path /v2/notification/inside/system
  *@method POST
  *@param from 服务调用者
  *@param type 消息类型
+ *@param to 通知消息接收者
  *@return PResult
  */
