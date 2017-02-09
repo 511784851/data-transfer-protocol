@@ -350,6 +350,7 @@ enum ENotifyType {
     CommunityKickedOut      = 108; // 社区踢出会员
     RealNameAuthFailed      = 109; // 实名认证失败
     StreamingSoon           = 110; // 第三方直播-即将直播
+	AchievementBroadcast    = 111; // 成就通知给其它人（好友或粉丝）
 
     SocialApply     = 200; // 好友申请
     CommunityInvite = 201; // 社区邀请
