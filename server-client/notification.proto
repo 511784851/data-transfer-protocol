@@ -374,12 +374,12 @@ enum ENotifyState {
 
 // 通知分类
 enum ENotifyCategory {
-    Notification     = 0; // 通知
-    MyNotification   = 1; // 我的通知
-    SysNotification  = 2; // 系统通知
-    SocialRequest    = 3; // 好友请求
-    CommunityRequest = 4; // 社区请求
-    Achievement      = 5; // 成就系统通知
+    Notification       = 0; // 通知
+    MyNotification     = 1; // 我的通知
+    SysNotification    = 2; // 系统通知
+    SocialRequest      = 3; // 好友请求
+    CommunityRequest   = 4; // 社区请求
+    TaskAndAchievement = 5; // 任务成就系统通知
 }
 
 // 评论帖子消息定义
