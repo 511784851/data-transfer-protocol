@@ -483,7 +483,7 @@ message PNotifySummaryList {
  *@note 更新通知消息状态
  *@uri /v2/notification/messages
  *@method PUT
- *@urlParam state 更新状态0: 未读，1: 已读，2: 删除
+ *@urlParam state 更新状态0: 未读，1: 已读，2: 删除，3: 动作状态（接受），4: 动作状态（拒绝）
  *@urlParam uuid 获取uuid对应用户的数据
  *@body PStringList 需要更新的消息ID列表
  *@cookie token&uuid
