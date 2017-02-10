@@ -210,6 +210,7 @@ message PCommentBool {
  *@path   /comment/delete
  *@method DELETE
  *@cookie token&uuid
+ *@param  postid 帖子ID
  *@param  id 评论ID
  *@return 返回PResult
  */
