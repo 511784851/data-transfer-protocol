@@ -150,6 +150,6 @@ service NotifyCallback {
  *@param from 服务调用者
  *@param uuid 消息发送者，如果时发送给自己的通知（to==uuid），那么uuid不用传
  *@param type 消息类型
- *@param to 通知消息接收者
+ *@body PStringList 通知消息接收者ID列表
  *@return PResult
  */
