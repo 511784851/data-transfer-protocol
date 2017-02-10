@@ -359,6 +359,7 @@ enum ENotifyType {
     // 任务成就
 
 	AchievementBroadcast = 300; // 成就通知给其它人（好友或粉丝）
+    TaskBroadcast        = 301; // 等级提升通知其他人 (好友或粉丝)
 }
 
 // 通知消息状态，已读/未读
