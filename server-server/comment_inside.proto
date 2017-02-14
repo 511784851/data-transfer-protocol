@@ -45,6 +45,13 @@ import "common_inside.proto";
 
 
 service IGrpcComment {
+     /*
+     *@note 批量评论微博
+     *@param PClientCommentList 评论的内容列表 
+     *@return PInt32Single失败的评论的下标
+     */
+    rpc GrpcComment(PClientCommentList) returns (PInt32Single);
+
     /*
      *@note 批量回复微博评论
      *@param PClientCommentList 回复的内容列表 
@@ -66,5 +73,17 @@ service IGrpcComment {
      */
     rpc GrpcCommentVoteExist(PBetchCommentVote) returns (PBetchCommentVoteExist);
 
-   
+    /*
+     *@note 查询帖子的评论数
+     *@param PStringList 帖子ID列表
+     *@return PInt32List
+     */
+    rpc GrpcGetCommentCnt(PStringList) returns (PInt32List);
+
+    /*
+     *@note 查询评论的回复数
+     *@param PStringList 帖子ID列表
+     *@return PInt32List
+     */
+    rpc GrpcGetCommentReplyCnt(PStringList) returns (PInt32List);
  }
