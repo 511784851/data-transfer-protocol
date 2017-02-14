@@ -1,7 +1,7 @@
 syntax = "proto3";
 package bbproto;
-import "result.proto";
 import "news.proto";
+import "common_inside.proto";
 
 // 个人统计信息
 message PNewsUserStatistic {
@@ -201,7 +201,21 @@ service IGrpcNews {
     /*
      *@note 编辑帖子
      *@param PPostInfo 编辑后的帖子 
-     *@return 返回PResult 
+     *@return PEmpty
      */
-    rpc GrpcPostEdit(PPostInfo) returns (PResult);
+    rpc GrpcPostEdit(PPostInfo) returns (PEmpty);
+
+    /*
+     *@note 批量点赞帖子
+     *@param PBetchVoteAction 期望点赞的帖子ID、执行动作的用户列表
+     *@return PEmpty 
+     */
+    rpc GrpcPostVote(PBetchVoteAction) returns (PEmpty);
+
+    /*
+     *@note 批量判断用户是否点赞过帖子
+     *@param PBetchVoteAction 期望判断的帖子ID、用户UUID     
+     *@return PNewsVoteExist 
+     */
+    rpc GrpcPostVoteExist(PBetchVoteAction) returns (PNewsVoteExist);
  }

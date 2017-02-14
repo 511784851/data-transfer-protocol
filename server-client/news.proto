@@ -202,6 +202,21 @@ message PTimelineRdsStore {
 	repeated string List = 1; //帖子ID数组
 }
 
+/*
+ *@note 批量赞帖动作信息
+ */
+message PBetchVoteAction {
+	string postId = 1;  //帖子ID
+	repeated  string uuidList = 2; //点赞的uuid列表
+}
+
+// 批量判断帖子是否被用户点赞过
+message PNewsVoteExist {
+    int64  id = 1; //帖子ID
+	repeated bool hasVote = 2;   //是否被赞过
+	int32 VoteCnt = 3;      //被赞次数
+}
+
 ////////////////////////////////////////////////////////////////
 /*
  *@note 访问获取带签名的文件上传URL

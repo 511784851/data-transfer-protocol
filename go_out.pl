@@ -40,7 +40,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-server/datapublishing_inside.proto ".
 						"server-server/news_inside.proto ".
 						"server-server/achievement_inside.proto ".
-						"server-server/community_inside.proto";
+						"server-server/community_inside.proto ".
+						"server-server/comment_inside.proto";
 
 $cmd = "protoc -Iserver-client -Iserver-server --go_out=".$output." ".$server_client_protos;
 system($cmd);

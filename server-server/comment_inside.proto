@@ -1,5 +1,8 @@
 syntax = "proto3";
 package bbproto;
+import "comment.proto";
+import "result.proto";
+import "common_inside.proto";
 
 
 /*
@@ -39,3 +42,29 @@ package bbproto;
  *@param count 每次加载多少条(可选，默认为10)
  *@return 成功返回PCommentLevel，失败返回PResult
  */
+
+
+service IGrpcComment {
+    /*
+     *@note 批量回复微博评论
+     *@param PClientCommentList 回复的内容列表 
+     *@return PInt32Single失败的评论的下标
+     */
+    rpc GrpcCommentReply(PClientCommentList) returns (PInt32Single);
+
+    /*
+     *@note 批量赞微博评论
+     *@param PBetchCommentVote 动作类型,期望赞的评论ID、用户列表
+     *@return PEmpty
+     */
+    rpc GrpcCommentVote(PBetchCommentVote) returns (PEmpty);
+
+    /*
+     *@note 批量判断用户是否赞过评论
+     *@param PBetchCommentVote 期望判断的评论ID、用户UUID
+     *@return PCommentVoteExist
+     */
+    rpc GrpcCommentVoteExist(PBetchCommentVote) returns (PBetchCommentVoteExist);
+
+   
+ }
