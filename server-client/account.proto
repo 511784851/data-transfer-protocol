@@ -98,11 +98,20 @@ message PUserBase {
   string UserResume = 11;			// 简介
   string Language = 12;             // 语言
   bool IsAI = 13;				 	// 是否水军， true表示水军
+  PUserBaseCommunity Community = 30;// 用户在社区的基础信息，只有在社区相关api会填充
 }
 
 // 用户基础信息列表
 message PUserBaseList {
 	repeated PUserBase list = 1; //PUserBase列表，最多100个
+}
+
+// 用户社区的基础信息
+message PUserBaseCommunity {
+	int64 FollowTime = 1;			// 用户加入社区的时间
+	int64 ForbidTime = 2;			// 用户被加入黑名单的时间
+	int64 DisableTime = 3;			// 用户被禁用时间
+	int64 DisableEndTime = 4;		// 用户被禁用的到期时间
 }
 
 message PPhoneMap {
