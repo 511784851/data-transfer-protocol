@@ -228,7 +228,7 @@ service IGrpcCommunity {
      *@param 帖子信息 
      *@return 返回 PResult
      */
-    rpc ModifyForumPost(PCommunityPostUpload) returns (PEmpty);	
+    rpc ModifyForumPost(PCommunityPostModify) returns (PEmpty);	
  }
 
 
