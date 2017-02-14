@@ -84,14 +84,6 @@ message PCommunityRedpacketUpload {
     PSendRedPacket Redpacket = 3;
 }
 
-// 修改帖子的信息
-message PCommunityPostModify {
-	string CommunityID = 1;						// 社区id
-	string PostID = 2;							// 帖子id
-	string Uuid = 3;							// 修改帖子的用户id，社区创建者，管理员，还有帖子的作者才能修改
-	PCommunityPostUpload Upload = 4;			// 帖子要修改的内容
-}
-
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
@@ -364,6 +356,17 @@ message PInsideCommunityUserList {
  *@path /v1/community/post/forum
  *@url param id 社区id
  *@method POST
+ *@body PCommunityPostUpload
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+ /*
+ *@note 修改社区论坛帖子
+ *@path /v1/community/post/forum
+ *@url param id 社区id
+ *@url param postid 帖子id
+ *@method PUT
  *@body PCommunityPostUpload
  *@cookie token&uuid
  *@return 返回 PResult

@@ -222,13 +222,6 @@ service IGrpcCommunity {
      *@return 成功返回 PCommunityBaseList ，失败返回 PResult
      */
     rpc GetCommunityBaseListWithUuid(PStringList) returns (PCommunityBaseList);
-	
-    /*
-     *@note 修改社区帖子
-     *@param 帖子信息 
-     *@return 返回 PResult
-     */
-    rpc ModifyForumPost(PCommunityPostModify) returns (PEmpty);	
  }
 
 
