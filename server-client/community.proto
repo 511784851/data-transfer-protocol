@@ -100,7 +100,8 @@ message PCommunityPostInfo {
     PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
     bool IsTop = 14;                            // 公告帖子是否置顶的标志位
     bool IsDel = 15;                            // 帖子是否删除的标记位
-	string CommunityID = 16;					// 社区id 
+	string CommunityID = 16;					// 社区id
+	int64 ModifyTime = 17;						// 帖子修改时间
 }
 
 // 帖子信息列表
