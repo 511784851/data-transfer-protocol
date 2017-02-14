@@ -373,4 +373,20 @@ service account {
      *@return PLevelInfoList 所有等级权限列表
      */
     rpc GetAllLevels(PEmpty) returns (PLevelInfoList);
- }
+
+    /*
+     *@note 批量更新用户昵称
+     *@param PNicknameList 用户昵称列表
+     *@return 无返回值
+     */
+    rpc BatchUpdateNickname(PNicknameList) returns (PEmpty);
+}
+
+message PNickname {
+    string UUID     = 1; // 用户ID
+    string nickname = 2; // 昵称
+}
+
+message PNicknameList {
+    repeated PNickname list = 1; // 用户昵称列表
+}
