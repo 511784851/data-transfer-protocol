@@ -13,14 +13,14 @@ if (@ARGV > 0) {
 
 #################server_client protos#######################
 $server_client_protos = "server-client/*.proto ";
-$cmd = "protoc -Iserver-client --java_out=".$output." ".$server_client_protos;
+$cmd = "protoc -Iserver-client -Iserver-server --java_out=".$output." ".$server_client_protos;
 system($cmd);
 
 
 
 #################server_server protos#######################
 $server_server_protos = "server-server/*.proto ";
-$cmd = "protoc --java_out=".$output." ".$server_server_protos;
+$cmd = "protoc -Iserver-client -Iserver-server --java_out=".$output." ".$server_server_protos;
 system($cmd);
 
 

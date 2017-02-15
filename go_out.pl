@@ -3,13 +3,13 @@ use File::Path;
 use Cwd; 
 $pwd = cwd();
  
-$output = "plugins=grpc:../go-commons";
+$output = "../go-commons";
 mkdir($output);
 $output = $output."/bbproto";
 mkdir($output);
 
 if (@ARGV > 0) {
-	$output = "plugins=grpc:".$ARGV[0];
+	$output = $ARGV[0];
 }
 
 #################server_client protos#######################
@@ -43,7 +43,7 @@ $server_client_protos = "server-client/result.proto ".
 						"server-server/community_inside.proto ".
 						"server-server/comment_inside.proto";
 
-$cmd = "protoc -Iserver-client -Iserver-server --go_out=".$output." ".$server_client_protos;
+$cmd = "protoc -Iserver-client -Iserver-server --go_out=plugins=grpc:".$output." ".$server_client_protos;
 system($cmd);
 
 if (@ARGV == 0) {
