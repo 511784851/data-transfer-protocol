@@ -63,13 +63,11 @@ message PCommentExtList {
 
 // 客户端发给服务端的评论结构
 message PClientComment {
-	int32 layer = 1;  	    //1:一级评论; 2:二级评论
-	int64 createTime = 7;	//评论创建时间
-	string uuid = 2;	//发表评论的用户ID
-	string atUuid = 3;	//二级评论中@的用户ID.一级评论可不填
-	string parentId =4; //评论的对象,帖子ID或者评论ID
-	string text = 5;	//评论文本内容
-	PAudio audio = 6;	//语音信息
+	string uuid = 1;	//发表评论的用户ID
+	string atUuid = 2;	//二级评论中@的用户ID.一级评论可不填
+	string parentId = 3; //评论的对象,帖子ID或者评论ID
+	string text = 4;	//评论文本内容
+	PAudio audio = 5;	//语音信息
 }
 
 // 客户端发给服务端的评论结构
