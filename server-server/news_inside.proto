@@ -225,4 +225,11 @@ service IGrpcNews {
      *@return PEmpty 
      */
     rpc GrpcNewsFollow(PBetchFollowAction) returns (PEmpty);
+
+    /*
+     *@note 批量判断是否关注用户
+     *@param PBetchFollowAction 目标uuid，待判断的uuid列表    
+     *@return PNewsFollowExist 
+     */
+    rpc GrpcNewsFollowExist(PBetchFollowAction) returns (PNewsFollowExist);
  }

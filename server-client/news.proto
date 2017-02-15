@@ -226,6 +226,13 @@ message PBetchFollowAction {
 	repeated  string uuidList = 3; //发起关注uuid列表
 }
 
+// 批量判断用户是否被关注
+message PNewsFollowExist {
+    string  uuid = 1; //用户ID
+	repeated bool hasFollow = 2;   //是关注
+	int32 fansCnt = 3;      //粉丝数
+}
+
 ////////////////////////////////////////////////////////////////
 /*
  *@note 访问获取带签名的文件上传URL
