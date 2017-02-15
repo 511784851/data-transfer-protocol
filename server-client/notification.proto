@@ -547,3 +547,12 @@ message PNotifySummaryList {
  *@cookie token&uuid
  *@return *PInt32Single 0: 不存在未读消息，1: 存在未读消息
  */
+
+/*
+ *@note 未读消息数，按照分类返回
+ *@uri /v2/notification/unread
+ *@method GET
+ *@urlParam uuid 获取uuid对应用户的数据
+ *@cookie token&uuid
+ *@return *PMsgCount 分类对应未读消息总数，默认为0
+ */
