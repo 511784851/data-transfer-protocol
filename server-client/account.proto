@@ -108,10 +108,10 @@ message PUserBaseList {
 
 // 用户社区的基础信息
 message PUserBaseCommunity {
-	int64 FollowTime = 1;			// 用户加入社区的时间
-	int64 ForbidTime = 2;			// 用户被加入黑名单的时间
-	int64 DisableTime = 3;			// 用户被禁用时间
-	int64 DisableEndTime = 4;		// 用户被禁用的到期时间
+	int64 FollowTime = 1;           // 用户加入社区的时间
+	int64 BlacklistTime = 2;        // 用户被加入黑名单的时间
+	int64 ForbidBedTime = 3;        // 用户被禁用时间
+	int64 ForbidEndTime = 4;        // 用户被禁用的到期时间
 }
 
 message PPhoneMap {

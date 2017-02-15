@@ -542,8 +542,17 @@ message PNotifySummaryList {
  *@note 通知状态（是否存在未读消息，小红点）
  *@uri /v2/notification/state
  *@method GET
- *@urlParam category 如果是成就系统传5，否则不传
+ *@urlParam category 如果是成就系统传5，否则不传；如果传all则返回包含所有分类的状态
  *@urlParam uuid 获取uuid对应用户的数据
  *@cookie token&uuid
  *@return *PInt32Single 0: 不存在未读消息，1: 存在未读消息
+ */
+
+/*
+ *@note 未读消息数，按照分类返回
+ *@uri /v2/notification/unread
+ *@method GET
+ *@urlParam uuid 获取uuid对应用户的数据
+ *@cookie token&uuid
+ *@return *PMsgCountList 分类(Type)对应未读消息总数，默认为未读数(Count)0
  */

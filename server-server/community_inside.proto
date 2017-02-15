@@ -113,30 +113,6 @@ import "community.proto";
  */
 
 /*
- *@note 获取指定社区的禁用用户列表，可按照用户等级筛选
- *@URL /v1/community/inside/userlist/forbid
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param level 用户等级；"reg"(普通用户), "vip"(vip用户), "vipp"(vip+用户), "vo"(官方授权用户)
- *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@url param count 获取成员个数
- *@return 成功返回 PInsideCommunityUserList ，失败返回 PResult;
- */
-
-/*
- *@note 获取指定社区的黑名单用户列表，可按照用户等级筛选
- *@URL /v1/community/inside/userlist/blacklist
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param level 用户等级；"reg"(普通用户), "vip"(vip用户), "vipp"(vip+用户), "vo"(官方授权用户)
-  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@url param count 获取成员个数
- *@return 成功返回 PInsideCommunityUserList ，失败返回 PResult;
- */
-
-/*
  *@note 获取指定社区指定用户发布的论坛帖子
  *@URL /v1/community/inside/forum/user/list
  *@method GET
