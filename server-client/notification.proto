@@ -554,5 +554,5 @@ message PNotifySummaryList {
  *@method GET
  *@urlParam uuid 获取uuid对应用户的数据
  *@cookie token&uuid
- *@return *PMsgCount 分类对应未读消息总数，默认为0
+ *@return *PMsgCountList 分类(Type)对应未读消息总数，默认为未读数(Count)0
  */
