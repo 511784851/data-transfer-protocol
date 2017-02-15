@@ -217,6 +217,15 @@ message PNewsVoteExist {
 	int32 VoteCnt = 3;      //被赞次数
 }
 
+/*
+ *@note 批量关注动作信息
+ */
+message PBetchFollowAction {
+	int32  actionType = 1; //1:关注; 0:取消关注
+	string uuid = 2;  //被关注用户的uuid
+	repeated  string uuidList = 3; //发起关注uuid列表
+}
+
 ////////////////////////////////////////////////////////////////
 /*
  *@note 访问获取带签名的文件上传URL

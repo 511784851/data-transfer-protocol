@@ -218,4 +218,11 @@ service IGrpcNews {
      *@return PNewsVoteExist 
      */
     rpc GrpcPostVoteExist(PBetchVoteAction) returns (PNewsVoteExist);
+
+    /*
+     *@note 批量关注用户
+     *@param PBetchFollowAction 目标uuid，发起关注的uuid列表    
+     *@return PEmpty 
+     */
+    rpc GrpcNewsFollow(PBetchFollowAction) returns (PEmpty);
  }
