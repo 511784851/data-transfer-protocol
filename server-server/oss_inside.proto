@@ -1,6 +1,8 @@
 syntax = "proto3";
 package bbproto;
 
+import "common_inside.proto";
+
 /*
  *@note 内网访问获取带签名的文件上传URL
  *@path /oss/uploadurl
@@ -68,3 +70,27 @@ package bbproto;
  *@param objectkey 文件名称
  *@return PResult，成功errCode为0
  */
+
+enum EFrom {
+	Unknown = 0;
+	Portrait = 1;
+	Background = 2;
+	News = 3;
+	Community = 4;
+}
+
+message PImageInfo {
+	string objectkey = 1;
+	string bucket = 2;
+	string uuid = 3;
+	EFrom from = 4;
+	int64 time = 5;
+}
+
+message PImageInfoList {
+	PImageInfo List = 1;
+}
+
+service grpcOss {
+	rpc AddImageInfo(PImageInfoList) returns (PEmpty);
+}
