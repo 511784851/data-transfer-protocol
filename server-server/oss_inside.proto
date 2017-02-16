@@ -1,6 +1,7 @@
 syntax = "proto3";
 package bbproto;
 
+//import "result.proto";
 import "common_inside.proto";
 
 /*
@@ -80,17 +81,20 @@ enum EFrom {
 }
 
 message PImageInfo {
-	string objectkey = 1;
-	string bucket = 2;
-	string uuid = 3;
-	EFrom from = 4;
-	int64 time = 5;
+	int64 id = 1;
+	string objectkey = 2;
+	int32 bucket = 3;
+	string uuid = 4;
+	EFrom from = 5;
+	int64 time = 6;
 }
 
 message PImageInfoList {
-	PImageInfo List = 1;
+	repeated PImageInfo List = 1;
 }
 
 service grpcOss {
 	rpc AddImageInfo(PImageInfoList) returns (PEmpty);
+	rpc ForbidImage(PImageInfoList) returns (PEmpty);
+	rpc PermitImage(PImageInfoList) returns (PEmpty);
 }
