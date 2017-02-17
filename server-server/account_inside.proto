@@ -3,6 +3,7 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "AccountApiProtos";
 
+import "result.proto";
 import "common_inside.proto";
 import "account.proto";
 
@@ -377,9 +378,9 @@ service account {
     /*
      *@note 批量更新用户昵称
      *@param PNicknameList 用户昵称列表
-     *@return 无返回值
+     *@return 设置失败的下标
      */
-    rpc BatchUpdateNickname(PNicknameList) returns (PEmpty);
+    rpc BatchUpdateNickname(PNicknameList) returns (PStringList);
 }
 
 message PNickname {
