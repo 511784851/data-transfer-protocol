@@ -380,7 +380,7 @@ service account {
      *@param PNicknameList 用户昵称列表
      *@return 设置失败的下标
      */
-    rpc BatchUpdateNickname(PNicknameList) returns (PStringList);
+    rpc BatchUpdateNickname(PNicknameList) returns (PInt32List);
 }
 
 message PNickname {
