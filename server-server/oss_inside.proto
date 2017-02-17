@@ -93,7 +93,10 @@ enum EFrom {
 	Community_Notice = 8;
 	// 论坛背景介绍图片
 	Community_Introduce = 9;
-	
+	// VIP+形象照
+	VIPP_Photo = 10;
+	// VIP+背景图
+	VIPP_Background = 11;
 }
 
 message PImageInfo {
