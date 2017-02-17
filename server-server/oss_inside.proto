@@ -73,20 +73,41 @@ import "common_inside.proto";
  */
 
 enum EFrom {
+	// 未知
 	Unknown = 0;
+	// 头像
 	Portrait = 1;
+	// 个人主页背景
 	Background = 2;
+	// 微博帖子
 	News = 3;
+	// 社区帖子
 	Community = 4;
 }
 
 message PImageInfo {
 	int64 id = 1;
 	string objectkey = 2;
-	int32 bucket = 3;
-	string uuid = 4;
-	EFrom from = 5;
-	int64 time = 6;
+	string thumb = 3;
+	int32 bucket = 4;
+	string uuid = 5;
+	EFrom from = 6;
+	int64 time = 7;
+}
+
+message PQueryParam {
+	string uuid = 1;
+	// begin,end：时间起止范围，unix time，秒
+	int64 begin = 2;
+	int64 end = 3;
+	// 来源
+	EFrom from = 4;
+	// 状态 0待审核 1审核通过 2审核未通过
+	int32 state = 5;
+	// 分页偏移
+	int32 offset = 6;
+	// 分页大小
+	int32 size = 7;
 }
 
 message PImageInfoList {
@@ -94,7 +115,12 @@ message PImageInfoList {
 }
 
 service grpcOss {
+	// 文件上传下载
+
+	
+	// 图片监管系列
 	rpc AddImageInfo(PImageInfoList) returns (PEmpty);
 	rpc ForbidImage(PImageInfoList) returns (PEmpty);
 	rpc PermitImage(PImageInfoList) returns (PEmpty);
+	rpc SelectImage(PQueryParam) returns (PImageInfoList);
 }
