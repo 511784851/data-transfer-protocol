@@ -75,14 +75,25 @@ import "common_inside.proto";
 enum EFrom {
 	// 未知
 	Unknown = 0;
-	// 头像
+	// 用户头像
 	Portrait = 1;
-	// 个人主页背景
+	// 用户主页背景
 	Background = 2;
-	// 微博帖子
-	News = 3;
+	// 社区头像
+	Community_Logo = 3;
+	// 论坛Banner图
+	Community_Banner = 4;
+	// 社区背景图
+	Community_Background = 5;
+	// BB动态帖子
+	News = 6;
 	// 社区帖子
-	Community = 4;
+	Community_Post = 7;
+	// 公告帖子
+	Community_Notice = 8;
+	// 论坛背景介绍图片
+	Community_Introduce = 9;
+	
 }
 
 message PImageInfo {
