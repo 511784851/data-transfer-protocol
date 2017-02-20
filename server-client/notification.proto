@@ -405,7 +405,7 @@ message PNotifySocial {
 
 // 评论投票通知消息
 message PNotifyCommentVote {
-  int32       type       = 1; // 0：赞；1：踩
+  int32       type       = 1; // 1：一级评论；2：二级评论
   PPostInfo   article    = 2; // 被投票评论相关的news
   PCommentExt commentExt = 3; // 被投票的评论
 }
