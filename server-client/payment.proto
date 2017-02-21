@@ -31,6 +31,70 @@ message PRedPay {
 }
 
 
+ message PLottory {
+	string title = 1;            // 抽奖标题
+	int32 type = 2;	         	// 接受人类型（0:全部，1:男，2:女）
+	int32 winners = 3;			//获奖名额数
+	int32 totAmt = 4;			//抽奖总金额（分）
+	int32 bonus = 5;			//平均每个人的奖金（分）
+	repeated string locCd = 6; // 地理位置编码列表
+	repeated string locNm = 7; //地理位置名称
+	repeated string PUserInf = 8; //获奖人列表
+}
+
+message PAcceptPrize{
+	int32 lottoryId = 1;		//抽奖包ID
+	int32 honoreeId = 2;		//领奖包ID
+}
+
+message PLottoryRet {
+	int32 recAccountType = 2;	 // 接受者账户类型（0-个人，1-企业）
+	string cusId = 3;	         // 用户id
+	string receivedId = 4;	     // 接受者id
+	int32 fenMoney = 5;	         // 支付金额（单位：分）
+	string orderNum = 6;	     // 订单号
+	string goodsName = 7;	     // 商品名称
+	string sign = 8;	         // 签名
+	int32 requestCode = 9;	     // 请求码
+}
+
+message PAcceptLottoryRet{
+	int32 recAccountType = 2;	 // 接受者账户类型（0-个人，1-企业）
+	string cusId = 3;	         // 用户id
+	string receivedId = 4;	     // 接受者id
+	int32 fenMoney = 5;	         // 支付金额（单位：分）
+	string orderNum = 6;	     // 订单号
+	string goodsName = 7;	     // 商品名称
+	string sign = 8;	         // 签名
+	int32 requestCode = 9;	     // 请求码
+}
+
+message PLottoryListRet{
+	int32 lottoryId = 1;		//抽奖包ID
+	string title = 2;			//抽奖包标题
+	int32 winners = 3;			//中奖人数
+	string crtTm = 4;			//发起抽奖时间
+	repeated string icons = 5;	//中奖者头像列表（最长5位）
+}
+
+message PLottoryDetailRet{
+	int32 lottoryId = 1;		//抽奖包ID
+	int32 totAmt = 2;			//抽奖总金额
+	string crtTm = 3;			//抽奖创建时间
+	int32 type = 4;				//抽奖类型（0:全部，1：男，2:女）
+	repeated string locCd = 5;	//位置代码
+	repeated string locNm = 6;	//位置名称
+	int32 winners = 7;			//获奖人数
+	repeated PUserInf = 8;		//用户列表
+}
+
+message PUserInf{
+	int32 uuid = 1;				//用户UUID
+	string nickNm = 2;			//用户昵称
+	string icon	= 3;			//用户头像
+	int32 sex = 4;				//用户性别
+}
+
 /*
  *@note 发普通紅包
  *@path /payment/send/one
@@ -48,4 +112,41 @@ message PRedPay {
  *@cookie token&uuid 登录用户信息
  *@body PGroupRed
  *@return 成功返回PRedPay，失败返回PResult
+ */
+
+ /*
+ *@note 发起抽奖
+ *@path /payment/v1/lottory/create
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PLottory
+ *@return 成功返回PLottoryRet，失败返回PResult
+ */
+ 
+/*
+ *@note 中奖人领奖
+ *@path /payment/v1/lottory/accept
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PAcceptPrize
+ *@return 成功返回PAcceptLottoryRet， 失败返回PResult
+ */
+
+/*
+ *@note 历史发起抽奖列表
+ *@path /payment/v1/lottory/list
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam keywords 标题关键字
+ *@return 成功返回PLottoryListRet，失败返回PResult
+ */
+ 
+/*
+ *@note 抽奖详情
+ *@path /payment/v1/lottory/detail
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam lottoryId 抽奖包Id
+ *@urlParam keywords 中奖者关键字
+ *@return 成功返回PLottoryDetailRet，失败返回PResult
  */
