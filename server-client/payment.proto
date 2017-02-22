@@ -39,7 +39,7 @@ message PRedPay {
 	int32 bonus = 5;			//平均每个人的奖金（分）
 	repeated string locCd = 6; // 地理位置编码列表
 	repeated string locNm = 7; //地理位置名称
-	repeated string PUserInf = 8; //获奖人列表
+	repeated PUserInf list = 8; //获奖人列表
 }
 
 message PAcceptPrize{
@@ -85,7 +85,7 @@ message PLottoryDetailRet{
 	repeated string locCd = 5;	//位置代码
 	repeated string locNm = 6;	//位置名称
 	int32 winners = 7;			//获奖人数
-	repeated PUserInf = 8;		//用户列表
+	repeated PUserInf list = 8;		//用户列表
 }
 
 message PUserInf{
