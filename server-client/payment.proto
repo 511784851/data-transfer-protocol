@@ -66,6 +66,7 @@ message PLocation{
 message PUserBaseEx{
 	PUserBase info = 1;			//用户基本信息
 	int32 sex = 2;				//用户性别（0:全部，1：男，2:女）
+	int32 amt = 3;				//单个领奖金额(单位分)
 }
 
 /*
