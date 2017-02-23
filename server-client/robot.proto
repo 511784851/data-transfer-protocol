@@ -1,0 +1,276 @@
+syntax = "proto3";
+package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "RobotProtos";
+
+// 推送消息类型
+enum ERobotPushType {
+    Regards     = 0; // 消息推送
+    Remind      = 1; // 生日提醒
+    Lottery     = 2; // 抽奖
+    RedPacket   = 3; // 红包
+    Streaming   = 4; // 直播
+}
+
+// 推送消息状态
+enum ERobotMsgState {
+    UnRead     = 0; // 未读
+    Read       = 1; // 已读
+    Delete     = 2; // 已删除
+}
+
+// 生日提醒消息类型
+enum ERobotRemindType {
+    default      = 0; // 默认
+    custom       = 1; // 自定义
+}
+
+// 网红创建的推送消息
+message PRegards {
+	int64 id                = 1;  //消息ID
+	PUserBase from          = 2;  //消息创建者	
+	repeated PUserBase to   = 3;  //如果是条件筛选填前5个用户ID.
+	PFansFilter  fansFilter = 4;  //粉丝筛选条件,精确选择时条件为空
+	int32  fansNum          = 5;  //消息推送的粉丝数
+	string srcType          = 6;  //消息类型 text, image, audio
+	string Text             = 7;  //消息文本,最大长度140
+	PAudio audio            = 8;  //消息语音,语音最大时长60
+	PImage image            = 9;  //消息图片
+	int64 createTime        = 10; //创建时间
+}
+
+// 网红创建的推送消息
+message PRegardsList {
+	repeated PRegards list = 1;
+}
+
+// 网红创建的生日提醒消息
+message PRemind {
+	int64 id                   = 1;   //消息ID
+	EAiRemindType remindType    = 2    //提醒类型: 默认提醒:0, 自定义提醒:1
+	PUserBase from              = 3;   //消息创建者
+	PUserBase to                = 4;   //提醒的目标用户uuid. 默认提醒时不填. 
+	string srcType              = 5;   //消息类型 text, audio
+	string Text                 = 6;   //文本,最大长度140
+	PAudio audio                = 7;   //语音,语音最大时长30
+}
+
+// 网红创建的生日提醒消息列
+message PRemindList {
+	PRemind default       = 1; //默认提醒
+	repeated PRemind list = 2; //提醒消息列表,默认提醒不填内容
+}
+
+
+// 机器人全局设置
+message PRobotGlobalSetting {
+	bool aiEnable          = 1;  //机器人总开关	
+	bool regardsRemind     = 2;  //是否接收生日提醒和消息推送	
+	bool regardsEnable     = 3;  //是否接收消息推送
+	bool remindEnable      = 4;  //是否接收生日提醒	
+	int32 skin             = 5;  //皮肤类型	
+}
+
+// 普通推送消息
+message PPushRegards {
+	int64 id         = 1;    //消息ID
+	string srcType   = 2;    //消息类型 text, image, audio
+	string Text      = 3;    //消息文本,最大长度140
+	PAudio audio     = 4;    //消息语音,语音最大时长60
+	PImage image     = 5;    //消息图片
+	int64 time       = 6;    //创建时间
+}
+
+// 提醒推送消息
+message PPushRemind {
+	int64 id                    = 1;   //消息ID
+	EAiRemindType remindType    = 2    //提醒类型: 默认提醒:0, 自定义提醒:1
+	string srcType              = 3;   //消息类型 text, audio
+	string Text                 = 4;   //文本,最大长度140
+	PAudio audio                = 5;   //语音,语音最大时长30
+}
+
+// 第三方直播提醒推送消息
+message PPushStreaming {
+	int64 id         = 1;   //消息ID
+	int64 time       = 2;   //直播时间
+	string room      = 3;   //房间号
+}
+
+// 抽奖推送消息
+message PPushLottery {
+	int64 id = 1;
+	//抽奖参数...
+}
+
+// 红包推送消息
+message PPushRedPacket {
+	string id = 1;
+	//红包参数...
+}
+
+// 网红推送给粉丝的消息
+message PRobotPushMsg {
+	int64          id        = 1; //消息ID
+	EAiPushType    msgType   = 2; //消息类型
+	EAiMsgState    state     = 3; //消息状态
+	PUserBase      from      = 4; //网红用户信息
+	PUserBase      to        = 5; //粉丝用户信息
+	PPushRegards   regards   = 6;
+	PPushRemind    remind    = 7;
+	PPushLottery   lottery   = 8;
+	PPushRedPacket redPacket = 9;
+	PPushStreaming streaming = 10;
+}
+
+// 网红推送给粉丝的消息列表
+message PPushMsgList {
+	repeated PPushMsg list = 1;
+}
+
+/*
+ *@note B端:网红创建推送消息
+ *@path /v1/robot/regards/publish
+ *@method POST
+ *@cookie token&uuid
+ *@body PRegards 消息数据
+ *@return PResult
+ */
+
+ /*
+ *@note B端:网红查看已创建的推送消息
+ *@path /v1/robot/regards/history
+ *@method GET
+ *@cookie token&uuid
+ *@param offset 分页的偏移,为上一页的最后一个消息ID 
+ *@param count  每页消息条数。默认30,最大100
+ *@return 成功返回PRegardsList,失败返回PResult
+ */
+
+ /*
+ *@note B端:网红删除已创建的推送消息
+ *@path /v1/robot/regards/history
+ *@method DELETE
+ *@cookie token&uuid
+ *@param ids 待删除的消息ID,多个以逗号分隔.最多50个 
+ *@return PResult
+ */
+
+ /*
+ *@note B端:查询剩余可发消息数
+ *@path /v1/robot/regards/limit
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PInt32Single,失败返回PResult
+ */
+
+/*
+ *@note B端:网红设置生日提醒
+ *@path /v1/robot/remind
+ *@method POST
+ *@cookie token&uuid
+ *@body   PRemind 消息数据
+ *@return 返回PResult
+ */
+
+ /*
+ *@note B端:查询未来7天(或历史)的提醒列表
+ *@path /v1/robot/remind
+ *@method GET
+ *@cookie token&uuid
+ *@param  offset  分页偏移,为上一页最后一个提醒消息的ID.默认0. 
+ *@param  count   分页大小.默认20, 最大100
+ *@param  type    查询类型: future, history.默认:future
+ *@return 成功返回PRemindList,失败返回PResult
+ */
+
+ /*
+ *@note B端:删除提醒消息
+ *@path /v1/robot/remind
+ *@method DELETE
+ *@cookie token&uuid
+ *@param  id      提醒消息id
+ *@return 返回PResult
+ */
+
+/*
+ *@note C端:机器人全局设置
+ *@path /v1/robot/setting/global
+ *@method PUT
+ *@cookie token&uuid
+ *@param  value  0:关闭; 1:打开;皮肤编号 
+ *@param  type   类型.消息推送: regards; 生日提醒: remind; 消息和生日提醒: regardsremind. 整个机器人: ai; 皮肤:skin
+ *@return PResult
+ */
+
+ /*
+ *@note C端:查询机器人全局设置
+ *@path /v1/robot/setting/global
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PRobotGlobalSetting,失败返回PResult
+ */
+
+ /*
+ *@note C端: 设置针对某个网红的开关
+ *@path /v1/robot/setting/personnal
+ *@method PUT
+ *@cookie token&uuid
+ *@param  oper    0:关闭; 1:打开  
+ *@param  type    类型. 所有消息: all. 默认:all
+ *@param  uuids   网红用户ID列表,多个以逗号分隔.最多50个.
+ *@return PResult
+ */
+
+ /*
+ *@note C端: 查询针对某个网红的开关
+ *@path /v1/robot/setting/personnal
+ *@method GET
+ *@cookie token&uuid
+ *@param  uuids   网红用户ID列表,多个以逗号分隔.最多50个.
+ *@return 成功返回PInt32List,失败返回PResult
+ */
+
+ /*
+ *@note C端: 推送消息列表首页
+ *@path /v1/robot/message/home
+ *@method GET
+ *@cookie token&uuid
+ *@param  offset  
+ *@param  count  
+ *@return 成功返回PPushMsgList,失败返回PResult
+ */
+
+ /*
+ *@note C端: 获取消息状态（是否存在未读消息，小红点）
+ *@uri /v1/robot/message/state
+ *@method GET
+ *@cookie token&uuid
+ *@return *PInt32Single 0: 不存在未读消息，1: 存在未读消息
+ */
+
+  /*
+ *@note C端: 设置消息的状态
+ *@path /v1/robot/message/state
+ *@method PUT
+ *@cookie token&uuid
+ *@param  state    已读:0; 未读: 1
+ *@body PStringList 消息ID列表的序列化数据
+ *@return PResult
+ */
+
+/*
+ *@note C端: 查询来自指定网红的消息列表
+ *@path /v1/robot/message
+ *@method GET
+ *@cookie token&uuid
+ *@param  uuid    网红的用户ID
+ *@param  offset  分页偏移,为上一页最后一个消息的ID.默认0. 
+ *@param  count   分页大小.默认20, 最大100
+ *@return 成功返回PPushMsgList,失败返回PResult
+ */
+
+
+
+
+
