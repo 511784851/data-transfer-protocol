@@ -61,8 +61,8 @@ message PLotterySingleRet{
 	int32 winners = 3;			//中奖人数
 	string crtTm = 4;			//发起抽奖时间
 	repeated string icons = 5;	//中奖者头像列表（最长5个头像）
-}
-
+} 
+ 
 message PLocation{
 	string locCd = 1;	//位置代码
 	string locNm = 2;	//位置名称
