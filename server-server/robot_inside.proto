@@ -1,6 +1,8 @@
 syntax = "proto3";
 package bbproto;
 import "robot.proto";
+import "result.proto";
+import "common_inside.proto";
 
 // 提醒消息的查询条件
 message PRemindQuery {
@@ -12,8 +14,8 @@ message PRemindQuery {
 
 // 是否有未读消息查询条件
 message PMsgStateQuery {
-	string        uuid        = 1; //用户id
-	repeat string celebritys  = 2; //网红uuid
+	string        uuid          = 1; //用户id
+	repeated string celebritys  = 2; //网红uuid
 }
 
 // 其他服务通知机器人推送的消息
