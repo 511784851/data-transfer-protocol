@@ -10,6 +10,23 @@ message PRemindQuery {
 	int32  count = 4;    //分页大小.默认20, 最大100
 }
 
+// 是否有未读消息查询条件
+message PMsgStateQuery {
+	string        uuid        = 1; //用户id
+	repeat string celebritys  = 2; //网红uuid
+}
+
+// 其他服务通知机器人推送的消息
+message PRobotNotifyMsg {
+    repeated string  to    = 1; //推送目标
+	PRobotPushMsg message  = 2; //消息内容
+}
+
+// 其他服务通知机器人推送的消息
+message PRobotNotifyMsgList {
+    repeated PRobotNotifyMsg  list    = 1;
+}
+
  service IGrpcRobot {
     /*
     *@note 设置B端每天(0-24时)推送消息数
@@ -41,8 +58,15 @@ message PRemindQuery {
 
     /*
     *@note   推送消息
-    *@param  PPushMsgList   消息
+    *@param  PRobotNotifyMsgList   消息
     *@return PEmpty
     */
-    rpc GrpcPush(PPushMsgList) returns (PEmpty);
+    rpc GrpcPush(PRobotNotifyMsgList) returns (PEmpty);
+
+    /*
+    *@note   用户查询是否有来自某网红的未读消息
+    *@param  PMsgStateQuery   消息
+    *@return PInt32List 状态列表. 0:全部已读; 1:存在未读
+    */
+    rpc GrpcGetMsgState(PMsgStateQuery) returns (PInt32List);
  }

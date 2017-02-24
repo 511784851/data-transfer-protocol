@@ -19,12 +19,6 @@ enum ERobotMsgState {
     Delete     = 2; // 已删除
 }
 
-// 生日提醒消息类型
-enum ERobotRemindType {
-    default      = 0; // 默认
-    custom       = 1; // 自定义
-}
-
 // 网红创建的推送消息
 message PRegards {
 	int64 id                = 1;  //消息ID
@@ -46,19 +40,27 @@ message PRegardsList {
 
 // 网红创建的生日提醒消息
 message PRemind {
-	int64 id                   = 1;   //消息ID
-	EAiRemindType remindType    = 2    //提醒类型: 默认提醒:0, 自定义提醒:1
-	PUserBase from              = 3;   //消息创建者
+	int64 id                    = 1;   //消息ID
+	int64 tplId                 = 2    //提醒模板ID
+	string from                 = 3;   //消息创建者uuid
 	PUserBase to                = 4;   //提醒的目标用户uuid. 默认提醒时不填. 
 	string srcType              = 5;   //消息类型 text, audio
 	string Text                 = 6;   //文本,最大长度140
 	PAudio audio                = 7;   //语音,语音最大时长30
+	int64  brithday             = 8;   //生日日期
+}
+
+// 网红创建的生日提醒消息模板
+message PRemindTpl {
+	int64 tplId                 = 1;   //模板ID
+	string srcType              = 2;   //消息类型 text, audio
+	string Text                 = 3;   //文本,最大长度140
+	PAudio audio                = 4;   //语音,语音最大时长30
 }
 
 // 网红创建的生日提醒消息列
 message PRemindList {
-	PRemind default       = 1; //默认提醒
-	repeated PRemind list = 2; //提醒消息列表,默认提醒不填内容
+	repeated PRemind list = 1; //提醒消息列表
 }
 
 
@@ -99,33 +101,50 @@ message PPushStreaming {
 
 // 抽奖推送消息
 message PPushLottery {
-	int64 id = 1;
+	int64 id = 1;  //消息ID
 	//抽奖参数...
 }
 
 // 红包推送消息
 message PPushRedPacket {
-	string id = 1;
+	int64 id = 1;  //消息ID
 	//红包参数...
 }
 
 // 网红推送给粉丝的消息
 message PRobotPushMsg {
 	int64          id        = 1; //消息ID
-	EAiPushType    msgType   = 2; //消息类型
-	EAiMsgState    state     = 3; //消息状态
-	PUserBase      from      = 4; //网红用户信息
-	PUserBase      to        = 5; //粉丝用户信息
-	PPushRegards   regards   = 6;
-	PPushRemind    remind    = 7;
-	PPushLottery   lottery   = 8;
-	PPushRedPacket redPacket = 9;
-	PPushStreaming streaming = 10;
+	int64          time      = 2; //消息发送时间
+	EAiPushType    msgType   = 3; //消息类型
+	EAiMsgState    state     = 4; //消息状态
+	PUserBase      from      = 5; //网红用户信息
+	PRobotPushRawMsg content = 6; //各类型消息
+}
+
+// 网红推送给粉丝的消息
+message PRobotPushRawMsg {
+	PPushRegards   regards   = 1; //推送消息
+	PPushRemind    remind    = 2; //生日提醒消息
+	PPushLottery   lottery   = 3; //抽奖消息
+	PPushRedPacket redPacket = 4; //红包消息
+	PPushStreaming streaming = 5; //直播提醒消息
 }
 
 // 网红推送给粉丝的消息列表
-message PPushMsgList {
-	repeated PPushMsg list = 1;
+message PRobotPushMsgList {
+	repeated PRobotPushMsg list = 1;
+}
+
+// 各类型消息数
+message PRobotMsgCount {
+	ERobotPushType type     = 1;  //类型
+	int32          count    = 2;  //数目
+}
+
+// 气泡消息队列
+message PRobotBubbleList {
+    repeated PRobotMsgCount  countList  = 1; //服务器各类型总消息数
+	repeated PRobotPushMsg    list      = 2; //消息内容
 }
 
 /*
@@ -217,7 +236,6 @@ message PPushMsgList {
  *@method PUT
  *@cookie token&uuid
  *@param  oper    0:关闭; 1:打开  
- *@param  type    类型. 所有消息: all. 默认:all
  *@param  uuids   网红用户ID列表,多个以逗号分隔.最多50个.
  *@return PResult
  */
@@ -238,24 +256,33 @@ message PPushMsgList {
  *@cookie token&uuid
  *@param  offset  
  *@param  count  
- *@return 成功返回PPushMsgList,失败返回PResult
+ *@return 成功返回PRobotPushMsgList,失败返回PResult
  */
 
  /*
- *@note C端: 获取消息状态（是否存在未读消息，小红点）
+ *@note C端: 查询是否存在未读消息
  *@uri /v1/robot/message/state
  *@method GET
  *@cookie token&uuid
  *@return *PInt32Single 0: 不存在未读消息，1: 存在未读消息
  */
 
-  /*
+ /*
  *@note C端: 设置消息的状态
  *@path /v1/robot/message/state
  *@method PUT
  *@cookie token&uuid
- *@param  state    已读:0; 未读: 1
- *@body PStringList 消息ID列表的序列化数据
+ *@param  state    已读:0; 未读: 1; 全部已读:2
+ *@body PStringList 消息ID列表的序列化数据. 设置全部时,body可以为空
+ *@return PResult
+ */
+
+ /*
+ *@note C端: 设置来自指定网红消息的状态全部已读
+ *@path /v1/robot/message/state/personnal
+ *@method PUT
+ *@cookie token&uuid
+ *@param  uuid    网红用户ID
  *@return PResult
  */
 
@@ -267,10 +294,25 @@ message PPushMsgList {
  *@param  uuid    网红的用户ID
  *@param  offset  分页偏移,为上一页最后一个消息的ID.默认0. 
  *@param  count   分页大小.默认20, 最大100
- *@return 成功返回PPushMsgList,失败返回PResult
+ *@return 成功返回PRobotPushMsgList,失败返回PResult
  */
 
+/*
+ *@note C端: 查询未播放的气泡
+ *@path /v1/robot/bubble
+ *@method GET
+ *@cookie token&uuid
+ *@param  offset  分页偏移,为上一页最后一个消息的ID.默认0. 
+ *@param  count   分页大小.默认20, 最大100
+ *@return 成功返回PRobotBubbleList,失败返回PResult
+*/
 
-
-
-
+/*
+ *@note C端: 设置气泡消息的状态
+ *@path /v1/robot/bubble/state
+ *@method PUT
+ *@cookie token&uuid
+ *@param  state    已读:0; 未读: 1; 全部已读:2
+ *@body PStringList 消息ID列表的序列化数据. 设置全部时,body可以为空
+ *@return PResult
+ */
