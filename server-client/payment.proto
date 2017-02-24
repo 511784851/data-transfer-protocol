@@ -1,25 +1,49 @@
 syntax = "proto3";
 
 package bbproto;
-import "account.proto";
+
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PaymentProtos";
 
-message POneRed {
-	int32 amount = 1;	         // 金额(单位：分)
-	string content = 2;	         // 描述
-	string recuuid = 3;          // 领用户uuid
+import "account.proto";
+
+message POrdinaryRed {
+	int32 money = 1;	           // 金额(单位：分)
+	string content = 2;	           // 描述
+	string rece_uuid = 3;          // 收红包用户uuid
 }
 message PGroupRed {
-	int32 count = 1;             // 数量
-	int32 amount = 2;	         // 总金额或单个金额(单位：分)
-	bool isRanNDOM = 3;	         // 是否随机红包
-	string content = 4;	         // 描述
-	repeated string recuuid = 5; // 可以领红包的用户
+	int32 count = 1;               // 数量
+	int32 money = 2;	           // 总金额或单个金额(单位：分)
+	bool isRandom = 3;	           // 是否随机红包
+	string content = 4;	           // 描述
+	repeated string rece_uuid = 5; // 可以领红包的用户
 }
 
+message PRedInfo {
+    string ord_no =1;                   // 订单号
+    int32 status = 2;                   // 红包当前针对用户状态（0-无权限领取，1-可领取，2-已领取，3-已领完，4-已过期）
+    int32 type = 3;                     // 红包类型（1-普通红包，2-等额群红包，3-随机群红包）
+	int32 tota_money = 4;               // 红包总金额（单位：分）
+	int32 tota_number = 5;	            // 红包总数量
+	int32 rece_money = 6;	            // 已领取金额（单位：分）
+	int32 rece_number = 7;	            // 已领取数量
+	string content = 8;	                // 描述
+	int64 send_tm = 9;	                // 发送时间
+	PUserBase userBase = 10;            // 发送人信息
+	repeated PReceive receive = 11;     // 领红包用户列表
+}
+
+message PReceive {
+	int32 id = 1;                // 唯一标识
+	int32 money = 2;             // 领红包的金额（单位：分）
+	int64 rece_tm = 3;	         // 领红包时间
+	PUserBase userBase = 4;      // 领红包用户信息
+}
+
+
 message PRedPay {
-	string fromActivity = 1;     // 黄金变量
+	string fromActivity = 1;     // 环境变量
 	int32 recAccountType = 2;	 // 接受者账户类型（0-个人，1-企业）
 	string cusId = 3;	         // 用户id
 	string receivedId = 4;	     // 接受者id
@@ -30,8 +54,7 @@ message PRedPay {
 	int32 requestCode = 9;	     // 请求码
 }
 
-
- message PLottery {
+message PLottery {
 	string title = 1;            // 抽奖标题
 	int32 type = 2;	         	// 接受人类型（0:全部，1:男，2:女）
 	int32 winners = 3;			//获奖名额数
@@ -71,13 +94,12 @@ message PUserBaseEx{
 
 /*
  *@note 发普通紅包
- *@path /payment/send/one
+ *@path /payment/send/ordinary
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body POneRed
  *@return 成功返回PRedPay，失败返回PResult
  */
- 
 
 /*
  *@note 发群紅包
@@ -86,6 +108,17 @@ message PUserBaseEx{
  *@cookie token&uuid 登录用户信息
  *@body PGroupRed
  *@return 成功返回PRedPay，失败返回PResult
+ */
+ 
+ /*
+ *@note 领红包
+ *@path /payment/find/receive
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *url param name 要搜索的内容
+ *url param index 上一条数据ID
+ *url param size 分页大小
+ *@return 成功返回PRedList，失败返回PResult
  */
 
  /*
