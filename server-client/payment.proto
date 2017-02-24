@@ -65,11 +65,7 @@ message PLottery {
 }
 
 message PLotteryListRet{
-	int32 lotteryId = 1;		//抽奖包ID
-	string title = 2;			//抽奖包标题
-	int32 winners = 3;			//中奖人数
-	string crtTm = 4;			//发起抽奖时间
-	repeated string icons = 5;	//中奖者头像列表（最长5个头像）
+	repeated PLotterySingleRet lotteries = 1;//单个抽奖信息
 }
 
 message PLotteryDetailRet{
@@ -79,9 +75,17 @@ message PLotteryDetailRet{
 	int32 type = 4;				//抽奖类型（0:全部，1：男，2:女）
 	int32 winners = 5;			//获奖人数
 	repeated PLocation locs = 6; //位置代码
-	repeated PUserBaseEx list = 7;		//用户列表
+	repeated PUserBaseEx users = 7;		//用户列表
 }
 
+message PLotterySingleRet{
+	int32 lotteryId = 1;		//抽奖包ID
+	string title = 2;			//抽奖包标题
+	int32 winners = 3;			//中奖人数
+	string crtTm = 4;			//发起抽奖时间
+	repeated string icons = 5;	//中奖者头像列表（最长5个头像.）
+} 
+ 
 message PLocation{
 	string locCd = 1;	//位置代码
 	string locNm = 2;	//位置名称
