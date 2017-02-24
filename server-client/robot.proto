@@ -3,13 +3,17 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "RobotProtos";
 
+import "account.proto";
+import "notification.proto";
+import "news.proto";
+
 // 推送消息类型
 enum ERobotPushType {
     Regards     = 0; // 消息推送
     Remind      = 1; // 生日提醒
     Lottery     = 2; // 抽奖
     RedPacket   = 3; // 红包
-    Streaming   = 4; // 直播
+    Stream      = 4; // 直播
 }
 
 // 推送消息状态
@@ -24,7 +28,7 @@ message PRegards {
 	int64 id                = 1;  //消息ID
 	PUserBase from          = 2;  //消息创建者	
 	repeated PUserBase to   = 3;  //如果是条件筛选填前5个用户ID.
-	PFansFilter  fansFilter = 4;  //粉丝筛选条件,精确选择时条件为空
+	//PFansFilter  fansFilter = 4;  //粉丝筛选条件,精确选择时条件为空
 	int32  fansNum          = 5;  //消息推送的粉丝数
 	string srcType          = 6;  //消息类型 text, image, audio
 	string Text             = 7;  //消息文本,最大长度140
@@ -41,7 +45,7 @@ message PRegardsList {
 // 网红创建的生日提醒消息
 message PRemind {
 	int64 id                    = 1;   //消息ID
-	int64 tplId                 = 2    //提醒模板ID
+	int64 tplId                 = 2;   //提醒模板ID
 	string from                 = 3;   //消息创建者uuid
 	PUserBase to                = 4;   //提醒的目标用户uuid. 默认提醒时不填. 
 	string srcType              = 5;   //消息类型 text, audio
@@ -86,10 +90,9 @@ message PPushRegards {
 // 提醒推送消息
 message PPushRemind {
 	int64 id                    = 1;   //消息ID
-	EAiRemindType remindType    = 2    //提醒类型: 默认提醒:0, 自定义提醒:1
-	string srcType              = 3;   //消息类型 text, audio
-	string Text                 = 4;   //文本,最大长度140
-	PAudio audio                = 5;   //语音,语音最大时长30
+	string srcType              = 2;   //消息类型 text, audio
+	string Text                 = 3;   //文本,最大长度140
+	PAudio audio                = 4;   //语音,语音最大时长30
 }
 
 // 第三方直播提醒推送消息
@@ -113,21 +116,21 @@ message PPushRedPacket {
 
 // 网红推送给粉丝的消息
 message PRobotPushMsg {
-	int64          id        = 1; //消息ID
-	int64          time      = 2; //消息发送时间
-	EAiPushType    msgType   = 3; //消息类型
-	EAiMsgState    state     = 4; //消息状态
-	PUserBase      from      = 5; //网红用户信息
-	PRobotPushRawMsg content = 6; //各类型消息
+	int64              id        = 1; //消息ID
+	int64              time      = 2; //消息发送时间
+	ERobotPushType     msgType   = 3; //消息类型
+	ERobotMsgState     state     = 4; //消息状态
+	PUserBase          from      = 5; //网红用户信息
+	PRobotPushRawMsg   content   = 6; //各类型消息
 }
 
 // 网红推送给粉丝的消息
 message PRobotPushRawMsg {
-	PPushRegards   regards   = 1; //推送消息
-	PPushRemind    remind    = 2; //生日提醒消息
-	PPushLottery   lottery   = 3; //抽奖消息
-	PPushRedPacket redPacket = 4; //红包消息
-	PPushStreaming streaming = 5; //直播提醒消息
+	PPushRegards     regards   = 1; //推送消息
+	PPushRemind      remind    = 2; //生日提醒消息
+	PPushLottery     lottery   = 3; //抽奖消息
+	PPushRedPacket   redPacket = 4; //红包消息
+	PNotifyStreaming streaming = 5; //直播提醒消息
 }
 
 // 网红推送给粉丝的消息列表
@@ -145,6 +148,15 @@ message PRobotMsgCount {
 message PRobotBubbleList {
     repeated PRobotMsgCount  countList  = 1; //服务器各类型总消息数
 	repeated PRobotPushMsg    list      = 2; //消息内容
+}
+
+// 心跳轮询推送信息汇总
+message PRobotSummary {
+    int32             totalNum      = 1; // 消息总数
+    int32             unReadNum     = 2; // 消息未读数
+    ERobotMsgState    state         = 3; // 是否存在未读  
+    PRobotPushMsgList newMsg        = 4; // 新的推送内容
+    PRobotBubbleList  bubbleSummary = 5; // 气泡汇总信息(包含newMsg)
 }
 
 /*
@@ -249,6 +261,15 @@ message PRobotBubbleList {
  *@return 成功返回PInt32List,失败返回PResult
  */
 
+  /*
+ *@note C端: 长轮询查询机器人消息
+ *@uri /v1/robot/message
+ *@method GET
+ *@cookie token&uuid
+ *@param  newconnect   是否新连接, 0:否;1:是. 不是新连接则bubbleSummary为空.
+ *@return 成功返回PRobotSummary ,失败返回PResult
+ */
+
  /*
  *@note C端: 推送消息列表首页
  *@path /v1/robot/message/home
@@ -257,14 +278,6 @@ message PRobotBubbleList {
  *@param  offset  
  *@param  count  
  *@return 成功返回PRobotPushMsgList,失败返回PResult
- */
-
- /*
- *@note C端: 查询是否存在未读消息
- *@uri /v1/robot/message/state
- *@method GET
- *@cookie token&uuid
- *@return *PInt32Single 0: 不存在未读消息，1: 存在未读消息
  */
 
  /*
@@ -288,7 +301,7 @@ message PRobotBubbleList {
 
 /*
  *@note C端: 查询来自指定网红的消息列表
- *@path /v1/robot/message
+ *@path /v1/robot/message/personnal
  *@method GET
  *@cookie token&uuid
  *@param  uuid    网红的用户ID
