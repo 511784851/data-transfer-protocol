@@ -69,6 +69,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 注册成功返回 PLogin ，失败返回 PResult
  */
 
@@ -85,6 +86,7 @@ message PLogin {
  *@url param channel 渠道或应用平台
  *@url param appid 应用分配的id
  *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@url param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -101,6 +103,7 @@ message PLogin {
  *@url param channel 渠道或应用平台
  *@url param appid 应用分配的id
  *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@url param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -165,6 +168,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -184,6 +188,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -199,6 +204,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -215,6 +221,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
@@ -236,6 +243,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 成功返回 PLogin ，失败返回 PResult
  */
 
@@ -331,6 +339,7 @@ message PLogin {
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
  *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@form param geo 位置信息，格式:"经度,纬度,地区编码"，用英文逗号分隔，如"22.528539,114.025842,CN;4403"，被用户禁用时传固定值"na"
  *@return 令牌有效或成功续期返回 PLogin ，失败返回 PResult
  */
 
