@@ -60,7 +60,7 @@ message PLotterySingleRet{
 	string title = 2;			//抽奖包标题
 	int32 winners = 3;			//中奖人数
 	string crtTm = 4;			//发起抽奖时间
-	repeated string icons = 5;	//中奖者头像列表（最长5个头像）
+	repeated string icons = 5;	//中奖者头像列表（最长5个头像.）
 } 
  
 message PLocation{

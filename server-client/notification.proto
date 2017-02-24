@@ -485,6 +485,7 @@ message PNotifySummaryList {
  *@urlParam offset 分页偏移值，从0开始
  *@urlParam count 获取的数量，最大值20
  *@urlParam uuid 获取uuid对应用户的数据
+ *@urlParam lang 国际化语言（当前只给web使用，传zh-cn）
  *@cookie token&uuid
  *@return *PNotifyMessageList
  */
