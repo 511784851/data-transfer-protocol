@@ -1,6 +1,9 @@
 syntax = "proto3";
 package bbproto; 
 
+import "datapublishing.proto";
+import "result.proto";
+
 // 每天的平均在线时间
 message POnlineData {
 	int64 date = 1;
@@ -19,3 +22,34 @@ message POnlineDataArray {
  *@param uuids 用逗号分隔的一众uuid
  *@return 成功返回PInt64List，失败返回PResult
  */
+
+
+message PQueryVUserParam {
+	string uuid = 1;
+	string keyword = 2;
+	int32 offset = 3;
+	int32 size = 4;
+}
+
+message PScrollResult {
+	// uuids
+	repeated string id = 1;
+	
+	// 取下一页的游标
+	string scrollId = 2;
+}
+
+message PScrollId{
+	string scrollId = 1;
+}
+
+service grpcDataPublishing {
+	// 查询粉丝
+	rpc SelectFans(PFansFilterParam) returns (PScrollResult);
+
+	// 用PScrollResult.scrollId查询下一页粉丝，直到PScrollResult.id为空
+	rpc ScrollMore(PScrollId) returns (PScrollResult);
+	
+	// 用户关注的vip及以上用户列表
+	rpc SelectVUser(PQueryVUserParam) returns (PStringList);
+}

@@ -6,6 +6,7 @@ option java_outer_classname = "RobotProtos";
 import "account.proto";
 import "notification.proto";
 import "news.proto";
+import "datapublishing.proto";
 
 // 推送消息类型
 enum ERobotPushType {
@@ -20,14 +21,13 @@ enum ERobotPushType {
 enum ERobotMsgState {
     UnRead     = 0; // 未读
     Read       = 1; // 已读
-    Delete     = 2; // 已删除
 }
 
 // 网红创建的推送消息
 message PBRegards {
 	int64 id                = 1;  //消息ID
 	repeated PUserBase to   = 2;  //如果是条件筛选填前5个用户ID.
-	//PFansFilter  fansFilter = 3;  //粉丝筛选条件,精确选择时条件为空
+	PFansFilterParam Filter = 3;  //粉丝筛选条件,精确选择时条件为空
 	int32  fansNum          = 4;  //消息推送的粉丝数
 	string srcType          = 5;  //消息类型 text, image, audio
 	string Text             = 6;  //消息文本,最大长度140
@@ -140,7 +140,19 @@ message PCRobotBubbleList {
 message PCRobotSummary {
     int32             totalNum        = 1; // 消息总数
     int32             unReadNum       = 2; // 消息未读数
-    PCRobotBubbleList  bubbleSummary = 3; // 气泡汇总信息
+    int32             nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
+    PCRobotBubbleList bubbleSummary   = 4; // 气泡汇总信息
+}
+
+// 用户关注的网红信息
+message PCCelebrity {
+    PUserBase       user     = 1; //用户信息
+    ERobotMsgState  msgState = 2; //是否有未读消息
+}
+
+// 用户关注的网红列表
+message PCCelebrityList {
+    repeated PCCelebrity list = 1;
 }
 
 /*
@@ -246,11 +258,11 @@ message PCRobotSummary {
  */
 
   /*
- *@note C端: 长轮询查询机器人消息
+ *@note C端: 长轮询查询机器人消息(如果超时,客户端立即重发.)
  *@uri /v1/robot/message
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PCRobotSummary ,失败返回PResult
+ *@return 成功返回PCRobotSummary ,失败返回PResult. 如果返回失败,客户端则延后3s重发.
  */
 
  /*
@@ -292,3 +304,24 @@ message PCRobotSummary {
  *@param  count   分页大小.默认20, 最大100
  *@return 成功返回PCRobotPushMsgList,失败返回PResult
  */
+
+/*
+ *@note C端: 查询用户关注的网红列表
+ *@path /v1/robot/celebrity
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCCelebrityList,失败返回PResult
+*/
+
+/*
+ *@note C端: 搜索用户关注的网红(最多只返回50个)
+ *@path /v1/robot/celebrity/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCCelebrityList,失败返回PResult
+*/

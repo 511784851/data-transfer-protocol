@@ -440,6 +440,23 @@ message PDiscover {
  *@return 成功返回PDiscover，失败返回PResult
  */
 
+message PFansFilterParam {
+	// 谁的粉丝
+	string uuid = 1;
+	
+	// 性别筛选 0女, 1男, 其它情况不过滤
+	int32 gender = 2;
+	
+	// 地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
+	repeated string region = 3;
+	
+	// true表示要对region取反，即排除
+	bool negate = 4;
+	
+	// 反选掉的用户
+	repeated string skipUuid = 5;
+}
+
 /*
  *@note 粉丝筛选
  *@path /datapublishing/fans/filter
@@ -450,8 +467,17 @@ message PDiscover {
  *              不需要此项过滤时，请勿传此参数
  *              多个地区用逗号连接，如CN;4403,CN;4404
  *              省市可以混杂在一起，如CN;43,CN;4403
+ *@param negate true表示要对region取反，即排除掉这些地区的粉丝
  *@param keyword 搜索关键字
  *@param pageindex 页号，从1开始
  *@param pagesize 页大小
  *@return 成功返回PGuyList，失败返回PResult
+ */
+
+/*
+ *@note 粉丝的地区分布
+ *@path /datapublishing/fans/regions
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PFollowData，失败返回PResult
  */
