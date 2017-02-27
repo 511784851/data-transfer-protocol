@@ -24,139 +24,123 @@ enum ERobotMsgState {
 }
 
 // 网红创建的推送消息
-message PRegards {
+message PBRegards {
 	int64 id                = 1;  //消息ID
-	PUserBase from          = 2;  //消息创建者	
-	repeated PUserBase to   = 3;  //如果是条件筛选填前5个用户ID.
-	//PFansFilter  fansFilter = 4;  //粉丝筛选条件,精确选择时条件为空
-	int32  fansNum          = 5;  //消息推送的粉丝数
-	string srcType          = 6;  //消息类型 text, image, audio
-	string Text             = 7;  //消息文本,最大长度140
-	PAudio audio            = 8;  //消息语音,语音最大时长60
-	PImage image            = 9;  //消息图片
-	int64 createTime        = 10; //创建时间
+	repeated PUserBase to   = 2;  //如果是条件筛选填前5个用户ID.
+	//PFansFilter  fansFilter = 3;  //粉丝筛选条件,精确选择时条件为空
+	int32  fansNum          = 4;  //消息推送的粉丝数
+	string srcType          = 5;  //消息类型 text, image, audio
+	string Text             = 6;  //消息文本,最大长度140
+	PAudio audio            = 7;  //消息语音,语音最大时长60
+	PImage image            = 8;  //消息图片
+	int64 createTime        = 9;  //创建时间
 }
 
 // 网红创建的推送消息
-message PRegardsList {
-	repeated PRegards list = 1;
+message PBRegardsList {
+	repeated PBRegards list = 1;
 }
 
 // 网红创建的生日提醒消息
 message PRemind {
 	int64 id                    = 1;   //消息ID
-	int64 tplId                 = 2;   //提醒模板ID
-	string from                 = 3;   //消息创建者uuid
-	PUserBase to                = 4;   //提醒的目标用户uuid. 默认提醒时不填. 
-	string srcType              = 5;   //消息类型 text, audio
-	string Text                 = 6;   //文本,最大长度140
-	PAudio audio                = 7;   //语音,语音最大时长30
-	int64  brithday             = 8;   //生日日期
+	PUserBase to                = 2;   //提醒的目标用户uuid. 默认提醒时不填. 
+	string srcType              = 3;   //消息类型 text, audio
+	string Text                 = 4;   //文本,最大长度140
+	PAudio audio                = 5;   //语音,语音最大时长30
+	int64  brithday             = 6;   //生日日期
 }
 
 // 网红创建的生日提醒消息模板
-message PRemindTpl {
-	int64 tplId                 = 1;   //模板ID
+message PBRemindTpl {
+	//int64 brithday            = 1;   //生日日期,模板ID
 	string srcType              = 2;   //消息类型 text, audio
 	string Text                 = 3;   //文本,最大长度140
 	PAudio audio                = 4;   //语音,语音最大时长30
 }
 
 // 网红创建的生日提醒消息列
-message PRemindList {
+message PBRemindList {
 	repeated PRemind list = 1; //提醒消息列表
 }
 
 
 // 机器人全局设置
-message PRobotGlobalSetting {
-	bool aiEnable          = 1;  //机器人总开关	
+message PCRobotGlobalSetting {
+	bool robotEnable       = 1;  //机器人总开关	
 	bool regardsRemind     = 2;  //是否接收生日提醒和消息推送	
 	bool regardsEnable     = 3;  //是否接收消息推送
 	bool remindEnable      = 4;  //是否接收生日提醒	
 	int32 skin             = 5;  //皮肤类型	
 }
 
-// 普通推送消息
-message PPushRegards {
-	int64 id         = 1;    //消息ID
-	string srcType   = 2;    //消息类型 text, image, audio
-	string Text      = 3;    //消息文本,最大长度140
-	PAudio audio     = 4;    //消息语音,语音最大时长60
-	PImage image     = 5;    //消息图片
-	int64 time       = 6;    //创建时间
+// 粉丝收到的消息推送
+message PCPushRegards {
+	string srcType   = 1;    //消息类型 text, image, audio
+	string Text      = 2;    //消息文本,最大长度140
+	PAudio audio     = 3;    //消息语音,语音最大时长60
+	PImage image     = 4;    //消息图片
 }
 
-// 提醒推送消息
-message PPushRemind {
-	int64 id                    = 1;   //消息ID
-	string srcType              = 2;   //消息类型 text, audio
-	string Text                 = 3;   //文本,最大长度140
-	PAudio audio                = 4;   //语音,语音最大时长30
+// 粉丝收到的提醒消息
+message PCPushRemind {
+	string srcType              = 1;   //消息类型 text, audio
+	string Text                 = 2;   //文本,最大长度140
+	PAudio audio                = 3;   //语音,语音最大时长30
 }
 
-// 第三方直播提醒推送消息
-message PPushStreaming {
-	int64 id         = 1;   //消息ID
-	int64 time       = 2;   //直播时间
-	string room      = 3;   //房间号
-}
 
-// 抽奖推送消息
-message PPushLottery {
-	int64 id = 1;  //消息ID
+// 粉丝收到的抽奖消息
+message PCPushLottery {
 	//抽奖参数...
 }
 
-// 红包推送消息
-message PPushRedPacket {
-	int64 id = 1;  //消息ID
+// 粉丝收到的红包消息
+message PCPushRedPacket {
 	//红包参数...
 }
 
-// 网红推送给粉丝的消息
-message PRobotPushMsg {
+// 粉丝收到的消息
+message PCRobotPushMsg {
 	int64              id        = 1; //消息ID
 	int64              time      = 2; //消息发送时间
 	ERobotPushType     msgType   = 3; //消息类型
 	ERobotMsgState     state     = 4; //消息状态
 	PUserBase          from      = 5; //网红用户信息
-	PRobotPushRawMsg   content   = 6; //各类型消息
+	PCRobotPushRawMsg   content  = 6; //各类型消息
 }
 
-// 网红推送给粉丝的消息
-message PRobotPushRawMsg {
-	PPushRegards     regards   = 1; //推送消息
-	PPushRemind      remind    = 2; //生日提醒消息
-	PPushLottery     lottery   = 3; //抽奖消息
-	PPushRedPacket   redPacket = 4; //红包消息
-	PNotifyStreaming streaming = 5; //直播提醒消息
+// 粉丝收到的消息
+message PCRobotPushRawMsg {
+	PCPushRegards     regards   = 1; //推送消息
+	PCPushRemind      remind    = 2; //生日提醒消息
+	PCPushLottery     lottery   = 3; //抽奖消息
+	PCPushRedPacket   redPacket = 4; //红包消息
+	PNotifyStreaming streaming  = 5; //直播提醒消息
 }
 
-// 网红推送给粉丝的消息列表
-message PRobotPushMsgList {
-	repeated PRobotPushMsg list = 1;
+// 粉丝收到的消息列表
+message PCRobotPushMsgList {
+	repeated PCRobotPushMsg list = 1;
 }
 
 // 各类型消息数
-message PRobotMsgCount {
-	ERobotPushType type     = 1;  //类型
+message PCRobotMsgCount {
+	ERobotPushType type     = 1;  //类型 ERobotPushType
 	int32          count    = 2;  //数目
 }
 
 // 气泡消息队列
-message PRobotBubbleList {
-    repeated PRobotMsgCount  countList  = 1; //服务器各类型总消息数
-	repeated PRobotPushMsg    list      = 2; //消息内容
+message PCRobotBubbleList {
+    repeated PCRobotMsgCount  countList  = 1; //服务器各类型总消息数
+	repeated PCRobotPushMsg    list      = 2; //消息内容
 }
 
 // 心跳轮询推送信息汇总
-message PRobotSummary {
-    int32             totalNum      = 1; // 消息总数
-    int32             unReadNum     = 2; // 消息未读数
-    ERobotMsgState    state         = 3; // 是否存在未读  
-    PRobotPushMsgList newMsg        = 4; // 新的推送内容
-    PRobotBubbleList  bubbleSummary = 5; // 气泡汇总信息(包含newMsg)
+message PCRobotSummary {
+    int32             totalNum        = 1; // 消息总数
+    int32             unReadNum       = 2; // 消息未读数
+    PCRobotBubbleList  bubbleSummary = 3; // 气泡汇总信息
 }
 
 /*
@@ -164,7 +148,7 @@ message PRobotSummary {
  *@path /v1/robot/regards/publish
  *@method POST
  *@cookie token&uuid
- *@body PRegards 消息数据
+ *@body PBRegards 消息数据
  *@return PResult
  */
 
@@ -175,7 +159,7 @@ message PRobotSummary {
  *@cookie token&uuid
  *@param offset 分页的偏移,为上一页的最后一个消息ID 
  *@param count  每页消息条数。默认30,最大100
- *@return 成功返回PRegardsList,失败返回PResult
+ *@return 成功返回PBRegardsList,失败返回PResult
  */
 
  /*
@@ -200,7 +184,7 @@ message PRobotSummary {
  *@path /v1/robot/remind
  *@method POST
  *@cookie token&uuid
- *@body   PRemind 消息数据
+ *@body   PBRemind 消息数据
  *@return 返回PResult
  */
 
@@ -212,7 +196,7 @@ message PRobotSummary {
  *@param  offset  分页偏移,为上一页最后一个提醒消息的ID.默认0. 
  *@param  count   分页大小.默认20, 最大100
  *@param  type    查询类型: future, history.默认:future
- *@return 成功返回PRemindList,失败返回PResult
+ *@return 成功返回PBRemindList,失败返回PResult
  */
 
  /*
@@ -239,7 +223,7 @@ message PRobotSummary {
  *@path /v1/robot/setting/global
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PRobotGlobalSetting,失败返回PResult
+ *@return 成功返回PCRobotGlobalSetting,失败返回PResult
  */
 
  /*
@@ -266,8 +250,7 @@ message PRobotSummary {
  *@uri /v1/robot/message
  *@method GET
  *@cookie token&uuid
- *@param  newconnect   是否新连接, 0:否;1:是. 不是新连接则bubbleSummary为空.
- *@return 成功返回PRobotSummary ,失败返回PResult
+ *@return 成功返回PCRobotSummary ,失败返回PResult
  */
 
  /*
@@ -277,7 +260,7 @@ message PRobotSummary {
  *@cookie token&uuid
  *@param  offset  
  *@param  count  
- *@return 成功返回PRobotPushMsgList,失败返回PResult
+ *@return 成功返回PCRobotPushMsgList,失败返回PResult
  */
 
  /*
@@ -307,25 +290,5 @@ message PRobotSummary {
  *@param  uuid    网红的用户ID
  *@param  offset  分页偏移,为上一页最后一个消息的ID.默认0. 
  *@param  count   分页大小.默认20, 最大100
- *@return 成功返回PRobotPushMsgList,失败返回PResult
- */
-
-/*
- *@note C端: 查询未播放的气泡
- *@path /v1/robot/bubble
- *@method GET
- *@cookie token&uuid
- *@param  offset  分页偏移,为上一页最后一个消息的ID.默认0. 
- *@param  count   分页大小.默认20, 最大100
- *@return 成功返回PRobotBubbleList,失败返回PResult
-*/
-
-/*
- *@note C端: 设置气泡消息的状态
- *@path /v1/robot/bubble/state
- *@method PUT
- *@cookie token&uuid
- *@param  state    已读:0; 未读: 1; 全部已读:2
- *@body PStringList 消息ID列表的序列化数据. 设置全部时,body可以为空
- *@return PResult
+ *@return 成功返回PCRobotPushMsgList,失败返回PResult
  */
