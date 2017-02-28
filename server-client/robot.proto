@@ -1,0 +1,327 @@
+syntax = "proto3";
+package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "RobotProtos";
+
+import "account.proto";
+import "notification.proto";
+import "news.proto";
+import "datapublishing.proto";
+
+// 推送消息类型
+enum ERobotPushType {
+    Regards     = 0; // 消息推送
+    Remind      = 1; // 生日提醒
+    Lottery     = 2; // 抽奖
+    RedPacket   = 3; // 红包
+    Stream      = 4; // 直播
+}
+
+// 推送消息状态
+enum ERobotMsgState {
+    UnRead     = 0; // 未读
+    Read       = 1; // 已读
+}
+
+// 网红创建的推送消息
+message PBRegards {
+	int64 id                = 1;  //消息ID
+	repeated PUserBase to   = 2;  //如果是条件筛选填前5个用户ID.
+	PFansFilterParam Filter = 3;  //粉丝筛选条件,精确选择时条件为空
+	int32  fansNum          = 4;  //消息推送的粉丝数
+	string srcType          = 5;  //消息类型 text, image, audio
+	string Text             = 6;  //消息文本,最大长度140
+	PAudio audio            = 7;  //消息语音,语音最大时长60
+	PImage image            = 8;  //消息图片
+	int64 createTime        = 9;  //创建时间
+}
+
+// 网红创建的推送消息
+message PBRegardsList {
+	repeated PBRegards list = 1;
+}
+
+// 网红创建的生日提醒消息
+message PRemind {
+	int64 id                    = 1;   //消息ID
+	PUserBase to                = 2;   //提醒的目标用户uuid. 默认提醒时不填. 
+	string srcType              = 3;   //消息类型 text, audio
+	string Text                 = 4;   //文本,最大长度140
+	PAudio audio                = 5;   //语音,语音最大时长30
+	int64  brithday             = 6;   //生日日期
+}
+
+// 网红创建的生日提醒消息模板
+message PBRemindTpl {
+	//int64 brithday            = 1;   //生日日期,模板ID
+	string srcType              = 2;   //消息类型 text, audio
+	string Text                 = 3;   //文本,最大长度140
+	PAudio audio                = 4;   //语音,语音最大时长30
+}
+
+// 网红创建的生日提醒消息列
+message PBRemindList {
+	repeated PRemind list = 1; //提醒消息列表
+}
+
+
+// 机器人全局设置
+message PCRobotGlobalSetting {
+	bool robotEnable       = 1;  //机器人总开关	
+	bool regardsRemind     = 2;  //是否接收生日提醒和消息推送	
+	bool regardsEnable     = 3;  //是否接收消息推送
+	bool remindEnable      = 4;  //是否接收生日提醒	
+	int32 skin             = 5;  //皮肤类型	
+}
+
+// 粉丝收到的消息推送
+message PCPushRegards {
+	string srcType   = 1;    //消息类型 text, image, audio
+	string Text      = 2;    //消息文本,最大长度140
+	PAudio audio     = 3;    //消息语音,语音最大时长60
+	PImage image     = 4;    //消息图片
+}
+
+// 粉丝收到的提醒消息
+message PCPushRemind {
+	string srcType              = 1;   //消息类型 text, audio
+	string Text                 = 2;   //文本,最大长度140
+	PAudio audio                = 3;   //语音,语音最大时长30
+}
+
+
+// 粉丝收到的抽奖消息
+message PCPushLottery {
+	//抽奖参数...
+}
+
+// 粉丝收到的红包消息
+message PCPushRedPacket {
+	//红包参数...
+}
+
+// 粉丝收到的消息
+message PCRobotPushMsg {
+	int64              id        = 1; //消息ID
+	int64              time      = 2; //消息发送时间
+	ERobotPushType     msgType   = 3; //消息类型
+	ERobotMsgState     state     = 4; //消息状态
+	PUserBase          from      = 5; //网红用户信息
+	PCRobotPushRawMsg   content  = 6; //各类型消息
+}
+
+// 粉丝收到的消息
+message PCRobotPushRawMsg {
+	PCPushRegards     regards   = 1; //推送消息
+	PCPushRemind      remind    = 2; //生日提醒消息
+	PCPushLottery     lottery   = 3; //抽奖消息
+	PCPushRedPacket   redPacket = 4; //红包消息
+	PNotifyStreaming streaming  = 5; //直播提醒消息
+}
+
+// 粉丝收到的消息列表
+message PCRobotPushMsgList {
+	repeated PCRobotPushMsg list = 1;
+}
+
+// 各类型消息数
+message PCRobotMsgCount {
+	ERobotPushType type     = 1;  //类型 ERobotPushType
+	int32          count    = 2;  //数目
+}
+
+// 气泡消息队列
+message PCRobotBubbleList {
+    repeated PCRobotMsgCount  countList  = 1; //服务器各类型总消息数
+	repeated PCRobotPushMsg    list      = 2; //消息内容
+}
+
+// 心跳轮询推送信息汇总
+message PCRobotSummary {
+    int32             totalNum        = 1; // 消息总数
+    int32             unReadNum       = 2; // 消息未读数
+    int32             nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
+    PCRobotBubbleList bubbleSummary   = 4; // 气泡汇总信息
+}
+
+// 用户关注的网红信息
+message PCCelebrity {
+    PUserBase       user     = 1; //用户信息
+    ERobotMsgState  msgState = 2; //是否有未读消息
+}
+
+// 用户关注的网红列表
+message PCCelebrityList {
+    repeated PCCelebrity list = 1;
+}
+
+/*
+ *@note B端:网红创建推送消息
+ *@path /v1/robot/regards/publish
+ *@method POST
+ *@cookie token&uuid
+ *@body PBRegards 消息数据
+ *@return PResult
+ */
+
+ /*
+ *@note B端:网红查看已创建的推送消息
+ *@path /v1/robot/regards/history
+ *@method GET
+ *@cookie token&uuid
+ *@param offset 分页的偏移,为上一页的最后一个消息ID 
+ *@param count  每页消息条数。默认30,最大100
+ *@return 成功返回PBRegardsList,失败返回PResult
+ */
+
+ /*
+ *@note B端:网红删除已创建的推送消息
+ *@path /v1/robot/regards/history
+ *@method DELETE
+ *@cookie token&uuid
+ *@param ids 待删除的消息ID,多个以逗号分隔.最多50个 
+ *@return PResult
+ */
+
+ /*
+ *@note B端:查询剩余可发消息数
+ *@path /v1/robot/regards/limit
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PInt32Single,失败返回PResult
+ */
+
+/*
+ *@note B端:网红设置生日提醒
+ *@path /v1/robot/remind
+ *@method POST
+ *@cookie token&uuid
+ *@body   PBRemind 消息数据
+ *@return 返回PResult
+ */
+
+ /*
+ *@note B端:查询未来7天(或历史)的提醒列表
+ *@path /v1/robot/remind
+ *@method GET
+ *@cookie token&uuid
+ *@param  offset  分页偏移,为上一页最后一个提醒消息的ID.默认0. 
+ *@param  count   分页大小.默认20, 最大100
+ *@param  type    查询类型: future, history.默认:future
+ *@return 成功返回PBRemindList,失败返回PResult
+ */
+
+ /*
+ *@note B端:删除提醒消息
+ *@path /v1/robot/remind
+ *@method DELETE
+ *@cookie token&uuid
+ *@param  id      提醒消息id
+ *@return 返回PResult
+ */
+
+/*
+ *@note C端:机器人全局设置
+ *@path /v1/robot/setting/global
+ *@method PUT
+ *@cookie token&uuid
+ *@param  value  0:关闭; 1:打开;皮肤编号 
+ *@param  type   类型.消息推送: regards; 生日提醒: remind; 消息和生日提醒: regardsremind. 整个机器人: ai; 皮肤:skin
+ *@return PResult
+ */
+
+ /*
+ *@note C端:查询机器人全局设置
+ *@path /v1/robot/setting/global
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCRobotGlobalSetting,失败返回PResult
+ */
+
+ /*
+ *@note C端: 设置针对某个网红的开关
+ *@path /v1/robot/setting/personnal
+ *@method PUT
+ *@cookie token&uuid
+ *@param  oper    0:关闭; 1:打开  
+ *@param  uuids   网红用户ID列表,多个以逗号分隔.最多50个.
+ *@return PResult
+ */
+
+ /*
+ *@note C端: 查询针对某个网红的开关
+ *@path /v1/robot/setting/personnal
+ *@method GET
+ *@cookie token&uuid
+ *@param  uuids   网红用户ID列表,多个以逗号分隔.最多50个.
+ *@return 成功返回PInt32List,失败返回PResult
+ */
+
+  /*
+ *@note C端: 长轮询查询机器人消息(如果超时,客户端立即重发.)
+ *@uri /v1/robot/message
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回PCRobotSummary ,失败返回PResult. 如果返回失败,客户端则延后3s重发.
+ */
+
+ /*
+ *@note C端: 推送消息列表首页
+ *@path /v1/robot/message/home
+ *@method GET
+ *@cookie token&uuid
+ *@param  offset  
+ *@param  count  
+ *@return 成功返回PCRobotPushMsgList,失败返回PResult
+ */
+
+ /*
+ *@note C端: 设置消息的状态
+ *@path /v1/robot/message/state
+ *@method PUT
+ *@cookie token&uuid
+ *@param  state    已读:0; 未读: 1; 全部已读:2
+ *@body PStringList 消息ID列表的序列化数据. 设置全部时,body可以为空
+ *@return PResult
+ */
+
+ /*
+ *@note C端: 设置来自指定网红消息的状态全部已读
+ *@path /v1/robot/message/state/personnal
+ *@method PUT
+ *@cookie token&uuid
+ *@param  uuid    网红用户ID
+ *@return PResult
+ */
+
+/*
+ *@note C端: 查询来自指定网红的消息列表
+ *@path /v1/robot/message/personnal
+ *@method GET
+ *@cookie token&uuid
+ *@param  uuid    网红的用户ID
+ *@param  offset  分页偏移,为上一页最后一个消息的ID.默认0. 
+ *@param  count   分页大小.默认20, 最大100
+ *@return 成功返回PCRobotPushMsgList,失败返回PResult
+ */
+
+/*
+ *@note C端: 查询用户关注的网红列表
+ *@path /v1/robot/celebrity
+ *@method GET
+ *@cookie token&uuid
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCCelebrityList,失败返回PResult
+*/
+
+/*
+ *@note C端: 搜索用户关注的网红(最多只返回50个)
+ *@path /v1/robot/celebrity/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param pageindex 页号
+ *@param pagesize 页大小
+ *@return 成功返回PCCelebrityList,失败返回PResult
+*/

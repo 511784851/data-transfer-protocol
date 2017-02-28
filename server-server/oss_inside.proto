@@ -125,7 +125,9 @@ message PQueryParam {
 }
 
 message PImageInfoList {
-	repeated PImageInfo List = 1;
+	repeated PImageInfo list = 1;
+	// 用于查询时返回给定条件下的记录总数，且只当offset为0时会填充此值
+	int32 total = 2;
 }
 
 service grpcOss {

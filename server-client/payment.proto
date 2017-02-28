@@ -5,79 +5,240 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PaymentProtos";
 
-message PWeixinPay {
-	string appid = 1;              // 应用ID
-	string partnerid = 2;	       // 商户号
-	string noncestr = 3;	       // 随机串
-	string timestamp = 4;	       // 时间戳
-	string prepayid = 5;	       // 预支付串
-	string package = 6;	           // 订单信息串
-	string sign = 7;               // 签名串
-	string orderNo = 8;	           // 订单的编号
+import "account.proto";
+
+
+/** ----------------- 以下是红包协议 （赵勇）-----------------*/
+message POrdinRedEnve {
+	int32 money = 1;	           // 金额(单位：分)
+	string content = 2;	           // 描述
+	string rece_uuid = 3;          // 接收用户uuid
 }
 
-// 生成订单的编号和订单的签名信息
-message PAlipayOrderInfo {
-	string orderNo = 1;	           // 订单的编号
-	string payInfo = 2;	           // 订单的签名信息
+message PGroupRedEnve {
+	int32 number = 1;              // 数量
+	int32 money = 2;	           // 总金额或单个金额(单位：分)
+	bool isRandom = 3;	           // 是否随机红包
+	string content = 4;	           // 描述
+	repeated string rece_uuid = 5; // 接收用户uuid
 }
 
-message PPayOrderList {
-	repeated PPayOrder payOrders = 1;// 支付订单信息
+message POrderPay {
+	string fromActivity = 1;       // 环境变量
+	int32 recAccountType = 2;	   // 接受者账户类型（0-个人，1-企业）
+	string cusId = 3;	           // 用户id
+	string receivedId = 4;	       // 接受者id
+	int32 fenMoney = 5;	           // 支付金额（单位：分）
+	string orderNum = 6;	       // 业务订单号
+	string goodsName = 7;	       // 商品名称
+	string sign = 8;	           // 签名
+	int32 requestCode = 9;	       // 请求码
 }
 
-message PPayOrder {
-	string orderNo = 1;	           // 订单的编号
-	string payType = 2;            // 支付渠道（WX-微信,ZFB-支付宝）
-	string orderSubject = 3;	   // 商品名称
-	string orderBody = 4;	       // 商品描述
-	int64 amount = 5;	           // 预支付金额（单位：分）
-	int64 payTime = 6;	           // 发起支付时间
-	int32 payStatu = 7;	           // 支付状态， 0-支付中，1-支付成功，2-支付失败 ， 当pay_statu=1或2时，有以下数据
-	string bankType = 8;	       // 付款银行
-	int64 totalFee = 9;	           // 实际支付金额（单位：分）
-	string errCodeDes = 10;	       // 支付失败原因描述
-	int64 endTime = 11;	           // 支付完成时间
+message PRedEnveInfo {
+    string ord_no = 1;                      // 业务订单号
+    int32 status = 2;                       // 红包当前针对用户状态（0-无权限领取，1-已领取，2-可领取，3-已领完，4-已过期）
+    int32 type = 3;                         // 红包类型（1-普通红包，2-等额群红包，3-随机群红包）
+	int32 tota_money = 4;                   // 红包总金额（单位：分）
+	int32 tota_number = 5;	                // 红包总数量
+	int32 rece_money = 6;	                // 已接收金额（单位：分）
+	int32 rece_number = 7;	                // 已接收数量
+	string content = 8;	                    // 描述
+	int64 send_tm = 9;	                    // 发送时间
+	PUserBase userBase = 10;                // 发送人信息
+	repeated PRedEnveRece redEnveRece = 11; // 接收用户列表
 }
+
+message PRedEnveHistory {
+    repeated PRedEnveInfo redEnveInfo = 1;
+}
+
+message PRedEnveRece {
+	int32 id = 1;                  // 唯一标识
+	int32 money = 2;               // 接收金额（单位：分）
+	int64 rece_tm = 3;	           // 接收时间
+	PUserBase userBase = 4;        // 接收用户信息
+}
+
+message PBill {
+    int32 income_money = 1;                 // 总收入金额（单位：分）
+    int32 expend_money = 2;                 // 总支出金额（单位：分）
+	int32 income_number = 3;                // 总收入数量
+	int32 expend_number = 4;	            // 总支出数量
+	repeated PBillInfo incomeBill = 5;	    // 收入账单明细
+	repeated PBillInfo expendBill = 6;	    // 支出账单明细
+}
+
+message PBillInfo {
+    int32 id = 1;                           // 编号
+    string ord_no = 2;                      // 业务订单号
+	int32 rece_money = 3;	                // 金额（单位：分）
+	int64 time = 4;	                        // 时间
+	int32 type = 5;                         // 类型
+	PUserBase userBase = 6;                 // 发送人信息
+}
+
+/*
+ *@note 获取用户打开融云钱包thirdToken
+ *@path /v1/payment/user/thirdToken
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 成功返回PStringSingle，失败返回PResult
+ */
  
 /*
- *@note 获取微信App预支付签名信息
- *@path /payment/weixin/paySign
- *@method GET
- *@param token&uuid 登录用户信息（必须）
- *@param orderSubject  订单的主题
- *@param orderBody 订单的内容描述
- *@param amount  订单的总价。以人民币的分为单位的整数（必须）
- *@return 成功返回PWeixinPay，失败返回PResult
+ *@note 发普通紅包
+ *@path /v1/payment/redEnve/sendOrdin
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body POrdinRedEnve
+ *@return 成功返回POrderPay，失败返回PResult
  */
 
 /*
- *@note 获取支付宝的支付签名信息。
- *@path /payment/alipay/paySign
- *@method GET
- *@cookie uuid  用户的uuid。
- *@cookie token  用户的token。
- *@param orderSubject  订单的主题
- *@param orderBody 订单的内容描述
- *@param amount  订单的总价。以人民币的分为单位的整数。
- *@return 成功PAlipayOrderInfo, 失败PResult
- */
-
-/*
- *@note 查询订单支付详细信息。
- *@path /payment/query/payOrder
- *@method GET
- *@cookie uuid&token
- *@param  orderNo  订单编号
- *@return 成功PPayOrder, 失败PResult
+ *@note 发群紅包
+ *@path /v1/payment/redEnve/sendGroup
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PGroupRedEnve
+ *@return 成功返回POrderPay，失败返回PResult
  */
  
  /*
- *@note 查询用户多个支付订单详细信息。
- *@path /payment/query/payOrders
+ *@note 打赏
+ *@path /v1/payment/reward/send
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body POrdinRedEnve
+ *@return 成功返回POrderPay，失败返回PResult
+ */
+ 
+ /*
+ *@note 领红包
+ *@path /v1/payment/redEnve/receive
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *form param ord_no 业务订单号
+ *@return 成功返回PRedEnveInfo，失败返回PResult
+ */
+ 
+ /*
+ *@note 查看红包详情
+ *@path /v1/payment/redEnve/info
  *@method GET
- *@cookie uuid&token
- *@param offset 查询更多起始值，offset=offset+count，默认0
- *@param count 每次查询的数量
- *@return 成功PPayOrderList, 失败PResult
+ *@cookie token&uuid 登录用户信息
+ *url param ord_no 业务订单号
+ *@return 成功返回PRedEnveInfo，失败返回PResult
+ */
+
+ /*
+ *@note 查看账单
+ *@path /v1/payment/redEnve/bill
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *url param index 上一批数据最后一条ID
+ *url param size 数量大小
+ *url param type 类型（1-收入 2-支出）
+ *@return 成功返回PRedEnveInfo，失败返回PResult
+ */
+ 
+ /*
+ *@note 发送红包历史
+ *@path /v1/payment/redEnve/history
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *url param index 上一批数据最后一条ID
+ *url param size 数量大小
+ *url param type 类型（1-收入 2-支出）
+ *@return 成功返回PRedEnveInfo，失败返回PResult
+ */
+ 
+
+/** ----------------- 以下是抽奖协议 （潘有良）-----------------*/
+
+message PLottery {
+	string title = 1;            // 抽奖标题
+	int32 type = 2;	         	// 接受人类型（0:全部，1:男，2:女）
+	int32 winners = 3;			//获奖名额数
+	int32 totAmt = 4;			//抽奖总金额（分）
+	int32 bonus = 5;			//平均每个人的奖金（分）
+	repeated PLocation locs = 6; // 地理位置
+	repeated string uuidList = 7; //获奖人列表
+}
+
+message PLotteryListRet{
+	repeated PLotterySingleRet lotteries = 1;//单个抽奖信息
+}
+
+message PAcceptPrize{
+	string lotteryId = 1;		//抽奖ID
+}
+
+message PLotteryDetailRet{
+	string lotteryId = 1;		//抽奖包ID
+	int32 totAmt = 2;			//抽奖总金额
+	string crtTm = 3;			//抽奖创建时间
+	int32 type = 4;				//抽奖类型（0:全部，1：男，2:女）
+	int32 winners = 5;			//获奖人数
+	repeated PLocation locs = 6; //位置代码
+	repeated PUserBaseEx users = 7;		//用户列表
+}
+
+message PLotterySingleRet{
+	string lotteryId = 1;		//抽奖包ID
+	string title = 2;			//抽奖包标题
+	int32 winners = 3;			//中奖人数
+	string crtTm = 4;			//发起抽奖时间
+	repeated string icons = 5;	//中奖者头像列表（最长5个头像.）
+} 
+ 
+message PLocation{
+	string locCd = 1;	//位置代码
+	string locNm = 2;	//位置名称
+}
+message PUserBaseEx{
+	PUserBase info = 1;			//用户基本信息
+	int32 sex = 2;				//用户性别（0:全部，1：男，2:女）
+	int32 amt = 3;				//单个领奖金额(单位分)
+}
+
+
+/*
+ *@note 发起抽奖
+ *@path /v1/payment/lottery/create
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PLottery
+ *@return 成功返回PRedPay，失败返回PResult
+ */
+ 
+ /*
+ *@note 中奖者领奖
+ *@path /v1/payment/lottery/accept
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PAcceptPrize
+ *@return 返回PResult
+ */
+
+/*
+ *@note 历史发起抽奖列表
+ *@path /v1/payment/lottery/list
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam startIndex 开始下标
+ *@urlParam size 结果集大小
+ *@urlParam keywords 标题关键字
+ *@return 成功返回PLotteryListRet，失败返回PResult
+ */
+ 
+/*
+ *@note 抽奖详情
+ *@path /v1/payment/lottery/detail
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam lotteryId 抽奖包Id
+ *@urlParam keywords 中奖者关键字
+ *@urlParam type 红包类型（0:全部，1:男，2:女）
+ *@return 成功返回PLotteryDetailRet，失败返回PResult
  */
