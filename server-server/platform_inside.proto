@@ -6,7 +6,7 @@ option java_outer_classname = "PlatformProtos";
 import "common_inside.proto";
 import "platform.proto";
 
-service Platform {
+service IPlatform {
 	
 	/**
 	 * 记录帐户安全的操作日志
