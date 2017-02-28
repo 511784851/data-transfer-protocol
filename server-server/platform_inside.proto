@@ -4,7 +4,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PlatformProtos";
 
 import "common_inside.proto";
-import "platform.proto"
+import "platform.proto";
 
 service Platform {
 	
