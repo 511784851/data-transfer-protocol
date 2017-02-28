@@ -1,0 +1,20 @@
+syntax = "proto3";
+package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "PlatformProtos";
+
+import "common_inside.proto";
+import "platform.proto"
+
+service Platform {
+	
+	/**
+	 * 记录帐户安全的操作日志
+	 *
+	 *@param PAccountOperateLog.Name 操作对象名称（手机、密码、微博。。。）
+	 *@param PAccountOperateLog.Content 操作内容
+	 *@param PAccountOperateLog.Operate 操作方式（修改、绑定、解绑。。。）
+	 *@return PResult
+	 */
+	rpc WriteAccountOperateLog(PAccountOperateLog) returns (PEmpty);
+}
