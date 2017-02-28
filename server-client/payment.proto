@@ -209,7 +209,7 @@ message PUserBaseEx{
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body PLottery
- *@return 成功返回PRedPay，失败返回PResult
+ *@return 成功返回POrderPay，失败返回PResult
  */
  
  /*
