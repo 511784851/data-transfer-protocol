@@ -42,7 +42,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-server/achievement_inside.proto ".
 						"server-server/community_inside.proto ".
 						"server-server/comment_inside.proto ".
-						"server-server/oss_inside.proto";
+						"server-server/oss_inside.proto".
+						"server-server/platform_inside.proto";
 
 $cmd = "protoc -Iserver-client -Iserver-server --go_out=plugins=grpc:".$output." ".$server_client_protos;
 system($cmd);

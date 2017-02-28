@@ -330,7 +330,20 @@ message PHelpContent {
 	string Content = 3;
 }
 
+//帐户安全操作记录
+message PAccountOperateLog {
+	int32 id = 1;
+	int64 cTime = 2; //创建时间
+	string name = 3; //操作对象名称（手机、密码、微博。。。）
+	string content = 4; //操作内容
+	string operate = 5; //操作名称（修改、绑定、解绑。。。）
+}
 
+//帐户安全操作记录列表
+message PAccountOperateLogList {
+	repeated PAccountOperateLog list = 1;
+	int32 total = 2;
+}
 
 
 /**************************API 定义***********************************/
