@@ -226,7 +226,7 @@ message PKeywordHistory {
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param keyword 搜索的内容
- *url type count 类型（0-不限，1-红包，2-打赏）
+ *url param type 类型（0-不限，1-红包，2-打赏）
  *url param last_id 上一批数据最后一条编号
  *url param count 数量大小
  *@return 成功返回PKeywordHistory，失败返回PResult
