@@ -33,7 +33,7 @@ message PBRegards {
 	string Text             = 6;  //消息文本,最大长度140
 	PAudio audio            = 7;  //消息语音,语音最大时长60
 	PImage image            = 8;  //消息图片
-	int64 createTime        = 7;  //创建时间
+	int64 createTime        = 9;  //创建时间
 }
 
 // 网红创建的推送消息
@@ -341,7 +341,6 @@ message PCCelebrityList {
  *@param pagesize  每页消息条数。默认30,最大100
  *@return 成功返回PCCelebrityList,失败返回PResult
 */
-
 
 /*
  *@note 访问获取带签名的文件上传URL
