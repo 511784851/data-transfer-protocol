@@ -29,6 +29,13 @@ message PRobotNotifyMsgList {
     repeated PRobotNotifyMsg  list    = 1;
 }
 
+// 生成支付订单的参数
+message PPayOrderParma {
+    int32 serviceNo    = 1;  //业务编号[0, 99]
+    int32 amount       = 2;  //金额[1,524288]
+    int32 machineNo    = 3;  //机器码[0,31]
+}
+
  service IGrpcRobot {
     /*
     *@note 设置B端每天(0-24时)推送消息数
@@ -39,10 +46,10 @@ message PRobotNotifyMsgList {
 
     /*
     *@note 监管:设置生日提醒(CEO祝福)
-    *@param   PRemind 消息数据
+    *@param   PBRemind 消息数据
     *@return PEmpty
     */
-    rpc GrpCreateRemind(PRemind) returns (PEmpty);
+    rpc GrpCreateRemind(PBRemind) returns (PEmpty);
 
     /*
     *@note 监管:查询未来7天(或历史)的CEO提醒列表
@@ -66,9 +73,10 @@ message PRobotNotifyMsgList {
     rpc GrpcPush(PRobotNotifyMsgList) returns (PEmpty);
 
     /*
-    *@note   用户查询是否有来自某网红的未读消息
-    *@param  PMsgStateQuery   消息
-    *@return PInt32List 状态列表. 0:全部已读; 1:存在未读
+    *@note   生成支付订单号
+    *@param  PPayOrderParma   订单参数
+    *@return PStringSingle
     */
-    rpc GrpcGetMsgState(PMsgStateQuery) returns (PInt32List);
+    rpc GrpcGenerateOrder(PPayOrderParma) returns (PStringSingle);
+
  }
