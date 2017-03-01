@@ -27,14 +27,13 @@ enum ERobotMsgState {
 message PBRegards {
 	int64 id                = 1;  //消息ID
 	string from             = 2;  //网红用户ID
-	repeated PUserBase to   = 3;  //如果是条件筛选填前5个用户ID.
+	repeated PUserBase to   = 3;  //条件筛选时不填.精确选择时只填uuid.
 	PFansFilterParam Filter = 4;  //粉丝筛选条件,精确选择时条件为空
 	int32  fansNum          = 5;  //消息推送的粉丝数
-	string srcType          = 6;  //消息类型 image, audio
-	string Text             = 7;  //消息文本,最大长度140
-	PAudio audio            = 8;  //消息语音,语音最大时长60
-	PImage image            = 9;  //消息图片
-	int64 createTime        = 10;  //创建时间
+	string Text             = 6;  //消息文本,最大长度140
+	PAudio audio            = 7;  //消息语音,语音最大时长60
+	PImage image            = 8;  //消息图片
+	int64 createTime        = 7;  //创建时间
 }
 
 // 网红创建的推送消息
@@ -80,7 +79,7 @@ message PCRobotGlobalSetting {
 	bool regardsRemind     = 2;  //是否接收生日提醒和消息推送	
 	bool regardsEnable     = 3;  //是否接收消息推送
 	bool remindEnable      = 4;  //是否接收生日提醒	
-	int64 skin             = 5;  //皮肤类型	
+	int64 skin             = 5;  //皮肤类型.0:女; 1:男
 }
 
 // 粉丝收到的消息推送
@@ -210,7 +209,7 @@ message PCCelebrityList {
  */
 
  /*
- *@note B端:查询已设置的默认提醒(如果没有设置过,则查询结果中各字段内容为空)
+ *@note B端:查询已设置的默认提醒(如果没有设置过,srcType内容为空)
  *@path /v1/robot/remind/setting
  *@method GET
  *@cookie token&uuid
