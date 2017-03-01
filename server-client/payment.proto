@@ -220,7 +220,6 @@ message PKeywordHistory {
  
 
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
-
 message PLottery {
 	string title = 1;            // 抽奖标题
 	int32 type = 2;	         	// 接受人类型（0:全部，1:男，2:女）
