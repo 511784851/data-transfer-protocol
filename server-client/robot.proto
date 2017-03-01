@@ -84,10 +84,9 @@ message PCRobotGlobalSetting {
 
 // 粉丝收到的消息推送
 message PCPushRegards {
-	string srcType   = 1;    //消息类型 text, image, audio
-	string Text      = 2;    //消息文本,最大长度140
-	PAudio audio     = 3;    //消息语音,语音最大时长60
-	PImage image     = 4;    //消息图片
+	string Text      = 1;    //消息文本,最大长度140
+	PAudio audio     = 2;    //消息语音,语音最大时长60
+	PImage image     = 3;    //消息图片
 }
 
 // 粉丝收到的提醒消息
@@ -217,6 +216,15 @@ message PCCelebrityList {
  */
 
  /*
+ *@note B端:切换默认提醒样式(文本/语音, 最小操作间隔:2秒)
+ *@path /v1/robot/remind/setting/exchange
+ *@method PUT
+ *@cookie token&uuid
+ *@param  srctype    文本: text; 语音:audio.默认: text
+ *@return 成功返回PBRemind,失败返回PResult
+ */
+
+ /*
  *@note B端:查询未来7天(或历史)的提醒列表
  *@path /v1/robot/remind
  *@method GET
@@ -326,8 +334,6 @@ message PCCelebrityList {
  *@path /v1/robot/celebrity
  *@method GET
  *@cookie token&uuid
- *@param pageindex 页序号.从0开始,默认0.
- *@param pagesize  每页消息条数。默认30,最大100
  *@return 成功返回PCCelebrityList,失败返回PResult
 */
 
@@ -337,8 +343,6 @@ message PCCelebrityList {
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
- *@param pageindex 页序号.从0开始,默认0.
- *@param pagesize  每页消息条数。默认30,最大100
  *@return 成功返回PCCelebrityList,失败返回PResult
 */
 
