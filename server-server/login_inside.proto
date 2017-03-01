@@ -18,6 +18,20 @@ message PToken {
     bool ForceBindPhone = 8;    // 如果标志位为true，则用户需要绑定手机号码方能继续操作
 }
 
+// 用户已绑定的登录方式信息
+message PLoignBindInfo {
+    string UserName = 1;        // 用户名，没有则为空
+    string PhoneCode = 2;       // 手机号码，没有则为空
+    bool WeiXin = 3;            // 是否已绑定微信，绑定为true，未绑定为false
+    bool WeiBo = 4;             // 是否已绑定微博，绑定为true，未绑定为false
+    bool Facebook = 5;          // 是否已绑定脸书，绑定为true，未绑定为false
+    bool Google = 6;            // 是否已绑定谷歌，绑定为true，未绑定为false
+}
+
+message PLoignBindInfoList {
+    repeated PLoignBindInfo List = 1;   
+}
+
 /*
  *@note 用户登出接口
  *@path /v1/login/inside/logout
@@ -179,4 +193,11 @@ service IGrpcLogin {
      *@return 返回 PResult
      */
     rpc SetForceBindPhoneCode(PStringList) returns (PEmpty);
+
+    /*
+     *@note 批量获取用户登录方式绑定的情况
+     *@param 用户uuid 列表
+     *@return 返回 PLoignBindInfoList
+     */
+    rpc GetBindInfoList(PStringList) returns (PLoignBindInfoList);
  }
