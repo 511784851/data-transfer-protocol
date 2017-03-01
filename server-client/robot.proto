@@ -341,3 +341,14 @@ message PCCelebrityList {
  *@param pagesize  每页消息条数。默认30,最大100
  *@return 成功返回PCCelebrityList,失败返回PResult
 */
+
+
+/*
+ *@note 访问获取带签名的文件上传URL
+ *@path /v1/robot/uploadfileurl
+ *@method GET
+ *@param digest 要上传的文件的md5 hexstring
+ *@param length 文件大小，字节
+ *@param extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
+ *@return 成功返回PUpload，失败返回PResult
+ */
