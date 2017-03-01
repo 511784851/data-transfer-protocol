@@ -43,6 +43,20 @@ import "common_inside.proto";
  *@return 成功返回PCommentLevel，失败返回PResult
  */
 
+// 加载评论的参数
+message PCommentParam {
+    string postId    = 1;     //提醒消息的创建者
+    string postUuid  = 2;     //提醒消息的创建者
+    int32  offset    = 3;     // 分页查询的偏移
+    int32  count     = 4;     //分页大小
+}
+
+// 加载二级评论的参数
+message PCommentCommentParam {
+    string cid     = 1;   //一级评论ID
+    int32  offset  = 2;   //分页查询的偏移
+    int32  count   = 3;   //分页大小
+}
 
 service IGrpcComment {
      /*
@@ -86,4 +100,18 @@ service IGrpcComment {
      *@return PInt32List
      */
     rpc GrpcGetCommentReplyCnt(PStringList) returns (PInt32List);
+
+    /*
+     *@note 加载帖子评论
+     *@param PCommentParam
+     *@return PCommentExtList
+     */
+    rpc GrpcLoadComment(PCommentParam) returns (PCommentExtList);
+
+     /*
+     *@note 加载评论的二级评论
+     *@param PCommentCommentParam
+     *@return PCommentExtList
+     */
+    rpc GrpcLoadCommentComment(PCommentCommentParam) returns (PCommentExtList);
  }
