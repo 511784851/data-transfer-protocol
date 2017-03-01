@@ -18,10 +18,13 @@ message PMsgStateQuery {
 	repeated string celebritys  = 2; //网红uuid
 }
 
+
 // 其他服务通知机器人推送的消息
 message PRobotNotifyMsg {
-    repeated string  to    = 1; //推送目标
-	PCRobotPushMsg message  = 2; //消息内容
+    repeated string    to         = 1; //推送目标
+    string             from       = 2; //网红用户信息
+    ERobotPushType     msgType    = 3; //消息类型
+    PCRobotPushRawMsg  content    = 4; //各类型消息
 }
 
 // 其他服务通知机器人推送的消息

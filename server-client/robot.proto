@@ -25,15 +25,15 @@ enum ERobotMsgState {
 
 // 网红创建的推送消息
 message PBRegards {
-	int64 id                = 1;  //消息ID
-	string from             = 2;  //网红用户ID
+	int64 id                = 1;  //消息ID,客户端不填
+	string from             = 2;  //网红用户ID,客户端不填
 	repeated PUserBase to   = 3;  //条件筛选时不填.精确选择时只填uuid.
 	PFansFilterParam Filter = 4;  //粉丝筛选条件,精确选择时条件为空
-	int32  fansNum          = 5;  //消息推送的粉丝数
+	int32  fansNum          = 5;  //消息推送的粉丝数,客户端不填
 	string Text             = 6;  //消息文本,最大长度140
 	PAudio audio            = 7;  //消息语音,语音最大时长60
 	PImage image            = 8;  //消息图片
-	int64 createTime        = 9;  //创建时间
+	int64 createTime        = 9;  //创建时间,客户端不填
 }
 
 // 网红创建的推送消息
@@ -43,13 +43,13 @@ message PBRegardsList {
 
 // 网红创建的生日提醒消息
 message PBRemind {
-	int64 id                    = 1;   //消息ID
-	string from                 = 2;   //网红用户ID
+	int64 id                    = 1;   //消息ID,客户端不填
+	string from                 = 2;   //网红用户ID,客户端不填
 	PUserBase to                = 3;   //提醒的目标用户uuid. 默认提醒时不填. 
 	string srcType              = 4;   //消息类型 text, audio
 	string Text                 = 5;   //文本,最大长度140
 	PAudio audio                = 6;   //语音,语音最大时长30
-	int64  brithday             = 7;   //生日日期
+	int64  brithday             = 7;   //生日日期,客户端不填
 }
 
 // 网红创建的生日提醒消息模板
@@ -153,13 +153,26 @@ message PCRobotSummary {
 
 // 用户关注的网红信息
 message PCCelebrity {
-    PUserBase       user     = 1; //用户信息
-    ERobotMsgState  msgState = 2; //是否有未读消息
+    PUserBase       user         = 1; //用户信息
+    PUserBase       belongVo     = 2; //所属VO信息
+    ERobotMsgState  msgState     = 3; //是否有未读消息
 }
 
 // 用户关注的网红列表
-message PCCelebrityList {
-    repeated PCCelebrity list = 1;
+message PCCelebrityGroup {
+    string   group            = 1;  //分组, A-Z
+    repeated PCCelebrity list = 2;  //组内网红信息
+}
+
+// 用户关注的网红列表
+message PCCelebrityGroupList {
+    repeated PCCelebrityGroup list = 1;
+}
+
+// 网红消息数限制
+message PBMsgNumLimit {
+    int32 total      = 1;  //总数
+    int32 remain     = 2;  //剩余数
 }
 
 /*
@@ -195,7 +208,7 @@ message PCCelebrityList {
  *@path /v1/robot/regards/limit
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PInt32Single,失败返回PResult
+ *@return 成功返回PBMsgNumLimit,失败返回PResult
  */
 
 /*
@@ -338,7 +351,7 @@ message PCCelebrityList {
 */
 
 /*
- *@note C端: 搜索用户关注的网红(最多只返回50个)
+ *@note C端: 搜索用户关注的网红
  *@path /v1/robot/celebrity/search
  *@method GET
  *@cookie token&uuid
