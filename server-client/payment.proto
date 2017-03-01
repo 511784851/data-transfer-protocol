@@ -220,32 +220,58 @@ message PKeywordHistory {
  
 
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
-message PLottery {
-	string title = 1;            // 抽奖标题
-	int32 type = 2;	         	// 接受人类型（0:全部，1:男，2:女）
-	int32 winners = 3;			//获奖名额数
-	int32 totAmt = 4;			//抽奖总金额（分）
-	int32 bonus = 5;			//平均每个人的奖金（分）
-	repeated PLocation locs = 6; // 地理位置
-	repeated string uuidList = 7; //获奖人列表
+/**抽奖（限制5mins/2times） */
+message PShuffle {
+	string title = 1; //标题
+	int32 gender = 2;//性别0:不限，1:男，2:女
+	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
+	bool negate = 4;// true表示要对region取反，即排除
+	int32 winners = 5;	//中奖人数
+	repeated string skipUuid = 6;// 反选掉的用户
+	int32 totAmt = 7;   //总金额
+	string remark = 8;//描述
+}
+/**抽奖结果*/
+message PShuffleRet{
+	string title = 1; //标题
+	int32 gender = 2;//性别0:不限，1:男，2:女
+	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
+	int32 winners = 4;	//中奖人数
+	int32 totAmt = 5;   //总金额
+	string remark = 6;//描述
+	repeated PUserBaseEx userList = 7;//中奖用户信息
+	string crtTm = 8; //创建时间
 }
 
+/**确认抽奖*/
+message PLotteryConfirm {
+	string title = 1;            // 抽奖标题
+	int32 gender = 2;	         // 接受人类型（0:全部，1:男，2:女）
+	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
+	int32 totAmt = 4;   		//总金额
+	int32 winners = 5;			//获奖名额数
+	int32 bonus = 6;			//平均每个人的奖金（分）
+	string remark = 7;			//描述
+	repeated PUserBaseEx userList = 8;//中奖用户信息
+}
+/**历史抽奖记录（最近一月）*/
 message PLotteryListRet{
 	repeated PLotterySingleRet lotteries = 1;//单个抽奖信息
 }
-
+/**中奖者领奖*/
 message PAcceptPrize{
 	string lotteryId = 1;		//抽奖ID
 }
-
+/**抽奖包详情*/
 message PLotteryDetailRet{
 	string lotteryId = 1;		//抽奖包ID
 	int32 totAmt = 2;			//抽奖总金额
 	string crtTm = 3;			//抽奖创建时间
 	int32 type = 4;				//抽奖类型（0:全部，1：男，2:女）
 	int32 winners = 5;			//获奖人数
-	repeated PLocation locs = 6; //位置代码
-	repeated PUserBaseEx users = 7;		//用户列表
+	repeated string region = 6; //位置代码
+	repeated PUserBaseEx userList = 7;//用户列表
+	string remark = 8;			//描述
 }
 
 message PLotterySingleRet{
@@ -253,27 +279,35 @@ message PLotterySingleRet{
 	string title = 2;			//抽奖包标题
 	int32 winners = 3;			//中奖人数
 	string crtTm = 4;			//发起抽奖时间
-	repeated string icons = 5;	//中奖者头像列表（最长5个头像.）
+	repeated PUserBase userList = 5;//参与抽奖者信息（最多5个）
 } 
- 
-message PLocation{
-	string locCd = 1;	//位置代码
-	string locNm = 2;	//位置名称
-}
+
 message PUserBaseEx{
 	PUserBase info = 1;			//用户基本信息
-	int32 sex = 2;				//用户性别（0:全部，1：男，2:女）
+	int32 gender = 2;			//用户性别（1：男，2:女）
 	int32 amt = 3;				//单个领奖金额(单位分)
 }
-
+/**抽奖历史删除*/
+message PLotteryDel{
+	string lotteryId = 1;		//抽奖ID
+}
 
 /*
  *@note 发起抽奖
- *@path /v1/payment/lottery/create
+ *@path /v1/payment/lottery/shuffle
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PLottery
- *@return 成功返回POrderPay，失败返回PResult
+ *@body PShuffle
+ *@return 成功返回PShuffleRet，失败返回PResult
+ */
+ 
+ /*
+ *@note 确认抽奖
+ *@path /v1/payment/lottery/confirm
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PLotteryConfirm
+ *@return 成功返回 POrderPay，失败返回PResult
  */
  
  /*
@@ -282,6 +316,15 @@ message PUserBaseEx{
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body PAcceptPrize
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note B端删除开奖记录
+ *@path /v1/payment/lottery/delete
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PLotteryDel
  *@return 返回PResult
  */
 
