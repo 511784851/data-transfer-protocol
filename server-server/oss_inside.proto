@@ -107,6 +107,7 @@ message PImageInfo {
 	string uuid = 5;
 	EFrom from = 6;
 	int64 time = 7;
+	int32 State = 8;
 }
 
 message PQueryParam {
