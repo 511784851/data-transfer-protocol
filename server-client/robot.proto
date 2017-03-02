@@ -207,6 +207,16 @@ message PBMsgNumLimit {
  */
 
  /*
+ *@note B端: 网红搜索历史推送的消息
+ *@path /v1/robot/regards/search
+ *@method GET
+ *@cookie token&uuid
+ *@param keyword 关键词
+ *@param type  内容搜索:content; 昵称搜索:nickname
+ *@return 成功返回PBRegardsList,失败返回PResult
+*/
+
+ /*
  *@note B端:查询剩余可发消息数
  *@path /v1/robot/regards/limit
  *@method GET
