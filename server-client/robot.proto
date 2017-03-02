@@ -43,13 +43,14 @@ message PBRegardsList {
 
 // 网红创建的生日提醒消息
 message PBRemind {
-	int64 id                    = 1;   //消息ID,客户端不填
-	string from                 = 2;   //网红用户ID,客户端不填
-	PUserBase to                = 3;   //提醒的目标用户uuid. 默认提醒时不填. 
-	string srcType              = 4;   //消息类型 text, audio
-	string Text                 = 5;   //文本,最大长度140
-	PAudio audio                = 6;   //语音,语音最大时长30
-	int64  brithday             = 7;   //生日日期,客户端不填
+	int64 id                    = 1;   //消息ID,客户端不填.如果消息未发送ID则为0
+	int32 state                 = 2;   //客户端不填.发送状态:0:待发送; 1:已过时间,已发送;2:已过时间,未发送
+	string from                 = 3;   //网红用户ID,客户端不填
+	PUserBase to                = 4;   //提醒的目标用户uuid. 默认提醒时不填. 
+	string srcType              = 5;   //消息类型 text, audio
+	string Text                 = 6;   //文本,最大长度140
+	PAudio audio                = 7;   //语音,语音最大时长30
+	int64  brithday             = 8;   //生日日期,客户端不填
 }
 
 // 网红创建的生日提醒消息模板
@@ -138,17 +139,19 @@ message PCRobotMsgCount {
 }
 
 // 气泡消息队列
-message PCRobotBubbleList {
-    repeated PCRobotMsgCount  countList  = 1; //服务器各类型总消息数
-	repeated PCRobotPushMsg    list      = 2; //消息内容
+message PCRobotBubble {
+   ERobotPushType             type     = 1;  //类型 ERobotPushType
+   int32                      count    = 2;  //数目
+   repeated PCRobotPushMsg    list     = 3; //消息内容
+
 }
 
 // 心跳轮询推送信息汇总
 message PCRobotSummary {
-    int32             totalNum        = 1; // 消息总数
-    int32             unReadNum       = 2; // 消息未读数, 如果-1客户端则忽略响应
-    int32             nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
-    PCRobotBubbleList bubbleSummary   = 4; // 气泡汇总信息
+    int32                  totalNum        = 1; // 消息总数, 如果-1客户端则忽略响应
+    int32                  unReadNum       = 2; // 消息未读数, 如果-1客户端则忽略响应
+    int32                  nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
+    repeated PCRobotBubble bubbleList      = 4; // 气泡消息列表
 }
 
 // 用户关注的网红信息
