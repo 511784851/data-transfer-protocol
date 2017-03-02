@@ -289,7 +289,7 @@ message PUserBaseEx{
 }
 /**抽奖历史删除*/
 message PLotteryDel{
-	string lotteryId = 1;		//抽奖ID
+	repeated string lotteryId = 1;		//抽奖ID
 }
 
 /*
