@@ -33,7 +33,7 @@ message POrderPay {
 	string goodsName = 6;	       // 商品名称
 	string sign = 7;	           // 签名
 }
-/** 单个红包详情 */
+/** 红包详情 */
 message PRedEnveInfo {
     string ord_no = 1;                      // 业务订单号
     int32 user_rece_money =2;               // 当前用户领取的金额（单位：分），如果是0表示网红自己查看详情
@@ -48,7 +48,7 @@ message PRedEnveInfo {
 	bool status = 11;                       // 红包是否过期
 	repeated PRedEnveRece redEnveRece = 12; // 红包领取信息，默认给10个
 }
-/** 单个红包领取信息 */
+/** 红包领取信息 */
 message PRedEnveRece {
 	int32 id = 1;                  // 唯一编号
 	int32 money = 2;               // 领取金额（单位：分）
@@ -57,7 +57,13 @@ message PRedEnveRece {
 	PUserBase userBase = 5;        // 领取用户信息
 }
 
-/** 红包领取列表信息 */
+/** 红包针对用户状态 */
+message PRedEnveStatus {
+    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完
+    int32 rece_money = 2; // 已领取金额（单位：分）
+}
+
+/** 红包领取列表 */
 message PRedEnveReceList {
 	repeated PRedEnveRece redEnveRece = 1; 
 }
@@ -68,8 +74,7 @@ message PBill {
     int32 expend_money = 2;                 // 总支出金额（单位：分）
 	int32 income_number = 3;                // 总收入数量
 	int32 expend_number = 4;	            // 总支出数量
-	repeated PBillInfo incomeBill = 5;	    // 收入账单明细
-	repeated PBillInfo expendBill = 6;	    // 支出账单明细
+	repeated PBillInfo billInfo = 5;	    // 账单明细
 }
 /** 账单-明细 */
 message PBillInfo {
@@ -81,11 +86,11 @@ message PBillInfo {
 	PUserBase userBase = 6;                 // 发送人信息
 }
 
-/** 红包发送列表 */
-message PRedEnveHistory {
+/** 发红包列表 */
+message PRedEnveList {
     repeated PRedEnveBaseInfo redEnveBaseInfo = 1;
 }
-/** 红包发送列表单个红包信息 */
+/** 发红包列表单个红包信息 */
 message PRedEnveBaseInfo {
     int32 id = 1;                           // 唯一编号
     string ord_no = 2;                      // 业务订单号
@@ -96,29 +101,29 @@ message PRedEnveBaseInfo {
 	repeated PUserBase userBase = 7;        // 前五个可领取用户信息
 }
 
-/** 收到打赏列表 */
-message PRewardHistory {
+/** 打赏列表 */
+message PRewardList {
     repeated PRewardInfo rewardInfo = 1;
 }
-/** 打赏详情 */
+/** 打赏列表详情 */
 message PRewardInfo {
 	int32 id = 1;                           // 唯一编号
-	int32 money = 2;	                    // 金额(单位：分)
-	string content = 3;	                    // 描述
-	int64 time = 4;	                        // 打赏时间
-	PUserBase sendUserBase = 5;             // 打赏人信息
-	PUserBase receUserBase = 6;             // 领赏人信息
+	string ord_no = 2;	                    // 业务订单号
+	int32 money = 3;	                    // 金额(单位：分)
+	string content = 4;	                    // 描述
+	int64 time = 5;	                        // 打赏时间
+	PUserBase userBase = 6;                 // 打赏人或领赏人信息
 }
 
-/** 单个打赏详情以及打赏人历史打赏信息 */
-message PRewardList {
-	PRewardInfo rewardInfo = 1;                 // 打赏信息
-	int32 money = 2;                            // 打赏总金额
-    repeated PRewardInfo rewardInfoHistory = 3; // 历史打赏信息
+/** 打赏详情以及打赏人历史打赏列表 */
+message PRewardInfoList {
+	PRewardInfo rewardInfo = 1;             // 打赏信息
+	int32 money = 2;                        // 打赏总金额
+    repeated PRewardList reward = 3;        // 历史打赏信息
 }
 
 /** 搜索的红包和打赏信息 */
-message PKeywordHistory {
+message PSreachList {
 	repeated PRedEnveBaseInfo redEnveBaseInfo = 1; // 搜索到的红包信息
     repeated PRewardInfo rewardInfo = 2;           // 搜索到的打赏信息
 }
@@ -133,7 +138,7 @@ message PKeywordHistory {
  
 /*
  *@note 发普通紅包
- *@path /v1/payment/send/ordinRedEnve
+ *@path /v1/payment/redEnve/send-ordin
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body POrdinRedEnve
@@ -142,7 +147,7 @@ message PKeywordHistory {
 
 /*
  *@note 发群紅包
- *@path /v1/payment/send/groupRedEnve
+ *@path /v1/payment/redEnve/send-group
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body PGroupRedEnve
@@ -151,7 +156,7 @@ message PKeywordHistory {
  
  /*
  *@note 打赏
- *@path /v1/payment/send/reward
+ *@path /v1/payment/reward/send
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body POrdinRedEnve
@@ -159,8 +164,26 @@ message PKeywordHistory {
  */
  
  /*
- *@note 查看红包详情(领红包)
- *@path /v1/payment/receive/redEnve
+ *@note 查询红包针对用户状态
+ *@path /v1/payment/redEnve/status
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *url param ord_no 业务订单号
+ *@return 成功返回PRedEnveStatus，失败返回PResult
+ */
+ 
+ /*
+ *@note 领红包
+ *@path /v1/payment/redEnve/receive
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *form param ord_no 业务订单号
+ *@return 成功返回PRedEnveStatus，失败返回PResult
+ */
+ 
+ /*
+ *@note 查看红包详情
+ *@path /v1/payment/redEnve/info
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param ord_no 业务订单号
@@ -168,8 +191,8 @@ message PKeywordHistory {
  */
  
   /*
- *@note 加载更多领红包用户
- *@path /v1/payment/find/receRedEnve
+ *@note 查询领红包列表
+ *@path /v1/payment/redEnve/receive-list
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param ord_no 业务订单号
@@ -179,57 +202,59 @@ message PKeywordHistory {
  */
 
  /*
- *@note 查看账单、批量加载账单数据
- *@path /v1/payment/find/bill
+ *@note 查看账单以及账单列表
+ *@path /v1/payment/bill/info-list
  *@method GET
  *@cookie token&uuid 登录用户信息
- *url param last_id 最后一条账单编号ID，第一次传值-1
- *url param count 数量大小
- *url param type 类型（1-收入 2-支出）
+ *url param type 类型（0-收入 1-支出）（默认0）
+ *url param idx  上一批数据最后ID（默认0）
+ *url param count 数量大小（必须）
  *@return 成功返回PBill，失败返回PResult
  */
  
  /*
- *@note 发送红包历史
- *@path /v1/payment/find/redEnvehistory
+ *@note 查询发红包列表
+ *@path /v1/payment/redEnve/send-list
  *@method GET
  *@cookie token&uuid 登录用户信息
- *url param last_id 上一批数据最后一条编号
- *url param count 数量大小
- *@return 成功返回PRedEnveHistory，失败返回PResult
+ *url param idx 上一批数据最后ID（默认0）
+ *url param count 数量大小（必须）
+ *@return 成功返回PRedEnveList，失败返回PResult
  */
  
   /*
- *@note 收到打赏历史
- *@path /v1/payment/find/rewardHistory
+ *@note 查询打赏列表
+ *@path /v1/payment/reward/list
  *@method GET
  *@cookie token&uuid 登录用户信息
- *url param last_id 上一批数据最后一条编号
- *url param count 数量大小
- *@return 成功返回PRewardHistory，失败返回PResult
+ *url param type 类型（0-领赏 1-打赏）（必须）
+ *url param idx 上一批数据最后ID（默认0）
+ *url param count 数量大小（必须）
+ *@return 成功返回PRewardList，失败返回PResult
  */
 
  /*
  *@note 查看打赏详情以及历史打赏记录
- *@path /v1/payment/find/rewardInfo
+ *@path /v1/payment/reward/info-list
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param ord_no 业务订单号
- *url param last_id 上一批数据最后一条编号
- *url param count 数量大小
- *@return 成功返回PRewardList，失败返回PResult
+ *url param type 类型（0-领赏 1-打赏）（必须）
+ *url param idx 上一批数据最后ID（默认0）
+ *url param count 数量大小（必须）
+ *@return 成功返回PRewardInfoList，失败返回PResult
  */
  
  /*
  *@note 搜索红包和打赏历史
- *@path /v1/payment/find/sreachfilter
+ *@path /v1/payment/sreach/list
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param keyword 搜索的内容
- *url param type 类型（0-不限，1-红包，2-打赏）
- *url param last_id 上一批数据最后一条编号
- *url param count 数量大小
- *@return 成功返回PKeywordHistory，失败返回PResult
+ *url param type 类型（0-不限，1-红包，2-打赏）（默认0）
+ *url param idx 上一批数据最后ID（默认0）
+ *url param count 数量大小（必须）
+ *@return 成功返回PSreachList，失败返回PResult
  */
  
 
