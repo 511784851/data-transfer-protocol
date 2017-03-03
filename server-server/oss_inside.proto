@@ -103,11 +103,12 @@ message PImageInfo {
 	int64 id = 1;
 	string objectkey = 2;
 	string thumb = 3;
-	int32 bucket = 4;
-	string uuid = 5;
-	EFrom from = 6;
-	int64 time = 7;
-	int32 State = 8;
+	string url = 4;
+	int32 bucket = 5;
+	string uuid = 6;
+	EFrom from = 7;
+	int64 time = 8;
+	int32 State = 9;
 }
 
 message PQueryParam {
