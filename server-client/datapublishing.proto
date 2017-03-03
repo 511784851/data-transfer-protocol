@@ -38,6 +38,9 @@ message PGuy {
 
 message PGuyList {
 	repeated PGuy guy = 1;
+	
+	// 不分页的结果总数，大于等于guy的size
+	int32 total = 2;
 }
 
 message PTopicNews {
@@ -450,7 +453,7 @@ message PFansFilterParam {
 	// 地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
 	repeated string region = 3;
 	
-	// true表示要对region取反，即排除
+	// true表示要对region取反，即排除掉这些地区的粉丝
 	bool negate = 4;
 	
 	// 反选掉的用户
@@ -462,12 +465,7 @@ message PFansFilterParam {
  *@path /datapublishing/fans/filter
  *@method POST
  *@cookie token&uuid
- *@param gender 性别过滤 0女 1男， 无此参数或其它情况不过滤
- *@param region 地区过滤 编码方式参照个人信息中的地区，如中国广东深圳为CN;4403
- *              不需要此项过滤时，请勿传此参数
- *              多个地区用逗号连接，如CN;4403,CN;4404
- *              省市可以混杂在一起，如CN;43,CN;4403
- *@param negate true表示要对region取反，即排除掉这些地区的粉丝
+ *@body PFansFilterParam 筛选参数
  *@param keyword 搜索关键字
  *@param pageindex 页号，从1开始
  *@param pagesize 页大小

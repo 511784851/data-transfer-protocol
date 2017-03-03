@@ -40,7 +40,8 @@ message PPostInfo {
 	int64 editTime = 27;            //编辑时间，上传时不用填
 	int64 delTime = 28;             //删除时间，上传时不用填
 	int64 RefCnt = 29;              //帖子被转发次数，上传时不用填
-}
+	PHyperLink hyperLink = 30;      //图片、文字帖可以带超链接
+ }
 
 // 被@的用户列表
 message PAtUserList {
@@ -76,6 +77,12 @@ message PAudio {
 	string url = 1;              //音频在OSS上的路径
 	int32 length = 2;            //音频长度
 	int64 expires = 3;           //音频的有效期（多少秒之后过期）
+} 
+
+// 超链接
+message PHyperLink {
+	string url = 1;              //链接地址
+	string nickName = 2;         //网红昵称
 } 
 
 // 图片的标签信息列表

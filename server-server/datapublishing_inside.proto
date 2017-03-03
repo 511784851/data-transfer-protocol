@@ -3,6 +3,8 @@ package bbproto;
 
 import "datapublishing.proto";
 import "result.proto";
+import "account.proto";
+import "common_inside.proto";
 
 // 每天的平均在线时间
 message POnlineData {
@@ -24,7 +26,7 @@ message POnlineDataArray {
  */
 
 
-message PQueryVUserParam {
+message PQueryUserParam {
 	string uuid = 1;
 	string keyword = 2;
 	int32 offset = 3;
@@ -32,15 +34,20 @@ message PQueryVUserParam {
 }
 
 message PScrollResult {
-	// uuids
+	// ids (如uuids等)
 	repeated string id = 1;
 	
 	// 取下一页的游标
-	string scrollId = 2;
+	string cursor = 2;
 }
 
-message PScrollId{
-	string scrollId = 1;
+message PGroupString {
+	string group = 1;
+	repeated string list = 2;
+}
+
+message PGroupStringList {
+	repeated PGroupString list = 1;
 }
 
 service grpcDataPublishing {
@@ -48,8 +55,17 @@ service grpcDataPublishing {
 	rpc SelectFans(PFansFilterParam) returns (PScrollResult);
 
 	// 用PScrollResult.scrollId查询下一页粉丝，直到PScrollResult.id为空
-	rpc ScrollMore(PScrollId) returns (PScrollResult);
+	rpc ScrollMore(PStringSingle) returns (PScrollResult);
 	
-	// 用户关注的vip及以上用户列表
-	rpc SelectVUser(PQueryVUserParam) returns (PStringList);
+	// 用户关注的网红列表，含搜索
+	rpc SelectVUser(PQueryUserParam) returns (PGroupStringList);
+	
+	// 网红当天过生日的粉丝uuid
+	rpc SelectTodayBirthdayFans(PStringSingle) returns (PScrollResult);
+	
+	// 网红7天内过生日的粉丝uuid
+	rpc Select7DayBirthdayFans(PQueryUserParam) returns (PUserList);
+	
+	// 当天有粉丝过生日的网红uuid
+	rpc SelectVUserHaveTodayBirthdayFans(PEmpty) returns (PStringList);
 }
