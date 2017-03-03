@@ -119,7 +119,7 @@ message PRewardInfo {
 message PRewardInfoList {
 	PRewardInfo rewardInfo = 1;             // 打赏信息
 	int32 money = 2;                        // 打赏总金额
-    repeated PRewardList reward = 3;        // 历史打赏信息
+    repeated PRewardInfo rewardInfo = 3;    // 历史打赏信息
 }
 
 /** 搜索的红包和打赏信息 */
