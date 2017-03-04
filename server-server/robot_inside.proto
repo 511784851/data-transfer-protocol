@@ -52,7 +52,7 @@ message PPayOrderParma {
     *@param   PBRemind 消息数据
     *@return PEmpty
     */
-    rpc GrpCreateRemind(PBRemind) returns (PEmpty);
+    rpc GrpcCreateRemind(PBRemind) returns (PEmpty);
 
     /*
     *@note 监管:查询未来7天(或历史)的CEO提醒列表
