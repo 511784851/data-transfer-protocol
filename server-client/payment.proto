@@ -227,7 +227,7 @@ message PSreachList {
  *@path /v1/payment/reward/list
  *@method GET
  *@cookie token&uuid 登录用户信息
- *url param type 类型（0-领赏 1-打赏）（必须）
+ *url param type 类型（0-接收 1-发送）（必须）
  *url param idx 上一批数据最后ID（默认0）
  *url param count 数量大小（必须）
  *@return 成功返回PRewardList，失败返回PResult
@@ -239,7 +239,6 @@ message PSreachList {
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param ord_no 业务订单号
- *url param type 类型（0-领赏 1-打赏）（必须）
  *url param idx 上一批数据最后ID（默认0）
  *url param count 数量大小（必须）
  *@return 成功返回PRewardInfoList，失败返回PResult
