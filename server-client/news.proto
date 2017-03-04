@@ -82,7 +82,8 @@ message PAudio {
 // 超链接
 message PHyperLink {
 	string url = 1;              //链接地址
-	string nickName = 2;         //网红昵称
+	string nickName = 2;         //网红昵称,客户端不用填
+	string uuid = 3;             //网红用户ID
 } 
 
 // 图片的标签信息列表
