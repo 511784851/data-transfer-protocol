@@ -271,9 +271,11 @@ message PShuffle {
 }
 */
 message PShuffle {
-	int32 gender = 1; //性别
+	int32 gender = 1; //性别 0:不限，1:男，2:女
 	repeated string region = 2; //地区筛选，格式如CN;4403、CN;44
 	int32 winners = 3;	//中奖人数
+	int32 bonus = 4;	//单个金额
+	int32 totAmt = 5; //总金额
 }
 /**抽奖结果
 message PShuffleRet{
