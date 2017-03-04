@@ -4,7 +4,7 @@ import "robot.proto";
 import "result.proto";
 import "common_inside.proto";
 option java_package = "com.blemobi.sep.probuf";
-option java_outer_classname = "RobotProtos";
+option java_outer_classname = "RobotApiProtos";
 
 // 提醒消息的查询条件
 message PRemindQuery {
