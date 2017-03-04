@@ -22,6 +22,7 @@ message PGroupRedEnve {
 	bool isRandom = 3;	           // 是否随机红包
 	string content = 4;	           // 描述
 	PFansFilterParam filter = 5;   // 粉丝筛选条件
+	repeated string uuid = 6;      // 勾选的用户
 }
 /** 发红包，打赏，抽奖返回的订单预支付信息 */
 message POrderPay {
