@@ -280,42 +280,17 @@ message PCelebrityGroup {
 
 
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
-/**抽奖（限制5mins/2times） 
+/**筛选中奖者*/
 message PShuffle {
-	string title = 1; //标题
-	int32 gender = 2;//性别0:不限，1:男，2:女
-	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
-	bool negate = 4;// true表示要对region取反，即排除
-	int32 winners = 5;	//中奖人数
-	repeated string skipUuid = 6;// 反选掉的用户
-	int32 totAmt = 7;   //总金额
-	string remark = 8;//描述
+	string title = 1;			//标题
+	int32 winners = 2;			//获奖人数
+	repeated string region = 3; //位置代码
+	string remark = 4;			//描述
+	int32 gender = 5; //性别 0:不限，1:男，2:女
+	int32 bonus = 6;	//单个金额
+	int32 totAmt = 7; //总金额
 }
-*/
-message PShuffle {
-	int32 gender = 1; //性别 0:不限，1:男，2:女
-	repeated string region = 2; //地区筛选，格式如CN;4403、CN;44
-	int32 winners = 3;	//中奖人数
-	int32 bonus = 4;	//单个金额
-	int32 totAmt = 5; //总金额
-}
-/**抽奖结果
-message PShuffleRet{
-	string title = 1; //标题
-	int32 gender = 2;//性别0:不限，1:男，2:女
-	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
-	int32 winners = 4;	//中奖人数
-	int32 totAmt = 5;   //总金额
-	string remark = 6;//描述
-	repeated PUserBaseEx userList = 7;//中奖用户信息
-	string crtTm = 8; //创建时间
-}
-*/
 
-message PShuffleRet {
-	repeated PUserBaseEx userList = 1;//中奖用户信息
-	string crtTm = 2; //创建时间
-}
 
 /**确认抽奖*/
 message PLotteryConfirm {
@@ -329,15 +304,15 @@ message PLotteryConfirm {
 	repeated PUserBaseEx userList = 8;//中奖用户信息
 }
 /**历史抽奖记录（最近一月）*/
-message PLotteryListRet{
-	repeated PLotterySingleRet lotteries = 1;//单个抽奖信息
+message PLotteryList{
+	repeated PLotterySingle lotteries = 1;//单个抽奖信息
 }
 /**中奖者领奖*/
 message PAcceptPrize{
 	string lotteryId = 1;		//抽奖ID
 }
-/**抽奖包详情*/
-message PLotteryDetailRet{
+/**抽奖包详情、筛选结果*/
+message PLotteryDetail{
 	string lotteryId = 1;		//抽奖包ID
 	string title = 2;			//标题
 	int32 totAmt = 3;			//抽奖总金额
@@ -349,7 +324,7 @@ message PLotteryDetailRet{
 	string remark = 9;			//描述
 }
 
-message PLotterySingleRet{
+message PLotterySingle{
 	string lotteryId = 1;		//抽奖包ID
 	string title = 2;			//抽奖包标题
 	int32 winners = 3;			//中奖人数
@@ -373,7 +348,7 @@ message PLotteryDel{
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@body PShuffle
- *@return 成功返回PShuffleRet，失败返回PResult
+ *@return 成功返回PLotteryDetail，失败返回PResult
  */
  
  /*
@@ -411,7 +386,7 @@ message PLotteryDel{
  *@urlParam startIndex 开始下标
  *@urlParam size 结果集大小
  *@urlParam keywords 标题关键字
- *@return 成功返回PLotteryListRet，失败返回PResult
+ *@return 成功返回PLotteryList，失败返回PResult
  */
  
 /*
@@ -422,5 +397,5 @@ message PLotteryDel{
  *@urlParam lotteryId 抽奖包Id
  *@urlParam keywords 中奖者关键字
  *@urlParam type 红包类型（0:全部，1:男，2:女）
- *@return 成功返回PLotteryDetailRet，失败返回PResult
+ *@return 成功返回PLotteryDetail，失败返回PResult
  */
