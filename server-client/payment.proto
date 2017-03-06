@@ -62,6 +62,7 @@ message PRedEnveRece {
 message PRedEnveStatus {
     int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完
     int32 rece_money = 2; // 已领取金额（单位：分）
+    string content = 3;   // 描述
 }
 
 /** 红包领取列表 */
@@ -127,6 +128,17 @@ message PRewardInfoList {
 message PSreachList {
 	repeated PRedEnveBaseInfo redEnveBaseInfo = 1; // 搜索到的红包信息
     repeated PRewardInfo rewardInfo = 2;           // 搜索到的打赏信息
+}
+
+/** 用户关注的网红列表 */
+message PCelebrityList {
+    repeated PCelebrityGroup celebrityGroup = 1;
+}
+
+/** 用户关注的网红信息 */
+message PCelebrityGroup {
+    string group = 1;                  // 分组, A-Z
+    repeated PUserBase userBase = 2;   // 网红信息
 }
 
 /*
@@ -257,6 +269,15 @@ message PSreachList {
  *@return 成功返回PSreachList，失败返回PResult
  */
  
+ /*
+ *@note 搜索用户关注的网红
+ *@path /v1/payment/user/celebrity-list
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@param keyword 关键词
+ *@return 成功返回PCelebrityList,失败返回PResult
+*/
+
 
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
 /**抽奖（限制5mins/2times） 
