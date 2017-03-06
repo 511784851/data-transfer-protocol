@@ -81,6 +81,13 @@ message PMsgNumLimitParma {
     rpc GrpcSetMsgNumPerDay(PMsgNumLimitParma) returns (PEmpty);
 
     /*
+    *@note 获取B端每天(0-24时)推送消息数
+    *@param PStringSingle 网红UUID
+    *@return PInt32Single
+    */
+    rpc GrpcGetMsgNumPerDay(PStringSingle) returns (PInt32Single);
+
+    /*
     *@note 监管:设置生日提醒(CEO祝福)
     *@param   PBRemind 消息数据
     *@return PEmpty
