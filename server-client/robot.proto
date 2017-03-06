@@ -6,6 +6,7 @@ option java_outer_classname = "RobotProtos";
 import "account.proto";
 import "notification.proto";
 import "news.proto";
+import "streaming.proto";
 import "datapublishing.proto";
 
 // 推送消息类型
@@ -45,7 +46,7 @@ message PBRegardsList {
 message PBRemind {
 	int64 id                    = 1;   //消息ID,客户端不填.如果消息未发送ID则为0
 	int32 state                 = 2;   //客户端不填.发送状态:0:待发送; 1:已过时间,已发送;2:已过时间,未发送
-	string from                 = 3;   //网红用户ID,客户端不填
+	string from                 = 3;   //网红用户ID,客户端不填,监管要填
 	PUserBase to                = 4;   //提醒的目标用户uuid. 默认提醒时不填. 
 	string srcType              = 5;   //消息类型 text, audio
 	string Text                 = 6;   //文本,最大长度140
@@ -66,11 +67,41 @@ message PBRemindList {
 	repeated PBRemind list = 1; //提醒消息列表
 }
 
+// 红包消息
+message PBRedpacket {
+	int64 id               = 1;   //消息ID
+	string from            = 2;   //发红包的网红用户ID
+	string content         = 3;   //红包备注
+	int64 redpacketId      = 4;   //红包id
+	string targetKey       = 5;   //红包参与者存储位置
+	int64  time            = 6;   //发送时间
+}
+
+// 抽奖消息
+message PBLottery {
+	int64 id               = 1;   //消息ID
+	string from            = 2;   //发起的网红用户ID
+	string content         = 3;   //抽奖备注
+	int64  lotteryId       = 4;   //抽奖id
+	string targetKey       = 5;   //参与者存储位置
+	int64  time            = 6;   //发送时间
+}
+
+// 直播消息
+message PBStreaming {
+	int64            id        = 1;   //消息ID
+	int64           time       = 2;   //发送时间
+	PStreamingLive  live       = 3;    //直播提醒信息
+}
+
 // 用于redis存储
 message PBRawMsg {
-    ERobotPushType    msgType = 1; //消息类型
+    ERobotPushType    msgType   = 1; //消息类型
 	PBRegards         regards   = 2; //推送消息
 	PBRemind          remind    = 3; //生日提醒消息
+	PBRedpacket       redpacket =4;
+	PBLottery         lottery   =5;
+	PBStreaming       stream    =6;
 }
 
 
@@ -331,7 +362,7 @@ message PBMsgNumLimit {
  *@method PUT
  *@cookie token&uuid
  *@param  state    已读:0; 未读: 1; 全部已读:2
- *@body PStringList 消息ID列表的序列化数据. 设置全部时,body可以为空
+ *@param  ids 消息ID列表逗号分隔. 设置全部时,可以为没有
  *@return PResult
  */
 

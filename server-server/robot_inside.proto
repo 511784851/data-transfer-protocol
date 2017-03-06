@@ -3,6 +3,7 @@ package bbproto;
 import "robot.proto";
 import "result.proto";
 import "common_inside.proto";
+import "notification.proto";
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "RobotApiProtos";
 
@@ -10,8 +11,14 @@ option java_outer_classname = "RobotApiProtos";
 message PRemindQuery {
 	string uuid = 1;     //提醒消息的创建者
 	string type = 2;     // future, history
-	int32  offset = 3;   //分页查询的偏移,为上一页最后一个提醒消息的ID.默认0.
-	int32  count = 4;    //分页大小.默认20, 最大100
+	int64  offset = 3;   //分页查询的偏移,为上一页最后一个提醒消息的ID.默认0.
+	int64  count = 4;    //分页大小.默认20, 最大100
+}
+
+// 提醒消息的删除条件
+message PRemindDeleteParam {
+    string  uuid  = 1;     //提醒消息的创建者
+    string  msgId = 2;    //消息ID
 }
 
 // 是否有未读消息查询条件
@@ -20,13 +27,31 @@ message PMsgStateQuery {
 	repeated string celebritys  = 2; //网红uuid
 }
 
+// 红包服务通知机器人的消息
+message PBRedPacketNotifyMsg {
+    string  targetKey   = 1;    //红包参与者的存储位置
+    int64   redpacketId  =2;    //红包ID
+}
+
+// 抽奖服务通知机器人的消息
+message PBLotteryNotifyMsg {
+    string  targetKey   = 1;  //抽奖参与者的存储位置
+    int64   lotteryId    =2;  //抽奖ID
+}
+
+// 其他服务通知机器人的消息
+message PRobotRawNotifyMsg  {
+    PNotifyStreaming       streaming  = 1; //直播
+    PBLotteryNotifyMsg     lottery    = 2; //抽奖
+    PBRedPacketNotifyMsg   redpacket  = 3; //红包
+}
 
 // 其他服务通知机器人推送的消息
 message PRobotNotifyMsg {
-    repeated string    to         = 1; //推送目标
-    string             from       = 2; //网红用户信息
-    ERobotPushType     msgType    = 3; //消息类型
-    PCRobotPushRawMsg  content    = 4; //各类型消息
+    repeated string     to         = 1; //推送目标
+    string              from       = 2; //网红用户信息
+    ERobotPushType      msgType    = 3; //消息类型
+    PRobotRawNotifyMsg  content    = 4; //各类型消息
 }
 
 // 其他服务通知机器人推送的消息
@@ -41,13 +66,19 @@ message PPayOrderParma {
     int32 machineNo    = 3;  //机器码[0,31]
 }
 
+// 消息数配置
+message PMsgNumLimitParma {
+    int32 num           = 1;  //每天消息数
+    string celebrity    = 2;  //网红以后id
+}
+
  service IGrpcRobot {
     /*
     *@note 设置B端每天(0-24时)推送消息数
     *@param PInt32Single 每天最大推送消息数
     *@return PEmpty
     */
-    rpc GrpcSetMsgNumPerDay(PInt32Single) returns (PEmpty);
+    rpc GrpcSetMsgNumPerDay(PMsgNumLimitParma) returns (PEmpty);
 
     /*
     *@note 监管:设置生日提醒(CEO祝福)
@@ -65,10 +96,10 @@ message PPayOrderParma {
 
     /*
     *@note 监管:删除提醒消息
-    *@param  PStringList      提醒消息id
+    *@param  PRemindDeleteParam      提醒消息创建者和id
     *@return PEmpty
     */
-    rpc GrpcDeleteRemind(PStringList) returns (PEmpty);
+    rpc GrpcDeleteRemind(PRemindDeleteParam) returns (PEmpty);
 
     /*
     *@note   推送消息
