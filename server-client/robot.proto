@@ -190,6 +190,7 @@ message PCCelebrity {
     PUserBase       user         = 1; //用户信息
     PUserBase       belongVo     = 2; //所属VO信息
     ERobotMsgState  msgState     = 3; //是否有未读消息
+    bool            isShield     = 4; //是否屏蔽
 }
 
 // 用户关注的网红列表
