@@ -282,7 +282,7 @@ message PLotteryConfirm {
 }
 /**历史抽奖记录（最近一月）*/
 message PLotteryList{
-	repeated PLotteryDetail lotteries = 1;//单个抽奖信息
+	repeated PLotterySingle lotteries = 1;//单个抽奖信息
 }
 /**中奖者领奖*/
 message PAcceptPrize{
