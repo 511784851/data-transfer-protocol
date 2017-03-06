@@ -261,11 +261,13 @@ message PSreachList {
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
 /**筛选中奖者*/
 message PShuffle {
-	int32 gender = 1; //性别 0:不限，1:男，2:女
-	repeated string region = 2; //地区筛选，格式如CN;4403、CN;44
-	int32 winners = 3;	//中奖人数
-	int32 bonus = 4;	//单个金额
-	int32 totAmt = 5; //总金额
+	string title = 1;			//标题
+	int32 winners = 2;			//获奖人数
+	repeated string region = 3; //位置代码
+	string remark = 4;			//描述
+	int32 gender = 5; //性别 0:不限，1:男，2:女
+	int32 bonus = 6;	//单个金额
+	int32 totAmt = 7; //总金额
 }
 
 
