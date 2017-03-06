@@ -4,7 +4,6 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "RobotProtos";
 
 import "account.proto";
-import "notification.proto";
 import "news.proto";
 import "streaming.proto";
 import "datapublishing.proto";
@@ -71,20 +70,18 @@ message PBRemindList {
 message PBRedpacket {
 	int64 id               = 1;   //消息ID
 	string from            = 2;   //发红包的网红用户ID
-	string content         = 3;   //红包备注
-	int64 redpacketId      = 4;   //红包id
-	string targetKey       = 5;   //红包参与者存储位置
-	int64  time            = 6;   //发送时间
+	string ord_no          = 3;   //订单号
+	string targetKey       = 4;   //红包参与者存储位置
+	int64  time            = 5;   //发送时间
 }
 
 // 抽奖消息
 message PBLottery {
 	int64 id               = 1;   //消息ID
 	string from            = 2;   //发起的网红用户ID
-	string content         = 3;   //抽奖备注
-	int64  lotteryId       = 4;   //抽奖id
-	string targetKey       = 5;   //参与者存储位置
-	int64  time            = 6;   //发送时间
+	string ord_no          = 3;   //订单号
+	string targetKey       = 4;   //参与者存储位置
+	int64  time            = 5;   //发送时间
 }
 
 // 直播消息
@@ -131,12 +128,12 @@ message PCPushRemind {
 
 // 粉丝收到的抽奖消息
 message PCPushLottery {
-	//抽奖参数...
+	string  ordNo      = 1;  //订单号
 }
 
 // 粉丝收到的红包消息
 message PCPushRedPacket {
-	//红包参数...
+	string  ordNo      = 1;  //订单号
 }
 
 // 粉丝收到的消息
@@ -155,7 +152,7 @@ message PCRobotPushRawMsg {
 	PCPushRemind      remind    = 2; //生日提醒消息
 	PCPushLottery     lottery   = 3; //抽奖消息
 	PCPushRedPacket   redPacket = 4; //红包消息
-	PNotifyStreaming streaming  = 5; //直播提醒消息
+	PStreamingLive    streaming  = 5; //直播提醒消息
 }
 
 // 粉丝收到的消息列表
@@ -190,7 +187,7 @@ message PCCelebrity {
     PUserBase       user         = 1; //用户信息
     PUserBase       belongVo     = 2; //所属VO信息
     ERobotMsgState  msgState     = 3; //是否有未读消息
-    bool            isShield     = 4; //是否屏蔽
+    bool            isShield     = 4; //是否屏蔽, 屏蔽:true, 未屏蔽:false
 }
 
 // 用户关注的网红列表
@@ -354,7 +351,7 @@ message PBMsgNumLimit {
  *@cookie token&uuid
  *@param pageindex 页序号.从0开始,默认0.
  *@param pagesize  每页消息条数。默认30,最大100  
- *@return 成功返回PCRobotPushMsgList,失败返回PResult
+ *@return 成功返回 PCRobotPushMsgList,失败返回PResult
  */
 
  /*
@@ -392,7 +389,7 @@ message PBMsgNumLimit {
  *@path /v1/robot/celebrity
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PCCelebrityList,失败返回PResult
+ *@return 成功返回PCCelebrityGroupList,失败返回PResult
 */
 
 /*
@@ -401,7 +398,7 @@ message PBMsgNumLimit {
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
- *@return 成功返回PCCelebrityList,失败返回PResult
+ *@return 成功返回PCCelebrityGroupList,失败返回PResult
 */
 
 /*
