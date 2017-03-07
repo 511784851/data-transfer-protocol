@@ -393,8 +393,6 @@ message PLotteryDel{
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@urlParam startIndex 开始下标
- *@urlParam size 结果集大小
- *@urlParam keywords 标题关键字
  *@return 成功返回PLotteryList，失败返回PResult
  */
  
