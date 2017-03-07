@@ -135,11 +135,18 @@ message PCelebrityList {
     repeated PCelebrityGroup celebrityGroup = 1;
 }
 
-/** 用户关注的网红信息 */
+/** 用户关注的网红分组*/
 message PCelebrityGroup {
-    string group = 1;                  // 分组, A-Z
-    repeated PUserBase userBase = 2;   // 网红信息
+    string group = 1;                            // 分组, A-Z
+    repeated PCelebrityInfo celebrityInfo = 2;   // 网红信息
 }
+
+/** 用户关注的网红信息 */
+message PCelebrityInfo {
+    PUserBase userBaseVO = 1;   // 网红的VO信息
+    PUserBase userBase = 2;     // 网红信息
+}
+
 
 /*
  *@note 获取用户打开融云钱包thirdToken
