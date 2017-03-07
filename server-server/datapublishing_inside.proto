@@ -64,6 +64,7 @@ message PFansSaveParam {
 service grpcDataPublishing {
 	// 查询粉丝
 	rpc SelectFans(PFansFilterParam) returns (PScrollResult);
+	rpc SelectFansEx(PFansFilterParam) returns (PScrollResult);
 	rpc SaveFans(PFansSaveParam) returns (PEmpty);
 
 	// 用PScrollResult.scrollId查询下一页粉丝，直到PScrollResult.id为空
