@@ -373,6 +373,7 @@ message PLotteryDel{
  *@FormParam remark 备注
  *@FormParam uuid 中奖者UUID列表 英文逗号分割 
  *@FormParam genders  中奖者性别列表 英文逗号分割
+ *@FormParam regions  中奖者地区编码 英文逗号分割
  *@return 成功返回 POrderPay，失败返回PResult
  */
  
