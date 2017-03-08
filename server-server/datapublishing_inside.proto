@@ -64,7 +64,11 @@ message PFansSaveParam {
 service grpcDataPublishing {
 	// 查询粉丝
 	rpc SelectFans(PFansFilterParam) returns (PScrollResult);
-	rpc SelectFansEx(PFansFilterParam) returns (PScrollResult);
+	
+	// 查询粉丝，uuid中用下划线拼接了地区信息，如：uuid_CN;4403
+	rpc SelectFansWithSource(PFansFilterParam) returns (PScrollResult);
+	rpc MoreFansWithSource(PStringSingle) returns (PScrollResult);
+	
 	rpc SaveFans(PFansSaveParam) returns (PEmpty);
 
 	// 用PScrollResult.scrollId查询下一页粉丝，直到PScrollResult.id为空
