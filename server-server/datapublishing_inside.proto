@@ -51,14 +51,21 @@ message PGroupStringList {
 }
 
 message PFansSaveParam {
+	// 表名，存储在哪个表里面
+	string table = 1;
+	
+	// 主键， key和id都赋值的话，变成组合主键
+	string key = 2;
+	int32 id = 3;
+	
 	// 勾选少部分用户时填充此字段，否则使用filter进行查询
-	repeated string uuid = 1;
+	repeated string uuid = 4;
+	
 	// 筛选条件
-	PFansFilterParam filter = 2;
-	// 主键
-	string key = 3;
+	PFansFilterParam filter = 5;
+
 	// 其它扩展内容
-	string content = 4;
+	string content = 6;
 }
 
 service grpcDataPublishing {
