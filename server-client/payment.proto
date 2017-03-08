@@ -6,8 +6,6 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PaymentProtos";
 
 import "account.proto";
-import "datapublishing.proto";
-
 /** ----------------- 以下是红包协议 （赵勇）-----------------*/
 /** 发红包，打赏，抽奖返回的订单预支付信息 */
 message POrderPay {
