@@ -9,21 +9,6 @@ import "account.proto";
 import "datapublishing.proto";
 
 /** ----------------- 以下是红包协议 （赵勇）-----------------*/
-/** 发普通红包，打赏 */
-message POrdinRedEnve {
-	int32 money = 1;	           // 金额(单位：分)
-	string content = 2;	           // 描述
-	string rece_uuid = 3;          // 接收用户uuid
-}
-/** 发群红包 */
-message PGroupRedEnve {
-	int32 number = 1;              // 数量
-	int32 money = 2;	           // 总金额或单个金额(单位：分)
-	bool isRandom = 3;	           // 是否随机红包
-	string content = 4;	           // 描述
-	PFansFilterParam filter = 5;   // 粉丝筛选条件
-	repeated string uuid = 6;      // 勾选的用户
-}
 /** 发红包，打赏，抽奖返回的订单预支付信息 */
 message POrderPay {
 	int32 recAccountType = 1;	   // 接受者账户类型
@@ -147,7 +132,6 @@ message PCelebrityInfo {
     PUserBase userBase = 2;     // 网红信息
 }
 
-
 /*
  *@note 获取用户打开融云钱包thirdToken
  *@path /v1/payment/user/thirdToken
@@ -161,7 +145,9 @@ message PCelebrityInfo {
  *@path /v1/payment/redEnve/send-ordin
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body POrdinRedEnve
+ *form param money 金额(单位：分)
+ *form param content 描述
+ *form param rece_uuid 接受用户uuid
  *@return 成功返回POrderPay，失败返回PResult
  */
 
@@ -170,16 +156,26 @@ message PCelebrityInfo {
  *@path /v1/payment/redEnve/send-group
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PGroupRedEnve
+ *form param number  数量
+ *form param money 总金额或单个金额(单位：分)
+ *form param isRandom 是否随机红包(true:是，false：否)
+ *form param content 描述
+ *form param tick_uuid 勾选的用户（多个用","隔开）
+ *form param filter_gender 性别筛选 0女, 1男, 其它情况不过滤
+ *form param filter_region 地区筛选，格式如CN;4403、CN;44，配合下面的negate使用（多个用","隔开）
+ *form param filter_negate true表示要对region取反，即排除掉这些地区的粉丝
+ *form param filter_skipUuid 反选掉的用户（多个用","隔开）
  *@return 成功返回POrderPay，失败返回PResult
  */
- 
+
  /*
  *@note 打赏
  *@path /v1/payment/reward/send
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body POrdinRedEnve
+ *form param money 金额(单位：分)
+ *form param content 描述
+ *form param rece_uuid 接受用户uuid
  *@return 成功返回POrderPay，失败返回PResult
  */
  
