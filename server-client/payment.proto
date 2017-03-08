@@ -351,16 +351,30 @@ message PLotteryDel{
  *@path /v1/payment/lottery/shuffle
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PShuffle
+ *@FormParam title 标题
+ *@FormParam winners 获奖者人数
+ *@FormParam region 地区列表以英文逗号分割 CN;4403,CN;4404
+ *@FormParam remark 备注
+ *@FormParam gender 性别 -1:不限，0:女，1:男
+ *@FormParam bonus 单个红包金额 （分）
+ *@FormParam totAmt 总金额 （分）
  *@return 成功返回PLotteryDetail，失败返回PResult
  */
- 
+
  /*
  *@note 确认抽奖
  *@path /v1/payment/lottery/confirm
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PLotteryConfirm
+ *@FormParam title 标题
+ *@FormParam gender 性别 -1:不限，0:女，1:男
+ *@FormParam region 地区列表以英文逗号分割 CN;4403,CN;4404
+ *@FormParam totAmt 抽奖金额 （分）
+ *@FormParam winners 获奖者人数
+ *@FormParam bonus 单个中奖金额 （分）
+ *@FormParam remark 备注
+ *@FormParam uuid 中奖者UUID列表 英文逗号分割 
+ *@FormParam genders  中奖者性别列表 英文逗号分割
  *@return 成功返回 POrderPay，失败返回PResult
  */
  
@@ -369,7 +383,7 @@ message PLotteryDel{
  *@path /v1/payment/lottery/accept
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PAcceptPrize
+ *@FormParam lotteryId  抽奖包ID
  *@return 返回PResult
  */
  
@@ -378,7 +392,7 @@ message PLotteryDel{
  *@path /v1/payment/lottery/delete
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PLotteryDel
+ *@FormParam lotteryId  抽奖包ID列表 英文逗号分割
  *@return 返回PResult
  */
 
@@ -387,6 +401,7 @@ message PLotteryDel{
  *@path /v1/payment/lottery/list
  *@method GET
  *@cookie token&uuid 登录用户信息
+ *@urlParam keywords 中奖者关键字
  *@urlParam startIndex 开始下标
  *@return 成功返回PLotteryList，失败返回PResult
  */
@@ -397,7 +412,5 @@ message PLotteryDel{
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@urlParam lotteryId 抽奖包Id
- *@urlParam keywords 中奖者关键字
- *@urlParam type 红包类型（-1:不限，0:女，1:男）
  *@return 成功返回PLotteryDetail，失败返回PResult
  */
