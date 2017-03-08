@@ -242,6 +242,8 @@ message PBMsgNumLimit {
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
+ *@param pageindex 页序号.从0开始,默认0.
+ *@param pagesize  每页消息条数。默认30,最大100
  *@return 成功返回PBRegardsList,失败返回PResult
 */
 
@@ -416,6 +418,5 @@ message PBMsgNumLimit {
  *@path   /v1/robot/share/remind
  *@method GET
  *@param  id    消息id
- *@param  by    祝福的来源(网红uuid)
  *@return 返回html文件
  */
