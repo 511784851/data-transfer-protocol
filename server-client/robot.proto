@@ -410,3 +410,12 @@ message PBMsgNumLimit {
  *@param extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
  *@return 成功返回PUpload，失败返回PResult
  */
+
+ /**
+ *@note   查看分享的生日祝福
+ *@path   /v1/robot/share/remind
+ *@method GET
+ *@param  id    消息id
+ *@param  by    祝福的来源(网红uuid)
+ *@return 返回html文件
+ */
