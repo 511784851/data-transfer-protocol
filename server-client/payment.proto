@@ -282,7 +282,6 @@ message PCelebrityInfo {
 */
 
 
-
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
 /**筛选中奖者*/
 message PShuffle {
