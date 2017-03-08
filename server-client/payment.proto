@@ -317,7 +317,7 @@ message PLotteryDetail{
 	string lotteryId = 1;		//抽奖包ID
 	string title = 2;			//标题
 	int32 totAmt = 3;			//抽奖总金额
-	string crtTm = 4;			//抽奖创建时间
+	int64 crtTm = 4;			//抽奖创建时间
 	int32 type = 5;				//抽奖类型（0:全部，1：男，2:女）
 	int32 winners = 6;			//获奖人数
 	repeated string region = 7; //位置代码
@@ -329,7 +329,7 @@ message PLotterySingle{
 	string lotteryId = 1;		//抽奖包ID
 	string title = 2;			//抽奖包标题
 	int32 winners = 3;			//中奖人数
-	string crtTm = 4;			//发起抽奖时间
+	int64 crtTm = 4;			//发起抽奖时间
 	repeated PUserBase userList = 5;//参与抽奖者信息（最多5个）
 } 
 
