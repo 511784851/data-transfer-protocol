@@ -242,7 +242,6 @@ message PBMsgNumLimit {
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
- *@param type  内容搜索:content; 昵称搜索:nickname
  *@return 成功返回PBRegardsList,失败返回PResult
 */
 

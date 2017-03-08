@@ -63,7 +63,6 @@ message PRobotNotifyMsgList {
 message PPayOrderParma {
     int32 serviceNo    = 1;  //业务编号[0, 99]
     int32 amount       = 2;  //金额[1,524288]
-    int32 machineNo    = 3;  //机器码[0,31]
 }
 
 // 消息数配置
