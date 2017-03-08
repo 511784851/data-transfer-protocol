@@ -290,7 +290,7 @@ message PShuffle {
 	int32 winners = 2;			//获奖人数
 	repeated string region = 3; //位置代码
 	string remark = 4;			//描述
-	int32 gender = 5; //性别 0:不限，1:男，2:女
+	int32 gender = 5; //性别 -1:不限，0:女，1:男
 	int32 bonus = 6;	//单个金额
 	int32 totAmt = 7; //总金额
 }
@@ -299,7 +299,7 @@ message PShuffle {
 /**确认抽奖*/
 message PLotteryConfirm {
 	string title = 1;            // 抽奖标题
-	int32 gender = 2;	         // 接受人类型（0:全部，1:男，2:女）
+	int32 gender = 2;	         // 接受人类型（-1:不限，0:女，1:男）
 	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
 	int32 totAmt = 4;   		//总金额
 	int32 winners = 5;			//获奖名额数
@@ -340,6 +340,7 @@ message PUserBaseEx{
 	PUserBase info = 1;			//用户基本信息
 	int32 gender = 2;			//用户性别（1：男，2:女）
 	int32 amt = 3;				//单个领奖金额(单位分)
+	string region = 4;			//用户位置
 }
 /**抽奖历史删除*/
 message PLotteryDel{
@@ -388,8 +389,6 @@ message PLotteryDel{
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@urlParam startIndex 开始下标
- *@urlParam size 结果集大小
- *@urlParam keywords 标题关键字
  *@return 成功返回PLotteryList，失败返回PResult
  */
  
@@ -400,6 +399,6 @@ message PLotteryDel{
  *@cookie token&uuid 登录用户信息
  *@urlParam lotteryId 抽奖包Id
  *@urlParam keywords 中奖者关键字
- *@urlParam type 红包类型（0:全部，1:男，2:女）
+ *@urlParam type 红包类型（-1:不限，0:女，1:男）
  *@return 成功返回PLotteryDetail，失败返回PResult
  */

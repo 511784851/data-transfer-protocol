@@ -51,6 +51,7 @@ message PBRemind {
 	string Text                 = 6;   //文本,最大长度140
 	PAudio audio                = 7;   //语音,语音最大时长30
 	int64  brithday             = 8;   //生日日期,客户端不填
+	bool   isPreView            = 9;   //预览标记,只有客户端使用,服务端总是填false
 }
 
 // 网红创建的生日提醒消息模板
@@ -267,7 +268,7 @@ message PBMsgNumLimit {
  *@path /v1/robot/remind/setting
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PBRemind,失败返回PResult
+ *@return 成功返回 PBRemind,失败返回PResult
  */
 
  /*
