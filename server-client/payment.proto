@@ -344,6 +344,36 @@ message PLotteryDel{
 	repeated string lotteryId = 1;		//抽奖ID
 }
 
+message PWinLottery{
+	string lotteryId = 1;		//抽奖包ID
+	string sendUuid = 2;		//发送放uuid
+	string sendNickNm = 3;		//发送者昵称
+	string title = 4;			//标题
+	int64 crtTm = 5;			//抽奖创建时间
+	int64 accTm = 6;			//领奖时间
+	string remark = 7;			//描述
+	int32 bonus = 8;			//的奖金（分）
+	int32 status = 9;			//状态 （0:还未领奖 1:已领奖 2:已过期）
+}
+/*
+ *@note 中奖者查看领奖
+ *@path /v1/payment/lottery/view
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId  抽奖包ID
+ *@return 正常返回PWinLottery 异常返回PResult
+ */
+
+/*
+ *@note 中奖者领奖
+ *@path /v1/payment/lottery/accept
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId  抽奖包ID
+ *@return 正常返回PWinLottery 异常返回PResult
+ */
+ 
+
 /*
  *@note 发起抽奖
  *@path /v1/payment/lottery/shuffle
@@ -377,14 +407,6 @@ message PLotteryDel{
  *@return 成功返回 POrderPay，失败返回PResult
  */
  
- /*
- *@note 中奖者领奖
- *@path /v1/payment/lottery/accept
- *@method POST
- *@cookie token&uuid 登录用户信息
- *@FormParam lotteryId  抽奖包ID
- *@return 返回PResult
- */
  
  /*
  *@note B端删除开奖记录
