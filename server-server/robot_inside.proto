@@ -70,10 +70,10 @@ message PMsgNumLimitParma {
 
     /*
     *@note 监管:设置生日祝福的CEO信息
-    *@param   PUserBase 消息数据
+    *@param   PStringSingle 头像图片的objectkey
     *@return PEmpty
     */
-    rpc GrpcSetCeoInfo(PUserBase) returns (PEmpty);
+    rpc GrpcSetCeoInfo(PStringSingle) returns (PEmpty);
 
     /*
     *@note 监管:查询已设置生日祝福的CEO信息
