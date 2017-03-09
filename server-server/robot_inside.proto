@@ -4,28 +4,10 @@ import "robot.proto";
 import "result.proto";
 import "common_inside.proto";
 import "streaming.proto";
+import "account.proto";
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "RobotApiProtos";
 
-// 提醒消息的查询条件
-message PRemindQuery {
-	string uuid = 1;     //提醒消息的创建者
-	string type = 2;     // future, history
-	int64  offset = 3;   //分页查询的偏移,为上一页最后一个提醒消息的ID.默认0.
-	int64  count = 4;    //分页大小.默认20, 最大100
-}
-
-// 提醒消息的删除条件
-message PRemindDeleteParam {
-    string  uuid  = 1;     //提醒消息的创建者
-    string  msgId = 2;    //消息ID
-}
-
-// 是否有未读消息查询条件
-message PMsgStateQuery {
-	string        uuid          = 1; //用户id
-	repeated string celebritys  = 2; //网红uuid
-}
 
 // 红包服务通知机器人的消息
 message PBRedPacketNotifyMsg {
@@ -87,25 +69,43 @@ message PMsgNumLimitParma {
     rpc GrpcGetMsgNumPerDay(PStringSingle) returns (PInt32Single);
 
     /*
-    *@note 监管:设置生日提醒(CEO祝福)
+    *@note 监管:设置生日祝福的CEO信息
+    *@param   PUserBase 消息数据
+    *@return PEmpty
+    */
+    rpc GrpcSetCeoInfo(PUserBase) returns (PEmpty);
+
+    /*
+    *@note 监管:查询已设置生日祝福的CEO信息
+    *@return PUserBase
+    */
+    rpc GrpcGetCeoInfo(PEmpty) returns (PUserBase);
+
+    /*
+    *@note 监管:设置生日提醒模板(CEO祝福)
     *@param   PBRemind 消息数据
     *@return PEmpty
     */
-    rpc GrpcCreateRemind(PBRemind) returns (PEmpty);
+    rpc GrpcSetRemindTpl(PBRemind) returns (PEmpty);
 
     /*
-    *@note 监管:查询未来7天(或历史)的CEO提醒列表
-    *@param  PRemindQuery
-    *@return PRemindList
+    *@note 监管:查询已设置的生日提醒模板(CEO)
+    *@return PBRemind
     */
-    rpc GrpcGetRemind(PRemindQuery) returns (PBRemindList);
+    rpc GrpcGetRemindTpl(PEmpty) returns (PBRemind);
 
     /*
-    *@note 监管:删除提醒消息
-    *@param  PRemindDeleteParam      提醒消息创建者和id
+    *@note 监管:开启、关闭生日提醒(CEO)
+    *@param   PBoolSingle  true:打开, false:关闭  
     *@return PEmpty
     */
-    rpc GrpcDeleteRemind(PRemindDeleteParam) returns (PEmpty);
+    rpc GrpcSetRemindSwitch(PBoolSingle) returns (PEmpty);
+
+    /*
+    *@note 监管:查询生日提醒(CEO)开关
+    *@return PBoolSingle  true:打开, false:关闭 
+    */
+    rpc GrpcGetRemindSwitch(PEmpty) returns (PBoolSingle);
 
     /*
     *@note   推送消息
