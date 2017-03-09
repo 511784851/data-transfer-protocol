@@ -30,11 +30,13 @@ message PMsgStateQuery {
 // 红包服务通知机器人的消息
 message PBRedPacketNotifyMsg {
     string  ordNo      = 1;    //订单号,也是参与者的ots存储key
+    string  text       = 2;    //红包留言
 }
 
 // 抽奖服务通知机器人的消息
 message PBLotteryNotifyMsg {
     string  ordNo      = 1;  //订单号,也是参与者的ots存储key
+    string  text       = 2;  //抽奖活动标题
 }
 
 // 其他服务通知机器人的消息
