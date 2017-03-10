@@ -182,7 +182,8 @@ message PCRobotSummary {
     int32                  totalNum        = 1; // 消息总数, 如果-1客户端则忽略响应
     int32                  unReadNum       = 2; // 消息未读数, 如果-1客户端则忽略响应
     int32                  nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
-    repeated PCRobotBubble bubbleList      = 4; // 气泡消息列表
+    bool                   isReconect      = 4; // 是不是重连, 30秒没轮询认为重连
+    repeated PCRobotBubble bubbleList      = 5; // 气泡消息列表
 }
 
 // 用户关注的网红信息
