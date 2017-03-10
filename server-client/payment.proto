@@ -241,6 +241,7 @@ message PCelebrityInfo {
  *@path /v1/payment/reward/list
  *@method GET
  *@cookie token&uuid 登录用户信息
+ *url param other_uuid 对方uuid
  *url param type 类型（0-接收 1-发送）（必须）
  *url param idx 上一批数据最后ID（默认0）
  *url param count 数量大小（必须）
