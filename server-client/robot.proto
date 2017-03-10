@@ -377,6 +377,15 @@ message PBMsgNumLimit {
  *@return PResult
  */
 
+ /*
+ *@note C端: 删除来自网红的消息
+ *@path /v1/robot/message
+ *@method DELETE
+ *@cookie token&uuid
+ *@param  id    消息ID
+ *@return PResult
+ */
+
 /*
  *@note C端: 查询来自指定网红的消息列表
  *@path /v1/robot/message/personnal
