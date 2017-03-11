@@ -265,9 +265,6 @@ message PCelebrityInfo {
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param keyword 搜索的内容
- *url param type 类型（0-不限，1-红包，2-打赏）（默认0）
- *url param idx 上一批数据最后ID（默认0）
- *url param count 数量大小（必须）
  *@return 成功返回PSreachList，失败返回PResult
  */
  
