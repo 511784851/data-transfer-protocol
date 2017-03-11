@@ -95,4 +95,7 @@ service grpcDataPublishing {
 	
 	// 当天有粉丝过生日的网红uuid
 	rpc SelectVUserHaveTodayBirthdayFans(PEmpty) returns (PStringList);
+	
+	// 根据昵称查询用户
+	rpc SearchUser(PStringSingle) returns (PStringList);
 }
