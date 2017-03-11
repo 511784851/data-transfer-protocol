@@ -43,7 +43,7 @@ message PRedEnveRece {
 
 /** 红包针对用户状态 */
 message PRedEnveStatus {
-    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完
+    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完，4-发送者自己
     int32 rece_money = 2; // 已领取金额（单位：分）
     string content = 3;   // 描述
 }
