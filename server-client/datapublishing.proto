@@ -458,6 +458,9 @@ message PFansFilterParam {
 	
 	// 反选掉的用户
 	repeated string skipUuid = 5;
+	
+	// 是否过滤掉VO
+	bool skipVO = 6;
 }
 
 /*
