@@ -44,7 +44,7 @@ message PRobotNotifyMsgList {
 // 生成支付订单的参数
 message PPayOrderParma {
     int32 serviceNo    = 1;  //业务编号[0, 99]
-    int32 amount       = 2;  //金额[1,524288]
+    int32 amount       = 2;  //金额[1,52428800], 分
 }
 
 // 消息数配置
