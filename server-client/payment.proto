@@ -43,7 +43,7 @@ message PRedEnveRece {
 
 /** 红包针对用户状态 */
 message PRedEnveStatus {
-    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完
+    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完，4-发送者自己
     int32 rece_money = 2; // 已领取金额（单位：分）
     string content = 3;   // 描述
 }
@@ -265,9 +265,6 @@ message PCelebrityInfo {
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param keyword 搜索的内容
- *url param type 类型（0-不限，1-红包，2-打赏）（默认0）
- *url param idx 上一批数据最后ID（默认0）
- *url param count 数量大小（必须）
  *@return 成功返回PSreachList，失败返回PResult
  */
  

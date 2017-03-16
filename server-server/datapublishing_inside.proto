@@ -69,6 +69,9 @@ message PFansSaveParam {
 
 	// 其它扩展内容
 	string content = 6;
+	
+	// 是否异步存储
+	bool asynchronous = 7;
 }
 
 service grpcDataPublishing {
@@ -95,4 +98,7 @@ service grpcDataPublishing {
 	
 	// 当天有粉丝过生日的网红uuid
 	rpc SelectVUserHaveTodayBirthdayFans(PEmpty) returns (PStringList);
+	
+	// 根据昵称查询用户
+	rpc SearchUser(PStringSingle) returns (PStringList);
 }
