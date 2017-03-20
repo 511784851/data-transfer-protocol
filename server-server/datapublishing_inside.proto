@@ -42,6 +42,9 @@ message PScrollResult {
 	
 	// 取下一页的游标
 	string cursor = 2;
+	
+	// 总数，以第一次请求时结果为准
+	int32 total = 3;
 }
 
 message PGroupString {
