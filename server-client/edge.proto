@@ -77,3 +77,13 @@ message PEdgeVersion {
  *@cookie token&uuid
  *@return 成功返回 PServiceHealthList ,失败返回 PRsult
  */
+
+/*
+ *@note 获取生日祝福分享地址
+ *@path /v1/edge/share/robot/remind
+ *@method GET
+ *@cookie token&uuid
+ *@param id  消息ID
+ *@param by  生日祝福的来源(网红uuid)
+ *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
+ */

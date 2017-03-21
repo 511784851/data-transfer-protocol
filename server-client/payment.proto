@@ -6,24 +6,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PaymentProtos";
 
 import "account.proto";
-import "datapublishing.proto";
-
 /** ----------------- 以下是红包协议 （赵勇）-----------------*/
-/** 发普通红包，打赏 */
-message POrdinRedEnve {
-	int32 money = 1;	           // 金额(单位：分)
-	string content = 2;	           // 描述
-	string rece_uuid = 3;          // 接收用户uuid
-}
-/** 发群红包 */
-message PGroupRedEnve {
-	int32 number = 1;              // 数量
-	int32 money = 2;	           // 总金额或单个金额(单位：分)
-	bool isRandom = 3;	           // 是否随机红包
-	string content = 4;	           // 描述
-	PFansFilterParam filter = 5;   // 粉丝筛选条件
-	repeated string uuid = 6;      // 勾选的用户
-}
 /** 发红包，打赏，抽奖返回的订单预支付信息 */
 message POrderPay {
 	int32 recAccountType = 1;	   // 接受者账户类型
@@ -60,7 +43,7 @@ message PRedEnveRece {
 
 /** 红包针对用户状态 */
 message PRedEnveStatus {
-    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完
+    int32 status = 1;     // 0-可领取，1-已领取，2-已过期，3-已领完，4-发送者自己
     int32 rece_money = 2; // 已领取金额（单位：分）
     string content = 3;   // 描述
 }
@@ -147,7 +130,6 @@ message PCelebrityInfo {
     PUserBase userBase = 2;     // 网红信息
 }
 
-
 /*
  *@note 获取用户打开融云钱包thirdToken
  *@path /v1/payment/user/thirdToken
@@ -161,7 +143,9 @@ message PCelebrityInfo {
  *@path /v1/payment/redEnve/send-ordin
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body POrdinRedEnve
+ *form param money 金额(单位：分)
+ *form param content 描述
+ *form param rece_uuid 接受用户uuid
  *@return 成功返回POrderPay，失败返回PResult
  */
 
@@ -170,16 +154,26 @@ message PCelebrityInfo {
  *@path /v1/payment/redEnve/send-group
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PGroupRedEnve
+ *form param number  数量
+ *form param money 总金额或单个金额(单位：分)
+ *form param isRandom 是否随机红包(true:是，false：否)
+ *form param content 描述
+ *form param tick_uuid 勾选的用户（多个用","隔开）
+ *form param filter_gender 性别筛选 0女, 1男, 其它情况不过滤
+ *form param filter_region 地区筛选，格式如CN;4403、CN;44，配合下面的negate使用（多个用","隔开）
+ *form param filter_negate true表示要对region取反，即排除掉这些地区的粉丝
+ *form param filter_skipUuid 反选掉的用户（多个用","隔开）
  *@return 成功返回POrderPay，失败返回PResult
  */
- 
+
  /*
  *@note 打赏
  *@path /v1/payment/reward/send
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body POrdinRedEnve
+ *form param money 金额(单位：分)
+ *form param content 描述
+ *form param rece_uuid 接受用户uuid
  *@return 成功返回POrderPay，失败返回PResult
  */
  
@@ -247,6 +241,7 @@ message PCelebrityInfo {
  *@path /v1/payment/reward/list
  *@method GET
  *@cookie token&uuid 登录用户信息
+ *url param other_uuid 对方uuid
  *url param type 类型（0-接收 1-发送）（必须）
  *url param idx 上一批数据最后ID（默认0）
  *url param count 数量大小（必须）
@@ -270,9 +265,6 @@ message PCelebrityInfo {
  *@method GET
  *@cookie token&uuid 登录用户信息
  *url param keyword 搜索的内容
- *url param type 类型（0-不限，1-红包，2-打赏）（默认0）
- *url param idx 上一批数据最后ID（默认0）
- *url param count 数量大小（必须）
  *@return 成功返回PSreachList，失败返回PResult
  */
  
@@ -286,7 +278,6 @@ message PCelebrityInfo {
 */
 
 
-
 /* ----------------- 以下是抽奖协议 （潘有良）-----------------*/
 /**筛选中奖者*/
 message PShuffle {
@@ -294,7 +285,7 @@ message PShuffle {
 	int32 winners = 2;			//获奖人数
 	repeated string region = 3; //位置代码
 	string remark = 4;			//描述
-	int32 gender = 5; //性别 0:不限，1:男，2:女
+	int32 gender = 5; //性别 -1:不限，0:女，1:男
 	int32 bonus = 6;	//单个金额
 	int32 totAmt = 7; //总金额
 }
@@ -303,7 +294,7 @@ message PShuffle {
 /**确认抽奖*/
 message PLotteryConfirm {
 	string title = 1;            // 抽奖标题
-	int32 gender = 2;	         // 接受人类型（0:全部，1:男，2:女）
+	int32 gender = 2;	         // 接受人类型（-1:不限，0:女，1:男）
 	repeated string region = 3;//地区筛选，格式如CN;4403、CN;44，配合下面的negate使用
 	int32 totAmt = 4;   		//总金额
 	int32 winners = 5;			//获奖名额数
@@ -324,7 +315,7 @@ message PLotteryDetail{
 	string lotteryId = 1;		//抽奖包ID
 	string title = 2;			//标题
 	int32 totAmt = 3;			//抽奖总金额
-	string crtTm = 4;			//抽奖创建时间
+	int64 crtTm = 4;			//抽奖创建时间
 	int32 type = 5;				//抽奖类型（0:全部，1：男，2:女）
 	int32 winners = 6;			//获奖人数
 	repeated string region = 7; //位置代码
@@ -336,7 +327,7 @@ message PLotterySingle{
 	string lotteryId = 1;		//抽奖包ID
 	string title = 2;			//抽奖包标题
 	int32 winners = 3;			//中奖人数
-	string crtTm = 4;			//发起抽奖时间
+	int64 crtTm = 4;			//发起抽奖时间
 	repeated PUserBase userList = 5;//参与抽奖者信息（最多5个）
 } 
 
@@ -344,45 +335,83 @@ message PUserBaseEx{
 	PUserBase info = 1;			//用户基本信息
 	int32 gender = 2;			//用户性别（1：男，2:女）
 	int32 amt = 3;				//单个领奖金额(单位分)
+	string region = 4;			//用户位置
 }
 /**抽奖历史删除*/
 message PLotteryDel{
 	repeated string lotteryId = 1;		//抽奖ID
 }
 
+message PWinLottery{
+	string lotteryId = 1;		//抽奖包ID
+	string sendUuid = 2;		//发送放uuid
+	string sendNickNm = 3;		//发送者昵称
+	string title = 4;			//标题
+	int64 crtTm = 5;			//抽奖创建时间
+	int64 accTm = 6;			//领奖时间
+	string remark = 7;			//描述
+	int32 bonus = 8;			//的奖金（分）
+	int32 status = 9;			//状态 （0:还未领奖 1:已领奖 2:已过期）
+}
+/*
+ *@note 中奖者查看领奖
+ *@path /v1/payment/lottery/view
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId  抽奖包ID
+ *@return 正常返回PWinLottery 异常返回PResult
+ */
+
+/*
+ *@note 中奖者领奖
+ *@path /v1/payment/lottery/accept
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId  抽奖包ID
+ *@return 正常返回PWinLottery 异常返回PResult
+ */
+ 
+
 /*
  *@note 发起抽奖
  *@path /v1/payment/lottery/shuffle
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PShuffle
+ *@FormParam title 标题
+ *@FormParam winners 获奖者人数
+ *@FormParam region 地区列表以英文逗号分割 CN;4403,CN;4404
+ *@FormParam remark 备注
+ *@FormParam gender 性别 -1:不限，0:女，1:男
+ *@FormParam bonus 单个红包金额 （分）
+ *@FormParam totAmt 总金额 （分）
  *@return 成功返回PLotteryDetail，失败返回PResult
  */
- 
+
  /*
  *@note 确认抽奖
  *@path /v1/payment/lottery/confirm
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PLotteryConfirm
+ *@FormParam title 标题
+ *@FormParam gender 性别 -1:不限，0:女，1:男
+ *@FormParam region 地区列表以英文逗号分割 CN;4403,CN;4404
+ *@FormParam totAmt 抽奖金额 （分）
+ *@FormParam winners 获奖者人数
+ *@FormParam bonus 单个中奖金额 （分）
+ *@FormParam remark 备注
+ *@FormParam uuid 中奖者UUID列表 英文逗号分割 
+ *@FormParam genders  中奖者性别列表 英文逗号分割
+ *@FormParam regions  中奖者地区编码 英文逗号分割
  *@return 成功返回 POrderPay，失败返回PResult
  */
  
- /*
- *@note 中奖者领奖
- *@path /v1/payment/lottery/accept
- *@method POST
- *@cookie token&uuid 登录用户信息
- *@body PAcceptPrize
- *@return 返回PResult
- */
  
  /*
  *@note B端删除开奖记录
  *@path /v1/payment/lottery/delete
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@body PLotteryDel
+ *@FormParam lotteryId  抽奖包ID列表 英文逗号分割
  *@return 返回PResult
  */
 
@@ -391,9 +420,8 @@ message PLotteryDel{
  *@path /v1/payment/lottery/list
  *@method GET
  *@cookie token&uuid 登录用户信息
+ *@urlParam keywords 中奖者关键字
  *@urlParam startIndex 开始下标
- *@urlParam size 结果集大小
- *@urlParam keywords 标题关键字
  *@return 成功返回PLotteryList，失败返回PResult
  */
  
@@ -403,7 +431,5 @@ message PLotteryDel{
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@urlParam lotteryId 抽奖包Id
- *@urlParam keywords 中奖者关键字
- *@urlParam type 红包类型（0:全部，1:男，2:女）
  *@return 成功返回PLotteryDetail，失败返回PResult
  */

@@ -200,4 +200,18 @@ service IGrpcLogin {
      *@return 返回 PLoignBindInfoList
      */
     rpc GetBindInfoList(PStringList) returns (PLoignBindInfoList);
+
+    /*
+     *@note 绑定用户的手机号码绑定
+     *@param 参数数组 [0]uuid  [1]手机号码（必须带区号，例：+8613512345678）
+     *@return 返回 PEmpty
+     */
+    rpc BindPhoneCode(PStringList) returns (PEmpty);
+
+    /*
+     *@note 批量解除指定uuid的手机号码绑定
+     *@param 用户uuid 列表
+     *@return 返回 PInt32List,每一个操作返回的错误代码
+     */
+    rpc UnBindPhoneCodeList(PStringList) returns (PInt32List);
  }

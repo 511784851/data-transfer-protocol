@@ -72,7 +72,7 @@ message PBRedpacket {
 	int64 id               = 1;   //消息ID
 	string from            = 2;   //发红包的网红用户ID
 	string ord_no          = 3;   //订单号
-	string targetKey       = 4;   //红包参与者存储位置
+	string text            = 4;   //红包留言
 	int64  time            = 5;   //发送时间
 }
 
@@ -81,7 +81,7 @@ message PBLottery {
 	int64 id               = 1;   //消息ID
 	string from            = 2;   //发起的网红用户ID
 	string ord_no          = 3;   //订单号
-	string targetKey       = 4;   //参与者存储位置
+	string text            = 4;   //抽奖标题
 	int64  time            = 5;   //发送时间
 }
 
@@ -130,11 +130,13 @@ message PCPushRemind {
 // 粉丝收到的抽奖消息
 message PCPushLottery {
 	string  ordNo      = 1;  //订单号
+	string text        = 2;  //抽奖标题
 }
 
 // 粉丝收到的红包消息
 message PCPushRedPacket {
 	string  ordNo      = 1;  //订单号
+	string text        = 2;   //红包留言
 }
 
 // 粉丝收到的消息
@@ -180,7 +182,8 @@ message PCRobotSummary {
     int32                  totalNum        = 1; // 消息总数, 如果-1客户端则忽略响应
     int32                  unReadNum       = 2; // 消息未读数, 如果-1客户端则忽略响应
     int32                  nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
-    repeated PCRobotBubble bubbleList      = 4; // 气泡消息列表
+    bool                   isReconect      = 4; // 是不是重连, 30秒没轮询认为重连
+    repeated PCRobotBubble bubbleList      = 5; // 气泡消息列表
 }
 
 // 用户关注的网红信息
@@ -242,7 +245,8 @@ message PBMsgNumLimit {
  *@method GET
  *@cookie token&uuid
  *@param keyword 关键词
- *@param type  内容搜索:content; 昵称搜索:nickname
+ *@param pageindex 页序号.从0开始,默认0.
+ *@param pagesize  每页消息条数。默认30,最大100
  *@return 成功返回PBRegardsList,失败返回PResult
 */
 
@@ -374,6 +378,15 @@ message PBMsgNumLimit {
  *@return PResult
  */
 
+ /*
+ *@note C端: 删除来自网红的消息
+ *@path /v1/robot/message
+ *@method DELETE
+ *@cookie token&uuid
+ *@param  id    消息ID
+ *@return PResult
+ */
+
 /*
  *@note C端: 查询来自指定网红的消息列表
  *@path /v1/robot/message/personnal
@@ -410,4 +423,12 @@ message PBMsgNumLimit {
  *@param length 文件大小，字节
  *@param extension 扩展名 如jpg,png,gif,bmp,mp3,apk等
  *@return 成功返回PUpload，失败返回PResult
+ */
+
+ /**
+ *@note   查看分享的生日祝福
+ *@path   /v1/robot/share
+ *@method GET
+ *@param  id    消息id
+ *@return 返回html文件
  */

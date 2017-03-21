@@ -6,6 +6,9 @@ import "result.proto";
 import "account.proto";
 import "common_inside.proto";
 
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "DatapublishingApiProtos";
+
 // 每天的平均在线时间
 message POnlineData {
 	int64 date = 1;
@@ -39,6 +42,9 @@ message PScrollResult {
 	
 	// 取下一页的游标
 	string cursor = 2;
+	
+	// 总数，以第一次请求时结果为准
+	int32 total = 3;
 }
 
 message PGroupString {
@@ -51,19 +57,34 @@ message PGroupStringList {
 }
 
 message PFansSaveParam {
+	// 表名，存储在哪个表里面
+	string table = 1;
+	
+	// 主键， key和id都赋值的话，变成组合主键
+	string key = 2;
+	int32 id = 3;
+	
 	// 勾选少部分用户时填充此字段，否则使用filter进行查询
-	repeated string uuid = 1;
+	repeated string uuid = 4;
+	
 	// 筛选条件
-	PFansFilterParam filter = 2;
-	// 主键
-	string key = 3;
+	PFansFilterParam filter = 5;
+
 	// 其它扩展内容
-	string content = 4;
+	string content = 6;
+	
+	// 是否异步存储
+	bool asynchronous = 7;
 }
 
 service grpcDataPublishing {
 	// 查询粉丝
 	rpc SelectFans(PFansFilterParam) returns (PScrollResult);
+	
+	// 查询粉丝，uuid中用下划线拼接了地区信息，如：uuid_CN;4403
+	rpc SelectFansWithSource(PFansFilterParam) returns (PScrollResult);
+	rpc MoreFansWithSource(PStringSingle) returns (PScrollResult);
+	
 	rpc SaveFans(PFansSaveParam) returns (PEmpty);
 
 	// 用PScrollResult.scrollId查询下一页粉丝，直到PScrollResult.id为空
@@ -80,4 +101,7 @@ service grpcDataPublishing {
 	
 	// 当天有粉丝过生日的网红uuid
 	rpc SelectVUserHaveTodayBirthdayFans(PEmpty) returns (PStringList);
+	
+	// 根据昵称查询用户
+	rpc SearchUser(PStringSingle) returns (PStringList);
 }
