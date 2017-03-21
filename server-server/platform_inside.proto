@@ -17,4 +17,14 @@ service IPlatform {
 	 *@return PResult
 	 */
 	rpc WriteAccountOperateLog(PAccountOperateLog) returns (PEmpty);
+	
+	/**
+	 * 提供通过监管系统登录的API
+	 *
+	 *@param PPlatformLogin.id 不用填（在返回值中）
+	 *@param PPlatformLogin.username 登录的用户名
+	 *@param PPlatformLogin.password 登录的密码（返回值中无此值）
+	 *@param PPlatformLogin.sessionID 不用填（在返回值中）
+	 */
+	rpc Login(PPlatformLogin) returns(PPlatformLogin);
 }

@@ -15,6 +15,14 @@ import "news.proto";
 	bool status = 1;
 	bool canDo = 2; //能否被操作
  }
+ 
+ //监管登录信息
+ message PPlatformLogin {
+	int32 id = 1;
+	string username = 2;
+	string password = 3;
+	string sessionID = 4;
+ }
 
 /*********微博***********/
 
