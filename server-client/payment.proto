@@ -447,6 +447,8 @@ message PGiftLotteryDetail{
 	repeated PUserBaseGiftEx userList = 7;//用户列表
 	string remark = 8;			//描述
 	repeated PGiftInfo gifts = 9; 		//礼物
+	int32 status = 10;	//状态
+	int32 remainCnt = 11; //剩余未领取的数量
 }
 
 message PGiftInfo{
@@ -458,13 +460,18 @@ message PUserBaseGiftEx{
 	PUserBase info = 1;			//用户基本信息
 	PGiftInfo gift = 2;			//奖品信息
 	string region = 4;			//用户位置
-	string rcvNm = 5;				//收货姓名
-	string rcvAddr = 6;			//收货地址
-	string rcvPhone = 7;		//联系电话
-	string rcvEmail = 8;		//邮箱地址
-	string rcvRemark = 9;		//描述
+	string rcvNm = 5;				//收货姓名 C端
+	string rcvAddr = 6;			//收货地址 C端
+	string rcvPhone = 7;		//联系电话 C端
+	string rcvEmail = 8;		//邮箱地址 C端
+	string rcvRemark = 9;		//描述 C端
 	int32 editCnt = 10;			//更新次数(C端使用)
-	int32 status = 11;			//是否填写收货信息 0: 未填写， 1: 已填写	
+	int32 status = 11;			//是否填写收货信息 0: 未填写， 1: 已填写
+	string brcvNm = 12;				//收货姓名 B端
+	string brcvAddr = 13;			//收货地址 B端
+	string brcvPhone = 14;		//联系电话 B端
+	string brcvEmail = 15;		//邮箱地址 B端
+	string brcvRemark = 16;		//描述 B端	
 }
 /*
  *@note 发起、刷新礼物抽奖
@@ -514,12 +521,12 @@ message PUserBaseGiftEx{
  
 /*
  *@note 中奖者、B端编辑地址
- *@path /v1/payment/giftlottery/accept
+ *@path /v1/payment/giftlottery/edit
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam lotteryId  抽奖包ID
  *@FormParam giftId  礼物ID
- *@FormParam uuid  中奖者UUID
+ *@FormParam uuid  B端传中奖者UUID,C端传自己的UUID，
  *@FormParam rcvNm 收货姓名
  *@FormParam rcvAddr 收货地址
  *@FormParam rcvPhone 联系电话
