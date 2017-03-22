@@ -352,6 +352,7 @@ enum ENotifyType {
     CommunityKickedOut      = 108; // 社区踢出会员
     RealNameAuthFailed      = 109; // 实名认证失败
     StreamingSoon           = 110; // 第三方直播-即将直播
+    PrivateMessage          = 111; // 私信
 
     SocialApply     = 200; // 好友申请
     CommunityInvite = 201; // 社区邀请
@@ -434,7 +435,7 @@ message PNotifyCommunity {
 
 // 自定义消息
 message PNotifyRawMessage {
-    string                  content         = 1;  // 服务端国际化(成就名称、等级名称等)
+    string                  content         = 1;  // 服务端国际化(成就名称、等级名称、私信等)
 
     PNotifyComment          commentNews     = 5;  // 帖子评论消息
     PNotifyCommentReply     commentReply    = 6;  // 评论的评论
