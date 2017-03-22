@@ -506,6 +506,9 @@ message PUserBaseGiftEx{
  *@FormParam gender 性别 -1:不限，0:女，1:男
  *@FormParam giftNm 奖品名称以英文逗号分割 iphone7,u盘
  *@FormParam giftCnt 奖品数量以英文逗号分割 10,5
+ *@FormParam uuids 中奖者UUID列表 英文逗号分割 
+ *@FormParam genders  中奖者性别列表 英文逗号分割
+ *@FormParam regions  中奖者地区编码 英文逗号分割
  *@return 返回PResult
  */
  
