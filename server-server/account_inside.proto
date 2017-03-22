@@ -140,7 +140,7 @@ message PPrivacyAttentionList {
  *@method GET
  *@param from 调用方
  *@param uuid 用户ID
- *@param action 开关
+ *@param action 开关，1: 封号，unix时间戳: 冻结账户截至时间，0：解除封号或冻结状态
  *@return 成功返回PbResult.Get(No_Error), 失败返回PbResult
  */
 
