@@ -433,3 +433,116 @@ message PWinLottery{
  *@urlParam lotteryId 抽奖包Id
  *@return 成功返回PLotteryDetail，失败返回PResult
  */
+ 
+ 
+ 
+ /**礼物抽奖包详情、筛选结果 */
+message PGiftLotteryDetail{
+	string lotteryId = 1;		//抽奖包ID
+	string title = 2;			//标题
+	int64 overdueTm = 3;			//过期时间 ms
+	int32 winners = 4;			//获奖总人数
+	int32 gender = 5;				//抽奖类型（-1:全部，1：男，0:女）
+	repeated string regions = 6; //位置代码
+	repeated PUserBaseGiftEx userList = 7;//用户列表
+	string remark = 8;			//描述
+	repeated PGiftInfo gifts = 9; 		//礼物
+}
+
+message PGiftInfo{
+	int32 giftId = 1;			//用户中奖的奖品ID
+	string giftNm = 2;				//用户中奖的奖品名称
+	int32 giftCnt = 3;		//礼物数量
+}
+message PUserBaseGiftEx{
+	PUserBase info = 1;			//用户基本信息
+	PGiftInfo gift = 2;			//奖品信息
+	string region = 4;			//用户位置
+	string rcvNm = 5;				//收货姓名
+	string rcvAddr = 6;			//收货地址
+	string rcvPhone = 7;		//联系电话
+	string rcvEmail = 8;		//邮箱地址
+	string rcvRemark = 9;		//描述
+	int32 editCnt = 10;			//更新次数(C端使用)
+	int32 status = 11;			//是否填写收货信息 0: 未填写， 1: 已填写	
+}
+/*
+ *@note 发起、刷新礼物抽奖
+ *@path /v1/payment/giftlottery/shuffle
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam title 标题
+ *@FromParam overdueTm 过期时间 int64(ms)
+ *@FormParam winners 获奖者总数
+ *@FormParam locCnt 选择地区个数
+ *@FormParam regions 地区列表以英文逗号分割 CN;4403,CN;4404
+ *@FormParam remark 备注
+ *@FormParam gender 性别 -1:不限，0:女，1:男
+ *@FormParam giftNm 奖品名称以英文逗号分割 iphone7,u盘
+ *@FormParam giftCnt 奖品数量以英文逗号分割 10,5
+ *@return 成功返回PGiftLotteryDetail，失败返回PResult
+ */
+ 
+
+
+/*
+ *@note 确认礼物抽奖
+ *@path /v1/payment/giftlottery/confirm
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam title 标题
+ *@FromParam overdueTm 过期时间 int64(ms)
+ *@FormParam winners 获奖者总数
+ *@FormParam locCnt 选择地区个数
+ *@FormParam regions 地区列表以英文逗号分割 CN;4403,CN;4404
+ *@FormParam remark 备注
+ *@FormParam gender 性别 -1:不限，0:女，1:男
+ *@FormParam giftNm 奖品名称以英文逗号分割 iphone7,u盘
+ *@FormParam giftCnt 奖品数量以英文逗号分割 10,5
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 中奖者领奖
+ *@path /v1/payment/giftlottery/accept
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId  抽奖包ID
+ *@FormParam giftId  礼物ID
+ *@return 成功返回PGiftLotteryDetail 异常返回PResult
+ */
+ 
+/*
+ *@note 中奖者、B端编辑地址
+ *@path /v1/payment/giftlottery/accept
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId  抽奖包ID
+ *@FormParam giftId  礼物ID
+ *@FormParam uuid  中奖者UUID
+ *@FormParam rcvNm 收货姓名
+ *@FormParam rcvAddr 收货地址
+ *@FormParam rcvPhone 联系电话
+ *@FormParam rcvEmail 邮箱地址
+ *@FormParam rcvRemark 描述
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 历史发起礼物抽奖列表
+ *@path /v1/payment/giftlottery/list
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam keywords 中奖者关键字
+ *@urlParam startIndex 开始下标
+ *@return 成功返回PLotteryList，失败返回PResult
+ */
+ 
+ /*
+ *@note 查看礼物抽奖详情
+ *@path /v1/payment/giftlottery/detail
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId 抽奖ID
+ *@return 成功返回PGiftLotteryDetail，失败返回PResult
+ */
