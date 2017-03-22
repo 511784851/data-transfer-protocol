@@ -17,7 +17,9 @@ service IPlatform {
 	 *@return PResult
 	 */
 	rpc WriteAccountOperateLog(PAccountOperateLog) returns (PEmpty);
-	
+}
+
+service IWebPlatform {
 	/**
 	 * 提供通过监管系统登录的API
 	 *
