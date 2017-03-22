@@ -99,6 +99,7 @@ message PUserBase {
   string Language = 12;             // 语言
   bool IsAI = 13;				 	// 是否水军， true表示水军
   int32 Gender = 14;                // 性别，0就是女，其余的是男；人妖暂时不考虑
+  int64 State = 15;                 // 账户状态，1：封号，unix时间戳：冻结账户截至时间，0：正常
   PUserBaseCommunity Community = 30;// 用户在社区的基础信息，只有在社区相关api会填充
 }
 
