@@ -57,6 +57,7 @@ message PUser {
 	int64 registerTime = 37;  		// 注册时间
 	PLinkInfoList linkList = 38;    // 第三方链接列表
 	int32 authStatus = 39;          // 实名认证状态(0:未认证,1:审核中,2:审核未通过,3:已认证)
+    int64 state = 40;               // 账户状态，1：封号，unix时间戳：冻结账户截至时间，0：正常
 }
 
 message PUserListEx {
