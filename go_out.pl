@@ -24,7 +24,6 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/datapublishing.proto ".
 						"server-client/notification.proto ".
 						"server-client/community.proto ".
-						"server-client/wallet.proto ".
 						"server-client/contact.proto ".
 						"server-client/netdisk.proto ".
 						"server-client/streaming.proto ".
@@ -36,7 +35,6 @@ $server_client_protos = "server-client/result.proto ".
 						"server-server/login_inside.proto ".
                         "server-server/account_inside.proto ".
 						"server-server/notification_inside.proto ".
-						"server-server/wallet_inside.proto ".
 						"server-server/datapublishing_inside.proto ".
 						"server-server/news_inside.proto ".
 						"server-server/achievement_inside.proto ".
