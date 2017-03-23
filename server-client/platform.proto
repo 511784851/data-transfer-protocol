@@ -28,7 +28,7 @@ import "news.proto";
  //监管的日志信息
  message PPlatformLog {
 	int32 id = 1; 
-	string userID = 2;
+	int64 userID = 2;
 	int64 cTime = 3;
 	string iPAddr = 4;
 	string URL = 5;
