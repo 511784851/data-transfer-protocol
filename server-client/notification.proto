@@ -353,6 +353,7 @@ enum ENotifyType {
     RealNameAuthFailed      = 109; // 实名认证失败
     StreamingSoon           = 110; // 第三方直播-即将直播
     SystemMessage           = 111; // 系统消息(私信等)
+    SimpleMessage           = 112; // 简单通知消息（抽奖等通知）
 
     SocialApply     = 200; // 好友申请
     CommunityInvite = 201; // 社区邀请
@@ -433,9 +434,19 @@ message PNotifyCommunity {
 	string name   = 2; // 社区名字
 }
 
+// 简单通知
+message PNotifySimple {
+    // uri携带跳转对象和对应参数信息
+    // scheme://path?query_string
+    //
+    // 抽奖中奖用户提交更新资料: payment://lottery/info?uuid=xxxx&id=xxx
+    // 抽奖发货提醒: payment://lottery/shipping?id=xxx
+    string uri = 1; // 简单通知消息参数
+}
+
 // 自定义消息
 message PNotifyRawMessage {
-    string                  content         = 1;  // 服务端国际化(成就名称、等级名称、系统消息等)
+    string                  content         = 1;  // 服务端国际化(成就名称、等级名称、系统消息、简单通知消息等)
 
     PNotifyComment          commentNews     = 5;  // 帖子评论消息
     PNotifyCommentReply     commentReply    = 6;  // 评论的评论
@@ -445,6 +456,7 @@ message PNotifyRawMessage {
     PNotifyNewsAt           newsAt          = 10; // @我
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
     PNotifyCommunity        community       = 12; // 社区通知/社区邀请
+    PNotifySimple           simple          = 13; // 简单通知
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
