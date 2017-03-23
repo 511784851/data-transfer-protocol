@@ -22,6 +22,12 @@ message PPostCountStatistic {
     int32 NoticeCnt     = 3; // 公告帖个数
 }
 
+// 设置帖子状态
+message PSetPostStateParam {
+    repeated int64 postIds     = 1; //帖子列表
+    int32          state       = 2; //帖子状态, 0:审核通过; 1:待审核; 2:审核不通过; 3:锁定;4:解锁; 5:屏蔽; 6:解除屏蔽;
+}
+
 /**
  *@note 用户批量关注/取消关注
  *@path /v1/news/inside/multi/follow
@@ -247,4 +253,19 @@ service IGrpcNews {
      *@return PPostCountStatistic 
      */
     rpc GetCommunityPostCount(PInt64Single) returns (PPostCountStatistic);
+
+
+    /*
+     *@note 通过帖子ID获取帖子详情
+     *@param PInt64List 帖子ID列表    
+     *@return PPostViewList 
+     */
+    rpc GetPostInfoByIds(PInt64List) returns (PPostViewList);
+
+     /*
+     *@note 设置帖子状态
+     *@param PSetPostStateParam 帖子ID列表、状态    
+     *@return PEmpty 
+     */
+    rpc SetPostState(PSetPostStateParam) returns (PEmpty);
  }

@@ -681,7 +681,7 @@ message PNewsFollowExist {
  */
 
  /**
- *@note   用户查看社区动态首页
+ *@note   用户查看社区动态、资讯首页
  *@path   /v1.2/news/community/timeline
  *@cookie token&uuid
  *@method GET
@@ -705,7 +705,7 @@ message PNewsFollowExist {
 
  /*
  *@note 置顶资讯帖(最多总共置顶3条)
- *@path /v1.2/news/infomation/top
+ *@path /v1.2/news/newsfeed/top
  *@method PUT
  *@cookie token&uuid
  *@param oper 0:取消置顶; 1:置顶
