@@ -17,8 +17,9 @@ message PBRedPacketNotifyMsg {
 
 // 抽奖服务通知机器人的消息
 message PBLotteryNotifyMsg {
-    string  ordNo      = 1;  //订单号,也是参与者的ots存储key
-    string  text       = 2;  //抽奖活动标题
+    string          ordNo      = 1;  //订单号,也是参与者的ots存储key
+    string          text       = 2;  //抽奖活动标题
+    ERobotPushType  type       = 3;  //提醒类型:抽奖活动提醒, 领奖提醒、过期提醒、收货地址更新提醒
 }
 
 // 其他服务通知机器人的消息
