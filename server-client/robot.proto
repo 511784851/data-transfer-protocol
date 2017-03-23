@@ -10,11 +10,14 @@ import "datapublishing.proto";
 
 // 推送消息类型
 enum ERobotPushType {
-    Regards     = 0; // 消息推送
-    Remind      = 1; // 生日提醒
-    Lottery     = 2; // 抽奖
-    RedPacket   = 3; // 红包
-    Stream      = 4; // 直播
+    Regards        = 0; // 消息推送
+    Remind         = 1; // 生日提醒
+    Lottery        = 2; // 抽奖
+    RedPacket      = 3; // 红包
+    Stream         = 4; // 直播
+    LotteryRemind  = 5; // 领奖提醒
+    LotteryExpire  = 6; // 抽奖过期提醒
+    LotteryCourier = 7; // 领奖收货信息更新提醒
 }
 
 // 推送消息状态
@@ -97,9 +100,9 @@ message PBRawMsg {
     ERobotPushType    msgType   = 1; //消息类型
 	PBRegards         regards   = 2; //推送消息
 	PBRemind          remind    = 3; //生日提醒消息
-	PBRedpacket       redpacket =4;
-	PBLottery         lottery   =5;
-	PBStreaming       stream    =6;
+	PBRedpacket       redpacket = 4;
+	PBLottery         lottery   = 5;
+	PBStreaming       stream    = 6;	
 }
 
 
@@ -153,7 +156,7 @@ message PCRobotPushMsg {
 message PCRobotPushRawMsg {
 	PCPushRegards     regards   = 1; //推送消息
 	PCPushRemind      remind    = 2; //生日提醒消息
-	PCPushLottery     lottery   = 3; //抽奖消息
+	PCPushLottery     lottery   = 3; //抽奖消息,对应消息类型:Lottery、LotteryRemind、LotteryExpire、LotteryCourier
 	PCPushRedPacket   redPacket = 4; //红包消息
 	PStreamingLive    streaming  = 5; //直播提醒消息
 }
