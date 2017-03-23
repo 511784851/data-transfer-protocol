@@ -24,6 +24,18 @@ import "news.proto";
 	string sessionID = 4;
 	string IPAddr = 5; //登录者的IP地址
  }
+ 
+ //监管的日志信息
+ message PPlatformLog {
+	int32 id = 1; 
+	string userID = 2;
+	int64 cTime = 3;
+	string iPAddr = 4;
+	string URL = 5;
+	string method = 6;
+	int32 errcode = 7;
+	string params = 8;
+ }
 
 /*********微博***********/
 

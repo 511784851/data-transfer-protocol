@@ -29,4 +29,9 @@ service IWebPlatform {
 	 *@param PPlatformLogin.sessionID 不用填（在返回值中）
 	 */
 	rpc Login(PPlatformLogin) returns(PPlatformLogin);
+	
+	/**
+	 * 提供给水军写操作日志
+	 */
+	rpc WriteLog(PPlatformLog) returns(PEmpty);
 }
