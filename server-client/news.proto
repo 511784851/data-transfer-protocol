@@ -716,18 +716,18 @@ message PNewsFollowExist {
  *@method GET
  *@cookie token&uuid
  *@param uuid 要查看的用户的id
- *@param type 要查看的文章类型,值:EPostType, 空表示查询所有类型. 默认:所有类型
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
   /**
- *@note vo用户个人微博主页
+ *@note vo用户个人微博主页(返回的第1页的第1个帖子为置顶帖)
  *@path /v1.2/news/home/vo
  *@method GET
  *@cookie token&uuid
- *@param uuid 被查看主页的用户的id
+ *@param type   bbnews:动态; newsfeed:资讯. 默认:bbnews
+ *@param uuid   被查看主页的用户的id
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@return 成功返回 PPostViewList, 失败返回 PResult
  */
