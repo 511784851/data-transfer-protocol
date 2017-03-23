@@ -449,10 +449,11 @@ message PGiftLotteryDetail{
 	repeated PGiftInfo gifts = 9; 		//礼物
 	int32 status = 10;	//状态
 	int32 remainCnt = 11; //剩余未领取的数量
+	int32 regionCnt = 12; //地区个数
 }
 
 message PGiftInfo{
-	int32 giftId = 1;			//用户中奖的奖品ID
+	string giftId = 1;			//用户中奖的奖品ID
 	string giftNm = 2;				//用户中奖的奖品名称
 	int32 giftCnt = 3;		//礼物数量
 }
@@ -466,7 +467,7 @@ message PUserBaseGiftEx{
 	string rcvEmail = 8;		//邮箱地址 C端
 	string rcvRemark = 9;		//描述 C端
 	int32 editCnt = 10;			//更新次数(C端使用)
-	int32 status = 11;			//是否填写收货信息 0: 未填写， 1: 已填写
+	int32 status = 11;			//是否填写收货信息 0: 未填写， 1: 已填写，3:头像高亮显示
 	string brcvNm = 12;				//收货姓名 B端
 	string brcvAddr = 13;			//收货地址 B端
 	string brcvPhone = 14;		//联系电话 B端
@@ -511,6 +512,15 @@ message PUserBaseGiftEx{
  *@FormParam regionList  中奖者地区编码 英文逗号分割
  *@return 返回PResult
  */
+
+ /*
+ *@note 中奖者查看中奖信息
+ *@path /v1/payment/giftlottery/view
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam lotteryId 中奖者关键字
+ *@return 成功返回PGiftLotteryDetail，失败返回PResult
+ */
  
 /*
  *@note 中奖者领奖
@@ -518,7 +528,6 @@ message PUserBaseGiftEx{
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam lotteryId  抽奖包ID
- *@FormParam giftId  礼物ID
  *@return 成功返回PGiftLotteryDetail 异常返回PResult
  */
  
@@ -528,7 +537,6 @@ message PUserBaseGiftEx{
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam lotteryId  抽奖包ID
- *@FormParam giftId  礼物ID
  *@FormParam uuid  B端传中奖者UUID,C端传自己的UUID，
  *@FormParam rcvNm 收货姓名
  *@FormParam rcvAddr 收货地址
@@ -553,6 +561,25 @@ message PUserBaseGiftEx{
  *@path /v1/payment/giftlottery/detail
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@FormParam lotteryId 抽奖ID
+ *@urlParam lotteryId 抽奖ID
  *@return 成功返回PGiftLotteryDetail，失败返回PResult
+ */
+ 
+ /*
+ *@note 礼物历史删除
+ *@path /v1/payment/giftlottery/delete
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId 抽奖ID 多个英文逗号分割
+ *@return 返回PResult
+ */
+ 
+  /*
+ *@note 提醒填写资料
+ *@path /v1/payment/giftlottery/remind
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId 抽奖ID 多个英文逗号分割
+ *@FormParam uuidList 多个英文逗号分割
+ *@return 返回PResult
  */
