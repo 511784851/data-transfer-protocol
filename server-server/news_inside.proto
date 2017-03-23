@@ -2,6 +2,7 @@ syntax = "proto3";
 package bbproto;
 import "news.proto";
 import "common_inside.proto";
+import "result.proto";
 
 // 个人统计信息
 message PNewsUserStatistic {
@@ -12,6 +13,13 @@ message PNewsUserStatistic {
 	int32 AudioPostCount = 6;		// 音频帖的个数
 	int32 VideoPostCount = 7;		// 视频帖的个数
 	int32 FollowShip = 8;			// 两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+}
+
+// 各类帖子数量
+message PPostCountStatistic {
+    int32 BbNewsCnt     = 1; // 动态帖个数
+    int32 NewsFeedCnt   = 2; // 资讯帖个数
+    int32 NoticeCnt     = 3; // 公告帖个数
 }
 
 /**
@@ -232,4 +240,11 @@ service IGrpcNews {
      *@return PNewsFollowExist 
      */
     rpc GrpcNewsFollowExist(PBetchFollowAction) returns (PNewsFollowExist);
+
+    /*
+     *@note 获取社区各类帖子数量
+     *@param PInt64Single 社区ID    
+     *@return PPostCountStatistic 
+     */
+    rpc GetCommunityPostCount(PInt64Single) returns (PPostCountStatistic);
  }

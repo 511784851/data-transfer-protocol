@@ -4,6 +4,124 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NewsProtos";
 
 import "account.proto";
+import "result.proto";
+import "community.proto";
+
+// 帖子类型
+enum EPostType {
+    Text        = 0; //文字帖
+    Image       = 1; //图片帖
+    Audio       = 2; //语音帖
+    Video       = 3; //视频帖
+    TextImage   = 4; //图文帖
+    Notice      = 5; //公告帖
+    NewsFeed    = 6; //新闻帖
+}
+
+// 资源类型
+enum EResourceType {
+    Txt         = 0; //文本
+    Img         = 1; //图片
+    Aud         = 2; //语音
+    VideoLocal  = 3; //本地视频
+    VideoOther  = 4; //第三方视频
+    VideoHuge   = 5; //长视频
+
+
+    HyperLink   = 16; //超链接 
+}
+
+// 标签信息列表
+message PTagList {
+    repeated PTag List = 1;
+}
+
+// 标签信息
+message PTag {
+	int32 Type          = 1; //1是标签物品，2是标签人
+	int32 SubType       = 2; //标签子类型 
+	float X             = 3; //标签x坐标相对图片的位置，百分比
+	float Y             = 4; //标签y坐标相对图片的位置，百分比
+	string Name         = 5; //标签的名称
+	string GoodPrice    = 6; //物品的价格
+	string GoodLink     = 7; //物品的链接
+	string PersonUuid   = 8; //人物的uuid
+	string PersonName   = 9; //用户的名称
+}
+
+// 帖子资源信息
+message PResource {
+	EResourceType   Type         = 1; //资源类型
+	string          Text         = 2; //文本内容,资源类型为Txt时有内容
+	string          ObjectKey    = 3; //媒体 objectkey
+	string          MediaUrl     = 4; //媒体完整url,客户端不填	
+	int64           MediaSize    = 5; //媒体长度, 单位是ms
+	int64           MediaExpires = 6; //资源过期时间,目前只有语音有过期时间
+	string          Des          = 7; //资源描述,目前只有图片有描述
+	string 			Thumbnail    = 8; //图片缩略图(客户端不填),或视频的缩略图
+	PTagList        Tags         = 9; //资源标签, 目前只有图片有标签
+}
+
+// 内容信息列表
+message PResourceList {
+	repeated PResource Resource = 1; //公告、资讯的List中第一条文本为标题
+}
+
+// 微博详情列表
+message PPostViewList {
+	repeated PPostNew list = 1; //博文列表
+}
+
+// 创建的帖子信息
+message PPostNew {
+	int64           id          = 1; //帖子ID,发布帖子时不填. 编辑帖子要填
+	string          uuid        = 2; //作者
+	int64           communityId = 3; //所属社区
+	EPostType       type        = 4; //帖子类型 
+	string          position    = 5; //发帖的地理位置
+	PStringList     atusers     = 6; //被@的用户列表
+	int64           refPostId   = 7; //引用的帖子ID
+	PResourceList   contents     = 8; //帖子正文
+ }
+
+// 帖子统计信息
+message PPostStatistc {
+	int64 	commentCnt  = 1;  //评论数
+	int64 	collectCnt  = 2;  //收藏数
+	int64 	voteCnt     = 3;  //点赞数
+	int64 	refCnt      = 4;  //被转发次数
+	int64 	shareCnt    = 5;  //分享数
+}
+
+// 帖子状态信息
+message PPostState {
+	bool    isDelete    = 1; //删除状态, true:已删除;false:未删除
+	bool    isShield    = 2; //屏蔽状态, true:屏蔽; false:未屏蔽
+	bool    isLock      = 3; //锁定状态, true:锁定; false:未锁定
+	bool    voted       = 4; //自己是否已点赞,true:是; false:否
+	bool    collected   = 5; //自己是否已收藏,true:是; false:否
+	bool    isTop       = 6; //是否置顶标志
+	int64   approval    = 7; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
+
+}
+
+// 帖子展示信息
+message PPostView {
+	int64           id          = 1; //帖子ID
+	EPostType       type        = 2; //帖子类型       
+	string          position    = 3; //发帖的地理位置
+	int64           time        = 4; //创建时间
+	int64           modifyTime  = 5; //编辑时间
+	int64           deleteTime  = 6; //删除时间
+	PUserBase       author      = 7; //帖子作者信息
+	PCommunityBase  community   = 8; //帖子所属社区
+	PResourceList   contents    = 9;  //帖子正文
+	PAtUserList     atUsers     = 10; //帖子@的用户列表
+	PPostView       refPost     = 11; //被引用(转发)的帖子
+	PPostStatistc   statistc    = 12; //帖子统计信息
+	PPostState      state       = 13; //帖子状态信息
+	bool            IsPreView   = 14; //预览标记,仅客户端使用
+ }
 
 // 微博详情列表
 message PPostInfoList {
@@ -533,3 +651,97 @@ message PNewsFollowExist {
  *@post form param: postids 微博的id,多个id用,分割.最大500个
  *@return 返回 PResult
  */
+
+ /**
+ *@note 发布帖子(论坛帖、资讯帖、公告帖)
+ *@path /v1.2/news/post
+ *@cookie token&uuid
+ *@method POST
+ *@body PPostNew 序列化数据
+ *@return 返回 PResult
+ */
+
+ /**
+ *@note 编辑帖子(论坛帖、资讯帖、公告帖)
+ *@path /v1.2/news/post
+ *@cookie token&uuid
+ *@method PUT
+ *@body   PPostNew 序列化数据
+ *@return 返回 PResult
+ */
+
+ /**
+ *@note   用户查看社交首页
+ *@path   /v1.2/news/user/timeline
+ *@cookie token&uuid
+ *@method GET
+ *@param  offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@param  count  查询条数, 默认:10
+ *@return 成功返回 PPostViewList,失败返回 PResult
+ */
+
+ /**
+ *@note   用户查看社区动态首页
+ *@path   /v1.2/news/community/timeline
+ *@cookie token&uuid
+ *@method GET
+ *@param  id     社区ID
+ *@param  type    bbnews:社区动态; newsfeed:社区资讯; notice:社区公告. 默认:bbnews
+ *@param  offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@param  count  查询条数, 默认:10
+ *@return 成功返回 PPostViewList,失败返回 PResult
+ */
+
+ /*
+ *@note 置顶公告帖(最多总共置顶1条)
+ *@path /v1.2/news/notice/top
+ *@method PUT
+ *@cookie token&uuid
+ *@param oper 0:取消置顶; 1:置顶
+ *@param id 社区id
+ *@param postid 帖子id
+ *@return返回 PResult
+ */
+
+ /*
+ *@note 置顶资讯帖(最多总共置顶3条)
+ *@path /v1.2/news/infomation/top
+ *@method PUT
+ *@cookie token&uuid
+ *@param oper 0:取消置顶; 1:置顶
+ *@param id 社区id
+ *@param postid 帖子id
+ *@return返回 PResult
+ */
+
+ /**
+ *@note 个人微博主页
+ *@path /v1.2/news/home
+ *@method GET
+ *@cookie token&uuid
+ *@param uuid 要查看的用户的id
+ *@param type 要查看的文章类型,值:EPostType, 空表示查询所有类型. 默认:所有类型
+ *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@param count  查询条数, 默认:10
+ *@return 成功返回 PPostViewList ，失败返回 PResult
+ */
+
+  /**
+ *@note vo用户个人微博主页
+ *@path /v1.2/news/home/vo
+ *@method GET
+ *@cookie token&uuid
+ *@param uuid 被查看主页的用户的id
+ *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@return 成功返回 PPostViewList, 失败返回 PResult
+ */
+
+  /**
+ *@note   获取帖子信息
+ *@path   /v1.2/news/post
+ *@cookie token&uuid
+ *@method GET
+ *@param  postid   帖子ID
+ *@return 成功返回 PPostView, 失败返回 PResult
+ */
+
