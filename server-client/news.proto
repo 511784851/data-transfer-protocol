@@ -26,6 +26,7 @@ enum EResourceType {
     VideoLocal  = 3; //本地视频
     VideoOther  = 4; //第三方视频
     VideoHuge   = 5; //长视频
+    Title       = 6; //标题
 }
 
 // 标签信息列表
@@ -62,7 +63,7 @@ message PResource {
 
 // 内容信息列表
 message PResourceList {
-	repeated PResource Resource = 1; //公告、资讯的List中第一条文本为标题
+	repeated PResource list = 1;
 }
 
 // 微博详情列表
@@ -721,7 +722,7 @@ message PNewsFollowExist {
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
-  /**
+ /**
  *@note vo用户个人微博主页(返回的第1页的第1个帖子为置顶帖)
  *@path /v1.2/news/home/vo
  *@method GET
@@ -732,7 +733,7 @@ message PNewsFollowExist {
  *@return 成功返回 PPostViewList, 失败返回 PResult
  */
 
-  /**
+ /**
  *@note   获取帖子信息
  *@path   /v1.2/news/post
  *@cookie token&uuid
