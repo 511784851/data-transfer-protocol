@@ -13,9 +13,8 @@ enum EPostType {
     Image       = 1; //图片帖
     Audio       = 2; //语音帖
     Video       = 3; //视频帖
-    TextImage   = 4; //图文帖
-    Notice      = 5; //公告帖
-    NewsFeed    = 6; //新闻帖
+    Notice      = 4; //公告帖
+    NewsFeed    = 5; //新闻帖
 }
 
 // 资源类型
@@ -29,24 +28,6 @@ enum EResourceType {
     Title       = 6; //标题
 }
 
-// 标签信息列表
-message PTagList {
-    repeated PTag List = 1;
-}
-
-// 标签信息
-message PTag {
-	int32 Type          = 1; //1是标签物品，2是标签人
-	int32 SubType       = 2; //标签子类型 
-	float X             = 3; //标签x坐标相对图片的位置，百分比
-	float Y             = 4; //标签y坐标相对图片的位置，百分比
-	string Name         = 5; //标签的名称
-	string GoodPrice    = 6; //物品的价格
-	string GoodLink     = 7; //物品的链接
-	string PersonUuid   = 8; //人物的uuid
-	string PersonName   = 9; //用户的名称
-}
-
 // 帖子资源信息
 message PResource {
 	EResourceType   Type            = 1; //资源类型
@@ -58,7 +39,7 @@ message PResource {
 	string          Des             = 7; //资源描述,目前只有图片有描述
 	string          ThumbObjectkey  = 8; //缩略图的objectKey,视频帖有缩略图时,客户端要填
 	string          ThumbUrl        = 9; //缩略图完整url,客户端不填
-	PTagList        Tags            = 10; //资源标签, 目前只有图片有标签
+	PImageTagList   Tags            = 10; //资源标签, 目前只有图片有标签
 }
 
 // 内容信息列表
@@ -80,6 +61,13 @@ message PPostNew {
 	string          position    = 5; //发帖的地理位置
 	PStringList     atusers     = 6; //被@的用户列表
 	PResourceList   contents    = 7; //帖子正文
+ }
+
+// 用于保存的帖子结构
+message PPostStore {
+	PPostNew   post        = 1; //帖子内容
+	int64      time        = 2; //创建时间
+	int64      modifyTime  = 3; //编辑时间    
  }
 
 // 帖子统计信息
