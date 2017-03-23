@@ -4,7 +4,6 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NewsProtos";
 
 import "account.proto";
-import "wallet.proto";
 
 // 微博详情列表
 message PPostInfoList {
@@ -33,7 +32,6 @@ message PPostInfo {
 	PAtUserList atusers = 20;    //被@的用户列表
 	bool IsDelete = 21;          //帖子已经被用户删除,上传时不用填
 	bool IsHide = 22;            //帖子正在被审核,上传时不用填
-    PRedPacketInfo RedPacket = 23;  //红包信息，上传时不用填
     int32 leveltype = 24;           //用户等级,上传时不用填
 	bool IsPreView = 25;            //预览标记,上传时不用填,true表示用于预览,发布后的帖子标记是false
 	PPostInfo refPost = 26;         //引用的帖子,上传时只填帖子ID
@@ -109,12 +107,6 @@ message PVideoTag {
 	float x = 1;
 	float y = 2;
 	string text = 3;			//标签内容
-}
-
-//微博红包
-message PPostRedpacket {
-    PPostInfo Post = 1;
-    PSendRedPacket Redpacket = 2;
 }
 
 message PRecommendUser {

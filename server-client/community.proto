@@ -4,7 +4,6 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "CommunityProtos";
 
 import "account.proto";
-import "wallet.proto";
 import "result.proto";
 
 /*=====================================*/
@@ -78,12 +77,6 @@ message PCommunityPostUpload {
 	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
 }
 
-// 发布红包帖子的信息
-message PCommunityRedpacketUpload {
-    PCommunityPostUpload Post = 2;
-    PSendRedPacket Redpacket = 3;
-}
-
 // 帖子信息
 message PCommunityPostInfo {
 	string ID = 2;								// 帖子id 
@@ -96,7 +89,6 @@ message PCommunityPostInfo {
 	int64 CommentCount = 9;						// 论坛帖子评论数量
 	PUserBase User = 10;						// 用户基础信息
 	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
-    PRedPacketInfo Redpacket = 12;              // 红包信息
     PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
     bool IsTop = 14;                            // 公告帖子是否置顶的标志位
     bool IsDel = 15;                            // 帖子是否删除的标记位
@@ -348,202 +340,6 @@ message PInsideCommunityUserList {
  *@body PCommunityPostUpload
  *@cookie token&uuid
  *@return返回 PResult
- */
-
-// 帖子相关操作
-/*
- *@note 发布社区论坛帖子
- *@path /v1/community/post/forum
- *@url param id 社区id
- *@method POST
- *@body PCommunityPostUpload
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
- /*
- *@note 修改社区论坛帖子
- *@path /v1/community/post/forum
- *@url param id 社区id
- *@url param postid 帖子id
- *@method PUT
- *@body PCommunityPostUpload
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 发布社区公告帖子
- *@path /v1/community/post/notice
- *@url param id 社区id
- *@url param replaceid -1表示不置顶；0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
- *@method POST
- *@body PCommunityPostUpload
- *@cookie token&uuid
- *@return返回 PResult
- */
-
-/*
- *@note 发布社区红包帖子
- *@path /v1/community/post/redpacket
- *@url param id 社区id
- *@method POST
- *@body PCommunityRedpacketUpload
- *@cookie token&uuid
- *@return返回 PResult
- */
-
-/*
- *@note 修改公告帖子内容，并选择是否置顶发布
- *@path /v1/community/post/notice
- *@url param id 社区id
- *@url param postid 帖子id
- *@url param replaceid -1表示不置顶；0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
- *@method PUT
- *@body PCommunityPostUpload
- *@cookie token&uuid
- *@return返回 PResult
- */
-
-/*
- *@note 修改置顶公告
- *@path /v1/community/post/top_notice
- *@url param id 社区id
- *@url param oper 0 为取消置顶，1 为置顶
- *@url param postid 帖子id
- *@url param replaceid 0表示一般置顶，当已有3个置顶公告时，移除发布最早的公告；>0表示替换置顶，值为要替换公告帖子的id，
- *@method GET
- *@cookie token&uuid
- *@return返回 PResult
- */
-
-/*
- *@note 已置顶公告再次置顶
- *@path /v1/community/post/toppest
- *@url param id 社区id
- *@url param postid 帖子id
- *@method GET
- *@cookie token&uuid
- *@return返回 PResult
- */
-
-/*
- *@note 获取社区指定id的帖子
- *@path /v1/community/post
- *@method GET
- *@url param id 社区id
- *@url param type id
- *@url param offset 贴子id
- *@cookie token&uuid
- *@return 成功返回 PCommunityPostList ， 失败返回 PResult
- */
-
-/*
- *@note 分页获取社区帖子
- *@path /v1/community/post
- *@method GET
- *@url param id 社区id
- *@url param type 获取帖子类型， forum 获取论坛帖子
- *@ 							notice 获取公告帖子
- *@								all 获取所有帖子，可用于社区首页刷新帖子
- *@url param tag 自定义类型标签的id; 0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
- *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
- *@url param count 获取帖子个数 
- *@cookie token&uuid
- *@return 成功返回 PCommunityPostList ， 失败返回 PResult
- */
-
-/*
- *@note 删除社区帖子
- *@path /v1/community/post
- *@method DELETE
- *@url param id 社区id
- *@url param postid 删除的公告/帖子的postid，多个id以,分割
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 标志社区帖子为已查看
- *@path /v1/community/post/viewing
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 获取评论列表
- *@path /v1/community/comment
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@url param order 时间正序填0，点赞排序填1
- *@url param direct 1为下一页，-1为上一页 (只在order=0时生效，order=1时，direct只能为1)
- *@url param offset 偏移值，direct=1时，填当前页最后一条评论的id，填-1表示获取第一页评论信息；
-						  	direct=-1时，填当前页第一条评论的id，填-1表示获取最后一页评论信息；
- *@url param count 获取评论的个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
- */
-
-/*
- *@note 删除评论
- *@path /v1/community/comment
- *@method DELETE
- *@url param id 社区id
- *@url param commentid 评论id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 获取评论列表
- *@path /v1/community/comment/vip
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@url param direct prev 为之前一条vip评论，next 为下一条vip评论，last 为最后一条vip评论
- *@url param offset 偏移值，评论id，依次评论为偏移值查找vip评论，如果没有查找到，返回PResult
- *@url param count 获取评论的个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
- */
-
-/*
- *@note 获取评论列表，通过评论id定位
- *@path /v1/community/comment/id
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@url param commentid 开始加载评论的id
- *@url param count 获取评论的个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityCommentInfoList ， 失败返回 PResult
- */
-
-/*
- *@note 评论社区帖子
- *@path /v1/community/comment
- *@method POST
- *@url param id 社区id
- *@url param postid 帖子id
- *@body PCommunityPostComment
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 对评论进行赞/踩
- *@path /v1/community/comment/vote
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@url param commentid 评论id
- *@url param type 赞为0，踩为1
- *@cookie token&uuid
- *@return 返回 PResult
  */
 
 
