@@ -329,6 +329,7 @@ message PLotterySingle{
 	int32 winners = 3;			//中奖人数
 	int64 crtTm = 4;			//发起抽奖时间
 	repeated PUserBase userList = 5;//参与抽奖者信息（最多5个）
+	bool in24Hours = 6;			//是否在24小时之内
 } 
 
 message PUserBaseEx{
