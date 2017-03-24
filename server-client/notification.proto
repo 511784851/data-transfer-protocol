@@ -439,8 +439,11 @@ message PNotifySimple {
     // uri携带跳转对象和对应参数信息
     // scheme://path?query_string
     //
-    // 抽奖中奖用户提交更新资料: payment://lottery/info?uuid=xxxx&id=xxx
-    // 抽奖发货提醒: payment://lottery/shipping?id=xxx
+    // 抽奖中奖用户提交更新资料:
+    // payment://lottery/editrcv?uuid=xxx&lottery_id=xxx&gift_nm=xxx&rcv_nm=xxx&rcv_addr=xxx&rcv_phone=xxx&rcv_email=xxx&rcv_remark=xxx
+    //
+    // 抽奖发货提醒:
+    // payment://lottery/shipping?lottery_id=xxx
     string uri = 1; // 简单通知消息参数
 }
 
