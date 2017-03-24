@@ -55,19 +55,19 @@ message PPostViewList {
 // 创建的帖子信息
 message PPostNew {
 	int64           id          = 1; //帖子ID,发布帖子时不填. 编辑帖子要填
-	string          uuid        = 2; //作者
-	int64           communityId = 3; //所属社区
-	EPostType       type        = 4; //帖子类型 
-	string          position    = 5; //发帖的地理位置
-	PStringList     atusers     = 6; //被@的用户列表
-	PResourceList   contents    = 7; //帖子正文
+	int64           communityId = 2; //所属社区
+	EPostType       type        = 3; //帖子类型 
+	string          position    = 4; //发帖的地理位置,资讯、公告帖不填
+	PStringList     atusers     = 5; //被@的用户列表,资讯、公告帖不填
+	PResourceList   contents    = 6; //帖子正文
  }
 
 // 用于保存的帖子结构
 message PPostStore {
 	PPostNew   post        = 1; //帖子内容
-	int64      time        = 2; //创建时间
-	int64      modifyTime  = 3; //编辑时间    
+	string     uuid        = 2; //帖子作者
+	int64      time        = 3; //创建时间
+	int64      modifyTime  = 4; //编辑时间    
  }
 
 // 帖子统计信息
@@ -75,8 +75,7 @@ message PPostStatistc {
 	int64 	commentCnt  = 1;  //评论数
 	int64 	collectCnt  = 2;  //收藏数
 	int64 	voteCnt     = 3;  //点赞数
-	int64 	refCnt      = 4;  //被转发次数
-	int64 	shareCnt    = 5;  //分享数
+	int64 	shareCnt    = 4;  //分享数
 }
 
 // 帖子状态信息
@@ -661,7 +660,7 @@ message PNewsFollowExist {
  *@cookie token&uuid
  *@method GET
  *@param  offset 偏移(客户端获取的最后一个帖子id), 默认:0
- *@param  count  查询条数, 默认:10
+ *@param  count  查询条数, 默认:10, 最大50
  *@return 成功返回 PPostViewList,失败返回 PResult
  */
 
@@ -673,7 +672,7 @@ message PNewsFollowExist {
  *@param  id     社区ID
  *@param  type    bbnews:社区动态; newsfeed:社区资讯; notice:社区公告. 默认:bbnews
  *@param  offset 偏移(客户端获取的最后一个帖子id), 默认:0
- *@param  count  查询条数, 默认:10
+ *@param  count  查询条数, 默认:10, 最大50
  *@return 成功返回 PPostViewList,失败返回 PResult
  */
 
@@ -706,7 +705,7 @@ message PNewsFollowExist {
  *@cookie token&uuid
  *@param uuid 要查看的用户的id
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
- *@param count  查询条数, 默认:10
+ *@param count  查询条数, 默认:10, 最大50
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
@@ -718,6 +717,7 @@ message PNewsFollowExist {
  *@param type   bbnews:动态; newsfeed:资讯. 默认:bbnews
  *@param uuid   被查看主页的用户的id
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@param count  查询条数, 默认:10, 最大50
  *@return 成功返回 PPostViewList, 失败返回 PResult
  */
 
