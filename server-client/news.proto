@@ -47,11 +47,6 @@ message PResourceList {
 	repeated PResource list = 1;
 }
 
-// 微博详情列表
-message PPostViewList {
-	repeated PPostNew list = 1; //博文列表
-}
-
 // 创建的帖子信息
 message PPostNew {
 	int64           id          = 1; //帖子ID,发布帖子时不填. 编辑帖子要填
@@ -88,6 +83,11 @@ message PPostState {
 	bool    isTop       = 6; //是否置顶标志
 	int64   approval    = 7; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
 
+}
+
+// 微博详情列表
+message PPostViewList {
+	repeated PPostView list = 1; //博文列表
 }
 
 // 帖子展示信息
@@ -681,7 +681,7 @@ message PNewsFollowExist {
  *@path /v1.2/news/notice/top
  *@method PUT
  *@cookie token&uuid
- *@param oper 0:取消置顶; 1:置顶
+ *@param oper 0:取消置顶; 1:置顶; 默认:0
  *@param id 社区id
  *@param postid 帖子id
  *@return返回 PResult
@@ -692,7 +692,7 @@ message PNewsFollowExist {
  *@path /v1.2/news/newsfeed/top
  *@method PUT
  *@cookie token&uuid
- *@param oper 0:取消置顶; 1:置顶
+ *@param oper 0:取消置顶; 1:置顶; 默认:0
  *@param id 社区id
  *@param postid 帖子id
  *@return返回 PResult
@@ -704,21 +704,10 @@ message PNewsFollowExist {
  *@method GET
  *@cookie token&uuid
  *@param uuid 要查看的用户的id
+ *@param type   all:动态+资讯; bbnews:动态; newsfeed:资讯. 默认:all
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10, 最大50
  *@return 成功返回 PPostViewList ，失败返回 PResult
- */
-
- /**
- *@note vo用户个人微博主页(返回的第1页的第1个帖子为置顶帖)
- *@path /v1.2/news/home/vo
- *@method GET
- *@cookie token&uuid
- *@param type   bbnews:动态; newsfeed:资讯. 默认:bbnews
- *@param uuid   被查看主页的用户的id
- *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
- *@param count  查询条数, 默认:10, 最大50
- *@return 成功返回 PPostViewList, 失败返回 PResult
  */
 
  /**

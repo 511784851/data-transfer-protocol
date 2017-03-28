@@ -4,6 +4,17 @@ import "news.proto";
 import "common_inside.proto";
 import "result.proto";
 
+// 帖子审核状态
+enum EPostStateOper {
+    Pass          = 0; //审核通过
+    Waite         = 1; //待审核
+    Reject        = 2; //审核不通过
+    Lock          = 3; //锁定
+    UnLock        = 4; //解锁
+    Shield        = 5; //屏蔽
+    UnShield      = 6; //解除屏蔽
+}
+
 // 个人统计信息
 message PNewsUserStatistic {
 	int32 FollowCount = 2;       	// 关注用户总数
@@ -24,8 +35,15 @@ message PPostCountStatistic {
 
 // 设置帖子状态
 message PSetPostStateParam {
-    repeated int64 postIds     = 1; //帖子列表
-    int32          state       = 2; //帖子状态, 0:审核通过; 1:待审核; 2:审核不通过; 3:锁定;4:解锁; 5:屏蔽; 6:解除屏蔽;
+    repeated int64   postIds     = 1; //帖子列表
+    EPostStateOper   state       = 2; //帖子状态, 0:审核通过; 1:待审核; 2:审核不通过; 3:锁定;4:解锁; 5:屏蔽; 6:解除屏蔽;
+}
+
+// 刷timeline参数
+message PRefreshTimelineParam {
+    string timelineClass  = 1; //timeline类型: bbnew:动态, newsfeed:资讯,all:所有
+    int64  offset         = 2; //偏移,为上次返回的最后一个帖子ID
+    int64  count          = 3; //查询条数, 默认10
 }
 
 /**
@@ -214,10 +232,10 @@ message PSetPostStateParam {
 service IGrpcNews {
     /*
      *@note 编辑帖子
-     *@param PPostInfo 编辑后的帖子 
+     *@param PPostNew 编辑后的帖子 
      *@return PEmpty
      */
-    rpc GrpcPostEdit(PPostInfo) returns (PEmpty);
+    rpc GrpcPostEdit(PPostNew) returns (PEmpty);
 
     /*
      *@note 批量点赞帖子
@@ -268,4 +286,11 @@ service IGrpcNews {
      *@return PEmpty 
      */
     rpc SetPostState(PSetPostStateParam) returns (PEmpty);
+
+     /*
+     *@note 刷新全局timeline
+     *@param PRefreshTimelineParam 参数    
+     *@return PPostViewList 
+     */
+    rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);
  }
