@@ -5,6 +5,7 @@ option java_outer_classname = "CommunityApiProtos";
 
 
 import "result.proto";
+import "common_inside.proto";
 import "community.proto";
 
 /*
@@ -153,6 +154,59 @@ service IGrpcCommunity {
      *@return 成功返回 PCommunityBaseList ，失败返回 PResult
      */
     rpc GetCommunityBaseListWithUuid(PStringList) returns (PCommunityBaseList);
+
+    /*
+     *@note 添加社区分类
+     *@param PCommunitySort，其中ID可以不填，Name必填
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+    rpc AddCommunitySort(PCommunitySort) returns (PEmpty);
+
+    /*
+     *@note 删除社区分类
+     *@param PCommunitySort，其中Name可以不填，ID必填
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+    rpc DelCommunitySort(PCommunitySort) returns (PEmpty);
+
+    /*
+     *@note 修改社区分类的名称
+     *@param PCommunitySort，其中ID，Name必填
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+    rpc SetCommunitySort(PCommunitySort) returns (PEmpty); 
+
+    /*
+     *@note 获取所有社区分类的列表
+     *@return 成功返回 PCommunitySortList ，失败返回 PResult
+     */
+    rpc GetCommunitySort(PEmpty) returns (PCommunitySortList);
+
+    /*
+     *@note 获取推荐社区分类列表
+     *@return 成功返回 PCommunitySortList ，失败返回 PResult
+     */
+    rpc GetRecommendCommunitySort(PEmpty) returns (PCommunitySortList);
+
+    /*
+     *@note 设置推荐社区分类列表
+     *@return 成功返回 PCommunitySortList ，失败返回 PResult
+     */
+    rpc SetRecommendCommunitySort(PCommunitySortList) returns (PEmpty);
+
+    /*
+     *@note 获取某个社区的分类
+     *@param 参数数组 [0]社区ID
+     *@return 成功返回 PCommunitySortList，失败返回 PResult
+     */
+    rpc GetUserCommunitySort(PStringList) returns (PCommunitySortList);
+
+    /*
+     *@note 设置某个社区的分类
+     *@param PCommunitySortList，其中社区ID、分类ID必填；UUID、Name 可以不填
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+    rpc SetUserCommunitySort(PCommunitySortList) returns (PEmpty);
  }
 
 
