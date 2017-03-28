@@ -580,7 +580,7 @@ message PUserBaseGiftEx{
  *@path /v1/payment/giftlottery/remind
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@FormParam lotteryId 抽奖ID 多个英文逗号分割
+ *@FormParam lotteryId 抽奖ID
  *@FormParam uuidList 多个英文逗号分割
  *@return 返回PResult
  */
