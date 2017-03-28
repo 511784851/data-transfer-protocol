@@ -41,7 +41,7 @@ message PSetPostStateParam {
 
 // 刷timeline参数
 message PRefreshTimelineParam {
-    string timelineClass  = 1; //timeline类型: bbnew:动态, newsfeed:资讯,all:所有
+    string timelineClass  = 1; //timeline类型: bbnews:动态, newsfeed:资讯,all:所有
     int64  offset         = 2; //偏移,为上次返回的最后一个帖子ID
     int64  count          = 3; //查询条数, 默认10
 }
