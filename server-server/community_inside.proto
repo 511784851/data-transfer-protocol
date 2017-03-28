@@ -196,10 +196,10 @@ service IGrpcCommunity {
 
     /*
      *@note 获取某个社区的分类
-     *@param 参数数组 [0]社区ID
+     *@param 社区ID
      *@return 成功返回 PCommunitySortList，失败返回 PResult
      */
-    rpc GetUserCommunitySort(PStringList) returns (PCommunitySortList);
+    rpc GetUserCommunitySort(PStringSingle) returns (PCommunitySortList);
 
     /*
      *@note 设置某个社区的分类
