@@ -158,9 +158,9 @@ service IGrpcCommunity {
     /*
      *@note 添加社区分类
      *@param PCommunitySort，其中ID可以不填，Name必填
-     *@return 成功返回 PEmpty，失败返回 PResult
+     *@return 成功返回 PCommunitySort PResult
      */
-    rpc AddCommunitySort(PCommunitySort) returns (PEmpty);
+    rpc AddCommunitySort(PCommunitySort) returns (PCommunitySort);
 
     /*
      *@note 删除社区分类
@@ -190,7 +190,7 @@ service IGrpcCommunity {
 
     /*
      *@note 设置推荐社区分类列表
-     *@return 成功返回 PCommunitySortList ，失败返回 PResult
+     *@return 成功返回 PEmpty ，失败返回 PResult
      */
     rpc SetRecommendCommunitySort(PCommunitySortList) returns (PEmpty);
 
