@@ -7,7 +7,7 @@ option java_outer_classname = "PaymentProtos";
 
 import "account.proto";
 /** ----------------- 以下是红包协议 （赵勇）-----------------*/
-/** 发红包，打赏，抽奖返回的订单预支付信息 */
+/** 发红包，打赏，抽奖返回的订单预支付信息 */ 
 message POrderPay {
 	int32 recAccountType = 1;	   // 接受者账户类型
 	string cusId = 2;	           // 支付用户id
