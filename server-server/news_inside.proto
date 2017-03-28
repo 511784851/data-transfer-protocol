@@ -272,6 +272,12 @@ service IGrpcNews {
      */
     rpc GetCommunityPostCount(PInt64Single) returns (PPostCountStatistic);
 
+    /*
+     *@note 获取系统帖子总数   
+     *@return 帖子数 
+     */
+    rpc GetGlobalPostCount(PEmpty) returns (PPostCountStatistic);
+
 
     /*
      *@note 通过帖子ID获取帖子详情
@@ -293,4 +299,5 @@ service IGrpcNews {
      *@return PPostViewList 
      */
     rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);
+
  }
