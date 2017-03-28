@@ -356,18 +356,6 @@ message PInsideCommunityUserList {
  */
 
 /*
- *@note 查看用户发布的所有帖子信息
- *@path /v1/community/setting/post
- *@method GET
- *@url param id 社区id
- *@url param uuid 被查看的用户uuid
- *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
- *@url param count 获取帖子个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityPostList ，失败返回 PResult
- */
-
-/*
  *@note 设置-好友列表；VO用户调用此接口会返回空
  *@path /v1/community/setting/friend
  *@method GET
@@ -964,17 +952,6 @@ message PCommunityInfoVO {
  *@form param post_tag 自定义类型标签的id , 多个以','分割
  *@cookie token&uuid
  *@return 返回 PResult;
- */
-
-/*
- *@note 获取用户在所有社区发布的论坛帖
- *@path /v1.2/community/user/forum
- *@method GET
- *@url param uuid 被查看的用户uuid
- *@url param offset 上一次分页最后一条帖子的id，如果是第一页则传-1
- *@url param count 获取帖子个数 
- *@cookie token&uuid
- *@return 成功返回 PCommunityPostList , 失败返回 PResult
  */
 
 /*

@@ -111,51 +111,6 @@ import "community.proto";
  *@url param count 获取成员个数
  *@return 成功返回 PInsideCommunityUserList ，失败返回 PResult;
  */
-
-/*
- *@note 获取指定社区指定用户发布的论坛帖子
- *@URL /v1/community/inside/forum/user/list
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param uuid 用户id
- *@url param type 帖子类型； txt(文字)，img(图片)，audio(音频)，video(第三方视频)，link(url)
- *@url param offset 以-1开始，之后填上一次获取的最后一个帖子的id
- *@url param count 单次获取的数量
- *@return 成功返回 PCommunityPostList ，失败返回 PResult;
- */
-
-/*
- *@note 获取指定社区所有用户发布的论坛帖子
- *@URL /v1/community/inside/forum/community/list
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param uuid 用户id
- *@url param type 帖子类型； txt(文字)，img(图片)，audio(音频)，video(第三方视频)，link(url)
- *@url param offset 以-1开始，之后填上一次获取的最后一个帖子的id
- *@url param count 单次获取的数量
- *@return 成功返回 PCommunityPostList ，失败返回 PResult;
- */
-
-/*
- *@note 发布社区公告帖子
- *@path /v1/community/inside/post/notice
- *@url param id 社区id
- *@method POST
- *@body PCommunityPostUpload
- *@return返回 PResult
- */
-
-/*
- *@note 发布社区论坛帖子
- *@path /v1/community/inside/post/notice
- *@url param id 社区id
- *@method POST
- *@body PCommunityPostUpload
- *@return返回 PResult
- */
- 
  
  // 1.2.x 社区新功能
 /*=====================================*/
