@@ -17,7 +17,6 @@ if (@ARGV > 0) {
 	"comment",
 	"social",
 	"community",
-	"wallet",
 );
 
 foreach $p (@protos){
