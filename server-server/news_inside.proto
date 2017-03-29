@@ -293,11 +293,17 @@ service IGrpcNews {
      */
     rpc SetPostState(PSetPostStateParam) returns (PEmpty);
 
+    /*
+     *@note 查询帖子状态
+     *@param PStringList 帖子ID   
+     *@return PInt32List 帖子状态
+     */
+    rpc GetPostState(PStringList) returns (PInt32List);
+
      /*
      *@note 刷新全局timeline
      *@param PRefreshTimelineParam 参数    
      *@return PPostViewList 
      */
-    rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);
-
+    rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);   
  }

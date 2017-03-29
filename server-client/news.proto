@@ -71,6 +71,7 @@ message PPostStatistc {
 	int64 	collectCnt  = 2;  //收藏数
 	int64 	voteCnt     = 3;  //点赞数
 	int64 	shareCnt    = 4;  //分享数
+	int64   viewCnt     = 5;  //阅读数
 }
 
 // 帖子状态信息
@@ -717,5 +718,15 @@ message PNewsFollowExist {
  *@method GET
  *@param  postid   帖子ID
  *@return 成功返回 PPostView, 失败返回 PResult
+ */
+
+ /**
+ *@note   获取收藏的微博列表
+ *@path   /v1.2/news/collect
+ *@cookie token&uuid
+ *@method GET
+ *@param  offset 以0开始，之后 offset = offset+ count 值偏移
+ *@param  count 获取收藏帖子数量,最大值为50
+ *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
