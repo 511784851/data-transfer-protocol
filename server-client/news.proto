@@ -9,23 +9,25 @@ import "community.proto";
 
 // 帖子类型
 enum EPostType {
-    Text        = 0; //文字帖
-    Image       = 1; //图片帖
-    Audio       = 2; //语音帖
-    Video       = 3; //视频帖
-    Notice      = 4; //公告帖
-    NewsFeed    = 5; //新闻帖
+	PtInvalid   = 0; //无效
+    Text        = 1; //文字帖
+    Image       = 2; //图片帖
+    Audio       = 3; //语音帖
+    Video       = 4; //视频帖
+    Notice      = 5; //公告帖
+    NewsFeed    = 6; //新闻帖
 }
 
 // 资源类型
 enum EResourceType {
-    Txt         = 0; //文本
-    Img         = 1; //图片
-    Aud         = 2; //语音
-    VideoLocal  = 3; //本地视频
-    VideoOther  = 4; //第三方视频
-    VideoHuge   = 5; //长视频
-    Title       = 6; //标题
+	RtInvalid   = 0; //无效
+    Txt         = 1; //文本
+    Img         = 2; //图片
+    Aud         = 3; //语音
+    VideoLocal  = 4; //本地视频
+    VideoOther  = 5; //第三方视频
+    VideoHuge   = 6; //长视频
+    Title       = 7; //标题
 }
 
 // 帖子标签
@@ -90,6 +92,7 @@ message PPostState {
 	bool        isTop               = 5; //是否置顶标志
 	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
 	bool        isFeatured          = 7; //是否被标为精选,true:是; false:否
+	bool        canDelete           = 8; //是否有删除权限(作者、社区创建者、管理员)
 }
 
 // 微博详情列表
