@@ -30,9 +30,9 @@ enum EResourceType {
 
 // 帖子标签
 enum EPostLabel {
-	LbNone         = 0x00; //无标签
-    LbGoddess      = 0x01; //电竞女神
-    LbFeatured     = 0x02; //精选
+	LbNone         = 0; //无标签
+    LbGoddess      = 1; //电竞女神
+    LbFeatured     = 2; //精选
 }
 
 // 帖子资源信息
@@ -761,3 +761,13 @@ message PNewsFollowExist {
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
+/**
+ *@note   获取首页的资讯列表
+ *@path   /v1.2/news/newsfeed
+ *@cookie token&uuid
+ *@method GET
+ *@param  class  社区分类, top、hot、EDG等. 默认 top
+ *@param  pageindex 页数偏移, 每次翻页加1,默认:0
+ *@param  pagesize  每页大小, 默认10, 最大值为50
+ *@return 成功返回 PPostViewList ，失败返回 PResult
+ */
