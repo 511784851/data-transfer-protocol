@@ -4,21 +4,21 @@ import "news.proto";
 import "common_inside.proto";
 import "result.proto";
 
-// 帖子审核状态
-enum EPostStateOper {
-    Pass          = 0; //审核通过
-    Waite         = 1; //待审核
-    Reject        = 2; //审核不通过
-    Lock          = 3; //锁定
-    UnLock        = 4; //解锁
-    Shield        = 5; //屏蔽
-    UnShield      = 6; //解除屏蔽
+//帖子状态操作类型
+enum EStateOperType {
+    OpPass          = 0; //设为审核通过
+    OpWaite         = 1; //设为待审核
+    OpReject        = 2; //设为审核不通过
+    OpLock          = 3; //设为锁定
+    OpUnLock        = 4; //设为解锁
+    OpShield        = 5; //设为屏蔽
+    OpUnShield      = 6; //设为解除屏蔽
 }
 
 // 个人统计信息
 message PNewsUserStatistic {
 	int32 FollowCount = 2;       	// 关注用户总数
-	int32 FansCount = 3;				// 粉丝用户总数
+	int32 FansCount = 3;			// 粉丝用户总数
 	int32 TxtPostCount = 4;			// 文字帖的个数
 	int32 ImgPostCount = 5;			// 图片帖的个数
 	int32 AudioPostCount = 6;		// 音频帖的个数
@@ -35,8 +35,8 @@ message PPostCountStatistic {
 
 // 设置帖子状态
 message PSetPostStateParam {
-    repeated int64   postIds     = 1; //帖子列表
-    EPostStateOper   state       = 2; //帖子状态, 0:审核通过; 1:待审核; 2:审核不通过; 3:锁定;4:解锁; 5:屏蔽; 6:解除屏蔽;
+    repeated int64   postIds    = 1; //帖子列表
+    EStateOperType   state       = 2; //帖子状态, 0:审核通过; 1:待审核; 2:审核不通过; 3:锁定;4:解锁; 5:屏蔽; 6:解除屏蔽;
 }
 
 // 刷timeline参数
@@ -44,6 +44,12 @@ message PRefreshTimelineParam {
     string timelineClass  = 1; //timeline类型: bbnews:动态, newsfeed:资讯,all:所有
     int64  offset         = 2; //偏移,为上次返回的最后一个帖子ID
     int64  count          = 3; //查询条数, 默认10
+}
+
+// 微博详情列表
+message PInsidePostViewList {
+    repeated PPostView list = 1; //博文列表
+    int32    Total          = 2; //帖子总数
 }
 
 /**

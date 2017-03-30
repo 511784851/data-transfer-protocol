@@ -28,6 +28,13 @@ enum EResourceType {
     Title       = 6; //标题
 }
 
+// 帖子标签
+enum EPostLabel {
+	LbNone         = 0x00; //无标签
+    LbGoddess      = 0x01; //电竞女神
+    LbFeatured     = 0x02; //精选
+}
+
 // 帖子资源信息
 message PResource {
 	EResourceType   Type            = 1; //资源类型
@@ -76,14 +83,13 @@ message PPostStatistc {
 
 // 帖子状态信息
 message PPostState {
-	bool    isDelete    = 1; //删除状态, true:已删除;false:未删除
-	bool    isShield    = 2; //屏蔽状态, true:屏蔽; false:未屏蔽
-	bool    isLock      = 3; //锁定状态, true:锁定; false:未锁定
-	bool    voted       = 4; //自己是否已点赞,true:是; false:否
-	bool    collected   = 5; //自己是否已收藏,true:是; false:否
-	bool    isTop       = 6; //是否置顶标志
-	int64   approval    = 7; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
-
+	bool        isDelete            = 1; //删除状态, true:已删除;false:未删除
+	bool        isShield            = 2; //屏蔽状态, true:屏蔽; false:未屏蔽
+	bool        voted               = 3; //自己是否已点赞,true:是; false:否
+	bool        collected           = 4; //自己是否已收藏,true:是; false:否
+	bool        isTop               = 5; //是否置顶标志
+	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
+	bool        isFeatured          = 7; //是否被标为精选,true:是; false:否
 }
 
 // 微博详情列表
@@ -601,13 +607,14 @@ message PNewsFollowExist {
  */
 
 /**
- *@note   刷新全局微博列表(类似游客刷微博)
+ *@note   刷全局微博列表
  *@path   /v1/news/global/timeline
  *@method GET
  *@cookie token&uuid
  *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp，vo,vip2(包含vip和vipp)
- *@return 成功返回 PPostInfoList ，失败返回 PResult
+ *@param  count  查询条数.默认10,最大50
+ *@param  type  all:所有, bbnews:动态, newsfeed;资讯, notice:公告.默认:all
+ *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
  /**
@@ -697,6 +704,30 @@ message PNewsFollowExist {
  *@param id 社区id
  *@param postid 帖子id
  *@return返回 PResult
+ */
+
+ /*
+ *@note 设置帖子标签
+ *@path /v1.2/news/label
+ *@method PUT
+ *@cookie token&uuid
+ *@param oper 0:设置; 1:取消设置; 默认:0
+ *@param id 社区id
+ *@param postid 帖子id
+ *@param label 标签(EPostLabel), 0:电竞女神; 1:精选
+ *@return返回 PResult
+ */
+
+ /*
+ *@note 按标签获取社区的帖子
+ *@path   /v1.2/news/label/posts
+ *@method GET
+ *@cookie token&uuid
+ *@param id 社区id
+ *@param label 标签(EPostLabel), 0:电竞女神; 1:精选
+ *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@param count  查询条数, 默认:10, 最大50
+ *@return返回 PPostViewList
  */
 
  /**
