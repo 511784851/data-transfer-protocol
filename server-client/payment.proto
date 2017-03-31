@@ -448,7 +448,7 @@ message PGiftLotteryDetail{
 	repeated PUserBaseGiftEx userList = 7;//用户列表
 	string remark = 8;			//描述
 	repeated PGiftInfo gifts = 9; 		//礼物
-	int32 status = 10;	//状态
+	int32 status = 10;	//状态 1:初始状态，2:领奖中，3:领奖完成，4:过期，0:已删除
 	int32 remainCnt = 11; //剩余未领取的数量
 	int32 regionCnt = 12; //地区个数
 }
@@ -468,7 +468,7 @@ message PUserBaseGiftEx{
 	string rcvEmail = 8;		//邮箱地址 C端
 	string rcvRemark = 9;		//描述 C端
 	int32 editCnt = 10;			//更新次数(C端使用)
-	int32 status = 11;			//是否填写收货信息 0: 未填写， 1: 已填写，3:头像高亮显示
+	int32 status = 11;			//是否填写收货信息 -1:未领奖, 0: 未填写， 1: 已填写，3:头像高亮显示
 	string brcvNm = 12;				//收货姓名 B端
 	string brcvAddr = 13;			//收货地址 B端
 	string brcvPhone = 14;		//联系电话 B端
