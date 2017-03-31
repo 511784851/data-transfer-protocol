@@ -715,7 +715,7 @@ message PNewsFollowExist {
  *@param oper 0:设置; 1:取消设置; 默认:0
  *@param id 社区id
  *@param postid 帖子id
- *@param label 标签(EPostLabel), 0:电竞女神; 1:精选
+ *@param label 标签, 0:电竞女神; 1:精选
  *@return返回 PResult
  */
 
@@ -725,7 +725,7 @@ message PNewsFollowExist {
  *@method GET
  *@cookie token&uuid
  *@param id 社区id
- *@param label 标签(EPostLabel), 0:电竞女神; 1:精选
+ *@param label 标签, 0:电竞女神; 1:精选
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10, 最大50
  *@return返回 PPostViewList
