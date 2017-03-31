@@ -127,7 +127,7 @@ service grpcDataPublishing {
 	// 根据昵称查询用户
 	rpc SearchUser(PStringSingle) returns (PStringList);
 	
-	// 用户超级查找，参数为json字条串，字段包括：
+	// 用户超级查找，参数为json字符串，字段包括：
 	// keyword 搜索关键词
 	// source 来源 0手机号码 1微信 2微博 3脸书 4谷歌 5用户名
 	// level 用户等级
@@ -138,6 +138,16 @@ service grpcDataPublishing {
 	// sort_regtime 以用户注册时间排序 asc升序 desc降序（默认）
 	// sample: `{"keyword":"xxx", "level":1, "sort_regtime":"desc"}`
 	rpc SearchUserV2(PStringSingle) returns (PScrollResult);
+	
+	// 帖子查找，参数为json字符串，字段包括：
+	// keyword_nickname 关键词为昵称，全词匹配
+	// keyword_title 关键词为帖子标题，分词搜索
+	// keyword_community 关键词为社区名称，全词匹配
+	// type 1社区动态 2资讯 
+	// state 0待审 1通过审核 2未通过审核
+	// cotp 所属的社区的分类，如："游戏"
+	// begin, end 发布时间起止范围,unix时间戳,秒
+	rpc SearchPostV2(PStringSingle) returns (PScrollResult);
 	
 	// 查询粉丝
 	rpc SelectFans(PFansFilterParam) returns (PScrollResult);
