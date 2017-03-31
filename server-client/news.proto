@@ -30,9 +30,8 @@ enum EResourceType {
 
 // 帖子标签
 enum EPostLabel {
-	LbNone         = 0; //无标签
-    LbGoddess      = 1; //电竞女神
-    LbFeatured     = 2; //精选
+    LbGoddess      = 0; //电竞女神
+    LbFeatured     = 1; //精选
 }
 
 // 帖子资源信息
@@ -89,8 +88,14 @@ message PPostState {
 	bool        collected           = 4; //自己是否已收藏,true:是; false:否
 	bool        isTop               = 5; //是否置顶标志
 	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
-	bool        isFeatured          = 7; //是否被标为精选,true:是; false:否
+	
 	bool        canDelete           = 8; //是否有删除权限(作者、社区创建者、管理员)
+	PLabelList  labelList           = 9; //标签列表,取值参考EPostLabel
+}
+
+// 标签列表
+message PLabelList {
+	repeated string List = 1; //标签列表
 }
 
 // 微博详情列表
