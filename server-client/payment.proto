@@ -474,6 +474,7 @@ message PUserBaseGiftEx{
 	string brcvPhone = 14;		//联系电话 B端
 	string brcvEmail = 15;		//邮箱地址 B端
 	string brcvRemark = 16;		//描述 B端	
+	int64 acceptTm = 17;		//领奖时间
 }
 /*
  *@note 发起、刷新礼物抽奖
