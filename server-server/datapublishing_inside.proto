@@ -213,11 +213,14 @@ service grpcDataPublishing {
 	rpc SelectNews(PNewsParam) returns (PStringList);
 	
 	// 人工推荐-添加单个用户/社区/话题/资讯/动态/精选
-	rpc AddManualRecommend(PManualRecommend) returns (PResult);	
+	rpc AddManualRecommend(PManualRecommend) returns (PEmpty);
+		
 	// 人工推荐-移除单个用户/社区/话题/资讯/动态/精选
-	rpc DelManualRecommend(PManualRecommend) returns (PResult);		
+	rpc DelManualRecommend(PManualRecommend) returns (PEmpty);
+		
 	// 人工推荐-批量覆盖推荐
-	rpc BatchManualRecommend(PManualRecommend) returns (PResult);
+	rpc BatchManualRecommend(PManualRecommend) returns (PEmpty);
+	
 	// 人工推荐-获取已推荐列表
-	rpc GetManualRecommend(PManualRecommend) returns (PStringList);
+	rpc GetManualRecommend(PManualRecommend) returns (PManualRecommend);
 }
