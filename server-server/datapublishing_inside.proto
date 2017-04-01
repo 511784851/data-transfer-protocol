@@ -88,7 +88,7 @@ message PFansSaveParam {
 }
 
 message PManualRecommend {
-	string id = 2; //资讯或动态ID
+	string id = 2; //帖子ID
 	int32 ttl = 3; //有效时间，单位秒
 	int32 order = 4; //次序
 }
@@ -97,7 +97,15 @@ message PManualRecommendList {
 	repeated PManualRecommend list = 1;
 }
 
+// 审核通知消息结构
+message PConfirmMsg {
+	//审核操作，1通过 2未通过
+	int32 state = 2;
+	//审核对象，如帖子ID、话题
+	repeated string data = 3;
+}
 
+// 关注、查看/赞/收藏/分享帖子、更新帖子标签
 message PEsActionMsg {
 	string sender = 1;
 	string receiver = 2;
@@ -123,7 +131,11 @@ service grpcDataPublishing {
 	rpc FollowUser(PEsActionMsg) returns (PEmpty);
 	rpc AddComment(PCommentMsg) returns (PEmpty);
 	rpc DelComment(PCommentMsg) returns (PEmpty);
-	
+	// 审核帖子
+	rpc ConfirmPost(PConfirmMsg) returns (PEmpty);
+	// 审核话题
+	rpc ConfirmTopic(PConfirmMsg) returns (PEmpty);
+		
 	// 根据昵称查询用户
 	rpc SearchUser(PStringSingle) returns (PStringList);
 	
