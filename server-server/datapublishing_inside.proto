@@ -87,14 +87,26 @@ message PFansSaveParam {
 	bool asynchronous = 7;
 }
 
-message PManualRecommend {
-	string id = 2; //帖子ID
-	int32 ttl = 3; //有效时间，单位秒
-	int32 order = 4; //次序
+enum ERecommendType {
+	RTReserve = 0;
+	RTUser = 1; 		//用户推荐
+	RTCommunity = 2; 	//社区推荐
+	RTTopic = 3; 		//话题推荐
+	RTNews = 4; 		//资讯推荐
+	RTPost = 5; 		//动态推荐
+	RTFeatured = 6; 	//精选推荐
 }
 
-message PManualRecommendList {
-	repeated PManualRecommend list = 1;
+message PManualRecommendInfo {
+	string id = 2; 				//用户ID、社区ID、帖子ID
+	int32 ttl = 3; 				//有效时间，单位秒
+	int32 order = 4; 			//次序
+}
+
+// 人工推荐
+message PManualRecommend {
+	ERecommendType rtp = 1;		//见ERecommendType
+	repeated PManualRecommendInfo list = 2;
 }
 
 // 审核通知消息结构
@@ -196,66 +208,16 @@ service grpcDataPublishing {
 	
 	// 当天有粉丝过生日的网红uuid
 	rpc SelectVUserHaveTodayBirthdayFans(PEmpty) returns (PStringList);
-	
-	//--------------------------------------------------------------------------
-	//1.3 & 1.4
-	
+		
 	// 发现->资讯页
 	rpc SelectNews(PNewsParam) returns (PStringList);
 	
-	/*
-	// 添加单个推荐用户
-	rpc AddRecommendUser(PStringSingle) returns (PResult);
-	// 移除单个推荐用户
-	rpc DelRecommendUser(PStringSingle) returns (PResult);
-	// 批量设置推荐用户
-	rpc BatchSetRecommendUser(PStringList) returns (PResult);
-	// 获取推荐的用户
-	rpc GetRecommendUser(PEmpty) returns (PStringList);
-
-	// 添加单个推荐社区
-	rpc AddRecommendCommunity(PStringSingle) returns (PResult);
-	// 移除单个推荐社区
-	rpc DelRecommendCommunity(PStringSingle) returns (PResult);	
-	// 批量设置推荐社区
-	rpc BatchSetRecommendCommunity(PStringList) returns (PResult);
-	// 获取推荐的社区
-	rpc GetRecommendCommunity(PEmpty) returns (PStringList);
-
-	// 添加单个推荐话题
-	rpc AddRecommendTopic(PStringSingle) returns (PResult);
-	// 移除单个推荐话题
-	rpc DelRecommendTopic(PStringSingle) returns (PResult);	
-	// 批量设置推荐话题
-	rpc BatchSetRecommendTopic(PStringList) returns (PResult);
-	// 获取推荐的话题
-	rpc GetRecommendTopic(PEmpty) returns (PStringList);
-
-	// 添加一条推荐资讯
-	rpc AddRecommendNews(PStringSingle) returns (PResult);
-	// 移除单个推荐资讯
-	rpc DelRecommendNews(PStringSingle) returns (PResult);	
-	// 批量设置推荐资讯
-	rpc BatchSetRecommendNews(PManualRecommendList) returns (PResult);
-	// 获取手动推荐的资讯
-	rpc GetRecommendNews(PEmpty) returns (PManualRecommendList);
-	
-	// 添加一条推荐动态
-	rpc AddRecommendPost(PStringSingle) returns (PResult);
-	// 移除单个推荐动态
-	rpc DelRecommendPost(PStringSingle) returns (PResult);	
-	// 批量设置推荐动态
-	rpc BatchSetRecommendPost(PManualRecommendList) returns (PResult);
-	// 获取手动推荐的动态
-	rpc GetRecommendPost(PEmpty) returns (PManualRecommendList);
-	
-	// 添加一条推荐精选（资讯或动态）
-	rpc AddRecommendEssence(PStringSingle) returns (PResult);
-	// 移除单个推荐精选
-	rpc DelRecommendEssence(PStringSingle) returns (PResult);	
-	// 批量设置推荐精选
-	rpc BatchSetRecommendEssence(PManualRecommendList) returns (PResult);
-	// 获取手动推荐的精选
-	rpc GetRecommendEssence(PEmpty) returns (PManualRecommendList);
-	*/
+	// 人工推荐-添加单个用户/社区/话题/资讯/动态/精选
+	rpc AddManualRecommend(PManualRecommend) returns (PResult);	
+	// 人工推荐-移除单个用户/社区/话题/资讯/动态/精选
+	rpc DelManualRecommend(PManualRecommend) returns (PResult);		
+	// 人工推荐-批量覆盖推荐
+	rpc BatchManualRecommend(PManualRecommend) returns (PResult);
+	// 人工推荐-获取已推荐列表
+	rpc GetManualRecommend(PManualRecommend) returns (PStringList);
 }
