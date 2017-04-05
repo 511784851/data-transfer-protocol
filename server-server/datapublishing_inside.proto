@@ -136,6 +136,17 @@ message PCommentMsg {
 	int64 time = 6;
 }
 
+message PTopicDetail {
+	string topic = 1;	//话题名称,不含#
+	int32 views = 2;	//浏览数
+	int32 count = 3;	//帖子数
+	int64 time = 4;		//创建时间，也就是第一篇帖子参与此话题的发布时间
+}
+
+message PTopicDetailList {
+	repeated PTopicDetail list = 1;
+}
+
 service grpcDataPublishing {
 	rpc AddPost(PPostStore) returns (PEmpty);
 	rpc UpdatePost(PPostStore) returns (PEmpty);
@@ -224,4 +235,7 @@ service grpcDataPublishing {
 	
 	// 人工推荐-获取已推荐列表
 	rpc GetManualRecommend(PManualRecommend) returns (PManualRecommend);
+	
+	// 获取话题详情列表
+	rpc GetTopicDetail(PStringList) returns (PTopicDetailList);
 }
