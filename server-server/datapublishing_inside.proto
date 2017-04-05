@@ -98,9 +98,10 @@ enum ERecommendType {
 }
 
 message PManualRecommendInfo {
-	string id = 2; 				//用户ID、社区ID、帖子ID
-	int32 ttl = 3; 				//有效时间，单位秒
-	int32 order = 4; 			//次序
+	int64 time = 1;		//初次设置时间，unix时间戳，秒
+	string id = 2; 		//用户ID、社区ID、帖子ID
+	int32 ttl = 3; 		//有效时间，单位秒
+	int32 order = 4; 	//次序
 }
 
 // 人工推荐
