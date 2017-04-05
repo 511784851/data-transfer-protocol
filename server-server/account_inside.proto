@@ -381,6 +381,17 @@ service account {
      *@return 设置失败的下标
      */
     rpc BatchUpdateNickname(PNicknameList) returns (PInt32List);
+
+    /*
+     *@note 批量获取用户基础信息
+    	1. 内部自动分段获取
+    	2. 返回顺序和传入uuids顺序一致
+    	3. 根据返回用户的UUID是否为""判断用户是否存在
+     *@param ctx 请求上下文
+     *@param uuids 用户ID列表
+     *@return *bbproto.PUserBaseList 用户基础信息列表
+    */
+    rpc GetUserBases(PStringList) returns (PUserBaseList);
 }
 
 message PNickname {
