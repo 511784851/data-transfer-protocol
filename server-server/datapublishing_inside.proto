@@ -47,7 +47,8 @@ message PNewsParam {
 }
 
 message PSearchPostParam {
-	EPostType tp = 1;	
+	//0全部 1动态 2资讯 3公告
+	int32 tp = 1;
 	string keyword = 2;
 	//指定帖子作者
 	string uuid = 3;
@@ -212,6 +213,7 @@ service grpcDataPublishing {
 	// cotag 所属的社区的分类，如："游戏"
 	// tag 帖子标签，如"精选"、"女神"等
 	// begin, end 发布时间起止范围,unix时间戳,秒
+	// sort_time 以帖子发布时间排序 asc升序 desc降序（默认）
 	rpc SearchPostV2(PStringSingle) returns (PScrollResult);
 	
 	// 社区查找，结果以时间倒序排序，参数为json字符串，字段包括：
