@@ -163,19 +163,6 @@ message PGameList {
  */
  
 /*
- *@note 搜索微博帖子
- *@path /datapublishing/news/search
- *@method GET
- *@cookie token&uuid
- *@param keyword 关键词
- *@param uuid 指定用户搜索
- *@param type 指定类型搜索，取值all text image video audio 默认all
- *@param pageindex 页号
- *@param pagesize 页大小
- *@return 成功返回PPostInfoList，失败返回PResult
- */
-
-/*
  *@note 搜索话题
  *@path /datapublishing/topic/search
  *@method GET

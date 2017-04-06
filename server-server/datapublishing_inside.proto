@@ -46,6 +46,17 @@ message PNewsParam {
 	int32 size = 3;
 }
 
+message PSearchPostParam {
+	EPostType tp = 1;	
+	string keyword = 2;
+	//指定帖子作者
+	string uuid = 3;
+	//分页偏移
+	int32 offset = 4;
+	//分页大小
+	int32 size = 5;
+}
+
 message PScrollResult {
 	// ids (如uuids等)
 	repeated string id = 1;
@@ -155,12 +166,21 @@ message PTopicDetailList {
 }
 
 service grpcDataPublishing {
+	// 新增帖子
 	rpc AddPost(PPostStore) returns (PEmpty);
+	// 更新帖子内容
 	rpc UpdatePost(PPostStore) returns (PEmpty);
+	// 更新帖子标签
 	rpc UpdatePostTags(PEsActionMsg) returns (PEmpty);
+	// 帖子交互
 	rpc Act2Post(PEsActionMsg) returns (PEmpty);
+	// 搜索帖子
+	rpc SearchPost(PSearchPostParam) returns (PStringList);
+	// 关注用户
 	rpc FollowUser(PEsActionMsg) returns (PEmpty);
+	// 新增帖子评论
 	rpc AddComment(PCommentMsg) returns (PEmpty);
+	// 删除评论
 	rpc DelComment(PCommentMsg) returns (PEmpty);
 	// 审核帖子
 	rpc ConfirmPost(PConfirmMsg) returns (PEmpty);
