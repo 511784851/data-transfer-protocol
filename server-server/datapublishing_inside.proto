@@ -87,26 +87,32 @@ message PFansSaveParam {
 	bool asynchronous = 7;
 }
 
-enum ERecommendType {
+enum ERotType {
 	RTReserve = 0;
-	RTUser = 1; 		//用户推荐
-	RTCommunity = 2; 	//社区推荐
-	RTTopic = 3; 		//话题推荐
-	RTNews = 4; 		//资讯推荐
-	RTPost = 5; 		//动态推荐
-	RTFeatured = 6; 	//精选推荐
+	RTUser = 1; 		//用户
+	RTCommunity = 2; 	//社区
+	RTTopic = 3; 		//话题
+	RTNews = 4; 		//资讯
+	RTPost = 5; 		//动态
+	RTFeatured = 6; 	//精选
 }
 
 message PManualRecommendInfo {
-	int64 time = 1;		//初次设置时间，unix时间戳，秒
-	string id = 2; 		//用户ID、社区ID、帖子ID
-	int32 ttl = 3; 		//有效时间，单位秒
+	string id = 1; 		//用户ID、社区ID、帖子ID
+	int64 time = 2;		//推荐起始时间，unix时间戳，单位秒	
+	int64 expire = 3; 	//过期时间，unix时间戳，单位秒
 	int32 order = 4; 	//次序
+}
+
+message PHotRemove {
+	ERotType rtp = 1;
+	bool cancel = 2;	//取消移除
+	repeated string ids = 3;
 }
 
 // 人工推荐
 message PManualRecommend {
-	ERecommendType rtp = 1;		//见ERecommendType
+	ERotType rtp = 1;		//见ERotType
 	repeated PManualRecommendInfo list = 2;
 }
 
@@ -139,8 +145,9 @@ message PCommentMsg {
 message PTopicDetail {
 	string topic = 1;	//话题名称,不含#
 	int32 views = 2;	//浏览数
-	int32 count = 3;	//帖子数
-	int64 time = 4;		//创建时间，也就是第一篇帖子参与此话题的发布时间
+	int32 count = 3;	//帖子总数
+	int32 newsc = 4;	//资讯数，动态数=count-newsc
+	int64 time = 5;		//创建时间，也就是第一篇帖子参与此话题的发布时间
 }
 
 message PTopicDetailList {
@@ -172,6 +179,7 @@ service grpcDataPublishing {
 	// begin,end 用户注册时间起止范围,unix时间戳,秒
 	// sort_nickname 以昵称拼音排序 asc升序 desc降序
 	// sort_regtime 以用户注册时间排序 asc升序 desc降序（默认）
+	// sort_hot 以用户热门度排序，仅支持desc降序
 	// sample: `{"keyword":"xxx", "level":1, "sort_regtime":"desc"}`
 	rpc SearchUserV2(PStringSingle) returns (PScrollResult);
 	
@@ -182,6 +190,7 @@ service grpcDataPublishing {
 	// type 1社区动态 2资讯 
 	// state 审核状态 0待审 1通过审核 2未通过审核
 	// cotag 所属的社区的分类，如："游戏"
+	// tag 帖子标签，如"精选"、"女神"等
 	// begin, end 发布时间起止范围,unix时间戳,秒
 	rpc SearchPostV2(PStringSingle) returns (PScrollResult);
 	
@@ -238,4 +247,10 @@ service grpcDataPublishing {
 	
 	// 获取话题详情列表
 	rpc GetTopicDetail(PStringList) returns (PTopicDetailList);
+	
+	// 从热门移除
+	rpc HotRemove(PHotRemove) returns (PEmpty);
+
+	// 判断是否在热门移除里面
+	rpc IsInHotRemove(PHotRemove) returns (PBoolList);
 }
