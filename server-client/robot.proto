@@ -12,12 +12,13 @@ import "datapublishing.proto";
 enum ERobotPushType {
     Regards        = 0; // 消息推送
     Remind         = 1; // 生日提醒
-    Lottery        = 2; // 抽奖
+    Lottery        = 2; // 现金抽奖
     RedPacket      = 3; // 红包
     Stream         = 4; // 直播
     LotteryRemind  = 5; // 领奖提醒
     LotteryExpire  = 6; // 抽奖过期提醒
     LotteryCourier = 7; // 领奖收货信息更新提醒
+    GiftLottery    = 8; // 礼物抽奖
 }
 
 // 推送消息状态
