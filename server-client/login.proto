@@ -6,6 +6,7 @@ option java_outer_classname = "LoginProtos";
 import "account.proto";
 
 message PLogin {
+	int64 State = 3;				// 账户状态，1：封号，unix时间戳：冻结账户截至时间，0：正常
     bool forceBindPhone = 4;        // 用户是否需要强制绑定手机号码，如果是，则需要绑定手机号码
 	bool newUser = 5;				// 是否新注册用户标识，true为新用户，false为老用户
 	string uuid = 6;      			// 用户ID
