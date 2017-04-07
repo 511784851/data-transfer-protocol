@@ -768,12 +768,25 @@ message PNewsFollowExist {
  */
 
 /**
- *@note   获取首页的资讯列表
+ *@note   获取首页的精选列表(筛选的资讯+动态)
  *@path   /v1.2/news/newsfeed
  *@cookie token&uuid
  *@method GET
  *@param  class  社区分类, top、hot、EDG等. 默认 top
  *@param  pageindex 页数偏移, 每次翻页加1,默认:0
  *@param  pagesize  每页大小, 默认10, 最大值为50
+ *@return 成功返回 PPostViewList ，失败返回 PResult
+ */
+
+ /**
+ *@note   搜索帖子
+ *@path   /v1.2/news/search
+ *@cookie token&uuid
+ *@method GET
+ *@param  keyword  关键字
+ *@param  uuid    指定用户搜索.默认:空
+ *@param  type    all:所有类别的帖子; bbnews:动态帖; newsfeed:资讯帖; notice:公告帖.默认:all
+ *@param  pageindex 页数偏移, 每次翻页加1,默认:0
+ *@param  pagesize  每页大小, 默认10, 最大值为50 
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
