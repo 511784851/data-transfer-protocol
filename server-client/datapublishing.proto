@@ -53,7 +53,7 @@ message PTopicNews {
 	//参与该话题的帖子数
 	int32 count = 4;
 	//博文列表
-	repeated PPostInfo Articles = 5;
+	PPostViewList posts = 5;
 }
 
 message PPostData {
@@ -182,7 +182,7 @@ message PGameList {
  *@param topic 两头不带#号的话题名
  *@param pageindex 页号
  *@param pagesize 页大小
- *@return 成功返回PTopicNews（当页号大于1时，返回PPostInfoList），失败返回PResult
+ *@return 成功返回PTopicNews（当页号大于1时，返回PPostViewList），失败返回PResult
  */
  
 /*
