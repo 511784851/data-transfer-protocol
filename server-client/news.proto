@@ -83,7 +83,7 @@ message PPostStatistc {
 // 帖子状态信息
 message PPostState {
 	bool        isDelete            = 1; //删除状态, true:已删除;false:未删除
-	bool        isShield            = 2; //屏蔽状态, true:屏蔽; false:未屏蔽
+	
 	bool        voted               = 3; //自己是否已点赞,true:是; false:否
 	bool        collected           = 4; //自己是否已收藏,true:是; false:否
 	bool        isTop               = 5; //是否置顶标志
