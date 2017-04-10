@@ -46,6 +46,7 @@ message PResource {
 	string          ThumbObjectkey  = 8; //缩略图的objectKey,视频帖有缩略图时,客户端要填
 	string          ThumbUrl        = 9; //缩略图完整url,客户端不填
 	PImageTagList   Tags            = 10; //资源标签, 目前只有图片有标签
+	PImageAttr      ImageAttr       = 11; //图片属性. 宽、高
 }
 
 // 内容信息列表
@@ -174,6 +175,13 @@ message PImage {
 	PImageTagList Tags = 2;//图片的热点广告 
 	string thumbnail = 3;        //缩略图的url
 	string des = 4;              //图片描述
+}
+
+// 图片属性
+message PImageAttr {
+	int32 width    = 1; //宽
+	int32 high     = 2; //高
+	bool  isCover  = 3; //是否作为封面. 是:true; 否:false
 }
 
 // 视频
