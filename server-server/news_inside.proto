@@ -46,10 +46,10 @@ message PRefreshTimelineParam {
     int64  count          = 3; //查询条数, 默认10
 }
 
-// 微博详情列表
-message PInsidePostViewList {
-    repeated PPostView list = 1; //博文列表
-    int32    Total          = 2; //帖子总数
+// 获取帖子信息参数
+message PGetPostsParam {
+    repeated int64 postIds   = 1; //帖子ID列表
+    string         uuid      = 2; //查看的用户,可选参数. 如果非空, 则填充用户关系信息(已收藏、已点赞等)
 }
 
 /**
@@ -287,10 +287,10 @@ service IGrpcNews {
 
     /*
      *@note 通过帖子ID获取帖子详情
-     *@param PInt64List 帖子ID列表    
+     *@param PGetPostsParam 帖子ID列表,访客的用户id
      *@return PPostViewList 
      */
-    rpc GetPostInfoByIds(PInt64List) returns (PPostViewList);
+    rpc GetPostInfoByIds(PGetPostsParam) returns (PPostViewList);
 
      /*
      *@note 设置帖子状态

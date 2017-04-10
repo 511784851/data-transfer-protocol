@@ -83,7 +83,7 @@ message PPostStatistc {
 // 帖子状态信息
 message PPostState {
 	bool        isDelete            = 1; //删除状态, true:已删除;false:未删除
-	
+
 	bool        voted               = 3; //自己是否已点赞,true:是; false:否
 	bool        collected           = 4; //自己是否已收藏,true:是; false:否
 	bool        isTop               = 5; //是否置顶标志
@@ -112,7 +112,7 @@ message PPostView {
 	int64           modifyTime  = 5; //编辑时间
 	int64           deleteTime  = 6; //删除时间
 	PUserBase       author      = 7; //帖子作者信息
-	PCommunityBase  community   = 8; //帖子所属社区
+	PCommunityBase  community   = 8; //帖子所属社区,如果社区已关闭(Status字段),帖子不能评论
 	PResourceList   contents    = 9;  //帖子正文
 	PAtUserList     atUsers     = 10; //帖子@的用户列表
 	PPostStatistc   statistc    = 11; //帖子统计信息
