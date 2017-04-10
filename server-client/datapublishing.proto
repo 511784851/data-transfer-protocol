@@ -416,10 +416,33 @@ message PRank {
  *@return 成功返回PGuyList，失败返回PResult
  */
 
+message PPostPreview {
+	int64 postId = 1;			//帖子ID
+	EPostType postType = 2;		//帖子类型
+	EResourceType resType = 3;  //资源类型，当为VideoOther时mediaURL有效
+	string thumbURL = 4;		//预览图片，视频首帧（或截图）也是在此提供
+	int32 hight = 5;			//预览图高
+	int32 width = 6;			//预览图宽
+	string mediaURL = 7;		//当resType为VideoOther时，填充资源地址
+	string title = 8;			//帖子标题，资讯帖有效
+	string body = 9;			//帖子文本内容，不是所有的，暂定取前50个字符
+}
+
+message PDiscoverCard {
+	// 卡片的数据类型（6用户 7社区 8话题 9帖子）
+	int32 category = 1;
+	
+	//用户
+	PGuy user = 6;
+	//社区
+	PCommunityBase community = 7;
+	//话题，不含#号，此时postPreview有效
+	string topic = 8;
+	//帖子，根据里面的postType知道是资讯帖（community有效）还是动态帖（user有效）
+	PPostPreview postPreview = 9;
+}
 message PDiscover {
-	PGuyList user = 1;
-	PCommunityBaseList community = 2;
-	PWords topic = 3;
+	repeated PDiscoverCard list = 1;
 }
 
 /*
@@ -427,7 +450,7 @@ message PDiscover {
  *@path /datapublishing/discover
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PDiscover，失败返回PResult
+ *@return 成功返回PDiscoverList，失败返回PResult
  */
 
 message PFansFilterParam {
