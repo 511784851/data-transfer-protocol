@@ -451,6 +451,7 @@ message PGiftLotteryDetail{
 	int32 status = 10;	//状态 1:初始状态，2:领奖中，3:领奖完成，4:过期，0:已删除
 	int32 remainCnt = 11; //剩余未领取的数量
 	int32 regionCnt = 12; //地区个数
+	int64 crtTm = 13;	//创建时间
 }
 
 message PGiftInfo{
