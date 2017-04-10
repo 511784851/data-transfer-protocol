@@ -446,7 +446,7 @@ message PDiscover {
 }
 
 /*
- *@note 搜索发现
+ *@note 发现
  *@path /datapublishing/discover
  *@method GET
  *@cookie token&uuid

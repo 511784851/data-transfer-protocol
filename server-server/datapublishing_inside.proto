@@ -160,6 +160,7 @@ message PTopicDetail {
 	int32 count = 3;	//帖子总数
 	int32 newsc = 4;	//资讯数，动态数=count-newsc
 	int64 time = 5;		//创建时间，也就是第一篇帖子参与此话题的发布时间
+	int32 state = 6;	//状态，见DataPublishing.go中EState的定义
 }
 
 message PTopicDetailList {
