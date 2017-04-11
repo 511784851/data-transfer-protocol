@@ -148,9 +148,10 @@ message PBetchCommentVote {
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
- *@param offset 从第几条开始加载
- *@param count 每次加载多少条
- *@return 成功返回PCommentExtList，失败返回PResult
+ *@param offset 从第几条开始加载, 默认: 0
+ *@param count 每次加载多少条, 默认:20, 最大100
+ *@param sort 排序方式.时间正序:0; 时间倒序:1; 质量最优:2; 人气最高:3; 最有争议:4.默认:0
+ *@return 成功返回 PCommentExtList ，失败返回PResult
  */
 
 /*
