@@ -441,6 +441,7 @@ message PDiscoverCard {
 	//帖子，根据里面的postType知道是资讯帖（community有效）还是动态帖（user有效）
 	PPostPreview postPreview = 9;
 }
+
 message PDiscover {
 	repeated PDiscoverCard list = 1;
 }
@@ -450,7 +451,8 @@ message PDiscover {
  *@path /datapublishing/discover
  *@method GET
  *@cookie token&uuid
- *@return 成功返回PDiscoverList，失败返回PResult
+ *@param offset,count 分页参数，从offset开始的count个记录，offset从0开始，size最大不超过20
+ *@return 成功返回PDiscover，失败返回PResult
  */
 
 message PFansFilterParam {
