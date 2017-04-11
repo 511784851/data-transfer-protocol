@@ -451,7 +451,7 @@ message PDiscover {
  *@path /datapublishing/discover
  *@method GET
  *@cookie token&uuid
- *@param offset,count 分页参数，从offset开始的count个记录，offset从0开始，size最大不超过20
+ *@param offset,count 分页参数，从offset开始的count个记录，offset从0开始，count最大不超过20
  *@return 成功返回PDiscover，失败返回PResult
  */
 

@@ -276,4 +276,7 @@ service grpcDataPublishing {
 
 	// 判断是否在热门移除里面
 	rpc IsInHotRemove(PHotRemove) returns (PBoolList);
+	
+	// 获取用户来源
+	rpc GetUserSource(PStringList) returns (PInt32List);
 }
