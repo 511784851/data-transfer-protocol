@@ -188,6 +188,7 @@ message PCRobotSummary {
     int32                  nextDelay       = 3; // 下次轮询的间隔时间(秒).0表示不等待.
     bool                   isReconect      = 4; // 是不是重连, 30秒没轮询认为重连
     repeated PCRobotBubble bubbleList      = 5; // 气泡消息列表
+    bool                   isSilence       = 6; // true: 3天没有收到任何消息
 }
 
 // 用户关注的网红信息
