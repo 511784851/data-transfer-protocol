@@ -47,15 +47,17 @@ message PNewsParam {
 }
 
 message PSearchPostParam {
-	//0全部 1动态 2资讯 3公告
+	//-2未指定 -1动态帖 + EPostType的定义
 	int32 tp = 1;
-	string keyword = 2;
+	//指定社区
+	string coid = 2;
+	string keyword = 3;
 	//指定帖子作者
-	string uuid = 3;
+	string uuid = 4;
 	//分页偏移
-	int32 offset = 4;
+	int32 offset = 5;
 	//分页大小
-	int32 size = 5;
+	int32 size = 6;
 }
 
 message PScrollResult {
