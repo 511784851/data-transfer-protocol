@@ -108,8 +108,7 @@ enum ERotType {
 	RTUser = 1; 		//用户
 	RTCommunity = 2; 	//社区
 	RTTopic = 3; 		//话题
-	RTNews = 4; 		//资讯
-	RTPost = 5; 		//动态
+	RTPost = 5; 		//帖子
 	RTFeatured = 6; 	//精选
 }
 
