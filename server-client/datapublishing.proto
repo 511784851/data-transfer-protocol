@@ -426,12 +426,37 @@ message PPostPreview {
 	string mediaURL = 7;		//当resType为VideoOther时，填充资源地址
 	string title = 8;			//帖子标题，资讯帖有效
 	string body = 9;			//帖子文本内容，不是所有的，暂定取前50个字符
+	int64 time = 10;			//帖子发布时间
+}
+
+enum ERecommendReason {
+	//热门推荐
+	HotDog = 4;
+	
+	//TA与您有相同的兴趣
+	SameTaste = 2;
+	
+	//TA与您加入了同个社区
+	JoinSameCommunity = 3;		
+	
+	//您有N个关注的人也关注（加入）了TA
+	NFollow = 0;
+	
+	//您有N个好友关注（加入）了TA
+	NFriend = 1;
+}
+
+message PRecommendReason {
+	ERecommendReason reason = 1;
+	int32 num = 2;
 }
 
 message PDiscoverCard {
 	// 卡片的数据类型（6用户 7社区 8话题 9帖子）
 	int32 category = 1;
 	
+	//推荐原因，仅当推荐用户或社区时有效
+	PRecommendReason reason = 5;
 	//用户
 	PGuy user = 6;
 	//社区
