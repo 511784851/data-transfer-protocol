@@ -431,24 +431,24 @@ message PPostPreview {
 
 enum ERecommendReason {
 	//热门推荐
-	HotDog = 4;
+	HotDog = 0;
 	
 	//TA与您有相同的兴趣
-	SameTaste = 2;
+	SameTaste = 1;
 	
 	//TA与您加入了同个社区
-	JoinSameCommunity = 3;		
+	JoinSameCommunity = 2;
 	
 	//您有N个关注的人也关注（加入）了TA
-	NFollow = 0;
+	NFollow = 3;
 	
 	//您有N个好友关注（加入）了TA
-	NFriend = 1;
+	NFriend = 4;
 }
 
 message PRecommendReason {
 	ERecommendReason reason = 1;
-	int32 num = 2;
+	int32 num = 2; //多少个关注的人（或好友）
 }
 
 message PDiscoverCard {
