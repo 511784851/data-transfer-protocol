@@ -792,7 +792,8 @@ message PNewsFollowExist {
  *@cookie token&uuid
  *@method GET
  *@param  keyword  关键字
- *@param  uuid    指定用户搜索.默认:空
+ *@param  uuid    指定用户ID搜索.默认:空
+ *@param  cid     指定社区ID搜索.默认:空
  *@param  type    all:所有类别的帖子; bbnews:动态帖; newsfeed:资讯帖; notice:公告帖.默认:all
  *@param  pageindex 页数偏移, 每次翻页加1,默认:0
  *@param  pagesize  每页大小, 默认10, 最大值为50 
