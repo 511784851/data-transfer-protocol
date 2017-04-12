@@ -17,12 +17,13 @@ message PCommunityID {
 // 社区基础信息
 message PCommunityBase {
 	int64 CreateTime = 1; 						// 社区创建时间
-	int32 Status = 6;                           // 社区状态；0社区开启状态；1社区关闭状态；
-	int32 Membership = 8;					  	// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	string ID = 2;                              // 社区的全局唯一id，能用于检索社区信息
 	string Name = 3;                            // 社区名字
 	string HeadImg = 4;                         // 社区头像地址
-    PCommunityResourceList IntroduceRes = 7;    // 社区介绍；图文混排
+	string Owner = 5;							// 社区创建者uuid
+	int32 Status = 6;                           // 社区状态；0社区开启状态；1社区关闭状态；
+	int32 Membership = 7;					  	// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
+	string StrIntroduce = 8;					// 节选社区介绍的第一段文字返回给客户端
     PCommunitySortList SortList = 9;			// 社区分类列表
 }
 
@@ -527,9 +528,10 @@ message PCommunityInfoV12 {
     PCommunityBase BaseInfo = 1;                        // 社区基础信息
     PCommunityLayout Layout = 2;                        // 社区成员的布局
     PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告
-    PCommunityBannerInfoList BannerList = 6;            // banner列表
-    PCommunityForumTagList ForumTagList = 4;            // 论坛帖子的自定义标签类型列表；图集中需要使用这个标签
-    PCommunityModulesList ModulesList = 5;              // 所有的功能模块列表
+    PCommunityBannerInfoList BannerList = 4;            // banner列表
+    PCommunityForumTagList ForumTagList = 5;            // 论坛帖子的自定义标签类型列表；图集中需要使用这个标签
+    PCommunityModulesList ModulesList = 6;              // 所有的功能模块列表
+   	PCommunityResourceList IntroduceRes = 7;    		// 社区介绍；图文混排
 }
 
 // ‘社区首页’返回的信息 v1.2.x
