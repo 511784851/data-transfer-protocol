@@ -16,46 +16,19 @@ message PCommunityID {
 
 // 社区基础信息
 message PCommunityBase {
+	int64 CreateTime = 1; 						// 社区创建时间
+	int32 Status = 6;                           // 社区状态；0社区开启状态；1社区关闭状态；
+	int32 Membership = 8;					  	// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	string ID = 2;                              // 社区的全局唯一id，能用于检索社区信息
 	string Name = 3;                            // 社区名字
 	string HeadImg = 4;                         // 社区头像地址
-    string Introduce = 5;                       // 社区介绍
-	int32 Status = 6;                           // 社区状态；0社区开启状态；1社区关闭状态；
     PCommunityResourceList IntroduceRes = 7;    // 社区介绍；图文混排
-    bool IsMember = 8;                          // 用户是否已经加入社区的标志位
     PCommunitySortList SortList = 9;			// 社区分类列表
 }
 
 // 社区基础信息列表
 message PCommunityBaseList {
 	repeated PCommunityBase List = 2; 		// 我关注的社区
-}
-
-// 社区信息
-message PCommunityInfo {
-	int32 Status = 2;				// 社区状态，-1没有创建/管理社区;0社区开启状态；1社区关闭状态；
-	int32 Membership = 3;			// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
-	string ID = 4;					// 社区id
-	string Name = 5;				// 社区名字
-	string HeadImg = 6;				// 社区头像
-	string BackgroundImg = 7;		// 社区背景图
-	string Introduce = 8;			// 社区介绍
-	string OwnerUUID = 9;			// 社区创建者的uuid
-	string OwnerName = 10;			// 社区创建者的名字
-	int32 MemberCount = 11;			// 社区成员数量
-	int32 ForumPostCount = 12;		// 社区论坛帖子数量
-	int32 NoticePostCount = 13;		// 社区公告帖子数量
-	string BottomNewsTxt = 14;		// 底部的最新资讯
-	string BottomBackgroundTxt = 15;// 底部的背景介绍
-	string BottomVideoTxt = 16;		// 底部的视频节目
-	string ManagerList = 17; 		// 社区管理员的uuid列表,多个管理员用','分割
-	PCommunitySortList SortList = 18;	// 社区分类列表
-}
-
-// ‘我的社区’返回的信息
-message PCommunityMe {
-	PCommunityInfo Info = 2;			// 我的社区信息
-	PCommunityBaseList List = 3; 		// 我关注的社区，默认显示20条
 }
 
 // 社区资源信息
@@ -69,77 +42,6 @@ message PCommunityResource {
 // 社区资源信息列表
 message PCommunityResourceList {
 	repeated PCommunityResource Resource = 2;
-}
-
-// 发布帖子的信息
-message PCommunityPostUpload {
-	string Title = 2;							// 帖子的标题
-	string SubType = 3;							// 帖子的子类型
-    string BannerImg = 4;                       // 公告帖子的轮播图
-	PCommunityResourceList ResourcesList = 10;	// 帖子正文引用到的资源信息
-}
-
-// 帖子信息
-message PCommunityPostInfo {
-	string ID = 2;								// 帖子id 
-	string Type = 3;							// 帖子类型，forum为论坛，notice为公告
-	string SubType = 4;							// 帖子的子类型
-	int64 Time = 5;								// 发布帖子的时间
-	string Title = 6;							// 帖子的标题
-	bool IsView = 7;							// 帖子是否被已查看
-	int64 ViewCount = 8;						// 论坛帖子查看数量
-	int64 CommentCount = 9;						// 论坛帖子评论数量
-	PUserBase User = 10;						// 用户基础信息
-	PCommunityResourceList ResourcesList = 11;	// 帖子正文引用到的资源信息
-    PCommunityResource BannerImg = 13;          // 公告帖子的轮播图
-    bool IsTop = 14;                            // 公告帖子是否置顶的标志位
-    bool IsDel = 15;                            // 帖子是否删除的标记位
-	string CommunityID = 16;					// 社区id
-	int64 ModifyTime = 17;						// 帖子修改时间
-}
-
-// 帖子信息列表
-message PCommunityPostList {
-	repeated PCommunityPostInfo PostInfo = 2;
-}
-
-// 帖子信息列表，包含被标旗数量
-message PCommunityFlagPostList {
-	repeated int32 FlagCount = 2;
-	repeated PCommunityPostInfo PostInfo = 3;
-}
-
-// ‘社区首页’返回的信息
-message PCommunityHome {
-	PCommunityInfo Info = 2;			// 我的社区信息
-	PUserBaseList List = 3; 			// 社区前五名成员列表
-	PCommunityPostInfo BottomBackgroundPost = 4; // 底部的背景介绍
-}
-
-// ---评论信息
-// 发表的评论
-message PCommunityPostComment {
-	string QuoteID = 2;	// 引用的评论id，如果没有引用评论，传空值
-	string Content = 3;	// 评论的正文
-}
-
-// 评论详情
-message PCommunityCommentInfo {
-	int32 Floor = 2;			// 评论的层数
-	int32 UpVote = 3;		// 评论的赞的数量
-	int32 DownVote = 4;		// 评论的踩的数量
-	int32 Status = 5;		// -1表示已踩，1表示已赞，0表示啥都没有
-	string ID = 6;			// 评论id
-	int64 Time = 7;			// 发表评论的时间
-	string Content = 8;		// 评论的正文
-	PUserBase User = 9;		// 发表评论的用户
-	PCommunityCommentInfo QuoteInfo = 10; // 引用的评论信息
-	bool IsDelete = 11; // 标志帖子是否已经被删除，true为已删除，false为未删除
-}
-
-// 评论详情列表
-message PCommunityCommentInfoList {
-	repeated PCommunityCommentInfo List = 2;
 }
 
 // ---社区信件
@@ -261,25 +163,6 @@ message PInsideCommunityUserList {
  *@return 成功返回PUploadArray，失败返回PResult
  */
 
-//--- 社区相关操作
-// v1.2 不再维护该接口
-/*
- *@note  创建社区
- *@path /v1/community
- *@method POST
- *@body PCommunityInfo， Name,HeadImg,BackgroundImg,Introduce都不能为空
- *@cookie token&uuid
- *@return 成功返回 PCommunityMe ，失败返回 PResult
- */
-
-/*
- *@note ‘我的社区’页面
- *@path /v1/community/me
- *@method GET
- *@cookie token&uuid
- *@return 成功返回 PCommunityMe ，失败返回PResult
- */
-
 /*
  *@note 分页获取我关注的列表
  *@path /v1/community/me/followlist
@@ -297,7 +180,7 @@ message PInsideCommunityUserList {
  *@url param id 社区id
  *@method GET
  *@cookie token&uuid
- *@return ‘启用社区’成功返回 PCommunityMe ，失败返回 PResult ； ‘关闭社区’返回 PResult
+ *@return ‘启用社区’成功返回 PCommunityIndex ，失败返回 PResult ； ‘关闭社区’返回 PResult
  */
 
 /*
@@ -309,41 +192,6 @@ message PInsideCommunityUserList {
  *@cookie token&uuid
  *@return PResult 
  */
-
-// v1.2 不再维护该接口
-/*
- *@note ‘社区首页’页面
- *@path /v1/community/home
- *@method GET
- *@url param id 社区id
- *@cookie token&uuid
- *@return 成功返回 PCommunityHome ，失败返回PResult
- */
-	
-// v1.2 不再维护该接口
-/*
- *@note 修改‘社区首页’页面
- *@path /v1/community/home
- *@method POST
- *@url param id 社区id
- *@url param fields 要修改的选项，可选的有Name,HeadImg,BackgroundImg,Introduce,
-				BottomNewsTxt,BottomBackgroundTxt,BottomVideoTxt修改多个以,分割
- *@body PCommunityInfo  
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-// v1.2 不再维护该接口
-/*
- *@note 发布底部背景介绍
- *@path /v1/community/bottom/background
- *@url param id 社区id
- *@method POST
- *@body PCommunityPostUpload
- *@cookie token&uuid
- *@return返回 PResult
- */
-
 
 // --- 社区设定
 /*
@@ -543,73 +391,6 @@ message PInsideCommunityUserList {
  */
 
 /*
- *@note 标旗帖子
- *@path /v1/community/flag/post
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 标旗评论
- *@path /v1/community/flag/comment
- *@method GET
- *@url param id 社区id
- *@url param postid 帖子id
- *@url param commentid 评论id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 标旗用户列表
- *@path /v1/community/flag/user
- *@method GET
- *@url param id 社区id
- *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@url param count 表示获取个数
- *@cookie token&uuid
- *@return 成功返回 PUserBaseList ，失败返回 PResult 
- */
-
-/*
- *@note 标旗内容的位置列表
- *@path /v1/community/flag/location
- *@method GET
- *@url param id 社区id
- *@url param uuid 要查看的用户uuid
- *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@url param count 表示获取个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityFlagList ， 失败返回 PResult 
- */
-
-/*
- *@note 标旗功能中查看用户帖子
- *@path /v1/community/flag/userpost
- *@method GET
- *@url param id 社区id
- *@url param uuid 要查看的用户uuid
- *@url param offset 论坛帖子的贴子id（填上一次获取的最后一个帖子id，-1代表从最新的帖子加载）
- *@url param count 获取帖子个数
- *@cookie token&uuid
- *@return 成功返回  PCommunityFlagPostList ， 失败返回 PResult 
- */
- 
-/*
- *@note 管理员取消帖子的标旗状态
- *@path /v1/community/flag
- *@method DELETE
- *@url param id 社区id
- *@url param uuid 要移除标旗的用户uuid
- *@url param flagid 被移除的标旗id,多个id以,分割
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
  *@note 获取用户通知列表
  *@path /v1/community/setting/notification
  *@method GET
@@ -663,21 +444,6 @@ message PInsideCommunityUserList {
  */ 
 
 /*
- *@note 社区帖子搜索
- *@path /v1/community/search/post
- *@method GET
- *@url param id 社区id
- *@url param type 可选参数 forum 获取论坛帖子; notice 获取公告帖子; all 获取所有帖子
- *@url param keyword 关键词
- *@url param beg 查询的开始时间，传时间戳，单位为秒；传0/不填 表示从好早，好早，好早之前到end
- *@url param end 查询的截止时间，传时间戳，单位为秒；传0/不填 表示当前时间
- *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@url param count 获取数量
- *@cookie token&uuid
- *@return 成功返回 PCommunityPostList ，失败返回PResult
- */ 
-
-/*
  *@note 社区搜索
  *@path /v1/community/search/community
  *@method GET
@@ -703,7 +469,7 @@ enum ECommunityModule {
     EGamerList = 4;         // 队员，只有VO有，其他没有这个模块
     EVideoProgram = 6;      // 视频节目
     ELink = 7;              // 链接
-    EForum = 8;             // 论坛
+    EForum = 8;             // 动态贴（原论坛贴）
     EChat = 9;              // 聊天
     EPhotoAlbum = 11;       // 图集
     ERanking = 12;          // 排行榜
@@ -739,7 +505,6 @@ message PCommunityModulesList {
 // 用户的自定义论坛帖子标签
 message PCommunityForumTag {
     int32 ID = 1;                                       // 标签id
-    int32 Type = 2;                                     // 自定义的论坛帖子分类；1是以帖子为单位归类；2是以用户id为单位归类
     string Name = 3;                                    // 自定义的标签名字
     bool Disable = 4;                                   // 是否禁用该标签 
 }
@@ -749,26 +514,12 @@ message PCommunityForumTagList {
 	repeated PCommunityForumTag List = 1;
 }
 
-// 社区成员的布局方案1
-// ForumTagList 中id的默认值为：0是‘全部’；1是‘官方’；2是‘精华’；3是‘电竞女神’
-message PCommunityLayoutPlan1 {
-    int32 ContentType = 1;                              // 内容模块id; -404为空；-1 为公告; >= 0 为论坛可选模块的id。1.6.x版本开始作废这个参数，默认填-404
-    PUserBaseList TopUserList = 2;                      // top成员列表；创建时不需要传
-    PInt32List MiddleModulesID = 3;                     // 中间定义的功能模块列表
-    PInt32List BottomModulesID = 4;                     // 底部定义的功能模块列表
-    PCommunityBannerInfoList BannerList = 5;            // banner列表
-}
-
-// 社区成员的布局方案2
-message PCommunityLayoutPlan2 {
-}
-
 // 社区成员的布局
 message PCommunityLayout {
-    int32 PlanID = 1;                                   // 布局方案id；1代表方案1
+    int32 PlanID = 1;                                   // 布局方案id；1代表模板1（1.2版本），2代表模板2（1.6版本）
     string Color = 2;                                   // 方案的配色
-    PCommunityLayoutPlan1 Plan1 = 3;                    // 方案1的布局
-    PCommunityLayoutPlan2 Plan2 = 4;					// 方案2的布局
+    PInt32List MiddleModulesID = 4;                     // 中间定义的功能模块列表
+    PInt32List BottomModulesID = 5;                     // 底部定义的功能模块列表
 }
 
 // 社区信息 v1.2.x
@@ -776,18 +527,21 @@ message PCommunityInfoV12 {
     PCommunityBase BaseInfo = 1;                        // 社区基础信息
     PCommunityLayout Layout = 2;                        // 社区成员的布局
     PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告
-    PCommunityForumTagList ForumTagList = 4;            // 论坛帖子的自定义标签类型列表；1.6.x作废该参数
+    PCommunityBannerInfoList BannerList = 6;            // banner列表
+    PCommunityForumTagList ForumTagList = 4;            // 论坛帖子的自定义标签类型列表；图集中需要使用这个标签
     PCommunityModulesList ModulesList = 5;              // 所有的功能模块列表
 }
 
 // ‘社区首页’返回的信息 v1.2.x
 message PCommunityHomeV12 {
-    int32 Membership = 1;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
-    int32 MemberCount = 2;                              // 社区成员数量
-	string ManagerList = 3;                             // 社区管理员的uuid列表,多个管理员用','分割
-    PUserBase Owner = 4;                                // 社区创建者的信息
-    PCommunityInfoV12 CommunityInfo = 5;                // 社区信息
-    bool IsVOMember = 6;                                // 是否创建者(VO)任命的VIPP
+	int32 Status = 1;									// 社区状态，-1没有创建社区;0社区开启状态；1社区关闭状态；
+    int32 Membership = 2;                               // 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
+    bool IsVOMember = 3;                                // 是否创建者(VO)任命的VIPP
+    int32 MemberCount = 4;                              // 社区成员数量
+	string ManagerList = 5;                             // 社区管理员的uuid列表,多个管理员用','分割
+    PUserBase Owner = 6;                                // 社区创建者的信息
+    PUserBaseList TopUserList = 7;                      // top成员列表；创建时不需要传
+    PCommunityInfoV12 CommunityInfo = 8;                // 社区信息
 }
 
 // 图集里面图片的信息
@@ -848,7 +602,7 @@ message PCommunityRankingDescribe {
 
 // VO社区信息
 message PCommunityInfoVO {
-	int32 Status = 2;				// 社区状态，-1没有创建社区;0社区开启状态；1社区关闭状态；
+	int32 Status = 1;									// 社区状态，-1没有创建社区;0社区开启状态；1社区关闭状态；
 	int32 MemberCount = 3;			// 社区成员数量
 	int32 ForumPostCount = 4;		// 社区论坛帖子数量
 	int32 NoticePostCount = 5;		// 社区公告帖子数量
@@ -872,7 +626,7 @@ message PCommunityInfoVO {
  *@method POST
  *@body PCommunityInfoV12
  *@cookie token&uuid
- *@return 成功返回 PCommunityMe ，失败返回 PResult
+ *@return 成功返回 PCommunityIndex ，失败返回 PResult
  */
  
 /*
@@ -880,17 +634,21 @@ message PCommunityInfoVO {
  *@path /v1.2/community
  *@method PUT
  *@url param id 社区id
- *@url param fields 要修改的选项，
-        方案1的可选的有:
-        Name,HeadImg,IntroduceRes,ForumTagList,ModulesList,Color,BannerList,MiddleModules,BottomModules,修改多个以,分割
-		如果要修改布局方案，即BannerList,MiddleModules,BottomModules时，PCommunityInfoV12要PlanID要填1
+ *@url param fields 要修改的选项如：Name,HeadImg,IntroduceRes,Layout,BannerList,ModulesList,修改多个以,分割,参数对应的字段如下
+ 					Name -> PCommunityInfoV12.BaseInfo.Name
+ 					HeadImg -> PCommunityInfoV12.BaseInfo.HeadImg
+ 					IntroduceRes -> PCommunityInfoV12.BaseInfo.IntroduceRes
+ 					Layout -> PCommunityInfoV12.Layout （这个结构需要完整填充）
+ 					BannerList -> PCommunityInfoV12.BannerList
+ 					ForumTagList -> PCommunityInfoV12.ForumTagList
+ 					ModulesList -> PCommunityInfoV12.ModulesList
  *@body PCommunityInfoV12
  *@cookie token&uuid
  *@return 返回 PResult
  */
- 
+
 /*
- *@note ‘社区首页’页面
+ *@note 某个社区的‘社区首页’
  *@path /v1.2/community/home
  *@method GET
  *@url param id 社区id
@@ -949,18 +707,6 @@ message PCommunityInfoVO {
  */
 
 /*
- *@note 修改社区的论坛帖子的类型
- *@URL /v1.2/community/fourme/post/type
- *@method PUT
- *@form param id 社区id
- *@form param oper 0为设置某个帖子为x类型帖子；1为移除某个帖子x类型帖子；
- *@form param post_id 帖子id
- *@form param post_tag 自定义类型标签的id , 多个以','分割
- *@cookie token&uuid
- *@return 返回 PResult;
- */
-
-/*
  *@note VO用户调用此接口直接获取自己社区的信息，不再调用‘我的社区’接口
  *@path /v1/community/vo
  *@method GET
@@ -986,9 +732,19 @@ message PCommunityInfoVO {
  *@return PResult 
  */
 
- // 1.6.x 社区新功能
+// 1.6.x 社区新功能
 /*=====================================*/
 // 结构定义
+
+// 我的‘社区首页’
+message PCommunityIndex {
+	int32 MemberCount = 1;				// 社区成员数量
+	int32 ForumPostCount = 2;			// 社区论坛帖子数量
+	int32 NoticePostCount = 3;			// 社区公告帖子数量
+	PCommunityHomeV12 Home = 4;			// 我创建/管理的社区首页
+	PCommunityBaseList Follow = 5; 		// 我关注的社区，默认显示20条
+	PCommunityBaseList Recommend = 6; 	// 系统推荐的社区，默认显示20条
+}
 
 // 社区分类
 message PCommunitySort {
@@ -1008,7 +764,16 @@ message PCommunitySortList {
 // API定义
 
 /*
- *@note 创建社区时，获取默认的社区分类列表
+ *@note 我的‘社区首页’
+ *@path /v1.6/community/index
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityIndex ，失败返回PResult
+ */
+
+
+/*
+ *@note 获取监管后台设置的推荐社区分类列表
  *@path /v1.6/community/recommend/sort
  *@method GET
  *@body PCommunitySortList
@@ -1026,7 +791,7 @@ message PCommunitySortList {
  */
 
 /*
- *@note 修改资讯页面‘我的分类’；[0]填top,[1]填热门；这2个分类目前为固定。总的list长度不能超过10
+ *@note 修改首页的精选栏‘我的分类’；[0]填top,[1]填热门；这2个分类目前为固定。总的list长度不能超过10
  *@path /v1.6/community/user/sort
  *@method PUT
  *@body PCommunitySortList 其中UUID、分类ID必填；社区ID、Name 可以不填
