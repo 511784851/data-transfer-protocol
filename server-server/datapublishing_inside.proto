@@ -50,7 +50,8 @@ message PSearchPostParam {
 	//-2未指定 -1动态帖 + EPostType的定义
 	int32 tp = 1;
 	//指定社区
-	string coid = 2;
+	int64 coid = 2;
+	//关键词，必填
 	string keyword = 3;
 	//指定帖子作者
 	string uuid = 4;
