@@ -9,76 +9,12 @@ import "common_inside.proto";
 import "community.proto";
 
 /*
- *@note 通过社区id获取社区基础信息列表
- *@URL /v1/community/inside/communitybaseinfo
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id，多个社区id以,分割
- *@return 成功返回 PCommunityBaseList ，失败返回 PResult; 
- */
-
-/*
- *@note 获取用户创建/管理的社区id
- *@URL /v1/community/inside/communityid
- *@method GET
- *@url param from 发起调用的服务名
- *@url param uuid 用户id
- *@return 成功返回 PInt64List ，失败返回 PResult; 
- */
-
-/*
- *@note 获取用户创建/管理的社区id
- *@URL /v1/community/inside/communityid_ex
- *@method GET
- *@url param from 发起调用的服务名
- *@url param uuid 用户id
- *@return 成功返回 PInt64List ，失败返回 PResult; list[0] 为社区id，list[1] 为是否创建者（1是创建者）
- */
-
-/*
  *@note 通过社区id获取社区信息
  *@URL /v1/community/inside/communityinfo
  *@method GET
  *@url param from 发起调用的服务名
  *@url param id 社区id
  *@return 成功返回 PCommunityInfo ，失败返回 PResult; 
- */
-
-/*
- *@note 通过社区id获取社区开启状态信息
- *@URL /v1/community/inside/community/status
- *@method GET
- *@url param from 发起调用的服务名
- *@url param ids 社区id列表，多个社区id以,分割
- *@return 成功返回 PInt32List（0为开启，1为关闭） ，失败返回 PResult; 
- */
-
-/*
- *@note 获取用户创建/管理的社区基础信息
- *@URL /v1/community/inside/user/community_base
- *@method GET
- *@url param from 发起调用的服务名
- *@url param uuid 用户id
- *@return 成功返回 PCommunityBaseList ，失败返回 PResult; 
- */
-
-/*
- *@note 获取用户关注的社区id列表
- *@URL /v1/community/inside/user/follow_communityid
- *@method GET
- *@url param from 发起调用的服务名
- *@url param uuid 用户id
- *@return 成功返回 PStringList ，失败返回 PResult;
- */
-
-/*
- *@note 获取用户是否为社区成员
- *@URL /v1/community/inside/user/member_status
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param uuid 用户id
- *@return 成功返回 PBoolSingle（true为是，false为不是） ，失败返回 PResult;
  */
 
 /*
@@ -113,48 +49,56 @@ import "community.proto";
  *@return 成功返回 PInsideCommunityUserList ，失败返回 PResult;
  */
  
- // 1.2.x 社区新功能
-/*=====================================*/
-// 结构定义
-
-
-/*=====================================*/
-// API定义
-
-/*
- *@note 获取社区当前设置的广告信息
- *@URL /v1.2/community/inside/ad
- *@method GET
- *@url param from 发起调用的服务名;只限粉丝管理系统调用
- *@url param id 社区id
- *@return 成功返回 PCommunityBannerInfo ，失败返回 PResult;
- */
- 
-/*
- *@note 设置社区当前设置的广告信息
- *@URL /v1.2/community/inside/ad
- *@method PUT
- *@form param from 发起调用的服务名;只限粉丝管理系统调用
- *@form param id 社区id
- *@body PCommunityBannerInfo
- *@return 返回 PResult;
- */
-
 service IGrpcCommunity {
     /*
-     *@note 获取PCommunityBaseList,不填充IsMember字段
+     *@note 获取用户在社区的禁用状态，true为禁用，
+     *@param 参数数组 [0]用户UUID [1]社区id 
+     *@return 成功返回 PBoolSingle ，失败返回 PResult
+     */
+    rpc GetForbidFlag(PStringList) returns (PBoolSingle);
+
+    /*
+     *@note 获取用户在社区的黑名单状态，true为黑名单
+     *@param 参数数组 [0]用户UUID [1]社区id 
+     *@return 成功返回 PBoolSingle ，失败返回 PResult
+     */
+    rpc GetBlacklistFlag(PStringList) returns (PBoolSingle);
+
+    /*
+     *@note 获取PCommunityBaseList,不填充Membership字段
      *@param 社区id的列表 
      *@return 成功返回 PCommunityBaseList ，失败返回 PResult
      */
     rpc GetCommunityBaseList(PStringList) returns (PCommunityBaseList);
 
     /*
-     *@note 获取PCommunityBaseList,并且判断用户是否已加入该社区，填充IsMember字段
+     *@note 获取PCommunityBaseList,并且判断用户与社区的关系，填充Membership字段
      *@param 参数数组 [0]用户UUID [1]社区id的列表 
      *@return 成功返回 PCommunityBaseList ，失败返回 PResult
      */
     rpc GetCommunityBaseListWithUuid(PStringList) returns (PCommunityBaseList);
-
+    
+    /*
+     *@note 获取用户创建/管理的社区信息,如果用户没有创建社区，则PCommunityBase内社区ID为0
+     *@param 参数数组 [0]用户UUID
+     *@return 成功返回 PCommunityBase ，失败返回 PResult
+     */
+    rpc GetUserCommunityBase(PStringSingle) returns (PCommunityBase);
+    
+    /*
+     *@note 获取用户关注的社区ID列表
+     *@param 用户UUID
+     *@return 成功返回 PStringList ，失败返回 PResult
+     */
+    rpc GetFollowCommunityID(PStringSingle) returns (PStringList);
+    
+    /*
+     *@note 获取用户关注的社区信息列表
+     *@param 用户UUID
+     *@return 成功返回 PCommunityBaseList ，失败返回 PResult
+     */
+    rpc GetFollowCommunityBaseList(PStringSingle) returns (PCommunityBaseList);
+   
     /*
      *@note 添加社区分类
      *@param PCommunitySort，其中ID可以不填，Name必填
