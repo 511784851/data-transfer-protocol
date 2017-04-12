@@ -16,6 +16,7 @@ message PLogin {
 	string nickname = 8;			// 用户昵称
 	string imgURL = 9;				// 用户头像URL
 	string username = 10;			// 用户名称
+	int64 RegisterTime = 11;		// 用户注册时间
 	PLevelInfo levelInfo = 12;		// 会员等级信息
 } 
 
