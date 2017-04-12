@@ -776,9 +776,8 @@ message PCommunitySortList {
  *@note 获取监管后台设置的推荐社区分类列表
  *@path /v1.6/community/recommend/sort
  *@method GET
- *@body PCommunitySortList
  *@cookie token&uuid
- *@return PResult 
+ *@return 成功返回 PCommunitySortList ，失败返回PResult
  */
 
 /*
@@ -791,7 +790,15 @@ message PCommunitySortList {
  */
 
 /*
- *@note 修改首页的精选栏‘我的分类’；[0]填top,[1]填热门；这2个分类目前为固定。总的list长度不能超过10
+ *@note 获取首页的精选栏‘我的分类’；不包括固定的Hot
+ *@path /v1.6/community/user/sort
+ *@method GET
+ *@cookie token&uuid
+ *@return 成功返回 PCommunitySortList ，失败返回PResult 
+ */
+
+/*
+ *@note 修改首页的精选栏‘我的分类’；总的list长度不能超过9，不包括固定的Hot
  *@path /v1.6/community/user/sort
  *@method PUT
  *@body PCommunitySortList 其中UUID、分类ID必填；社区ID、Name 可以不填
