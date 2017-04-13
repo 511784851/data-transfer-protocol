@@ -116,8 +116,9 @@ enum ERotType {
 	RTUser = 1; 		//用户
 	RTCommunity = 2; 	//社区
 	RTTopic = 3; 		//话题
-	RTPost = 5; 		//帖子
-	RTFeatured = 6; 	//精选
+	RTPostHot = 4; 		//帖子（精选版块）
+	RTPostDiscover = 5; //帖子（发现版块）
+	RTFeatured = 6; 	//社区精华帖
 }
 
 message PManualRecommendInfo {
