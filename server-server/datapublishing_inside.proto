@@ -36,6 +36,8 @@ message PQueryUserParam {
 	string keyword = 2;
 	int32 offset = 3;
 	int32 size = 4;
+	int64 coid = 5;
+	string field = 6;
 }
 
 message PCustomPageParam {
@@ -228,9 +230,11 @@ service grpcDataPublishing {
 	rpc ConfirmPost(PConfirmMsg) returns (PEmpty);
 	// 审核话题
 	rpc ConfirmTopic(PConfirmMsg) returns (PEmpty);
-		
+	
+	// 搜索用户
+	rpc SearchUser(PQueryUserParam) returns (PStringList);
 	// 根据昵称查询用户
-	rpc SearchUser(PStringSingle) returns (PStringList);
+	// rpc SearchUser(PStringSingle) returns (PStringList);
 	
 	// 用户超级查找，参数为json字符串，字段包括：
 	// keyword 搜索关键词
