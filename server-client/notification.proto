@@ -8,199 +8,8 @@ import "comment.proto";
 import "account.proto";
 import "streaming.proto";
 
-/*
-推送消息类型，
-comment_news 		// 帖子评论
-comment_comment 	// 评论回复
-comment_vote 		// 评论投票
-social_accept 		// 好友申请
-news_follow 		// 关注我
-news_upvote 		// 帖子点赞
-news_at         	// 帖子@用户
-community_invite	// 社区邀请
-streaming           // 第三方提醒
-achievement         // 达成成就
-task                // 游戏化任务
-achievement_task    // 达成成就 和 游戏化任务
-*/
-
 /*=====================================*/
 //结构定义
-
-message SimpleUser {
-  /*保留1~4用于扩展*/ 
-  int32 level = 5;		    // 用户等级
-  string uuid = 6;        	// 服务端标志用户的唯一id
-  string username = 7;     	// 用户名，唯一
-  string nickname = 8;      // 昵称
-  string headImgURL = 9;    // 头像地址
-}
-
-// 帖子评论通知消息
-message NotifyComment {
-  int64 messageId = 1; 		    //消息id 
-  SimpleUser commentUser = 2;	//评论的用户
-  PComment comment = 3;		    //评论
-  PPostInfo article = 4; 	    //评论相关的news
-  int64 time = 5;		        //评论的时间
-  int32 status = 6; 		    //0：未读；1：已读
-}
-
-// 帖子评论通知消息
-message NotifyCommentExt {
-  int64 messageId = 1; 		//消息id 
-  SimpleUser commentUser = 2;	//评论的用户
-  PCommentExt commentExt = 3;	//评论
-  PPostInfo article = 4; 	//评论相关的news
-  int64 time = 5;		//评论的时间
-  int32 status = 6; 		//0：未读；1：已读
-}
-
-// 帖子评论通知消息列表
-message NotifyCommentList {
-  repeated NotifyComment list = 1; //NotifyComment列表
-}
-
-// 帖子评论通知消息列表
-message NotifyCommentExtList {
-  repeated NotifyCommentExt list = 1; //NotifyCommentExt列表
-}
-
-// 评论回复通知消息
-message NotifyCommentReply {
-  int64 messageId = 1; 		//消息id 
-  SimpleUser commentUser = 2;	//评论的用户
-  PCommentExt commentExt = 3;	//被回复的评论
-  PCommentExt replyExt = 4;	//回复的内容
-  int64 time = 5;		//回复的时间
-  int32 status = 6; 		//0：未读；1：已读
-  SimpleUser replyUser = 7;	//被回复评论的用户
-  PPostInfo article = 8; 	//评论相关的news
-}
-
-// 评论回复通知消息列表
-message NotifyCommentReplyList {
-  repeated NotifyCommentReply list = 1; //NotifyCommentReply列表
-}
-
-// 评论投票通知消息
-message NotifyCommentVote {
-  int64 messageId = 1; 		//消息id 
-  SimpleUser voteUser = 2;	//投票的用户
-  PComment comment = 3;		//被投票的评论
-  PPostInfo article = 4; 	//被投票评论相关的news
-  int64 time = 5;		//投票的时间
-  int32 voteType = 6; 		//0：赞；1：踩
-  int32 status = 7; 		//0：未读；1：已读
-}
-
-// 评论投票通知消息
-message NotifyCommentVoteExt {
-  int64 messageId = 1; 		//消息id 
-  SimpleUser voteUser = 2;	//投票的用户
-  PCommentExt commentExt = 3;	//被投票的评论
-  PPostInfo article = 4; 	//被投票评论相关的news
-  int64 time = 5;		//投票的时间
-  int32 voteType = 6; 		//0：赞；1：踩
-  int32 status = 7; 		//0：未读；1：已读
-}
-
-// 评论投票通知消息列表
-message NotifyCommentVoteList {
-  repeated NotifyCommentVote list = 1; //NotifyCommentVote列表
-}
-
-// 好友申请通知消息
-message NotifySocial {
-  int64 messageId = 1; 		//消息id 
-  SimpleUser socialUser = 2;	//申请好友或接受好友的用户
-  int64 time = 3;		//申请好友或接受好友的时间
-  int32 socialType = 4; 	//0：申请好友；1：接受好友申请；2：拒绝好友申请
-  int32 status = 5; 		//0：未读；1：已读
-  // socialRelation 当前好友关系: A(自己), B(对方)
-  // 0：A --- B (A 和 B 完全没关系)
-  // 1: A --> B (A 向 B 申请好友，B 还未接受)
-  // 2: A <-- B (B 向 A 申请好友，A 还未接受)
-  // 3: A <-> B (B 与 A 是好友)
-  int32 socialRelation = 6;
-  string notifyUUID = 7;	// 被通知用户的uuid
-}
-
-// 好友申请通知消息列表
-message NotifySocialList {
-  repeated NotifySocial list = 1; //NotifySocial列表
-}
-
-//关注通知消息
-message NotifyFollow {
-  int64 messageId = 1;			//消息id 
-  SimpleUser followUser = 2; 	//关注我的用户
-  int64 time = 3; 				//关注的时间
-  int32 followship = 4;      	//两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
-  int32 status = 5; 			//0：未读；1：已读
-}
-
-//关注通知消息列表
-message NotifyFollowList {
-  repeated NotifyFollow list = 1; //NotifyFollow列表，最多50个
-}
-
-//点赞通知信息
-message NotifyNewsVote {
-  int64 messageId = 1;		//消息id 
-  SimpleUser voteUser = 2; 	//点赞的用户
-  PPostInfo article = 3; 	//点赞的news
-  int64 time = 4;   		//点赞时间
-  int32 status = 5; 		//0：未读；1：已读
-}
-
-//点赞通知信息列表
-message NotifyNewsVoteList {
-  repeated NotifyNewsVote list = 1; //NotifyNewsVote列表，最多50个  
-}
-
-message NotifyNewsAt {
-  int64 messageId  = 1; //消息id
-  PPostInfo article = 2; //帖子
-  int64 time       = 3; //发帖时间
-  int32 status     = 4; //0：未读；1：已读
-}
-
-//帖子@通知信息列表
-message NotifyNewsAtList {
-  repeated NotifyNewsAt list = 1; //NotifyNewsAt列表，最多50个  
-}
-
-// 社区邀请通知消息
-message PNotifyCommunityInvite {
-	int64 messageId = 1;		// 消息id 
-	int64 time = 2; 			// 邀请的时间
-	int32 status = 3; 			// 0：未读；1：已读
-	int64 communityId = 4; 	// 邀请加入的社区的id
-	string communityName = 5; 	// 社区名字
-	PUserBase User = 6; 		// 邀请我的用户
-}
-
-// 社区邀请通知消息列表
-message PNotifyCommunityInviteList {
-  repeated PNotifyCommunityInvite list = 1; // PNotifyCommunityInvite 列表
-}
-
-// 推送消息的个数
-message PMsgCount {
-	string Type = 2;
-	int64 Count = 3;
-}
-
-// 推送消息个数列表
-message PMsgCountList {
-	repeated PMsgCount MsgCount = 2;
-}
-
-// 消息id列表
-message PMsgIDList {
-	repeated string MsgID = 2;
-}
 
 message PNotifySetting {
 	bool mute = 1;
@@ -217,86 +26,16 @@ message PStreamingMsgList {
   repeated PStreamingMsg list = 1;
 }
 
-message PGameMsg {
-	//消息id 
-	int64 messageId = 1;
-	
-	//达成时间
-	int64 time = 2;
-	
-	string uuid = 3;
-	string nickname = 4;
-	
-	//是否好友
-	bool isFriend = 5;
-	
-	//0表示PAchievementMsg，1表示PTaskMsg
-	int32 tp = 6; 
-	
-	//成就部分定义，占用7~10
-	//成就名称
-	string achievementName = 10;
-	
-	//任务部分定义，从11开始
-	//...
-	
-	int32 level = 11; // 等级
-	string levelNmae = 12;// 等级名称
-	
-	int32 status = 20;  //状态(0:未读,1:已读)
+// 推送消息的个数
+message PMsgCount {
+       string Type = 2;
+       int64 Count = 3;
 }
 
-//成就达成通知消息列表
-message PGameMsgList {
-	  repeated PGameMsg list = 1;
+// 推送消息个数列表
+message PMsgCountList {
+       repeated PMsgCount MsgCount = 2;
 }
-
-
-/*=====================================*/
-//API定义
-
-/*
- *@note 获取某个类型的推送消息
- *@path /v1/notification/msg
- *@method GET
- *@url param msg_type 见 '推送消息类型'
- *@url param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
- *@url param msg_id 标志从哪一个消息开始获取，-1为拉取最新的通知消息，如果msg_id不存在，则从附近小于msg_id获取，直到为0
- *@url param count 获取的数量，最大值为50
- *@cookie token&uuid
- *@return 见各个类型的推送消息定义的结构
- */
-
-/*
- *@note 删除某个类型的推送消息
- *@path /v1/notification/msg/delete
- *@method POST
- *@url param msg_type 见 '推送消息类型'
- *@body PMsgIDList
- *@cookie token&uuid
- *@return PResult 
- */
-
-/*
- *@note 设置某个推送消息为未读状态或已读状态
- *@path /v1/notification/msg/status
- *@method POST
- *@url param msg_type 见 '推送消息类型'
- *@url param status 0为未读，1为已读
- *@body PMsgIDList 如果body为空，则表示所有的MsgID，只能全部设为已读，不能全部设为未读
- *@cookie token&uuid
- *@return PResult
- */
-
-/*
- *@note 获取某个/所有推送消息的个数
- *@path /v1/notification/msg/count
- *@method GET
- *@url param msg_type 见 '推送消息类型'，取所有类型的填all
- *@url param get_type 0为取未读的消息，1为已读的消息，2为所有的消息
- *@cookie token&uuid
- *@return 成功返回MsgCounts，失败返回PResult
- */
 
 /*
  *@note 获取设置信息
@@ -313,15 +52,6 @@ message PGameMsgList {
  *@body PSetting
  *@cookie token&uuid
  *@return 返回PResult
- */
-
-/*
- *@note 添加推送消息(只用于水军压力测试,真实客户端可以不用管)
- *@path /v1/notification/test/inside/msg
- *@method POST
- *@param from 服务调用者
- *@body PPushMsg
- *@return 返回int32错误码
  */
 
 // *********** v2 ************
@@ -436,6 +166,7 @@ message PNotifyCommunity {
 
 // 简单通知
 message PNotifySimple {
+    // 如果uri是空字符串，则不进行跳转
     // uri携带跳转对象和对应参数信息
     // scheme://path?query_string
     //
