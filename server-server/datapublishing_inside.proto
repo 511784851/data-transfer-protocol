@@ -5,6 +5,7 @@ import "datapublishing.proto";
 import "result.proto";
 import "account.proto";
 import "news.proto";
+import "community.proto";
 import "common_inside.proto";
 
 option java_package = "com.blemobi.sep.probuf";
@@ -45,6 +46,11 @@ message PCustomPageParam {
 	
 	//根据接口确定含义
 	string arg0 = 3;	
+}
+
+message PJsonParam {
+	string json = 1;	//map[string]interface{}转换而来
+	string arg0 = 2;	//自定义参数
 }
 
 message PSearchPostParam {
@@ -139,7 +145,7 @@ message PConfirmMsg {
 	repeated string data = 3;
 }
 
-// 关注、查看/赞/收藏/分享帖子、更新帖子标签
+// 关注、交友、查看/赞/收藏/分享帖子、更新帖子标签
 message PEsActionMsg {
 	string sender = 1;
 	string receiver = 2;
@@ -170,7 +176,36 @@ message PTopicDetailList {
 	repeated PTopicDetail list = 1;
 }
 
+message PLoginRecord {
+	string uuid = 1;
+	string ip = 2;		//客户端原始ip地址
+	string model = 3;
+	string imei = 4;
+	string ostp = 5;	//0 未知、1 Android、2 IOS、3 水军、 4 粉丝管理系统
+	string osv = 6;
+	string channel = 7;
+	string version = 8;
+	int32 level = 9;	//用户等级
+	int32 tp = 10;		//登录类型,详见 blemobi/go-commons/service/ServiceCommon.go
+	int64 time = 16;
+	bool register = 17;	//是否是创建用户（注册）事件
+}
+
 service grpcDataPublishing {
+	// 用户注册
+	rpc AddUser(PUser) returns (PEmpty);
+	// 更新用户
+	rpc UpdateUser(PJsonParam) returns (PEmpty);
+	// 记录登录日志
+	rpc RecordLogin(PLoginRecord) returns (PEmpty);
+	// 增加社区
+	rpc AddCommunity(PCommunityBase) returns (PEmpty);
+	// 更新社区
+	rpc UpdateCommunity(PJsonParam) returns (PEmpty);
+	// 加入(离开)社区
+	rpc JoinCommunity(PEsActionMsg) returns (PEmpty);
+	// 搜索社区
+	rpc SearchCommunity(PCustomPageParam) returns (PStringList);
 	// 新增帖子
 	rpc AddPost(PPostStore) returns (PEmpty);
 	// 更新帖子内容
@@ -183,6 +218,8 @@ service grpcDataPublishing {
 	rpc SearchPost(PSearchPostParam) returns (PStringList);
 	// 关注用户
 	rpc FollowUser(PEsActionMsg) returns (PEmpty);
+	// 好友操作
+	rpc MakeFriend(PEsActionMsg) returns (PEmpty);
 	// 新增帖子评论
 	rpc AddComment(PCommentMsg) returns (PEmpty);
 	// 删除评论
