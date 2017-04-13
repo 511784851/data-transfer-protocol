@@ -1,0 +1,48 @@
+/*
+ *@note 垃圾桶列表
+ *@path /v1/payment/lottery/trashList
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@urlParam startIdx 开始下标 从0开始
+ *@return 正常返回如下格式，异常PResult
+ */
+[
+    {
+        "crtTm": 1490856481271, //创建时间
+        "delTm": 0, // 删除人
+        "desc": "哈哈",//抽奖说明
+        "lotteryId": "5201703301682339995513344023",//抽奖ID
+        "operator": " ",//删除人
+        "title": "哈哈",//抽奖标题
+        "type": 2,//抽奖类型 1:现金抽奖，2:礼物抽奖
+        "winnerCnt": 1,//获奖人数
+        "winnerList": [//中奖者列表
+            {
+                "headUrl": "",//头像地址
+                "level": 0,//等级
+                "nickNm": "",//昵称
+                "uuid": ""//uuid
+            }
+        ]
+    }
+]
+
+/*
+ *@note 还原抽奖包
+ *@path /v1/payment/lottery/resotre
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId[]  抽奖包ID
+ *@FormParam type[]  抽奖包类型
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 彻底删除抽奖包
+ *@path /v1/payment/lottery/foreverdel
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam lotteryId[]  抽奖包ID
+ *@FormParam type[]  抽奖包类型
+ *@return 返回PResult
+ */
