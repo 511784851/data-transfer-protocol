@@ -52,6 +52,12 @@ message PGetPostsParam {
     string         uuid      = 2; //查看的用户,可选参数. 如果非空, 则填充用户关系信息(已收藏、已点赞等)
 }
 
+// 内部发帖结构
+message PInsidePostNew {
+    string   uuid = 1;  //作者
+    PPostNew  post = 2;  //帖子内容
+}
+
 /**
  *@note 用户批量关注/取消关注
  *@path /v1/news/inside/multi/follow
@@ -104,20 +110,6 @@ message PGetPostsParam {
  *@return 成功返回 PRelation ，失败返回 PResult
  */
 
-/**
- *@note 根据过滤条件批量获取帖子
- *@path /v1/news/inside/multi/post
- *@method GET
- *@param from 发起调用的服务方，必须在consul上注册
- *@param postids 帖子id，多个帖子id用,分隔
- *@param type   帖子类型:all(全部)，text(文字)，image(图片)，audio(音频)，video(第三方视频)
- *@param sorttype 本参数在过滤条件“querytype”为1时才有效, 表示排序方式, 取值: 0:时间正序、1:按评论数排序、2:按点赞数排序
- *@param timestart 本参数在过滤条件“querytype”为1时才有效, 表示查询时间点之后的帖子, 0表示查所有的帖子.取值为int64的Unix时间戳
- *@param poststatus 本参数在过滤条件“querytype”为1时才有效, 取值范围: hide:被屏蔽的帖子; del:被删除的帖子,如果不指定则查询正常的帖子
- *@param offset  分页查询的偏移,为已返回的微博帖子的个数, 如果没有,默认为0
- *@param count  分页查询返回的最大条数,如果没有,默认为10
- *@return 成功返回 PPostInfoList ，失败返回 PResult
- */
 
 /**
  *@note 批量判断某个帖子是否存在
@@ -149,26 +141,6 @@ message PGetPostsParam {
  *@return 成功返回 PNewsUserStatistic ，失败返回 PResult
  */
 
-/**
- *@note   内部发布微博
- *@path   /v1/news/inside/post
- *@param  uuid   作为微博发布者的用户id
- *@method POST
- *@param from 发起调用的服务方，必须在consul上注册
- *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
- *@return 返回 PResult
- */
-
- /**
- *@note   根据Id获取主题信息
- *@path   /v1/news/inside/follow/subject
- *@method GET
- *@param from 发起调用的服务方，必须在consul上注册
- *@param  uuid   用户Id
- *@param  subjectids  主题ID,多个Id以,分开
- *@return 返回 PSubjectList,失败返回 PResult
- */
-
  /*
  *@note 任务消息订阅
  *@path /v1/news/inside/task/msg/subscribe
@@ -190,15 +162,6 @@ message PGetPostsParam {
 *@return 成功返回 PFollowOrFansList ，失败返回 PResult
 */
 
-/**
- *@note 批量判断某个帖子状态
- *@path /v1/news/inside/multi/post/status
- *@method GET
- *@param from 发起调用的服务方，必须在consul上注册
- *@param postids 帖子id，多个帖子id用,分隔
- *@return 成功返回 PInt32List, 0:正常, 1:不存在, 2:已删除, 3:已屏蔽。失败返回 PResult
- */
-
  /**
  *@note   获取微博帖子作者uuid
  *@path   /v1/news/inside/post/author
@@ -217,24 +180,6 @@ message PGetPostsParam {
  *@return 返回 PInt32List.失败返回 PResult
  */
 
- /**
- *@note   刷全局微博列表
- *@path   /v1/news/inside/guest/timeline
- *@method GET
- *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all,reg,vip,vipp,vip2, vo
- *@return 成功返回 PPostInfoList ，失败返回 PResult
- */
-
-/**
- *@note   编辑微博(支持编辑:正文文本、图片、音频、视频、@用户列表、地址位置、被转发的原始帖)
- *@path   /v1/news/inside/post/edit
- *@method POST
- *@param  from 发起调用的服务方，必须在consul上注册
- *@body   PPostInfo数据流. images.url/video.url/audio.url 这些个url传的是upload的objectKey
- *@return 返回 PResult
- */
-
 service IGrpcNews {
     /*
      *@note 编辑帖子
@@ -242,6 +187,13 @@ service IGrpcNews {
      *@return PEmpty
      */
     rpc GrpcPostEdit(PPostNew) returns (PEmpty);
+
+    /*
+     *@note 发布帖子
+     *@param PInsidePostNew 发布的帖子
+     *@return PEmpty
+     */
+    rpc GrpcPostPublish(PInsidePostNew) returns (PEmpty);
 
     /*
      *@note 批量点赞帖子
@@ -311,5 +263,12 @@ service IGrpcNews {
      *@param PRefreshTimelineParam 参数    
      *@return PPostViewList 
      */
-    rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);   
+    rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);  
+
+    /*
+     *@note 查询用户粉丝数
+     *@param PStringList 用户列表   
+     *@return PInt32List 用户的粉丝数
+     */
+    rpc GetUsersFansCount(PStringList) returns (PInt32List); 
  }

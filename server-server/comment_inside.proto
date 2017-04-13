@@ -19,6 +19,12 @@ message PCommentCommentParam {
     int32  count   = 3;   //分页大小
 }
 
+// 通过ID查评论的参数
+message PQueryByIdsParam {
+    string            uuid     = 1;   //查看评论的用户
+    repeated  string  ids      = 2;   //评论ID列表
+}
+
 /*
  *@note 关闭/开启 某个微博帖子的智能回复功能
  *@path /comment/togglecomment
@@ -75,18 +81,6 @@ message PCommentCommentParam {
  *@param from 服务请求来源
  *@param id 评论的ID
  *@return 成功返回PCommentBool(屏蔽:true, 未屏蔽:false)，失败返回PResult
- */
-
- /*
- *@note 监管系统取评论列表,屏蔽的评论对监管系统可见
- *@path /comment/commentlistforadmin
- *@method GET
- *@cookie token&uuid
- *@param postid 帖子ID
- *@param postuuid 帖子创建者ID
- *@param start (可选参数)从第几条开始,默认0
- *@param count (可选参数)每个等级取多少条,默认2
- *@return 成功返回PCommentList，失败返回PResult
  */
 
  /*
@@ -154,4 +148,11 @@ service IGrpcComment {
      *@return PCommentExtList
      */
     rpc GrpcLoadCommentComment(PCommentCommentParam) returns (PCommentExtList);
+
+    /*
+     *@note 通过评论ID获取评论内容
+     *@param PQueryByIdsParam
+     *@return PCommentExtList
+     */
+    rpc GrpcGetCommentByIds(PQueryByIdsParam) returns (PCommentExtList);
  }

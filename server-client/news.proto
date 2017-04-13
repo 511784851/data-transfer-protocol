@@ -379,42 +379,12 @@ message PNewsFollowExist {
  */
 
 /**
- *@note   发布微博
- *@path   /v1/news/post
- *@cookie token&uuid
- *@method POST
- *@body   PArticle数据流images.url/video.url/audio.url 这些个url传的是pupload的objectKey
- *@return 返回 PResult
- */
-
-/**
- *@note   发布红包微博
- *@path   /v1/news/post/redpacket
- *@cookie token&uuid
- *@method POST
- *@body PPostRedpacket 序列化二进制数据
- *@return 返回 PResult
- */
-
-/**
  *@note   删除微博
  *@path   /v1/news/post
  *@cookie token&uuid
  *@method DELETE
  *@param  postid 微博的id
  *@return 返回 PResult
- */
-
- /**
- *@note   用户刷新微博
- *@path   /v1/news/user/timeline
- *@cookie token&uuid
- *@method GET
- *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  level 选择查看什么等级的微博列表 all，reg，vip，vipp,vo,vip2(包含vip和vipp), offical(官方社区timeline), other(普通社区timeline)
- *@param  type  刷新类型 news:个人动态; community:社区Timeline.如果没有该参数则默认为刷新个人动态
- *@param  subjectid   主题的id
- *@return 成功返回 PPostInfoList ，失败返回 PResult
  */
 
 /**
@@ -436,16 +406,6 @@ message PNewsFollowExist {
  *@return 返回 PResult
  */
  
-/**
- *@note   获取收藏的微博列表
- *@path   /v1/news/collect
- *@cookie token&uuid
- *@method GET
- *@param  offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@param  count 获取收藏帖子数量,最大值为50
- *@param  type 要查看的文章类型 值：all, text, image, audio, video
- *@return 成功返回 PPostInfoList ，失败返回 PResult
- */
 
 /**
  *@note   关注/取消关注
@@ -478,17 +438,6 @@ message PNewsFollowExist {
  *@param  cursor 下次查询的起点，默认为0。
  *@return 成功返回 PFollowOrFansList ，失败返回 PResult
  */  
-
-/**
- *@note 个人微博主页
- *@path /v1/news/home
- *@method GET
- *@cookie token&uuid
- *@param uuid 用户的id
- *@param type 要查看的文章类型 值：all, text, image, audio, video, imgtext(图文贴)
- *@param offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@return 成功返回 PPostInfoList ，失败返回 PResult
- */
 
 /**
  *@note   查看其他用户首页
@@ -529,49 +478,6 @@ message PNewsFollowExist {
  *@return 返回 PResult
  */
 
-/**
- *@note 查询用户已发布的微博ID列表
- *@path   /v1/news/user/postids
- *@method GET
- *@cookie token&uuid
- *@param  uuid 		 被查询的用户的uuid
- *@param  votemin    过滤条件:点赞数最小值.
- *@param  votemax	 过滤条件:点赞数最大值.
- *@param  timestart  过滤条件:起始时间.格式为UTC时间的time.RFC3339字符串,如:2016-09-27T01:27:48Z
- *@param  timeend   过滤条件:结束时间.格式为UTC时间的time.RFC3339字符串,如:2016-09-27T01:27:48Z
- *@param  offset 分页查询的偏移,为上次查询返回的PStrQueryRet.Next,如果没有,默认为0
- *@param  count  分页查询返回的最大条数,如果没有,默认为10,最大值50
- *@return 成功返回 PStrQueryRet ，失败返回 PResult
- */
-
- /**
- *@note   关注/取消关注主题
- *@path   /v1/news/follow/subject
- *@cookie token&uuid
- *@method POST
- *@param  oper 为1时表示添加关注，为0时表示取消关注
- *@param  subjectid   关注/取消关注主题的id,目前是社区Id
- *@return 返回 PResult
- */
-
- /**
- *@note   获取用户关注的主题
- *@path   /v1/news/follow/subject
- *@cookie token&uuid
- *@method GET
- *@param  offset 分页查询的偏移,为已经查询的条数
- *@param  count  查询结果条数
- *@return 返回 PSubjectList,失败返回 PResult
- */
-
-/**
- *@note   帖子是否已经被用户点赞,返回点赞数
- *@path   /v1/news/vote/exist
- *@cookie token&uuid
- *@method GET
- *@param  postid 帖子ID
- *@return 返回 PPostInfo.失败返回 PResult
- */
 
 /**
  *@note   判断用户A是否关注了用户B,返回B的粉丝数
@@ -582,25 +488,6 @@ message PNewsFollowExist {
  *@return 返回 PRelation,失败返回 PResult
  */
 
- /**
- *@note   获取微博帖子信息
- *@path   /v1/news/post
- *@cookie token&uuid
- *@method GET
- *@param  postid   微博帖子ID
- *@return 成功返回 PPostInfo, 失败返回 PResult
- */
-
-/**
- *@note 搜索主题，对于"MyTimeline"的搜索结果是一次性返回(最多50条)
- *@path  /v1/news/search/subject
- *@method GET
- *@cookie token&uuid
- *@param  keyword 	 搜索关键字
- *@param  offset 	 针对非"MyTimeline"的分页偏移,为已返回的结果数目
- *@param  count 	 针对非"MyTimeline"的搜索结果条数
- *@return 成功返回 PSubjectSearchList ，失败返回 PResult
- */
 
  /**
  *@note   获取@用户的列表
@@ -610,35 +497,6 @@ message PNewsFollowExist {
  *@return 成功返回 PCanAtUserList, 失败返回 PResult
  */
 
- /**
- *@note vo用户个人微博主页
- *@path /v1/news/home/vo
- *@method GET
- *@cookie token&uuid
- *@param uuid 被查看主页的用户的id
- *@param offset 分页的偏移,为已返回的结果的最后一条帖子ID,第一页填0
- *@return 成功返回 PPostInfoList，第一页的第一个帖子为置顶帖, 失败返回 PResult
- */
-
-/**
- *@note   刷全局微博列表
- *@path   /v1/news/global/timeline
- *@method GET
- *@cookie token&uuid
- *@param  offset 帖子id偏移值（客户端获取的最后一个帖子id），初始化填0
- *@param  count  查询条数.默认10,最大50
- *@param  type  all:所有, bbnews:动态, newsfeed;资讯, notice:公告.默认:all
- *@return 成功返回 PPostViewList ，失败返回 PResult
- */
-
- /**
- *@note   编辑微博
- *@path   /v1/news/post/edit
- *@cookie token&uuid
- *@method POST
- *@body   PPostInfo数据流. images.url/video.url/audio.url 这些个url传的是upload的objectKey
- *@return 返回 PResult
- */
 
  /**
  *@note 获取用户收藏数量
@@ -728,7 +586,7 @@ message PNewsFollowExist {
  *@param oper 0:设置; 1:取消设置; 默认:0
  *@param id 社区id
  *@param postid 帖子id
- *@param label 标签, 0:电竞女神; 1:精选
+ *@param label 标签, 0:电竞女神; 1:精华
  *@return返回 PResult
  */
 
@@ -738,7 +596,7 @@ message PNewsFollowExist {
  *@method GET
  *@cookie token&uuid
  *@param id 社区id
- *@param label 标签, 0:电竞女神; 1:精选
+ *@param label 标签, 0:电竞女神; 1:精华
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10, 最大50
  *@return返回 PPostViewList
