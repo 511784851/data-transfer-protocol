@@ -93,6 +93,24 @@ message PBetchCommentVote {
 	repeated  string uuidList = 3; //点赞的uuid列表
 }
 
+message PVoteUser {
+	string uuid = 1;	//赞或踩的用户信息
+	string nickname = 2;
+	string headImgUrl = 3;
+}
+
+message PVoteUserList {
+	repeated PVoteUser user = 1;
+}
+
+message PInt32Array {
+	repeated int32 array = 1;
+}
+
+message PCommentBool {
+	bool isEnable = 1; // 是否开启评论/回复
+}
+
 /*
  *@note 发布评论
  *@path /comment/publish
@@ -132,15 +150,6 @@ message PBetchCommentVote {
  *@return 成功返回PComment，失败返回PResult
  */
  
-/*
- *@note 取评论列表（按等级，每个等级取2条）
- *@path /comment/commentlist
- *@method GET
- *@cookie token&uuid
- *@param postid 帖子ID query参数
- *@param postuuid 帖子创建者ID query参数
- *@return 成功返回PCommentList，失败返回PResult
- */
  
 /*
  *@note 加载评论
@@ -155,30 +164,6 @@ message PBetchCommentVote {
  */
 
 /*
- *@note 加载更多评论
- *@path /comment/commentmore
- *@method GET
- *@cookie token&uuid
- *@param postid 帖子ID query参数
- *@param postuuid 帖子创建者ID query参数
- *@param level 用户等级 query参数
- *@param offset 从第几条开始加载 query参数
- *@param count 每次加载多少条 query参数
- *@return 成功返回PCommentLevel，失败返回PResult
- */
- 
-/*
- *@note 分页加载评论的评论
- *@path /comment/commentchild
- *@method GET
- *@cookie token&uuid
- *@param id 评论ID query参数
- *@param offset 从第几条开始加载 query参数
- *@param count 每次加载多少条 query参数
- *@return 成功返回PCommentLevel，失败返回PResult
- */
-
-/*
  *@note 分页加载评论的评论(每一条评论包含等级)
  *@path /comment/subcomment
  *@method GET
@@ -187,55 +172,6 @@ message PBetchCommentVote {
  *@param offset 从第几条开始加载 query参数
  *@param count 每次加载多少条 query参数
  *@return 成功返回PCommentExtList，失败返回PResult
- */
-
-message PVoteUser {
-	string uuid = 1;	//赞或踩的用户信息
-	string nickname = 2;
-	string headImgUrl = 3;
-}
-
-message PVoteUserList {
-	repeated PVoteUser user = 1;
-}
-
-message PInt32Array {
-	repeated int32 array = 1;
-}
-
-/*
- *@note 取N个帖子的评论数，提供给news模块调用
- *@path /comment/post/count
- *@method GET
- *@param postids 帖子ID，用|分隔 query参数
- *@return 成功返回PInt32Array，失败返回PResult
- */
-
-message PCommentBool {
-	bool isEnable = 1; // 是否开启评论/回复
-}
-
-/*
- *@note 按条件查询指定等级的评论
- *@path /comment/commentsbyfilter
- *@method GET
- *@cookie token&uuid
- *@param  type 过滤类型.赞:uv;踩:dv
- *@param  min  评论被点赞数最小值
- *@param  max  评论被点赞数最大值
- *@param  level  等级 0:普通用户;1:vip;2:vipp;3:vo;4:游客
- *@param  offset 分页偏移,为已返回的条数
- *@param  count  查询结果条数.默认10,最大50
- *@return 返回PStringList,失败返回PbResult
- */
-
-/*
- *@note 查询评论是否被用户赞/踩过，并返回赞、踩数
- *@path /comment/vote/exist
- *@method GET
- *@cookie token&uuid
- *@param id 评论ID
- *@return 返回PComment,失败返回PbResult
  */
 
  /*

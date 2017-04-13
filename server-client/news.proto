@@ -31,7 +31,7 @@ enum EResourceType {
 // 帖子标签
 enum EPostLabel {
     LbGoddess      = 0; //电竞女神
-    LbFeatured     = 1; //精选
+    LbFeatured     = 1; //精华
 }
 
 // 帖子资源信息

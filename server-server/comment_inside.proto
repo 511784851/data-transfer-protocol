@@ -4,45 +4,6 @@ import "comment.proto";
 import "result.proto";
 import "common_inside.proto";
 
-
-/*
- *@note 取N个帖子的评论数
- *@path /comment/post/count
- *@method GET
- *@param postids 帖子ID，用|分隔
- *@param from 发起调用的服务方
- *@return 成功返回PInt32Array，失败返回PResult
- */
-
-/*
- *@note 获取评论
- *@path /comment/getcomment
- *@method GET
- *@param id 评论ID
- *@param from 发起调用的服务方
- *@return 成功返回PComment，失败返回PResult
- */
-
-/*
- *@note 获取多条评论
- *@path /comment/getcomments
- *@method GET
- *@param ids 评论ID数组,以","分隔
- *@param from 发起调用的服务方
- *@return 返回PCommentLevel
- */
-
-/*
- *@note 通过PostID获取评论
- *@path /comment/getcommentsbypostid
- *@method GET
- *@param postid 帖子ID
- *@param level 用户等级
- *@param start 从第几条开始加载(可选，默认为0)
- *@param count 每次加载多少条(可选，默认为10)
- *@return 成功返回PCommentLevel，失败返回PResult
- */
-
 // 加载评论的参数
 message PCommentParam {
     string postId    = 1;     //提醒消息的创建者
@@ -57,6 +18,85 @@ message PCommentCommentParam {
     int32  offset  = 2;   //分页查询的偏移
     int32  count   = 3;   //分页大小
 }
+
+/*
+ *@note 关闭/开启 某个微博帖子的智能回复功能
+ *@path /comment/togglecomment
+ *@method POST
+ *@param uid 帖子的作者ID
+ *@param id 帖子的ID
+ *@param action 0表示要关闭，1表示要开启
+ *@return PResult，成功关闭或成功开启，errcode等于0
+ */
+
+/*
+ *@note 屏蔽/解除屏蔽 某个微博帖子的整个评论
+ *@path /comment/shieldcommentall
+ *@method POST
+ *@param uid 帖子的作者ID
+ *@param id 帖子的ID
+ *@param action 0表示屏蔽，1表示解除屏蔽
+ *@return PResult，成功关闭或成功开启，errcode等于0
+ */
+
+ /*
+ *@note 屏蔽/解除屏蔽 某个微博帖子的某一条评论
+ *@path /comment/shieldcommentsingle
+ *@method POST
+ *@param pid 评论ID
+ *@param action 0表示屏蔽，1表示解除屏蔽
+ *@return PResult，成功屏蔽或成功解除屏蔽，errcode等于0
+ */
+
+ /*
+ *@note 获取某条微博回复功能是否开启
+ *@path /comment/cancomment
+ *@method GET
+ *@param from 服务请求来源，如:platform
+ *@param uid 帖子的作者ID
+ *@param id 帖子的ID
+ *@return 成功返回PCommentBool(开启：true, 关闭：false)，失败返回PResult
+ */
+
+ /*
+ *@note 获取某条微博是否屏蔽全部评论
+ *@path /comment/isshieldpostcomment
+ *@method GET
+ *@param from 服务请求来源，如:platform
+ *@param uid 帖子的作者ID
+ *@param id 帖子的ID
+ *@return 成功返回PCommentBool(屏蔽:true, 未屏蔽:false)，失败返回PResult
+ */
+
+ /*
+ *@note 获取某条评论是否屏蔽
+ *@path /comment/isshieldcomment
+ *@method GET
+ *@param from 服务请求来源
+ *@param id 评论的ID
+ *@return 成功返回PCommentBool(屏蔽:true, 未屏蔽:false)，失败返回PResult
+ */
+
+ /*
+ *@note 监管系统取评论列表,屏蔽的评论对监管系统可见
+ *@path /comment/commentlistforadmin
+ *@method GET
+ *@cookie token&uuid
+ *@param postid 帖子ID
+ *@param postuuid 帖子创建者ID
+ *@param start (可选参数)从第几条开始,默认0
+ *@param count (可选参数)每个等级取多少条,默认2
+ *@return 成功返回PCommentList，失败返回PResult
+ */
+
+ /*
+ *@note 任务消息订阅
+ *@path /v1/comment/inside/task/msg/subscribe
+ *@method POST
+ *@param from 调用的服务名
+ *@param PSubscribeArray 订阅消息
+ *@return 返回PResultt
+ */
 
 service IGrpcComment {
      /*
