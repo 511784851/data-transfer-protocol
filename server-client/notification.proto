@@ -60,14 +60,19 @@ message PMsgCountList {
 enum ENotifyType {
     // 我的通知
 
-    CommentNews     = 0; // 评论帖子
-    CommentComment  = 1; // 评论评论
-    CommentVote     = 2; // 评论赞
-    NewsFollow      = 3; // 关注
-    NewsVote        = 4; // 帖子点赞
-    NewsAt          = 5; // @我
-    SocialAccept    = 6; // 接受好友申请
-    CommentDownVote = 7; // 评论踩
+    CommentNews      = 0;  // 评论帖子
+    CommentComment   = 1;  // 评论评论
+    CommentVote      = 2;  // 评论赞
+    NewsFollow       = 3;  // 关注
+    NewsVote         = 4;  // 帖子点赞
+    NewsAt           = 5;  // @我
+    SocialAccept     = 6;  // 接受好友申请
+    CommentDownVote  = 7;  // 评论踩
+    NewsCreate       = 8;  // 帖子创建（动态帖、新闻帖）
+    NewsView         = 9;  // 帖子浏览N次
+    NewsVoteCount    = 10; // 帖子点赞次数
+    NewsCommentCount = 11; // 帖子评论次数
+    NewsANN          = 12; // 社区公告
 
     // 系统通知
 
@@ -83,6 +88,8 @@ enum ENotifyType {
     RealNameAuthFailed      = 109; // 实名认证失败
     StreamingSoon           = 110; // 第三方直播-即将直播
     SystemMessage           = 111; // 系统消息(私信等)
+    // 帖子删除、评论删除
+    // 社区禁用
     SimpleMessage           = 112; // 简单通知消息（抽奖等通知）
 
     SocialApply     = 200; // 好友申请
@@ -191,6 +198,7 @@ message PNotifyRawMessage {
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
     PNotifyCommunity        community       = 12; // 社区通知/社区邀请
     PNotifySimple           simple          = 13; // 简单通知
+    PPostInfo               article         = 14; // 帖子信息（社区公告、帖子创建、帖子浏览、帖子评论次数、点赞次数）
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
