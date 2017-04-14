@@ -472,6 +472,7 @@ enum ECommunityModule {
     ELink = 7;              // 链接
     EForum = 8;             // 动态贴（原论坛贴）
     EChat = 9;              // 聊天
+    EPeopleNearby = 10;     // 附近
     EPhotoAlbum = 11;       // 图集
     ERanking = 12;          // 排行榜
     EStore = 13;            // 商店
@@ -737,6 +738,14 @@ message PCommunityInfoVO {
 // 1.6.x 社区新功能
 /*=====================================*/
 // 结构定义
+
+// 帖子默认标签id
+enum ECommunityPostLabel (
+	EPostLabelAll 	= 0 		// 全部
+	EPostLabelNews 	= 1 		// 资讯
+	EPostLabelFeatured  = 2 	// 精华
+	EPostLabelGoddess = 3 		// 电竞女神
+)
 
 // 我的‘社区首页’
 message PCommunityIndex {
