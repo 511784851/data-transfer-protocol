@@ -740,12 +740,12 @@ message PCommunityInfoVO {
 // 结构定义
 
 // 帖子默认标签id
-enum ECommunityPostLabel (
-	EPostLabelAll 	= 0 		// 全部
-	EPostLabelNews 	= 1 		// 资讯
-	EPostLabelFeatured  = 2 	// 精华
-	EPostLabelGoddess = 3 		// 电竞女神
-)
+enum ECommunityPostLabel {
+	EPostLabelAll 	= 0; 		// 全部
+	EPostLabelNews 	= 1; 		// 资讯
+	EPostLabelFeatured  = 2; 	// 精华
+	EPostLabelGoddess = 3; 		// 电竞女神	
+}
 
 // 我的‘社区首页’
 message PCommunityIndex {
