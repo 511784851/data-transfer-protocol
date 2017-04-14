@@ -137,7 +137,6 @@ message PCommunityNotificationUnRead {
 	int64 Unread = 2;
 }
 
-
 // 社区用户信息
 message PInsideCommunityUser {
 	PUserBase User = 2;			// 用户基础信息
@@ -474,7 +473,6 @@ enum ECommunityModule {
     EChat = 9;              // 聊天
     EPeopleNearby = 10;     // 附近
     EPhotoAlbum = 11;       // 图集
-    ERanking = 12;          // 排行榜
     EStore = 13;            // 商店
     ENews = 14;            	// 资讯
 }
@@ -484,8 +482,8 @@ enum ECommunityModule {
 message PCommunityBannerInfo {
     bool Enable = 1;                                    // true为启用，false为禁止
     string Name = 2;                                    // banner的自定义名字
-    PCommunityResource ImgRes = 3;                      // banner的图片资源信息；
-    PCommunityResource LinkRes = 4;                     // banner链接信息，空(无链接)；非空时，type可选的有：url(链接地址)； post(帖子id)； notice(公告id)；对应信息保存在URL字段;如果链接需要保存名字，则保存在Name字段
+    PCommunityResource ImgRes = 3;                      // banner的图片资源信息；Name为oss的objectkey，URL为服务端返回的访问地址
+    PCommunityResource LinkRes = 4;                     // banner链接信息，无链接是为空；有链接时，Name填：链接描述信息；type可选的有：url、post；URL填对应的值：url->完整的链接地址字段、post->动态帖子id|资讯帖子id|公告id
 }
 
 // 社区Banner资源信息列表
@@ -528,11 +526,11 @@ message PCommunityLayout {
 message PCommunityInfoV12 {
     PCommunityBase BaseInfo = 1;                        // 社区基础信息
     PCommunityLayout Layout = 2;                        // 社区成员的布局
-    PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告
-    PCommunityBannerInfoList BannerList = 4;            // banner列表
+    PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告,如果没有设置或者广告为空，则该字段为空
+    PCommunityBannerInfoList BannerList = 4;            // banner列表,如果没有设置或者banner为空，则该字段为空
     PCommunityForumTagList ForumTagList = 5;            // 论坛帖子的自定义标签类型列表；图集中需要使用这个标签
     PCommunityModulesList ModulesList = 6;              // 所有的功能模块列表
-   	PCommunityResourceList IntroduceRes = 7;    		// 社区介绍；图文混排
+   	PCommunityResourceList IntroduceRes = 7;    		// 社区介绍；图文混排,如果没有设置或者资源为空，则该字段为空
 }
 
 // ‘社区首页’返回的信息 v1.2.x
