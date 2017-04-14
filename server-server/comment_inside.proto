@@ -3,6 +3,8 @@ package bbproto;
 import "comment.proto";
 import "result.proto";
 import "common_inside.proto";
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "CommentApiProtos";
 
 // 加载评论的参数
 message PCommentParam {
