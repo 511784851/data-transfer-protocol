@@ -5,6 +5,7 @@ option java_outer_classname = "DataPublishingProtos";
 
 import "community.proto";
 import "news.proto";
+import "result.proto";
 
 message PWords {
 	repeated string word = 1;
