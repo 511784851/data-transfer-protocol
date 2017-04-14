@@ -172,7 +172,6 @@ message PNotifyCommunity {
 
 // 简单通知
 message PNotifySimple {
-    // 如果uri是空字符串，则不进行跳转
     // uri携带跳转对象和对应参数信息
     // scheme://path?query_string
     //
@@ -199,7 +198,7 @@ message PNotifyRawMessage {
     PNotifyNewsAt           newsAt          = 10; // @我
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
     PNotifyCommunity        community       = 12; // 社区通知/社区邀请
-    PNotifySimple           simple          = 13; // 简单通知
+    PNotifySimple           simple          = 13; // 简单通知，如果simple为空指针，则不进行跳转
     PPostInfo               article         = 14; // 帖子信息（帖子创建、帖子浏览、帖子评论次数、点赞次数）
 }
 
