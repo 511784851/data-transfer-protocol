@@ -432,6 +432,7 @@ message PPostPreview {
 	string ucid = 11;			//作者ID或社区ID
 	string name = 12;			//动态帖的作者或资讯帖的社区名称
 	string headURL = 13;		//动态帖作者头像或资讯帖社区头像
+	int32 level = 14;			//作者的用户等级
 }
 
 enum ERecommendReason {
