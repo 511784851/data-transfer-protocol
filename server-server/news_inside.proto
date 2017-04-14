@@ -52,6 +52,7 @@ message PRefreshTimelineParam {
 message PGetPostsParam {
     repeated int64 postIds   = 1; //帖子ID列表
     string         uuid      = 2; //查看的用户,可选参数. 如果非空, 则填充用户关系信息(已收藏、已点赞等)
+    int32          viewType  = 3; //查看类型,  0:用户查看(非正常帖子不显示正文)  1: 监管查看(显示所有状态的所有帖子)
 }
 
 // 内部发帖结构
