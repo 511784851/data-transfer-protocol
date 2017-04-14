@@ -28,12 +28,6 @@ enum EResourceType {
     Title       = 6; //标题
 }
 
-// 帖子标签
-enum EPostLabel {
-    LbGoddess      = 0; //电竞女神
-    LbFeatured     = 1; //精华
-}
-
 // 帖子资源信息
 message PResource {
 	EResourceType   Type            = 1; //资源类型
@@ -91,12 +85,12 @@ message PPostState {
 	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
 	
 	bool        canDelete           = 8; //是否有删除权限(作者、社区创建者、管理员)
-	PLabelList  labelList           = 9; //标签列表,取值参考EPostLabel
+	PLabelList  labelList           = 9; //标签列表,取值参考ECommunityPostLabel
 }
 
 // 标签列表
 message PLabelList {
-	repeated string List = 1; //标签列表
+	repeated int32 List = 1; //标签列表
 }
 
 // 微博详情列表
@@ -556,6 +550,18 @@ message PNewsFollowExist {
  *@return 成功返回 PPostViewList,失败返回 PResult
  */
 
+ /**
+ *@note   用户查看自己在社区发布历史(动态、资讯)
+ *@path   /v1.2/news/user/history
+ *@cookie token&uuid
+ *@method GET
+ *@param  id     社区ID
+ *@param  type    bbnews:社区动态; newsfeed:社区资讯. 默认:bbnews
+ *@param  offset 偏移(客户端获取的最后一个帖子id), 默认:0
+ *@param  count  查询条数, 默认:10, 最大50
+ *@return 成功返回 PPostViewList,失败返回 PResult
+ */
+
  /*
  *@note 置顶公告帖(最多总共置顶1条)
  *@path /v1.2/news/notice/top
@@ -586,7 +592,7 @@ message PNewsFollowExist {
  *@param oper 0:设置; 1:取消设置; 默认:0
  *@param id 社区id
  *@param postid 帖子id
- *@param label 标签, 0:电竞女神; 1:精华
+ *@param label 标签 参考 ECommunityPostLabel. 2:精华, 3:电竞女神; 
  *@return返回 PResult
  */
 
@@ -596,7 +602,7 @@ message PNewsFollowExist {
  *@method GET
  *@cookie token&uuid
  *@param id 社区id
- *@param label 标签, 0:电竞女神; 1:精华
+ *@param label 标签 参考ECommunityPostLabel. 2:精华, 3:电竞女神;
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10, 最大50
  *@return返回 PPostViewList
@@ -634,11 +640,11 @@ message PNewsFollowExist {
  */
 
 /**
- *@note   获取首页的精选列表(筛选的资讯+动态)
+ *@note   获取APP首页的精选列表(筛选的资讯+动态)
  *@path   /v1.2/news/newsfeed
  *@cookie token&uuid
  *@method GET
- *@param  class  社区分类, top、hot、EDG等. 默认 top
+ *@param  class  社区分类的ID, hot 的ID固定为0
  *@param  pageindex 页数偏移, 每次翻页加1,默认:0
  *@param  pagesize  每页大小, 默认10, 最大值为50
  *@return 成功返回 PPostViewList ，失败返回 PResult

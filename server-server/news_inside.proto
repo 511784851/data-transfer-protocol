@@ -56,8 +56,18 @@ message PGetPostsParam {
 
 // 内部发帖结构
 message PInsidePostNew {
-    string   uuid = 1;  //作者
-    PPostNew  post = 2;  //帖子内容
+    string          uuid = 1;  //作者
+    PPostNew        post = 2;  //帖子内容
+    int32     createType = 3;  //可选参数. 0:正常创建(原有服务使用); 1:隐式创建(视频服务使用)
+}
+
+// 查看用户的发帖历史
+message PQueryHitoryParam {
+    string  uuid        = 1;  //要查看的用户
+    string  communityId = 2;  //可选参数. 空: 用户所有历史; 非空: 用户在指定社区的历史
+    string  postClass   = 3;  //可选参数. all: 动态+资讯; bbnews:动态; newsfeed:资讯. 默认: all
+    int64   offset      = 4;  //偏移,为上次返回的最后一个帖子ID, 默认:0
+    int64   count       = 5;  //查询条数, 默认10
 }
 
 /**
@@ -212,6 +222,13 @@ service IGrpcNews {
     rpc GrpcPostVoteExist(PBetchVoteAction) returns (PNewsVoteExist);
 
     /*
+     *@note 批量获取帖子点赞数(视频服务)
+     *@param PStringList 帖子ID    
+     *@return PInt32List 
+     */
+    rpc GrpcGetPostsVoteCnt(PStringList) returns (PInt32List);
+
+    /*
      *@note 批量关注用户
      *@param PBetchFollowAction 目标uuid，发起关注的uuid列表    
      *@return PEmpty 
@@ -273,4 +290,11 @@ service IGrpcNews {
      *@return PInt32List 用户的粉丝数
      */
     rpc GetUsersFansCount(PStringList) returns (PInt32List); 
+
+    /*
+     *@note 查看用户的发帖历史
+     *@param PQueryHitoryParam 查询参数   
+     *@return PPostViewList
+     */
+    rpc GrpcGetUserPostHistory(PQueryHitoryParam) returns (PPostViewList);
  }
