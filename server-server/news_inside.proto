@@ -3,6 +3,8 @@ package bbproto;
 import "news.proto";
 import "common_inside.proto";
 import "result.proto";
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "NewsApiProtos";
 
 //帖子状态操作类型
 enum EStateOperType {

@@ -182,6 +182,10 @@ message PCommunityCreator {
 	string remark = 15;			// 文件的备注信息
 	string miniObjectKey = 16;	// 文件缩略图objectKey
 	string miniUrl = 17;		// 文件缩略图url
+	string postId = 18;			// 帖子ID
+	int32 commentsCnt = 19;		// 评论数
+	int32 thumbsupCnt = 20;		// 点赞数
+	int32 postTyp = 21;			// 帖子类型 3:视频帖,5:新闻帖,6:原创录播
 }
 
 message PNetFilelist {
@@ -227,3 +231,20 @@ message PNetFilelist {
  *@url param pageSize  要获取的记录数
  *@return 成功PNetFilelist, 失败PResult
  */
+ 
+/*
+ *@note 通知添加文件信息
+ *@path /netdisk/v1/file/notifyadd
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@body PNetFilelist
+ *@return 返回PResult
+ */
+/*
+ *@note 通知删除文件信息
+ *@path /netdisk/v1/file/notifydelete
+ *@method DELETE
+ *@cookie token&uuid 登录用户信息
+ *@url param postId 帖子Id（多个id用 ","隔开）
+ *@return 返回PResult
+ */ 
