@@ -72,7 +72,6 @@ enum ENotifyType {
     NewsView         = 9;  // 帖子浏览N次
     NewsVoteCount    = 10; // 帖子点赞次数
     NewsCommentCount = 11; // 帖子评论次数
-    NewsANN          = 12; // 社区公告
 
     // 系统通知
 
@@ -89,7 +88,7 @@ enum ENotifyType {
     StreamingSoon           = 110; // 第三方直播-即将直播
     SystemMessage           = 111; // 系统消息(私信等)
     // 帖子删除、评论删除
-    // 社区禁用
+    // 社区禁用、社区公告
     SimpleMessage           = 112; // 简单通知消息（抽奖等通知）
 
     SocialApply     = 200; // 好友申请
@@ -182,6 +181,9 @@ message PNotifySimple {
     //
     // 抽奖发货提醒:
     // payment://lottery/shipping?lottery_id=xxx
+    //
+    // 社区公告
+    // community://post/ann?post_id=xxx
     string uri = 1; // 简单通知消息参数
 }
 
@@ -198,7 +200,7 @@ message PNotifyRawMessage {
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
     PNotifyCommunity        community       = 12; // 社区通知/社区邀请
     PNotifySimple           simple          = 13; // 简单通知
-    PPostInfo               article         = 14; // 帖子信息（社区公告、帖子创建、帖子浏览、帖子评论次数、点赞次数）
+    PPostInfo               article         = 14; // 帖子信息（帖子创建、帖子浏览、帖子评论次数、点赞次数）
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
