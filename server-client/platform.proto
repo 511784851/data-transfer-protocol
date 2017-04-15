@@ -367,6 +367,21 @@ message PAccountOperateLogList {
 	int32 total = 2;
 }
 
+/**1.6版本***开始**/
+message PReportInfo {
+	int32 id = 1; 
+	int64 cTime = 2;  //举报时间
+	string tID = 3; //举报对象ID(资讯ID,动态ID,原创录播ID等)
+	string cID = 4; //社区ID
+	string rType = 5; //举报类型(1.资讯帖，2.动态帖，3.原创录播）
+	string content = 6; //举报内容
+	string rID = 7; //举报人UUID
+	int32 state = 8; //状态（app端不需要填）
+	int32 dispose = 9; //处理结果（app端不需要填）
+}
+
+/**1.6版本***结束**/
+
 
 /**************************API 定义***********************************/
 
