@@ -391,47 +391,6 @@ message PInsideCommunityUserList {
  */
 
 /*
- *@note 获取用户通知列表
- *@path /v1/community/setting/notification
- *@method GET
- *@url param id 社区id
- *@url param offset 上一页的通知id，第一页填-1
- *@url param count 表示获取个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityNotificationList , 失败返回 PResult
- */
-
-/*
- *@note 删除通知信息
- *@path /v1/community/setting/notification
- *@method DELETE
- *@url param id 社区id
- *@url param notificationid 要删除的通知id，多个id以,分割
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 用户设置通知信息状态
- *@path /v1/community/setting/notification/status
- *@method GET
- *@url param id 社区id
- *@url param view 0为设置已读，1为设置未读
- *@url param notificationid 设置已读的通知id；如果设置全部，填all；如果设置多条(50条以内)，以,分割id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 获取用户在社区是否有通知未读
- *@path /v1/community/setting/notification/unread
- *@method GET
- *@url param id 社区id
- *@cookie token&uuid
- *@return 成功返回 PCommunityNotificationUnRead  , 失败返回 PResult
- */
-
-/*
  *@note 社区成员搜索
  *@path /v1/community/search/member
  *@method GET
@@ -605,8 +564,8 @@ message PCommunityRankingDescribe {
 message PCommunityInfoVO {
 	int32 Status = 1;									// 社区状态，-1没有创建社区;0社区开启状态；1社区关闭状态；
 	int32 MemberCount = 3;			// 社区成员数量
-	int32 ForumPostCount = 4;		// 社区论坛帖子数量
-	int32 NoticePostCount = 5;		// 社区公告帖子数量
+	int32 ForumPostCount = 4;		// 社区动态帖子数量
+	int32 NewsPostCount = 5;		// 社区资讯帖子数量
     PCommunityHomeV12 Home = 6;     // 社区信息
 }
 
@@ -748,8 +707,8 @@ enum ECommunityPostLabel {
 // 我的‘社区首页’
 message PCommunityIndex {
 	int32 MemberCount = 1;				// 社区成员数量
-	int32 ForumPostCount = 2;			// 社区论坛帖子数量
-	int32 NoticePostCount = 3;			// 社区公告帖子数量
+	int32 ForumPostCount = 2;			// 社区动态帖子数量
+	int32 NewsPostCount = 3;			// 社区资讯帖子数量
 	PCommunityHomeV12 Home = 4;			// 我创建/管理的社区首页
 	PCommunityBaseList Follow = 5; 		// 我关注的社区，默认显示20条
 	PCommunityBaseList Recommend = 6; 	// 系统推荐的社区，默认显示20条
