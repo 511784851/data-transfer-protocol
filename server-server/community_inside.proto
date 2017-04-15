@@ -139,6 +139,13 @@ service IGrpcCommunity {
     rpc SetRecommendCommunitySort(PCommunitySortList) returns (PEmpty);
 
     /*
+     *@note 移除推荐社区分类
+     *@param PCommunitySort，其中Name可以不填，ID必填
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+    rpc DelRecommendCommunitySort(PCommunitySort) returns (PEmpty);
+
+    /*
      *@note 获取某个社区的分类
      *@param 社区ID
      *@return 成功返回 PCommunitySortList，失败返回 PResult
