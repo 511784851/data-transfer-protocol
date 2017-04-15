@@ -368,6 +368,8 @@ message PAccountOperateLogList {
 }
 
 /**1.6版本***开始**/
+
+
 message PReportInfo {
 	int32 id = 1; 
 	int64 cTime = 2;  //举报时间
@@ -375,10 +377,22 @@ message PReportInfo {
 	string cID = 4; //社区ID
 	string rType = 5; //举报类型(1.资讯帖，2.动态帖，3.原创录播）
 	string content = 6; //举报内容
-	string rID = 7; //举报人UUID
+	string rID = 7; //举报人UUID（app端不需要填）
 	int32 state = 8; //状态（app端不需要填）
 	int32 dispose = 9; //处理结果（app端不需要填）
 }
+
+/**
+ * 举报
+ *
+ *@path /platform-manager/report/info
+ *@cookie token&uuid
+ *@method POST
+ *@body PReportInfo数据流
+ *@return PResult
+ */
+
+
 
 /**1.6版本***结束**/
 
