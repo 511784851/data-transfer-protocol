@@ -724,9 +724,9 @@ message PCommunitySort {
 message PCommunitySortList {
 	string ID = 1;								// 社区ID，设置社区分类时填充；其它情况为空即可
 	string UUID = 2;							// 用户ID，修改资讯页面‘我的分类’时填充；其它情况为空即可
-    repeated PCommunitySort List = 3;			// 社区分类列表
+	repeated PCommunitySort Recommend = 3;		// 固定分类
+    repeated PCommunitySort Customize = 4;		// 自定义分类
 }
-
 
 /*=====================================*/
 // API定义
@@ -738,7 +738,6 @@ message PCommunitySortList {
  *@cookie token&uuid
  *@return 成功返回 PCommunityIndex ，失败返回PResult
  */
-
 
 /*
  *@note 获取监管后台设置的推荐社区分类列表
@@ -758,7 +757,7 @@ message PCommunitySortList {
  */
 
 /*
- *@note 获取首页的精选栏‘我的分类’；不包括固定的Hot
+ *@note 获取首页的精选栏‘我的分类’
  *@path /v1.6/community/user/sort
  *@method GET
  *@cookie token&uuid
@@ -766,7 +765,7 @@ message PCommunitySortList {
  */
 
 /*
- *@note 修改首页的精选栏‘我的分类’；总的list长度不能超过9，不包括固定的Hot
+ *@note 修改首页的精选栏‘我的分类’；Recommend + Customize 
  *@path /v1.6/community/user/sort
  *@method PUT
  *@body PCommunitySortList 其中UUID、分类ID必填；社区ID、Name 可以不填
