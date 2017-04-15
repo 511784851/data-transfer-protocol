@@ -5,7 +5,6 @@ import "datapublishing.proto";
 import "result.proto";
 import "account.proto";
 import "news.proto";
-import "community.proto";
 import "common_inside.proto";
 
 option java_package = "com.blemobi.sep.probuf";
@@ -202,7 +201,7 @@ service grpcDataPublishing {
 	// 记录登录日志
 	rpc RecordLogin(PLoginRecord) returns (PEmpty);
 	// 增加社区
-	rpc AddCommunity(PCommunityBase) returns (PEmpty);
+	rpc AddCommunity(PJsonParam) returns (PEmpty);
 	// 更新社区
 	rpc UpdateCommunity(PJsonParam) returns (PEmpty);
 	// 加入(离开)社区
