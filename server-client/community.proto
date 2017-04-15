@@ -716,8 +716,9 @@ message PCommunityIndex {
 
 // 社区分类
 message PCommunitySort {
-	int32 ID = 1;								// 分类ID
-	string Name = 2;							// 分类名称
+	bool Recommend = 1;							// 已设置为推荐的标志位，监管系统使用
+	int32 ID = 2;								// 分类ID
+	string Name = 3;							// 分类名称
 }
 
 // 社区分类列表
