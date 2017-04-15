@@ -137,7 +137,6 @@ message PCommunityNotificationUnRead {
 	int64 Unread = 2;
 }
 
-
 // 社区用户信息
 message PInsideCommunityUser {
 	PUserBase User = 2;			// 用户基础信息
@@ -392,47 +391,6 @@ message PInsideCommunityUserList {
  */
 
 /*
- *@note 获取用户通知列表
- *@path /v1/community/setting/notification
- *@method GET
- *@url param id 社区id
- *@url param offset 上一页的通知id，第一页填-1
- *@url param count 表示获取个数
- *@cookie token&uuid
- *@return 成功返回 PCommunityNotificationList , 失败返回 PResult
- */
-
-/*
- *@note 删除通知信息
- *@path /v1/community/setting/notification
- *@method DELETE
- *@url param id 社区id
- *@url param notificationid 要删除的通知id，多个id以,分割
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 用户设置通知信息状态
- *@path /v1/community/setting/notification/status
- *@method GET
- *@url param id 社区id
- *@url param view 0为设置已读，1为设置未读
- *@url param notificationid 设置已读的通知id；如果设置全部，填all；如果设置多条(50条以内)，以,分割id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 获取用户在社区是否有通知未读
- *@path /v1/community/setting/notification/unread
- *@method GET
- *@url param id 社区id
- *@cookie token&uuid
- *@return 成功返回 PCommunityNotificationUnRead  , 失败返回 PResult
- */
-
-/*
  *@note 社区成员搜索
  *@path /v1/community/search/member
  *@method GET
@@ -474,7 +432,6 @@ enum ECommunityModule {
     EChat = 9;              // 聊天
     EPeopleNearby = 10;     // 附近
     EPhotoAlbum = 11;       // 图集
-    ERanking = 12;          // 排行榜
     EStore = 13;            // 商店
     ENews = 14;            	// 资讯
 }
@@ -484,8 +441,8 @@ enum ECommunityModule {
 message PCommunityBannerInfo {
     bool Enable = 1;                                    // true为启用，false为禁止
     string Name = 2;                                    // banner的自定义名字
-    PCommunityResource ImgRes = 3;                      // banner的图片资源信息；
-    PCommunityResource LinkRes = 4;                     // banner链接信息，空(无链接)；非空时，type可选的有：url(链接地址)； post(帖子id)； notice(公告id)；对应信息保存在URL字段;如果链接需要保存名字，则保存在Name字段
+    PCommunityResource ImgRes = 3;                      // banner的图片资源信息；Name为oss的objectkey，URL为服务端返回的访问地址
+    PCommunityResource LinkRes = 4;                     // banner链接信息，无链接是为空；有链接时，Name填：链接描述信息；type可选的有：url、post；URL填对应的值：url->完整的链接地址字段、post->动态帖子id|资讯帖子id|公告id
 }
 
 // 社区Banner资源信息列表
@@ -528,11 +485,11 @@ message PCommunityLayout {
 message PCommunityInfoV12 {
     PCommunityBase BaseInfo = 1;                        // 社区基础信息
     PCommunityLayout Layout = 2;                        // 社区成员的布局
-    PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告
-    PCommunityBannerInfoList BannerList = 4;            // banner列表
+    PCommunityBannerInfo Advertisement = 3;             // 监管后台设置的广告,如果没有设置或者广告为空，则该字段为空
+    PCommunityBannerInfoList BannerList = 4;            // banner列表,如果没有设置或者banner为空，则该字段为空
     PCommunityForumTagList ForumTagList = 5;            // 论坛帖子的自定义标签类型列表；图集中需要使用这个标签
     PCommunityModulesList ModulesList = 6;              // 所有的功能模块列表
-   	PCommunityResourceList IntroduceRes = 7;    		// 社区介绍；图文混排
+   	PCommunityResourceList IntroduceRes = 7;    		// 社区介绍；图文混排,如果没有设置或者资源为空，则该字段为空
 }
 
 // ‘社区首页’返回的信息 v1.2.x
@@ -607,8 +564,8 @@ message PCommunityRankingDescribe {
 message PCommunityInfoVO {
 	int32 Status = 1;									// 社区状态，-1没有创建社区;0社区开启状态；1社区关闭状态；
 	int32 MemberCount = 3;			// 社区成员数量
-	int32 ForumPostCount = 4;		// 社区论坛帖子数量
-	int32 NoticePostCount = 5;		// 社区公告帖子数量
+	int32 ForumPostCount = 4;		// 社区动态帖子数量
+	int32 NewsPostCount = 5;		// 社区资讯帖子数量
     PCommunityHomeV12 Home = 6;     // 社区信息
 }
 
@@ -750,8 +707,8 @@ enum ECommunityPostLabel {
 // 我的‘社区首页’
 message PCommunityIndex {
 	int32 MemberCount = 1;				// 社区成员数量
-	int32 ForumPostCount = 2;			// 社区论坛帖子数量
-	int32 NoticePostCount = 3;			// 社区公告帖子数量
+	int32 ForumPostCount = 2;			// 社区动态帖子数量
+	int32 NewsPostCount = 3;			// 社区资讯帖子数量
 	PCommunityHomeV12 Home = 4;			// 我创建/管理的社区首页
 	PCommunityBaseList Follow = 5; 		// 我关注的社区，默认显示20条
 	PCommunityBaseList Recommend = 6; 	// 系统推荐的社区，默认显示20条

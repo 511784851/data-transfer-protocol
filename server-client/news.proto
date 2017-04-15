@@ -15,6 +15,7 @@ enum EPostType {
     Video       = 3; //视频帖
     Notice      = 4; //公告帖
     NewsFeed    = 5; //新闻帖
+    Anonymous   = 6; //网盘服务创建的匿名帖.
 }
 
 // 创建的帖子信息

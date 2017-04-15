@@ -72,6 +72,7 @@ enum ENotifyType {
     NewsView         = 9;  // 帖子浏览N次
     NewsVoteCount    = 10; // 帖子点赞次数
     NewsCommentCount = 11; // 帖子评论次数
+    OVideoCreate     = 12; // 原创录播
 
     // 系统通知
 
@@ -199,7 +200,7 @@ message PNotifyRawMessage {
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒
     PNotifyCommunity        community       = 12; // 社区通知/社区邀请
     PNotifySimple           simple          = 13; // 简单通知，如果simple为空指针，则不进行跳转
-    PPostInfo               article         = 14; // 帖子信息（帖子创建、帖子浏览、帖子评论次数、点赞次数）
+    PPostInfo               article         = 14; // 帖子信息（帖子创建、帖子浏览、帖子评论次数、点赞次数、原创录播帖）
 }
 
 // 通知消息，服务端发送的消息和客户端收到的消息结构
