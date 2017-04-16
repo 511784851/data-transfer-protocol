@@ -3,39 +3,22 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "CommunityApiProtos";
 
-
 import "result.proto";
+import "account.proto";
+import "news_inside.proto";
 import "common_inside.proto";
 import "community.proto";
 
-/*
- *@note 通过社区id获取社区信息
- *@URL /v1/community/inside/communityinfo
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@return 成功返回 PCommunityInfo ，失败返回 PResult; 
- */
+message PCommunityBaseEx {
+    int32 MemberCount = 1;              // 社区成员数量
+    PUserBase Owner = 2;                // 社区创建者信息
+    PCommunityBase Base = 3;            // 社区基础信息
+    PPostCountStatistic PostCount = 4;  // 社区帖子信息
+}
 
-/*
- *@note 获取用户在指定社区的禁用状态
- *@URL /v1/community/inside/user/forbid_status
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param uuid 用户id
- *@return 成功返回 PBoolSingle（true为禁用，false为未禁用） ，失败返回 PResult;
- */
-
-/*
- *@note 获取用户在指定社区的黑名单状态
- *@URL /v1/community/inside/user/blacklist_status
- *@method GET
- *@url param from 发起调用的服务名
- *@url param id 社区id
- *@url param uuid 用户id
- *@return 成功返回 PBoolSingle（true为黑名单，false为黑名单） ，失败返回 PResult;
- */
+message PCommunityBaseExList {
+    repeated PCommunityBaseEx list = 1;
+}
 
 /*
  *@note 获取指定社区的关注用户列表，可按照用户等级筛选
@@ -158,6 +141,24 @@ service IGrpcCommunity {
      *@return 成功返回 PEmpty，失败返回 PResult
      */
     rpc SetUserCommunitySort(PCommunitySortList) returns (PEmpty);
+
+    /*
+     *@note 获取社区的top userlist
+     *@return 成功返回 PStringList top user的uuid ，失败返回 PResult
+     */
+    rpc GetTopUserList(PStringSingle) returns (PStringList);
+
+    /*
+     *@note 设置社区的top userlist
+     *@param 参数数组 [0]社区id [1]uuid列表...
+     *@return 成功返回 PEmpty ，失败返回 PResult
+     */
+    rpc SetTopUserList(PStringList) returns (PEmpty);
+
+    /*
+     *@note 分页获取社区的 PCommunityBaseExList
+     *@param 参数数组 [0]分页偏移值 [1]分页大小
+     *@return 成功返回 PCommunityBaseExList ，失败返回 PResult
+     */
+    rpc GetCommunityBaseExList(PInt32List) returns (PCommunityBaseExList);
  }
-
-
