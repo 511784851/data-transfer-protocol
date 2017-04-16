@@ -118,6 +118,7 @@ enum ERotType {
 	RTPostHot = 4; 		//帖子（精选版块）
 	RTPostDiscover = 5; //帖子（发现版块）
 	RTFeatured = 6; 	//社区精华帖
+	RTPostHotApp = 7;	//app精选页面展示的热门帖子，只用于hot remove操作
 }
 
 message PManualRecommendInfo {
@@ -194,6 +195,9 @@ message PLoginRecord {
 }
 
 service grpcDataPublishing {
+	// 使缓存失效
+	rpc ExpireCache(PStringSingle) returns (PEmpty);
+	
 	// 用户注册
 	rpc AddUser(PUser) returns (PEmpty);
 	// 更新用户
@@ -255,10 +259,11 @@ service grpcDataPublishing {
 	// keyword_community 关键词为社区名称，全词匹配
 	// type 1社区动态 2资讯 
 	// state 审核状态 0待审 1通过审核 2未通过审核
-	// cotag 所属的社区的分类，如："游戏"
+	// cotag 所属的社区的分类ID
 	// tag 帖子标签，如"精选"、"女神"等
 	// begin, end 发布时间起止范围,unix时间戳,秒
 	// sort_time 以帖子发布时间排序 asc升序 desc降序（默认）
+	// sort_hot 以帖子热门度排序，仅支持desc降序
 	rpc SearchPostV2(PStringSingle) returns (PScrollResult);
 	
 	// 社区查找，结果以时间倒序排序，参数为json字符串，字段包括：
@@ -266,11 +271,15 @@ service grpcDataPublishing {
 	// keyword_community 关键词为社区名称，部分匹配
 	// cotag 社区分类，如："游戏"
 	// begin, end 社区创建时间起止范围,unix时间戳,秒
+	// sort_time 以社区创建时间排序 asc升序 desc降序（默认）
+	// sort_hot 以社区热门度排序，仅支持desc降序
 	rpc SearchCommunityV2(PStringSingle) returns (PScrollResult);
 	
 	// 话题查找，结果以时间倒序排序，参数为json字符串，字段包括：
 	// keyword 关键词
 	// state 审核状态 0待审 1通过审核 2未通过审核
+	// sort_time 以话题创建时间排序 asc升序 desc降序（默认）
+	// sort_hot 以话题热门度排序，仅支持desc降序
 	rpc SearchTopicV2(PStringSingle) returns (PScrollResult);
 	
 	// 查询粉丝
@@ -297,8 +306,8 @@ service grpcDataPublishing {
 	// 当天有粉丝过生日的网红uuid
 	rpc SelectVUserHaveTodayBirthdayFans(PEmpty) returns (PStringList);
 		
-	// 发现->资讯页
-	rpc SelectNews(PCustomPageParam) returns (PStringList);
+	// 精选版块
+	rpc SelectPostByCategory(PCustomPageParam) returns (PStringList);
 	
 	// 人工推荐-添加单个用户/社区/话题/资讯/动态/精选
 	rpc AddManualRecommend(PManualRecommend) returns (PEmpty);
