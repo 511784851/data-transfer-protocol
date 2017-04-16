@@ -158,6 +158,19 @@ service IGrpcCommunity {
      *@return 成功返回 PEmpty，失败返回 PResult
      */
     rpc SetUserCommunitySort(PCommunitySortList) returns (PEmpty);
+
+    /*
+     *@note 获取社区的top userlist
+     *@return 成功返回 PStringList top user的uuid ，失败返回 PResult
+     */
+    rpc GetTopUserList(PStringSingle) returns (PStringList);
+
+    /*
+     *@note 设置社区的top userlist
+     *@param 参数数组 [0]社区id [1]uuid列表...
+     *@return 成功返回 PEmpty ，失败返回 PResult
+     */
+    rpc SetTopUserList(PStringList) returns (PEmpty);
  }
 
 
