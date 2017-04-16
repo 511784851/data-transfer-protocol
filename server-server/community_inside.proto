@@ -116,7 +116,13 @@ service IGrpcCommunity {
     rpc GetRecommendCommunitySort(PEmpty) returns (PCommunitySortList);
 
     /*
-     *@note 设置推荐社区分类列表
+     *@note 添加推荐社区分类列表
+     *@return 成功返回 PEmpty ，失败返回 PResult
+     */
+    rpc AddRecommendCommunitySort(PCommunitySort) returns (PEmpty);
+
+    /*
+     *@note 设置推荐社区分类列表,覆盖修改，用于排序
      *@return 成功返回 PEmpty ，失败返回 PResult
      */
     rpc SetRecommendCommunitySort(PCommunitySortList) returns (PEmpty);
@@ -136,7 +142,7 @@ service IGrpcCommunity {
     rpc GetUserCommunitySort(PStringSingle) returns (PCommunitySortList);
 
     /*
-     *@note 设置某个社区的分类
+     *@note 设置某个社区的分类,全覆盖
      *@param PCommunitySortList，其中社区ID、分类ID必填；UUID、Name 可以不填
      *@return 成功返回 PEmpty，失败返回 PResult
      */
