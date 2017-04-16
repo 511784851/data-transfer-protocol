@@ -3,8 +3,6 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PlatformProtos";
 
-import "news.proto";
-
 //列出所有服务的状态（开启的还是关闭的）
  message PServiceStatus {
  	map<string,PService> status = 1; 
@@ -248,7 +246,7 @@ message PBanner {
 	//string inside = 9; //如果是内部链接，这个值有效，news表示微博，其他待定
 	//PPostInfo postInfo = 10; //微博的详情
 	int32 stay = 11; //广告停留时间（单位：秒）（客户端使用）
-	int32 aType = 8; //广告图的类型（1.发现版块，2.精选版块，3.启动图）
+	int32 aType = 12; //广告图的类型（1.发现版块，2.精选版块，3.启动图）
 }
 
 //默认头像列表
