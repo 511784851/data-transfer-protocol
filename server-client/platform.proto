@@ -490,7 +490,7 @@ message PReportInfo {
    *@path /platform-manager/banner/app/list
    *@cookie token&uuid
    *@method GET
-   *@param width 需要获取的图片的长，不传返回那么随便给一张
+   *@param tp 广告图的类型（1.发现版块，2.精选版块，3.启动图）
    *@return 成功 PBannerList ，失败 PResult
    */
 
