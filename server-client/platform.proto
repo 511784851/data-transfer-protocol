@@ -241,25 +241,14 @@ message PBanner {
 	string src = 2; //图片地址（客户端使用）
 	string url = 3; //点击链接地址（客户端使用）
 	string text = 4; //文字（客户端使用）
-	int32 width = 5; //图片的宽
+	//int32 width = 5; //图片的宽
 	int64 expires = 6; //图片到期时间
-	bool enable = 7; //是否下架
+	bool enable = 7; ////广告图的状态（0.禁用，1.启用）
 	int64 time = 8; //创建时间
-	string inside = 9; //如果是内部链接，这个值有效，news表示微博，其他待定
-	PPostInfo postInfo = 10; //微博的详情
-}
-
-message PBannerSignle {
-	int32 id = 1;
-	string url = 2; //点击链接地址
-	string text = 3; //文字
-	int64 expires = 4; //图片到期时间
-	repeated PBannerImage imgs = 5;
-}
-
-message PBannerImage {
-	string src = 1; //图片地址
-	int32 width = 2; //图片的宽
+	//string inside = 9; //如果是内部链接，这个值有效，news表示微博，其他待定
+	//PPostInfo postInfo = 10; //微博的详情
+	int32 stay = 11; //广告停留时间（单位：秒）（客户端使用）
+	int32 aType = 8; //广告图的类型（1.发现版块，2.精选版块，3.启动图）
 }
 
 //默认头像列表
@@ -382,17 +371,7 @@ message PReportInfo {
 	int32 dispose = 9; //处理结果（app端不需要填）
 }
 
-//广告图
-message PAdvertisementImg {
-	int32 id = 1;
-	string url = 2; //点击链接地址
-	string text = 3; //文字
-	int64 expires = 4; //图片到期时间
-	string src = 5; //图片地址
-	int32 stay = 6; //广告停留时间（单位：秒）
-	int64 cTime = 7; //广告图创建时间
-	int32 aType = 8; //广告图的类型（1.发现版块，2.精选版块，3.启动图）
-}
+
 
 /**1.6版本***结束**/
 
