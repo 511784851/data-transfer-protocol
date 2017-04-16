@@ -725,7 +725,7 @@ message PCommunitySort {
 message PCommunitySortList {
 	string ID = 1;								// 社区ID，设置社区分类时填充；其它情况为空即可
 	string UUID = 2;							// 用户ID，修改资讯页面‘我的分类’时填充；其它情况为空即可
-	repeated PCommunitySort Recommend = 3;		// 固定分类
+	repeated PCommunitySort Recommend = 3;		// 首页精选栏固定显示分类，1.6版固定显示top
     repeated PCommunitySort Customize = 4;		// 自定义分类
 }
 
