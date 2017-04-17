@@ -237,7 +237,7 @@ message PBannerList {
 message PBanner {
 	int32 id = 1;
 	string src = 2; //图片地址（客户端使用）
-	string url = 3; //点击链接地址（客户端使用）
+	string url = 3; //点击链接地址（客户端使用）内部链接：app://xxx/:id		外部链接：http://xxx
 	string text = 4; //文字（客户端使用）
 	//int32 width = 5; //图片的宽
 	int64 expires = 6; //图片到期时间
@@ -367,6 +367,9 @@ message PReportInfo {
 	string rID = 7; //举报人UUID（app端不需要填）
 	int32 state = 8; //状态（app端不需要填）
 	int32 dispose = 9; //处理结果（app端不需要填）
+	string cName = 10; //社区名称
+	string postContent = 11; //帖子内容
+	
 }
 
 
