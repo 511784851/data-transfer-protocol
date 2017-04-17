@@ -122,7 +122,8 @@ message PPostInfo {
 	string  title = 31;             //资讯、公告的标题
 	int32   videoCnt = 32;			//视频数量
 	int32   imageCnt = 33;			//图片数量
-	int32   audioCnt = 34;			//图片数量
+	int32   audioCnt = 34;			//音频数量
+	int32   viewCnt = 35;			//被阅读次数
  }
 
 // 被@的用户列表
