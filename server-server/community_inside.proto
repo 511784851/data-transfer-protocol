@@ -48,6 +48,13 @@ service IGrpcCommunity {
     rpc GetBlacklistFlag(PStringList) returns (PBoolSingle);
 
     /*
+     *@note 获取社区成员列表
+     *@param 社区id的列表 
+     *@return 成功返回 PStringList ，失败返回 PResult
+     */
+    rpc GetCommunityMemberList(PStringSingle) returns (PStringList);
+
+    /*
      *@note 获取PCommunityBaseList,不填充Membership字段
      *@param 社区id的列表 
      *@return 成功返回 PCommunityBaseList ，失败返回 PResult
