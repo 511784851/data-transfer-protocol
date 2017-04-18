@@ -71,6 +71,19 @@ message PQueryHitoryParam {
     int64   count       = 5;  //查询条数, 默认10
 }
 
+// 帖子简要信息
+message PPostBrief {
+    int64   id          = 1;  //帖子ID
+    string  uuid        = 2;  //作者
+    string  communityId = 3;  //社区ID
+}
+
+// 帖子简要信息
+message PPostBriefList {
+    repeated PPostBrief List = 1; //信息列表
+}
+
+
 /**
  *@note 用户批量关注/取消关注
  *@path /v1/news/inside/multi/follow
@@ -286,7 +299,7 @@ service IGrpcNews {
     rpc RefreshGlobalTimeline(PRefreshTimelineParam) returns (PPostViewList);  
 
     /*
-     *@note 查询用户粉丝数
+     *@note 查询用户粉丝数(监管)
      *@param PStringList 用户列表   
      *@return PInt32List 用户的粉丝数
      */
@@ -298,4 +311,18 @@ service IGrpcNews {
      *@return PPostViewList
      */
     rpc GrpcGetUserPostHistory(PQueryHitoryParam) returns (PPostViewList);
+
+    /*
+     *@note  查询帖子简要信息(大数据)
+     *@param    PStringList 帖子ID列表
+     *@return   PPostBriefList
+     */
+    rpc GrpcGetPostBrief(PStringList) returns (PPostBriefList);
+
+    /*
+     *@note  查询帖子状态和统计(网盘服务使用、大数据)
+     *@param    PGetPostsParam 帖子ID列表, viewType字段忽略
+     *@return   PPostViewList 只填充状态信息和统计信息 
+     */
+    rpc GrpcGetPostExtraInfo(PGetPostsParam) returns (PPostViewList);
  }

@@ -48,12 +48,10 @@ message PPostStatistc {
 // 帖子状态信息
 message PPostState {
 	bool        isDelete            = 1; //删除状态, true:已删除;false:未删除
-
 	bool        voted               = 3; //自己是否已点赞,true:是; false:否
 	bool        collected           = 4; //自己是否已收藏,true:是; false:否
 	bool        isTop               = 5; //是否置顶标志
 	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
-	
 	bool        canDelete           = 8; //是否有删除权限(作者、社区创建者、管理员)
 	PLabelList  labelList           = 9; //标签列表,取值参考ECommunityPostLabel
 }
