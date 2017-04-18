@@ -204,7 +204,6 @@ message PNetFilelist {
 }
 
 
-
 /*
  *@note 监管系统查询所有原创录播视频
  *@path /netdisk/v1/file/superviselist
@@ -302,9 +301,6 @@ message PNetFilelist {
  */ 
  
  
- 
- 
- 
  /*
  *@note 查询视频列表（监管）
  *@path /netdisk/v1/supervise/list
@@ -314,7 +310,7 @@ message PNetFilelist {
  *@url param end_time  结束时间 (格式：年-月-日)
  *@url param status 审核状态（all:全部，0:审核通过，-1：待审核，-2:审核不通过）
  *@url param keyword 搜索内容
- *@url param idx 分页起始值（首次传-1）
+ *@url param idx 分页起始时间（首次传-1）
  *@return 成功返回PNetFilelist，失败返回PResult
  */
  
@@ -323,7 +319,8 @@ message PNetFilelist {
  *@path /netdisk/v1/supervise/check
  *@method PUT
  *@cookie token&uuid 登录用户信息
- *@FormParam fileIds 视频ID（多个使用逗号隔开）
+ *@FormParam fileId 多个视频ID数组
+ *@FormParam communityId 多个社区ID数组（与fileId一一对应）
  *@FormParam status 审核状态（0:通过，-2:不通过）
  *@return 返回PResult
  */
