@@ -54,7 +54,7 @@ message PPostState {
 	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
 	bool        canDelete           = 8; //是否有删除权限(作者、社区创建者、管理员)
 	PLabelList  labelList           = 9; //标签列表,取值参考ECommunityPostLabel
-	int32       followShip          = 10; //关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者
+	int32       followShip          = 10; //关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
 }
 
 // 标签列表
