@@ -2,7 +2,7 @@ syntax = "proto3";
 package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NetdiskProtos";
-
+import "account.proto";
 /*
  * 在此应用的接口中的，有很多功能是从oss.proto文件中继承下来，而oss.proto中功能又是从阿里的oss继承过来。
  * 因此，在使用本应用接口时，先详细阅读oss.proto接口文档和阿里的oss的相关文档。
@@ -188,9 +188,12 @@ message PCommunityCreator {
 	int32 postTyp = 21;			// 帖子类型 3:视频帖,5:新闻帖,6:原创录播
 	int32 tipoffTimes = 22;		// 举报次数
 	int32 palyTimes = 23;		// 播放次数
-	int32 status = 24;			// 0:正常，-1:隐藏
-	string headUrl = 25;		//头像地址
-	int32 level = 26;			//等级
+	int32 status = 24;			// 0:审核通过，-1：待审核，-2:审核不通过
+	PUserBase user = 25;		// 创建者信息
+	bool voted = 26; 			// 自己是否已点赞,true:是; false:否
+	bool collected = 27; 		// 自己是否已收藏,true:是; false:否
+	bool canDelete = 28; 		// 是否有删除权限(作者、社区创建者、管理员)
+	int32 communityStatus = 29; // 社区状态；0社区开启状态；1社区关闭状态；
 }
 
 
@@ -200,6 +203,34 @@ message PNetFilelist {
 	int32 DiskSize = 2;         //总数量
 }
 
+
+/*
+ *@note 监管系统查询所有原创录播视频
+ *@path /netdisk/v1/file/superviselist
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param from  请求来源 服务名
+ *@url param keywords 按文件标题模糊查询
+ *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
+ *@url param pageSize  要获取的记录数
+ *@url param beginTm  开始时间
+ *@url param endTm  结束时间
+ *@url param status  状态 0:审核通过，-1：待审核，-2:审核不通过,1:全部
+ *@return 成功PNetFilelist, 失败PResult
+ */
+ 
+/*
+ *@note 监管系统设置审核通过|不通过
+ *@path /netdisk/v1/file/audit
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@fromparam from  请求来源 服务名
+ *@fromparam fileId[]  文件ID列表
+ *@fromparam type 0:通过，-2:不通过
+ *@return PResult
+ */
+ 
+ 
 /*
  *@note 添加文件信息
  *@path /netdisk/v1/file/add
@@ -268,3 +299,28 @@ message PNetFilelist {
  *@url param postId 帖子Id（多个id用 ","隔开）
  *@return 返回PResult
  */ 
+ 
+ 
+ /*
+ *@note 查询视频列表（监管）
+ *@path /netdisk/v1/supervise/list
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param start_time  开始时间(格式：年-月-日)
+ *@url param end_time  结束时间 (格式：年-月-日)
+ *@url param status 审核状态（all:全部，0:审核通过，-1：待审核，-2:审核不通过）
+ *@url param keyword 搜索内容
+ *@url param idx 分页起始时间（首次传-1）
+ *@return 成功返回PNetFilelist，失败返回PResult
+ */
+ 
+ /*
+ *@note 审核视频信息（监管）
+ *@path /netdisk/v1/supervise/check
+ *@method PUT
+ *@cookie token&uuid 登录用户信息
+ *@FormParam fileId 多个视频ID数组
+ *@FormParam communityId 多个社区ID数组（与fileId一一对应）
+ *@FormParam status 审核状态（0:通过，-2:不通过）
+ *@return 返回PResult
+ */
