@@ -194,6 +194,12 @@ message PLoginRecord {
 	bool register = 17;	//是否是创建用户（注册）事件
 }
 
+//用于序列化存储
+message PUserCommunityRecommend {
+	repeated PRecommendReason reason = 1;
+	repeated string id = 2; //用户或社区ID
+}
+
 service grpcDataPublishing {
 	// 使缓存失效
 	rpc ExpireCache(PStringSingle) returns (PEmpty);
@@ -257,7 +263,8 @@ service grpcDataPublishing {
 	// keyword_nickname 关键词为昵称，全词匹配
 	// keyword_title 关键词为帖子标题，分词搜索
 	// keyword_community 关键词为社区名称，全词匹配
-	// type 1社区动态 2资讯 
+	// coid 指定社区ID搜索
+	// type 1社区动态 2资讯 3公告
 	// state 审核状态 0待审 1通过审核 2未通过审核
 	// cotag 所属的社区的分类ID
 	// tag 帖子标签，如"精选"、"女神"等

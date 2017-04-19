@@ -34,6 +34,8 @@ message PNetFile {
 	bool collected = 27; 		// 自己是否已收藏,true:是; false:否
 	bool canDelete = 28; 		// 是否有删除权限(作者、社区创建者、管理员)
 	int32 communityStatus = 29; // 社区状态；0社区开启状态；1社区关闭状态；
+	int32 resourceType = 30;	// 资源类型 3; //本地视频,4; //第三方视频,5; //长视频, 6,原创录播
+	int32 followShip = 31;		//关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者
 }
 
 message PNetFilelist {
