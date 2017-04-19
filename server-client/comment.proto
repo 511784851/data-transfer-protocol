@@ -157,6 +157,7 @@ message PCommentBool {
  *@method GET
  *@cookie token&uuid
  *@param postid 帖子ID
+ *@param postuuid  帖子作者
  *@param offset 从第几条开始加载, 默认: 0
  *@param count 每次加载多少条, 默认:20, 最大100
  *@param sort 排序方式. 最新靠前:0; 最旧靠前:1; 质量最优:2; 人气最高:3; 最有争议:4.默认:0
