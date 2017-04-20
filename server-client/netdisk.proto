@@ -1,7 +1,9 @@
 syntax = "proto3";
+
 package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NetdiskProtos";
+
 import "account.proto";
 
 message PNetFile {
