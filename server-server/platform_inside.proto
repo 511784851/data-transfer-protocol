@@ -18,6 +18,11 @@ service IPlatform {
 	 *@return PResult
 	 */
 	rpc WriteAccountOperateLog(PAccountOperateLog) returns (PEmpty);
+	
+	/**
+	 * 删除帖子时调用，更新举报列表里对应帖子的状态
+	 */
+	rpc DelPostReport(PInt64List) returns(PEmpty);
 }
 
 service IWebPlatform {
@@ -35,9 +40,4 @@ service IWebPlatform {
 	 * 提供给水军写操作日志
 	 */
 	rpc WriteLog(PPlatformLog) returns(PEmpty);
-	
-	/**
-	 * 删除帖子时调用，更新举报列表里对应帖子的状态
-	 */
-	rpc DelPostReport(PInt64List) returns(PEmpty);
 }
