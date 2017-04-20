@@ -22,7 +22,8 @@ service IPlatform {
 	/**
 	 * 删除帖子时调用，更新举报列表里对应帖子的状态
 	 */
-	rpc DelPostReport(PInt64List) returns(PEmpty);
+	rpc DelPostReport(PInt64List, int) returns(PEmpty);
+	
 }
 
 service IWebPlatform {
