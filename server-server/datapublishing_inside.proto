@@ -200,6 +200,12 @@ message PUserCommunityRecommend {
 	repeated string id = 2; //用户或社区ID
 }
 
+message PVisitCommunity {
+	string uuid = 1;	//访问者ID
+	string coid = 2;	//社区ID
+	bool joined = 3;	//访问者当时是否已加入这个社区
+}
+
 service grpcDataPublishing {
 	// 使缓存失效
 	rpc ExpireCache(PStringSingle) returns (PEmpty);
@@ -342,4 +348,7 @@ service grpcDataPublishing {
 	
 	// 获取推荐的社区
 	rpc GetRecommendCommunity(PCustomPageParam) returns (PStringList);
+	
+	// 用户访问了社区
+	rpc VisitCommunity(PVisitCommunity) returns (PEmpty);
 }

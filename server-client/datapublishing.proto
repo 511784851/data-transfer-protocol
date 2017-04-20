@@ -475,6 +475,7 @@ message PDiscoverCard {
 
 message PDiscover {
 	repeated PDiscoverCard list = 1;
+	string context = 2;	 //加载下一页时（或下拉刷新时）要上传此参数
 }
 
 /*
@@ -483,6 +484,7 @@ message PDiscover {
  *@method GET
  *@cookie token&uuid
  *@param offset,count 分页参数，从offset开始的count个记录，offset从0开始，count最大不超过20
+ *@param context 上一次调用该接口返回的PDiscover.context值
  *@return 成功返回PDiscover，失败返回PResult
  */
 
