@@ -44,6 +44,82 @@ message PNetFilelist {
 	repeated PNetFile netFile = 1;
 	int32 DiskSize = 2;         //总数量
 }
+
+
+
+/*
+ *@note 粉丝管理系统获取视频列表
+ *@path netdisk/v1/file/fansVlist
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区Id
+ *@url param title 按文件标题模糊查询
+ *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
+ *@url param pageSize  要获取的记录数 
+ *@return 正常返回如下格式，异常PResult
+ */
+/* [
+    {
+        "commentsCnt": 0,//评论数
+        "desc": "",//描述描述
+        "fileId": "",//文件id
+        "headUrl": "",//头像地址
+        "level": 0,//等级
+        "nickNm": "",//昵称
+        "objectKey": "c71a56321c10fda11492503916976.mp4",//视频objkey
+        "postId": "120981",//帖子ID
+        "thumbObjectKey": "73edb1eb4527f6cd1492503916975.jpg",//缩略图objkey
+        "thumbUrl": "",//缩略图地址
+        "thumbsupCnt": 1,//点赞数
+        "title": "",//标题
+        "url": "",//视频地址
+        "fromCreateTime": 123143154134//视频创建时间
+    }
+]*/
+
+/*
+ *@note 粉丝管理系统添加视频
+ *@path netdisk/v1/file/videoAdd
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam communityId  社区ID
+ *@FormParam extension 扩张名
+ *@FormParam fileSize 文件大小
+ *@FormParam title 标题
+ *@FormParam miniObjectKey 缩略图objkey
+ *@FormParam objectKey 视频objkey
+ *@FormParam desc 描述
+ *@FormParam remark 描述
+ *@FormParam transferFlag 转发标示 boolean 
+ *@FormParam shareFlag 共享标示 boolean
+ *@FormParam conserveFlag 收藏标示 boolean
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 粉丝管理系统编辑视频
+ *@path netdisk/v1/file/videoEdit
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam communityId  社区ID
+ *@FormParam title 标题
+ *@FormParam desc 描述
+ *@FormParam transferFlag 转发标示 boolean 
+ *@FormParam shareFlag 共享标示 boolean
+ *@FormParam conserveFlag 收藏标示 boolean
+ *@return 返回PResult
+ */
+  
+/*
+ *@note 粉丝管理系统删除视频
+ *@path netdisk/v1/file/videoDel
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam fileId[]  文件id
+ *@FormParam communityId  社区ID
+ *@return 返回PResult
+ */
+ 
  
  /*
  *@note 添加文件信息
