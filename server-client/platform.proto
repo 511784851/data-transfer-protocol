@@ -369,7 +369,11 @@ message PReportInfo {
 	int32 dispose = 9; //处理结果（app端不需要填）
 	string cName = 10; //社区名称
 	string postContent = 11; //帖子内容
-	
+}
+
+message PArrarInt64AndBool {
+	repeated int64 list = 1;
+	bool status = 2;
 }
 
 
