@@ -25,6 +25,7 @@ message PCommunityBase {
 	int32 Membership = 7;					  	// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	string StrIntroduce = 8;					// 节选社区介绍的第一段文字返回给客户端
     PCommunitySortList SortList = 9;			// 社区分类列表
+    string Manager = 10;						// 社区管理员的uuid，多个以,分割
 }
 
 // 社区基础信息列表
