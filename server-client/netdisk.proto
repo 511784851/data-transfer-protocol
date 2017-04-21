@@ -144,6 +144,7 @@ message PNetFilelist {
  *@path /netdisk/v1/file/delete
  *@method DELETE
  *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区ID
  *@url param fileIds 文件Id（多个id用 ","隔开）
  *@return 返回PResult
  */
