@@ -351,4 +351,6 @@ service grpcDataPublishing {
 	
 	// 用户访问了社区
 	rpc VisitCommunity(PVisitCommunity) returns (PEmpty);
+	// 用户访问了个人主页
+	rpc VisitHomePage(PStringList) returns (PEmpty);
 }
