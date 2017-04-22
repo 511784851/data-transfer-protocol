@@ -184,6 +184,9 @@ message PNotifySimple {
     //
     // 社区公告
     // community://post/ann?post_id=xxx
+    //
+    // 评论删除
+    // community://comment/delete?post_id=xxx
     string uri = 1; // 简单通知消息参数
 }
 
