@@ -775,3 +775,12 @@ message PCommunitySortList {
  *@return PResult 
  */
 
+/*
+ *@note 获取社区分类是否能修改
+ *@path /v1.6/community/user/sort/modify
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return PBoolSingle 
+ */
+
