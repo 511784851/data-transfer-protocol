@@ -123,6 +123,7 @@ message PPostInfo {
 	int32   imageCnt = 33;			//图片数量
 	int32   audioCnt = 34;			//音频数量
 	int32   viewCnt = 35;			//被阅读次数
+	int64   communityId = 36;       // 所属社区
  }
 
 // 被@的用户列表
