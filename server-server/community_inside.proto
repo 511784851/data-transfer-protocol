@@ -169,9 +169,9 @@ service IGrpcCommunity {
     rpc SetTopUserList(PStringList) returns (PEmpty);
 
     /*
-     *@note 分页获取社区的 PCommunityBaseExList
-     *@param 参数数组 [0]分页偏移值 [1]分页大小
+     *@note 获取社区的 PCommunityBaseExList
+     *@param 社区id列表
      *@return 成功返回 PCommunityBaseExList ，失败返回 PResult
      */
-    rpc GetCommunityBaseExList(PInt32List) returns (PCommunityBaseExList);
+    rpc GetCommunityBaseExList(PStringList) returns (PCommunityBaseExList);
  }
