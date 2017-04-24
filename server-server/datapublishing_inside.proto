@@ -206,6 +206,32 @@ message PVisitCommunity {
 	bool joined = 3;	//访问者当时是否已加入这个社区
 }
 
+message PDiscoverParams {
+	//帖子发布时间为多少小时以内
+	int32 retieTime = 1;
+	
+	//帖子的评论数
+	int32 retieComments = 2;
+	
+	//帖子的点赞数
+	int32 retieVotes = 3;
+	
+	//精华推荐发布的帖子的时间多少小时内
+	int32 jinghuaRecommendTime = 4;
+	
+	//精华推荐发布的帖子的评论数为多少
+	int32 jinghuaRecommendComments = 5; 
+	
+	//每个社区不能超过数量
+	int32 jinghuaRecommendCommunityShow = 6;
+	
+	//我关注的人发布的帖子的时间范围
+	int32 followPostTime = 8;
+	
+	//我的好友发布的帖子的时间范围
+	int32 friendPostTime = 9;	
+}
+
 service grpcDataPublishing {
 	// 使缓存失效
 	rpc ExpireCache(PStringSingle) returns (PEmpty);
@@ -270,10 +296,10 @@ service grpcDataPublishing {
 	// keyword_title 关键词为帖子标题，分词搜索
 	// keyword_community 关键词为社区名称，全词匹配
 	// coid 指定社区ID搜索
-	// type 1社区动态 2资讯 3公告
+	// type EPostType的int值，另外增加1个定义：-1动态帖
 	// state 审核状态 0待审 1通过审核 2未通过审核
-	// cotag 所属的社区的分类ID
-	// tag 帖子标签，如"精选"、"女神"等
+	// cotag 所属的社区的分类，string
+	// tag 帖子标签，string
 	// begin, end 发布时间起止范围,unix时间戳,秒
 	// sort_time 以帖子发布时间排序 asc升序 desc降序（默认）
 	// sort_hot 以帖子热门度排序，仅支持desc降序
@@ -353,4 +379,8 @@ service grpcDataPublishing {
 	rpc VisitCommunity(PVisitCommunity) returns (PEmpty);
 	// 用户访问了个人主页
 	rpc VisitHomePage(PStringList) returns (PEmpty);
+	
+	// 设置发现页面的参数
+	rpc SetDiscoverParams(PDiscoverParams) returns (PEmpty);
+	rpc GetDiscoverParams(PEmpty) returns (PDiscoverParams);
 }
