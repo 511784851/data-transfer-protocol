@@ -105,6 +105,7 @@ message PNetFilelist {
  *@cookie token&uuid 登录用户信息
  *@FormParam communityId  社区ID
  *@FormParam title 标题
+ *@FormParam fileId 文件ID
  *@FormParam desc 描述
  *@FormParam transferFlag 转发标示 boolean 
  *@FormParam shareFlag 共享标示 boolean
