@@ -73,6 +73,10 @@ enum ENotifyType {
     NewsVoteCount    = 10; // 帖子点赞次数
     NewsCommentCount = 11; // 帖子评论次数
     OVideoCreate     = 12; // 原创录播
+    CommentOVideo    = 13; // 评论原创录播
+    OVideoVote       = 14; // 原创录播点赞
+    OVideoView       = 15; // 原创录播浏览N次
+    OVideoVoteCount  = 16; // 原创录播点赞次数
 
     // 系统通知
 
