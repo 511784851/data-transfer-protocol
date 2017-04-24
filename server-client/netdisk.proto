@@ -133,6 +133,16 @@ message PNetFilelist {
  *@return 返回PResult
  */
  
+/*
+ *@note 文件信息详情
+ *@path /netdisk/v1/file/detail
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区ID
+ *@url param postId 帖子ID
+ *@return 成功PNetFile 失败返回PResult
+ */
+ 
  /*
  *@note 编辑文件信息
  *@path /netdisk/v1/file/edit
