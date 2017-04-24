@@ -54,6 +54,7 @@ message PNetFilelist {
  *@cookie token&uuid 登录用户信息
  *@url param communityId 社区Id
  *@url param title 按文件标题模糊查询
+ *@url param postTyp 帖子类型 3:视频帖,5:新闻帖,6:原创录播
  *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
  *@url param pageSize  要获取的记录数 
  *@return 正常返回如下格式，异常PResult
@@ -74,6 +75,7 @@ message PNetFilelist {
         "title": "",//标题
         "url": "",//视频地址
         "fromCreateTime": 123143154134//视频创建时间
+        "resourceType" : // 资源类型 3; //本地视频,4; //第三方视频,5; //长视频, 6,原创录播
     }
 ]*/
 
@@ -148,6 +150,29 @@ message PNetFilelist {
  *@url param fileIds 文件Id（多个id用 ","隔开）
  *@return 返回PResult
  */
+ 
+/*
+ *@note 记录播放次数
+ *@path /netdisk/v1/file/play
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区ID
+ *@url param objectkey 文件objkey
+ *@return 返回PResult
+ */
+
+/*
+ *@note 举报视频
+ *@path /netdisk/v1/file/tipoff
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区ID
+ *@url param postId 帖子ID
+ *@url param objectkey 文件objkey
+ *@url param content 举报内容
+ *@return 返回PResult
+ */
+ 
  
  /*
  *@note 查询文件信息
