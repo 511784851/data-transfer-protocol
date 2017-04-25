@@ -598,7 +598,7 @@ message PCommunityInfoVO {
  *@url param fields 要修改的选项如：Name,HeadImg,IntroduceRes,Layout,BannerList,ModulesList,修改多个以,分割,参数对应的字段如下
  					Name -> PCommunityInfoV12.BaseInfo.Name
  					HeadImg -> PCommunityInfoV12.BaseInfo.HeadImg
- 					IntroduceRes -> PCommunityInfoV12.BaseInfo.IntroduceRes
+ 					IntroduceRes -> PCommunityInfoV12.IntroduceRes
  					Layout -> PCommunityInfoV12.Layout （这个结构需要完整填充）
  					BannerList -> PCommunityInfoV12.BannerList
  					ForumTagList -> PCommunityInfoV12.ForumTagList
