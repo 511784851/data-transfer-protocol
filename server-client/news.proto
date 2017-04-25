@@ -429,6 +429,7 @@ message PNewsFollowExist {
  *@method GET
  *@param  uuid 发帖子的用户id
  *@param  postid 帖子id
+ *@param  oper  0:点赞, 1:取消点赞. 默认:0
  *@return 返回 PResult
  */
 
