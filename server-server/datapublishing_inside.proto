@@ -208,28 +208,28 @@ message PVisitCommunity {
 
 message PDiscoverParams {
 	//帖子发布时间为多少小时以内
-	int32 retieTime = 1;
+	int32 retieInHour = 1;
 	
 	//帖子的评论数
-	int32 retieComments = 2;
+	int32 retieMinComments = 2;
 	
 	//帖子的点赞数
-	int32 retieVotes = 3;
+	int32 retieMinVotes = 3;
 	
 	//精华推荐发布的帖子的时间多少小时内
-	int32 jinghuaRecommendTime = 4;
+	int32 jinghuaInHour = 4;
 	
 	//精华推荐发布的帖子的评论数为多少
-	int32 jinghuaRecommendComments = 5; 
+	int32 jinghuaMinComments = 5; 
 	
 	//每个社区不能超过数量
-	int32 jinghuaRecommendCommunityShow = 6;
+	int32 jinghuaMaxCommunityShow = 6;
 	
 	//我关注的人发布的帖子的时间范围
-	int32 followPostTime = 8;
+	int32 myFollowPostInDay = 8;
 	
 	//我的好友发布的帖子的时间范围
-	int32 friendPostTime = 9;	
+	int32 myFriendPostInDay = 9;	
 }
 
 service grpcDataPublishing {
@@ -297,7 +297,7 @@ service grpcDataPublishing {
 	// keyword_community 关键词为社区名称，全词匹配
 	// coid 指定社区ID搜索
 	// type EPostType的int值，另外增加1个定义：-1动态帖
-	// state 审核状态 0待审 1通过审核 2未通过审核
+	// state 审核状态 0待审 1通过审核 2未通过审核 4已删除的帖子
 	// cotag 所属的社区的分类，string
 	// tag 帖子标签，string
 	// begin, end 发布时间起止范围,unix时间戳,秒
