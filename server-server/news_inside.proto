@@ -83,6 +83,11 @@ message PPostBriefList {
     repeated PPostBrief List = 1; //信息列表
 }
 
+// 删除帖子参数
+message PDeletePostsParam {
+     string      postId   = 1; //帖子ID
+     string      uuid     = 2; //执行删除的用户
+}
 
 /**
  *@note 用户批量关注/取消关注
@@ -325,4 +330,11 @@ service IGrpcNews {
      *@return   PPostViewList 只填充状态信息和统计信息 
      */
     rpc GrpcGetPostExtraInfo(PGetPostsParam) returns (PPostViewList);
+
+    /*
+     *@note    删除帖子(网盘服务使用删除原创录播帖)
+     *@param    PDeletePostsParam 帖子ID
+     *@return   PEmpty
+     */
+    rpc GrpcDeletePost(PDeletePostsParam) returns (PEmpty);
  }
