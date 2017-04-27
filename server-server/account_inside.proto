@@ -392,6 +392,22 @@ service account {
      *@return *bbproto.PUserBaseList 用户基础信息列表
     */
     rpc GetUserBases(PStringList) returns (PUserBaseList);
+
+    /*
+     *@note 批量获取是否水军用户
+     *@param ctx 请求上下文
+     *@param uuids 用户UUID列表
+     *@return []bool 是否水军列表，对应关系是下标
+     */
+     rpc GetRobots(PStringList) returns (PBoolList);
+
+    /*
+     *@note 批量获取用户语言信息
+     *@param ctx 请求上下文
+     *@param uuids 用户UUID列表
+     *@return []string 语言列表，对应关系是下标（如果为空由调用者决定默认语言）
+     */
+     rpc GetLanguages(PStringList) returns (PStringList);
 }
 
 message PNickname {
