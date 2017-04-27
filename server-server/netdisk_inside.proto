@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "NetdiskApiProtos";
+
+import "netdisk.proto";
+import "common_inside.proto";
+
+message POPFileParam{
+	repeated PNetFile list = 1;
+	POP op = 2;
+}
+
+enum PStatus{
+	NORMAL = 0;	//正常
+	WAIT_AUDIT = 1;//待审核
+	DECLINE = 2;//审核不通过
+	DELETED = 3;//视频已删除
+}
+enum POP{
+	CREATE = 0; //创建
+	DELETE = 1; //删除
+}
+message PSetFileParam{
+	repeated string postId = 1;
+	PStatus status = 2;
+}
+
+service NetDiskService{
+	/*
+     *@note 根据帖子ID，设置所属帖子视频的状态
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+	rpc setVideoStatusByPostId(PSetFileParam) returns (PEmpty);
+	
+	/*
+     *@note 当新建、审核拒绝、删除（动态、咨询）帖子时，需要将帖子中的视频通知netdisk进行对应操作
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+	rpc opVideo(POPFileParam) returns (PEmpty);
+	
+	
+}
