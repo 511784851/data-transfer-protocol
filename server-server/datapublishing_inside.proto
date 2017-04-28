@@ -232,6 +232,18 @@ message PDiscoverParams {
 	int32 myFriendPostInDay = 9;	
 }
 
+message PPersonas {
+	int32 total = 1; 	// 总数
+	int32 male = 2;  	// 男
+	int32 female = 3;	// 女
+
+	// 地区分布
+	repeated PRegionData region = 6;
+	
+	// 年龄分布
+	repeated PAgeData age = 7;	
+}
+
 service grpcDataPublishing {
 	// 使缓存失效
 	rpc ExpireCache(PStringSingle) returns (PEmpty);
@@ -383,5 +395,14 @@ service grpcDataPublishing {
 	
 	// 设置发现页面的参数
 	rpc SetDiscoverParams(PDiscoverParams) returns (PEmpty);
+	// 获取发现页面的参数
 	rpc GetDiscoverParams(PEmpty) returns (PDiscoverParams);
+	
+	// 获取用户画像
+	// 参数为json字符串
+	// 字段包括：
+	// begin, end 时间起止范围，unix时间戳，秒
+	// tp 1活跃 2注册
+	rpc GetPersonas(PStringSingle) returns (PPersonas);
+	
 }
