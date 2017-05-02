@@ -5,6 +5,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NetdiskApiProtos";
 
 import "netdisk.proto";
+import "result.proto";
 import "common_inside.proto";
 
 message POPFileParam{
@@ -23,8 +24,9 @@ enum POP{
 	DELETE = 1; //删除
 }
 message PSetFileParam{
-	repeated string postId = 1;
-	PStatus status = 2;
+	string communityId = 1;//社区ID
+	repeated string postId = 2;//帖子ID
+	PStatus status = 3;//状态
 }
 
 service NetDiskService{
@@ -40,5 +42,17 @@ service NetDiskService{
      */
 	rpc opVideo(POPFileParam) returns (PEmpty);
 	
+	/*
+     *@note 查询社区中是否存在视频
+     *@param PStringSingle communityId
+     *@return 成功返回 PBoolSingle，失败返回 PResult
+     */
+	rpc isExistsVideo(PStringSingle) returns (PBoolSingle);
 	
+	/*
+     *@note 根据帖子ID举报视频
+     *@param PStringSingle postId
+     *@return 成功返回 PBoolSingle，失败返回 PResult
+     */
+	rpc tipoffVideoByPost(PStringSingle) returns (PEmpty);
 }

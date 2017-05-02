@@ -199,7 +199,7 @@ message PNetFilelist {
  *@url param title 按文件标题模糊查询
  *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
  *@url param topic 话题
- *@url param category 分类
+ *@url param category 分类 0:全部，1:精华
  *@url param pageSize  要获取的记录数
  *@return 成功PNetFilelist, 失败PResult
  */
@@ -255,5 +255,16 @@ message PNetFilelist {
  *@FormParam fileId 多个视频ID数组
  *@FormParam communityId 多个社区ID数组（与fileId一一对应）
  *@FormParam status 审核状态（0:通过，-2:不通过）
+ *@return 返回PResult
+ */
+ 
+ /*
+ *@note 推荐／取消为精华(客户端)
+ *@path /netdisk/v1/file/essenceOp
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@formparam communityId 社区ID
+ *@formparam fileId 文件ID
+ *@formparam op 1：推荐为精华，0:取消精华
  *@return 返回PResult
  */
