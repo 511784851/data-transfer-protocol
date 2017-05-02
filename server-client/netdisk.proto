@@ -29,7 +29,7 @@ message PNetFile {
 	int32 thumbsupCnt = 20;		// 点赞数
 	int32 postTyp = 21;			// 帖子类型 3:视频帖,5:新闻帖,6:原创录播
 	int32 tipoffTimes = 22;		// 举报次数
-	int32 palyTimes = 23;		// 播放次数
+	int32 playTimes = 23;		// 播放次数
 	int32 status = 24;			// 0:审核通过，-1：待审核，-2:审核不通过, -3: 视频已删除
 	PUserBase user = 25;		// 创建者信息
 	bool voted = 26; 			// 自己是否已点赞,true:是; false:否
@@ -38,6 +38,8 @@ message PNetFile {
 	int32 communityStatus = 29; // 社区状态；0社区开启状态；1社区关闭状态；
 	int32 resourceType = 30;	// 资源类型 3; //本地视频,4; //第三方视频,5; //长视频, 6,原创录播
 	int32 followShip = 31;		//关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
+	repeated string topic = 32;	//参与的话题
+	int32 category = 33;		//分类 0:全部，1:精华
 }
 
 message PNetFilelist {
@@ -48,7 +50,7 @@ message PNetFilelist {
 
 
 /*
- *@note 粉丝管理系统获取视频列表
+ *@note 获取视频列表（粉丝管理）
  *@path netdisk/v1/file/fansVlist
  *@method GET
  *@cookie token&uuid 登录用户信息
@@ -80,7 +82,7 @@ message PNetFilelist {
 ]*/
 
 /*
- *@note 粉丝管理系统添加视频
+ *@note 添加视频（粉丝管理）
  *@path netdisk/v1/file/videoAdd
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -99,7 +101,7 @@ message PNetFilelist {
  */
  
 /*
- *@note 粉丝管理系统编辑视频
+ *@note 编辑视频（粉丝管理）
  *@path netdisk/v1/file/videoEdit
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -114,7 +116,7 @@ message PNetFilelist {
  */
   
 /*
- *@note 粉丝管理系统删除视频
+ *@note 删除视频（粉丝管理）
  *@path netdisk/v1/file/videoDel
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -125,7 +127,7 @@ message PNetFilelist {
  
  
  /*
- *@note 添加文件信息
+ *@note 添加文件信息（客户端）
  *@path /netdisk/v1/file/add
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -134,7 +136,7 @@ message PNetFilelist {
  */
  
 /*
- *@note 文件信息详情
+ *@note 文件信息详情（客户端）
  *@path /netdisk/v1/file/detail
  *@method GET
  *@cookie token&uuid 登录用户信息
@@ -144,7 +146,7 @@ message PNetFilelist {
  */
  
  /*
- *@note 编辑文件信息
+ *@note 编辑文件信息（废除）
  *@path /netdisk/v1/file/edit
  *@method PUT
  *@cookie token&uuid 登录用户信息
@@ -153,7 +155,7 @@ message PNetFilelist {
  */
  
  /*
- *@note 删除文件信息
+ *@note 删除文件信息(客户端)
  *@path /netdisk/v1/file/delete
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -163,17 +165,19 @@ message PNetFilelist {
  */
  
 /*
- *@note 记录播放次数
- *@path /netdisk/v1/file/play
+ *@note 记录播放次数(客户端)
+ *@path /netdisk/v1/file/countPlayTimes
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@url param communityId 社区ID
- *@url param objectkey 文件objkey
+ *@formparam communityId 社区ID
+ *@formparam objectkey 文件objkey
+ *@formparam postId 帖子ID
+ *@formparam fileId 文件ID
  *@return 返回PResult
  */
 
 /*
- *@note 举报视频
+ *@note 举报视频(客户端)
  *@path /netdisk/v1/file/tipoff
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -187,19 +191,21 @@ message PNetFilelist {
  
  /*
  *@note 查询文件信息
- *@path /netdisk/v1/file/list
+ *@path /netdisk/v1/file/list（客户端）
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@url param communityId 社区Id
  *@url param postTyp 帖子类型 3:视频帖（社区首页传3）,5:新闻帖,6:原创录播，不需要筛选，可以不传
  *@url param title 按文件标题模糊查询
  *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
+ *@url param topic 话题
+ *@url param category 分类
  *@url param pageSize  要获取的记录数
  *@return 成功PNetFilelist, 失败PResult
  */
  
  /*
- *@note 通知添加文件信息
+ *@note 通知添加文件信息(废除，接口已移至netfile_inside)
  *@path /netdisk/v1/file/notifyadd
  *@method POST
  *@cookie token&uuid 登录用户信息
@@ -219,7 +225,7 @@ message PNetFilelist {
  */
  
 /*
- *@note 通知删除文件信息
+ *@note 通知删除文件信息(废除，接口已移至netfile_inside)
  *@path /netdisk/v1/file/notifydelete
  *@method DELETE
  *@cookie token&uuid 登录用户信息
