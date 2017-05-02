@@ -405,4 +405,6 @@ service grpcDataPublishing {
 	// tp 1活跃 2注册
 	rpc GetPersonas(PStringSingle) returns (PPersonas);
 	
+	// 心跳
+	rpc Heartbeat(PStringList) returns (PEmpty);
 }
