@@ -407,4 +407,7 @@ service grpcDataPublishing {
 	
 	// 心跳
 	rpc Heartbeat(PStringList) returns (PEmpty);
+	
+	// 获取帖子参与的话题（供java调用,注：返回的话题是不带#号的）
+	rpc GetTopicOfPost(PStringSingle) returns (PStringList);
 }
