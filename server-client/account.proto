@@ -368,6 +368,23 @@ message PAccountVoMemberBase {
     PUserBase ubase = 3; // 基础信息
 }
 
+enum EAccountVoTab {
+    TabHome     = 0; // 主页
+    TabBBNews   = 1; // 动态
+    TabNewsFeed = 2; // 资讯
+    TabStore    = 3; // 商店
+    TabVideo    = 4; // 视频
+    TabLink     = 5; // 链接
+    TabMember   = 6; // 队员
+}
+
+// VO标签栏
+message PAccountVoTabs {
+    // 根据类型判断是否存在tabs中
+    // 如果存在则显示，否则不显示
+    map<int32, bool> tabs = 1;
+}
+
 /*=====================================*/
 //API定义
 
@@ -621,4 +638,13 @@ message PAccountVoMemberBase {
  *@cookie token&uuid
  *@uriParam uuid 被查看用户ID，如果不传默认取cookie中的uuid
  *@return PAccountVoMemberBase
+ */
+
+/*
+ *@note VO主页显示的标签栏
+ *@uri /v1/account/vo/tabs
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam void VO用户ID
+ *@return PAccountVoTabs 显示的标签栏
  */
