@@ -176,7 +176,7 @@ message PNetFilelist {
  */
 
 /*
- *@note 举报视频(客户端)
+ *@note 举报视频(客户端)废除-由监管提供
  *@path /netdisk/v1/file/tipoff
  *@method POST
  *@cookie token&uuid 登录用户信息

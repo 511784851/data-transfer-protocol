@@ -29,6 +29,18 @@ message PSetFileParam{
 	PStatus status = 3;//状态
 }
 
+message PTipOffPostParam{
+	string communityId = 1;	//社区ID
+	string postId = 2;		//帖子ID
+	string uuid = 3;		//举报人
+}
+message PTipOffObjkeyParam{
+	string communityId = 1;	//社区ID
+	string postId = 2;		//帖子ID
+	string objectKey = 3;	//文件objectkey
+	string uuid = 4;		//举报人
+}
+
 service NetDiskService{
 	/*
      *@note 根据帖子ID，设置所属帖子视频的状态
@@ -50,9 +62,14 @@ service NetDiskService{
 	rpc isExistsVideo(PStringSingle) returns (PBoolSingle);
 	
 	/*
-     *@note 根据帖子ID举报视频
-     *@param PStringSingle postId
+     *@note 举报帖子
      *@return 成功返回 PBoolSingle，失败返回 PResult
      */
-	rpc tipoffVideoByPost(PStringSingle) returns (PEmpty);
+	rpc tipoffVideoByPost(PTipOffPostParam) returns (PBoolSingle);
+	
+	/*
+     *@note 举报单个视频
+     *@return 成功返回 PEmpty，失败返回 PResult
+     */
+	rpc tipoofVideoByObjectkey(PTipOffObjkeyParam) returns (PBoolSingle);
 }
