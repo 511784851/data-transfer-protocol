@@ -71,5 +71,5 @@ service NetDiskService{
      *@note 举报单个视频
      *@return 成功返回 PEmpty，失败返回 PResult
      */
-	rpc tipoofVideoByObjectkey(PTipOffObjkeyParam) returns (PBoolSingle);
+	rpc tipoffVideoByObjectkey(PTipOffObjkeyParam) returns (PBoolSingle);
 }
