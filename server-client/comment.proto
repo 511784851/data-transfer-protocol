@@ -88,8 +88,8 @@ message PBetchCommentVoteExist {
  *@note 批量赞踩评论
  */
 message PBetchCommentVote {
-    int32  voteType = 1; //操作类型:0:赞, 1:踩
-	string cid = 2;  //评论ID
+    int32           voteType  = 1; //操作类型:0:赞, 1:踩, 2:取消赞, 3:取消踩
+	string           cid      = 2; //评论ID
 	repeated  string uuidList = 3; //点赞的uuid列表
 }
 

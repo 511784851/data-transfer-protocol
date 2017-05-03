@@ -9,10 +9,10 @@ import "community.proto";
 
 // 帖子类型
 enum EPostType {
-    Text        = 0; //文字帖
-    Image       = 1; //图片帖
-    Audio       = 2; //语音帖
-    Video       = 3; //视频帖
+    Text        = 0; //文字帖, 属于动态
+    Image       = 1; //图片帖, 属于动态
+    Audio       = 2; //语音帖, 属于动态
+    Video       = 3; //视频帖, 属于动态
     Notice      = 4; //公告帖
     NewsFeed    = 5; //新闻帖
     Anonymous   = 6; //网盘服务创建的匿名帖(原创录播).
