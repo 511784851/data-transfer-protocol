@@ -81,7 +81,7 @@ message PPostView {
 	PAtUserList     atUsers     = 10; //帖子@的用户列表
 	PPostStatistc   statistc    = 11; //帖子统计信息
 	PPostState      state       = 12; //帖子状态信息
-	bool            IsPreView   = 13; //预览标记,仅客户端使用
+	int32           preView     = 13; //预览标记,仅客户端使用
  }
 
 // 微博详情列表
