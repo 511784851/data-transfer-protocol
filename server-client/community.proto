@@ -350,7 +350,7 @@ message PCommunitySortList {
 // 社区管理员权限
 // 详细权限文档 http://confluence.blemobi.com/pages/viewpage.action?pageId=15764813
 message PCommunityManagerRight {
-	int64 Id = 1;						// 用户创建/管理的社区id，如果是普通用户，则社区id为0 | 要赋予/修改管理员的社区id
+	string Id = 1;						// 用户创建/管理的社区id，如果是普通用户，则社区id为0 | 要赋予/修改管理员的社区id
 	int32 Membership = 2;				// 用户与社区的关系， 0为创建者（拥有所有权限），1为管理者，
 	string Uuid = 3;					// 获取权限时不用填充 | 要赋予/修改权限的用户id
 	int32 PublishStatus = 4;			// 发布身份；0代表以管理员自己身份发布；1代表以首次以创建者身份发布（需要app/粉丝弹窗提示）；2代表已确认使用创建者身份发布
@@ -832,6 +832,15 @@ message PCommunityManagerRight {
  *@path /v1.7/community/right
  *@method PUT
  *@body PCommunityManagerRight  
+ *@cookie token&uuid
+ *@return 返回PResult
+ */
+
+ /*
+ *@note 创建者/超级管理员添加管理员
+ *@path /v1.7/community/right
+ *@method POST
+ *@body PCommunityManagerRight
  *@cookie token&uuid
  *@return 返回PResult
  */
