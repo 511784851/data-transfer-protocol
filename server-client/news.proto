@@ -362,12 +362,12 @@ message PNewsFollowExist {
  
 
 /**
- *@note   关注/取消关注
+ *@note   关注/取消关注(支持批量)
  *@path   /v1/news/follow
  *@cookie token&uuid
  *@method POST
  *@param  oper 为1时表示添加关注，为0时表示取消关注
- *@param  uuid 关注/取消关注对象的id
+ *@param  uuid 关注/取消关注对象的id,多个id用,分割
  *@return 返回 PResult
  */
 
@@ -576,6 +576,7 @@ message PNewsFollowExist {
  *@param label 标签 参考ECommunityPostLabel. 2:精华, 3:电竞女神;
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10, 最大50
+ *@param type   bbnews:动态帖; newsfeed:资讯帖.默认:bbnews
  *@return返回 PPostViewList
  */
 
