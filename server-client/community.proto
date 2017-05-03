@@ -837,6 +837,16 @@ message PCommunityManagerRight {
  */
 
  /*
+ *@note 删除管理员
+ *@path /v1.7/community/right
+ *@method DELETE
+ *@url param id 社区id
+ *@url param uuid 用户id
+ *@cookie token&uuid
+ *@return 返回PResult
+ */
+
+ /*
  *@note 修改管理员作为创建者发布帖子的状态位
  *@path /v1.7/community/right/publish_status
  *@method PUT
