@@ -3,6 +3,8 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PlatformProtos";
 
+import "account.proto"
+
 //列出所有服务的状态（开启的还是关闭的）
  message PServiceStatus {
  	map<string,PService> status = 1; 
@@ -380,17 +382,28 @@ message PArrarInt64AndBool {
 
 /**1.6版本***结束**/
 
+message PRecommendUsers {
+	repeated PUserBase users = 1; //推荐用户的列表
+	repeated int32 fansCounts = 2; //粉丝数的列表（索引跟users的索引一一对应）
+}
+
 
 /**************************API 定义***********************************/
 
 /**
- * 举报微博
+ * 举报帖子
  *
  *@path /platform-manager/report/news
  *@cookie token&uuid
  *@method POST
  *@param id 被举报的帖子ID
- *@param qtype 问题类型
+ *@param qtype 问题类型（以下类型的ID）
+	1、人身攻击
+	2、色情信息
+	3、违法信息
+	4、垃圾营销
+	5、侵权信息
+	6、虚假信息
  *@return PResult
  */
  
@@ -444,42 +457,42 @@ message PArrarInt64AndBool {
  *@return PResult
  */
  
- /**
-  * 意见反馈
-  *
-  *@path /platform-manager/feedback/add
-  *@cookie token&uuid
-  *@method POST
-  *@param content 反馈内容（可以为空）
-  *@param images 图片的objkey，多个以,分隔（可以为空）
-  *@param qtype 问题的类型编号（PFeedbackQuestion的id属性）
-  *@param mood 心情的编号（0其他，1开心，2一般，3难过）
-  *@return PResult
-  */
-  
-  /**
-   * 意见反馈，获取某心情对应的问题类型
-   *
-   *@path /platform-manager/feedback/questions
-   *@cookie token&uuid
-   *@method GET
-   *@param tid 类型的编号（1意见反馈，2举报用户，3举报帖子）
-   *@param mid 心情的编号（0其他，1开心，2一般，3难过）
-   *@param lid 语言的编号（zh-cn简体中文，zh-tw繁体中文，en-us英文，ko-kr韩文）
-   *@return PFeedbackQuestionList
-   */
-   
-  /**
-   * 获取上传文件的状态
-   *
-   *@path /platform-manager/upload/status
-   *@cookie token&uuid
-   *@method GET
-   *@param digest 文件的MD5值
-   *@param length 文件长度
-   *@param ext 文件后缀
-   *@return PUpload(在oss.proto文件里)
-   */
+/**
+* 意见反馈
+*
+*@path /platform-manager/feedback/add
+*@cookie token&uuid
+*@method POST
+*@param content 反馈内容（可以为空）
+*@param images 图片的objkey，多个以,分隔（可以为空）
+*@param qtype 问题的类型编号（PFeedbackQuestion的id属性）
+*@param mood 心情的编号（0其他，1开心，2一般，3难过）
+*@return PResult
+*/
+
+/**
+* 意见反馈，获取某心情对应的问题类型
+*
+*@path /platform-manager/feedback/questions
+*@cookie token&uuid
+*@method GET
+*@param tid 类型的编号（1意见反馈，2举报用户，3举报帖子）
+*@param mid 心情的编号（0其他，1开心，2一般，3难过）
+*@param lid 语言的编号（zh-cn简体中文，zh-tw繁体中文，en-us英文，ko-kr韩文）
+*@return PFeedbackQuestionList
+*/
+
+/**
+* 获取上传文件的状态
+*
+*@path /platform-manager/upload/status
+*@cookie token&uuid
+*@method GET
+*@param digest 文件的MD5值
+*@param length 文件长度
+*@param ext 文件后缀
+*@return PUpload(在oss.proto文件里)
+*/
    
 /**
  * 批量获取上传文件的状态
@@ -491,23 +504,41 @@ message PArrarInt64AndBool {
  *@return 成功返回PUploadArray，失败返回PResult
  */
   
-  /**
-   * 获取图片轮播图（banner）
-   *
-   *@path /platform-manager/banner/app/list
-   *@cookie token&uuid
-   *@method GET
-   *@param tp 广告图的类型（1.发现版块，2.精选版块，3.启动图）
-   *@return 成功 PBannerList ，失败 PResult
-   */
+/**
+* 获取图片轮播图（banner）
+*
+*@path /platform-manager/banner/app/list
+*@cookie token&uuid
+*@method GET
+*@param tp 广告图的类型（1.发现版块，2.精选版块，3.启动图）
+*@return 成功 PBannerList ，失败 PResult
+*/
 
-   
-   /**
-	* 获取多个默认的头像
-	*
-	*@path /platform-manager/default/head
-	*@cookie token&uuid
-	*@method GET
-	*@param count 要获取的头像的个数（默认是10）
-	*@return 成功 PDefaultHeadList，失败PResult
-    */
+
+/**
+* 获取多个默认的头像
+*
+*@path /platform-manager/default/head
+*@cookie token&uuid
+*@method GET
+*@param count 要获取的头像的个数（默认是10）
+*@return 成功 PDefaultHeadList，失败PResult
+*/
+
+/**
+ * 获取推荐的社区
+ *
+ *@path /platform-manager/recommend/community
+ *@cookie token&uuid
+ *@method get
+ *@return 成功 PCommunityBaseList ，失败 PResult
+ */
+ 
+ /**
+ * 获取推荐的用户
+ *
+ *@path /platform-manager/recommend/user
+ *@cookie token&uuid
+ *@method get
+ *@return 成功 PRecommendUsers ，失败 PResult
+ */
