@@ -10,15 +10,58 @@ import "common_inside.proto";
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "DatapublishingApiProtos";
 
-// 每天的平均在线时间
+// 在线数据
 message POnlineData {
 	int64 date = 1;
-	int32 value = 2;
+	// 日活跃用户
+	int32 dau = 2;
+	// 新增用户
+	int32 newRegisters = 3;
+	//平均在线时间
+	int32 oltAvg = 4;
+	//最高在线人数
+	int32 olMax = 6;
+	//平均在线人数
+	int32 olAvg = 7;
 }
 
-message POnlineDataArray {
-	repeated POnlineData array = 1;
+message POnlineDataList {
+	repeated POnlineData list = 1;
 }
+
+// 用户留存
+message PRetention {
+	int64 date = 1;                                	
+	int32 newRegisters = 2;
+	int32 l1 = 7; 
+	int32 l2 = 8;
+	int32 l3 = 9;
+	int32 l4 = 10;
+	int32 l5 = 11;
+	int32 l6 = 12;
+	int32 l7 = 13;
+	int32 l14 = 14;
+	int32 l30 = 15;
+}
+
+message PRetentionList {
+	repeated PRetention list = 1;
+}
+
+// 用户流失统计
+message PLosing {
+	int64 date = 1;
+	int32 totalRegisters = 2;
+	int32 lost1 = 3;
+	int32 lost7 = 4;
+	int32 lost14 = 5;
+	int32 lost30 = 6;
+}
+
+message PLosingList {
+	repeated PLosing list = 1;
+}
+
 
 /*
  *@note 批量获取最后心跳时间
@@ -397,7 +440,16 @@ service grpcDataPublishing {
 	rpc SetDiscoverParams(PDiscoverParams) returns (PEmpty);
 	// 获取发现页面的参数
 	rpc GetDiscoverParams(PEmpty) returns (PDiscoverParams);
+
+	// 获取在线统计
+	rpc GetOnlineData(PStringList) returns (POnlineDataList);
+		
+	// 获取留存统计
+	rpc GetRetention(PStringList) returns (PRetentionList);
 	
+	// 获取流失统计
+	rpc GetLosing(PStringList) returns (PLosingList);
+		
 	// 获取用户画像
 	// 参数为json字符串
 	// 字段包括：
@@ -410,4 +462,5 @@ service grpcDataPublishing {
 	
 	// 获取帖子参与的话题（供java调用,注：返回的话题是不带#号的）
 	rpc GetTopicOfPost(PStringSingle) returns (PStringList);
+	
 }
