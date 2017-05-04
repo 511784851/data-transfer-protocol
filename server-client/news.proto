@@ -9,10 +9,10 @@ import "community.proto";
 
 // 帖子类型
 enum EPostType {
-    Text        = 0; //文字帖
-    Image       = 1; //图片帖
-    Audio       = 2; //语音帖
-    Video       = 3; //视频帖
+    Text        = 0; //文字帖, 属于动态
+    Image       = 1; //图片帖, 属于动态
+    Audio       = 2; //语音帖, 属于动态
+    Video       = 3; //视频帖, 属于动态
     Notice      = 4; //公告帖
     NewsFeed    = 5; //新闻帖
     Anonymous   = 6; //网盘服务创建的匿名帖(原创录播).
@@ -81,7 +81,7 @@ message PPostView {
 	PAtUserList     atUsers     = 10; //帖子@的用户列表
 	PPostStatistc   statistc    = 11; //帖子统计信息
 	PPostState      state       = 12; //帖子状态信息
-	bool            IsPreView   = 13; //预览标记,仅客户端使用
+	int32           preView     = 13; //预览标记,仅客户端使用
  }
 
 // 微博详情列表
@@ -362,12 +362,12 @@ message PNewsFollowExist {
  
 
 /**
- *@note   关注/取消关注
+ *@note   关注/取消关注(支持批量)
  *@path   /v1/news/follow
  *@cookie token&uuid
  *@method POST
  *@param  oper 为1时表示添加关注，为0时表示取消关注
- *@param  uuid 关注/取消关注对象的id
+ *@param  uuid 关注/取消关注对象的id,多个id用,分割
  *@return 返回 PResult
  */
 
@@ -576,6 +576,7 @@ message PNewsFollowExist {
  *@param label 标签 参考ECommunityPostLabel. 2:精华, 3:电竞女神;
  *@param offset 偏移(客户端获取的最后一个帖子id), 默认:0
  *@param count  查询条数, 默认:10, 最大50
+ *@param type   bbnews:动态帖; newsfeed:资讯帖.默认:bbnews
  *@return返回 PPostViewList
  */
 

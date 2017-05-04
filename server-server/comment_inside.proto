@@ -10,8 +10,9 @@ option java_outer_classname = "CommentApiProtos";
 message PCommentParam {
     string postId    = 1;     //提醒消息的创建者
     string postUuid  = 2;     //提醒消息的创建者
-    int32  offset    = 3;     // 分页查询的偏移
+    int32  offset    = 3;     //分页查询的偏移
     int32  count     = 4;     //分页大小
+    bool   isAdmin   = 5;     //是否监管查看, true: 可以看屏蔽的评论, false:只能看正常评论
 }
 
 // 加载二级评论的参数
@@ -19,6 +20,7 @@ message PCommentCommentParam {
     string cid     = 1;   //一级评论ID
     int32  offset  = 2;   //分页查询的偏移
     int32  count   = 3;   //分页大小
+    bool   isAdmin = 4;   //是否监管查看, true: 可以看屏蔽的评论, false:只能看正常评论
 }
 
 // 通过ID查评论的参数
