@@ -3,7 +3,7 @@ package bbproto;
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PlatformProtos";
 
-import "account.proto"
+import "account.proto";
 
 //列出所有服务的状态（开启的还是关闭的）
  message PServiceStatus {
