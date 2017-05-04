@@ -462,5 +462,7 @@ service grpcDataPublishing {
 	
 	// 获取帖子参与的话题（供java调用,注：返回的话题是不带#号的）
 	rpc GetTopicOfPost(PStringSingle) returns (PStringList);
-	
+
+	// 获取好友推荐
+	rpc GetRecommendFriends(PCustomPageParam) returns (PStringList);
 }
