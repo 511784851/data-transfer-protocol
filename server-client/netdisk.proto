@@ -195,7 +195,7 @@ message PNetFilelist {
  *@cookie token&uuid 登录用户信息
  *@url param communityId 社区Id
  *@url param postTyp 帖子类型 3:视频帖（社区首页传3）,5:新闻帖,6:原创录播，不需要筛选，可以不传
- *@url param title 按文件标题模糊查询
+ *@url param keywords 按文件标题模糊查询
  *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
  *@url param topic 话题
  *@url param category 分类 0:全部，1:精华
@@ -257,13 +257,24 @@ message PNetFilelist {
  *@return 返回PResult
  */
  
- /*
+/*
  *@note 推荐／取消为精华(客户端)
  *@path /netdisk/v1/file/essenceOp
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@formparam communityId 社区ID
  *@formparam fileId 文件ID
+ *@formparam op 1：推荐为精华，0:取消精华
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 推荐／取消为精华(粉丝管理系统)
+ *@path /netdisk/v1/file/batchEssenceOp
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@formparam communityId 社区ID
+ *@formparam fileId[] 文件ID
  *@formparam op 1：推荐为精华，0:取消精华
  *@return 返回PResult
  */
