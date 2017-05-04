@@ -176,9 +176,9 @@ service IGrpcCommunity {
     rpc GetCommunityBaseExList(PStringList) returns (PCommunityBaseExList);
 
     /*
-     *@note 获取用户对某一个社区的权限列表
-     *@param 参数数组 [0]用户UUID [1]社区id
-     *@return 成功返回 PCommunityManagerRight ，失败返回 PResult
+     *@note 批量获取用户创建/管理的社区信息
+     *@param 用户id列表
+     *@return 成功返回 PCommunityManagerRightList ，失败返回 PResult
      */
-    rpc GetCommunityRight(PStringList) returns (PCommunityManagerRight);
+    rpc GetCommunityRight(PStringList) returns (PCommunityManagerRightList);
  }

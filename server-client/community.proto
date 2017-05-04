@@ -371,6 +371,9 @@ message PCommunityManagerRight {
 	bool RecyleBin = 24;				// 回收站
 }
 
+message PCommunityManagerRightList {
+	repeated PCommunityManagerRight List = 1;
+}
 
 /*=====================================*/
 // API定义
