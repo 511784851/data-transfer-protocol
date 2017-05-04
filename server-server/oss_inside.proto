@@ -118,12 +118,15 @@ message PQueryParam {
 	int64 end = 3;
 	// 来源
 	EFrom from = 4;
-	// 状态 0待审核 1审核通过 2审核未通过
+	// 状态 0待审核 1审核通过 2审核未通过 3自动审核通过 4自动审核为不通过
 	int32 state = 5;
 	// 分页偏移
 	int32 offset = 6;
 	// 分页大小
 	int32 size = 7;
+	//分值范围0-100
+	int32 rate1 = 8;
+	int32 rate2 = 9;
 }
 
 message PImageInfoList {
