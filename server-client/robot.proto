@@ -19,7 +19,6 @@ enum ERobotPushType {
     LotteryExpire  = 6; // 抽奖过期提醒
     LotteryCourier = 7; // 领奖收货信息更新提醒
     GiftLottery    = 8; // 礼物抽奖
-    FansSysRight   = 9; //具有粉丝管理系统权限(普通用户升级为非普通用户、被任命为管理员) 
 }
 
 // 推送消息状态
@@ -352,7 +351,6 @@ message PBMsgNumLimit {
  *@uri /v1/robot/message
  *@method GET
  *@cookie token&uuid
- *@param  state   状态. 0: 普通状态, 1: 第一次使用(新手引导状态).默认:0
  *@return 成功返回PCRobotSummary 
  */
 
