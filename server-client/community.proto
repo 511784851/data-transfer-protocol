@@ -346,29 +346,33 @@ message PCommunitySortList {
 /*=====================================*/
 //-----------------1.7.x----------------- 
 /*=====================================*/
+message PCommunityManagerInfo {
+	string Name = 1;							// 联系人，必选
+	string PhoneCode = 2;						// 联系电话，必选
+	string Other = 3;							// 其他联系方式
+}
 
 // 社区管理员权限
 // 详细权限文档 http://confluence.blemobi.com/pages/viewpage.action?pageId=15764813
 message PCommunityManagerRight {
-	string Id = 1;						// 用户创建/管理的社区id，如果是普通用户，则社区id为空字符串 | 要赋予/修改管理员的社区id
-	int32 Membership = 2;				// 用户与社区的关系， 0为创建者（拥有所有权限），1为管理者，
-	string Uuid = 3;					// 获取权限时不用填充 | 要赋予/修改权限的用户id
-	int32 PublishStatus = 4;			// 发布身份；0代表以管理员自己身份发布；1代表以首次以创建者身份发布（需要app/粉丝弹窗提示）；2代表已确认使用创建者身份发布
-	bool PublishAsOwner = 10;			// 是否能以管理员权限发布内容 帖子/视频/评论等
-	bool Admin = 11;					// 授权管理
-	bool Post = 12;						// 社区帖子管理（动态、资讯、公告）
-	bool Layout = 13;					// 社区装修
-	bool Banner = 14;					// 社区广告
-	bool Photoalbum = 15;				// 社区图集
-	bool Video = 16;					// 社区视频
-	bool Netdisk = 17;					// 原创录播
-	bool Information = 18;				// 社区资料
-	bool Chat = 19;						// 聊天室
-	bool DataManagement = 20;			// 数据管理（大数据、排行榜）
-	bool Report = 21;					// 举报管理
-	bool Feedback = 22;					// 意见反馈
-	bool Member = 23;					// 社区成员
-	bool RecyleBin = 24;				// 回收站
+	string Id = 1;								// 用户创建/管理的社区id，如果是普通用户，则社区id为空字符串 | 要赋予/修改管理员的社区id
+	int32 Membership = 2;						// 用户与社区的关系， 0为创建者（拥有所有权限），1为管理者，
+	string Uuid = 3;							// 获取权限时不用填充 | 要赋予/修改权限的用户id
+	int32 PublishStatus = 4;					// 发布身份；0代表以管理员自己身份发布；1代表以首次以创建者身份发布（需要app/粉丝弹窗提示）；2代表已确认使用创建者身份发布
+	PCommunityManagerInfo Info = 5;				// 管理员资料，粉丝系统使用
+	bool PublishAsOwner = 10;					// 是否能以管理员权限发布内容 帖子/视频/评论等
+	bool Admin = 11;							// 授权管理
+	bool Post = 12;								// 社区帖子管理（动态、资讯、公告）
+	bool Layout = 13;							// 社区装修
+	bool Banner = 14;							// 社区广告
+	bool Netdisk = 15;							// 原创录播
+	bool Information = 16;						// 社区资料
+	bool Chat = 17;								// 聊天室
+	bool DataManagement = 18;					// 数据管理（大数据、排行榜）
+	bool Report = 19;							// 举报管理
+	bool Feedback = 20;							// 意见反馈
+	bool Member = 21;							// 社区成员
+	bool RecyleBin = 22;						// 回收站
 }
 
 message PCommunityManagerRightList {
