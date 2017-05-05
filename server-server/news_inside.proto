@@ -17,15 +17,20 @@ enum EStateOperType {
     OpUnShield      = 6; //设为解除屏蔽
 }
 
-// 个人统计信息
+// A查看B的个人统计信息
 message PNewsUserStatistic {
-	int32 FollowCount = 2;       	// 关注用户总数
-	int32 FansCount = 3;			// 粉丝用户总数
-	int32 TxtPostCount = 4;			// 文字帖的个数
-	int32 ImgPostCount = 5;			// 图片帖的个数
-	int32 AudioPostCount = 6;		// 音频帖的个数
-	int32 VideoPostCount = 7;		// 视频帖的个数
-	int32 FollowShip = 8;			// 两用户间的关系、0:无关系，1,：是粉丝，2：已关注，3：相互关注
+	int32 FollowCount    = 1;   // 关注数
+	int32 FansCount      = 2;	// 粉丝数
+	int32 BbnewsCount    = 3;	// 动态数
+	int32 NewsfeedCount  = 4;	// 资讯数
+	int32 FollowShip     = 5;	// 两用户间的关系、0:无关系, 1: B关注了A, 2:A关注了B, 3：相互关注
+    int64 FollowTime     = 6;   // A关注B的时间
+    int64 PassiveTime    = 7;   // A被B关注的时间
+}
+
+// 个人统计信息列表
+message PNewsUserStatisticList {
+   repeated PNewsUserStatistic list = 1;
 }
 
 // 各类帖子数量
@@ -87,6 +92,12 @@ message PPostBriefList {
 message PDeletePostsParam {
      string      postId   = 1; //帖子ID
      string      uuid     = 2; //执行删除的用户
+}
+
+// 查询用户信息参数
+message PNewsQueryUserParam {     
+     string           uuid      = 1; //发起查询的用户
+     repeated string  targets   = 2; //被查询的用户uuid
 }
 
 /**
@@ -337,4 +348,11 @@ service IGrpcNews {
      *@return   PEmpty
      */
     rpc GrpcDeletePost(PDeletePostsParam) returns (PEmpty);
+
+    /*
+     *@note    查询用户的统计信息(粉丝数、关注数、帖子数)
+     *@param    PNewsQueryUserParam 帖子ID
+     *@return   PNewsUserStatisticList
+     */
+    rpc GrpcGetUserStatistic(PNewsQueryUserParam) returns (PNewsUserStatisticList);
  }
