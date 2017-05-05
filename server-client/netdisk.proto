@@ -37,9 +37,10 @@ message PNetFile {
 	bool canDelete = 28; 		// 是否有删除权限(作者、社区创建者、管理员)
 	int32 communityStatus = 29; // 社区状态；0社区开启状态；1社区关闭状态；
 	int32 resourceType = 30;	// 资源类型 3; //本地视频,4; //第三方视频,5; //长视频, 6,原创录播
-	int32 followShip = 31;		//关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
-	repeated string topic = 32;	//参与的话题
-	int32 category = 33;		//分类 0:全部，1:精华
+	int32 followShip = 31;		// 关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
+	repeated string topic = 32;	// 参与的话题
+	int32 category = 33;		// 分类 0:全部，1:精华
+	int32 membership = 34;		// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 }
 
 message PNetFilelist {
