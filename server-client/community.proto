@@ -359,7 +359,9 @@ message PCommunityManagerRight {
 	int32 Membership = 2;						// 用户与社区的关系， 0为创建者（拥有所有权限），1为管理者，
 	string Uuid = 3;							// 获取权限时不用填充 | 要赋予/修改权限的用户id
 	int32 PublishStatus = 4;					// 发布身份；0代表以管理员自己身份发布；1代表以首次以创建者身份发布（需要app/粉丝弹窗提示）；2代表已确认使用创建者身份发布
-	PCommunityManagerInfo Info = 5;				// 管理员资料，粉丝系统使用
+	int64 Time = 5;								// 设置管理员的时间
+	PCommunityManagerInfo Info = 6;				// 管理员资料，粉丝系统使用
+	PUserBase Base = 7;							// 管理员的基础数据
 	bool PublishAsOwner = 10;					// 是否能以管理员权限发布内容 帖子/视频/评论等
 	bool Admin = 11;							// 授权管理
 	bool Post = 12;								// 社区帖子管理（动态、资讯、公告）
