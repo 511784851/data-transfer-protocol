@@ -109,7 +109,7 @@ message PImageInfo {
 	EFrom from = 7;
 	int64 time = 8;
 	int32 State = 9;
-	int32 pornrate = 10;
+	float pornrate = 10;
 }
 
 message PQueryParam {
@@ -119,7 +119,7 @@ message PQueryParam {
 	int64 end = 3;
 	// 来源
 	EFrom from = 4;
-	// 状态 0待审核 1审核通过 2审核未通过 3自动审核通过 4自动审核为不通过
+	// 状态 0待审核 1审核通过 2审核未通过 3自动审核通过 4自动审核为不通过 5审核失败
 	int32 state = 5;
 	// 分页偏移
 	int32 offset = 6;
