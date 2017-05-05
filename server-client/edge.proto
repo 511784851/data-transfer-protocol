@@ -87,3 +87,13 @@ message PEdgeVersion {
  *@param by  生日祝福的来源(网红uuid)
  *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
  */
+
+ /*
+ *@note 获取视频分享地址
+ *@path /v1/edge/share/video
+ *@method GET
+ *@cookie token&uuid
+ *@param fileid  视频文件id
+ *@param postid  帖子id
+ *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
+ */

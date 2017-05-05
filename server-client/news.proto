@@ -423,7 +423,7 @@ message PNewsFollowExist {
  */
 
 /**
- *@note   news点赞
+ *@note   news点赞、取消赞
  *@path   /v1/news/vote
  *@cookie token&uuid
  *@method GET

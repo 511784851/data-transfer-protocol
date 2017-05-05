@@ -336,7 +336,9 @@ service grpcDataPublishing {
 	// 用户超级查找，参数为json字符串，字段包括：
 	// keyword 搜索关键词
 	// source 来源 0手机号码 1微信 2微博 3脸书 4谷歌 5用户名
-	// coid 社区ID,string类型,如"550"
+	// coid 社区ID,string类型,如"550",指定后可以用来搜索社区成员
+	// follow 指定后可以用来搜索该用户的粉丝
+	// friend 指定后可以用来搜索该用户的好友
 	// level 用户等级
 	// state 用户状态 0正常 1被封 2冻结
 	// no_water true过滤水军

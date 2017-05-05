@@ -863,6 +863,15 @@ message PCommunityManagerRightList {
  */
 
  /*
+ *@note 获取管理员权限列表，粉丝端调用，调用者必须是创建者或者拥有管理权限的用户
+ *@path /v1.7/community/manager_list
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityManagerRightList， 失败返回PResult
+ */
+
+ /*
  *@note 修改管理员作为创建者发布帖子的状态位
  *@path /v1.7/community/right/publish_status
  *@method PUT
