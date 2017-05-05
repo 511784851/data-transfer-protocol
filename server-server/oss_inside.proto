@@ -109,6 +109,7 @@ message PImageInfo {
 	EFrom from = 7;
 	int64 time = 8;
 	int32 State = 9;
+	int32 pornrate = 10;
 }
 
 message PQueryParam {
