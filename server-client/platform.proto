@@ -510,7 +510,7 @@ message PRecommendUsers {
 *@path /platform-manager/banner/app/list
 *@cookie token&uuid
 *@method GET
-*@param tp 广告图的类型（1.发现版块，2.精选版块，3.启动图）
+*@param tp 广告图的类型（1.发现版块，2.精选版块，3.启动图，4.社区登录图）
 *@return 成功 PBannerList ，失败 PResult
 */
 
