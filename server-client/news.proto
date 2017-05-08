@@ -635,3 +635,11 @@ message PNewsFollowExist {
  *@param  pagesize  每页大小, 默认10, 最大值为50 
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
+
+/**
+ *@note   游客查看帖子
+ *@path   /v1/news/guest/post
+ *@method GET
+ *@param  postid 帖子 id
+ *@return PPostView,失败返回 PResult
+ */
