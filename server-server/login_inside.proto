@@ -196,6 +196,13 @@ service IGrpcLogin {
     rpc SetForceBindPhoneCode(PStringList) returns (PEmpty);
 
     /*
+     *@note获取用户是否需要绑定手机号码的标志位
+     *@param 用户uuid 列表
+     *@return 返回 PBoolList
+     */
+    rpc GetForceBindPhoneCodeFlag(PStringList) returns (PBoolList);
+
+    /*
      *@note 批量获取用户登录方式绑定的情况
      *@param 用户uuid 列表
      *@return 返回 PLoignBindInfoList
