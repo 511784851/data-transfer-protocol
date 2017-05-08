@@ -354,6 +354,7 @@ service grpcDataPublishing {
 	// keyword_nickname 关键词为昵称，全词匹配
 	// keyword_title 关键词为帖子标题，分词搜索
 	// keyword_community 关键词为社区名称，全词匹配
+	// topic 包含该话题的帖子
 	// coid 指定社区ID搜索
 	// type EPostType的int值，另外增加1个定义：-1动态帖
 	// state 审核状态 0待审 1通过审核 2未通过审核 4已删除的帖子
