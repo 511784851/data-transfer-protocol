@@ -279,3 +279,14 @@ message PNetFilelist {
  *@formparam op 1：推荐为精华，0:取消精华
  *@return 返回PResult
  */
+ 
+ 
+/*
+ *@note 分享视频
+ *@path /netdisk/v1/file/shareVideo
+ *@method GET
+ *@url param communityId 社区ID
+ *@url param postId 帖子ID
+ *@url param fileId 文件ID
+ *@return 返回PPostView JSON 格式
+ */
