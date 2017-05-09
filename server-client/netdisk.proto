@@ -137,12 +137,13 @@ message PNetFilelist {
  */
  
 /*
- *@note 文件信息详情（客户端）
- *@path /netdisk/v1/file/detail
+ *@note 文件信息详情（客户端）原创录播跳转视频详情（communityId+postId），其它跳转视频详情（communityId+fileId）
+ *@path /netdisk/v1/file/detail 
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@url param communityId 社区ID
  *@url param postId 帖子ID
+ *@url param fileId 文件ID
  *@return 成功PNetFile 失败返回PResult
  */
  
