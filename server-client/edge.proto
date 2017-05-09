@@ -94,6 +94,6 @@ message PEdgeVersion {
  *@method GET
  *@cookie token&uuid
  *@param fileid  视频文件id
- *@param postid  帖子id
+ *@param communityid  社区id
  *@return 成功返回 PStringList （0是分享地址，1是默认缩略图地址），失败返回 PRsult
  */
