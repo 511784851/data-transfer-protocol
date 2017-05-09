@@ -889,12 +889,13 @@ message PCommunityManagerRightList {
 
  /*
  *@note 搜索社区成员
+ *@如果使用服务端返回游标，则其他字段都可不填；否则id不能为空
  *@path /v1.7/community/member/search
  *@method GET
  *@url param id 社区id
- *@url param level 用户等级
- *@url param nickname 昵称
- *@url param sort nickname_asc以昵称升序 nickname_desc以昵称降序
+ *@url param level 用户等级；0（普通用户）；1（vip）；2（vip+）；3（vo）；不填则搜索所有等级用户
+ *@url param keyword 关键字，昵称或者用户名；不填则搜索所有用户
+ *@url param sort nickname_asc以昵称升序 nickname_desc以昵称降序；不填则默认使用升序
  *@url param cursor 取下一页的游标，由服务端返回；首页传0
  *@cookie token&uuid
  *@return 成功返回 PCommunityMemberList ，失败返回PResult
@@ -904,9 +905,9 @@ message PCommunityManagerRightList {
  *@note 按照用户加入社区的时间获取社区成员列表
  *@path /v1.7/community/member/follow_time
  *@method GET
- *@url param id 社区id
- *@url param beg 起始时间
- *@url param end 结束时间
+ *@url param id 社区id，必填
+ *@url param beg 起始时间，必填
+ *@url param end 结束时间，必填
  *@url param cursor 取下一页的游标，由服务端返回；首页传0
  *@cookie token&uuid
  *@return 成功返回 PCommunityMemberList ，失败返回PResult
