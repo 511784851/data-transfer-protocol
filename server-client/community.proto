@@ -80,8 +80,9 @@ message PCommunityMember {
 	int32 IsFollow = 4;							// 0表示未关注，1表示已关注
 	int32 IsManager = 5;						// 0表示非管理员，1表示是管理员
 	bool IsTop = 6;								// 用户是否top成员标志
-	int64 ForbidTime = 7; 						// 用户禁用到期时间，如果没有被禁用，则填0
-	int64 BeBlacklistTime = 8;					// 用户被踢出社区的时间，如果不是社区黑名单，则填0
+	int64 ForbidBegTime = 7;					// 用户禁设置时间，如果没有被禁用，则填0
+ 	int64 ForbidEndTime = 8;					// 用户禁用到期时间，如果没有被禁用，则填0
+	int64 BeBlacklistTime = 9;					// 用户被踢出社区的时间，如果不是社区黑名单，则填0
 }
 
 // 社区成员信息列表
