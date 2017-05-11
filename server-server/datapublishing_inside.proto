@@ -4,6 +4,7 @@ package bbproto;
 import "datapublishing.proto";
 import "result.proto";
 import "account.proto";
+import "community.proto";
 import "news.proto";
 import "common_inside.proto";
 
@@ -469,4 +470,17 @@ service grpcDataPublishing {
 
 	// 获取好友推荐
 	rpc GetRecommendFriends(PCustomPageParam) returns (PStringList);
+	
+	// 个人的头条帖
+	rpc GetPersonalTopPost(PCustomPageParam) returns (PStringList);
+	
+	// 批量获取用户的最后心跳时间
+	rpc MGetLastHeartBeat(PStringList) returns (PInt64List);
+	
+	// 获取社区图集
+	rpc GetCommunityPhotosGroupByDate(PStringSingle) returns(PCommunityPhotoAlbumDateList);
+	// 获取社区指定日期的图集
+	rpc GetCommunityPhotos(PStringSingle) returns(PCommunityPhotoAlbumList);
+	//  社区成员列表
+	rpc ListCommunityMember(PStringSingle) returns(PStringList);
 }
