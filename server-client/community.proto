@@ -868,7 +868,7 @@ message PCommunityManagerRightList {
 
 /*
  *@note 获取某个用户创建/管理的社区的权限
- *@path /v1.7/community/right
+ *@path /v1.7/community/user_right
  *@method GET
  *@url param uuid 用户id
  *@cookie token&uuid
