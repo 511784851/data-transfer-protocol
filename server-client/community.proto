@@ -866,6 +866,15 @@ message PCommunityManagerRightList {
  *@return 返回PResult
  */
 
+/*
+ *@note 获取某个用户创建/管理的社区的权限
+ *@path /v1.7/community/right
+ *@method GET
+ *@url param uuid 用户id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityManagerRight ，失败返回PResult
+ */
+ 
  /*
  *@note 获取管理员权限列表，粉丝端调用，调用者必须是创建者或者拥有管理权限的用户
  *@path /v1.7/community/manager_list
