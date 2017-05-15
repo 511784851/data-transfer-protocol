@@ -74,7 +74,8 @@ message PLabelStatus{
  *@url param title 按文件标题模糊查询
  *@url param postTyp 帖子类型 3:视频帖,5:新闻帖,6:原创录播
  *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
- *@url param pageSize  要获取的记录数 
+ *@url param pageSize  要获取的记录数
+ *@url param category  视频分类(0:全部，1：精华)
  *@return 正常返回如下格式，异常PResult
  */
 /* [

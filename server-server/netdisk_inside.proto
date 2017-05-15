@@ -49,7 +49,7 @@ service NetDiskService{
 	rpc setVideoStatusByPostId(PSetFileParam) returns (PEmpty);
 	
 	/*
-     *@note 当新建、审核拒绝、删除（动态、咨询）帖子时，需要将帖子中的视频通知netdisk进行对应操作
+     *@note 当新建、删除（动态、咨询）帖子时，需要将帖子中的视频通知netdisk进行对应操作
      *@return 成功返回 PEmpty，失败返回 PResult
      */
 	rpc opVideo(POPFileParam) returns (PEmpty);
