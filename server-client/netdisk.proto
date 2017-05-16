@@ -49,9 +49,9 @@ message PNetFilelist {
 	int32 DiskSize = 2;         //总数量
 }
 
-enum PCategory{
-	ALL = 0;		//全部
-	ESSENCE = 1;	//精华
+message PCategory{
+	int32 category = 1; //分类ID
+	string categoryNm = 2; // 分类名称
 }
 
 message PLabelStatusList{
