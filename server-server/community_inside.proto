@@ -169,6 +169,20 @@ service IGrpcCommunity {
     rpc SetTopUserList(PStringList) returns (PEmpty);
 
     /*
+     *@note 添加社区的top userlist
+     *@param 参数数组 [0]社区id [1]uuid列表...
+     *@return 成功返回 PEmpty ，失败返回 PResult
+     */
+    rpc AddTopUserList(PStringList) returns (PEmpty);
+
+    /*
+     *@note 删除社区的top userlist
+     *@param 参数数组 [0]社区id [1]uuid列表...
+     *@return 成功返回 PEmpty ，失败返回 PResult
+     */
+    rpc DelTopUserList(PStringList) returns (PEmpty);
+
+    /*
      *@note 获取社区的 PCommunityBaseExList
      *@param 社区id列表
      *@return 成功返回 PCommunityBaseExList ，失败返回 PResult

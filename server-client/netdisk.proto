@@ -39,13 +39,28 @@ message PNetFile {
 	int32 resourceType = 30;	// 资源类型 3; //本地视频,4; //第三方视频,5; //长视频, 6,原创录播
 	int32 followShip = 31;		// 关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
 	repeated string topic = 32;	// 参与的话题
-	int32 category = 33;		// 分类 0:全部，1:精华
+	int32 category = 33;		// 分类 0:全部，1:精华(与PCategory对应)
 	int32 membership = 34;		// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
+	bool isSync = 35;			// 是否同步
 }
 
 message PNetFilelist {
 	repeated PNetFile netFile = 1;
 	int32 DiskSize = 2;         //总数量
+}
+
+enum PCategory{
+	ALL = 0;		//全部
+	ESSENCE = 1;	//精华
+}
+
+message PLabelStatusList{
+	repeated PLabelStatus list = 1;	//视频标签状态列表
+}
+
+message PLabelStatus{
+	PCategory category = 1;	//分类
+	bool hasVideo = 2;		//是否有视频
 }
 
 
@@ -59,7 +74,8 @@ message PNetFilelist {
  *@url param title 按文件标题模糊查询
  *@url param postTyp 帖子类型 3:视频帖,5:新闻帖,6:原创录播
  *@url param fromCreateTime  上次最后一条数据的createTime，首次访问传值“0”。
- *@url param pageSize  要获取的记录数 
+ *@url param pageSize  要获取的记录数
+ *@url param category  视频分类(0:全部，1：精华)
  *@return 正常返回如下格式，异常PResult
  */
 /* [
@@ -290,4 +306,14 @@ message PNetFilelist {
  *@url param postId 帖子ID
  *@url param fileId 文件ID
  *@return 返回PPostView JSON 格式
+ */
+
+
+/*
+ *@note 客户端判断哪些分类标签需要显示
+ *@path /netdisk/v1/file/labelStatus（客户端）
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param communityId 社区Id
+ *@return 成功PLabelStatusList, 失败PResult
  */

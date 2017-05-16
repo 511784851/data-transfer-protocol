@@ -83,14 +83,8 @@ enum EFrom {
 	Community_Logo = 3;
 	// 论坛Banner图
 	Community_Banner = 4;
-	// 社区背景图
-	Community_Background = 5;
-	// BB动态帖子
+	// 帖子
 	News = 6;
-	// 社区帖子
-	Community_Post = 7;
-	// 公告帖子
-	Community_Notice = 8;
 	// 论坛背景介绍图片
 	Community_Introduce = 9;
 	// VIP+形象照

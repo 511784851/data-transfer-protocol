@@ -199,9 +199,9 @@ message PNotifyRawMessage {
     string                  content         = 1;  // 服务端国际化(成就名称、等级名称、系统消息、简单通知消息等)
 
     PNotifyComment          commentNews     = 5;  // 帖子评论消息
-    PNotifyCommentReply     commentReply    = 6;  // 评论的评论
+    PNotifyCommentReply     commentReply    = 6;  // 评论的评论、评论赞/踩
     PNotifySocial           socialApply     = 7;  // 好友请求
-    PNotifyCommentVote      commentVote     = 8;  // 评论赞/踩
+    PNotifyCommentVote      commentVote     = 8;  // （注意：评论赞/踩使用commentReply）
     PNotifyNewsVote         newsVote        = 9;  // 帖子赞/踩
     PNotifyNewsAt           newsAt          = 10; // @我
     PNotifyStreaming        streaming       = 11; // 第三方直播提醒

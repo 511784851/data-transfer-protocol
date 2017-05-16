@@ -100,6 +100,12 @@ message PNewsQueryUserParam {
      repeated string  targets   = 2; //被查询的用户uuid
 }
 
+// 帖子编辑参数
+message PPostEditParam {     
+     PPostNew           postNew   = 1; //编辑后的帖子
+     bool               isAdmin   = 2; //是否是监管编辑
+}
+
 /**
  *@note 用户批量关注/取消关注
  *@path /v1/news/inside/multi/follow
@@ -225,10 +231,10 @@ message PNewsQueryUserParam {
 service IGrpcNews {
     /*
      *@note 编辑帖子
-     *@param PPostNew 编辑后的帖子 
+     *@param PPostEditParam 编辑后的帖子 
      *@return PEmpty
      */
-    rpc GrpcPostEdit(PPostNew) returns (PEmpty);
+    rpc GrpcPostEdit(PPostEditParam) returns (PEmpty);
 
     /*
      *@note 发布帖子

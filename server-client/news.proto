@@ -52,7 +52,7 @@ message PPostState {
 	bool        collected           = 4; //自己是否已收藏,true:是; false:否
 	bool        isTop               = 5; //是否置顶标志
 	int64       approval            = 6; //审核状态, 0:审核通过; 1:待审核; 2:审核不通过
-	bool        canDelete           = 8; //是否有删除权限(作者、社区创建者、管理员)
+	bool        canDelete           = 8; //是否有删除权限(社区创建者、具有帖子管理权限的管理员, 与是否为帖子作者无关)
 	PLabelList  labelList           = 9; //标签列表,取值参考ECommunityPostLabel
 	int32       followShip          = 10; //关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
 }
@@ -367,7 +367,7 @@ message PNewsFollowExist {
  *@cookie token&uuid
  *@method POST
  *@param  oper 为1时表示添加关注，为0时表示取消关注
- *@param  uuid 关注/取消关注对象的id,多个id用,分割
+ *@param  uuid 关注/取消关注对象的id,多个id用,分割. 最大个数: 50
  *@return 返回 PResult
  */
 
