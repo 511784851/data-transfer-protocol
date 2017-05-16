@@ -249,6 +249,7 @@ message PBanner {
 	//PPostInfo postInfo = 10; //微博的详情
 	int32 stay = 11; //广告停留时间（单位：秒）（客户端使用）
 	int32 aType = 12; //广告图的类型（1.发现版块，2.精选版块，3.启动图）
+	int32 putaway = 13; //是否上架（0.未上架，1.已上架）
 }
 
 //默认头像列表
