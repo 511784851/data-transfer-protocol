@@ -100,6 +100,15 @@ import "result.proto";
  */
 
 /*
+ *@note 获取某个用户和一组用户的社交关系列表
+ *@path /social/relations
+ *@method GET
+ *@param uuid 用户 A 的 UUID
+ *@param uuids 一组用户的uuid, 使用","分隔
+ *@return PStringList 下表对应关系。关系值说明：0: A --- B; 1: A --> B; 2: A <-- B; 3: A <-> B
+ */
+
+/*
  *@note 增加推荐好友
  *@path /social/addrecommend
  *@method POST
