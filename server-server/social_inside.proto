@@ -100,15 +100,6 @@ import "result.proto";
  */
 
 /*
- *@note 获取某个用户和一组用户的社交关系列表
- *@path /social/relations
- *@method GET
- *@param uuid 用户 A 的 UUID
- *@param uuids 一组用户的uuid, 使用","分隔
- *@return PStringList 下表对应关系。关系值说明：0: A --- B; 1: A --> B; 2: A <-- B; 3: A <-> B
- */
-
-/*
  *@note 增加推荐好友
  *@path /social/addrecommend
  *@method POST
@@ -141,8 +132,20 @@ service Social {
     *@return PSocialFriendCounts uuid对应的好友数量
     */
    rpc FriendCounts(PStringList) returns (PSocialFriendCounts);
+
+   /*
+    *@note 获取用户的社交关系
+    *@param PRelationReq 社交关系请求
+    *@return PStringList 对应用户列表下标的关系。值说明：0: A --- B; 1: A --> B; 2: A <-- B; 3: A <-> B
+    */
+    rpc Relations(PRelationReq) returns (PStringList);
 }
 
 message PSocialFriendCounts {
     map<string, int32> counts = 1;
+}
+
+message PRelationReq {
+    string uuid           = 1; // 查询的用户UUID
+    repeated string uuids = 2; // 需要确定社交关系的用户UUID列表
 }
