@@ -18,7 +18,13 @@ message PLogin {
 	string username = 10;			// 用户名称
 	int64 RegisterTime = 11;		// 用户注册时间
 	PLevelInfo levelInfo = 12;		// 会员等级信息
-} 
+}
+
+message PLoginUpdateAccount {
+	string HeadImgURL = 1;			// 头像地址；如果不修改默认头像，则填空串；使用 /account/user/imageurl 上传头像
+	string Nickname = 2;			// 昵称；如果不修改默认昵称，则填空串
+	int32 Gender = 3;				// 性别，-1是未定义，0就是女，其余的是男
+}
 
 /*
  *@note 生成手机短信验证码
@@ -91,7 +97,7 @@ message PLogin {
  */
 
 /*
- *@note 手机号快速登录
+ *@note 手机号快速登录;1.7新增特性，如果手机号对应的账号不存在，则直接注册
  *@path /v1/login/phone/account
  *@method GET
  *@url param account 手机号，需要带上区号。例：+8613512345678
@@ -342,5 +348,30 @@ message PLogin {
  *@method DELETE
  *@cookie token&uuid
  *@url param appid 应用分配的id
+ *@return 返回 PResult
+ */
+
+ /*
+ *@note 手机号注册
+ *@path /v1.7/login/account
+ *@method POST
+ *@form param phonecode 手机号，需要带上区号。例：+8613512345678
+ *@form param authcode 验证手机短信验证码
+ *@form param ostp 操作系统类型 0 未知、1 Android、2 IOS、3 水军、4 粉丝管理系统
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@return 注册成功返回 PLogin ，失败返回 PResult
+ */
+
+ /*
+ *@note 用户第一次注册成功后，修改用户头像，昵称，性别
+ *@path /v1.7/login/account
+ *@method PUT
+ *@body PLoginUpdateAccount 修改用户的信息
+ *@cookie token&uuid
  *@return 返回 PResult
  */
