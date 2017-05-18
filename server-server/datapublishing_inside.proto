@@ -331,6 +331,8 @@ service grpcDataPublishing {
 	
 	// 搜索用户
 	rpc SearchUser(PQueryUserParam) returns (PStringList);
+	// 邀请好友或粉丝加入社区， 实际上也是进行用户搜索
+	rpc InviteToJoinCommunity(PQueryUserParam) returns (PStringList);
 	// 根据昵称查询用户
 	// rpc SearchUser(PStringSingle) returns (PStringList);
 	
