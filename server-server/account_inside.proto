@@ -408,6 +408,22 @@ service account {
      *@return []string 语言列表，对应关系是下标（如果为空由调用者决定默认语言）
      */
      rpc GetLanguages(PStringList) returns (PStringList);
+
+    /*
+     *@note 注册用户
+     *@param ctx 请求上下文
+     *@param PUserBase 注册信息
+     *@return PUserBase 注册后信息，如默认头像等
+     */
+     rpc Register(PUserBase) returns (PUserBase);
+
+     /*
+      *@note 设置用户信息
+      *@param ctx 请求上下文
+      *@param PUserBase
+      *@return 无返回值
+      */
+     rpc SetUserBase(PUserBase) returns (PEmpty);
 }
 
 message PNickname {
