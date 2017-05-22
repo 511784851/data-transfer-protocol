@@ -86,7 +86,10 @@ message PImgURLs {
 // 普通文件（非图片文件）URL生成参数
 message PGenUrlParam {
 	int32 bucket = 1;
+	//自定义地址过期时间，unix时间戳，秒
 	int64 expires = 2;
+	//true表示可内网访问
+	bool lan = 3;
 	repeated string keys = 6;
 }
 
