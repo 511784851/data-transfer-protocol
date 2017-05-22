@@ -73,14 +73,14 @@ import "oss.proto";
  *@return PResult，成功errCode为0
  */
 
-message PObjectURL {
+message PImgURL {
 	string origin = 1; //原文件地址，图片文件不一定有
 	string low = 2;	   //低清图地址 720宽，图片才有
 	string thumb = 3;  //缩略图地址 默认360宽，图片才有
 }
 
-message PObjectURLs {
-	repeated PObjectURL list = 1;
+message PImgURLs {
+	repeated PImgURL list = 1;
 }
 
 // 普通文件（非图片文件）URL生成参数
@@ -172,7 +172,7 @@ service grpcOss {
 	// 批量获取非图片文件访问地址
 	rpc GetObjectURLs(PGenUrlParam) returns (PStringList);
 	// 批量获取图片文件访问地址
-	rpc GetImageURLs(PGenImgUrlParam) returns (PObjectURLs);
+	rpc GetImageURLs(PGenImgUrlParam) returns (PImgURLs);
 	
 	// 图片监管系列
 	rpc AddImageInfo(PImageInfoList) returns (PEmpty);
