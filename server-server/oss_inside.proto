@@ -1,8 +1,9 @@
 syntax = "proto3";
 package bbproto;
 
-//import "result.proto";
+import "result.proto";
 import "common_inside.proto";
+import "oss.proto";
 
 /*
  *@note 内网访问获取带签名的文件上传URL
@@ -72,6 +73,41 @@ import "common_inside.proto";
  *@return PResult，成功errCode为0
  */
 
+message PObjectURL {
+	string origin = 1; //原文件地址，图片文件不一定有
+	string low = 2;	   //低清图地址 720宽，图片才有
+	string thumb = 3;  //缩略图地址 默认360宽，图片才有
+}
+
+message PObjectURLs {
+	repeated PObjectURL list = 1;
+}
+
+// 普通文件（非图片文件）URL生成参数
+message PGenUrlParam {
+	int32 bucket = 1;
+	int64 expires = 2;
+	repeated string keys = 6;
+}
+
+message PImgSize {
+	// object key
+	string key = 1;
+	// 图片宽
+	int32 width = 2;
+	// 图片高
+	int32 height = 3;
+	// 文件大小
+	int32 size = 4;
+}
+
+// 图片文件URL生成参数
+message PGenImgUrlParam {
+	int32 bucket = 1;
+	int64 expires = 2;
+	repeated PImgSize imgs = 6;
+}
+
 enum EFrom {
 	// 未知
 	Unknown = 0;
@@ -131,8 +167,12 @@ message PImageInfoList {
 }
 
 service grpcOss {
-	// 文件上传下载
-
+	// 批量获取文件上传地址
+	rpc GetUploadURLs(PFileInfoArray) returns (PUploadArray);
+	// 批量获取非图片文件访问地址
+	rpc GetObjectURLs(PGenUrlParam) returns (PStringList);
+	// 批量获取图片文件访问地址
+	rpc GetImageURLs(PGenImgUrlParam) returns (PObjectURLs);
 	
 	// 图片监管系列
 	rpc AddImageInfo(PImageInfoList) returns (PEmpty);
