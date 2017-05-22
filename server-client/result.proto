@@ -219,4 +219,5 @@ message PImageAttr {
 	int32 width    = 1; //宽
 	int32 high     = 2; //高
 	bool  isCover  = 3; //是否作为封面. 是:true; 否:false
+	int32 size     = 4; //大小,单位:Byte
 }
