@@ -151,6 +151,7 @@ message PKeyword {
 message PKeywordResultList {
 	repeated string list = 1; //已经找到的敏感词列表 (return=1才会有)
 	string replaceText = 2; //把敏感词替换后的文本（replace=1才会有）
+	bool hasWord = 3; //是否有敏感词（true表示有，false表示没有）
 }
 
 /*********黑名单***********/
