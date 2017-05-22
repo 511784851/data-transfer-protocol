@@ -18,6 +18,7 @@ message PLogin {
 	string username = 10;			// 用户名称
 	int64 RegisterTime = 11;		// 用户注册时间
 	PLevelInfo levelInfo = 12;		// 会员等级信息
+	int32 gender = 13;    			// 性别，0就是女，其余的是男；人妖暂时不考虑
 }
 
 message PLoginUpdateAccount {
