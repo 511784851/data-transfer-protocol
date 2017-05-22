@@ -148,6 +148,11 @@ message PKeyword {
 	string work = 2;
 }
 
+message PKeywordResultList {
+	repeated string list = 1; //已经找到的敏感词列表 (return=1才会有)
+	string replaceText = 2; //把敏感词替换后的文本（replace=1才会有）
+}
+
 /*********黑名单***********/
 
 //黑名单列表
