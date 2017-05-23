@@ -91,7 +91,8 @@ message PPostBriefList {
 // 删除帖子参数
 message PDeletePostsParam {
      string      postId   = 1; //帖子ID
-     string      uuid     = 2; //执行删除的用户
+     string      uuid     = 2; //执行删除的用户, 监管删除可以不填
+     bool        isAdmin  = 3; //是否监管删除
 }
 
 // 查询用户信息参数
