@@ -68,8 +68,9 @@ message PCommunityMailInfo {
 
 // 论坛信件列表
 message PCommunityMailList {
-	int64 Unread = 2;
-	repeated PCommunityMailInfo MailInfo = 3;
+	int64 Total = 1;							// 用户收到的信件总数，只在分页请求第一次返回
+	int64 Unread = 2;							// 用户未读信件总数
+	repeated PCommunityMailInfo MailInfo = 3;	// 信件列表
 }
 
 // ---社区设定
@@ -178,10 +179,13 @@ enum ECommunityModule {
 
 // 社区Banner资源信息
 message PCommunityBannerInfo {
-    bool Enable = 1;                			// true为启用，false为禁止
+    bool Enable = 1;                			// true为启用，false为禁止(注：1.7后续版本不应该判断这个标志位，应该使用EnableStatus字段)
     string Name = 2;                			// banner的自定义名字
     PCommunityResource ImgRes = 3;  			// banner的图片资源信息；Name为oss的objectkey，URL为服务端返回的访问地址
     PCommunityResource LinkRes = 4; 			// banner链接信息，无链接是为空；有链接时，Name填：链接描述信息；type可选的有：url、post；URL填对应的值：url->完整的链接地址字段、post->动态帖子id|资讯帖子id|公告id
+    int32 EnableStatus = 5;						// 开启状态；0为启用，1为不开启，2为审核不通过
+    int32 ReviewStatus = 6;						// 审核状态；0为未审核，1为审核通过，2为审核不通过
+
 }
 
 // 社区Banner资源信息列表
@@ -918,4 +922,13 @@ message PCommunityManagerRightList {
  *@url param cursor 取下一页的游标，由服务端返回；首页传0
  *@cookie token&uuid
  *@return 成功返回 PCommunityMemberList ，失败返回PResult
+ */
+
+/*
+ *@note 根据社区名获取社区id，如果没有这个社区名的社区，则社区id为0
+ *@path /v1.7/community/id
+ *@method GET
+ *@url param name 社区名
+ *@cookie token&uuid
+ *@return 成功返回 PInt64Single ，失败返回PResult
  */
