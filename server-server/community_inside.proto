@@ -198,9 +198,10 @@ service IGrpcCommunity {
 
     /*
      *@note 批量获取用户创建/管理的社区信息;同时判断用户是否关注了社区
-     *@param 用户id列表
-     *@return 成功返回 PCommunityManagerRightList ，失败返回 PResult
+     *@param 参数数组 [0]社区id [1]uuid列表...
+     *@PCommunityManagerRightList 返回数据与 rpc GetCommunityRight(PStringList) 一致，但会填充用户与社区的Membership字段
      *@Membership字段说明: -1(用户没有关注社区), 0(用户是社区的创建者), 1(用户是社区的管理者), 2(用户是社区的普通成员)
+     *@return 成功返回 PCommunityManagerRightList ，失败返回 PResult
      */
     rpc GetCommunityRightWithCommunityID(PStringList) returns (PCommunityManagerRightList);
  }
