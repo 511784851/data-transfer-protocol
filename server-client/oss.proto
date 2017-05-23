@@ -20,6 +20,7 @@ message PDownload {
 // 多个文件的上传信息
 message PUploadArray {
 	repeated PUpload uploads = 1;
+	int32 bucket = 2;
 }
 
 // 多个文件的下载信息
