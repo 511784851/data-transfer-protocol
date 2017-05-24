@@ -4,6 +4,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "PlatformProtos";
 
 import "account.proto";
+import "news.proto"
 
 //列出所有服务的状态（开启的还是关闭的）
  message PServiceStatus {
@@ -385,6 +386,29 @@ message PArrarInt64AndBool {
 	bool status = 2;
 }
 
+message PReportNewsInfo {
+	int32 id = 1; //举报id（查看举报人列表会用到）
+	PPostView view = 2; //帖子详情
+	int32 count = 3; //举报次数
+	int32 status = 4; //帖子的处理状态（0：待处理，1：举报无效，2：已删除）
+	int64 beginDisabled = 5; //禁用用户的开始时间（0表示没有禁用用户）
+	int64 endDisabled = 6; //禁用用户的结束时间（0表示没有禁用用户，-1表示禁用永久）
+}
+
+message PReportNewsInfoList {
+	repeated PReportNewsInfo list = 1;
+}
+
+message PReportNewsUser {
+	int32 qtype = 1; //举报的问题类型
+	int64 ctime = 2; //举报时间
+	PUserBase user = 3; //用户基本信息
+}
+
+message PReportNewsUserList {
+	repeated PReportNewsUser list = 1;
+}
+
 
 
 /**1.6版本***结束**/
@@ -411,6 +435,53 @@ message PRecommendUsers {
 	4、垃圾营销
 	5、侵权信息
 	6、虚假信息
+ *@return PResult
+ */
+ 
+ 
+/**
+* 待处理的举报帖子的数量
+*
+*@path /platform-manager/report/news/count
+*@cookie token&uuid
+*@method get
+*@param cid 社区ID
+*@return 成功：PInt32Single，失败：PResult
+*/
+  
+/**
+* 待处理的列表/已处理的列表
+*
+*@path /platform-manager/report/news/list
+*@cookie token&uuid
+*@method get
+*@param cid 社区ID
+*@param status 处理状态（0待处理，1已处理）
+*@param offset 分页偏移量（开始为0，后面页码为(offset+1)*count）
+*@param count 第页总量（默认10条）
+*@return 成功：PReportNewsInfoList，失败：PResult
+*/
+  
+/**
+ * 举报人列表
+ *
+ *@path /platform-manager/report/news/user
+ *@cookie token&uuid
+ *@method get
+ *@param id 举报ID
+ *@param offset 分页偏移量（开始为0，后面页码为(offset+1)*count）
+ *@param count 第页总量（默认10条）
+ *@return done: PReportNewsUserList, faild: PResult
+ */
+ 
+/**
+ * 删除帖子、还原帖子/举报无效及取消举报无效
+ *
+ *@path /platform-manager/report/news/status
+ *@cookie token&uuid
+ *@method put
+ *@param id 举报ID
+ *@param status 状态（0取消举报无效，1举报无效或还原帖子，2删除帖子）
  *@return PResult
  */
  
