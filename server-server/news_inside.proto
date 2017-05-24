@@ -357,6 +357,13 @@ service IGrpcNews {
     rpc GrpcDeletePost(PDeletePostsParam) returns (PEmpty);
 
     /*
+     *@note    恢复被删除的帖子(粉丝管理系统)
+     *@param    PDeletePostsParam 帖子ID
+     *@return   PEmpty
+     */
+    rpc GrpcUnDeletePost(PDeletePostsParam) returns (PEmpty);
+
+    /*
      *@note    查询用户的统计信息(粉丝数、关注数、帖子数)
      *@param    PNewsQueryUserParam 帖子ID
      *@return   PNewsUserStatisticList
