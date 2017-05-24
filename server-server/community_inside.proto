@@ -197,4 +197,32 @@ service IGrpcCommunity {
      *@return 成功返回 PCommunityManagerRightList ，失败返回 PResult
      */
     rpc GetCommunityRightWithCommunityID(PStringList) returns (PCommunityManagerRightList);
+
+    /*
+     *@note 获取社区banner信息
+     *@param 社区id列表
+     *@return 成功返回 PCommunityBannerEx ， 失败返回 PResult
+     */
+    rpc GetBannerInfoListEx(PStringList) returns (PCommunityBannerEx);
+
+    /*
+     *@note 修改社区banner开启状态
+     *@param 参数数组 [0]社区id [1]开启状态（0为开启，1为关闭）
+     *@return 返回 PResult
+     */
+    rpc PutBannerStatus(PStringList) returns (PEmpty);
+
+    /*
+     *@note 修改社区banner审核状态，PCommunityBannerInfo中只填Id与ReviewStatus
+     *@param PCommunityBannerInfoEx 
+     *@return 返回 PResult
+     */
+    rpc PutBannerInfo(PCommunityBannerInfoEx) returns (PEmpty);
+
+    /*
+     *@note 修改社区名字
+     *@param 参数数组 [0]社区id [1]社区名字
+     *@return 返回 PResult
+     */
+    rpc PutCommunityName(PStringList) returns (PEmpty);
  }

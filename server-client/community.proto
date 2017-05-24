@@ -185,12 +185,31 @@ message PCommunityBannerInfo {
     PCommunityResource LinkRes = 4; 			// banner链接信息，无链接是为空；有链接时，Name填：链接描述信息；type可选的有：url、post；URL填对应的值：url->完整的链接地址字段、post->动态帖子id|资讯帖子id|公告id
     int32 EnableStatus = 5;						// 开启状态；0为启用，1为不开启，2为审核不通过
     int32 ReviewStatus = 6;						// 审核状态；0为未审核，1为审核通过，2为审核不通过
-
+    int64 Id = 7;								// banner的uid，由服务端生成并返回给客户端，客户端修改/新增banner时，这个字段需要置为0。如果Id不变，但Name/ImgRes/LinkRes更改了，服务端判定为新的banner，会重置审核状态为0
 }
 
 // 社区Banner资源信息列表
 message PCommunityBannerInfoList {
 	repeated PCommunityBannerInfo List = 1;		// banner图的顺序跟客户端编辑时顺序一致；开启的广告显示在前面，不开启的广告显示在后面
+}
+
+// PCommunityBannerInfo 扩展信息
+message PCommunityBannerInfoEx {
+	int64 Id = 1;								// 社区id
+	PCommunityBannerInfo Info = 5;				// banner信息
+}
+
+// PCommunityBannerInfoList 扩展信息
+message PCommunityBannerInfoListEx {
+	int64 Id = 1;								// 社区id
+	bool UserDisableBanner = 2;					// 社区创建者/管理员关闭社区banner功能的标志位
+	bool SystemDisableBanner = 3;				// 监管系统关闭banner功能的标志位
+	PCommunityBannerInfoList BannerList = 10;	// banner信息
+}
+
+// PCommunityBannerInfoListEx列表
+message PCommunityBannerEx {
+	repeated PCommunityBannerInfoListEx List = 1; //
 }
 
 // 用户的自定义功能模块
@@ -245,6 +264,8 @@ message PCommunityHomeV12 {
     PUserBase Owner = 6;                 		// 社区创建者的信息
     PUserBaseList TopUserList = 7;       		// top成员列表；创建时不需要传
     PCommunityInfoV12 CommunityInfo = 8; 		// 社区信息
+    bool UserDisableBanner = 9;					// 社区创建者/管理员关闭社区banner功能的标志位
+    bool SystemDisableBanner = 10;				// 监管系统关闭banner功能的标志位
 }
 
 // 图集里面图片的信息
@@ -631,15 +652,13 @@ message PCommunityManagerRightList {
  
 /*
  *@note  修改社区
- *@path /v1.2/community
+ *@path /v1.2/community; 1.7.x版本修改banner的功能，移到 /v1.7/community/banner
  *@method PUT
  *@url param id 社区id
- *@url param fields 要修改的选项如：Name,HeadImg,IntroduceRes,Layout,BannerList,ModulesList,修改多个以,分割,参数对应的字段如下
- 					Name -> PCommunityInfoV12.BaseInfo.Name
+ *@url param fields 要修改的选项如：HeadImg,IntroduceRes,Layout,ModulesList,修改多个以,分割,参数对应的字段如下
  					HeadImg -> PCommunityInfoV12.BaseInfo.HeadImg
  					IntroduceRes -> PCommunityInfoV12.IntroduceRes
  					Layout -> PCommunityInfoV12.Layout （这个结构需要完整填充）
- 					BannerList -> PCommunityInfoV12.BannerList
  					ForumTagList -> PCommunityInfoV12.ForumTagList
  					ModulesList -> PCommunityInfoV12.ModulesList
  *@body PCommunityInfoV12
@@ -888,4 +907,21 @@ message PCommunityManagerRightList {
  *@url param name 社区名
  *@cookie token&uuid
  *@return 成功返回 PInt64Single ，失败返回PResult
+ */
+
+/*
+ *@note 根据社区id，获取banner状态/信息
+ *@path /v1.7/community/banner
+ *@method GET
+ *@url param id 社区id
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityBannerInfoListEx ，失败返回PResult
+ */
+
+ /*
+ *@note 修改社区banner信息
+ *@path /v1.7/community/banner
+ *@method PUT
+ *@body PCommunityBannerInfoListEx
+ *@return 成功返回 PCommunityBannerInfoListEx ，失败返回PResult
  */
