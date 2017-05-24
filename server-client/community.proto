@@ -146,7 +146,7 @@ message PInsideCommunityUser {
 	PUserBase User = 2;							// 用户基础信息
 	int64 FollowTime = 3;						// 关注社区的时间
 	int64 ForbidTime = 4; 						// 用户禁用到期时间
-	int64 BeBlacklistTime = 5;					// 用户被踢出社区的时间
+	int64 BeBlacklistTime = 5;					// 用户被踢出社区的时间；1.7后续版本会删除
 }
 
 // 社区用户列表信息
@@ -562,27 +562,6 @@ message PCommunityManagerRightList {
  */
 
 /*
- *@note 设置-查看私信
- *@path /v1/community/setting/private/mail
- *@method GET
- *@url param id 社区id
- *@url param mailid 信件id
- *@cookie token&uuid
- *@return 成功返回 PCommunityMailInfo ，失败返回 PResult
- */
-
-/*
- *@note 设置-管理员发送私信
- *@path /v1/community/setting/admin/private/mail
- *@method POST
- *@url param id 社区id
- *@url param uuid 接收信件用户的uuid
- *body PCommunityMailUpload
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
  *@note 设置-支持-禁用/解禁用户
  *@path /v1/community/setting/admin/disableduser
  *@method POST
@@ -597,28 +576,6 @@ message PCommunityManagerRightList {
 /*
  *@note 设置-支持-禁用用户列表
  *@path /v1/community/setting/admin/disableduser
- *@method GET
- *@url param id 社区id
- *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移
- *@url param count 获取个数
- *@cookie token&uuid
- *@return 成功返回 PUserBaseList ，失败返回 PResult
- */
-
-/*
- *@note 设置-支持-踢出/解除踢出社区
- *@path /v1/community/setting/admin/blacklist
- *@method POST
- *@url param id 社区id
- *@url param operate 0为解除踢出社区，1为踢出社区
- *@url param uuid  设置用户id
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 设置-支持-踢出社区用户列表
- *@path /v1/community/setting/admin/blacklist
  *@method GET
  *@url param id 社区id
  *@url param offset 一开始以0开始，之后 offset = offset+ count 值偏移

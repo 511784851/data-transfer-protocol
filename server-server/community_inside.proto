@@ -41,13 +41,6 @@ service IGrpcCommunity {
     rpc GetForbidFlag(PStringList) returns (PBoolSingle);
 
     /*
-     *@note 获取用户在社区的黑名单状态，true为黑名单
-     *@param 参数数组 [0]用户UUID [1]社区id 
-     *@return 成功返回 PBoolSingle ，失败返回 PResult
-     */
-    rpc GetBlacklistFlag(PStringList) returns (PBoolSingle);
-
-    /*
      *@note 获取社区成员列表
      *@param 社区id的列表 
      *@return 成功返回 PStringList ，失败返回 PResult
