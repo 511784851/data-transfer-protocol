@@ -74,9 +74,9 @@ import "oss.proto";
  */
 
 message PImgURL {
-	string origin = 1; //原文件地址，图片文件不一定有
-	string low = 2;	   //低清图地址 720宽，图片才有
-	string thumb = 3;  //缩略图地址 默认360宽，图片才有
+	string origin = 1; //原图地址，不一定有
+	string low = 2;	   //低清图地址
+	string thumb = 3;  //缩略图地址
 }
 
 message PImgURLs {
