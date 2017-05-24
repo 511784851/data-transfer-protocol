@@ -195,13 +195,13 @@ message PCommunityBannerInfoList {
 
 // PCommunityBannerInfo 扩展信息
 message PCommunityBannerInfoEx {
-	int64 Id = 1;								// 社区id
+	string Id = 1;								// 社区id
 	PCommunityBannerInfo Info = 5;				// banner信息
 }
 
 // PCommunityBannerInfoList 扩展信息
 message PCommunityBannerInfoListEx {
-	int64 Id = 1;								// 社区id
+	string Id = 1;								// 社区id
 	bool UserDisableBanner = 2;					// 社区创建者/管理员关闭社区banner功能的标志位
 	bool SystemDisableBanner = 3;				// 监管系统关闭banner功能的标志位
 	PCommunityBannerInfoList BannerList = 10;	// banner信息
@@ -901,7 +901,7 @@ message PCommunityManagerRightList {
  */
 
 /*
- *@note 根据社区名获取社区id，如果没有这个社区名的社区，则社区id为0
+ *@note 根据社区名获取社区id，如果没有这个社区名的社区，则社区id为0，如果为-1则代表有用户使用这个社区名在创建社区
  *@path /v1.7/community/id
  *@method GET
  *@url param name 社区名
@@ -918,7 +918,7 @@ message PCommunityManagerRightList {
  *@return 成功返回 PCommunityBannerInfoListEx ，失败返回PResult
  */
 
- /*
+/*
  *@note 修改社区banner信息
  *@path /v1.7/community/banner
  *@method PUT
