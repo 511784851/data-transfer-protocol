@@ -922,6 +922,9 @@ message PCommunityManagerRightList {
  *@note 修改社区banner信息
  *@path /v1.7/community/banner
  *@method PUT
+ *@url param fields 要修改的数据字段，可选字段有 disable,bannerlist。修改多个值以,分割
+ 						disable		--> PCommunityBannerInfoListEx.UserDisableBanner
+ 						bannerlist 	--> PCommunityBannerInfoListEx.BannerList
  *@body PCommunityBannerInfoListEx
  *@return 成功返回 PCommunityBannerInfoListEx ，失败返回PResult
  */
