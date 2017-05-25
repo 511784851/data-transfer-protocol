@@ -57,7 +57,7 @@ message PLoginUpdateAccount {
  *@path /v1/login/authcode
  *@method DELETE
  *@url param phonecode 手机号，需要带上区号。例：+8613512345678
- *@url param type 验证码的类型； 1 新用户注册，2 密码重置，3 修改绑定手机号码
+ *@url param type 验证码的类型；1 新用户注册，2 密码重置，3 修改绑定手机号码，4 使用手机号码快速登录  5 第三方登录绑定手机号码
  *@url param authcode 下发客户端的短信验证码
  *@url param appid 应用分配的id
  *@return 成功返回 PStringSingle，其存储的是authtoken，用于验证手机号码下一步操作用，有效时间为5分钟； 失败则返回 PResult
@@ -232,6 +232,7 @@ message PLoginUpdateAccount {
  *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
  *@form param channel 渠道或应用平台
  *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@return 登录成功返回 PLogin ，失败返回 PResult
  */
 
