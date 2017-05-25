@@ -55,6 +55,7 @@ message PPostState {
 	bool        canDelete           = 8; //是否有删除权限(社区创建者、具有帖子管理权限的管理员, 与是否为帖子作者无关)
 	PLabelList  labelList           = 9; //标签列表,取值参考ECommunityPostLabel
 	int32       followShip          = 10; //关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
+	int32       shield              = 11; //屏蔽状态, 0:未屏蔽, 1:已被用户屏蔽
 }
 
 // 标签列表
@@ -644,4 +645,12 @@ message PNewsFollowExist {
  *@method GET
  *@param  postid 帖子 id
  *@return PPostView,失败返回 PResult
+ */
+
+ /**
+ *@note   用户屏蔽帖子
+ *@path   /v1/news/shield/post
+ *@method PUT
+ *@param  postid 帖子 id
+ *@return  返回PResult
  */
