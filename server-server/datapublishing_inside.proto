@@ -306,6 +306,8 @@ service grpcDataPublishing {
 	rpc JoinCommunity(PEsActionMsg) returns (PEmpty);
 	// 搜索社区
 	rpc SearchCommunity(PCustomPageParam) returns (PStringList);
+	// 分类列出社区
+	rpc ListCommunityByCategory(PCustomPageParam) returns (PStringList);
 	// 新增帖子
 	rpc AddPost(PPostStore) returns (PEmpty);
 	// 更新帖子内容
@@ -490,4 +492,9 @@ service grpcDataPublishing {
 	rpc GetCommunityPhotos(PStringSingle) returns(PCommunityPhotoAlbumList);
 	//  社区成员列表
 	rpc ListCommunityMember(PStringSingle) returns(PStringList);
+	
+	// 对帖子不感兴趣
+	rpc DisinterestPost(PStringList) returns (PEmpty);
+	// 对用户不感兴趣
+	rpc DisinterestUser(PStringList) returns (PEmpty);
 }
