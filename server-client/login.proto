@@ -45,7 +45,7 @@ message PLoginUpdateAccount {
  *@method POST
  *@form param phonecode 手机号，需要带上区号。例：+8613512345678
  *@form param type 短信验证码的类型； 5 第三方登录绑定手机号码
- *@form param bind_type 要绑定的第三方登录类型， 1 微信；2 微博；3 脸书；4 谷歌
+ *@form param bind_type 要绑定的第三方登录类型， 1 微信；2 微博；3 脸书；4 谷歌； 6 QQ
  *@form param lang "zh-cn" //中文简体；"zh-tw" //中文繁体；"en-us" //English；"ko-kr" //韩文
  *@form param imei 手机设备串号
  *@form param appid 应用分配的id
@@ -221,6 +221,21 @@ message PLoginUpdateAccount {
  */
 
 /*
+ *@note QQ登录，如果之前没登录过，自动创建账号
+ *@path /v1/login/third_party/qq/account
+ *@method POST
+ *@form param openid 客户端SDK返回
+ *@form param access_token 客户端SDK返回
+ *@form param ostp 操作系统类型 0未知、1Android、2IOS
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
+ *@return 登录成功返回 PLogin ，失败返回 PResult
+ */
+
+/*
  *@note 第三方登录绑定手机号码调用的接口
  *@path /v1/login/third_party/bind
  *@method PUT
@@ -247,7 +262,7 @@ message PLoginUpdateAccount {
  *@method GET
  *@cookie token&uuid
  *@url param appid 应用分配的id
- *@return 成功返回 PBoolList (0 手机号码；1 微信；2 微博；3 脸书；4 谷歌；5 用户名)，失败返回PResult,
+ *@return 成功返回 PBoolList (0 手机号码；1 微信；2 微博；3 脸书；4 谷歌；5 用户名；6 QQ)，失败返回PResult,
  */
 
 /*
@@ -255,7 +270,7 @@ message PLoginUpdateAccount {
  *@uri  /v1/login/account/binding 
  *@method DELETE
  *@cookie token&uuid
- *@url param type 解绑类型(1 微信；2 微博；3 脸书；4 谷歌)
+ *@url param type 解绑类型(1 微信；2 微博；3 脸书；4 谷歌；6 QQ)
  *@url param appid 应用分配的id
  *@return 返回 PResult
  */
@@ -366,6 +381,44 @@ message PLoginUpdateAccount {
  *@path /v1.7/login/account
  *@method PUT
  *@body PLoginUpdateAccount 修改用户的信息
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+ /*
+ *@note 往用户绑定的手机号码发送短信验证码
+ *@path /v1.7/login/authcode
+ *@method POST
+ *@form param type 短信验证码的类型； 1 新用户注册 ，2 密码重置 ，3 修改绑定手机号码 ，4 使用手机号码快速登录 ， 5 第三方注册时绑定手机号码
+ *@form param lang "zh-cn" //中文简体；"zh-tw" //中文繁体；"en-us" //English；"ko-kr" //韩文
+ *@form param ostp 操作系统类型 0 未知、1 Android、2 IOS、3 水军、4 粉丝管理系统
+ *@form param osv 操作系统版本
+ *@form param model 设备型号
+ *@form param imei 手机取IMEI，无IMEI用WIFI的MAC地址
+ *@form param channel 渠道或应用平台
+ *@form param appid 应用分配的id
+ *@form param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
+
+/*
+ *@note 验证绑定手机号码接收的验证码
+ *@path /v1.7/login/authcode
+ *@method DELETE
+ *@url param authcode 下发客户端的短信验证码
+ *@url param type 短信验证码的类型； 1 新用户注册 ，2 密码重置 ，3 修改绑定手机号码 ，4 使用手机号码快速登录 ， 5 第三方注册时绑定手机号码
+ *@cookie token&uuid
+ *@return 成功返回 PStringSingle，其存储的是authtoken，用于验证手机号码下一步操作用，有效时间为5分钟； 失败则返回 PResult
+ */
+
+ /*
+ *@note 重置密码
+ *@path /v1.7/login/account/password
+ *@method PUT
+ *@form param type reset
+ *@form param authtoken 验证手机短信验证码后返回的authtoken
+ *@form param password 新密码
  *@cookie token&uuid
  *@return 返回 PResult
  */
