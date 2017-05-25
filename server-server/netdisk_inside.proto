@@ -18,10 +18,16 @@ enum PStatus{
 	WAIT_AUDIT = 1;//待审核
 	DECLINE = 2;//审核不通过
 	DELETED = 3;//视频已删除
+	HIDDEN = 4; //隐藏
 }
 enum POP{
 	CREATE = 0; //创建
 	DELETE = 1; //删除
+}
+message PHiddenParam{
+    string communityId = 1;//社区ID
+    string postId = 2;//帖子ID
+    string uuid = 3;//UUID
 }
 message PSetFileParam{
 	string communityId = 1;//社区ID
@@ -69,7 +75,13 @@ service NetDiskService{
 	
 	/*
      *@note 举报单个视频
-     *@return 成功返回 PEmpty，失败返回 PResult
+     *@return 成功返回 PBoolSingle，失败返回 PResult
      */
 	rpc tipoffVideoByObjectkey(PTipOffObjkeyParam) returns (PBoolSingle);
+
+    /*
+     *@note 隐藏视频
+     *@return 成功返回 PBoolSingle，失败返回 PResult
+     */
+    rpc hiddenVideo(PHiddenParam) returns (PBoolSingle);
 }
