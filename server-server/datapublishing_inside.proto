@@ -363,6 +363,11 @@ service grpcDataPublishing {
 	// state 审核状态 0待审 1通过审核 2未通过审核 4已删除的帖子
 	// cotag 所属的社区的分类，string
 	// tag 帖子标签，string
+	// votes 点赞数最小值， int
+	// comments 评论数最小值， int
+	// shares 分享数最小值， int
+	// bookmarks 收藏数最小值， int
+	// views 浏览数最小值， int
 	// begin, end 发布时间起止范围,unix时间戳,秒
 	// sort_time 以帖子发布时间排序 asc升序 desc降序（默认）
 	// sort_hot 以帖子热门度排序，仅支持desc降序
