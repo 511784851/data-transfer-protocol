@@ -411,3 +411,14 @@ message PLoginUpdateAccount {
  *@cookie token&uuid
  *@return 成功返回 PStringSingle，其存储的是authtoken，用于验证手机号码下一步操作用，有效时间为5分钟； 失败则返回 PResult
  */
+
+ /*
+ *@note 重置密码
+ *@path /v1.7/login/account/password
+ *@method PUT
+ *@form param type reset
+ *@form param authtoken 验证手机短信验证码后返回的authtoken
+ *@form param password 新密码
+ *@cookie token&uuid
+ *@return 返回 PResult
+ */
