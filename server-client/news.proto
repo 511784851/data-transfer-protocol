@@ -648,9 +648,10 @@ message PNewsFollowExist {
  */
 
  /**
- *@note   用户屏蔽帖子
- *@path   /v1/news/shield/post
+ *@note   屏蔽帖子或用户
+ *@path   /v1.2/news/shield
  *@method PUT
- *@param  postid 帖子 id
+ *@param  id     帖子ID或uuid(与type对应)
+ *@param  type   0:屏蔽帖子, 1:屏蔽用户. 默认:0
  *@return  返回PResult
  */
