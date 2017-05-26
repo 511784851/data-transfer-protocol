@@ -55,6 +55,7 @@ message PPostState {
 	bool        canDelete           = 8; //是否有删除权限(社区创建者、具有帖子管理权限的管理员, 与是否为帖子作者无关)
 	PLabelList  labelList           = 9; //标签列表,取值参考ECommunityPostLabel
 	int32       followShip          = 10; //关注关系, 0:无关注关系, 1: 访客被作者关注, 2: 访客关注了作者, 3:已相互关注
+	int32       shield              = 11; //屏蔽状态, 0:未屏蔽, 1:帖子已被用户屏蔽,  2:作者已被用户屏蔽, 3:帖子和作者都已被屏蔽
 }
 
 // 标签列表
@@ -65,6 +66,7 @@ message PLabelList {
 // 微博详情列表
 message PPostViewList {
 	repeated PPostView list = 1; //博文列表
+	int64    nextIndex      = 2; //下一次查询的偏移,目前仅APP首页精选页面的查询使用
 }
 
 // 帖子展示信息
@@ -618,9 +620,20 @@ message PNewsFollowExist {
  *@path   /v1.2/news/newsfeed
  *@cookie token&uuid
  *@method GET
- *@param  class  社区分类的ID, hot 的ID固定为0
+ *@param  class  社区分类的ID, top 的ID固定为0
  *@param  pageindex 页数偏移, 每次翻页加1,默认:0
  *@param  pagesize  每页大小, 默认10, 最大值为50
+ *@return 成功返回 PPostViewList ，失败返回 PResult
+ */
+
+ /**
+ *@note   获取APP首页的精选列表(筛选的资讯+动态)
+ *@path   /v1.7/news/newsfeed
+ *@cookie token&uuid
+ *@method GET
+ *@param  class  社区分类的ID, top 的ID固定为0
+ *@param  offset 偏移, 上一次返回结果中的PPostViewList.nextIndex
+ *@param  count  每页大小, 默认10, 最大值为50
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
@@ -644,4 +657,13 @@ message PNewsFollowExist {
  *@method GET
  *@param  postid 帖子 id
  *@return PPostView,失败返回 PResult
+ */
+
+ /**
+ *@note   屏蔽帖子或用户
+ *@path   /v1.2/news/shield
+ *@method PUT
+ *@param  id     帖子ID或uuid(与type对应)
+ *@param  type   0:屏蔽帖子, 1:屏蔽用户的动态. 默认:0
+ *@return  返回PResult
  */

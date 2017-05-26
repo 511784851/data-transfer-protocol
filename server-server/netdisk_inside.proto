@@ -23,6 +23,12 @@ enum POP{
 	CREATE = 0; //创建
 	DELETE = 1; //删除
 }
+message PHiddenParam{
+    string communityId = 1;//社区ID
+    string postId = 2;//帖子ID(postId、hiddenUuid 二者传其一)
+    string hiddenUuid = 3;//UUID 帖子创建者UUID、被屏蔽用户的UUID
+	string uuid = 4;//发起者的UUID
+}
 message PSetFileParam{
 	string communityId = 1;//社区ID
 	repeated string postId = 2;//帖子ID
@@ -69,7 +75,13 @@ service NetDiskService{
 	
 	/*
      *@note 举报单个视频
-     *@return 成功返回 PEmpty，失败返回 PResult
+     *@return 成功返回 PBoolSingle，失败返回 PResult
      */
 	rpc tipoffVideoByObjectkey(PTipOffObjkeyParam) returns (PBoolSingle);
+
+    /*
+     *@note 隐藏视频
+     *@return 成功返回 PBoolSingle，失败返回 PResult
+     */
+    rpc hiddenVideo(PHiddenParam) returns (PBoolSingle);
 }

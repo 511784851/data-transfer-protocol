@@ -367,7 +367,7 @@ message PCommunitySortList {
 	string ID = 1;								// 社区ID，设置社区分类时填充；其它情况为空即可
 	string UUID = 2;							// 用户ID，修改资讯页面‘我的分类’时填充；其它情况为空即可
 	repeated PCommunitySort Recommend = 3;		// 首页精选栏固定显示分类，1.6版固定显示top
-    repeated PCommunitySort Customize = 4;		// 自定义分类
+    repeated PCommunitySort Customize = 4;		// 首页精选栏用户自定义分类 或者 监管后台设置的推荐分类
 }
 
 /*=====================================*/
@@ -922,6 +922,20 @@ message PCommunityManagerRightList {
  *@note 修改社区banner信息
  *@path /v1.7/community/banner
  *@method PUT
+ *@url param fields 要修改的数据字段，可选字段有 disable,bannerlist。修改多个值以,分割
+ 						disable		--> PCommunityBannerInfoListEx.UserDisableBanner
+ 						bannerlist 	--> PCommunityBannerInfoListEx.BannerList
  *@body PCommunityBannerInfoListEx
  *@return 成功返回 PCommunityBannerInfoListEx ，失败返回PResult
+ */
+
+/*
+ *@note 分页获取推荐社区列表
+ *@path /v1.7/community/recommend/community
+ *@method GET
+ *@url param type 分类id，如果是全部，则不用填这个字段
+ *@url param offset 起始下标，以0开始
+ *@url param count 获取数量，最大数量为20
+ *@cookie token&uuid
+ *@return 成功返回 PCommunityBaseList ，失败返回PResult
  */

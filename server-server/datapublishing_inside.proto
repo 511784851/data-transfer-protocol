@@ -90,7 +90,8 @@ message PCustomPageParam {
 	int32 size = 2;
 	
 	//根据接口确定含义
-	string arg0 = 3;	
+	string arg0 = 3;
+	string arg1 = 4;
 }
 
 message PJsonParam {
@@ -306,6 +307,8 @@ service grpcDataPublishing {
 	rpc JoinCommunity(PEsActionMsg) returns (PEmpty);
 	// 搜索社区
 	rpc SearchCommunity(PCustomPageParam) returns (PStringList);
+	// 分类列出社区
+	rpc ListCommunityByCategory(PCustomPageParam) returns (PStringList);
 	// 新增帖子
 	rpc AddPost(PPostStore) returns (PEmpty);
 	// 更新帖子内容
@@ -363,6 +366,11 @@ service grpcDataPublishing {
 	// state 审核状态 0待审 1通过审核 2未通过审核 4已删除的帖子
 	// cotag 所属的社区的分类，string
 	// tag 帖子标签，string
+	// votes 点赞数最小值， int
+	// comments 评论数最小值， int
+	// shares 分享数最小值， int
+	// bookmarks 收藏数最小值， int
+	// views 浏览数最小值， int
 	// begin, end 发布时间起止范围,unix时间戳,秒
 	// sort_time 以帖子发布时间排序 asc升序 desc降序（默认）
 	// sort_hot 以帖子热门度排序，仅支持desc降序
@@ -485,4 +493,9 @@ service grpcDataPublishing {
 	rpc GetCommunityPhotos(PStringSingle) returns(PCommunityPhotoAlbumList);
 	//  社区成员列表
 	rpc ListCommunityMember(PStringSingle) returns(PStringList);
+	
+	// 对帖子不感兴趣
+	rpc DisinterestPost(PStringList) returns (PEmpty);
+	// 对用户不感兴趣
+	rpc DisinterestUser(PStringList) returns (PEmpty);
 }

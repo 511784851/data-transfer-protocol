@@ -42,6 +42,7 @@ message PNetFile {
 	int32 category = 33;		// 分类 0:全部，1:精华(与PCategory对应)
 	int32 membership = 34;		// 用户与社区的关系，-1无关系，0为拥有者，1为管理者，2为已关注
 	bool isSync = 35;			// 是否同步
+	string hiddenList = 36;		//被隐藏的用户列表","分割
 }
 
 message PNetFilelist {
