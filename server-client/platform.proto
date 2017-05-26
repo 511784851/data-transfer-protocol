@@ -450,14 +450,14 @@ message PRecommendUsers {
 */
   
 /**
-* 待处理的列表/已处理的列表
+* 所有举报列表/待处理的举报列表/已处理的举报列表
 *
 *@path /platform-manager/report/news/list
 *@cookie token&uuid
 *@method get
 *@param cid 社区ID
 *@param status 处理状态（-1所有，0待处理，1已处理）
-*@param offset 分页偏移量（开始为0）
+*@param offset 分页偏移量（开始为0,第二页为1，以此类推）
 *@param count 第页总量（默认10条）
 *@return 成功：PReportNewsInfoList，失败：PResult
 */
@@ -469,7 +469,7 @@ message PRecommendUsers {
  *@cookie token&uuid
  *@method get
  *@param id 举报ID
- *@param offset 分页偏移量（开始为0）
+ *@param offset 分页偏移量（开始为0，第二页为1，以此类推）
  *@param count 第页总量（默认10条）
  *@return done: PReportNewsUserList, faild: PResult
  */
@@ -480,8 +480,8 @@ message PRecommendUsers {
  *@path /platform-manager/report/news/status
  *@cookie token&uuid
  *@method put
- *@param id 举报ID
- *@param status 状态（0取消举报无效，1举报无效或还原帖子，2删除帖子）
+ *@url param id 举报ID
+ *@url param status 状态（0取消举报无效，1举报无效，2删除帖子，3还原帖子）
  *@return PResult
  */
  
