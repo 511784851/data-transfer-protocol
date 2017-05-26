@@ -204,6 +204,7 @@ message PCommunityBannerInfoListEx {
 	string Id = 1;								// 社区id
 	bool UserDisableBanner = 2;					// 社区创建者/管理员关闭社区banner功能的标志位
 	bool SystemDisableBanner = 3;				// 监管系统关闭banner功能的标志位
+	string CommunityName = 4;					// 社区名
 	PCommunityBannerInfoList BannerList = 10;	// banner信息
 }
 
