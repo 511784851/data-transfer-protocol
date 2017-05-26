@@ -620,7 +620,7 @@ message PNewsFollowExist {
  *@path   /v1.2/news/newsfeed
  *@cookie token&uuid
  *@method GET
- *@param  class  社区分类的ID, hot 的ID固定为0
+ *@param  class  社区分类的ID, top 的ID固定为0
  *@param  pageindex 页数偏移, 每次翻页加1,默认:0
  *@param  pagesize  每页大小, 默认10, 最大值为50
  *@return 成功返回 PPostViewList ，失败返回 PResult
@@ -631,7 +631,7 @@ message PNewsFollowExist {
  *@path   /v1.7/news/newsfeed
  *@cookie token&uuid
  *@method GET
- *@param  class  社区分类的ID, hot 的ID固定为0
+ *@param  class  社区分类的ID, top 的ID固定为0
  *@param  offset 偏移, 上一次返回结果中的PPostViewList.nextIndex
  *@param  count  每页大小, 默认10, 最大值为50
  *@return 成功返回 PPostViewList ，失败返回 PResult
