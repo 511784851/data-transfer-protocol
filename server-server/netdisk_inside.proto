@@ -18,7 +18,6 @@ enum PStatus{
 	WAIT_AUDIT = 1;//待审核
 	DECLINE = 2;//审核不通过
 	DELETED = 3;//视频已删除
-	HIDDEN = 4; //隐藏
 }
 enum POP{
 	CREATE = 0; //创建
@@ -26,8 +25,9 @@ enum POP{
 }
 message PHiddenParam{
     string communityId = 1;//社区ID
-    string postId = 2;//帖子ID
-    string uuid = 3;//UUID
+    string postId = 2;//帖子ID(postId、hiddenUuid 二者传其一)
+    string hiddenUuid = 3;//UUID 帖子创建者UUID、被屏蔽用户的UUID
+	string uuid = 4;//发起者的UUID
 }
 message PSetFileParam{
 	string communityId = 1;//社区ID
