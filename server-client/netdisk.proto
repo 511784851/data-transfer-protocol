@@ -45,6 +45,12 @@ message PNetFile {
 	string hiddenList = 36;		//被隐藏的用户列表","分割
 }
 
+message PBlacklist{
+    string communityId = 1;     //社区ID
+    string uuid = 2;            //当前用户UUID
+    string blackUuidList = 3;   //被屏蔽的uuid列表
+}
+
 message PNetFilelist {
 	repeated PNetFile netFile = 1;
 	int32 DiskSize = 2;         //总数量
