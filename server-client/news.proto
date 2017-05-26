@@ -66,6 +66,7 @@ message PLabelList {
 // 微博详情列表
 message PPostViewList {
 	repeated PPostView list = 1; //博文列表
+	int64    nextIndex      = 2; //下一次查询的偏移,目前仅APP首页精选页面的查询使用
 }
 
 // 帖子展示信息
@@ -622,6 +623,17 @@ message PNewsFollowExist {
  *@param  class  社区分类的ID, hot 的ID固定为0
  *@param  pageindex 页数偏移, 每次翻页加1,默认:0
  *@param  pagesize  每页大小, 默认10, 最大值为50
+ *@return 成功返回 PPostViewList ，失败返回 PResult
+ */
+
+ /**
+ *@note   获取APP首页的精选列表(筛选的资讯+动态)
+ *@path   /v1.7/news/newsfeed
+ *@cookie token&uuid
+ *@method GET
+ *@param  class  社区分类的ID, hot 的ID固定为0
+ *@param  offset 偏移, 上一次返回结果中的PPostViewList.nextIndex
+ *@param  count  每页大小, 默认10, 最大值为50
  *@return 成功返回 PPostViewList ，失败返回 PResult
  */
 
