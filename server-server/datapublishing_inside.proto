@@ -496,6 +496,9 @@ service grpcDataPublishing {
 	
 	// 对帖子不感兴趣
 	rpc DisinterestPost(PStringList) returns (PEmpty);
+	rpc DisinterestPostBroadcast(PStringList) returns (PEmpty);
 	// 对用户不感兴趣
 	rpc DisinterestUser(PStringList) returns (PEmpty);
+	rpc DisinterestUserBroadcast(PStringList) returns (PEmpty);
+	
 }
