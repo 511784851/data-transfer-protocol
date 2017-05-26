@@ -117,6 +117,10 @@ message PUserBaseCommunity {
 	int64 ForbidEndTime = 4;        // 用户被禁用的到期时间
 }
 
+message PUserBaseCommunityList {
+	repeated PUserBaseCommunity list = 1; 
+}
+
 message PPhoneMap {
 	map<string,string> list = 1; //手机号：uuid
 }

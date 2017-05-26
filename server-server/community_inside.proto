@@ -41,6 +41,13 @@ service IGrpcCommunity {
     rpc GetForbidFlag(PStringList) returns (PBoolSingle);
 
     /*
+     *@note 获取用户在社区的禁用时间列表
+     *@param 参数数组 [0]社区id [1...]用户UUID数组
+     *@return 成功返回 PBoolSingle ，失败返回 PResult
+     */
+    rpc GetForbidTimeList(PStringList) returns (PUserBaseCommunityList);
+
+    /*
      *@note 获取社区成员列表
      *@param 社区id的列表 
      *@return 成功返回 PStringList ，失败返回 PResult
