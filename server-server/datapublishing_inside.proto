@@ -90,7 +90,8 @@ message PCustomPageParam {
 	int32 size = 2;
 	
 	//根据接口确定含义
-	string arg0 = 3;	
+	string arg0 = 3;
+	string arg1 = 4;
 }
 
 message PJsonParam {
