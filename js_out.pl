@@ -17,6 +17,7 @@ $protos = "server-client/result.proto ".
 		"server-client/platform.proto ".
 		"server-client/datapublishing.proto ".
 		"server-client/community.proto ".
+		"server-client/fans.proto ".
 		"server-client/netdisk.proto ";
 
 

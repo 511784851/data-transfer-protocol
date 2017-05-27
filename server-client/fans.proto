@@ -1,0 +1,46 @@
+syntax = "proto3";
+package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "FansProtos";
+
+import "account.proto";
+import "../server-server/news_inside.proto";
+
+message PUserView {
+	repeated PUserBase view = 1;
+	int32 total = 2;
+	string context = 3;
+}
+
+message PUserShip {
+	repeated PUser users = 1;
+	repeated PNewsUserStatistic counts = 2;
+	map<string, int32> friends = 3;
+	string context = 4;
+	int32 total = 5;
+}
+
+message PVOMember {
+	PAccountVoMember vIPPList = 1;
+	PUserBase userBase = 2;
+	PNewsUserStatistic counts = 3;
+}
+
+message PVOMembers {
+	repeated TVOMember members = 1;
+	repeated PNewsUserStatistic counts = 2;
+	map<string, int32> friends = 3;
+}
+
+message PPostView {
+	repeated PPostView view = 1;
+	int32 total = 2;
+	string context = 3;
+}
+
+message PMenu {
+	int32 iD = 1;
+	string name = 2;
+	string func = 3;
+	repeated PMenu children = 4;
+}
