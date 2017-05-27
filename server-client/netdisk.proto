@@ -46,7 +46,6 @@ message PNetFile {
 }
 
 message PBlacklist{
-    string communityId = 1;     //社区ID
     string uuid = 2;            //当前用户UUID
     string blackUuidList = 3;   //被屏蔽的uuid列表
 }
