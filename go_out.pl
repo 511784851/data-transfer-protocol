@@ -31,6 +31,7 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/task.proto ".
 						"server-client/edge.proto ".
 						"server-client/achievement.proto ".
+						"server-client/fans.proto ".
 						"server-server/common_inside.proto ".
 						"server-server/login_inside.proto ".
                         "server-server/account_inside.proto ".

@@ -4,7 +4,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "FansProtos";
 
 import "account.proto";
-import "../server-server/news_inside.proto";
+import "news.proto";
 
 message PUserView {
 	repeated PUserBase view = 1;
@@ -14,7 +14,7 @@ message PUserView {
 
 message PUserShip {
 	repeated PUser users = 1;
-	repeated PNewsUserStatistic counts = 2;
+	repeated PCounts counts = 2;
 	map<string, int32> friends = 3;
 	string context = 4;
 	int32 total = 5;
@@ -23,16 +23,16 @@ message PUserShip {
 message PVOMember {
 	PAccountVoMember vIPPList = 1;
 	PUserBase userBase = 2;
-	PNewsUserStatistic counts = 3;
+	PCounts counts = 3;
 }
 
 message PVOMembers {
-	repeated TVOMember members = 1;
-	repeated PNewsUserStatistic counts = 2;
+	repeated PVOMember members = 1;
+	repeated PCounts counts = 2;
 	map<string, int32> friends = 3;
 }
 
-message PPostView {
+message PPostViewex {
 	repeated PPostView view = 1;
 	int32 total = 2;
 	string context = 3;
@@ -43,4 +43,14 @@ message PMenu {
 	string name = 2;
 	string func = 3;
 	repeated PMenu children = 4;
+}
+
+message PCounts {
+	int32 FollowCount   = 1;
+	int32 FansCount     = 2;
+	int32 BbnewsCount   = 3;
+	int32 NewsfeedCount = 4;
+	int32 FollowShip    = 5;
+	int32 FollowTime    = 6;
+	int32 PassiveTime   = 7;
 }
