@@ -18,7 +18,8 @@ $protos = "server-client/result.proto ".
 		"server-client/datapublishing.proto ".
 		"server-client/community.proto ".
 		"server-client/fans.proto ".
-		"server-client/netdisk.proto ";
+		"server-client/netdisk.proto ".
+		"server-server/news_inside.proto ";
 
 
 $cmd = "protoc -Iserver-client -Iserver-server --js_out=import_style=commonjs,binary:${output} ${protos}";

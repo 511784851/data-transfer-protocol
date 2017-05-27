@@ -5,6 +5,7 @@ option java_outer_classname = "FansProtos";
 
 import "account.proto";
 import "news.proto";
+import "news_inside.proto";
 
 message PUserView {
 	repeated PUserBase view = 1;
@@ -14,7 +15,7 @@ message PUserView {
 
 message PUserShip {
 	repeated PUser users = 1;
-	repeated PCounts counts = 2;
+	repeated PNewsUserStatistic counts = 2;
 	map<string, int32> friends = 3;
 	string context = 4;
 	int32 total = 5;
@@ -23,12 +24,12 @@ message PUserShip {
 message PVOMember {
 	PAccountVoMember vIPPList = 1;
 	PUserBase userBase = 2;
-	PCounts counts = 3;
+	PNewsUserStatistic counts = 3;
 }
 
 message PVOMembers {
 	repeated PVOMember members = 1;
-	repeated PCounts counts = 2;
+	repeated PNewsUserStatistic counts = 2;
 	map<string, int32> friends = 3;
 }
 
@@ -45,12 +46,12 @@ message PMenu {
 	repeated PMenu children = 4;
 }
 
-message PCounts {
-	int32 FollowCount   = 1;
-	int32 FansCount     = 2;
-	int32 BbnewsCount   = 3;
-	int32 NewsfeedCount = 4;
-	int32 FollowShip    = 5;
-	int32 FollowTime    = 6;
-	int32 PassiveTime   = 7;
-}
+// message PCounts {
+	// int32 FollowCount   = 1;
+	// int32 FansCount     = 2;
+	// int32 BbnewsCount   = 3;
+	// int32 NewsfeedCount = 4;
+	// int32 FollowShip    = 5;
+	// int32 FollowTime    = 6;
+	// int32 PassiveTime   = 7;
+// }
