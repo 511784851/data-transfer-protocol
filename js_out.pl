@@ -1,13 +1,16 @@
 #! /usr/bin/perl
 use File::Path;
-use Cwd;
+use Cwd; 
 $pwd = cwd();
-
+ 
 $output = "../web-fan-management/src/protobuf";
+mkdir($output);
+
 if (@ARGV > 0) {
 	$output = $ARGV[0];
 }
 
+#################server_client protos#######################
 $protos = "server-client/result.proto ".
                         "server-client/account.proto ".
 						"server-client/login.proto ".
@@ -43,12 +46,9 @@ $protos = "server-client/result.proto ".
 						"server-server/social_inside.proto ".
 						"server-server/netdisk_inside.proto";
 
-
 $cmd = "protoc -Iserver-client -Iserver-server --js_out=import_style=commonjs,binary:${output} ${protos}";
 system($cmd);
 
 if (@ARGV == 0) {
 	system(pause);
 }
-
-

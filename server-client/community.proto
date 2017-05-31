@@ -902,12 +902,21 @@ message PCommunityManagerRightList {
  */
 
 /*
- *@note 根据社区名获取社区id，如果没有这个社区名的社区，则社区id为0，如果为-1则代表有用户使用这个社区名在创建社区
+ *@note 根据社区名获取社区id，如果没有这个社区名的社区，则社区id为0
  *@path /v1.7/community/id
  *@method GET
  *@url param name 社区名
  *@cookie token&uuid
  *@return 成功返回 PInt64Single ，失败返回PResult
+ */
+
+/*
+ *@note 判断社区名是否可用
+ *@path /v1.7/community/valid/name
+ *@method GET
+ *@url param name 社区名
+ *@cookie token&uuid
+ *@return 返回PResult
  */
 
 /*

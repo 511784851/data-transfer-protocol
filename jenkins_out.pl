@@ -13,6 +13,10 @@ $output = $output_root."/java";
 mkdir($output);
 `perl java_out.pl $output`;
 
+$output = $output_root."/js";
+mkdir($output);
+`perl js_out.pl $output`;
+
 $output = $output_root."/javanano";
 mkdir($output);
 `perl javanano_out.pl $output`;
