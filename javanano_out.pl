@@ -14,7 +14,7 @@ if (@ARGV > 0) {
 #################server_client protos#######################
 $server_client_protos = "server-client/*.proto ";
 
-$cmd = "protoc -Iserver-client --javanano_out=".$output." ".$server_client_protos;
+$cmd = "protoc -Iserver-client -Iserver-server --javanano_out=".$output." ".$server_client_protos;
 system($cmd);
 
 

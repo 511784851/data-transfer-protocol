@@ -16,7 +16,7 @@ if (@ARGV == 2) {
 #################server_client protos#######################
 $server_client_protos = "server-client/*.proto ";
 
-$cmd = "${exe} -Iserver-client --objc_out=${output} ${server_client_protos}";
+$cmd = "${exe} -Iserver-client -Iserver-server --objc_out=${output} ${server_client_protos}";
 system($cmd);
 
 
