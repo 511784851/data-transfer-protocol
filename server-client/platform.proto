@@ -393,6 +393,7 @@ message PReportNewsInfo {
 	int32 status = 4; //帖子的处理状态（0：待处理，1：举报无效，2：已删除）
 	int64 beginDisabled = 5; //禁用用户的开始时间（0表示没有禁用用户）
 	int64 endDisabled = 6; //禁用用户的结束时间（0表示没有禁用用户，-1表示禁用永久）
+	int64 lastTime = 7; //最后被举报时间
 }
 
 message PReportNewsInfoList {
