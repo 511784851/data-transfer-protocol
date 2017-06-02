@@ -146,7 +146,6 @@ message PInsideCommunityUser {
 	PUserBase User = 2;							// 用户基础信息
 	int64 FollowTime = 3;						// 关注社区的时间
 	int64 ForbidTime = 4; 						// 用户禁用到期时间
-	int64 BeBlacklistTime = 5;					// 用户被踢出社区的时间；1.7后续版本会删除
 }
 
 // 社区用户列表信息
@@ -409,6 +408,14 @@ message PCommunityManagerRightList {
 	repeated PCommunityManagerRight List = 1;
 }
 
+// 批量设置解禁/禁用用户
+message PCommunitySetDisableUser {
+	string Id = 1; 								// 社区id
+	int32 Type = 2; 							// 0为解禁，1为禁用
+	int64 Time = 3; 							// 禁用时长,单位分钟,永久禁用填-1
+	repeated string Uuids = 4;					// 操作的目标用户
+}
+
 /*=====================================*/
 // API定义
 
@@ -504,17 +511,6 @@ message PCommunityManagerRightList {
  *@method GET
  *@url param id 社区id
  *@url param uuid 邀请的好友uuid
- *@cookie token&uuid
- *@return 返回 PResult
- */
-
-/*
- *@note 设置-添加/删除管理员
- *@path /v1/community/setting/admin/manager
- *@method GET
- *@url param id 社区id
- *@url param operate add为添加，del为删除
- *@url param uuid 要添加为管理员的用户uuid
  *@cookie token&uuid
  *@return 返回 PResult
  */
@@ -948,4 +944,13 @@ message PCommunityManagerRightList {
  *@url param count 获取数量，最大数量为20
  *@cookie token&uuid
  *@return 成功返回 PCommunityBaseList ，失败返回PResult
+ */
+
+ /*
+ *@note 批量解禁/禁用用户
+ *@path /v1.7/community/disabled_user
+ *@method POST
+ *@body PCommunitySetDisableUser
+ *@cookie token&uuid
+ *@return 返回 PResult
  */
