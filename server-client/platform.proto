@@ -460,6 +460,8 @@ message PRecommendUsers {
 *@param status 处理状态（-1所有，0待处理，1已处理）
 *@param offset 分页偏移量（开始为0,第二页为1，以此类推）
 *@param count 第页总量（默认10条）
+*@param sort 排序（time 时间倒序，count 次数倒序）
+*@param keyword 搜索关键字，支持被举报人昵称及动态帖子的内容
 *@return 成功：PReportNewsInfoList，失败：PResult
 */
   
@@ -481,8 +483,8 @@ message PRecommendUsers {
  *@path /platform-manager/report/news/status
  *@cookie token&uuid
  *@method put
- *@url param id 举报ID
- *@url param status 状态（0取消举报无效，1举报无效，2删除帖子，3还原帖子）
+ *@url param id 举报ID，多个以“,”分隔
+ *@url param status 状态（0取消举报无效，1举报无效，2删除帖子，3还原帖子），多个以“,”分隔
  *@return PResult
  */
  
