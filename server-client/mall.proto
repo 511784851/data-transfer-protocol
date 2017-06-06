@@ -1,0 +1,267 @@
+syntax = "proto3";
+package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "MallProtos";
+import "account.proto";
+message POss {
+    string objKey = 1;
+    string url = 2;
+}
+message PCategoryStatics{
+    PGoodsCategory category = 1;
+    int32 count = 2;
+}
+enum PTag {
+    ROUTINE = 0; //常规
+    LIMITED = 1; //限量
+    EXCLUSIVE = 2; //专属
+    SPECIAL_OFFER = 3; //特价
+}
+enum PGoodsCategory {
+    REAL = 0; //实物
+    VIRTUAL = 1; //虚拟物品
+}
+enum PLimitType {
+    NONE = 0; //不限制
+    DAY = 1; //按天限制
+    WEEK = 2; //按周限制
+}
+message PLimit {
+    PLimitType type = 1;
+    int32 times = 2;
+}
+enum PSaleStatus{
+    INIT = 0;//待上架
+    SALE = 1;//出售中
+    OFFSALE = 2;//已下架
+}
+
+enum POnOffType {
+    AUTO = 0; //默认
+    TIME_RANGE = 1; //时间段
+}
+message POnOff {
+    POnOffType type = 1;
+    int64 begin = 2; //上架时间（ms）
+    int64 end = 3; //下架时间（ms）
+}
+
+message PGoodsList{
+    repeated PGoodsInf list = 1;
+}
+
+message POrderList{
+    repeated POrderInf list = 1;
+}
+message PGoodsInf {
+    int32 id = 1; //ID
+    PGoodsCategory category = 2; //分类
+    string nm = 3; //名称
+    int32 price = 4; //售价
+    POss pic = 5; //oss图片
+    string describe = 6; //描述
+    int32 stock = 8; //总库存 (默认：-1,不限制库存)
+    int32 remainCnt = 9; //剩余数量(默认：-1)
+    int32 todayStock = 10; //今日库存(默认：-1)
+    int32 todayRemain = 11; //今日剩余(默认：-1)
+    int32 exchangeCommunityId = 12; //兑换条件社区ID限制、没有社区限制时填写0
+    PLimit limit = 13; //限制购买频次
+    int32 exchangeLevel = 14; //兑换条件用户等级限制、没有等级限制时不填写
+    PTag tag = 15; //促销标示
+    PSaleStatus saleStatus = 16;
+    POnOff onoff = 17; //上下架选项
+    int32 status = 18; //商品状态 0:正常、1：今日已售罄、2：已售罄 、3：库存告急
+    int64 crtTm = 19; //创建时间
+}
+message PAddrInf {
+    string contact = 1; //联系人
+    string addr = 2; //收货地址
+    string email = 3; //email
+    string qq = 4; //qq
+    string phone = 5; //电话
+}
+message POrderInf {
+    string id = 1;
+    int32 gId = 2;
+    PGoodsCategory gType = 3;
+    int32 count = 4;
+    PAddrInf addrInf = 5;
+    string remark = 6; //备注
+    int32 status = 7; //0:待发货、1：已发货
+    string express = 8; // 快递信息 快递名+空格+快递编号
+    PUserBase buyer = 9; // 购买者信息
+    string bbNO = 10; //购买者BB号
+    string opRemark = 11; //操作备注
+    string opTm = 12; //操作时间
+    PUserBase opor = 13; //操作人
+    int64 crtTm = 14;
+}
+// app接口（潘有良）
+/*
+ *@note 分类标签下商品数量统计
+ *@path v1/mall/front/typeStatistics
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 正常返回PCategoryStatics，异常PResult
+ */
+
+/*
+ *@note 商品列表 （每次返回20条）
+ *@path v1/mall/front/goodsList
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@QueryParam category 分类（0：实物，1：虚拟）
+ *@QueryParam lastId 最后一条数据的ID
+ *@return 正常返回PGoodsList，异常PResult
+ */
+
+/*
+ *@note 订单列表 （每次返回20条）
+ *@path v1/mall/front/ordList
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@QueryParam category 分类（0：实物，1：虚拟）
+ *@QueryParam lastId 最后一条数据的ID
+ *@return 正常返回 POrderList，异常 PResult
+ */
+
+/*
+ *@note 商品详情
+ *@path v1/mall/front/detail
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@QueryParam id 商品ID
+ *@return 正常返回 PGoodsInf，异常 PResult
+ */
+
+/*
+ *@note 兑换实物
+ *@path v1/mall/front/exchangeReal
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam("id") 商品ID
+ *@FormParam("contact") 联系人
+ *@FormParam("address") 收货地址
+ *@FormParam("phone") 联系电话
+ *@FormParam("remark") 描述
+ *@return PResult
+ */
+
+/*
+ *@note 兑换虚拟商品
+ *@path v1/mall/front/exchangeVirtual
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam("id") 商品ID
+ *@FormParam("email")
+ *@FormParam("qqNO")
+ *@FormParam("phone") 联系电话
+ *@FormParam("remark") 描述
+ *@return PResult
+ */
+
+/*
+ *@note 获取时候地址
+ *@path v1/mall/front/getAddr
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 正常 PAddrInf 异常 PResult
+ */
+
+
+// 监管接口（潘有良）
+/*
+ *@note 添加商品
+ *@path v1/mall/mgr/addGoods
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam("name") 商品名称
+ *@FormParam("category") 分类 0：实物，1：虚拟
+ *@FormParam("price") 价格
+ *@FormParam("objkey") 图像objkey
+ *@FormParam("describe") 描述
+ *@FormParam("stock") 库存，-1：不限制
+ *@FormParam("communityId") 兑换社区ID，-1：不限制
+ *@FormParam("level") 兑换等级 -1：不限制
+ *@FormParam("tag") 标签 PTag对应的int值
+ *@FormParam("limitType") 限制类型 PLimitType对应的int 值
+ *@FormParam("times") 限制频次
+ *@FormParam("onoffType") 上架类型POnOffType对应的int值
+ *@FormParam("begin") 上架时间 （ms）
+ *@FormParam("end") 下架时间（ms）
+ *@return PResult json结构
+ */
+
+/*
+ *@note 编辑商品
+ *@path v1/mall/mgr/editGoods
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam("id") 商品ID
+ *@FormParam("name") 商品名称
+ *@FormParam("category") 分类 0：实物，1：虚拟
+ *@FormParam("price") 价格
+ *@FormParam("objkey") 图像objkey
+ *@FormParam("describe") 描述
+ *@FormParam("stock") 库存，-1：不限制
+ *@FormParam("communityId") 兑换社区ID，-1：不限制
+ *@FormParam("level") 兑换等级 -1：不限制
+ *@FormParam("tag") 标签 PTag对应的int值
+ *@FormParam("limitType") 限制类型 PLimitType对应的int 值
+ *@FormParam("times") 限制频次
+ *@FormParam("onoffType") 上架类型POnOffType对应的int值
+ *@FormParam("begin") 上架时间 （ms）
+ *@FormParam("end") 下架时间（ms）
+ *@return PResult json结构
+ */
+
+/*
+ *@note 编辑商品上下架
+ *@path v1/mall/mgr/changeGoodsStatus
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam("id") 商品ID
+ *@FormParam("saleStatus") 设置状态：1;//出售中 2;//已下架
+ *@return PResult json结构
+ */
+
+/*
+ *@note 商品列表
+ *@path v1/mall/mgr/goodsList
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，-1：全部
+ *@QueryParam("category") 商品分类 PGoodsCategory对应int值， -1：全部
+ *@QueryParam("name") 商品名称
+ *@QueryParam("pageSize") 每页条数
+ *@QueryParam("page") 当前页数
+ *@return 正常参照具体结果， 异常PResult json结构
+ */
+
+
+/*
+ *@note 订单列表
+ *@path v1/mall/mgr/ordList
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@QueryParam("begin") 兑换开始时间 ms
+ *@QueryParam("end") 兑换结束时间 ms
+ *@QueryParam("status") 订单状态 -1：全部、 0:待发货、1：已发货
+ *@QueryParam("type") 查询字段类型 ""：忽略，orderNO，goodsNm，phoneNO
+ *@QueryParam("val") type对应的值
+ *@QueryParam("pageSize") 每页显示条数
+ *@QueryParam("page") 当前页
+ *@return 正常参照具体结果， 异常PResult json结构
+ */
+
+/*
+ *@note 添加物流信息
+ *@path v1/mall/mgr/addExpress
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@FormParam("ordId") 订单编号
+ *@FormParam("expressInf") 物流信息
+ *@FormParam("describe") 操作备注
+ *@FormParam("changeStatus") 是否更改为已发货 true|false
+ *@return PResult json结构
+ */
