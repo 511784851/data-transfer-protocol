@@ -423,3 +423,16 @@ message PLoginUpdateAccount {
  *@cookie token&uuid
  *@return 返回 PResult
  */
+
+ 
+ /*
+ *@note 绑定手机号登录方式
+ *@uri /v1.7/login/account/binding 
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type phone
+ *@form param phonecode 手机号，需要带上区号。例：+8613512345678
+ *@form param authcode 下发客户端的短信验证码（6位数字）
+ *@form param appid 应用分配的id
+ *@return 返回 PResult
+ */
