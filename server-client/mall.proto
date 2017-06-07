@@ -6,11 +6,16 @@ import "account.proto";
 message POss {
     string objKey = 1;
     string url = 2;
+    string thumb = 3;
 }
 message PCategoryStatics{
     PGoodsCategory category = 1;
     int32 count = 2;
 }
+message PCategoryStaticsList{
+    repeated PCategoryStatics list = 1;
+}
+
 enum PTag {
     ROUTINE = 0; //常规
     LIMITED = 1; //限量
@@ -72,6 +77,8 @@ message PGoodsInf {
     POnOff onoff = 17; //上下架选项
     int32 status = 18; //商品状态 0:正常、1：今日已售罄、2：已售罄 、3：库存告急
     int64 crtTm = 19; //创建时间
+    int32 serialNO = 20;//排序序号
+    string goodsNO = 21;//商品编号
 }
 message PAddrInf {
     string contact = 1; //联系人
@@ -102,7 +109,7 @@ message POrderInf {
  *@path v1/mall/front/typeStatistics
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@return 正常返回PCategoryStatics，异常PResult
+ *@return 正常返回 PCategoryStaticsList，异常PResult
  */
 
 /*
@@ -186,9 +193,11 @@ message POrderInf {
  *@FormParam("tag") 标签 PTag对应的int值
  *@FormParam("limitType") 限制类型 PLimitType对应的int 值
  *@FormParam("times") 限制频次
+ *@FormParam saleStatus 出售状态 PSaleStatus对应的int值
  *@FormParam("onoffType") 上架类型POnOffType对应的int值
  *@FormParam("begin") 上架时间 （ms）
  *@FormParam("end") 下架时间（ms）
+ *@FromParam("serialNO") 商品排序序号
  *@return PResult json结构
  */
 
@@ -209,9 +218,11 @@ message POrderInf {
  *@FormParam("tag") 标签 PTag对应的int值
  *@FormParam("limitType") 限制类型 PLimitType对应的int 值
  *@FormParam("times") 限制频次
+ *@FormParam saleStatus 出售状态 PSaleStatus对应的int值
  *@FormParam("onoffType") 上架类型POnOffType对应的int值
  *@FormParam("begin") 上架时间 （ms）
  *@FormParam("end") 下架时间（ms）
+ *@FromParam("serialNO") 商品排序序号
  *@return PResult json结构
  */
 
@@ -230,8 +241,8 @@ message POrderInf {
  *@path v1/mall/mgr/goodsList
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，-1：全部
- *@QueryParam("category") 商品分类 PGoodsCategory对应int值， -1：全部
+ *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，不传：全部
+ *@QueryParam("category") 商品分类 PGoodsCategory对应int值， 不传：全部
  *@QueryParam("name") 商品名称
  *@QueryParam("pageSize") 每页条数
  *@QueryParam("page") 当前页数
