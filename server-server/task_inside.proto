@@ -1,37 +1,37 @@
 syntax = "proto3";
 package bbproto;
 
-/*
- *@note 消息订阅
- *@path url（统一为： /v1/servicename/inside/task/msg/subscribe）
- *@method POST
- *@url param from 调用的服务名
- *@body PSubscribeArray数据流
- *@return 返回PResult
- */
- 
- /*
- *@note 消息回调
- *@path /task/callback/msgid
- *@method POST
- *@url param from 调用的服务名
- *@body PCallbackArray数据流
- *@return 成功返回PInt64List(-1表示永久，0表示取消订阅，其它表示失效时间的时间戳)，失败返回PResult
- */
- 
-  /*
- *@note 用户基础信息变更回调
- *@path /task/callback/userBase
- *@method POST
- *@url param from 调用的服务名
- *@body PUserBaseList数据流（PUserBase中用户昵称，头像，等级，语言必须有）
- *@return 返回PResult
- */
- 
- /*
- *@note 获取等级列表
- *@path /task/callback/level
- *@method GET
- *@url param from 调用的服务名
- *@return 成功返回PExpLevelList，失败返回PResult
- */
+message PTaskMsgs {
+    repeated PTaskMsg taskMsg = 1;
+}
+
+message PTaskMsg {
+    string uuid = 1;     // 用户uuid
+    int32 msgID = 2;     // 消息ID
+    int32 count = 3;     // 消息触发次数
+}
+
+message PGoldExchg {
+    string uuid = 1;     // 用户uuid
+    string orderNo = 2;  // 订单号
+    int32 gold = 3;      // 兑换金币
+}
+
+// 规定所有任务消息默认为订阅状态
+service TaskService {
+	// 任务消息通知
+	// 返回对应msgID的订阅状态：-1-永久取消订阅，0-保持默认，其它-取消订阅的有效时间戳（保留到天）
+	rpc notify(PTaskMsgs) returns (PInt64List);
+	
+	// 检查消息状态（由其它服务提供）
+	// 请求中count表示要检查的消息进行次数，返回uuid-msigId对应的消息触发次数
+	// rpc checkMsgIds(PTaskMsgs) returns (PInt32List);
+}	
+	// 批量查询用户金币
+	// PStringList为要查询的用户uuid，返回对应的用户可用金币数量
+	rpc getUserGold(PStringList) returns (PInt32List);
+	
+	// 商城兑换金币
+	// 同一个订单号不可重复兑换
+	rpc exchg(PGoldExchg) returns (PReasult);
+}
