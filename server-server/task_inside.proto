@@ -1,5 +1,9 @@
 syntax = "proto3";
 package bbproto;
+option java_package = "com.blemobi.sep.probuf";
+option java_outer_classname = "TaskApiProtos";
+
+import "result.proto";
 
 message PTaskMsgs {
     repeated PTaskMsg taskMsg = 1;
@@ -26,12 +30,12 @@ service TaskService {
 	// 检查消息状态（由其它服务提供）
 	// 请求中count表示要检查的消息进行次数，返回uuid-msigId对应的消息触发次数
 	// rpc checkMsgIds(PTaskMsgs) returns (PInt32List);
-}	
+	
 	// 批量查询用户金币
 	// PStringList为要查询的用户uuid，返回对应的用户可用金币数量
 	rpc getUserGold(PStringList) returns (PInt32List);
 	
 	// 商城兑换金币
 	// 同一个订单号不可重复兑换
-	rpc exchg(PGoldExchg) returns (PReasult);
+	rpc exchg(PGoldExchg) returns (PResult);
 }
