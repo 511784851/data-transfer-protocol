@@ -19,8 +19,7 @@ message PCategoryStaticsList{
 enum PTag {
     ROUTINE = 0; //常规
     LIMITED = 1; //限量
-    EXCLUSIVE = 2; //专属
-    SPECIAL_OFFER = 3; //特价
+    SPECIAL_OFFER = 2; //特价
 }
 enum PGoodsCategory {
     REAL = 0; //实物
@@ -50,7 +49,10 @@ message POnOff {
     int64 begin = 2; //上架时间（ms）
     int64 end = 3; //下架时间（ms）
 }
-
+message PContacts{
+    string qq = 1;
+    string email = 2;
+}
 message PGoodsList{
     repeated PGoodsInf list = 1;
 }
@@ -65,20 +67,23 @@ message PGoodsInf {
     int32 price = 4; //售价
     POss pic = 5; //oss图片
     string describe = 6; //描述
-    int32 stock = 8; //总库存 (默认：-1,不限制库存)
-    int32 remainCnt = 9; //剩余数量(默认：-1)
-    int32 todayStock = 10; //今日库存(默认：-1)
-    int32 todayRemain = 11; //今日剩余(默认：-1)
-    int32 exchangeCommunityId = 12; //兑换条件社区ID限制、没有社区限制时填写0
-    PLimit limit = 13; //限制购买频次
-    int32 exchangeLevel = 14; //兑换条件用户等级限制、没有等级限制时不填写
-    PTag tag = 15; //促销标示
-    PSaleStatus saleStatus = 16;
-    POnOff onoff = 17; //上下架选项
-    int32 status = 18; //商品状态 0:正常、1：今日已售罄、2：已售罄 、3：库存告急
-    int64 crtTm = 19; //创建时间
-    int32 serialNO = 20;//排序序号
-    string goodsNO = 21;//商品编号
+    string otherDescribe = 7;//其它描述
+    int32 totStock = 8; //总库存 (默认：-1,不限制库存)
+    int32 totSaled = 9; //消暑数量 0
+    int32 totRemain = 10; //剩余库存
+    int32 todayStock = 11; //今日库存 (默认：-1,不限制库存)
+    int32 todaySaled = 12; //今日售出 0
+    int32 todayRemain = 13; //今日剩余库存(默认：-1)
+    int32 exchangeCommunityId = 14; //兑换条件社区ID限制、没有社区限制时填写0
+    PLimit limit = 15; //限制购买频次
+    int32 exchangeLevel = 16; //兑换条件用户等级限制、没有等级限制时不填写
+    PTag tag = 17; //促销标示
+    PSaleStatus saleStatus = 18;
+    POnOff onoff = 19; //上下架选项
+    int32 status = 20; //商品状态 0:正常、1：今日已售罄、2：已售罄 、3：库存告急
+    int64 crtTm = 21; //创建时间
+    int32 serialNO = 22;//排序序号
+    string goodsNO = 23;//商品编号
 }
 message PAddrInf {
     string contact = 1; //联系人
@@ -89,8 +94,8 @@ message PAddrInf {
 }
 message POrderInf {
     string id = 1;
-    int32 gId = 2;
-    PGoodsCategory gType = 3;
+    PGoodsInf goodsInf = 2;
+    //PGoodsCategory gType = 3;
     int32 count = 4;
     PAddrInf addrInf = 5;
     string remark = 6; //备注
@@ -99,13 +104,14 @@ message POrderInf {
     PUserBase buyer = 9; // 购买者信息
     string bbNO = 10; //购买者BB号
     string opRemark = 11; //操作备注
-    string opTm = 12; //操作时间
+    int64 opTm = 12; //操作时间
     PUserBase opor = 13; //操作人
     int64 crtTm = 14;
 }
 // app接口（潘有良）
+
 /*
- *@note 分类标签下商品数量统计
+ *@note 分类标签下商品数量统计（废弃）
  *@path v1/mall/front/typeStatistics
  *@method GET
  *@cookie token&uuid 登录用户信息
@@ -113,12 +119,21 @@ message POrderInf {
  */
 
 /*
+ *@note 获取平台联系方式
+ *@path v1/mall/front/getContacts
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 正常返回 PContacts，异常PResult
+ */
+
+
+/*
  *@note 商品列表 （每次返回20条）
  *@path v1/mall/front/goodsList
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam category 分类（0：实物，1：虚拟）
- *@QueryParam lastId 最后一条数据的ID
+ *@QueryParam serialNo 最后一条数据的serialNo 第一次填写0
  *@return 正常返回PGoodsList，异常PResult
  */
 
@@ -127,8 +142,8 @@ message POrderInf {
  *@path v1/mall/front/ordList
  *@method GET
  *@cookie token&uuid 登录用户信息
- *@QueryParam category 分类（0：实物，1：虚拟）
- *@QueryParam lastId 最后一条数据的ID
+ *@QueryParam category 分类（0：实物，1：虚拟，-1：不限）
+ *@QueryParam time 最后一条数据的crtTm 第一次传0
  *@return 正常返回 POrderList，异常 PResult
  */
 
@@ -151,6 +166,9 @@ message POrderInf {
  *@FormParam("address") 收货地址
  *@FormParam("phone") 联系电话
  *@FormParam("remark") 描述
+ *@FromParam("excChannel") 渠道 iOS下单：0；安卓下单：1；H5下单：2
+ *@FromParam("payChannel")支付渠道：金币支付0；支付宝支付：1；微信支付：2；银联支付：3
+ *@FromParam("bizType")业务类型：虚拟兑换 0；实物兑换：1；虚拟购买：2；实物购买：3
  *@return PResult
  */
 
@@ -164,6 +182,9 @@ message POrderInf {
  *@FormParam("qqNO")
  *@FormParam("phone") 联系电话
  *@FormParam("remark") 描述
+ *@FromParam("excChannel") 渠道 iOS下单：0；安卓下单：1；H5下单：2
+ *@FromParam("payChannel")支付渠道：金币支付0；支付宝支付：1；微信支付：2；银联支付：3
+ *@FromParam("bizType")业务类型：虚拟兑换 0；实物兑换：1；虚拟购买：2；实物购买：3
  *@return PResult
  */
 
@@ -187,7 +208,9 @@ message POrderInf {
  *@FormParam("price") 价格
  *@FormParam("objkey") 图像objkey
  *@FormParam("describe") 描述
+ *@FormParam("otherDescribe") 描述
  *@FormParam("stock") 库存，-1：不限制
+ *@FormParam("limitCnt") 每日限购数量，-1：不限制
  *@FormParam("communityId") 兑换社区ID，-1：不限制
  *@FormParam("level") 兑换等级 -1：不限制
  *@FormParam("tag") 标签 PTag对应的int值
@@ -212,7 +235,9 @@ message POrderInf {
  *@FormParam("price") 价格
  *@FormParam("objkey") 图像objkey
  *@FormParam("describe") 描述
+ *@FormParam("otherDescribe") 描述
  *@FormParam("stock") 库存，-1：不限制
+ *@FormParam("limitCnt") 每日限购数量，-1：不限制
  *@FormParam("communityId") 兑换社区ID，-1：不限制
  *@FormParam("level") 兑换等级 -1：不限制
  *@FormParam("tag") 标签 PTag对应的int值
@@ -258,7 +283,7 @@ message POrderInf {
  *@QueryParam("begin") 兑换开始时间 ms
  *@QueryParam("end") 兑换结束时间 ms
  *@QueryParam("status") 订单状态 -1：全部、 0:待发货、1：已发货
- *@QueryParam("type") 查询字段类型 ""：忽略，orderNO，goodsNm，phoneNO
+ *@QueryParam("type") 查询字段类型 ""：忽略，orderNO，goodsNm，goodsNO, phoneNO
  *@QueryParam("val") type对应的值
  *@QueryParam("pageSize") 每页显示条数
  *@QueryParam("page") 当前页
