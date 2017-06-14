@@ -24,6 +24,7 @@ message PEdgeVersion {
  *@url param channel 渠道或应用平台，格式如：‘主渠道号.子渠道号’ 渠道号为纯数字，用.分割
  *@url param version 客户端的版本号，格式如：‘主版本号.子版本号.修正版本号’ 版本号为纯数字，用.分割
  *@url param appid 应用分配的id
+ *@url param install 是否新安装,APP安装过程中通知服务器. 可选参数. 0: 否, 1:是. 默认: 0
  *@return 成功返回 PEdgeVersion ，失败返回 PRsult
  */
 
