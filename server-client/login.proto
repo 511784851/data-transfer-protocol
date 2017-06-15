@@ -338,6 +338,17 @@ message PLoginUpdateAccount {
  */
 
 /*
+ *@note 绑定qq登录方式
+ *@uri /v1/login/account/binding
+ *@method PUT
+ *@cookie token&uuid
+ *@form param type qq
+ *@form param openid 客户端SDK返回
+ *@form param access_token 客户端SDK返回
+ *@return 返回 PResult
+ */
+
+/*
  *@note 使用uuid&token登陆系统，并更新token
  *@path /v1/login/session
  *@method PUT
