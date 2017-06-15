@@ -15,20 +15,20 @@ message PTaskInfo {
 	int32 ID = 1;                        // 任务ID
 	int32 gold = 2;                      // 金币
 	int32 state = 3;                     // 任务状态（0-进行中，1-可领奖，-1-已完成）
-	int32 count = 4;                     // 已完成次数
-	int32 loop = 5;                      // 可完成次数
-	string desc = 6;                     // 任务描述
+	int32 count = 4;                     // 已完成进度
+	int32 targ = 5;                      // 要求进度
+	int32 loop = 6;                      // 可完成次数
+	string desc = 7;                     // 任务描述
 }
 
 message PGoldDetails {
 	repeated PGoldDetail detail = 1;     // 金币明细
-	int32 start = 2;                     // 下次分页起始值  
 }
 
 message PGoldDetail {
 	int64 time = 1;                      // 时间（保留到毫秒）
 	int32 gold = 2;                      // 金币（大于0是收入，小于0是支出）
-	int32 type = 3;                      // 类型（0-新手任务，1-每日任务，2-商城消费，3-监管操作）
+	int32 type = 3;                      // 类型（1-新手任务，2-每日任务，3-商城消费，4-监管操作）
 	string desc = 4;                     // 描述
 }
 
@@ -37,6 +37,7 @@ message PGoldDetail {
  *@path /v1/task/gold/list
  *@method GET
  *@cookie uuid&token
+ *url param language 用户语言
  *@return 成功返回PGoldTask，失败返回PResult
  */
 
@@ -50,12 +51,16 @@ message PGoldDetail {
  */
 
 /*
- *@note 获取金币明细列表
+ *@note 查询金币明细列表
  *@path /v1/task/gold/details
  *@method GET
  *@cookie uuid&token
- *@param size 分页大小
- *@param start 分页起始值（默认填-1）
+ *url param language 用户语言
+ *@param idx 分页起始值（上一批数据的最后time值，默认值0）
+ *@url param size 分页大小
+ *@url param st 查询的开始时间
+ *@url param et 查询的结束时间
+ *@url param type 类型（0-全部，1-新手任务，2-每日任务，3-商城消费，4-监管操作）
  *@return 成功返回PGoldDetails，失败返回PResult
  */
  
@@ -68,4 +73,30 @@ message PGoldDetail {
  *@form param type 类型（0-减少,1-增加）
  *@form param content 描述
  *@return 返回PResult
+ */
+ 
+ 
+ /*
+ * 任务ID对照表
+ * ID	desc
+ * 1001	设置BB号
+ * 1002	设置头像
+ * 1003	设置密码
+ * 1004	设置性别、生日、地区
+ * 1005	绑定手机号
+ * 1006	绑定第三方：qq
+ * 1007	绑定第三方：微信
+ * 1008	绑定第三方：微博
+ * 1009	首次发帖
+ * 1010	对任意社区任意3个不同帖子发表评论
+ * 1011	抢任意帖子的评论沙发
+ * 1012	分享帖子/视频
+ * 1013	关注5个用户
+ * 1014	加入5个社区
+ * 1015	分享社区
+ * 1016	签到任意社区
+ * 2001	任意社区发帖
+ * 2002	任意社区发表评论
+ * 2003	抢任意帖子的评论沙发
+ * 2004	分享帖子或社区
  */
