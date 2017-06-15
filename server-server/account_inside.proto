@@ -424,6 +424,13 @@ service account {
       *@return 无返回值
       */
      rpc SetUserBase(PUserBase) returns (PEmpty);
+
+    /*
+     *@note 批量更新头像
+     *@param PAccountKVList key对应用户UUID，val对应头像ObjectKey
+     *@return 如果更新失败则返回错误
+     */
+    rpc BatchUpdateHeadImage(PAccountKVList) returns (PEmpty);
 }
 
 message PNickname {
@@ -433,4 +440,14 @@ message PNickname {
 
 message PNicknameList {
     repeated PNickname list = 1; // 用户昵称列表
+}
+
+// 通用键值对参数
+message PAccountKV {
+    string key = 1;
+    string val = 2;
+}
+
+message PAccountKVList {
+    repeated PAccountKV list = 1;
 }
