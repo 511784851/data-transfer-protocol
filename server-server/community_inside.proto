@@ -8,6 +8,7 @@ import "account.proto";
 import "news_inside.proto";
 import "common_inside.proto";
 import "community.proto";
+import "task_inside.proto";
 
 message PCommunityBaseEx {
     int32 MemberCount = 1;              // 社区成员数量
@@ -232,4 +233,8 @@ service IGrpcCommunity {
      *@return 返回 PResult
      */
     rpc PutCommunityName(PStringList) returns (PEmpty);
+
+    // 检查消息状态（由其它服务提供）
+    // 请求中count表示要检查的消息进行次数，返回uuid-msigId对应的消息触发次数
+    rpc checkMsgIds(PTaskMsgs) returns (PInt32List);
  }
