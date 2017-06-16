@@ -76,7 +76,6 @@ message PGoldDetail {
  *@return 返回PResult
  */
  
- 
  /*
  * 任务ID对照表
  * ID	desc
