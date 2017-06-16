@@ -76,6 +76,13 @@ message PGoldDetail {
  *@return 返回PResult
  */
  
+ 
+ /*
+ *日常任务完成推送标识
+ *MsgType/msgid=TGC
+ *content=完成[任务名称]，+/-金币数量
+ */
+ 
  /*
  * 任务ID对照表
  * ID	desc
