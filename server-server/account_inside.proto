@@ -6,6 +6,7 @@ option java_outer_classname = "AccountApiProtos";
 import "result.proto";
 import "common_inside.proto";
 import "account.proto";
+import "task_inside.proto";
 
 /*=====================================*/
 //结构定义
@@ -431,6 +432,10 @@ service account {
      *@return 如果更新失败则返回错误
      */
     rpc BatchUpdateHeadImage(PAccountKVList) returns (PEmpty);
+
+    // 检查消息状态（由其它服务提供）
+    // 请求中count表示要检查的消息进行次数，返回uuid-msigId对应的消息触发次数
+    rpc checkMsgIds(PTaskMsgs) returns (PInt32List);
 }
 
 message PNickname {
