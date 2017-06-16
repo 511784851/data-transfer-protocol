@@ -78,7 +78,7 @@ message PGoldDetail {
  
  
  /*
- *日常任务完成推送标识
+ *完成日常任务推送协议
  *MsgType/msgid=TGC
  *content=完成[任务名称]，+/-金币数量
  */
