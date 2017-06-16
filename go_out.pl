@@ -46,7 +46,8 @@ $server_client_protos = "server-client/result.proto ".
 						"server-client/robot.proto ".
 						"server-server/robot_inside.proto ".
 						"server-server/social_inside.proto ".
-						"server-server/netdisk_inside.proto";
+						"server-server/netdisk_inside.proto ".
+						"server-server/task_inside.proto";
 
 $cmd = "protoc -Iserver-client -Iserver-server --go_out=plugins=grpc:".$output." ".$server_client_protos;
 system($cmd);
