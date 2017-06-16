@@ -8,6 +8,7 @@ import "account.proto";
 import "news_inside.proto";
 import "common_inside.proto";
 import "community.proto";
+import "task_inside.proto";
 
 message PCommunityBaseEx {
     int32 MemberCount = 1;              // 社区成员数量

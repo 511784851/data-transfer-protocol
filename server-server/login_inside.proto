@@ -4,6 +4,7 @@ option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "LoginApiProtos";
 
 import "common_inside.proto";
+import "task_inside.proto";
 import "login.proto";
 import "result.proto";
 
