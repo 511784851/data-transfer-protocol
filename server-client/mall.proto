@@ -277,6 +277,18 @@ message POrderInf {
  */
 
 /*
+ *@note 商品导出excel
+ *@path v1/mall/mgr/goodsExport
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，不传：全部
+ *@QueryParam("category") 商品分类 PGoodsCategory对应int值， 不传：全部
+ *@QueryParam("name") 商品名称
+ *@QueryParam("sort") ASC:升序，DESC：降序，不传：时间序
+ *@return 正常文件流， 异常PResult json结构
+ */
+
+/*
  *@note 编辑商品序号
  *@path v1/mall/mgr/updateSerial
  *@method POST
