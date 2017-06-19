@@ -74,7 +74,7 @@ message PGoodsInf {
     int32 todayStock = 11; //今日库存 (默认：-1,不限制库存)
     int32 todaySaled = 12; //今日售出 0
     int32 todayRemain = 13; //今日剩余库存(默认：-1)
-    int32 exchangeCommunityId = 14; //兑换条件社区ID限制、没有社区限制时填写0
+    int32 exchangeCommunityId = 14; //兑换条件社区ID限制、没有社区限制时填写0、无限制-1
     PLimit limit = 15; //限制购买频次
     int32 exchangeLevel = 16; //兑换条件用户等级限制、没有等级限制时不填写
     PTag tag = 17; //促销标示
@@ -84,6 +84,7 @@ message PGoodsInf {
     int64 crtTm = 21; //创建时间
     int32 serialNO = 22;//排序序号
     string goodsNO = 23;//商品编号
+    int32 exchangeCommunityNm = 25; //限制兑换的社区名称（无限制、任何社区都为空）
 }
 message PAddrInf {
     string contact = 1; //联系人
