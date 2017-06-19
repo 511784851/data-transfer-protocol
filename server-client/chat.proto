@@ -5,6 +5,137 @@ option java_outer_classname = "ChatProtos";
 
 import "account.proto";
 
+message PRoomInfo {
+	PUserBase user = 1;			   // 创建者信息
+	int32 boolgag = 2;	           // 是否停止消息分发
+}
+
+message PRoomUser {
+	PUserBase user = 1;			   // 用户信息
+	int32 role = 2;	               // 0表示成员，0-普通成员，1-创建者，2-管理员
+	int32 boolgag = 3;	           // 是否被禁言
+}
+
+
+/*
+ *@note 获取用户登录融云的token
+ *@path /v1/chat/user/token
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 成功返回PStringSingle，失败返回PResult
+ */
+ 
+/*
+ *@note 加入社区聊天室
+ *@path /v1/chat/room/join
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 添加禁言聊天室成员
+ *@path /v1/chat/room/add-gag
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@form byuuid 要禁言用户uuid
+ *@form minute 禁言时长，以分钟为单位，最大值为43200分钟
+ *@return 返回PResult
+ */
+
+/*
+ *@note 移除禁言聊天室成员
+ *@path /v1/chat/room/del-gag
+ *@method DELETE
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@form byuuid 要移除禁言用户uuid
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 添加封禁/踢出聊天室成员
+ *@path /v1/chat/room/add-gag
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@form byuuid 要封禁/踢出用户uuid
+ *@form minute 封禁/踢出时长，以分钟为单位，最大值为43200分钟
+ *@return 返回PResult
+ */
+
+/*
+ *@note 停止聊天室消息分发
+ *@path /v1/chat/room/stop-msg
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 恢复聊天室消息分发
+ *@path /v1/chat/room/resu-msg
+ *@method DELETE
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@return 返回PResult
+ */
+ 
+/*
+ *@note 发送聊天室公告信息
+ *@path /v1/chat/room/send-msg
+ *@method POST
+ *@cookie token&uuid 登录用户信息
+ *@form communityId 社区ID
+ *@form content 消息内容
+ *@form extra 附加信息
+ *@return 返回PResult
+ *聊天室公告消息定义 消息标识：GGTxtMsg 示例说明：{"content":"hello","extra":"helloExtra"}	 JSON说明： 表示文本内容，extra 为附加信息(如果开发者自己需要，可以自己在 App 端进行解析)
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 message PWkToken {
 	string appAccessToken = 1;     // 百川应用AppSecret
 	string domain = 2;	           // 应用domain（已废弃）
