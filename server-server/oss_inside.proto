@@ -170,8 +170,8 @@ message PImageInfoList {
 }
 
 message PFileData{
-	int32 bucket;
-	string objectkey;
+	int32 bucket = 1;
+	string objectkey = 2;
 }
 
 service grpcOss {
@@ -182,7 +182,7 @@ service grpcOss {
 	// 批量获取图片文件访问地址
 	rpc GetImageURLs(PGenImgUrlParam) returns (PImgURLs);
 	
-	rpc DeleteFile(PFileData)return(bool);
+	rpc DeleteFile(PFileData)returns(PEmpty);
 	// 图片监管系列
 	rpc AddImageInfo(PImageInfoList) returns (PEmpty);
 	rpc ForbidImage(PImageInfoList) returns (PEmpty);
