@@ -651,3 +651,13 @@ message PAccountVoTabs {
  *@uriParam void VO用户ID
  *@return PAccountVoTabs 显示的标签栏
  */
+
+/*
+ *@note 获取多个用户基础信息
+ *@uri /v1/account/users/baseinfo
+ *@method GET
+ *@cookie token&uuid
+ *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users/baseinfo?uuids=1,2,3"
+ *@return 成功:PUserBaseList,失败:CXXResult
+ */
+

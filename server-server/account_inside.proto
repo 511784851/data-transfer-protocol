@@ -200,15 +200,6 @@ message PPrivacyAttentionList {
 //API V1 定义
 
 /*
- *@note     获取多个用户基础信息
- *@path     /v1/account/users/baseinfo
- *@method   GET
- *@uriParam from 服务名称
- *@uriParam uuids 用户ID,要获取多个用户时用","分隔,如"/v1/account/users/baseinfo?uuids=1,2,3"
- *@return   成功:PUserBaseList,失败:CXXResult
- */
-
-/*
  *@note 设置等级信息
  *@uri  /v1/account/user/level
  *@method POST
