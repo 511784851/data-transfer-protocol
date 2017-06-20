@@ -279,6 +279,8 @@ message POrderInf {
  *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，不传：全部
  *@QueryParam("category") 商品分类 PGoodsCategory对应int值， 不传：全部
  *@QueryParam("name") 商品名称
+ *@QueryParam("begin") 开始日期 ms
+ *@QueryParam("end") 结束日期 ms
  *@QueryParam("pageSize") 每页条数
  *@QueryParam("page") 当前页数
  *@QueryParam("sort") ASC:升序，DESC：降序，不传：时间序
@@ -293,6 +295,8 @@ message POrderInf {
  *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，不传：全部
  *@QueryParam("category") 商品分类 PGoodsCategory对应int值， 不传：全部
  *@QueryParam("name") 商品名称
+ *@QueryParam("begin") 开始日期 ms
+ *@QueryParam("end") 结束日期 ms
  *@QueryParam("sort") ASC:升序，DESC：降序，不传：时间序
  *@return 正常文件流， 异常PResult json结构
  */
