@@ -56,24 +56,10 @@ message PGoldDetail {
  *@path /v1/task/gold/details
  *@method GET
  *@cookie uuid&token
- *url param language 用户语言
- *@param idx 分页起始值（上一批数据的最后time值，默认值0）
+ *@url param language 用户语言
+ *@url param idx 分页起始值（上一批数据的最后time值，默认值0）
  *@url param size 分页大小
- *@url param st 查询的开始时间
- *@url param et 查询的结束时间
- *@url param type 类型（0-全部，1-新手任务，2-每日任务，3-商城消费，4-监管操作）
  *@return 成功返回PGoldDetails，失败返回PResult
- */
- 
- /*
- *@note 金币增加/减少（监管）
- *@path /v1/task/gold/operation
- *@method POST
- *@cookie uuid&token
- *@form param gold 金币数量
- *@form param type 类型（0-减少,1-增加）
- *@form param content 描述
- *@return 返回PResult
  */
  
  
