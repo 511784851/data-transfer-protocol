@@ -293,6 +293,7 @@ message PAccountNewsPersonInfo {
   	bool friend = 11;             //是否是好友，是：true
 	PLinkInfoList linkInfos = 12; //超链接列表
     PUserBase supervisor = 13; //如果是VIP+，这里会携带所属vo的基础信息
+    int32 goldCnt = 14; // 金币数量
 }
 
 // 显示聊天的个人档案信息
