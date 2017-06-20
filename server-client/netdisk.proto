@@ -314,6 +314,15 @@ message PLabelStatus{
  *@return 返回PPostView JSON 格式
  */
 
+/*
+ *@note 分享视频成功回调
+ *@path /netdisk/v1/file/shareVideoSucc (客户端)
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@url param fileId 文件ID
+ *@return 返回PResult
+ */
+
 
 /*
  *@note 客户端判断哪些分类标签需要显示

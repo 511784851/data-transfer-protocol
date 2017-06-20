@@ -197,6 +197,14 @@ message POrderInf {
  *@return 正常 PAddrInf 没有地址或者异常 PResult
  */
 
+/*
+ *@note 获取可用金币
+ *@path v1/mall/front/getGold
+ *@method GET
+ *@cookie token&uuid 登录用户信息
+ *@return 正常 PInt32Single 没有地址或者异常 PResult
+ */
+
 
 // 监管接口（潘有良）
 /*
@@ -323,4 +331,12 @@ message POrderInf {
  *@FormParam("describe") 操作备注
  *@FormParam("changeStatus") 是否更改为已发货 true|false
  *@return PResult json结构
+ */
+
+/*
+ *@note 分享商品详情
+ *@path v1/mall/mgr/shareGoods
+ *@method GET
+ *@UrlParam("id") 商品编号
+ *@return PGoodsInf json结构
  */
