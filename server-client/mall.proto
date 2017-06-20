@@ -301,8 +301,8 @@ message POrderInf {
  *@path v1/mall/mgr/updateSerial
  *@method POST
  *@cookie token&uuid 登录用户信息
- *@FormParam("id") 商品ID
- *@FormParam("serial") 序号 > 0
+ *@FormParam("id[]") 商品ID
+ *@FormParam("serial[]") 序号 > 0
  *@return PResult json结构
  */
 
