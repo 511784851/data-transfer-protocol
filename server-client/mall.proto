@@ -85,6 +85,7 @@ message PGoodsInf {
     int32 serialNO = 22;//排序序号
     string goodsNO = 23;//商品编号
     string exchangeCommunityNm = 25; //限制兑换的社区名称（无限制、任何社区都为空）
+    string shareLink = 26; //分享链接
 }
 message PAddrInf {
     string contact = 1; //联系人
