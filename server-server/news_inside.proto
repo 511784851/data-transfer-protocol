@@ -3,6 +3,7 @@ package bbproto;
 import "news.proto";
 import "common_inside.proto";
 import "result.proto";
+import "task_inside.proto";
 option java_package = "com.blemobi.sep.probuf";
 option java_outer_classname = "NewsApiProtos";
 
@@ -369,4 +370,11 @@ service IGrpcNews {
      *@return   PNewsUserStatisticList
      */
     rpc GrpcGetUserStatistic(PNewsQueryUserParam) returns (PNewsUserStatisticList);
+
+    /*
+     *@note    检查消息状态(由其它服务提供)
+     *@param   请求中count表示要检查的消息进行次数
+     *@return  uuid-msigId对应的消息触发次数
+     */
+    rpc checkMsgIds(PTaskMsgs) returns (PInt32List);
  }
