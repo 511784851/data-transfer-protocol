@@ -114,7 +114,7 @@ message POrderInf {
 
 /*
  *@note 分类标签下商品数量统计（废弃）
- *@path v1/mall/front/typeStatistics
+ *@path v1/task/front/typeStatistics
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@return 正常返回 PCategoryStaticsList，异常PResult
@@ -122,7 +122,7 @@ message POrderInf {
 
 /*
  *@note 获取平台联系方式
- *@path v1/mall/front/getContacts
+ *@path v1/task/front/getContacts
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@return 正常返回 PContacts，异常PResult
@@ -131,7 +131,7 @@ message POrderInf {
 
 /*
  *@note 商品列表 （每次返回20条）
- *@path v1/mall/front/goodsList
+ *@path v1/task/front/goodsList
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam category 分类（0：实物，1：虚拟）
@@ -141,7 +141,7 @@ message POrderInf {
 
 /*
  *@note 订单列表 （每次返回20条）
- *@path v1/mall/front/ordList
+ *@path v1/task/front/ordList
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam category 分类（0：实物，1：虚拟，-1：不限）
@@ -151,7 +151,7 @@ message POrderInf {
 
 /*
  *@note 商品详情
- *@path v1/mall/front/detail
+ *@path v1/task/front/detail
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam id 商品ID
@@ -160,7 +160,7 @@ message POrderInf {
 
 /*
  *@note 兑换实物
- *@path v1/mall/front/exchangeReal
+ *@path v1/task/front/exchangeReal
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("id") 商品ID
@@ -176,7 +176,7 @@ message POrderInf {
 
 /*
  *@note 兑换虚拟商品
- *@path v1/mall/front/exchangeVirtual
+ *@path v1/task/front/exchangeVirtual
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("id") 商品ID
@@ -192,7 +192,7 @@ message POrderInf {
 
 /*
  *@note 获取地址
- *@path v1/mall/front/getAddr
+ *@path v1/task/front/getAddr
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@return 正常 PAddrInf 没有地址或者异常 PResult
@@ -200,7 +200,7 @@ message POrderInf {
 
 /*
  *@note 获取可用金币
- *@path v1/mall/front/getGold
+ *@path v1/task/front/getGold
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@return 正常 PInt32Single 没有地址或者异常 PResult
@@ -210,7 +210,7 @@ message POrderInf {
 // 监管接口（潘有良）
 /*
  *@note 添加商品
- *@path v1/mall/mgr/addGoods
+ *@path v1/task/mgr/addGoods
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("name") 商品名称
@@ -236,7 +236,7 @@ message POrderInf {
 
 /*
  *@note 编辑商品
- *@path v1/mall/mgr/editGoods
+ *@path v1/task/mgr/editGoods
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("id") 商品ID
@@ -263,7 +263,7 @@ message POrderInf {
 
 /*
  *@note 编辑商品上下架
- *@path v1/mall/mgr/changeGoodsStatus
+ *@path v1/task/mgr/changeGoodsStatus
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("id") 商品ID
@@ -273,7 +273,7 @@ message POrderInf {
 
 /*
  *@note 商品列表
- *@path v1/mall/mgr/goodsList
+ *@path v1/task/mgr/goodsList
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，不传：全部
@@ -289,7 +289,7 @@ message POrderInf {
 
 /*
  *@note 商品导出excel
- *@path v1/mall/mgr/goodsExport
+ *@path v1/task/mgr/goodsExport
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam("saleStatus") 售卖状态 PSaleStatus对应的int 值，不传：全部
@@ -303,7 +303,7 @@ message POrderInf {
 
 /*
  *@note 编辑商品序号
- *@path v1/mall/mgr/updateSerial
+ *@path v1/task/mgr/updateSerial
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("id[]") 商品ID
@@ -313,7 +313,7 @@ message POrderInf {
 
 /*
  *@note 订单列表
- *@path v1/mall/mgr/ordList
+ *@path v1/task/mgr/ordList
  *@method GET
  *@cookie token&uuid 登录用户信息
  *@QueryParam("begin") 兑换开始时间 ms
@@ -328,7 +328,7 @@ message POrderInf {
 
 /*
  *@note 添加物流信息
- *@path v1/mall/mgr/addExpress
+ *@path v1/task/mgr/addExpress
  *@method POST
  *@cookie token&uuid 登录用户信息
  *@FormParam("ordId") 订单编号
@@ -340,7 +340,7 @@ message POrderInf {
 
 /*
  *@note 分享商品详情
- *@path v1/mall/mgr/shareGoods
+ *@path v1/task/mgr/shareGoods
  *@method GET
  *@UrlParam("id") 商品编号
  *@return PGoodsInf json结构
