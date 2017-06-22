@@ -72,6 +72,6 @@ service TaskService {
  *@path /v1/task/user/gold
  *@method GET
  *@url param from 服务名称
- *@form param uuids 用户uuid列表（用","隔开）
+ *@url param uuids 用户uuid列表（用","隔开）
  *@return 成功返回PInt32List，失败返回PResult
  */
